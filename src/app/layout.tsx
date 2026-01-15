@@ -1,28 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Logistiq - Soluții Inteligente de Logistică",
-  description: "Platformă modernă pentru gestionarea eficientă a operațiunilor logistice. Automatizare, tracking în timp real și optimizare a fluxurilor.",
-  keywords: ["logistică", "management", "transport", "automatizare", "tracking"],
+  title: "Logistiq - Platforma #1 pentru Managementul Depozitelor",
+  description: "Logistiq digitalizeaza operatiunile din depozit. Check-in QR pentru soferi, management rampe in timp real, comunicare instantanee.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="ro">
-      <body className={`${inter.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
-  );
+}) {
+  return children;
 }

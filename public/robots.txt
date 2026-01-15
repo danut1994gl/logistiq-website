@@ -1,0 +1,12 @@
+# Robots.txt for Logistiq
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://logistiq.ro/sitemap.xml
+
+# Disallow admin/private areas (if any)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
