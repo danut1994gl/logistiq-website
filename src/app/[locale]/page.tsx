@@ -1068,7 +1068,18 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
 }
 
 // Driver App Mockup - Waiting Status
-function DriverMockupWaiting() {
+// QR Code SVG component for qrgo.ro
+function QRCodeSVG() {
+  return (
+    <svg viewBox="0 0 29 29" className="w-full h-full">
+      <rect width="29" height="29" fill="white"/>
+      <path d="M0,0h7v1h-7zM8,0h1v1h-1zM10,0h2v1h-2zM14,0h1v1h-1zM16,0h2v1h-2zM19,0h3v1h-3zM22,0h7v1h-7zM0,1h1v1h-1zM6,1h1v1h-1zM8,1h2v1h-2zM11,1h1v1h-1zM13,1h3v1h-3zM17,1h1v1h-1zM20,1h1v1h-1zM22,1h1v1h-1zM28,1h1v1h-1zM0,2h1v1h-1zM2,2h3v1h-3zM6,2h1v1h-1zM10,2h1v1h-1zM12,2h1v1h-1zM14,2h1v1h-1zM18,2h1v1h-1zM22,2h1v1h-1zM24,2h3v1h-3zM28,2h1v1h-1zM0,3h1v1h-1zM2,3h3v1h-3zM6,3h1v1h-1zM8,3h1v1h-1zM10,3h5v1h-5zM16,3h2v1h-2zM19,3h2v1h-2zM22,3h1v1h-1zM24,3h3v1h-3zM28,3h1v1h-1zM0,4h1v1h-1zM2,4h3v1h-3zM6,4h1v1h-1zM9,4h1v1h-1zM11,4h2v1h-2zM14,4h3v1h-3zM18,4h3v1h-3zM22,4h1v1h-1zM24,4h3v1h-3zM28,4h1v1h-1zM0,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM10,5h1v1h-1zM13,5h1v1h-1zM15,5h1v1h-1zM17,5h2v1h-2zM20,5h1v1h-1zM22,5h1v1h-1zM28,5h1v1h-1zM0,6h7v1h-7zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM14,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h7v1h-7zM9,7h2v1h-2zM12,7h2v1h-2zM15,7h1v1h-1zM17,7h1v1h-1zM19,7h2v1h-2zM0,8h1v1h-1zM2,8h1v1h-1zM4,8h3v1h-3zM8,8h3v1h-3zM13,8h3v1h-3zM19,8h1v1h-1zM21,8h2v1h-2zM24,8h2v1h-2zM27,8h2v1h-2zM1,9h2v1h-2zM5,9h2v1h-2zM9,9h1v1h-1zM11,9h3v1h-3zM17,9h2v1h-2zM21,9h1v1h-1zM23,9h1v1h-1zM25,9h1v1h-1zM27,9h1v1h-1zM1,10h1v1h-1zM3,10h3v1h-3zM7,10h1v1h-1zM10,10h1v1h-1zM12,10h2v1h-2zM15,10h3v1h-3zM20,10h2v1h-2zM23,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM0,11h2v1h-2zM4,11h2v1h-2zM8,11h4v1h-4zM14,11h2v1h-2zM17,11h1v1h-1zM21,11h2v1h-2zM25,11h1v1h-1zM27,11h2v1h-2zM0,12h1v1h-1zM3,12h2v1h-2zM6,12h1v1h-1zM9,12h2v1h-2zM12,12h4v1h-4zM17,12h3v1h-3zM23,12h1v1h-1zM25,12h2v1h-2zM28,12h1v1h-1zM0,13h1v1h-1zM2,13h3v1h-3zM7,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM14,13h2v1h-2zM17,13h1v1h-1zM19,13h1v1h-1zM23,13h1v1h-1zM26,13h2v1h-2zM1,14h1v1h-1zM3,14h1v1h-1zM6,14h1v1h-1zM8,14h2v1h-2zM11,14h1v1h-1zM13,14h2v1h-2zM16,14h4v1h-4zM21,14h2v1h-2zM24,14h2v1h-2zM27,14h1v1h-1zM0,15h1v1h-1zM2,15h2v1h-2zM5,15h1v1h-1zM7,15h3v1h-3zM11,15h1v1h-1zM14,15h1v1h-1zM16,15h1v1h-1zM18,15h2v1h-2zM21,15h1v1h-1zM23,15h3v1h-3zM27,15h2v1h-2zM0,16h3v1h-3zM5,16h3v1h-3zM10,16h2v1h-2zM13,16h3v1h-3zM18,16h1v1h-1zM20,16h1v1h-1zM23,16h2v1h-2zM0,17h1v1h-1zM2,17h1v1h-1zM5,17h2v1h-2zM8,17h1v1h-1zM11,17h5v1h-5zM18,17h2v1h-2zM21,17h4v1h-4zM26,17h3v1h-3zM0,18h1v1h-1zM2,18h2v1h-2zM5,18h2v1h-2zM9,18h1v1h-1zM12,18h2v1h-2zM15,18h1v1h-1zM17,18h1v1h-1zM19,18h1v1h-1zM21,18h1v1h-1zM23,18h1v1h-1zM26,18h1v1h-1zM0,19h1v1h-1zM3,19h1v1h-1zM5,19h2v1h-2zM9,19h3v1h-3zM14,19h2v1h-2zM17,19h2v1h-2zM20,19h2v1h-2zM24,19h5v1h-5zM2,20h1v1h-1zM4,20h1v1h-1zM8,20h4v1h-4zM14,20h2v1h-2zM17,20h1v1h-1zM19,20h2v1h-2zM22,20h4v1h-4zM27,20h1v1h-1zM8,21h2v1h-2zM11,21h1v1h-1zM14,21h1v1h-1zM18,21h2v1h-2zM22,21h1v1h-1zM25,21h2v1h-2zM28,21h1v1h-1zM0,22h7v1h-7zM8,22h1v1h-1zM10,22h3v1h-3zM16,22h1v1h-1zM18,22h1v1h-1zM20,22h3v1h-3zM24,22h2v1h-2zM27,22h2v1h-2zM0,23h1v1h-1zM6,23h1v1h-1zM9,23h1v1h-1zM12,23h1v1h-1zM14,23h2v1h-2zM17,23h3v1h-3zM21,23h2v1h-2zM24,23h1v1h-1zM26,23h1v1h-1zM0,24h1v1h-1zM2,24h3v1h-3zM6,24h1v1h-1zM8,24h1v1h-1zM10,24h1v1h-1zM13,24h4v1h-4zM18,24h2v1h-2zM21,24h2v1h-2zM24,24h1v1h-1zM27,24h2v1h-2zM0,25h1v1h-1zM2,25h3v1h-3zM6,25h1v1h-1zM9,25h2v1h-2zM12,25h2v1h-2zM15,25h3v1h-3zM19,25h1v1h-1zM21,25h1v1h-1zM23,25h3v1h-3zM27,25h2v1h-2zM0,26h1v1h-1zM2,26h3v1h-3zM6,26h1v1h-1zM9,26h3v1h-3zM13,26h3v1h-3zM17,26h1v1h-1zM19,26h4v1h-4zM24,26h3v1h-3zM0,27h1v1h-1zM6,27h1v1h-1zM8,27h3v1h-3zM13,27h1v1h-1zM16,27h1v1h-1zM18,27h1v1h-1zM20,27h2v1h-2zM24,27h1v1h-1zM26,27h1v1h-1zM0,28h7v1h-7zM9,28h2v1h-2zM13,28h1v1h-1zM15,28h2v1h-2zM19,28h1v1h-1zM22,28h2v1h-2zM25,28h1v1h-1zM27,28h2v1h-2z" fill="black"/>
+    </svg>
+  );
+}
+
+// Driver App Mockup - Waiting Status
+function DriverMockupWaiting({ t }: { t: Translations }) {
   return (
     <PhoneFrame>
       <div className="h-full overflow-hidden text-white">
@@ -1082,8 +1093,8 @@ function DriverMockupWaiting() {
                 </svg>
               </div>
               <div>
-                <p className="text-[9px] font-semibold">Status Check-in</p>
-                <p className="text-[7px] text-blue-200">Emag</p>
+                <p className="text-[9px] font-semibold">{t.qrgoDriver?.statusCheckin || "Status Check-in"}</p>
+                <p className="text-[7px] text-blue-200">{t.qrgoDriver?.warehouseName || "Depozit București"}</p>
               </div>
             </div>
             <div className="flex items-center gap-1 text-[7px] bg-emerald-500/20 px-1.5 py-0.5 rounded-full">
@@ -1106,20 +1117,16 @@ function DriverMockupWaiting() {
                   </svg>
                 </div>
                 <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  În Așteptare
+                  {t.qrgoDriver?.waiting || "În Așteptare"}
                 </span>
-                <p className="text-[7px] text-slate-400 mt-1 text-center">Aștepți confirmarea operatorului</p>
+                <p className="text-[7px] text-slate-400 mt-1 text-center">{t.qrgoDriver?.waitingDesc || "Aștepți confirmarea operatorului"}</p>
               </div>
-              {/* QR Code Side */}
+              {/* QR Code Side - Real QR code to qrgo.ro */}
               <div className="flex-1 flex flex-col items-center justify-center py-2">
                 <div className="w-16 h-16 bg-white rounded p-1 mb-1">
-                  <div className="w-full h-full grid grid-cols-5 grid-rows-5 gap-[1px]">
-                    {Array.from({ length: 25 }).map((_, i) => (
-                      <div key={i} className={`${[0,1,2,4,5,6,7,10,12,14,15,17,18,19,20,22,23,24].includes(i) ? 'bg-slate-900' : 'bg-white'}`} />
-                    ))}
-                  </div>
+                  <QRCodeSVG />
                 </div>
-                <p className="text-[7px] text-slate-500">fcee6dfd...</p>
+                <p className="text-[7px] text-slate-500">qrgo.ro</p>
               </div>
             </div>
             <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
@@ -1129,7 +1136,7 @@ function DriverMockupWaiting() {
               <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              <span>Trimis 19:07</span>
+              <span>{t.qrgoDriver?.sent || "Trimis"} 19:07</span>
             </div>
           </div>
 
@@ -1141,10 +1148,10 @@ function DriverMockupWaiting() {
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-[8px] text-amber-300 font-medium">Ce trebuie să faci</span>
+              <span className="text-[8px] text-amber-300 font-medium">{t.qrgoDriver?.whatToDo || "Ce trebuie să faci"}</span>
             </div>
-            <p className="text-[9px] text-amber-200 font-semibold">Te rugăm să aștepți</p>
-            <p className="text-[7px] text-amber-300/70">Vei fi notificat la următoarea acțiune</p>
+            <p className="text-[9px] text-amber-200 font-semibold">{t.qrgoDriver?.pleaseWait || "Te rugăm să aștepți"}</p>
+            <p className="text-[7px] text-amber-300/70">{t.qrgoDriver?.willBeNotified || "Vei fi notificat la următoarea acțiune"}</p>
           </div>
 
           {/* Driver Info Card */}
@@ -1155,16 +1162,16 @@ function DriverMockupWaiting() {
                   <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-[8px] text-slate-300 font-medium">Informații Șofer</span>
+              <span className="text-[8px] text-slate-300 font-medium">{t.qrgoDriver?.driverInfo || "Informații Șofer"}</span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-[7px]">
               <div>
-                <p className="text-slate-500">NUME</p>
-                <p className="text-white">Balan</p>
+                <p className="text-slate-500">{t.qrgoDriver?.driverNameLabel || "NUME"}</p>
+                <p className="text-white">{t.qrgoDriver?.driverName || "Popescu Ion"}</p>
               </div>
               <div>
-                <p className="text-slate-500">TELEFON</p>
-                <p className="text-white">+40771570577</p>
+                <p className="text-slate-500">{t.qrgoDriver?.driverPhoneLabel || "TELEFON"}</p>
+                <p className="text-white">{t.qrgoDriver?.driverPhone || "+40 722 345 678"}</p>
               </div>
             </div>
           </div>
@@ -1175,7 +1182,8 @@ function DriverMockupWaiting() {
 }
 
 // Driver App Mockup - Assigned Status
-function DriverMockupAssigned() {
+// Driver App Mockup - Assigned Status
+function DriverMockupAssigned({ t }: { t: Translations }) {
   return (
     <PhoneFrame>
       <div className="h-full overflow-hidden text-white">
@@ -1189,8 +1197,8 @@ function DriverMockupAssigned() {
                 </svg>
               </div>
               <div>
-                <p className="text-[9px] font-semibold">Status Check-in</p>
-                <p className="text-[7px] text-blue-200">Emag</p>
+                <p className="text-[9px] font-semibold">{t.qrgoDriver?.statusCheckin || "Status Check-in"}</p>
+                <p className="text-[7px] text-blue-200">{t.qrgoDriver?.warehouseName || "Depozit București"}</p>
               </div>
             </div>
             <div className="flex items-center gap-1 text-[7px] bg-emerald-500/20 px-1.5 py-0.5 rounded-full">
@@ -1213,18 +1221,16 @@ function DriverMockupAssigned() {
                   </svg>
                 </div>
                 <span className="text-[8px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  Alocat
+                  {t.qrgoDriver?.assigned || "Alocat"}
                 </span>
-                <p className="text-[7px] text-slate-400 mt-1 text-center">V-a fost atribuită o rampă</p>
+                <p className="text-[7px] text-slate-400 mt-1 text-center">{t.qrgoDriver?.assignedDesc || "V-a fost atribuită o rampă"}</p>
               </div>
-              {/* Truck Image Side */}
+              {/* QR Code Side - Real QR code to qrgo.ro */}
               <div className="flex-1 flex flex-col items-center justify-center py-2">
-                <div className="w-16 h-12 bg-slate-700 rounded mb-1 flex items-center justify-center overflow-hidden">
-                  <svg className="w-10 h-8 text-slate-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                  </svg>
+                <div className="w-16 h-16 bg-white rounded p-1 mb-1">
+                  <QRCodeSVG />
                 </div>
-                <p className="text-[7px] text-slate-500">562a10b7...</p>
+                <p className="text-[7px] text-slate-500">qrgo.ro</p>
               </div>
             </div>
             <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
@@ -1237,7 +1243,7 @@ function DriverMockupAssigned() {
               <svg className="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              <span>Văzut 19:44</span>
+              <span>{t.qrgoDriver?.seen || "Văzut"} 19:44</span>
             </div>
           </div>
 
@@ -1249,9 +1255,9 @@ function DriverMockupAssigned() {
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-[8px] text-emerald-300 font-medium">Ce trebuie să faci</span>
+              <span className="text-[8px] text-emerald-300 font-medium">{t.qrgoDriver?.whatToDo || "Ce trebuie să faci"}</span>
             </div>
-            <p className="text-[11px] text-emerald-200 font-bold">Mergi la Rampa 1</p>
+            <p className="text-[11px] text-emerald-200 font-bold">{t.qrgoDriver?.goToRamp || "Mergi la Rampa 1"}</p>
           </div>
 
           {/* Ramp Card */}
@@ -1262,7 +1268,7 @@ function DriverMockupAssigned() {
                   <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-[8px] text-slate-300 font-medium">Rampă Alocată</span>
+              <span className="text-[8px] text-slate-300 font-medium">{t.qrgoDriver?.rampAssigned || "Rampă Alocată"}</span>
             </div>
             <p className="text-[11px] text-white font-bold mb-2">Rampa 1</p>
             <div className="w-full h-14 bg-slate-700 rounded flex items-center justify-center">
@@ -1278,7 +1284,8 @@ function DriverMockupAssigned() {
 }
 
 // Driver App Mockup - Check-in Info
-function DriverMockupInfo() {
+// Driver App Mockup - Check-in Info
+function DriverMockupInfo({ t }: { t: Translations }) {
   return (
     <PhoneFrame>
       <div className="h-full overflow-hidden text-white">
@@ -1290,7 +1297,7 @@ function DriverMockupInfo() {
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
             </div>
-            <span className="text-[9px] font-semibold">Informații Check-in</span>
+            <span className="text-[9px] font-semibold">{t.qrgoDriver?.checkinInfo || "Informații Check-in"}</span>
           </div>
         </div>
 
@@ -1305,7 +1312,7 @@ function DriverMockupInfo() {
               <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
-              Descărcare & Încărcare
+              {t.qrgoDriver?.unloadAndLoad || "Descărcare & Încărcare"}
             </span>
           </div>
 
@@ -1315,7 +1322,7 @@ function DriverMockupInfo() {
               <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              REF. DESCĂRCARE
+              {t.qrgoDriver?.unloadRef || "REF. DESCĂRCARE"}
             </p>
             <p className="text-[10px] text-emerald-300 font-bold">UUDEJJ</p>
           </div>
@@ -1325,7 +1332,7 @@ function DriverMockupInfo() {
               <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
-              REF. ÎNCĂRCARE
+              {t.qrgoDriver?.loadRef || "REF. ÎNCĂRCARE"}
             </p>
             <p className="text-[10px] text-red-300 font-bold">76656778</p>
           </div>
@@ -1337,7 +1344,7 @@ function DriverMockupInfo() {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
               </svg>
               <div>
-                <p className="text-[6px] text-slate-500">ORĂ PROGRAMATĂ</p>
+                <p className="text-[6px] text-slate-500">{t.qrgoDriver?.scheduledTime || "ORĂ PROGRAMATĂ"}</p>
                 <p className="text-[9px] text-orange-400 font-semibold">09:00</p>
               </div>
             </div>
@@ -1346,8 +1353,8 @@ function DriverMockupInfo() {
                 <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
               </svg>
               <div>
-                <p className="text-[6px] text-slate-500">TIP MARFĂ</p>
-                <p className="text-[9px] text-white">Legume</p>
+                <p className="text-[6px] text-slate-500">{t.qrgoDriver?.cargoType || "TIP MARFĂ"}</p>
+                <p className="text-[9px] text-white">{t.qrgoDriver?.cargoValue || "Legume"}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -1355,8 +1362,8 @@ function DriverMockupInfo() {
                 <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
               </svg>
               <div>
-                <p className="text-[6px] text-slate-500">DEPARTAMENT</p>
-                <p className="text-[9px] text-white">Office</p>
+                <p className="text-[6px] text-slate-500">{t.qrgoDriver?.department || "DEPARTAMENT"}</p>
+                <p className="text-[9px] text-white">{t.qrgoDriver?.departmentValue || "Office"}</p>
               </div>
             </div>
           </div>
@@ -1367,34 +1374,34 @@ function DriverMockupInfo() {
               <svg className="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z" />
               </svg>
-              <span className="text-[8px] font-semibold">Cronologie</span>
+              <span className="text-[8px] font-semibold">{t.qrgoDriver?.timeline || "Cronologie"}</span>
             </div>
             <div className="space-y-1.5">
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[7px] text-white font-medium">Rampă Alocată</span>
+                    <span className="text-[7px] text-white font-medium">{t.qrgoDriver?.rampAllocated || "Rampă Alocată"}</span>
                     <span className="text-[6px] text-slate-500">19:44</span>
                   </div>
-                  <p className="text-[6px] text-slate-400">Rampa 1 alocată</p>
+                  <p className="text-[6px] text-slate-400">{t.qrgoDriver?.rampAllocatedDesc || "Rampa 1 alocată"}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[7px] text-white font-medium">Check-in confirmat</span>
+                    <span className="text-[7px] text-white font-medium">{t.qrgoDriver?.checkinConfirmed || "Check-in confirmat"}</span>
                     <span className="text-[6px] text-slate-500">19:44</span>
                   </div>
-                  <p className="text-[6px] text-slate-400">Confirmat de Daniel</p>
+                  <p className="text-[6px] text-slate-400">{t.qrgoDriver?.confirmedBy || "Confirmat de Daniel"}</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-500 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[7px] text-white font-medium">Check-in creat</span>
+                    <span className="text-[7px] text-white font-medium">{t.qrgoDriver?.checkinCreated || "Check-in creat"}</span>
                     <span className="text-[6px] text-slate-500">19:43</span>
                   </div>
                 </div>
@@ -1435,15 +1442,15 @@ function QRGODriverSection({ t }: { t: Translations }) {
         {/* Phone Mockups */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 mb-12">
           <div className="transform lg:-rotate-6 lg:translate-y-4 hover:rotate-0 hover:translate-y-0 transition-transform duration-300">
-            <DriverMockupWaiting />
+            <DriverMockupWaiting t={t} />
             <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup1Title || "Status în așteptare"}</p>
           </div>
           <div className="transform lg:scale-110 lg:z-10 hover:scale-115 transition-transform duration-300">
-            <DriverMockupAssigned />
+            <DriverMockupAssigned t={t} />
             <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup2Title || "Rampă alocată"}</p>
           </div>
           <div className="transform lg:rotate-6 lg:translate-y-4 hover:rotate-0 hover:translate-y-0 transition-transform duration-300">
-            <DriverMockupInfo />
+            <DriverMockupInfo t={t} />
             <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup3Title || "Detalii check-in"}</p>
           </div>
         </div>
