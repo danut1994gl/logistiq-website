@@ -57,7 +57,7 @@ export const translations = {
       feature3Title: "Chat & Notificări în Timp Real",
       feature3Desc:
         "Chat instant între operator și șofer, notificări push pe telefon, și opțional SMS. Comunicare clară, indiferent de platforma folosită.",
-      feature4Title: "Categorii Departamente & Camioane",
+      feature4Title: "Categorisire",
       feature4Desc:
         "Organizează check-in-urile pe departamente (Legume, Uscate, Congelate, Refrigerate) și tipuri camion (camion+remorcă, semiremorcă, prelată etc).",
       feature5Title: "Rapoarte & Analytics",
