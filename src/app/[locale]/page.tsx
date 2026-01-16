@@ -1126,7 +1126,7 @@ function DriverMockupWaiting({ t }: { t: Translations }) {
                 <div className="w-16 h-16 bg-white rounded p-1 mb-1">
                   <QRCodeSVG />
                 </div>
-                <p className="text-[7px] text-slate-500">qrgo.ro</p>
+                <p className="text-[7px] text-slate-500">fcee6dfd...</p>
               </div>
             </div>
             <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
@@ -1230,7 +1230,7 @@ function DriverMockupAssigned({ t }: { t: Translations }) {
                 <div className="w-16 h-16 bg-white rounded p-1 mb-1">
                   <QRCodeSVG />
                 </div>
-                <p className="text-[7px] text-slate-500">qrgo.ro</p>
+                <p className="text-[7px] text-slate-500">562a10b7...</p>
               </div>
             </div>
             <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
@@ -1270,7 +1270,7 @@ function DriverMockupAssigned({ t }: { t: Translations }) {
               </div>
               <span className="text-[8px] text-slate-300 font-medium">{t.qrgoDriver?.rampAssigned || "Rampă Alocată"}</span>
             </div>
-            <p className="text-[11px] text-white font-bold mb-2">Rampa 1</p>
+            <p className="text-[11px] text-white font-bold mb-2">{t.qrgoDriver?.ramp1 || "Rampa 1"}</p>
             <div className="w-full h-14 bg-slate-700 rounded flex items-center justify-center">
               <svg className="w-12 h-10 text-slate-500" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
@@ -1324,7 +1324,7 @@ function DriverMockupInfo({ t }: { t: Translations }) {
               </svg>
               {t.qrgoDriver?.unloadRef || "REF. DESCĂRCARE"}
             </p>
-            <p className="text-[10px] text-emerald-300 font-bold">UUDEJJ</p>
+            <p className="text-[10px] text-emerald-300 font-bold">{t.qrgoDriver?.unloadRefValue || "PO-2024-0847"}</p>
           </div>
 
           <div className="bg-red-500/10 rounded-lg p-2 border border-red-500/30">
@@ -1334,7 +1334,7 @@ function DriverMockupInfo({ t }: { t: Translations }) {
               </svg>
               {t.qrgoDriver?.loadRef || "REF. ÎNCĂRCARE"}
             </p>
-            <p className="text-[10px] text-red-300 font-bold">76656778</p>
+            <p className="text-[10px] text-red-300 font-bold">{t.qrgoDriver?.loadRefValue || "DEL-RO-12458"}</p>
           </div>
 
           {/* Details */}
