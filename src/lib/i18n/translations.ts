@@ -206,6 +206,16 @@ export const translations = {
       madeWith: "Făcut cu",
       inRomania: "în România",
     },
+    qrgoDriver: {
+      badge: "Aplicație Mobilă",
+      title: "QRGO Driver",
+      subtitle: "Aplicația mobilă pentru șoferi - check-in rapid, notificări în timp real și instrucțiuni clare pentru fiecare operațiune.",
+      mockup1Title: "Status în așteptare",
+      mockup2Title: "Rampă alocată",
+      mockup3Title: "Detalii check-in",
+      downloadFrom: "Descarcă din",
+      visitWebsite: "Vizitează qrgo.ro",
+    },
     seo: {
       title: "Logistiq - Platforma #1 pentru Managementul Depozitelor | Check-in Digital Șoferi",
       description:
@@ -420,6 +430,16 @@ export const translations = {
       allRights: "All rights reserved.",
       madeWith: "Made with",
       inRomania: "in Romania",
+    },
+    qrgoDriver: {
+      badge: "Mobile App",
+      title: "QRGO Driver",
+      subtitle: "The mobile app for drivers - quick check-in, real-time notifications and clear instructions for every operation.",
+      mockup1Title: "Waiting status",
+      mockup2Title: "Ramp assigned",
+      mockup3Title: "Check-in details",
+      downloadFrom: "Download from",
+      visitWebsite: "Visit qrgo.ro",
     },
     seo: {
       title: "Logistiq - #1 Warehouse Management Platform | Digital Driver Check-in",
@@ -636,6 +656,16 @@ export const translations = {
       madeWith: "Hergestellt mit",
       inRomania: "in Rumanien",
     },
+    qrgoDriver: {
+      badge: "Mobile App",
+      title: "QRGO Driver",
+      subtitle: "Die mobile App für Fahrer - schneller Check-in, Echtzeit-Benachrichtigungen und klare Anweisungen für jeden Vorgang.",
+      mockup1Title: "Wartestatus",
+      mockup2Title: "Rampe zugewiesen",
+      mockup3Title: "Check-in Details",
+      downloadFrom: "Herunterladen von",
+      visitWebsite: "Besuchen Sie qrgo.ro",
+    },
     seo: {
       title: "Logistiq - #1 Lagerverwaltungsplattform | Digitaler Fahrer-Check-in",
       description:
@@ -850,6 +880,16 @@ export const translations = {
       allRights: "Wszelkie prawa zastrzezone.",
       madeWith: "Stworzone z",
       inRomania: "w Rumunii",
+    },
+    qrgoDriver: {
+      badge: "Aplikacja Mobilna",
+      title: "QRGO Driver",
+      subtitle: "Aplikacja mobilna dla kierowcow - szybka rejestracja, powiadomienia w czasie rzeczywistym i jasne instrukcje dla kazdej operacji.",
+      mockup1Title: "Status oczekiwania",
+      mockup2Title: "Rampa przydzielona",
+      mockup3Title: "Szczegoly rejestracji",
+      downloadFrom: "Pobierz z",
+      visitWebsite: "Odwiedz qrgo.ro",
     },
     seo: {
       title: "Logistiq - Platforma #1 do zarzadzania magazynem | Cyfrowa rejestracja kierowcow",
@@ -1066,6 +1106,16 @@ export const translations = {
       madeWith: "Keszult",
       inRomania: "Romaniaban",
     },
+    qrgoDriver: {
+      badge: "Mobil Alkalmazas",
+      title: "QRGO Driver",
+      subtitle: "A mobil alkalmazas soforoknek - gyors bejelentkezes, valos ideju ertesitesek es vilagos utasitasok minden muvelethez.",
+      mockup1Title: "Varakozasi statusz",
+      mockup2Title: "Rampa kiosztva",
+      mockup3Title: "Bejelentkezesi reszletek",
+      downloadFrom: "Letoltes innen",
+      visitWebsite: "Latogasson el a qrgo.ro-ra",
+    },
     seo: {
       title: "Logistiq - #1 Raktarkezelo Platform | Digitalis Sofor Bejelentkezes",
       description:
@@ -1281,6 +1331,16 @@ export const translations = {
       madeWith: "Napraveno s",
       inRomania: "v Rumnija",
     },
+    qrgoDriver: {
+      badge: "Mobilno Prilozhenie",
+      title: "QRGO Driver",
+      subtitle: "Mobilnoto prilozhenie za voditeli - brza registracija, uvedomlenija v realno vreme i jasni instrukcii za vsjaka operacija.",
+      mockup1Title: "Status na chakane",
+      mockup2Title: "Rampa razpredelena",
+      mockup3Title: "Detajli za registracija",
+      downloadFrom: "Izteglete ot",
+      visitWebsite: "Posetete qrgo.ro",
+    },
     seo: {
       title: "Logistiq - #1 Platforma za upravlenie na skladove | Digitalna registracija na voditeli",
       description:
@@ -1445,9 +1505,9 @@ export const translations = {
         "Rejoignez des centaines d'entrepots qui ont deja digitalise leurs processus avec Logistiq.",
       button: "Commencez maintenant",
       noCreditCard: "Pas de carte de credit requise",
-      phoneNumber: "+40 XXX XXX XXX",
+      or: "ou",
       callUs: "Appelez-nous",
-      scheduleCall: "Planifier un appel",
+      phoneNumber: "+40 XXX XXX XXX",
     },
     contact: {
       title: "Entrons en contact",
@@ -1460,9 +1520,13 @@ export const translations = {
       message: "Message",
       messagePlaceholder: "Dites-nous quelques mots sur votre entrepot et vos besoins...",
       send: "Envoyer le message",
-      responseTime: "Nous repondons generalement dans les 24 heures.",
+      sending: "Envoi en cours...",
+      sent: "Message envoye avec succes!",
+      error: "Erreur lors de l'envoi. Veuillez reessayer.",
       info: "Adresse",
       address: "Bucarest, Roumanie",
+      responseTime: "Nous repondons generalement dans les 24 heures.",
+      scheduleCall: "Planifier un appel",
     },
     footer: {
       description:
@@ -1491,6 +1555,16 @@ export const translations = {
       allRights: "Tous droits reserves.",
       madeWith: "Fait avec",
       inRomania: "en Roumanie",
+    },
+    qrgoDriver: {
+      badge: "Application Mobile",
+      title: "QRGO Driver",
+      subtitle: "L'application mobile pour les chauffeurs - check-in rapide, notifications en temps reel et instructions claires pour chaque operation.",
+      mockup1Title: "Statut en attente",
+      mockup2Title: "Rampe attribuee",
+      mockup3Title: "Details du check-in",
+      downloadFrom: "Telecharger depuis",
+      visitWebsite: "Visitez qrgo.ro",
     },
     seo: {
       title: "Logistiq - Plateforme #1 de gestion d'entrepot | Check-in numerique chauffeurs",
@@ -1656,9 +1730,9 @@ export const translations = {
         "Sluit u aan bij honderden magazijnen die hun processen al hebben gedigitaliseerd met Logistiq.",
       button: "Start nu",
       noCreditCard: "Geen creditcard vereist",
-      phoneNumber: "+40 XXX XXX XXX",
+      or: "of",
       callUs: "Bel ons",
-      scheduleCall: "Plan een gesprek",
+      phoneNumber: "+40 XXX XXX XXX",
     },
     contact: {
       title: "Laten we contact opnemen",
@@ -1671,9 +1745,13 @@ export const translations = {
       message: "Bericht",
       messagePlaceholder: "Vertel ons iets over uw magazijn en behoeften...",
       send: "Bericht verzenden",
-      responseTime: "We reageren meestal binnen 24 uur.",
+      sending: "Verzenden...",
+      sent: "Bericht succesvol verzonden!",
+      error: "Fout bij verzenden. Probeer het opnieuw.",
       info: "Adres",
       address: "Boekarest, Roemenie",
+      responseTime: "We reageren meestal binnen 24 uur.",
+      scheduleCall: "Plan een gesprek",
     },
     footer: {
       description:
@@ -1702,6 +1780,16 @@ export const translations = {
       allRights: "Alle rechten voorbehouden.",
       madeWith: "Gemaakt met",
       inRomania: "in Roemenie",
+    },
+    qrgoDriver: {
+      badge: "Mobiele App",
+      title: "QRGO Driver",
+      subtitle: "De mobiele app voor chauffeurs - snelle check-in, realtime meldingen en duidelijke instructies voor elke operatie.",
+      mockup1Title: "Wachtstatus",
+      mockup2Title: "Dok toegewezen",
+      mockup3Title: "Check-in details",
+      downloadFrom: "Downloaden van",
+      visitWebsite: "Bezoek qrgo.ro",
     },
     seo: {
       title: "Logistiq - #1 Magazijnbeheer Platform | Digitale Chauffeur Check-in",

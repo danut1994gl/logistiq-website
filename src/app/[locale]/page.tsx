@@ -200,7 +200,7 @@ const FlagNL = () => (
 );
 
 // Map locale to flag component
-const localeToFlag: Record<Locale, () => JSX.Element> = {
+const localeToFlag: Record<Locale, React.FC> = {
   ro: FlagRO,
   en: FlagGB,
   de: FlagDE,
@@ -1048,6 +1048,452 @@ function BenefitsSection({ t }: { t: Translations }) {
   );
 }
 
+// Phone Frame Component
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative mx-auto w-[220px] h-[450px]">
+      {/* Phone outer frame */}
+      <div className="absolute inset-0 bg-slate-800 rounded-[2.5rem] shadow-2xl border-4 border-slate-700">
+        {/* Notch */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-5 bg-slate-900 rounded-full" />
+        {/* Screen */}
+        <div className="absolute top-8 left-2 right-2 bottom-8 bg-slate-900 rounded-[1.5rem] overflow-hidden">
+          {children}
+        </div>
+        {/* Home indicator */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-slate-600 rounded-full" />
+      </div>
+    </div>
+  );
+}
+
+// Driver App Mockup - Waiting Status
+function DriverMockupWaiting() {
+  return (
+    <PhoneFrame>
+      <div className="h-full overflow-hidden text-white">
+        {/* Status Header */}
+        <div className="bg-blue-600 px-3 py-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-blue-500/50 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[9px] font-semibold">Status Check-in</p>
+                <p className="text-[7px] text-blue-200">Emag</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 text-[7px] bg-emerald-500/20 px-1.5 py-0.5 rounded-full">
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-emerald-300">LIVE</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-2 space-y-2">
+          {/* Status Card */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700">
+            <div className="flex gap-2">
+              {/* Status Icon Side */}
+              <div className="flex-1 flex flex-col items-center justify-center py-2">
+                <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center mb-1">
+                  <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  În Așteptare
+                </span>
+                <p className="text-[7px] text-slate-400 mt-1 text-center">Aștepți confirmarea operatorului</p>
+              </div>
+              {/* QR Code Side */}
+              <div className="flex-1 flex flex-col items-center justify-center py-2">
+                <div className="w-16 h-16 bg-white rounded p-1 mb-1">
+                  <div className="w-full h-full grid grid-cols-5 grid-rows-5 gap-[1px]">
+                    {Array.from({ length: 25 }).map((_, i) => (
+                      <div key={i} className={`${[0,1,2,4,5,6,7,10,12,14,15,17,18,19,20,22,23,24].includes(i) ? 'bg-slate-900' : 'bg-white'}`} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-[7px] text-slate-500">fcee6dfd...</p>
+              </div>
+            </div>
+            <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
+              <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span>Trimis 19:07</span>
+            </div>
+          </div>
+
+          {/* Action Card */}
+          <div className="bg-amber-500/10 rounded-lg p-2 border border-amber-500/30">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-5 h-5 rounded-full bg-amber-500/30 flex items-center justify-center">
+                <svg className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-[8px] text-amber-300 font-medium">Ce trebuie să faci</span>
+            </div>
+            <p className="text-[9px] text-amber-200 font-semibold">Te rugăm să aștepți</p>
+            <p className="text-[7px] text-amber-300/70">Vei fi notificat la următoarea acțiune</p>
+          </div>
+
+          {/* Driver Info Card */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 rounded-full bg-blue-500/30 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-[8px] text-slate-300 font-medium">Informații Șofer</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-[7px]">
+              <div>
+                <p className="text-slate-500">NUME</p>
+                <p className="text-white">Balan</p>
+              </div>
+              <div>
+                <p className="text-slate-500">TELEFON</p>
+                <p className="text-white">+40771570577</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+// Driver App Mockup - Assigned Status
+function DriverMockupAssigned() {
+  return (
+    <PhoneFrame>
+      <div className="h-full overflow-hidden text-white">
+        {/* Status Header */}
+        <div className="bg-blue-600 px-3 py-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-blue-500/50 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[9px] font-semibold">Status Check-in</p>
+                <p className="text-[7px] text-blue-200">Emag</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 text-[7px] bg-emerald-500/20 px-1.5 py-0.5 rounded-full">
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-emerald-300">LIVE</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-2 space-y-2">
+          {/* Status Card */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700">
+            <div className="flex gap-2">
+              {/* Status Icon Side */}
+              <div className="flex-1 flex flex-col items-center justify-center py-2">
+                <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mb-1">
+                  <svg className="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-[8px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  Alocat
+                </span>
+                <p className="text-[7px] text-slate-400 mt-1 text-center">V-a fost atribuită o rampă</p>
+              </div>
+              {/* Truck Image Side */}
+              <div className="flex-1 flex flex-col items-center justify-center py-2">
+                <div className="w-16 h-12 bg-slate-700 rounded mb-1 flex items-center justify-center overflow-hidden">
+                  <svg className="w-10 h-8 text-slate-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                  </svg>
+                </div>
+                <p className="text-[7px] text-slate-500">562a10b7...</p>
+              </div>
+            </div>
+            <div className="border-t border-slate-700 mt-2 pt-2 flex items-center justify-end gap-1 text-[7px] text-slate-400">
+              <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <svg className="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <span>Văzut 19:44</span>
+            </div>
+          </div>
+
+          {/* Action Card - Go to Ramp */}
+          <div className="bg-emerald-500/10 rounded-lg p-2 border border-emerald-500/30">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/30 flex items-center justify-center">
+                <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-[8px] text-emerald-300 font-medium">Ce trebuie să faci</span>
+            </div>
+            <p className="text-[11px] text-emerald-200 font-bold">Mergi la Rampa 1</p>
+          </div>
+
+          {/* Ramp Card */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 rounded-full bg-purple-500/30 flex items-center justify-center">
+                <svg className="w-2.5 h-2.5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-[8px] text-slate-300 font-medium">Rampă Alocată</span>
+            </div>
+            <p className="text-[11px] text-white font-bold mb-2">Rampa 1</p>
+            <div className="w-full h-14 bg-slate-700 rounded flex items-center justify-center">
+              <svg className="w-12 h-10 text-slate-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+// Driver App Mockup - Check-in Info
+function DriverMockupInfo() {
+  return (
+    <PhoneFrame>
+      <div className="h-full overflow-hidden text-white">
+        {/* Info Header */}
+        <div className="bg-slate-800 px-3 py-2 border-b border-slate-700">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-blue-500/30 flex items-center justify-center">
+              <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <span className="text-[9px] font-semibold">Informații Check-in</span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-2 space-y-2 overflow-y-auto" style={{ maxHeight: 'calc(100% - 36px)' }}>
+          {/* Operation Type Badge */}
+          <div className="flex justify-center">
+            <span className="text-[8px] px-2 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+              Descărcare & Încărcare
+            </span>
+          </div>
+
+          {/* Reference Cards */}
+          <div className="bg-emerald-500/10 rounded-lg p-2 border border-emerald-500/30">
+            <p className="text-[7px] text-emerald-400 mb-0.5 flex items-center gap-1">
+              <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              REF. DESCĂRCARE
+            </p>
+            <p className="text-[10px] text-emerald-300 font-bold">UUDEJJ</p>
+          </div>
+
+          <div className="bg-red-500/10 rounded-lg p-2 border border-red-500/30">
+            <p className="text-[7px] text-red-400 mb-0.5 flex items-center gap-1">
+              <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+              REF. ÎNCĂRCARE
+            </p>
+            <p className="text-[10px] text-red-300 font-bold">76656778</p>
+          </div>
+
+          {/* Details */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700 space-y-2">
+            <div className="flex items-center gap-2">
+              <svg className="w-3 h-3 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+              </svg>
+              <div>
+                <p className="text-[6px] text-slate-500">ORĂ PROGRAMATĂ</p>
+                <p className="text-[9px] text-orange-400 font-semibold">09:00</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+              </svg>
+              <div>
+                <p className="text-[6px] text-slate-500">TIP MARFĂ</p>
+                <p className="text-[9px] text-white">Legume</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+              </svg>
+              <div>
+                <p className="text-[6px] text-slate-500">DEPARTAMENT</p>
+                <p className="text-[9px] text-white">Office</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div className="bg-slate-800 rounded-lg p-2 border border-slate-700">
+            <div className="flex items-center gap-2 mb-2">
+              <svg className="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z" />
+              </svg>
+              <span className="text-[8px] font-semibold">Cronologie</span>
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-1" />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[7px] text-white font-medium">Rampă Alocată</span>
+                    <span className="text-[6px] text-slate-500">19:44</span>
+                  </div>
+                  <p className="text-[6px] text-slate-400">Rampa 1 alocată</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1" />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[7px] text-white font-medium">Check-in confirmat</span>
+                    <span className="text-[6px] text-slate-500">19:44</span>
+                  </div>
+                  <p className="text-[6px] text-slate-400">Confirmat de Daniel</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-slate-500 mt-1" />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[7px] text-white font-medium">Check-in creat</span>
+                    <span className="text-[6px] text-slate-500">19:43</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+// QRGO Driver Section
+function QRGODriverSection({ t }: { t: Translations }) {
+  return (
+    <section id="qrgo-driver" className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full filter blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 text-sm font-medium mb-4">
+            <MobileIcon />
+            {t.qrgoDriver?.badge || "Mobile App"}
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            {t.qrgoDriver?.title || "QRGO Driver"}
+          </h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            {t.qrgoDriver?.subtitle || "Aplicația mobilă pentru șoferi - check-in rapid, notificări în timp real și instrucțiuni clare pentru fiecare operațiune."}
+          </p>
+        </div>
+
+        {/* Phone Mockups */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 mb-12">
+          <div className="transform lg:-rotate-6 lg:translate-y-4 hover:rotate-0 hover:translate-y-0 transition-transform duration-300">
+            <DriverMockupWaiting />
+            <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup1Title || "Status în așteptare"}</p>
+          </div>
+          <div className="transform lg:scale-110 lg:z-10 hover:scale-115 transition-transform duration-300">
+            <DriverMockupAssigned />
+            <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup2Title || "Rampă alocată"}</p>
+          </div>
+          <div className="transform lg:rotate-6 lg:translate-y-4 hover:rotate-0 hover:translate-y-0 transition-transform duration-300">
+            <DriverMockupInfo />
+            <p className="text-center text-sm text-slate-400 mt-4">{t.qrgoDriver?.mockup3Title || "Detalii check-in"}</p>
+          </div>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="https://apps.apple.com/app/qrgo-driver"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-xl font-medium hover:bg-slate-100 transition-colors"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div className="text-left">
+              <p className="text-[10px] opacity-70">{t.qrgoDriver?.downloadFrom || "Descarcă din"}</p>
+              <p className="text-sm font-semibold">App Store</p>
+            </div>
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=ro.qrgo.driver"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-xl font-medium hover:bg-slate-100 transition-colors"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+            </svg>
+            <div className="text-left">
+              <p className="text-[10px] opacity-70">{t.qrgoDriver?.downloadFrom || "Descarcă din"}</p>
+              <p className="text-sm font-semibold">Google Play</p>
+            </div>
+          </a>
+          <a
+            href="https://qrgo.ro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            <GlobeIcon />
+            <span>{t.qrgoDriver?.visitWebsite || "Vizitează qrgo.ro"}</span>
+            <ArrowRightIcon />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Testimonials Section
 function TestimonialsSection({ t }: { t: Translations }) {
   const testimonials = [
@@ -1587,6 +2033,7 @@ export default function HomePage({ params }: { params: Promise<{ locale: string 
       <HowItWorksSection t={t} />
       <FeaturesSection t={t} />
       <BenefitsSection t={t} />
+      <QRGODriverSection t={t} />
       <TestimonialsSection t={t} />
       <PricingSection t={t} />
       <CTASection t={t} />
