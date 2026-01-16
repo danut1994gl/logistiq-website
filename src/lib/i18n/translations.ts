@@ -71,7 +71,7 @@ export const translations = {
         "Interfață disponibilă în 12 limbi europene. Șoferii din orice țară pot folosi aplicația în limba lor nativă.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Branding pe domeniu propriu (ex: checkin.depozit.ro) și API REST documentat pentru integrare cu WMS, TMS și alte sisteme existente.",
+        "Personalizare completă pe domeniul tău (ex: checkin.companie.ro) și API documentat pentru conectare cu sistemele existente de gestiune depozit sau transport.",
       feature9Title: "100% Cloud - Fără Echipament",
       feature9Desc:
         "Platforma funcționează complet în cloud. Nu ai nevoie de servere, echipamente speciale sau instalări locale. Accesează de oriunde, oricând, de pe orice dispozitiv.",
