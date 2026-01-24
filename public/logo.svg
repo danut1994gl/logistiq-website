@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer rounded container -->
+  <rect x="10" y="10" width="180" height="180" rx="40" fill="white"/>
+
+  <!-- Blue top-left section -->
+  <path d="M50 40 H120 Q140 40 140 60 V80 Q140 100 120 100 H100 Q80 100 80 80 V60 Q80 40 60 40 H50 Q30 40 30 60 V140 Q30 160 50 160 H60 Q80 160 80 140 V120 H60 Q40 120 40 100 V60 Q40 40 50 40Z" fill="#2563EB"/>
+
+  <!-- Orange bottom-right section -->
+  <rect x="100" y="120" width="60" height="60" rx="20" fill="#F59E0B"/>
+</svg>
