@@ -2018,7 +2018,7 @@ function ContactSection({ t }: { t: Translations }) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{t.cta.callUs}</h3>
-                  <a href="tel:+40xxxxxxxxx" className="text-green-600 dark:text-green-400 hover:underline">
+                  <a href="tel:+40771570577" className="text-green-600 dark:text-green-400 hover:underline">
                     {t.cta.phoneNumber}
                   </a>
                 </div>
@@ -2027,13 +2027,20 @@ function ContactSection({ t }: { t: Translations }) {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 flex-shrink-0">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{t.contact.info}</h3>
-                  <p className="text-slate-600 dark:text-slate-300">{t.contact.address}</p>
+                  <div className="text-slate-600 dark:text-slate-300 text-sm space-y-0.5">
+                    <p>{t.contact.schedule.monday}</p>
+                    <p>{t.contact.schedule.tuesday}</p>
+                    <p>{t.contact.schedule.wednesday}</p>
+                    <p>{t.contact.schedule.thursday}</p>
+                    <p>{t.contact.schedule.friday}</p>
+                    <p className="text-slate-400">{t.contact.schedule.saturday}</p>
+                    <p className="text-slate-400">{t.contact.schedule.sunday}</p>
+                  </div>
                 </div>
               </div>
 
