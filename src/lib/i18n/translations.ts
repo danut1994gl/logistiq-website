@@ -11,11 +11,11 @@ export const translations = {
       login: "Autentificare",
     },
     hero: {
-      badge: "Platforma inteligentă pentru managementul depozitelor",
+      badge: "Platforma inteligentă pentru gestionarea fluxului de descărcare / încărcare în depozite",
       title: "Transformă haosul din depozit în",
       titleHighlight: "eficiență maximă",
       subtitle:
-        "Logistiq conectează șoferii cu operatorii din depozit în timp real. Check-in digital prin QR, alocare rampe automată, comunicare instantanee - totul într-o singură platformă.",
+        "Logistiq conectează șoferii cu operatorii din depozit în timp real. Check-in digital prin cod QR sau aplicație mobilă, alocare rampă, comunicare instantanee - totul într-o singură platformă.",
       cta1: "Solicită Demo Gratuit",
       cta2: "Vezi cum funcționează",
       trustedBy: "Folosit de depozite din toată Europa",
@@ -33,54 +33,54 @@ export const translations = {
         "Proces simplu în 4 pași. De la check-in până la plecare, totul este digitalizat și optimizat.",
       step1Title: "Șoferul face check-in",
       step1Desc:
-        "Prin aplicația web qrgo.ro sau aplicația mobilă, șoferul scanează codul QR și introduce datele: număr camion, remorcă, referință, poze documente.",
+        "Prin aplicația web sau mobilă <b>QRGO Driver</b>, șoferul scanează codul QR și introduce datele: număr camion, remorcă, referință, poze documente.",
       step2Title: "Operatorul alocă rampa",
       step2Desc:
-        "Operatorul din depozit vede în timp real toți șoferii în așteptare și îi direcționează către rampa disponibilă cu un singur click.",
+        "Operatorul din depozit vede în timp real toți șoferii în așteptare și îi direcționează către departamentul sau rampa corespunzătoare cu un singur click.",
       step3Title: "Comunicare în timp real",
       step3Desc:
         "Șoferii primesc notificări push și mesaje personalizate. Știu exact unde să meargă și ce să facă, fără confuzie sau timp pierdut.",
       step4Title: "Operațiune finalizată",
       step4Desc:
-        "La finalizare, totul este documentat automat. Rapoarte detaliate, timpi de operare, statistici - toate disponibile instant.",
+        "La finalizare, totul este documentat automat. Rapoarte detaliate, timpi de operare, statistici, evidență.",
     },
     features: {
       title: "Tot ce ai nevoie pentru un depozit eficient",
       subtitle:
-        "Funcționalități dezvoltate împreună cu operatori și șoferi, pentru probleme reale din industrie.",
-      feature1Title: "Check-in Digital QR",
+        "Funcționalități dezvoltate împreună cu administratori de depozite, operatori și șoferi, pentru a rezolva problemele reale din industrie.",
+      feature1Title: "Check-in Digital",
       feature1Desc:
-        "La sosire, șoferul scanează codul QR sau accesează linkul depozitului. Completează datele și primește confirmare instant. Fără hârtii, fără cozi.",
-      feature2Title: "Management Rampe Live",
+        "La sosire, șoferul scanează codul QR sau accesează depozitul în aplicația QRGO Driver. Completează datele și primește confirmare. Fără hârtii, fără cozi.",
+      feature2Title: "Management Rampe",
       feature2Desc:
-        "Vizualizare în timp real a tuturor rampelor. Alocă, eliberează și optimizează fluxul de camioane dintr-un singur dashboard.",
+        "Operatorii alocă, eliberează și optimizează fluxul de camioane dintr-un singur dashboard.",
       feature3Title: "Chat & Notificări în Timp Real",
       feature3Desc:
-        "Chat instant între operator și șofer, notificări push pe telefon, și opțional SMS. Comunicare clară, indiferent de platforma folosită.",
+        "Chat instant între operator și șofer, notificări push pe telefon, și opțional SMS. Comunicare clară, indiferent de platforma folosită de șofer.",
       feature4Title: "Categorisire",
       feature4Desc:
         "Organizează check-in-urile pe departamente (Legume, Uscate, Congelate, Refrigerate) și tipuri camion (camion+remorcă, semiremorcă, prelată etc).",
       feature5Title: "Rapoarte & Analytics",
       feature5Desc:
-        "Dashboard-uri interactive cu KPI-uri în timp real. Timpi de așteptare, încărcări pe zi, eficiență rampe, statistici departamente, toate măsurabile.",
+        "Dashboard-uri interactive cu KPI-uri în timp real. Timpi de așteptare, încărcări / descărcări pe zile, statistici departamente, grafice.",
       feature6Title: "Aplicație Android & iOS",
       feature6Desc:
-        "Șoferii accesează qrgo.ro sau descarcă aplicația mobilă din App Store sau Google Play. Compatibil cu orice dispozitiv, oriunde în lume.",
+        "Șoferii pot folosi aplicația QRGO Driver Web sau pot instala aplicația mobilă din App Store sau Google Play.",
       feature7Title: "Multi-limbă (12 limbi)",
       feature7Desc:
         "Interfață disponibilă în 12 limbi europene. Șoferii din orice țară pot folosi aplicația în limba lor nativă.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Personalizare completă pe domeniul tău (ex: checkin.companie.ro) și API documentat pentru conectare cu sistemele existente de gestiune depozit sau transport.",
-      feature9Title: "100% Cloud - Fără Echipament",
+        "Personalizare pe domeniul propriu (ex: checkin.companie.ro) și posibilitatea de integrare cu sistemele existente de gestiune depozit sau transport prin API.",
+      feature9Title: "Cloud - Fără Echipament",
       feature9Desc:
-        "Platforma funcționează complet în cloud. Nu ai nevoie de servere, echipamente speciale sau instalări locale. Accesează de oriunde, oricând, de pe orice dispozitiv.",
+        "Platforma funcționează complet în cloud. Nu ai nevoie de servere, echipamente speciale sau instalări locale.",
       feature10Title: "Instrucțiuni & Ghidare Șoferi",
       feature10Desc:
         "Șoferii primesc rampa alocată, indicații de orientare și instrucțiuni personalizate direct în aplicație. Ideal pentru șoferii care vizitează depozitul prima dată.",
       feature11Title: "Early Check-in & Programare",
       feature11Desc:
-        "Șoferii pot face check-in din drum și pot programa ora estimată de sosire. Depozitul știe din timp cine vine și poate planifica mai eficient.",
+        "Șoferii pot face check-in din drum și pot programa ora estimată de sosire. Depozitul știe din timp cine vine, la ce oră și poate planifica mai eficient fluxul de descărcare / încărcare.",
       feature12Title: "Detectare Automată Locație",
       feature12Desc:
         "Aplicația mobilă detectează automat când șoferul ajunge în zona depozitului și îi afișează notificare de check-in. Proces fără fricțiune, complet automatizat.",
@@ -90,11 +90,11 @@ export const translations = {
       subtitle: "Logistiq îmbunătățește eficiența pentru toți cei implicați în operațiuni.",
       forWarehouse: "Pentru Depozit",
       forDrivers: "Pentru Șoferi",
-      warehouse1: "Reducere 50% timp de așteptare șoferi",
+      warehouse1: "Optimizarea timpului de operare pentru șoferi de la intrare până la ieșire",
       warehouse2: "Trasabilitate completă: fiecare etapă de la intrare până la ieșire este înregistrată cu timpi exacți",
       warehouse3: "Eliminare hârtii și procese manuale",
       warehouse4: "Rapoarte automate pentru management",
-      warehouse5: "Planificare eficientă - știi din timp cine vine",
+      warehouse5: "Gestionarea eficientă a fluxului și a rampelor de descărcare / încărcare",
       warehouse6: "Fără echipament suplimentar - totul în cloud",
       drivers1: "Check-in rapid în mai puțin de 30 secunde",
       drivers2: "Primesc rampa și instrucțiuni direct în aplicație",
@@ -105,19 +105,31 @@ export const translations = {
     },
     testimonials: {
       title: "Ce spun clienții noștri",
-      subtitle: "Depozite din toată Europa folosesc Logistiq zilnic pentru a-și eficientiza operațiunile.",
+      subtitle: "Feedback de la echipele care folosesc Logistiq zilnic.",
       testimonial1:
-        "De când folosim Logistiq, timpul de așteptare al șoferilor s-a redus cu 60%. Operatorii noștri sunt mult mai eficienți.",
-      testimonial1Author: "Alexandru M.",
-      testimonial1Role: "Director Operațiuni, Depozit București",
+        "Am implementat sistemul pentru că pierdeam mult timp cu hârtiile și cozile la poartă. Acum șoferii fac check-in singuri, iar noi vedem totul pe dashboard. E mult mai simplu.",
+      testimonial1Author: "Manager Operațiuni",
+      testimonial1Role: "Depozit Logistic, România",
       testimonial2:
-        "Aplicația este foarte ușor de folosit. Șoferii noștri au adoptat-o imediat, fără training special.",
-      testimonial2Author: "Maria P.",
-      testimonial2Role: "Manager Logistică, Centru Distribuție Cluj",
+        "La început am fost sceptic, dar după o săptămână de utilizare nu mai vreau să mă întorc la vechiul sistem. Văd instant cine așteaptă și pot aloca rampele rapid.",
+      testimonial2Author: "Operator Depozit",
+      testimonial2Role: "Centru de Distribuție, România",
       testimonial3:
-        "Rapoartele automate ne economisesc ore întregi de muncă manuală în fiecare săptămână. Excelent!",
-      testimonial3Author: "Ionuț D.",
-      testimonial3Role: "Supervisor, Hub Logistic Timișoara",
+        "Cel mai mult apreciez că pot genera rapoarte automat. Înainte făceam totul manual în Excel și dura ore întregi.",
+      testimonial3Author: "Coordonator Logistică",
+      testimonial3Role: "Hub Regional, România",
+      testimonial4:
+        "Ne-a ajutat să avem o imagine clară asupra întregului flux. Știm exact câți șoferi sunt în curte, la ce rampe și cât durează fiecare operațiune.",
+      testimonial4Author: "Director Logistică",
+      testimonial4Role: "Companie de Distribuție, România",
+      testimonial5:
+        "Acum nu mai trebuie să sun operatorii pentru fiecare camion care intră. Șoferul face check-in, eu validez la barieră și gata.",
+      testimonial5Author: "Operator Poartă",
+      testimonial5Role: "Depozit Alimentar, România",
+      testimonial6:
+        "Am eliminat complet foile de pontaj pentru camioane. Totul se înregistrează automat cu ora exactă de intrare și ieșire.",
+      testimonial6Author: "Administrator Depozit",
+      testimonial6Role: "Terminal Logistic, România",
     },
     pricing: {
       title: "Alege planul potrivit",
@@ -131,19 +143,16 @@ export const translations = {
       includedFeatures: "Ce este inclus:",
       feature1: "Check-in-uri nelimitate",
       feature2: "Management rampe în timp real",
-      feature3: "Notificări push și SMS",
+      feature3: "Notificări push Aplicație și SMS (opțional)",
       feature4: "Rapoarte și analytics",
       feature5: "Aplicație mobilă iOS & Android",
       feature6: "Suport multi-limbă",
       feature7: "Suport tehnic",
+      feature8: "White-label pe domeniu propriu",
+      feature9: "SLA garantat 99.9%",
+      feature10: "Training personalizat",
       enterpriseFeature1: "Toate funcțiile Professional",
-      enterpriseFeature2: "Depozite nelimitate",
-      enterpriseFeature3: "White-label pe domeniu propriu",
-      enterpriseFeature4: "API access complet",
-      enterpriseFeature5: "Integrări custom (WMS, TMS)",
-      enterpriseFeature6: "Manager cont dedicat",
-      enterpriseFeature7: "SLA garantat 99.9%",
-      enterpriseFeature8: "Training personalizat",
+      enterpriseFeature2: "Integrări custom (WMS, TMS)",
       singleLocation: "1 locație",
       multipleLocations: "Locații multiple",
       customPricing: "Preț personalizat",
@@ -154,7 +163,6 @@ export const translations = {
       subtitle:
         "Alătură-te sutelor de depozite care au ales eficiența. Demo gratuit, configurare rapidă, fără obligații.",
       button: "Solicită Demo Gratuit",
-      noCreditCard: "Nu este necesar card de credit",
       or: "sau",
       callUs: "Sună-ne direct",
       phoneNumber: "+40 xxx xxx xxx",
@@ -273,11 +281,11 @@ export const translations = {
       login: "Login",
     },
     hero: {
-      badge: "Smart platform for warehouse management",
+      badge: "Smart platform for managing loading/unloading flow in warehouses",
       title: "Transform warehouse chaos into",
       titleHighlight: "maximum efficiency",
       subtitle:
-        "Logistiq connects drivers with warehouse operators in real-time. Digital QR check-in, automatic dock allocation, instant communication - all in one platform.",
+        "Logistiq connects drivers with warehouse operators in real-time. Digital check-in via QR code or mobile app, dock allocation, instant communication - all in one platform.",
       cta1: "Request Free Demo",
       cta2: "See how it works",
       trustedBy: "Trusted by warehouses across Europe",
@@ -295,54 +303,54 @@ export const translations = {
         "Simple 4-step process. From check-in to departure, everything is digitized and optimized.",
       step1Title: "Driver checks in",
       step1Desc:
-        "Through qrgo.ro web app or mobile app, the driver scans the QR code and enters data: truck number, trailer, reference, document photos.",
+        "Through the web or mobile app <b>QRGO Driver</b>, the driver scans the QR code and enters data: truck number, trailer, reference, document photos.",
       step2Title: "Operator assigns dock",
       step2Desc:
-        "The warehouse operator sees all waiting drivers in real-time and directs them to an available dock with a single click.",
+        "The warehouse operator sees all waiting drivers in real-time and directs them to the corresponding department or dock with a single click.",
       step3Title: "Real-time communication",
       step3Desc:
         "Drivers receive push notifications and personalized messages. They know exactly where to go and what to do, no confusion or wasted time.",
       step4Title: "Operation completed",
       step4Desc:
-        "Upon completion, everything is automatically documented. Detailed reports, operation times, statistics - all available instantly.",
+        "Upon completion, everything is automatically documented. Detailed reports, operation times, statistics, records.",
     },
     features: {
       title: "Everything you need for an efficient warehouse",
       subtitle:
-        "Features developed together with operators and drivers, for real industry problems.",
-      feature1Title: "Digital QR Check-in",
+        "Features developed together with warehouse administrators, operators and drivers, to solve real industry problems.",
+      feature1Title: "Digital Check-in",
       feature1Desc:
-        "Drivers scan the QR code on arrival. No papers, no endless queues, no confusion. All data captured instantly and securely.",
-      feature2Title: "Live Dock Management",
+        "On arrival, the driver scans the QR code or accesses the warehouse in the QRGO Driver app. Fills in the data and receives confirmation. No papers, no queues.",
+      feature2Title: "Dock Management",
       feature2Desc:
-        "Real-time view of all docks. Allocate, release and optimize truck flow from a single dashboard.",
+        "Operators allocate, release and optimize truck flow from a single dashboard.",
       feature3Title: "Real-time Chat & Notifications",
       feature3Desc:
-        "Instant chat between operator and driver, push notifications on phone, and SMS options. Clear communication, regardless of platform used.",
+        "Instant chat between operator and driver, push notifications on phone, and SMS options. Clear communication, regardless of the platform used by the driver.",
       feature4Title: "Department & Truck Categories",
       feature4Desc:
         "Organize check-ins by departments (Vegetables, Dry Goods, Frozen, Refrigerated) and truck types (truck+trailer, semi-trailer, tarp truck etc).",
       feature5Title: "Reports & Analytics",
       feature5Desc:
-        "Interactive dashboards with real-time KPIs. Waiting times, loads per day, dock efficiency, department statistics, all measurable.",
+        "Interactive dashboards with real-time KPIs. Waiting times, loads/unloads per day, department statistics, charts.",
       feature6Title: "Android & iOS App",
       feature6Desc:
-        "Drivers access qrgo.ro or download the mobile app from App Store or Google Play. Compatible with any device, anywhere in the world.",
+        "Drivers can use the QRGO Driver Web app or install the mobile app from App Store or Google Play.",
       feature7Title: "Multi-language (12 languages)",
       feature7Desc:
         "Interface available in 12 European languages. Drivers from any country can use the app in their native language.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Custom domain branding (e.g., checkin.yourwarehouse.com) and documented REST API for integration with WMS, TMS and other systems.",
-      feature9Title: "100% Cloud - No Equipment",
+        "Custom domain branding (e.g., checkin.yourwarehouse.com) and the possibility to integrate with existing warehouse or transport management systems via API.",
+      feature9Title: "Cloud - No Equipment",
       feature9Desc:
-        "Platform runs completely in the cloud. No servers, special equipment or local installations needed. Access from anywhere, anytime, on any device.",
+        "Platform runs completely in the cloud. No servers, special equipment or local installations needed.",
       feature10Title: "Driver Instructions & Guidance",
       feature10Desc:
         "Drivers receive assigned dock, navigation directions and personalized instructions directly in the app. Ideal for drivers visiting the warehouse for the first time.",
       feature11Title: "Early Check-in & Scheduling",
       feature11Desc:
-        "Drivers can check-in while on the road and schedule their estimated arrival time. Warehouse knows in advance who's coming and can plan more efficiently.",
+        "Drivers can check-in while on the road and schedule their estimated arrival time. Warehouse knows in advance who's coming, at what time and can plan the loading/unloading flow more efficiently.",
       feature12Title: "Automatic Location Detection",
       feature12Desc:
         "Mobile app automatically detects when driver arrives in the warehouse area and displays check-in notification. Frictionless, fully automated process.",
@@ -352,11 +360,11 @@ export const translations = {
       subtitle: "Logistiq improves efficiency for everyone involved in operations.",
       forWarehouse: "For Warehouse",
       forDrivers: "For Drivers",
-      warehouse1: "50% reduction in driver waiting time",
+      warehouse1: "Optimizing driver operation time from entry to exit",
       warehouse2: "Complete traceability: every step from entry to exit is recorded with exact timestamps",
       warehouse3: "Eliminate papers and manual processes",
       warehouse4: "Automatic reports for management",
-      warehouse5: "Efficient planning - know who's coming in advance",
+      warehouse5: "Efficient management of flow and loading/unloading docks",
       warehouse6: "No extra equipment - everything in the cloud",
       drivers1: "Quick check-in in less than 30 seconds",
       drivers2: "Receive dock and instructions directly in app",
@@ -367,19 +375,31 @@ export const translations = {
     },
     testimonials: {
       title: "What our customers say",
-      subtitle: "Warehouses across Europe use Logistiq daily to streamline their operations.",
+      subtitle: "Feedback from teams using Logistiq daily.",
       testimonial1:
-        "Since using Logistiq, driver waiting time has been reduced by 60%. Our operators are much more efficient.",
-      testimonial1Author: "Alexandru M.",
-      testimonial1Role: "Operations Director, Bucharest Warehouse",
+        "We implemented the system because we were losing too much time with paperwork and queues at the gate. Now drivers check-in themselves and we see everything on the dashboard. Much simpler.",
+      testimonial1Author: "Operations Manager",
+      testimonial1Role: "Logistics Warehouse, Europe",
       testimonial2:
-        "The app is very easy to use. Our drivers adopted it immediately, without special training.",
-      testimonial2Author: "Maria P.",
-      testimonial2Role: "Logistics Manager, Cluj Distribution Center",
+        "I was skeptical at first, but after a week of use I don't want to go back to the old system. I instantly see who's waiting and can allocate docks quickly.",
+      testimonial2Author: "Warehouse Operator",
+      testimonial2Role: "Distribution Center, Europe",
       testimonial3:
-        "Automatic reports save us hours of manual work every week. Excellent!",
-      testimonial3Author: "Ionut D.",
-      testimonial3Role: "Supervisor, Timisoara Logistics Hub",
+        "What I appreciate most is being able to generate reports automatically. Before, I did everything manually in Excel and it took hours.",
+      testimonial3Author: "Logistics Coordinator",
+      testimonial3Role: "Regional Hub, Europe",
+      testimonial4:
+        "It helped us get a clear picture of the entire flow. We know exactly how many drivers are in the yard, at which docks, and how long each operation takes.",
+      testimonial4Author: "Logistics Director",
+      testimonial4Role: "Distribution Company, Europe",
+      testimonial5:
+        "Now I don't have to call the operators for every truck that enters. The driver checks in, I validate at the gate, and that's it.",
+      testimonial5Author: "Gate Operator",
+      testimonial5Role: "Food Warehouse, Europe",
+      testimonial6:
+        "We completely eliminated truck timesheets. Everything is recorded automatically with the exact entry and exit time.",
+      testimonial6Author: "Warehouse Administrator",
+      testimonial6Role: "Logistics Terminal, Europe",
     },
     pricing: {
       title: "Choose the right plan",
@@ -393,19 +413,16 @@ export const translations = {
       includedFeatures: "What's included:",
       feature1: "Unlimited check-ins",
       feature2: "Real-time dock management",
-      feature3: "Push notifications and SMS",
+      feature3: "App Push notifications and SMS (optional)",
       feature4: "Reports and analytics",
       feature5: "Mobile app iOS & Android",
       feature6: "Multi-language support",
       feature7: "Technical support",
+      feature8: "White-label on your own domain",
+      feature9: "99.9% SLA guaranteed",
+      feature10: "Personalized training",
       enterpriseFeature1: "All Professional features",
-      enterpriseFeature2: "Unlimited warehouses",
-      enterpriseFeature3: "White-label on own domain",
-      enterpriseFeature4: "Full API access",
-      enterpriseFeature5: "Custom integrations (WMS, TMS)",
-      enterpriseFeature6: "Dedicated account manager",
-      enterpriseFeature7: "99.9% guaranteed SLA",
-      enterpriseFeature8: "Personalized training",
+      enterpriseFeature2: "Custom integrations (WMS, TMS)",
       singleLocation: "1 location",
       multipleLocations: "Multiple locations",
       customPricing: "Custom pricing",
@@ -416,7 +433,6 @@ export const translations = {
       subtitle:
         "Join hundreds of warehouses that chose efficiency. Free demo, quick setup, no obligations.",
       button: "Request Free Demo",
-      noCreditCard: "No credit card required",
       or: "or",
       callUs: "Call us directly",
       phoneNumber: "+40 xxx xxx xxx",
@@ -535,11 +551,11 @@ export const translations = {
       login: "Anmelden",
     },
     hero: {
-      badge: "Intelligente Plattform fur Lagerverwaltung",
+      badge: "Intelligente Plattform für die Verwaltung von Be- und Entladevorgängen in Lagern",
       title: "Verwandeln Sie Lagerchaos in",
       titleHighlight: "maximale Effizienz",
       subtitle:
-        "Logistiq verbindet Fahrer mit Lagerbetreibern in Echtzeit. Digitaler QR-Check-in, automatische Rampenzuweisung, sofortige Kommunikation - alles auf einer Plattform.",
+        "Logistiq verbindet Fahrer mit Lagerbetreibern in Echtzeit. Digitaler Check-in per QR-Code oder mobiler App, Rampenzuweisung, sofortige Kommunikation - alles auf einer Plattform.",
       cta1: "Kostenlose Demo anfordern",
       cta2: "So funktioniert es",
       trustedBy: "Vertrauenswurdig von Lagern in ganz Europa",
@@ -557,54 +573,54 @@ export const translations = {
         "Einfacher 4-Schritte-Prozess. Vom Check-in bis zur Abfahrt ist alles digitalisiert und optimiert.",
       step1Title: "Fahrer checkt ein",
       step1Desc:
-        "Uber die Web-App qrgo.ro oder die mobile App scannt der Fahrer den QR-Code und gibt Daten ein: LKW-Nummer, Anhanger, Referenz, Dokumentfotos.",
+        "Über die Web- oder Mobile-App <b>QRGO Driver</b> scannt der Fahrer den QR-Code und gibt Daten ein: LKW-Nummer, Anhänger, Referenz, Dokumentfotos.",
       step2Title: "Betreiber weist Rampe zu",
       step2Desc:
-        "Der Lagerbetreiber sieht alle wartenden Fahrer in Echtzeit und leitet sie mit einem Klick zu einer verfugbaren Rampe.",
+        "Der Lagerbetreiber sieht alle wartenden Fahrer in Echtzeit und leitet sie mit einem Klick zur entsprechenden Abteilung oder Rampe.",
       step3Title: "Echtzeit-Kommunikation",
       step3Desc:
         "Fahrer erhalten Push-Benachrichtigungen und personalisierte Nachrichten. Sie wissen genau, wohin sie gehen und was zu tun ist.",
       step4Title: "Vorgang abgeschlossen",
       step4Desc:
-        "Nach Abschluss wird alles automatisch dokumentiert. Detaillierte Berichte, Betriebszeiten, Statistiken - alles sofort verfugbar.",
+        "Nach Abschluss wird alles automatisch dokumentiert. Detaillierte Berichte, Betriebszeiten, Statistiken, Aufzeichnungen.",
     },
     features: {
       title: "Alles, was Sie fur ein effizientes Lager brauchen",
       subtitle:
-        "Funktionen, die gemeinsam mit Betreibern und Fahrern fur echte Branchenprobleme entwickelt wurden.",
-      feature1Title: "Digitaler QR-Check-in",
+        "Funktionen, die gemeinsam mit Lagerverwaltern, Betreibern und Fahrern entwickelt wurden, um echte Branchenprobleme zu lösen.",
+      feature1Title: "Digitaler Check-in",
       feature1Desc:
-        "Fahrer scannen den QR-Code bei Ankunft. Keine Papiere, keine endlosen Warteschlangen, keine Verwirrung. Alle Daten werden sofort und sicher erfasst.",
-      feature2Title: "Live-Rampenverwaltung",
+        "Bei Ankunft scannt der Fahrer den QR-Code oder greift auf das Lager in der QRGO Driver App zu. Füllt die Daten aus und erhält eine Bestätigung. Keine Papiere, keine Warteschlangen.",
+      feature2Title: "Rampenverwaltung",
       feature2Desc:
-        "Echtzeitansicht aller Rampen. Zuweisen, freigeben und LKW-Fluss von einem einzigen Dashboard aus optimieren.",
+        "Operatoren weisen zu, geben frei und optimieren den LKW-Fluss von einem einzigen Dashboard aus.",
       feature3Title: "Echtzeit-Chat & Benachrichtigungen",
       feature3Desc:
-        "Sofortiger Chat zwischen Betreiber und Fahrer, Push-Benachrichtigungen auf dem Handy und SMS-Optionen. Klare Kommunikation, unabhangig von der Plattform.",
+        "Sofortiger Chat zwischen Betreiber und Fahrer, Push-Benachrichtigungen auf dem Handy und SMS-Optionen. Klare Kommunikation, unabhängig von der vom Fahrer verwendeten Plattform.",
       feature4Title: "Abteilungs- & LKW-Kategorien",
       feature4Desc:
         "Organisieren Sie Check-ins nach Abteilungen (Gemuse, Trockenwaren, Tiefkuhl, Gekuhlt) und LKW-Typen (LKW+Anhanger, Sattelauflieger, Plane etc).",
       feature5Title: "Berichte & Analysen",
       feature5Desc:
-        "Interaktive Dashboards mit Echtzeit-KPIs. Wartezeiten, Ladungen pro Tag, Rampeneffizienz, Abteilungsstatistiken, alles messbar.",
+        "Interaktive Dashboards mit Echtzeit-KPIs. Wartezeiten, Beladungen/Entladungen pro Tag, Abteilungsstatistiken, Grafiken.",
       feature6Title: "Android & iOS App",
       feature6Desc:
-        "Fahrer greifen auf qrgo.ro zu oder laden die App aus dem App Store oder Google Play. Kompatibel mit jedem Gerat, uberall auf der Welt.",
+        "Fahrer können die QRGO Driver Web-App nutzen oder die mobile App aus dem App Store oder Google Play installieren.",
       feature7Title: "Mehrsprachig (12 Sprachen)",
       feature7Desc:
         "Oberflache in 12 europaischen Sprachen verfugbar. Fahrer aus jedem Land konnen die App in ihrer Muttersprache nutzen.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Eigenes Domain-Branding (z.B. checkin.ihrlager.de) und dokumentierte REST-API zur Integration mit WMS, TMS und anderen Systemen.",
-      feature9Title: "100% Cloud - Keine Hardware",
+        "Eigenes Domain-Branding (z.B. checkin.ihrlager.de) und die Möglichkeit zur Integration mit bestehenden Lager- oder Transportmanagementsystemen über API.",
+      feature9Title: "Cloud - Keine Hardware",
       feature9Desc:
-        "Plattform lauft vollstandig in der Cloud. Keine Server, spezielle Ausrustung oder lokale Installationen erforderlich. Zugriff von uberall, jederzeit, auf jedem Gerat.",
+        "Plattform läuft vollständig in der Cloud. Keine Server, spezielle Ausrüstung oder lokale Installationen erforderlich.",
       feature10Title: "Fahrer-Anweisungen & Fuhrung",
       feature10Desc:
         "Fahrer erhalten zugewiesene Rampe, Wegbeschreibung und personalisierte Anweisungen direkt in der App. Ideal fur Fahrer, die das Lager zum ersten Mal besuchen.",
       feature11Title: "Fruher Check-in & Terminplanung",
       feature11Desc:
-        "Fahrer konnen unterwegs einchecken und ihre geschatzte Ankunftszeit planen. Das Lager weiss im Voraus, wer kommt und kann effizienter planen.",
+        "Fahrer können unterwegs einchecken und ihre geschätzte Ankunftszeit planen. Das Lager weiß im Voraus, wer kommt, wann und kann den Be-/Entladefluss effizienter planen.",
       feature12Title: "Automatische Standorterkennung",
       feature12Desc:
         "Die mobile App erkennt automatisch, wenn der Fahrer im Lagerbereich ankommt und zeigt eine Check-in-Benachrichtigung an. Reibungsloser, vollautomatischer Prozess.",
@@ -614,11 +630,11 @@ export const translations = {
       subtitle: "Logistiq verbessert die Effizienz fur alle am Betrieb Beteiligten.",
       forWarehouse: "Fur das Lager",
       forDrivers: "Fur Fahrer",
-      warehouse1: "50% Reduzierung der Fahrer-Wartezeit",
+      warehouse1: "Optimierung der Betriebszeit für Fahrer von der Einfahrt bis zur Ausfahrt",
       warehouse2: "Vollstandige Ruckverfolgbarkeit: jeder Schritt vom Eingang bis zum Ausgang wird mit genauen Zeitstempeln erfasst",
       warehouse3: "Eliminierung von Papier und manuellen Prozessen",
       warehouse4: "Automatische Berichte fur das Management",
-      warehouse5: "Effiziente Planung - wissen Sie im Voraus, wer kommt",
+      warehouse5: "Effiziente Verwaltung des Flusses und der Be-/Entladerampen",
       warehouse6: "Keine zusatzliche Ausrustung - alles in der Cloud",
       drivers1: "Schneller Check-in in weniger als 30 Sekunden",
       drivers2: "Erhalten Rampe und Anweisungen direkt in der App",
@@ -629,19 +645,31 @@ export const translations = {
     },
     testimonials: {
       title: "Was unsere Kunden sagen",
-      subtitle: "Lager in ganz Europa nutzen Logistiq taglich zur Optimierung ihrer Ablaufe.",
+      subtitle: "Feedback von Teams, die Logistiq täglich nutzen.",
       testimonial1:
-        "Seit wir Logistiq nutzen, hat sich die Wartezeit der Fahrer um 60% reduziert. Unsere Betreiber sind viel effizienter.",
-      testimonial1Author: "Alexandru M.",
-      testimonial1Role: "Betriebsleiter, Lager Bukarest",
+        "Wir haben das System eingeführt, weil wir zu viel Zeit mit Papierkram und Warteschlangen am Tor verloren haben. Jetzt checken Fahrer selbst ein und wir sehen alles auf dem Dashboard. Viel einfacher.",
+      testimonial1Author: "Betriebsleiter",
+      testimonial1Role: "Logistiklager, Europa",
       testimonial2:
-        "Die App ist sehr einfach zu bedienen. Unsere Fahrer haben sie sofort ubernommen, ohne spezielle Schulung.",
-      testimonial2Author: "Maria P.",
-      testimonial2Role: "Logistikmanagerin, Verteilzentrum Cluj",
+        "Anfangs war ich skeptisch, aber nach einer Woche Nutzung möchte ich nicht mehr zum alten System zurück. Ich sehe sofort, wer wartet und kann Rampen schnell zuweisen.",
+      testimonial2Author: "Lagermitarbeiter",
+      testimonial2Role: "Verteilzentrum, Europa",
       testimonial3:
-        "Automatische Berichte sparen uns jede Woche Stunden manueller Arbeit. Ausgezeichnet!",
-      testimonial3Author: "Ionut D.",
-      testimonial3Role: "Supervisor, Logistik-Hub Timisoara",
+        "Am meisten schätze ich, dass ich Berichte automatisch erstellen kann. Früher habe ich alles manuell in Excel gemacht und es dauerte Stunden.",
+      testimonial3Author: "Logistikkoordinator",
+      testimonial3Role: "Regionales Hub, Europa",
+      testimonial4:
+        "Es hat uns geholfen, einen klaren Überblick über den gesamten Ablauf zu bekommen. Wir wissen genau, wie viele Fahrer auf dem Hof sind, an welchen Rampen und wie lange jeder Vorgang dauert.",
+      testimonial4Author: "Logistikdirektor",
+      testimonial4Role: "Distributionsunternehmen, Europa",
+      testimonial5:
+        "Jetzt muss ich nicht mehr für jeden LKW, der einfährt, die Disponenten anrufen. Der Fahrer meldet sich an, ich validiere am Tor, und fertig.",
+      testimonial5Author: "Pförtner",
+      testimonial5Role: "Lebensmittellager, Europa",
+      testimonial6:
+        "Wir haben die LKW-Zeiterfassung komplett abgeschafft. Alles wird automatisch mit der genauen Ein- und Ausfahrtszeit erfasst.",
+      testimonial6Author: "Lagerverwalter",
+      testimonial6Role: "Logistikterminal, Europa",
     },
     pricing: {
       title: "Wahlen Sie den richtigen Plan",
@@ -655,19 +683,16 @@ export const translations = {
       includedFeatures: "Was enthalten ist:",
       feature1: "Unbegrenzte Check-ins",
       feature2: "Echtzeit-Rampenverwaltung",
-      feature3: "Push-Benachrichtigungen und SMS",
+      feature3: "App Push-Benachrichtigungen und SMS (optional)",
       feature4: "Berichte und Analysen",
       feature5: "Mobile App iOS & Android",
       feature6: "Mehrsprachige Unterstutzung",
       feature7: "Technischer Support",
+      feature8: "White-Label auf eigener Domain",
+      feature9: "99,9% SLA garantiert",
+      feature10: "Personalisierte Schulung",
       enterpriseFeature1: "Alle Professional-Funktionen",
-      enterpriseFeature2: "Unbegrenzte Lager",
-      enterpriseFeature3: "White-Label auf eigener Domain",
-      enterpriseFeature4: "Vollstandiger API-Zugang",
-      enterpriseFeature5: "Individuelle Integrationen (WMS, TMS)",
-      enterpriseFeature6: "Dedizierter Account Manager",
-      enterpriseFeature7: "99,9% garantierte SLA",
-      enterpriseFeature8: "Personalisiertes Training",
+      enterpriseFeature2: "Individuelle Integrationen (WMS, TMS)",
       singleLocation: "1 Standort",
       multipleLocations: "Mehrere Standorte",
       customPricing: "Individueller Preis",
@@ -678,7 +703,6 @@ export const translations = {
       subtitle:
         "Schliessen Sie sich Hunderten von Lagern an, die Effizienz gewahlt haben. Kostenlose Demo, schnelle Einrichtung, keine Verpflichtungen.",
       button: "Kostenlose Demo anfordern",
-      noCreditCard: "Keine Kreditkarte erforderlich",
       or: "oder",
       callUs: "Rufen Sie uns direkt an",
       phoneNumber: "+40 xxx xxx xxx",
@@ -797,11 +821,11 @@ export const translations = {
       login: "Logowanie",
     },
     hero: {
-      badge: "Inteligentna platforma do zarzadzania magazynem",
+      badge: "Inteligentna platforma do zarządzania przepływem załadunku/rozładunku w magazynach",
       title: "Zamien chaos magazynowy w",
       titleHighlight: "maksymalna wydajnosc",
       subtitle:
-        "Logistiq laczy kierowcow z operatorami magazynu w czasie rzeczywistym. Cyfrowa rejestracja QR, automatyczne przydzielanie dok\u00f3w, natychmiastowa komunikacja - wszystko na jednej platformie.",
+        "Logistiq łączy kierowców z operatorami magazynu w czasie rzeczywistym. Cyfrowa rejestracja przez kod QR lub aplikację mobilną, przydzielanie doków, natychmiastowa komunikacja - wszystko na jednej platformie.",
       cta1: "Zamow bezplatne demo",
       cta2: "Zobacz jak to dziala",
       trustedBy: "Zaufanie magazyn\u00f3w w calej Europie",
@@ -819,54 +843,54 @@ export const translations = {
         "Prosty 4-etapowy proces. Od rejestracji do wyjazdu, wszystko jest zdigitalizowane i zoptymalizowane.",
       step1Title: "Kierowca sie rejestruje",
       step1Desc:
-        "Przez aplikacje webowa qrgo.ro lub aplikacje mobilna, kierowca skanuje kod QR i wprowadza dane: numer ciezarowki, przyczepe, referencje, zdjecia dokument\u00f3w.",
+        "Przez aplikację webową lub mobilną <b>QRGO Driver</b>, kierowca skanuje kod QR i wprowadza dane: numer ciężarówki, przyczepę, referencję, zdjęcia dokumentów.",
       step2Title: "Operator przydziela dok",
       step2Desc:
-        "Operator magazynu widzi wszystkich oczekujacych kierowc\u00f3w w czasie rzeczywistym i kieruje ich do dostepnego doku jednym kliknieciem.",
+        "Operator magazynu widzi wszystkich oczekujących kierowców w czasie rzeczywistym i kieruje ich do odpowiedniego działu lub doku jednym kliknięciem.",
       step3Title: "Komunikacja w czasie rzeczywistym",
       step3Desc:
         "Kierowcy otrzymuja powiadomienia push i spersonalizowane wiadomosci. Wiedza dokladnie, gdzie isc i co robic, bez zamieszania.",
       step4Title: "Operacja zakonczona",
       step4Desc:
-        "Po zakonczeniu wszystko jest automatycznie dokumentowane. Szczegolowe raporty, czasy operacji, statystyki - wszystko dostepne natychmiast.",
+        "Po zakończeniu wszystko jest automatycznie dokumentowane. Szczegółowe raporty, czasy operacji, statystyki, ewidencja.",
     },
     features: {
       title: "Wszystko, czego potrzebujesz do wydajnego magazynu",
       subtitle:
-        "Funkcje opracowane wspolnie z operatorami i kierowcami, dla rzeczywistych problem\u00f3w branzowych.",
-      feature1Title: "Cyfrowa rejestracja QR",
+        "Funkcje opracowane wspólnie z administratorami magazynów, operatorami i kierowcami, aby rozwiązywać rzeczywiste problemy branżowe.",
+      feature1Title: "Cyfrowa rejestracja",
       feature1Desc:
-        "Kierowcy skanuja kod QR po przybyciu. Bez papier\u00f3w, bez nieskoczonych kolejek, bez zamieszania. Wszystkie dane sa natychmiast i bezpiecznie rejestrowane.",
-      feature2Title: "Zarzadzanie dokami na zywo",
+        "Po przybyciu kierowca skanuje kod QR lub uzyskuje dostęp do magazynu w aplikacji QRGO Driver. Wypełnia dane i otrzymuje potwierdzenie. Bez papierów, bez kolejek.",
+      feature2Title: "Zarządzanie dokami",
       feature2Desc:
-        "Widok wszystkich dok\u00f3w w czasie rzeczywistym. Przydzielaj, zwalniaj i optymalizuj przeplyw ciezar\u00f3wek z jednego panelu.",
+        "Operatorzy przydzielają, zwalniają i optymalizują przepływ ciężarówek z jednego panelu.",
       feature3Title: "Chat i powiadomienia w czasie rzeczywistym",
       feature3Desc:
-        "Natychmiastowy chat miedzy operatorem a kierowca, powiadomienia push na telefon i opcje SMS. Jasna komunikacja, niezaleznie od platformy.",
+        "Natychmiastowy chat między operatorem a kierowcą, powiadomienia push na telefon i opcje SMS. Jasna komunikacja, niezależnie od platformy używanej przez kierowcę.",
       feature4Title: "Kategorie dzialow i ciezarowek",
       feature4Desc:
         "Organizuj check-iny wedlug dzialow (Warzywa, Produkty suche, Mrozone, Chlodzone) i typow ciezarowek (ciezarowka+przyczepa, naczepa, plandeka itp).",
       feature5Title: "Raporty i analizy",
       feature5Desc:
-        "Interaktywne pulpity z KPI w czasie rzeczywistym. Czasy oczekiwania, ladunki dziennie, wydajnosc dokow, statystyki dzialow, wszystko mierzalne.",
+        "Interaktywne pulpity z KPI w czasie rzeczywistym. Czasy oczekiwania, załadunki/rozładunki dziennie, statystyki działów, wykresy.",
       feature6Title: "Aplikacja Android i iOS",
       feature6Desc:
-        "Kierowcy uzyskuja dostep do qrgo.ro lub pobieraja aplikacje z App Store lub Google Play. Kompatybilna z kazdym urzadzeniem, gdziekolwiek na swiecie.",
+        "Kierowcy mogą korzystać z aplikacji QRGO Driver Web lub zainstalować aplikację mobilną z App Store lub Google Play.",
       feature7Title: "Wielojezycznosc (12 jezykow)",
       feature7Desc:
         "Interfejs dostepny w 12 jezykach europejskich. Kierowcy z kazdego kraju moga korzystac z aplikacji w swoim jezyku ojczystym.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Branding na wlasnej domenie (np. checkin.twojmagazyn.pl) i udokumentowane API REST do integracji z WMS, TMS i innymi systemami.",
-      feature9Title: "100% Chmura - Bez Sprzetu",
+        "Branding na własnej domenie (np. checkin.twojmagazyn.pl) i możliwość integracji z istniejącymi systemami zarządzania magazynem lub transportem przez API.",
+      feature9Title: "Chmura - Bez Sprzętu",
       feature9Desc:
-        "Platforma dziala w pelni w chmurze. Nie potrzebujesz serwerow, specjalnego sprzetu ani lokalnych instalacji. Dostep z dowolnego miejsca, w dowolnym czasie, na dowolnym urzadzeniu.",
+        "Platforma działa w pełni w chmurze. Nie potrzebujesz serwerów, specjalnego sprzętu ani lokalnych instalacji.",
       feature10Title: "Instrukcje i Wskazowki dla Kierowcow",
       feature10Desc:
         "Kierowcy otrzymuja przypisany dok, wskazowki nawigacyjne i spersonalizowane instrukcje bezposrednio w aplikacji. Idealne dla kierowcow odwiedzajacych magazyn po raz pierwszy.",
       feature11Title: "Wczesna Rejestracja i Planowanie",
       feature11Desc:
-        "Kierowcy moga sie zarejestrowac bedac w trasie i zaplanowac szacowany czas przyjazdu. Magazyn wie z wyprzedzeniem, kto przyjezdza i moze planowac efektywniej.",
+        "Kierowcy mogą się zarejestrować będąc w trasie i zaplanować szacowany czas przyjazdu. Magazyn wie z wyprzedzeniem, kto przyjeżdża, o której godzinie i może efektywniej planować przepływ załadunku/rozładunku.",
       feature12Title: "Automatyczne Wykrywanie Lokalizacji",
       feature12Desc:
         "Aplikacja mobilna automatycznie wykrywa, gdy kierowca dojedza do strefy magazynu i wyswietla powiadomienie o rejestracji. Bezproblemowy, w pelni zautomatyzowany proces.",
@@ -876,11 +900,11 @@ export const translations = {
       subtitle: "Logistiq poprawia wydajnosc dla wszystkich zaangazowanych w operacje.",
       forWarehouse: "Dla magazynu",
       forDrivers: "Dla kierowcow",
-      warehouse1: "50% redukcja czasu oczekiwania kierowcow",
+      warehouse1: "Optymalizacja czasu operacji kierowców od wjazdu do wyjazdu",
       warehouse2: "Pelna identyfikowalnosc: kazdy etap od wjazdu do wyjazdu jest rejestrowany z dokladnymi znacznikami czasu",
       warehouse3: "Eliminacja papierow i procesow recznych",
       warehouse4: "Automatyczne raporty dla zarzadu",
-      warehouse5: "Efektywne planowanie - wiesz z wyprzedzeniem, kto przyjezdza",
+      warehouse5: "Efektywne zarządzanie przepływem i rampami załadunkowymi/rozładunkowymi",
       warehouse6: "Bez dodatkowego sprzetu - wszystko w chmurze",
       drivers1: "Szybka rejestracja w mniej niz 30 sekund",
       drivers2: "Otrzymuja dok i instrukcje bezposrednio w aplikacji",
@@ -890,20 +914,32 @@ export const translations = {
       drivers6: "Dostepne w ich jezyku ojczystym",
     },
     testimonials: {
-      title: "Co mowia nasi klienci",
-      subtitle: "Magazyny w calej Europie codziennie korzystaja z Logistiq, aby usprawnić swoje operacje.",
+      title: "Co mówią nasi klienci",
+      subtitle: "Opinie zespołów korzystających z Logistiq na co dzień.",
       testimonial1:
-        "Od kiedy uzywamy Logistiq, czas oczekiwania kierowcow zmniejszyl sie o 60%. Nasi operatorzy sa duzo bardziej wydajni.",
-      testimonial1Author: "Alexandru M.",
-      testimonial1Role: "Dyrektor Operacyjny, Magazyn Bukareszt",
+        "Wdrożyliśmy system, bo traciliśmy zbyt dużo czasu na papierkową robotę i kolejki przy bramie. Teraz kierowcy sami się meldują, a my widzimy wszystko na dashboardzie. O wiele prościej.",
+      testimonial1Author: "Kierownik Operacyjny",
+      testimonial1Role: "Magazyn Logistyczny, Europa",
       testimonial2:
-        "Aplikacja jest bardzo latwa w uzyciu. Nasi kierowcy przyjeli ja natychmiast, bez specjalnego szkolenia.",
-      testimonial2Author: "Maria P.",
-      testimonial2Role: "Kierownik Logistyki, Centrum Dystrybucji Cluj",
+        "Na początku byłem sceptyczny, ale po tygodniu używania nie chcę wracać do starego systemu. Od razu widzę, kto czeka i mogę szybko przydzielać doki.",
+      testimonial2Author: "Operator Magazynu",
+      testimonial2Role: "Centrum Dystrybucji, Europa",
       testimonial3:
-        "Automatyczne raporty oszczedzaja nam godziny pracy recznej co tydzien. Doskonale!",
-      testimonial3Author: "Ionut D.",
-      testimonial3Role: "Supervisor, Hub Logistyczny Timisoara",
+        "Najbardziej cenię możliwość automatycznego generowania raportów. Wcześniej robiłem wszystko ręcznie w Excelu i trwało to godzinami.",
+      testimonial3Author: "Koordynator Logistyki",
+      testimonial3Role: "Hub Regionalny, Europa",
+      testimonial4:
+        "Pomogło nam uzyskać jasny obraz całego przepływu. Wiemy dokładnie, ilu kierowców jest na placu, przy których rampach i jak długo trwa każda operacja.",
+      testimonial4Author: "Dyrektor Logistyki",
+      testimonial4Role: "Firma Dystrybucyjna, Europa",
+      testimonial5:
+        "Teraz nie muszę dzwonić do dyspozytorów przy każdej ciężarówce, która wjeżdża. Kierowca się melduje, ja waliduję przy bramie i gotowe.",
+      testimonial5Author: "Operator Bramy",
+      testimonial5Role: "Magazyn Spożywczy, Europa",
+      testimonial6:
+        "Całkowicie wyeliminowaliśmy karty czasu pracy dla ciężarówek. Wszystko jest rejestrowane automatycznie z dokładnym czasem wjazdu i wyjazdu.",
+      testimonial6Author: "Administrator Magazynu",
+      testimonial6Role: "Terminal Logistyczny, Europa",
     },
     pricing: {
       title: "Przejrzyste ceny",
@@ -917,19 +953,16 @@ export const translations = {
       includedFeatures: "Co jest zawarte:",
       feature1: "Nieograniczone rejestracje",
       feature2: "Zarzadzanie dokami w czasie rzeczywistym",
-      feature3: "Powiadomienia push i SMS",
+      feature3: "Powiadomienia push w aplikacji i SMS (opcjonalnie)",
       feature4: "Raporty i analizy",
       feature5: "Aplikacja mobilna iOS & Android",
       feature6: "Wsparcie wielojezyczne",
       feature7: "Wsparcie techniczne",
+      feature8: "White-label na własnej domenie",
+      feature9: "SLA gwarantowane 99,9%",
+      feature10: "Spersonalizowane szkolenie",
       enterpriseFeature1: "Wszystkie funkcje Professional",
-      enterpriseFeature2: "Nieograniczone magazyny",
-      enterpriseFeature3: "White-label na wlasnej domenie",
-      enterpriseFeature4: "Pelny dostep API",
-      enterpriseFeature5: "Indywidualne integracje (WMS, TMS)",
-      enterpriseFeature6: "Dedykowany opiekun konta",
-      enterpriseFeature7: "99,9% gwarantowane SLA",
-      enterpriseFeature8: "Spersonalizowane szkolenie",
+      enterpriseFeature2: "Indywidualne integracje (WMS, TMS)",
       singleLocation: "1 lokalizacja",
       multipleLocations: "Wiele lokalizacji",
       customPricing: "Cena indywidualna",
@@ -940,7 +973,6 @@ export const translations = {
       subtitle:
         "Dolacz do setek magazynow, ktore wybraly wydajnosc. Darmowe demo, szybka konfiguracja, bez zobowiazan.",
       button: "Zamow bezplatne demo",
-      noCreditCard: "Nie wymagana karta kredytowa",
       or: "lub",
       callUs: "Zadzwon bezposrednio",
       phoneNumber: "+40 xxx xxx xxx",
@@ -1059,11 +1091,11 @@ export const translations = {
       login: "Belepes",
     },
     hero: {
-      badge: "Intelligens raktarkezelo platform",
+      badge: "Intelligens platform a raktári be- és kirakodási folyamatok kezelésére",
       title: "Alakitsa at a raktari kaoszt",
       titleHighlight: "maximalis hatekonysagga",
       subtitle:
-        "A Logistiq valos idoben kapcsolja ossze a soforokat a raktari operatorokkal. Digitalis QR bejelentkezes, automatikus dokk kiosztas, azonnali kommunikacio - minden egy platformon.",
+        "A Logistiq valós időben kapcsolja össze a sofőröket a raktári operátorokkal. Digitális bejelentkezés QR kóddal vagy mobilalkalmazással, dokk kiosztás, azonnali kommunikáció - minden egy platformon.",
       cta1: "Ingyenes demo keres",
       cta2: "Nezze meg hogyan mukodik",
       trustedBy: "Raktarak bizalmaval egesz Europaban",
@@ -1081,54 +1113,54 @@ export const translations = {
         "Egyszeru 4 lepesu folyamat. A bejelentkezestol a tavozasig minden digitalizalt es optimalizalt.",
       step1Title: "Sofor bejelentkezik",
       step1Desc:
-        "A qrgo.ro webalkalmazason vagy mobilalkalmazason keresztul a sofor beolvassa a QR kodot es megadja az adatokat: kamion szam, potkocsi, referencia, dokumentum fotok.",
+        "A <b>QRGO Driver</b> webes vagy mobil alkalmazáson keresztül a sofőr beolvassa a QR kódot és megadja az adatokat: kamion szám, pótkocsi, referencia, dokumentum fotók.",
       step2Title: "Operator dokkot oszt ki",
       step2Desc:
-        "A raktari operator valos idoben latja az osszes varakozo sofert es egyetlen kattintassal egy elerheto dokkhoz iranyitja oket.",
+        "A raktári operátor valós időben látja az összes várakozó sofőrt és egyetlen kattintással a megfelelő osztályhoz vagy dokkhoz irányítja őket.",
       step3Title: "Valos ideju kommunikacio",
       step3Desc:
         "A soforok push ertesiteseket es szemelyre szabott uzeneteket kapnak. Pontosan tudjak, hova menjenek es mit csinaljanek, zavar nelkul.",
       step4Title: "Muvelet befejezve",
       step4Desc:
-        "Befejezes utan minden automatikusan dokumentalodik. Reszletes jelentes, mukodesi idok, statisztikak - minden azonnal elerheto.",
+        "Befejezés után minden automatikusan dokumentálódik. Részletes jelentések, működési idők, statisztikák, nyilvántartás.",
     },
     features: {
       title: "Minden, amire hatekony raktarhoz szuksege van",
       subtitle:
-        "Operatorokkal es soforokkel kozosen fejlesztett funkciok, valodi iparagi problemakra.",
-      feature1Title: "Digitalis QR bejelentkezes",
+        "Raktárvezetőkkel, operátorokkal és sofőrökkel közösen fejlesztett funkciók, a valódi iparági problémák megoldására.",
+      feature1Title: "Digitális bejelentkezés",
       feature1Desc:
-        "A soforok erkezeskor beolvassak a QR kodot. Nincs papir, nincs vegtelen sor, nincs zavar. Minden adat azonnal es biztonsagosan rogzitodik.",
-      feature2Title: "Elo dokkkezeles",
+        "Érkezéskor a sofőr beolvassa a QR kódot vagy eléri a raktárat a QRGO Driver alkalmazásban. Kitölti az adatokat és megerősítést kap. Nincs papír, nincs várakozás.",
+      feature2Title: "Dokkkezelés",
       feature2Desc:
-        "Minden dokk valos ideju megtekintese. Osztsa ki, szabaditsa fel es optimalizalja a kamion forgalmat egyetlen muszerfalrol.",
+        "Az operátorok egy irányítópultról osztják ki, szabadítják fel és optimalizálják a kamion forgalmat.",
       feature3Title: "Valos ideju chat es ertesitesek",
       feature3Desc:
-        "Azonnali chat operator es sofor kozott, push ertesitesek telefonra es SMS lehetosegek. Tiszta kommunikacio, platformtol fuggetlenul.",
+        "Azonnali chat operátor és sofőr között, push értesítések telefonra és SMS lehetőségek. Tiszta kommunikáció, a sofőr által használt platformtól függetlenül.",
       feature4Title: "Reszleg- es kamionkategoriak",
       feature4Desc:
         "Rendezze a bejelentkezeseket reszlegek szerint (Zoldsegek, Szarazaru, Fagyasztott, Hutott) es kamion tipusok szerint (kamion+potkocsi, felpotkocsi, ponyvaz stb).",
       feature5Title: "Jelentesek es elemzesek",
       feature5Desc:
-        "Interaktiv muszerfalak valos ideju KPI-kkal. Varakozasi idok, napi rakomanok, dokk hatekonysag, reszleg statisztikak, minden merheto.",
+        "Interaktív műszerfalak valós idejű KPI-kkal. Várakozási idők, napi be-/kirakodások, részleg statisztikák, grafikonok.",
       feature6Title: "Android es iOS alkalmazas",
       feature6Desc:
-        "A soforok elerheti a qrgo.ro-t vagy letolthetik az alkalmazast az App Store-bol vagy Google Play-bol. Kompatibilis barmely eszkozzel, barhol a vilagon.",
+        "A sofőrök használhatják a QRGO Driver Web alkalmazást vagy telepíthetik a mobil alkalmazást az App Store-ból vagy Google Play-ből.",
       feature7Title: "Tobbnyelvuseg (12 nyelv)",
       feature7Desc:
         "Felulet 12 europai nyelven elerheto. Barmely orszagbol szarmazo soforok hasznalhatjak az alkalmazast anyanyelyvukon.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Sajat domain branding (pl. checkin.azoraktara.hu) es dokumentalt REST API a WMS, TMS es mas rendszerekkel valo integraciohoz.",
-      feature9Title: "100% Felho - Nincs Hardver",
+        "Saját domain branding (pl. checkin.azoraktara.hu) és lehetőség az integrációra a meglévő raktár- vagy szállításirányítási rendszerekkel API-n keresztül.",
+      feature9Title: "Felhő - Nincs Hardver",
       feature9Desc:
-        "A platform teljes egeszeben a felhoben fut. Nincs szukseg szerverekre, specialis berendezesekre vagy helyi telepitesekre. Barhonnan, barmikor, barmilyen eszkozrol elerheto.",
+        "A platform teljes egészében a felhőben fut. Nincs szükség szerverekre, speciális berendezésekre vagy helyi telepítésekre.",
       feature10Title: "Sofor Utasitasok es Utmutatas",
       feature10Desc:
         "A soforok megkapjak a kiosztott dokkot, navigacios utmutatasokat es szemelyre szabott utasitasokat kozvetlenul az alkalmazasban. Idealis eloszor latogato soforok szamara.",
       feature11Title: "Korai Bejelentkezes es Idopontfoglalas",
       feature11Desc:
-        "A soforok bejelentkezhetnek utazas kozben es megtervezhetik a becsult erkezesi idot. A raktar elore tudja, ki jon es hatekonyabban tervezhet.",
+        "A sofőrök bejelentkezhetnek utazás közben és megtervezhetik a becsült érkezési időt. A raktár előre tudja, ki jön, mikor és hatékonyabban tervezheti a be-/kirakodási folyamatot.",
       feature12Title: "Automatikus Helyzeterkenites",
       feature12Desc:
         "A mobil alkalmazas automatikusan eszleli, amikor a sofor megerkezett a raktar kozelebe es megjeleniti a bejelentkezesi ertesitest. Surlodamentes, teljesen automatizalt folyamat.",
@@ -1138,11 +1170,11 @@ export const translations = {
       subtitle: "A Logistiq javitja a hatekonysagot minden muveletben resztvevo szamara.",
       forWarehouse: "Raktarnak",
       forDrivers: "Soforoknek",
-      warehouse1: "50%-os csokkenes a soforok varakozasi idejeben",
+      warehouse1: "A sofőrök üzemidejének optimalizálása a belépéstől a kilépésig",
       warehouse2: "Teljes nyomonkovethetoseg: minden lepes a belegestol a tavozasig pontos idopecszettel rogzitve",
       warehouse3: "Papir es manualis folyamatok kiikustatasa",
       warehouse4: "Automatikus jelentesek a vezetosegnek",
-      warehouse5: "Hatekony tervezes - elore tudja, ki erkezik",
+      warehouse5: "A folyamat és a be-/kirakodó rámpák hatékony kezelése",
       warehouse6: "Nincs extra berendezes - minden a felhoben",
       drivers1: "Gyors bejelentkezes kevesebb mint 30 masodperc alatt",
       drivers2: "Megkapjak a dokkot es utasitasokat kozvetlenul az alkalmazasban",
@@ -1152,20 +1184,32 @@ export const translations = {
       drivers6: "Elerheto az anyanyelyvukon",
     },
     testimonials: {
-      title: "Mit mondanak ugyfeleink",
-      subtitle: "Europaszerte a raktarak naponta hasznaljak a Logistiq-ot muveleteiik egyszerusitesere.",
+      title: "Mit mondanak ügyfeleink",
+      subtitle: "Visszajelzések a Logistiq-ot naponta használó csapatoktól.",
       testimonial1:
-        "Amota hasznaljuk a Logistiq-ot, a soforok varakozasi ideje 60%-kal csokkent. Operatoraink sokkal hatekonyabbak.",
-      testimonial1Author: "Alexandru M.",
-      testimonial1Role: "Uzemeltetesi igazgato, Bukarest Raktar",
+        "Azért vezettük be a rendszert, mert túl sok időt vesztettünk papírmunkával és sorban állással a kapunál. Most a sofőrök maguk jelentkeznek be, mi pedig mindent látunk a műszerfalon. Sokkal egyszerűbb.",
+      testimonial1Author: "Üzemeltetési Vezető",
+      testimonial1Role: "Logisztikai Raktár, Európa",
       testimonial2:
-        "Az alkalmazas nagyon konnyen hasznalhato. Soforeink azonnal elfogadtak, kulon kepzes nelkul.",
-      testimonial2Author: "Maria P.",
-      testimonial2Role: "Logisztikai vezeto, Cluj Elosztokozpont",
+        "Eleinte szkeptikus voltam, de egy hét használat után nem akarok visszatérni a régi rendszerhez. Azonnal látom, ki várakozik és gyorsan ki tudom osztani a dokkokat.",
+      testimonial2Author: "Raktári Operátor",
+      testimonial2Role: "Elosztóközpont, Európa",
       testimonial3:
-        "Az automatikus jelentes hetente orakat takarit meg a manualis munkabol. Kivalo!",
-      testimonial3Author: "Ionut D.",
-      testimonial3Role: "Supervisor, Timisoara Logisztikai Kozpont",
+        "A legjobban azt értékelem, hogy automatikusan tudok jelentéseket készíteni. Korábban mindent kézzel csináltam Excelben és órákig tartott.",
+      testimonial3Author: "Logisztikai Koordinátor",
+      testimonial3Role: "Regionális Hub, Európa",
+      testimonial4:
+        "Segített, hogy tiszta képet kapjunk az egész folyamatról. Pontosan tudjuk, hány sofőr van az udvaron, melyik dokknál és mennyi ideig tart minden művelet.",
+      testimonial4Author: "Logisztikai Igazgató",
+      testimonial4Role: "Disztribúciós Vállalat, Európa",
+      testimonial5:
+        "Most nem kell felhívnom a diszpécsereket minden behajtó teherautónál. A sofőr bejelentkezik, én validálom a kapunál, és kész.",
+      testimonial5Author: "Kapuügyintéző",
+      testimonial5Role: "Élelmiszer Raktár, Európa",
+      testimonial6:
+        "Teljesen megszüntettük a teherautók időnyilvántartását. Minden automatikusan rögzítésre kerül a pontos be- és kilépési idővel.",
+      testimonial6Author: "Raktár Adminisztrátor",
+      testimonial6Role: "Logisztikai Terminál, Európa",
     },
     pricing: {
       title: "Valassza ki a megfelelo tervet",
@@ -1179,19 +1223,16 @@ export const translations = {
       includedFeatures: "Mit tartalmaz:",
       feature1: "Korlatlan bejelentkezesek",
       feature2: "Valos ideju dokk kezeles",
-      feature3: "Push ertesitesek es SMS",
+      feature3: "Alkalmazas Push ertesitesek es SMS (opcionalis)",
       feature4: "Jelentes es elemzes",
       feature5: "Mobil alkalmazas iOS & Android",
       feature6: "Tobbnyelvuseg tamogatas",
       feature7: "Technikai tamogatas",
+      feature8: "White-label sajat domenen",
+      feature9: "99,9% garantalt SLA",
+      feature10: "Szemelyre szabott kepzes",
       enterpriseFeature1: "Minden Professional funkcio",
-      enterpriseFeature2: "Korlatlan raktarak",
-      enterpriseFeature3: "White-label sajat domenen",
-      enterpriseFeature4: "Teljes API hozzaferes",
-      enterpriseFeature5: "Egyeni integraciok (WMS, TMS)",
-      enterpriseFeature6: "Dedikalt fiokkezelo",
-      enterpriseFeature7: "99,9% garantalt SLA",
-      enterpriseFeature8: "Szemelyre szabott kepzes",
+      enterpriseFeature2: "Egyeni integraciok (WMS, TMS)",
       singleLocation: "1 helyszin",
       multipleLocations: "Tobb helyszin",
       customPricing: "Egyeni arazes",
@@ -1202,7 +1243,6 @@ export const translations = {
       subtitle:
         "Csatlakozzon szazakhoz raktarakhoz, akik a hatekonysagot valasztottak. Ingyenes demo, gyors beallitas, kotelezettseg nelkul.",
       button: "Ingyenes demo keres",
-      noCreditCard: "Nem szukseges hitelkartya",
       or: "vagy",
       callUs: "Hivjon kozvetlenul",
       phoneNumber: "+40 xxx xxx xxx",
@@ -1321,11 +1361,11 @@ export const translations = {
       login: "Vhod",
     },
     hero: {
-      badge: "Inteligentna platforma za upravlenie na skladove",
+      badge: "Интелигентна платформа за управление на потока за разтоварване/натоварване в складове",
       title: "Transformirajte haosa v sklada v",
       titleHighlight: "maksimalna efektivnost",
       subtitle:
-        "Logistiq svrzva voditeli s operatorite na sklada v realno vreme. Digitalno QR registrirane, avtomatichno rapredelenie na dokove, mgnovena komunikacija - vsichko na edna platforma.",
+        "Logistiq свързва водачи с операторите на склада в реално време. Цифрово регистриране чрез QR код или мобилно приложение, разпределение на докове, мигновена комуникация - всичко на една платформа.",
       cta1: "Zajavete bezplatno demo",
       cta2: "Vijte kak raboti",
       trustedBy: "Doverenata na skladove v cjala Evropa",
@@ -1343,54 +1383,54 @@ export const translations = {
         "Prost 4-stapkov proces. Ot registracija do zaminane, vsichko e digitalizirano i optimizirano.",
       step1Title: "Voditelat se registrira",
       step1Desc:
-        "Prez ueb prilozhenieto qrgo.ro ili mobilnoto prilozhenie, voditelat skanira QR koda i vvzhda danni: nomer na kamion, remrke, referencia, snimki na dokumenti.",
+        "Чрез уеб или мобилното приложение <b>QRGO Driver</b>, водителят сканира QR кода и въвежда данни: номер на камион, ремарке, референция, снимки на документи.",
       step2Title: "Operatorat razpredelja dok",
       step2Desc:
-        "Operatorat na sklada vizhda vsichki chakashti voditeli v realno vreme i gi nasochva km nalichen dok s edno klikane.",
+        "Операторът на склада вижда всички чакащи водачи в реално време и ги насочва към съответния отдел или док с едно кликване.",
       step3Title: "Komunikacija v realno vreme",
       step3Desc:
         "Voditelite poluchavat push uvedomlenija i personalizirani smovenija. Znaat tochno kde da otivat i kakvo da pravjat, bez obkrkvane.",
       step4Title: "Operacijata e zavshena",
       step4Desc:
-        "Pri zavrshvane vsichko se dokumentira avtomatichno. Podrobni otcheti, rabotni vremena, statistiki - vsichko e dostpno vednaga.",
+        "При завършване всичко се документира автоматично. Подробни отчети, работни времена, статистики, отчетност.",
     },
     features: {
       title: "Vsichko, ot koeto se nuzhdaete za efektiven sklad",
       subtitle:
-        "Funkcii, razraboteni zaedno s operatori i voditeli, za realni problemite v industrijavat.",
-      feature1Title: "Digitalna QR registracija",
+        "Функции, разработени заедно с администратори на складове, оператори и водачи, за решаване на реалните проблеми в индустрията.",
+      feature1Title: "Дигитална регистрация",
       feature1Desc:
-        "Voditelite skanirat QR koda pri pristigane. Bez hartia, bez bezpoznachi opashki, bez obkrkvane. Vsichki danni se zachvat mgnoveno i sigurno.",
-      feature2Title: "Upravlenie na dokove na zhivo",
+        "При пристигане водачът сканира QR кода или влиза в склада в приложението QRGO Driver. Попълва данните и получава потвърждение. Без хартия, без опашки.",
+      feature2Title: "Управление на докове",
       feature2Desc:
-        "Pregled v realno vreme na vsichki dokove. Razpredeljajte, osvobozhdavajte i optimizirajte potoka na kamionite ot edno tablo.",
+        "Операторите разпределят, освобождават и оптимизират потока на камионите от едно табло.",
       feature3Title: "Chat i uvedomlenija v realno vreme",
       feature3Desc:
-        "Mgnovena komunikacija mezhdu operator i voditel, push uvedomlenija na telefona i SMS opcii. Jasna komunikacija, nezavisimo ot platformata.",
+        "Мигновена комуникация между оператор и водач, push известия на телефона и SMS опции. Ясна комуникация, независимо от платформата, използвана от водача.",
       feature4Title: "Kategorii otdeli i kamioni",
       feature4Desc:
         "Organizirajte registraciite po otdeli (Zelenchutsi, Suhi stoki, Zamrazeni, Ohladeni) i tipove kamioni (kamion+remrke, poluremrke, brezent i dr).",
       feature5Title: "Otcheti i analizi",
       feature5Desc:
-        "Interaktivni tabla s KPI v realno vreme. Vremena za chakane, tovari na den, efektivnost na dokovete, statistiki po otdeli, vsichko izmerimo.",
+        "Интерактивни табла с KPI в реално време. Времена за чакане, товарене/разтоварване на ден, статистики по отдели, графики.",
       feature6Title: "Android i iOS prilozhenie",
       feature6Desc:
-        "Voditelite imat dostp do qrgo.ro ili izteglat prilozhenieto ot App Store ili Google Play. Smvestimo s vsako ustrojstvo, navsjakte po sveta.",
+        "Водачите могат да използват уеб приложението QRGO Driver или да инсталират мобилното приложение от App Store или Google Play.",
       feature7Title: "Mnogoezinovost (12 ezika)",
       feature7Desc:
         "Interfejs, nalichen na 12 evropejski ezika. Voditeli ot vsqka drzhava mogat da izpolzvat prilozhenieto na rodnija si ezik.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Branding na sobstven domejn (npr. checkin.vashsklad.bg) i dokumentiran REST API za integracija s WMS, TMS i drugi sistemi.",
-      feature9Title: "100% Oblak - Bez Oborudvane",
+        "Брандиране на собствен домейн (напр. checkin.vashsklad.bg) и възможност за интеграция със съществуващи системи за управление на склад или транспорт чрез API.",
+      feature9Title: "Облак - Без Оборудване",
       feature9Desc:
-        "Platformata raboti izcialo v oblaka. Njama nuzhda ot serveri, specialno oborudvane ili lokalni instalacii. Dostp otvsjkde, po vsqko vreme, ot vsqko ustrojstvo.",
+        "Платформата работи изцяло в облака. Няма нужда от сървъри, специално оборудване или локални инсталации.",
       feature10Title: "Instrukcii i Nasochvane za Voditeli",
       feature10Desc:
         "Voditelite poluchavat opredelen dok, navigacionni ukazanija i personalizirani instrukcii direktno v prilozhenieto. Idealno za voditeli, posheshtavashti sklada za prv pt.",
       feature11Title: "Ranna Registracija i Planirane",
       feature11Desc:
-        "Voditelite mogat da se registrirat po vreme na pt i da planuvat ochakvano vreme na pristigane. Skladat znae predvaritelno koj idva i mozhe da planuva po-efektivno.",
+        "Водачите могат да се регистрират по време на път и да планират очакваното време на пристигане. Складът знае предварително кой идва, кога и може да планира по-ефективно потока за товарене/разтоварване.",
       feature12Title: "Avtomatichno Zasichane na Mestopolozhenie",
       feature12Desc:
         "Mobilnoto prilozhenie avtomatichno zasichva, kogato voditelqt pristigne v zonata na sklada i pokazva uvedomlenie za registracija. Proces bez trkane, napltno avtomatiziran.",
@@ -1400,11 +1440,11 @@ export const translations = {
       subtitle: "Logistiq podobrjava efektivnostta za vsichki uchastvashti v operaciite.",
       forWarehouse: "Za sklada",
       forDrivers: "Za voditelite",
-      warehouse1: "50% namaljavane na vremeto za chakane na voditelite",
+      warehouse1: "Оптимизиране на времето за работа на водачите от влизане до излизане",
       warehouse2: "Plna prosledimnost: vsqka stpka ot vhoda do izhoda e zapisana s tochni vremevi pecati",
       warehouse3: "Premahvane na hartijata i rchnite procesi",
       warehouse4: "Avtomatichni otcheti za upravlenieto",
-      warehouse5: "Efektivno planirane - znaete predvaritelno koj pristiga",
+      warehouse5: "Ефективно управление на потока и рампите за товарене/разтоварване",
       warehouse6: "Bez dopplnitelno oborudvane - vsichko v oblaka",
       drivers1: "Bkrza registracija za po-malko ot 30 sekundi",
       drivers2: "Poluchavat dok i instrukcii direktno v prilozhenieto",
@@ -1414,20 +1454,32 @@ export const translations = {
       drivers6: "Nalichno na rodnija im ezik",
     },
     testimonials: {
-      title: "Kakvo kazvat nashite klienti",
-      subtitle: "Skladove v cjala Evropa izpolzvat Logistiq vseki den, za da optimizirat operaciite si.",
+      title: "Какво казват нашите клиенти",
+      subtitle: "Отзиви от екипи, които използват Logistiq ежедневно.",
       testimonial1:
-        "Otkak izpolzvame Logistiq, vremeto za chakane na voditelite e namaleno s 60%. Nashite operatori sa mnogo po-efektivni.",
-      testimonial1Author: "Aleksandr M.",
-      testimonial1Role: "Director po operaciite, Sklad Bukuresht",
+        "Внедрихме системата, защото губехме твърде много време с документи и опашки на портала. Сега шофьорите се регистрират сами, а ние виждаме всичко на таблото. Много по-просто.",
+      testimonial1Author: "Мениджър Операции",
+      testimonial1Role: "Логистичен Склад, Европа",
       testimonial2:
-        "Prilozhenieto e mnogo lesno za izpolzvane. Nashite voditeli go prieha vednaga, bez specialno obuchenie.",
-      testimonial2Author: "Marija P.",
-      testimonial2Role: "Menidzhr logistika, Distribucionen centr Kluzh",
+        "В началото бях скептичен, но след седмица използване не искам да се връщам към старата система. Веднага виждам кой чака и мога бързо да разпределям доковете.",
+      testimonial2Author: "Оператор Склад",
+      testimonial2Role: "Дистрибуционен Център, Европа",
       testimonial3:
-        "Avtomatichnite otcheti ni spastavat chasove rchna rabota vsqka sedmica. Otlichno!",
-      testimonial3Author: "Jonut D.",
-      testimonial3Role: "Supervayzr, Logistichen hub Timishoara",
+        "Най-много ценя възможността да генерирам отчети автоматично. Преди правех всичко ръчно в Excel и отнемаше часове.",
+      testimonial3Author: "Координатор Логистика",
+      testimonial3Role: "Регионален Хъб, Европа",
+      testimonial4:
+        "Помогна ни да получим ясна картина на целия поток. Знаем точно колко шофьори са в двора, на кои докове и колко време отнема всяка операция.",
+      testimonial4Author: "Директор Логистика",
+      testimonial4Role: "Дистрибуторска Компания, Европа",
+      testimonial5:
+        "Сега не е нужно да се обаждам на диспечерите за всеки камион, който влиза. Шофьорът се регистрира, аз валидирам на портата и готово.",
+      testimonial5Author: "Оператор Порта",
+      testimonial5Role: "Хранителен Склад, Европа",
+      testimonial6:
+        "Напълно премахнахме времевите листове за камиони. Всичко се записва автоматично с точното време на влизане и излизане.",
+      testimonial6Author: "Администратор Склад",
+      testimonial6Role: "Логистичен Терминал, Европа",
     },
     pricing: {
       title: "Izberete pravlnija plan",
@@ -1441,19 +1493,16 @@ export const translations = {
       includedFeatures: "Kakvo e vklyucheno:",
       feature1: "Neogranicheni registracii",
       feature2: "Upravlenie na dokove v realno vreme",
-      feature3: "Push uvedomlenija i SMS",
+      feature3: "Push uvedomlenija v prilozhenieto i SMS (opcionalno)",
       feature4: "Otcheti i analizi",
       feature5: "Mobilno prilozhenie iOS & Android",
       feature6: "Mnogoezikova poddrzhka",
       feature7: "Tehnicheska poddrzhka",
+      feature8: "White-label na sobstven domejn",
+      feature9: "99,9% garantiran SLA",
+      feature10: "Personalizirano obuchenie",
       enterpriseFeature1: "Vsichki Professional funkcii",
-      enterpriseFeature2: "Neogranicheni skladove",
-      enterpriseFeature3: "White-label na sobstven domejn",
-      enterpriseFeature4: "Plen dostp do API",
-      enterpriseFeature5: "Individualni integracii (WMS, TMS)",
-      enterpriseFeature6: "Otdelen menidzhr na akaunti",
-      enterpriseFeature7: "99,9% garantiran SLA",
-      enterpriseFeature8: "Personalizirano obuchenie",
+      enterpriseFeature2: "Individualni integracii (WMS, TMS)",
       singleLocation: "1 lokacija",
       multipleLocations: "Mnogo lokacii",
       customPricing: "Individualna cena",
@@ -1464,7 +1513,6 @@ export const translations = {
       subtitle:
         "Prisedinte se km stotici skladove, koito izbrahha efektivnostta. Bezplatno demo, bkrza nastrojka, bez zadlzhenija.",
       button: "Zajavete bezplatno demo",
-      noCreditCard: "Ne se iziskva kreditna karta",
       or: "ili",
       callUs: "Obadete ni se direktno",
       phoneNumber: "+40 xxx xxx xxx",
@@ -1583,11 +1631,11 @@ export const translations = {
       login: "Connexion",
     },
     hero: {
-      badge: "Plateforme intelligente pour la gestion d'entrepot",
+      badge: "Plateforme intelligente pour la gestion des flux de chargement/déchargement en entrepôts",
       title: "Transformez le chaos de l'entrepot en",
       titleHighlight: "efficacite maximale",
       subtitle:
-        "Logistiq connecte les chauffeurs aux operateurs d'entrepot en temps reel. Check-in QR numerique, attribution automatique des quais, communication instantanee - tout sur une seule plateforme.",
+        "Logistiq connecte les chauffeurs aux opérateurs d'entrepôt en temps réel. Check-in numérique via code QR ou application mobile, attribution des quais, communication instantanée - tout sur une seule plateforme.",
       cta1: "Demander une demo gratuite",
       cta2: "Voir comment ca marche",
       trustedBy: "Fait confiance par les entrepots de toute l'Europe",
@@ -1605,54 +1653,54 @@ export const translations = {
         "Processus simple en 4 etapes. Du check-in au depart, tout est numerise et optimise.",
       step1Title: "Le chauffeur s'enregistre",
       step1Desc:
-        "Via l'application web qrgo.ro ou l'application mobile, le chauffeur scanne le code QR et saisit les donnees: numero de camion, remorque, reference, photos de documents.",
+        "Via l'application web ou mobile <b>QRGO Driver</b>, le chauffeur scanne le code QR et saisit les données: numéro de camion, remorque, référence, photos de documents.",
       step2Title: "L'operateur attribue un quai",
       step2Desc:
-        "L'operateur d'entrepot voit tous les chauffeurs en attente en temps reel et les dirige vers un quai disponible en un clic.",
+        "L'opérateur d'entrepôt voit tous les chauffeurs en attente en temps réel et les dirige vers le département ou quai correspondant en un clic.",
       step3Title: "Communication en temps reel",
       step3Desc:
         "Les chauffeurs recoivent des notifications push et des messages personnalises. Ils savent exactement ou aller et quoi faire, sans confusion.",
       step4Title: "Operation terminee",
       step4Desc:
-        "Une fois termine, tout est documente automatiquement. Rapports detailles, temps d'operation, statistiques - tout disponible instantanement.",
+        "Une fois terminé, tout est documenté automatiquement. Rapports détaillés, temps d'opération, statistiques, registres.",
     },
     features: {
       title: "Tout ce dont vous avez besoin pour un entrepot efficace",
       subtitle:
-        "Fonctionnalites developpees avec les operateurs et chauffeurs, pour les vrais problemes de l'industrie.",
-      feature1Title: "Check-in QR numerique",
+        "Fonctionnalités développées avec les administrateurs d'entrepôt, opérateurs et chauffeurs, pour résoudre les vrais problèmes de l'industrie.",
+      feature1Title: "Check-in numérique",
       feature1Desc:
-        "Les chauffeurs scannent le code QR a l'arrivee. Pas de papiers, pas de files interminables, pas de confusion. Toutes les donnees capturees instantanement et securisees.",
-      feature2Title: "Gestion des quais en direct",
+        "À l'arrivée, le chauffeur scanne le code QR ou accède à l'entrepôt dans l'application QRGO Driver. Remplit les données et reçoit une confirmation. Sans papier, sans files d'attente.",
+      feature2Title: "Gestion des quais",
       feature2Desc:
-        "Vue en temps reel de tous les quais. Attribuez, liberez et optimisez le flux de camions depuis un seul tableau de bord.",
+        "Les opérateurs attribuent, libèrent et optimisent le flux de camions depuis un seul tableau de bord.",
       feature3Title: "Chat & notifications en temps reel",
       feature3Desc:
-        "Chat instantane entre operateur et chauffeur, notifications push sur telephone et options SMS. Communication claire, quelle que soit la plateforme.",
+        "Chat instantané entre opérateur et chauffeur, notifications push sur téléphone et options SMS. Communication claire, quelle que soit la plateforme utilisée par le chauffeur.",
       feature4Title: "Categories departements & camions",
       feature4Desc:
         "Organisez les check-ins par departements (Legumes, Produits secs, Surgeles, Refrigeres) et types de camions (camion+remorque, semi-remorque, bache etc).",
       feature5Title: "Rapports & analyses",
       feature5Desc:
-        "Tableaux de bord interactifs avec KPI en temps reel. Temps d'attente, chargements par jour, efficacite des quais, statistiques par departement, tout mesurable.",
+        "Tableaux de bord interactifs avec KPI en temps réel. Temps d'attente, chargements/déchargements par jour, statistiques par département, graphiques.",
       feature6Title: "Application Android & iOS",
       feature6Desc:
-        "Les chauffeurs aceedent a qrgo.ro ou telecharger l'application depuis l'App Store ou Google Play. Compatible avec tout appareil, partout dans le monde.",
+        "Les chauffeurs peuvent utiliser l'application QRGO Driver Web ou installer l'application mobile depuis l'App Store ou Google Play.",
       feature7Title: "Multi-langue (12 langues)",
       feature7Desc:
         "Interface disponible en 12 langues europeennes. Les chauffeurs de n'importe quel pays peuvent utiliser l'application dans leur langue maternelle.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Branding sur domaine propre (ex: checkin.votreentrepot.fr) et API REST documentee pour l'integration avec WMS, TMS et autres systemes.",
-      feature9Title: "100% Cloud - Sans Equipement",
+        "Branding sur domaine propre (ex: checkin.votreentrepot.fr) et possibilité d'intégration avec les systèmes existants de gestion d'entrepôt ou de transport via API.",
+      feature9Title: "Cloud - Sans Équipement",
       feature9Desc:
-        "La plateforme fonctionne entierement dans le cloud. Pas besoin de serveurs, d'equipements speciaux ou d'installations locales. Acces depuis n'importe ou, a tout moment, sur n'importe quel appareil.",
+        "La plateforme fonctionne entièrement dans le cloud. Pas besoin de serveurs, d'équipements spéciaux ou d'installations locales.",
       feature10Title: "Instructions & Guidage Chauffeurs",
       feature10Desc:
         "Les chauffeurs recoivent le quai attribue, les directions de navigation et des instructions personnalisees directement dans l'application. Ideal pour les chauffeurs visitant l'entrepot pour la premiere fois.",
       feature11Title: "Check-in Anticipe & Planification",
       feature11Desc:
-        "Les chauffeurs peuvent s'enregistrer en route et planifier leur heure d'arrivee estimee. L'entrepot sait a l'avance qui arrive et peut planifier plus efficacement.",
+        "Les chauffeurs peuvent s'enregistrer en route et planifier leur heure d'arrivée estimée. L'entrepôt sait à l'avance qui arrive, à quelle heure et peut planifier plus efficacement le flux de chargement/déchargement.",
       feature12Title: "Detection Automatique de Localisation",
       feature12Desc:
         "L'application mobile detecte automatiquement quand le chauffeur arrive dans la zone de l'entrepot et affiche une notification de check-in. Processus sans friction, entierement automatise.",
@@ -1662,11 +1710,11 @@ export const translations = {
       subtitle: "Logistiq ameliore l'efficacite pour tous les acteurs des operations.",
       forWarehouse: "Pour l'entrepot",
       forDrivers: "Pour les chauffeurs",
-      warehouse1: "Reduction de 50% du temps d'attente des chauffeurs",
+      warehouse1: "Optimisation du temps d'opération des chauffeurs de l'entrée à la sortie",
       warehouse2: "Tracabilite complete: chaque etape de l'entree a la sortie est enregistree avec horodatage exact",
       warehouse3: "Elimination des papiers et processus manuels",
       warehouse4: "Rapports automatiques pour la direction",
-      warehouse5: "Planification efficace - sachez a l'avance qui arrive",
+      warehouse5: "Gestion efficace du flux et des quais de chargement/déchargement",
       warehouse6: "Pas d'equipement supplementaire - tout dans le cloud",
       drivers1: "Check-in rapide en moins de 30 secondes",
       drivers2: "Recoivent quai et instructions directement dans l'app",
@@ -1677,19 +1725,31 @@ export const translations = {
     },
     testimonials: {
       title: "Ce que disent nos clients",
-      subtitle: "Des entrepots de toute l'Europe utilisent Logistiq quotidiennement pour optimiser leurs operations.",
+      subtitle: "Retours d'équipes utilisant Logistiq au quotidien.",
       testimonial1:
-        "Depuis que nous utilisons Logistiq, le temps d'attente des chauffeurs a ete reduit de 60%. Nos operateurs sont beaucoup plus efficaces.",
-      testimonial1Author: "Alexandre M.",
-      testimonial1Role: "Directeur des operations, Entrepot Paris",
+        "Nous avons mis en place le système car nous perdions trop de temps avec la paperasse et les files d'attente au portail. Maintenant les chauffeurs s'enregistrent eux-mêmes et nous voyons tout sur le tableau de bord. Beaucoup plus simple.",
+      testimonial1Author: "Responsable Opérations",
+      testimonial1Role: "Entrepôt Logistique, Europe",
       testimonial2:
-        "L'application est tres facile a utiliser. Nos chauffeurs l'ont adoptee immediatement, sans formation speciale.",
-      testimonial2Author: "Marie P.",
-      testimonial2Role: "Responsable logistique, Centre de distribution Lyon",
+        "J'étais sceptique au début, mais après une semaine d'utilisation je ne veux plus revenir à l'ancien système. Je vois instantanément qui attend et je peux attribuer les quais rapidement.",
+      testimonial2Author: "Opérateur Entrepôt",
+      testimonial2Role: "Centre de Distribution, Europe",
       testimonial3:
-        "Les rapports automatiques nous font gagner des heures de travail manuel chaque semaine. Excellent!",
-      testimonial3Author: "Jean D.",
-      testimonial3Role: "Superviseur, Hub logistique Marseille",
+        "Ce que j'apprécie le plus, c'est de pouvoir générer des rapports automatiquement. Avant, je faisais tout manuellement dans Excel et ça prenait des heures.",
+      testimonial3Author: "Coordinateur Logistique",
+      testimonial3Role: "Hub Régional, Europe",
+      testimonial4:
+        "Cela nous a aidés à avoir une vision claire de l'ensemble du flux. Nous savons exactement combien de chauffeurs sont dans la cour, à quels quais et combien de temps dure chaque opération.",
+      testimonial4Author: "Directeur Logistique",
+      testimonial4Role: "Société de Distribution, Europe",
+      testimonial5:
+        "Maintenant, je n'ai plus besoin d'appeler les dispatcheurs pour chaque camion qui entre. Le chauffeur s'enregistre, je valide à la porte, et c'est fait.",
+      testimonial5Author: "Opérateur de Porte",
+      testimonial5Role: "Entrepôt Alimentaire, Europe",
+      testimonial6:
+        "Nous avons complètement éliminé les feuilles de temps pour les camions. Tout est enregistré automatiquement avec l'heure exacte d'entrée et de sortie.",
+      testimonial6Author: "Administrateur d'Entrepôt",
+      testimonial6Role: "Terminal Logistique, Europe",
     },
     pricing: {
       title: "Choisissez le bon plan",
@@ -1703,19 +1763,16 @@ export const translations = {
       includedFeatures: "Ce qui est inclus:",
       feature1: "Check-ins illimites",
       feature2: "Gestion des quais en temps reel",
-      feature3: "Notifications push et SMS",
+      feature3: "Notifications push App et SMS (optionnel)",
       feature4: "Rapports et analyses",
       feature5: "Application mobile iOS & Android",
       feature6: "Support multilingue",
       feature7: "Support technique",
+      feature8: "White-label sur domaine propre",
+      feature9: "SLA garanti 99,9%",
+      feature10: "Formation personnalisee",
       enterpriseFeature1: "Toutes les fonctionnalites Professional",
-      enterpriseFeature2: "Entrepots illimites",
-      enterpriseFeature3: "White-label sur domaine propre",
-      enterpriseFeature4: "Acces API complet",
-      enterpriseFeature5: "Integrations personnalisees (WMS, TMS)",
-      enterpriseFeature6: "Gestionnaire de compte dedie",
-      enterpriseFeature7: "SLA garanti 99,9%",
-      enterpriseFeature8: "Formation personnalisee",
+      enterpriseFeature2: "Integrations personnalisees (WMS, TMS)",
       singleLocation: "1 site",
       multipleLocations: "Sites multiples",
       customPricing: "Prix personnalise",
@@ -1726,7 +1783,6 @@ export const translations = {
       subtitle:
         "Rejoignez des centaines d'entrepots qui ont deja digitalise leurs processus avec Logistiq.",
       button: "Commencez maintenant",
-      noCreditCard: "Pas de carte de credit requise",
       or: "ou",
       callUs: "Appelez-nous",
       phoneNumber: "+40 XXX XXX XXX",
@@ -1845,11 +1901,11 @@ export const translations = {
       login: "Inloggen",
     },
     hero: {
-      badge: "Slim platform voor magazijnbeheer",
+      badge: "Slim platform voor het beheer van laad- en losstromen in magazijnen",
       title: "Transformeer magazijn chaos in",
       titleHighlight: "maximale efficientie",
       subtitle:
-        "Logistiq verbindt chauffeurs met magazijnoperators in realtime. Digitale QR check-in, automatische dok toewijzing, directe communicatie - alles op een platform.",
+        "Logistiq verbindt chauffeurs met magazijnoperators in realtime. Digitale check-in via QR-code of mobiele app, dok toewijzing, directe communicatie - alles op een platform.",
       cta1: "Vraag gratis demo aan",
       cta2: "Bekijk hoe het werkt",
       trustedBy: "Vertrouwd door magazijnen in heel Europa",
@@ -1867,54 +1923,54 @@ export const translations = {
         "Eenvoudig 4-stappen proces. Van check-in tot vertrek, alles is gedigitaliseerd en geoptimaliseerd.",
       step1Title: "Chauffeur checkt in",
       step1Desc:
-        "Via de webapp qrgo.ro of de mobiele app scant de chauffeur de QR-code en voert gegevens in: trucknummer, trailer, referentie, documentfoto's.",
+        "Via de web- of mobiele app <b>QRGO Driver</b> scant de chauffeur de QR-code en voert gegevens in: trucknummer, trailer, referentie, documentfoto's.",
       step2Title: "Operator wijst dok toe",
       step2Desc:
-        "De magazijnoperator ziet alle wachtende chauffeurs in realtime en stuurt ze met een klik naar een beschikbare dok.",
+        "De magazijnoperator ziet alle wachtende chauffeurs in realtime en stuurt ze met één klik naar de corresponderende afdeling of dok.",
       step3Title: "Realtime communicatie",
       step3Desc:
         "Chauffeurs ontvangen push-notificaties en gepersonaliseerde berichten. Ze weten precies waar ze heen moeten en wat te doen, zonder verwarring.",
       step4Title: "Operatie voltooid",
       step4Desc:
-        "Na voltooiing wordt alles automatisch gedocumenteerd. Gedetailleerde rapporten, operatietijden, statistieken - alles direct beschikbaar.",
+        "Na voltooiing wordt alles automatisch gedocumenteerd. Gedetailleerde rapporten, operatietijden, statistieken, registratie.",
     },
     features: {
       title: "Alles wat u nodig heeft voor een efficient magazijn",
       subtitle:
-        "Functies ontwikkeld samen met operators en chauffeurs, voor echte brancheproblemen.",
-      feature1Title: "Digitale QR check-in",
+        "Functies ontwikkeld samen met magazijnbeheerders, operators en chauffeurs, om echte brancheproblemen op te lossen.",
+      feature1Title: "Digitale check-in",
       feature1Desc:
-        "Chauffeurs scannen de QR-code bij aankomst. Geen papieren, geen eindeloze wachtrijen, geen verwarring. Alle gegevens direct en veilig vastgelegd.",
-      feature2Title: "Live dok beheer",
+        "Bij aankomst scant de chauffeur de QR-code of opent het magazijn in de QRGO Driver app. Vult de gegevens in en ontvangt bevestiging. Geen papier, geen wachtrijen.",
+      feature2Title: "Dokbeheer",
       feature2Desc:
-        "Realtime overzicht van alle dokken. Wijs toe, maak vrij en optimaliseer de truckstroom vanuit een dashboard.",
+        "Operators wijzen toe, maken vrij en optimaliseren de truckstroom vanuit één dashboard.",
       feature3Title: "Realtime chat & notificaties",
       feature3Desc:
-        "Directe chat tussen operator en chauffeur, push-notificaties op telefoon en SMS-opties. Duidelijke communicatie, ongeacht platform.",
+        "Directe chat tussen operator en chauffeur, push-notificaties op telefoon en SMS-opties. Duidelijke communicatie, ongeacht het platform dat de chauffeur gebruikt.",
       feature4Title: "Afdeling & truck categorieen",
       feature4Desc:
         "Organiseer check-ins per afdeling (Groenten, Droge waren, Diepvries, Gekoeld) en truck types (vrachtwagen+trailer, oplegger, zeil etc).",
       feature5Title: "Rapporten & analyses",
       feature5Desc:
-        "Interactieve dashboards met realtime KPI's. Wachttijden, ladingen per dag, dok efficientie, afdelingsstatistieken, alles meetbaar.",
+        "Interactieve dashboards met realtime KPI's. Wachttijden, ladingen/lossingen per dag, afdelingsstatistieken, grafieken.",
       feature6Title: "Android & iOS app",
       feature6Desc:
-        "Chauffeurs hebben toegang tot qrgo.ro of downloaden de app uit de App Store of Google Play. Compatibel met elk apparaat, overal ter wereld.",
+        "Chauffeurs kunnen de QRGO Driver Web-app gebruiken of de mobiele app installeren uit de App Store of Google Play.",
       feature7Title: "Meertalig (12 talen)",
       feature7Desc:
         "Interface beschikbaar in 12 Europese talen. Chauffeurs uit elk land kunnen de app in hun moedertaal gebruiken.",
       feature8Title: "White-Label & API",
       feature8Desc:
-        "Branding op eigen domein (bijv. checkin.uwmagazijn.nl) en gedocumenteerde REST API voor integratie met WMS, TMS en andere systemen.",
-      feature9Title: "100% Cloud - Geen Apparatuur",
+        "Branding op eigen domein (bijv. checkin.uwmagazijn.nl) en de mogelijkheid tot integratie met bestaande magazijn- of transportbeheersystemen via API.",
+      feature9Title: "Cloud - Geen Apparatuur",
       feature9Desc:
-        "Platform draait volledig in de cloud. Geen servers, speciale apparatuur of lokale installaties nodig. Toegang vanaf overal, altijd, op elk apparaat.",
+        "Platform draait volledig in de cloud. Geen servers, speciale apparatuur of lokale installaties nodig.",
       feature10Title: "Chauffeur Instructies & Begeleiding",
       feature10Desc:
         "Chauffeurs ontvangen toegewezen dok, navigatie-aanwijzingen en gepersonaliseerde instructies direct in de app. Ideaal voor chauffeurs die het magazijn voor het eerst bezoeken.",
       feature11Title: "Vroege Check-in & Planning",
       feature11Desc:
-        "Chauffeurs kunnen onderweg inchecken en hun geschatte aankomsttijd plannen. Het magazijn weet van tevoren wie komt en kan efficienter plannen.",
+        "Chauffeurs kunnen onderweg inchecken en hun geschatte aankomsttijd plannen. Het magazijn weet van tevoren wie komt, hoe laat en kan de laad-/losflow efficiënter plannen.",
       feature12Title: "Automatische Locatiedetectie",
       feature12Desc:
         "De mobiele app detecteert automatisch wanneer de chauffeur in de magazijnzone arriveert en toont een check-in notificatie. Naadloos, volledig geautomatiseerd proces.",
@@ -1924,11 +1980,11 @@ export const translations = {
       subtitle: "Logistiq verbetert de efficientie voor iedereen betrokken bij operaties.",
       forWarehouse: "Voor het magazijn",
       forDrivers: "Voor chauffeurs",
-      warehouse1: "50% reductie in wachttijd chauffeurs",
+      warehouse1: "Optimalisatie van de operatietijd van chauffeurs van binnenkomst tot vertrek",
       warehouse2: "Volledige traceerbaarheid: elke stap van binnenkomst tot vertrek wordt geregistreerd met exacte tijdstempels",
       warehouse3: "Eliminatie van papieren en handmatige processen",
       warehouse4: "Automatische rapporten voor management",
-      warehouse5: "Efficiente planning - weet van tevoren wie komt",
+      warehouse5: "Efficiënt beheer van de stroom en laad-/losperrons",
       warehouse6: "Geen extra apparatuur - alles in de cloud",
       drivers1: "Snelle check-in in minder dan 30 seconden",
       drivers2: "Ontvangen dok en instructies direct in app",
@@ -1939,19 +1995,31 @@ export const translations = {
     },
     testimonials: {
       title: "Wat onze klanten zeggen",
-      subtitle: "Magazijnen in heel Europa gebruiken Logistiq dagelijks om hun operaties te optimaliseren.",
+      subtitle: "Feedback van teams die Logistiq dagelijks gebruiken.",
       testimonial1:
-        "Sinds we Logistiq gebruiken, is de wachttijd van chauffeurs met 60% verminderd. Onze operators zijn veel efficienter.",
-      testimonial1Author: "Alexander M.",
-      testimonial1Role: "Operations Director, Magazijn Amsterdam",
+        "We hebben het systeem geïmplementeerd omdat we te veel tijd verloren met papierwerk en wachtrijen bij de poort. Nu checken chauffeurs zelf in en zien we alles op het dashboard. Veel eenvoudiger.",
+      testimonial1Author: "Operations Manager",
+      testimonial1Role: "Logistiek Magazijn, Europa",
       testimonial2:
-        "De app is heel makkelijk te gebruiken. Onze chauffeurs namen het direct over, zonder speciale training.",
-      testimonial2Author: "Marie P.",
-      testimonial2Role: "Logistiek Manager, Distributiecentrum Rotterdam",
+        "Ik was eerst sceptisch, maar na een week gebruik wil ik niet meer terug naar het oude systeem. Ik zie direct wie wacht en kan snel dokken toewijzen.",
+      testimonial2Author: "Magazijn Operator",
+      testimonial2Role: "Distributiecentrum, Europa",
       testimonial3:
-        "Automatische rapporten besparen ons uren handmatig werk elke week. Uitstekend!",
-      testimonial3Author: "Jan D.",
-      testimonial3Role: "Supervisor, Logistieke Hub Utrecht",
+        "Wat ik het meest waardeer is dat ik automatisch rapporten kan genereren. Vroeger deed ik alles handmatig in Excel en dat duurde uren.",
+      testimonial3Author: "Logistiek Coördinator",
+      testimonial3Role: "Regionaal Hub, Europa",
+      testimonial4:
+        "Het heeft ons geholpen een duidelijk beeld te krijgen van de volledige stroom. We weten precies hoeveel chauffeurs er op het terrein zijn, bij welke docks en hoe lang elke operatie duurt.",
+      testimonial4Author: "Logistiek Directeur",
+      testimonial4Role: "Distributiebedrijf, Europa",
+      testimonial5:
+        "Nu hoef ik niet meer te bellen naar de dispatchers voor elke vrachtwagen die binnenrijdt. De chauffeur checkt in, ik valideer bij de poort, en klaar.",
+      testimonial5Author: "Poort Operator",
+      testimonial5Role: "Voedselmagazijn, Europa",
+      testimonial6:
+        "We hebben de tijdregistratie voor vrachtwagens volledig geëlimineerd. Alles wordt automatisch geregistreerd met de exacte in- en uitrijtijd.",
+      testimonial6Author: "Magazijn Beheerder",
+      testimonial6Role: "Logistiek Terminal, Europa",
     },
     pricing: {
       title: "Kies het juiste plan",
@@ -1965,19 +2033,16 @@ export const translations = {
       includedFeatures: "Wat is inbegrepen:",
       feature1: "Onbeperkte check-ins",
       feature2: "Realtime dokbeheer",
-      feature3: "Push notificaties en SMS",
+      feature3: "App Push notificaties en SMS (optioneel)",
       feature4: "Rapporten en analyses",
       feature5: "Mobiele app iOS & Android",
       feature6: "Meertalige ondersteuning",
       feature7: "Technische ondersteuning",
+      feature8: "White-label op eigen domein",
+      feature9: "99,9% SLA gegarandeerd",
+      feature10: "Gepersonaliseerde training",
       enterpriseFeature1: "Alle Professional functies",
-      enterpriseFeature2: "Onbeperkte magazijnen",
-      enterpriseFeature3: "White-label op eigen domein",
-      enterpriseFeature4: "Volledige API toegang",
-      enterpriseFeature5: "Aangepaste integraties (WMS, TMS)",
-      enterpriseFeature6: "Dedicated accountmanager",
-      enterpriseFeature7: "99,9% gegarandeerde SLA",
-      enterpriseFeature8: "Gepersonaliseerde training",
+      enterpriseFeature2: "Aangepaste integraties (WMS, TMS)",
       singleLocation: "1 locatie",
       multipleLocations: "Meerdere locaties",
       customPricing: "Aangepaste prijs",
@@ -1988,7 +2053,6 @@ export const translations = {
       subtitle:
         "Sluit u aan bij honderden magazijnen die hun processen al hebben gedigitaliseerd met Logistiq.",
       button: "Start nu",
-      noCreditCard: "Geen creditcard vereist",
       or: "of",
       callUs: "Bel ons",
       phoneNumber: "+40 XXX XXX XXX",
