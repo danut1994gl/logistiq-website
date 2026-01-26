@@ -293,7 +293,7 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || isOpen
           ? "glass shadow-lg"
           : "bg-transparent"
       }`}
@@ -1709,7 +1709,25 @@ function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <div className="mb-6">
-              <div className="flex items-baseline gap-1 mb-4">
+              {/* Warehouse selector buttons */}
+              <div className="grid grid-cols-3 gap-2 mb-6">
+                {(['5', '10', '25'] as const).map((count) => (
+                  <button
+                    key={count}
+                    onClick={() => setSelectedWarehouses(count)}
+                    className={`py-3 px-4 rounded-xl font-semibold text-sm transition-all ${
+                      selectedWarehouses === count
+                        ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                    }`}
+                  >
+                    {warehouseLabels[count]}
+                  </button>
+                ))}
+              </div>
+
+              {/* Price display */}
+              <div className="flex items-baseline gap-1">
                 <span className="text-4xl font-bold text-slate-900 dark:text-white">
                   {enterprisePrices[selectedWarehouses]}€
                 </span>
@@ -1717,15 +1735,6 @@ function PricingSection({ t }: { t: Translations }) {
                   {t.pricing.perMonth}
                 </span>
               </div>
-              <select
-                value={selectedWarehouses}
-                onChange={(e) => setSelectedWarehouses(e.target.value as '5' | '10' | '25')}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="5">{warehouseLabels['5']}</option>
-                <option value="10">{warehouseLabels['10']}</option>
-                <option value="25">{warehouseLabels['25']}</option>
-              </select>
             </div>
 
             <div className="mb-8">
