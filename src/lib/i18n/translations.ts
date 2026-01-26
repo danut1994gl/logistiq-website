@@ -165,6 +165,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Începe Acum",
+      choosePlan: "Alege planul",
       contactUs: "Contactează-ne",
       includedFeatures: "Ce este inclus:",
       feature1: "Check-in-uri nelimitate",
@@ -288,7 +289,7 @@ export const translations = {
     seo: {
       title: "Logistiq - Platforma #1 pentru Managementul Depozitelor | Check-in Digital Șoferi",
       description:
-        "Logistiq digitalizează operațiunile din depozit. Check-in QR pentru șoferi, management rampe în timp real, comunicare instantanee. Reducere 50% timp așteptare. Demo gratuit!",
+        "Logistiq digitalizează operațiunile din depozit. Check-in QR pentru șoferi, management rampe în timp real, comunicare instantanee. Reducere timp așteptare. Demo gratuit!",
       keywords:
         "management depozit, check-in șoferi, logistică, software depozit, rampe încărcare, WMS, transport, digitalizare logistică, qrgo",
     },
@@ -480,7 +481,7 @@ export const translations = {
           { term: "Utilizator", def: "Orice persoană care accesează sau utilizează Platforma, inclusiv Clientul și persoanele desemnate de acesta" },
           { term: "Abonament", def: "Contractul de prestări servicii încheiat între Prestator și Client pentru accesul la Platformă" },
           { term: "Dashboard", def: "Interfața de administrare disponibilă la cloud.logistiq.ro pentru managementul depozitelor" },
-          { term: "Driver App", def: "Aplicația de check-in pentru șoferi disponibilă la qrgo.ro" },
+          { term: "Driver App / QRGO Driver", def: "Aplicația web sau mobilă de check-in pentru șoferi disponibilă la qrgo.ro (web) sau pe Google Play / App Store" },
         ],
       },
       article2: {
@@ -489,7 +490,7 @@ export const translations = {
         items: [
           "Gestionarea operațiunilor de check-in în depozite de logistică",
           "Accesul la interfața Dashboard (cloud.logistiq.ro) pentru manageri și operatori",
-          "Accesul la aplicația Driver App (qrgo.ro) pentru șoferii care efectuează check-in",
+          "Accesul la aplicația QRGO Driver (qrgo.ro) pentru șoferii care efectuează check-in",
           "Funcționalitățile incluse în planul de abonament ales",
           "Suport tehnic conform nivelului de abonament",
         ],
@@ -529,12 +530,38 @@ export const translations = {
       article7: {
         title: "Articolul 7 - Upgrade și Downgrade",
         upgrade: { title: "Upgrade", content: "Trecerea la un plan superior este efectivă imediat cu plata diferenței proporționale." },
-        downgrade: { title: "Downgrade", content: "Trecerea la un plan inferior devine efectivă la următoarea facturare. Nu se poate face downgrade sub numărul actual de depozite." },
+        downgrade: { title: "Downgrade", content: "Trecerea la un plan inferior poate fi făcută oricând, cu rambursarea proporțională a diferenței pentru perioada rămasă. Nu se poate face downgrade sub numărul actual de depozite active." },
       },
       article8: {
         title: "Articolul 8 - Funcționalități și Limitări",
-        included: { title: "Inclus în toate planurile", items: ["Check-in-uri nelimitate", "Departamente și rampe nelimitate", "Câmpuri personalizate", "Rapoarte complete", "Check-in prin cod QR", "Aplicație pentru șoferi", "Suport email"] },
-        enterprise: { title: "Funcționalități Enterprise", items: ["API access (Enterprise 5+)", "Domeniu personalizat (Enterprise 5+)", "Suport prioritar (Enterprise 5+)", "Suport dedicat (Enterprise 10+)", "SLA 99.9% (Enterprise 25)"] },
+        included: {
+          title: "Inclus în toate planurile",
+          items: [
+            "Check-in digital - șoferii scanează cod QR sau folosesc aplicația QRGO Driver",
+            "Management rampe - alocare și optimizare flux camioane",
+            "Chat și notificări în timp real între operator și șofer",
+            "Categorisire pe departamente și tipuri camion",
+            "Rapoarte și analytics - dashboard-uri interactive cu KPI-uri",
+            "Aplicație QRGO Driver (Web, Android, iOS)",
+            "Multi-limbă - interfață în 12 limbi europene",
+            "Cloud - fără echipament sau instalări locale",
+            "Instrucțiuni și ghidare șoferi în aplicație",
+            "Early check-in și programare ora de sosire",
+            "Detectare automată locație (aplicația mobilă)",
+            "Check-in-uri, departamente și rampe nelimitate",
+            "Suport email",
+          ],
+        },
+        enterprise: {
+          title: "Funcționalități Enterprise",
+          items: [
+            "White-Label pe domeniu propriu (Enterprise 5+)",
+            "Acces API pentru integrări (Enterprise 5+)",
+            "Suport prioritar (Enterprise 5+)",
+            "Suport dedicat (Enterprise 10+)",
+            "SLA 99.9% (Enterprise 25)",
+          ],
+        },
       },
       article9: {
         title: "Articolul 9 - Disponibilitatea Serviciului",
@@ -543,7 +570,7 @@ export const translations = {
       },
       article10: {
         title: "Articolul 10 - Obligațiile Clientului",
-        items: ["Plata la termen", "Date de facturare corecte", "Utilizare legală a Platformei", "Respectare GDPR pentru datele șoferilor", "Interdicție de revânzare a serviciului"],
+        items: ["Plata în avans a abonamentului", "Date de facturare corecte", "Utilizare legală a Platformei", "Respectare GDPR pentru datele șoferilor", "Interdicție de revânzare a serviciului"],
       },
       article11: {
         title: "Articolul 11 - Obligațiile Prestatorului",
@@ -822,6 +849,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Get Started",
+      choosePlan: "Choose plan",
       contactUs: "Contact Us",
       includedFeatures: "What's included:",
       feature1: "Unlimited check-ins",
@@ -945,7 +973,7 @@ export const translations = {
     seo: {
       title: "Logistiq - #1 Warehouse Management Platform | Digital Driver Check-in",
       description:
-        "Logistiq digitizes warehouse operations. QR check-in for drivers, real-time dock management, instant communication. 50% waiting time reduction. Free demo!",
+        "Logistiq digitizes warehouse operations. QR check-in for drivers, real-time dock management, instant communication. Reduced waiting time. Free demo!",
       keywords:
         "warehouse management, driver check-in, logistics, warehouse software, loading docks, WMS, transport, logistics digitalization, qrgo",
     },
@@ -1137,13 +1165,13 @@ export const translations = {
           { term: "User", def: "Any person who accesses or uses the Platform, including the Client and designated persons" },
           { term: "Subscription", def: "The service agreement between Provider and Client for Platform access" },
           { term: "Dashboard", def: "The admin interface at cloud.logistiq.ro for warehouse management" },
-          { term: "Driver App", def: "The check-in app for drivers at qrgo.ro" },
+          { term: "Driver App / QRGO Driver", def: "The web or mobile check-in app for drivers available at qrgo.ro (web) or on Google Play / App Store" },
         ],
       },
       article2: {
         title: "Article 2 - Subject of Agreement",
         content: "The Provider agrees to provide the Client with access to the Logistiq Platform for:",
-        items: ["Managing check-in operations in logistics warehouses", "Access to Dashboard (cloud.logistiq.ro) for managers and operators", "Access to Driver App (qrgo.ro) for drivers", "Features included in the chosen subscription plan", "Technical support according to subscription level"],
+        items: ["Managing check-in operations in logistics warehouses", "Access to Dashboard (cloud.logistiq.ro) for managers and operators", "Access to QRGO Driver (qrgo.ro) for drivers", "Features included in the chosen subscription plan", "Technical support according to subscription level"],
       },
       article3: {
         title: "Article 3 - Acceptance of Terms",
@@ -1169,12 +1197,38 @@ export const translations = {
       article7: {
         title: "Article 7 - Upgrade and Downgrade",
         upgrade: { title: "Upgrade", content: "Upgrade to higher plan is effective immediately with prorated payment." },
-        downgrade: { title: "Downgrade", content: "Downgrade becomes effective at next billing cycle. Cannot downgrade below current warehouse count." },
+        downgrade: { title: "Downgrade", content: "Downgrade can be made anytime, with a proportional refund for the remaining period. Cannot downgrade below current active warehouse count." },
       },
       article8: {
         title: "Article 8 - Features and Limitations",
-        included: { title: "Included in all plans", items: ["Unlimited check-ins", "Unlimited departments and docks", "Custom fields", "Full reports", "QR check-in", "Driver app", "Email support"] },
-        enterprise: { title: "Enterprise Features", items: ["API access (Enterprise 5+)", "Custom domain (Enterprise 5+)", "Priority support (Enterprise 5+)", "Dedicated support (Enterprise 10+)", "99.9% SLA (Enterprise 25)"] },
+        included: {
+          title: "Included in all plans",
+          items: [
+            "Digital check-in - drivers scan QR code or use QRGO Driver app",
+            "Dock management - allocate and optimize truck flow",
+            "Real-time chat and notifications between operator and driver",
+            "Categorization by departments and truck types",
+            "Reports and analytics - interactive dashboards with KPIs",
+            "QRGO Driver app (Web, Android, iOS)",
+            "Multi-language - interface in 12 European languages",
+            "Cloud-based - no equipment or local installation needed",
+            "Driver instructions and guidance in-app",
+            "Early check-in and arrival time scheduling",
+            "Automatic location detection (mobile app)",
+            "Unlimited check-ins, departments and docks",
+            "Email support",
+          ],
+        },
+        enterprise: {
+          title: "Enterprise Features",
+          items: [
+            "White-Label on custom domain (Enterprise 5+)",
+            "API access for integrations (Enterprise 5+)",
+            "Priority support (Enterprise 5+)",
+            "Dedicated support (Enterprise 10+)",
+            "99.9% SLA (Enterprise 25)",
+          ],
+        },
       },
       article9: {
         title: "Article 9 - Service Availability",
@@ -1183,7 +1237,7 @@ export const translations = {
       },
       article10: {
         title: "Article 10 - Client Obligations",
-        items: ["Timely payment", "Correct billing information", "Legal use of Platform", "GDPR compliance for driver data", "No resale of service"],
+        items: ["Upfront subscription payment", "Correct billing information", "Legal use of Platform", "GDPR compliance for driver data", "No resale of service"],
       },
       article11: {
         title: "Article 11 - Provider Obligations",
@@ -1462,6 +1516,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Jetzt Starten",
+      choosePlan: "Plan wählen",
       contactUs: "Kontaktieren Sie uns",
       includedFeatures: "Was enthalten ist:",
       feature1: "Unbegrenzte Check-ins",
@@ -1585,7 +1640,7 @@ export const translations = {
     seo: {
       title: "Logistiq - #1 Lagerverwaltungsplattform | Digitaler Fahrer-Check-in",
       description:
-        "Logistiq digitalisiert Lagerablaufe. QR-Check-in fur Fahrer, Echtzeit-Rampenverwaltung, sofortige Kommunikation. 50% Wartezeitreduzierung. Kostenlose Demo!",
+        "Logistiq digitalisiert Lagerablaufe. QR-Check-in fur Fahrer, Echtzeit-Rampenverwaltung, sofortige Kommunikation. Reduzierte Wartezeit. Kostenlose Demo!",
       keywords:
         "Lagerverwaltung, Fahrer-Check-in, Logistik, Lagersoftware, Laderampen, WMS, Transport, Logistik-Digitalisierung, qrgo",
     },
@@ -1725,10 +1780,10 @@ export const translations = {
       article4: { title: "Artikel 4 - Registrierung und Konto", items: ["Korrekte Registrierungsdaten", "Kontosicherheit liegt beim Kunden", "Recht auf Kontosperrung", "Keine Kontoübertragung ohne Zustimmung"] },
       article5: { title: "Artikel 5 - Vertragsdauer", trial: { title: "Testphase", content: "10 Tage kostenlose Testphase." }, subscription: { title: "Abonnement", content: "Monatlich mit automatischer Verlängerung." }, cancellation: { title: "Kündigung", content: "Jederzeit möglich, Zugang bis Ende der bezahlten Periode." } },
       article6: { title: "Artikel 6 - Preise und Zahlung", items: ["Preise in EUR", "Monatliche Vorauszahlung", "Zahlung per Karte oder Überweisung", "Rechnungen über SmartBill (Rumänien)", "Preisänderungen mit 30 Tagen Vorlauf"], plans: { title: "Verfügbare Pläne", professional: "Professional: 139 EUR/Monat - 1 Lager", enterprise5: "Enterprise 5: 500 EUR/Monat - bis 5 Lager", enterprise10: "Enterprise 10: 800 EUR/Monat - bis 10 Lager", enterprise25: "Enterprise 25: 1.590 EUR/Monat - bis 25 Lager" } },
-      article7: { title: "Artikel 7 - Upgrade und Downgrade", upgrade: { title: "Upgrade", content: "Sofort wirksam mit anteiliger Zahlung." }, downgrade: { title: "Downgrade", content: "Wirksam zum nächsten Abrechnungszyklus." } },
+      article7: { title: "Artikel 7 - Upgrade und Downgrade", upgrade: { title: "Upgrade", content: "Sofort wirksam mit anteiliger Zahlung." }, downgrade: { title: "Downgrade", content: "Kann jederzeit durchgeführt werden, mit anteiliger Rückerstattung für den verbleibenden Zeitraum. Downgrade unter die aktuelle Anzahl aktiver Lager nicht möglich." } },
       article8: { title: "Artikel 8 - Funktionen und Einschränkungen", included: { title: "In allen Plänen enthalten", items: ["Unbegrenzte Check-ins", "Unbegrenzte Abteilungen", "Benutzerdefinierte Felder", "Vollständige Berichte", "QR-Check-in", "Fahrer-App", "E-Mail-Support"] }, enterprise: { title: "Enterprise-Funktionen", items: ["API-Zugang (Enterprise 5+)", "Eigene Domain (Enterprise 5+)", "Priority-Support (Enterprise 5+)", "Dedizierter Support (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
       article9: { title: "Artikel 9 - Serviceverfügbarkeit", content: "Der Anbieter verpflichtet sich zu mindestens 99,9% jährlicher Verfügbarkeit.", exclusions: { title: "Ausnahmen", items: ["Geplante Wartung", "Höhere Gewalt", "Cyberangriffe", "Drittanbieterprobleme"] } },
-      article10: { title: "Artikel 10 - Kundenpflichten", items: ["Rechtzeitige Zahlung", "Korrekte Rechnungsdaten", "Legale Nutzung", "DSGVO-Konformität", "Kein Weiterverkauf"] },
+      article10: { title: "Artikel 10 - Kundenpflichten", items: ["Vorauszahlung des Abonnements", "Korrekte Rechnungsdaten", "Legale Nutzung", "DSGVO-Konformität", "Kein Weiterverkauf"] },
       article11: { title: "Artikel 11 - Anbieterpflichten", items: ["Zugang gemäß Plan", "Technischer Support", "Sicherheitsmaßnahmen", "Regelmäßige Backups", "Benachrichtigung bei Änderungen"] },
       article12: { title: "Artikel 12 - Geistiges Eigentum", platform: { title: "Plattform", content: "Alle Rechte gehören dem Anbieter." }, clientData: { title: "Kundendaten", content: "Kunde behält alle Rechte an seinen Daten." }, license: { title: "Lizenz", content: "Nicht-exklusive Lizenz für die Abonnementdauer." } },
       article13: { title: "Artikel 13 - Haftungsbeschränkung", items: ["Dienst 'wie besehen'", "Keine Haftung für indirekte Schäden", "Maximale Haftung: 3 Monatsabonnements", "Gelöschte Daten nicht wiederherstellbar"] },
@@ -1913,6 +1968,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Zacznij Teraz",
+      choosePlan: "Wybierz plan",
       contactUs: "Skontaktuj sie",
       includedFeatures: "Co jest zawarte:",
       feature1: "Nieograniczone rejestracje",
@@ -2036,7 +2092,7 @@ export const translations = {
     seo: {
       title: "Logistiq - Platforma #1 do zarzadzania magazynem | Cyfrowa rejestracja kierowcow",
       description:
-        "Logistiq digitalizuje operacje magazynowe. Rejestracja QR dla kierowcow, zarzadzanie dokami w czasie rzeczywistym, natychmiastowa komunikacja. 50% redukcja czasu oczekiwania. Darmowe demo!",
+        "Logistiq digitalizuje operacje magazynowe. Rejestracja QR dla kierowcow, zarzadzanie dokami w czasie rzeczywistym, natychmiastowa komunikacja. Skrócony czas oczekiwania. Darmowe demo!",
       keywords:
         "zarzadzanie magazynem, rejestracja kierowcow, logistyka, oprogramowanie magazynowe, doki zaladunkowe, WMS, transport, digitalizacja logistyki, qrgo",
     },
@@ -2176,10 +2232,10 @@ export const translations = {
       article4: { title: "Artykuł 4 - Rejestracja i konto", items: ["Prawidłowe dane rejestracyjne", "Bezpieczeństwo konta to odpowiedzialność Klienta", "Prawo do zawieszenia konta", "Zakaz transferu konta bez zgody"] },
       article5: { title: "Artykuł 5 - Czas trwania umowy", trial: { title: "Okres próbny", content: "10 dni bezpłatnego okresu próbnego." }, subscription: { title: "Subskrypcja", content: "Miesięczna z automatycznym odnowieniem." }, cancellation: { title: "Anulowanie", content: "Możliwe w dowolnym momencie, dostęp do końca opłaconego okresu." } },
       article6: { title: "Artykuł 6 - Ceny i płatności", items: ["Ceny w EUR", "Miesięczna płatność z góry", "Płatność kartą lub przelewem", "Faktury przez SmartBill (Rumunia)", "Zmiany cen z 30-dniowym wyprzedzeniem"], plans: { title: "Dostępne plany", professional: "Professional: 139 EUR/miesiąc - 1 magazyn", enterprise5: "Enterprise 5: 500 EUR/miesiąc - do 5 magazynów", enterprise10: "Enterprise 10: 800 EUR/miesiąc - do 10 magazynów", enterprise25: "Enterprise 25: 1590 EUR/miesiąc - do 25 magazynów" } },
-      article7: { title: "Artykuł 7 - Upgrade i Downgrade", upgrade: { title: "Upgrade", content: "Natychmiastowy z proporcjonalną płatnością." }, downgrade: { title: "Downgrade", content: "Od następnego cyklu rozliczeniowego." } },
+      article7: { title: "Artykuł 7 - Upgrade i Downgrade", upgrade: { title: "Upgrade", content: "Natychmiastowy z proporcjonalną płatnością." }, downgrade: { title: "Downgrade", content: "Można dokonać w dowolnym momencie, z proporcjonalnym zwrotem za pozostały okres. Nie można obniżyć planu poniżej aktualnej liczby aktywnych magazynów." } },
       article8: { title: "Artykuł 8 - Funkcje i ograniczenia", included: { title: "We wszystkich planach", items: ["Nielimitowane check-iny", "Nielimitowane działy", "Pola niestandardowe", "Pełne raporty", "QR check-in", "Aplikacja kierowcy", "Wsparcie email"] }, enterprise: { title: "Funkcje Enterprise", items: ["Dostęp API (Enterprise 5+)", "Własna domena (Enterprise 5+)", "Wsparcie priorytetowe (Enterprise 5+)", "Dedykowane wsparcie (Enterprise 10+)", "SLA 99,9% (Enterprise 25)"] } },
       article9: { title: "Artykuł 9 - Dostępność usługi", content: "Usługodawca zobowiązuje się do minimum 99,9% rocznej dostępności.", exclusions: { title: "Wykluczenia", items: ["Planowana konserwacja", "Siła wyższa", "Ataki cybernetyczne", "Problemy dostawców zewnętrznych"] } },
-      article10: { title: "Artykuł 10 - Obowiązki Klienta", items: ["Terminowa płatność", "Prawidłowe dane rozliczeniowe", "Legalne korzystanie", "Zgodność z RODO", "Zakaz odsprzedaży"] },
+      article10: { title: "Artykuł 10 - Obowiązki Klienta", items: ["Płatność z góry za subskrypcję", "Prawidłowe dane rozliczeniowe", "Legalne korzystanie", "Zgodność z RODO", "Zakaz odsprzedaży"] },
       article11: { title: "Artykuł 11 - Obowiązki Usługodawcy", items: ["Dostęp według planu", "Wsparcie techniczne", "Środki bezpieczeństwa", "Regularne kopie zapasowe", "Powiadomienia o zmianach"] },
       article12: { title: "Artykuł 12 - Własność intelektualna", platform: { title: "Platforma", content: "Wszelkie prawa należą do Usługodawcy." }, clientData: { title: "Dane Klienta", content: "Klient zachowuje prawa do swoich danych." }, license: { title: "Licencja", content: "Niewyłączna licencja na czas subskrypcji." } },
       article13: { title: "Artykuł 13 - Ograniczenie odpowiedzialności", items: ["Usługa 'tak jak jest'", "Brak odpowiedzialności za straty pośrednie", "Maksymalna odpowiedzialność: 3 miesiące subskrypcji", "Usunięte dane nie do odzyskania"] },
@@ -2364,6 +2420,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Kezdje El Most",
+      choosePlan: "Válasszon tervet",
       contactUs: "Kapcsolatfelvetel",
       includedFeatures: "Mit tartalmaz:",
       feature1: "Korlatlan bejelentkezesek",
@@ -2487,7 +2544,7 @@ export const translations = {
     seo: {
       title: "Logistiq - #1 Raktarkezelo Platform | Digitalis Sofor Bejelentkezes",
       description:
-        "A Logistiq digitalizalja a raktari muveleteket. QR bejelentkezes soforoknek, valos ideju dokk kezeles, azonnali kommunikacio. 50% varakozasi ido csokkenes. Ingyenes demo!",
+        "A Logistiq digitalizalja a raktari muveleteket. QR bejelentkezes soforoknek, valos ideju dokk kezeles, azonnali kommunikacio. Csökkentett várakozási idő. Ingyenes demo!",
       keywords:
         "raktarkezeles, sofor bejelentkezes, logisztika, raktar szoftver, rakododokkos, WMS, szallitas, logisztikai digitalizacio, qrgo",
     },
@@ -2627,10 +2684,10 @@ export const translations = {
       article4: { title: "4. cikk - Regisztráció és fiók", items: ["Pontos regisztrációs adatok", "Fiók biztonsága az Ügyfél felelőssége", "Fiók felfüggesztésének joga", "Fiók átruházása nem lehetséges"] },
       article5: { title: "5. cikk - Szerződés időtartama", trial: { title: "Próbaidőszak", content: "10 napos ingyenes próbaidőszak." }, subscription: { title: "Előfizetés", content: "Havi, automatikus megújítással." }, cancellation: { title: "Lemondás", content: "Bármikor lehetséges, hozzáférés a fizetett időszak végéig." } },
       article6: { title: "6. cikk - Árak és fizetés", items: ["Árak EUR-ban", "Havi előre fizetés", "Kártyás vagy banki átutalás", "Számlák SmartBill-en keresztül", "Árváltozások 30 napos előzetes értesítéssel"], plans: { title: "Elérhető csomagok", professional: "Professional: 139 EUR/hó - 1 raktár", enterprise5: "Enterprise 5: 500 EUR/hó - max 5 raktár", enterprise10: "Enterprise 10: 800 EUR/hó - max 10 raktár", enterprise25: "Enterprise 25: 1590 EUR/hó - max 25 raktár" } },
-      article7: { title: "7. cikk - Csomag váltás", upgrade: { title: "Upgrade", content: "Azonnal hatályos arányos fizetéssel." }, downgrade: { title: "Downgrade", content: "A következő számlázási ciklusban hatályos." } },
+      article7: { title: "7. cikk - Csomag váltás", upgrade: { title: "Upgrade", content: "Azonnal hatályos arányos fizetéssel." }, downgrade: { title: "Downgrade", content: "Bármikor elvégezhető, a fennmaradó időszakra arányos visszatérítéssel. Nem lehet a jelenlegi aktív raktárak száma alá csökkenteni." } },
       article8: { title: "8. cikk - Funkciók és korlátozások", included: { title: "Minden csomagban", items: ["Korlátlan check-in", "Korlátlan osztályok", "Egyéni mezők", "Teljes jelentések", "QR check-in", "Sofőr app", "Email támogatás"] }, enterprise: { title: "Enterprise funkciók", items: ["API hozzáférés (Enterprise 5+)", "Egyéni domain (Enterprise 5+)", "Prioritás támogatás (Enterprise 5+)", "Dedikált támogatás (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
       article9: { title: "9. cikk - Szolgáltatás elérhetősége", content: "A Szolgáltató minimum 99,9% éves elérhetőséget vállal.", exclusions: { title: "Kivételek", items: ["Tervezett karbantartás", "Vis maior", "Kibertámadások", "Harmadik fél problémái"] } },
-      article10: { title: "10. cikk - Ügyfél kötelezettségei", items: ["Időben fizetés", "Pontos számlázási adatok", "Legális használat", "GDPR megfelelőség", "Viszonteladás tilalma"] },
+      article10: { title: "10. cikk - Ügyfél kötelezettségei", items: ["Előfizetés előre fizetése", "Pontos számlázási adatok", "Legális használat", "GDPR megfelelőség", "Viszonteladás tilalma"] },
       article11: { title: "11. cikk - Szolgáltató kötelezettségei", items: ["Hozzáférés a csomag szerint", "Technikai támogatás", "Biztonsági intézkedések", "Rendszeres mentések", "Változásokról értesítés"] },
       article12: { title: "12. cikk - Szellemi tulajdon", platform: { title: "Platform", content: "Minden jog a Szolgáltatóé." }, clientData: { title: "Ügyfél adatai", content: "Az Ügyfél megtartja adatainak jogait." }, license: { title: "Licenc", content: "Nem kizárólagos licenc az előfizetés időtartamára." } },
       article13: { title: "13. cikk - Felelősség korlátozása", items: ["Szolgáltatás 'ahogy van'", "Közvetett károkért nincs felelősség", "Maximum felelősség: 3 havi előfizetés", "Törölt adatok nem állíthatók vissza"] },
@@ -2815,6 +2872,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Zapochnete Sega",
+      choosePlan: "Izberete plan",
       contactUs: "Svkrzhete se s nas",
       includedFeatures: "Kakvo e vklyucheno:",
       feature1: "Neogranicheni registracii",
@@ -2938,7 +2996,7 @@ export const translations = {
     seo: {
       title: "Logistiq - #1 Platforma za upravlenie na skladove | Digitalna registracija na voditeli",
       description:
-        "Logistiq digitalizira operaciite v sklada. QR registracija za voditeli, upravlenie na dokove v realno vreme, mgnovena komunikacija. 50% namaljavane na vremeto za chakane. Bezplatno demo!",
+        "Logistiq digitalizira operaciite v sklada. QR registracija za voditeli, upravlenie na dokove v realno vreme, mgnovena komunikacija. Намалено време за чакане. Bezplatno demo!",
       keywords:
         "upravlenie na skladove, registracija na voditeli, logistika, skladov softuer, tovarnni dokove, WMS, transport, digitalizacija na logistikata, qrgo",
     },
@@ -3078,10 +3136,10 @@ export const translations = {
       article4: { title: "Член 4 - Регистрация и акаунт", items: ["Точни данни за регистрация", "Сигурността на акаунта е отговорност на Клиента", "Право на спиране на акаунта", "Забрана за прехвърляне на акаунт"] },
       article5: { title: "Член 5 - Срок на договора", trial: { title: "Пробен период", content: "10 дни безплатен пробен период." }, subscription: { title: "Абонамент", content: "Месечен с автоматично подновяване." }, cancellation: { title: "Отказ", content: "Възможен по всяко време, достъп до края на платения период." } },
       article6: { title: "Член 6 - Цени и плащания", items: ["Цени в EUR", "Месечно авансово плащане", "Плащане с карта или банков превод", "Фактури чрез SmartBill", "Промени в цените с 30 дни предизвестие"], plans: { title: "Налични планове", professional: "Professional: 139 EUR/месец - 1 склад", enterprise5: "Enterprise 5: 500 EUR/месец - до 5 склада", enterprise10: "Enterprise 10: 800 EUR/месец - до 10 склада", enterprise25: "Enterprise 25: 1590 EUR/месец - до 25 склада" } },
-      article7: { title: "Член 7 - Upgrade и Downgrade", upgrade: { title: "Upgrade", content: "Веднага в сила с пропорционално плащане." }, downgrade: { title: "Downgrade", content: "В сила от следващия цикъл на фактуриране." } },
+      article7: { title: "Член 7 - Upgrade и Downgrade", upgrade: { title: "Upgrade", content: "Веднага в сила с пропорционално плащане." }, downgrade: { title: "Downgrade", content: "Може да се направи по всяко време, с пропорционално възстановяване за оставащия период. Не може да се понижи под текущия брой активни складове." } },
       article8: { title: "Член 8 - Функции и ограничения", included: { title: "Включени във всички планове", items: ["Неограничени check-ins", "Неограничени отдели", "Персонализирани полета", "Пълни отчети", "QR check-in", "Приложение за шофьори", "Email поддръжка"] }, enterprise: { title: "Enterprise функции", items: ["API достъп (Enterprise 5+)", "Собствен домейн (Enterprise 5+)", "Приоритетна поддръжка (Enterprise 5+)", "Персонална поддръжка (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
       article9: { title: "Член 9 - Наличност на услугата", content: "Доставчикът се ангажира с минимум 99,9% годишна наличност.", exclusions: { title: "Изключения", items: ["Планирана поддръжка", "Форсмажор", "Кибератаки", "Проблеми с трети страни"] } },
-      article10: { title: "Член 10 - Задължения на Клиента", items: ["Навременно плащане", "Точни данни за фактуриране", "Законно използване", "Спазване на GDPR", "Забрана за препродажба"] },
+      article10: { title: "Член 10 - Задължения на Клиента", items: ["Авансово плащане на абонамента", "Точни данни за фактуриране", "Законно използване", "Спазване на GDPR", "Забрана за препродажба"] },
       article11: { title: "Член 11 - Задължения на Доставчика", items: ["Достъп според плана", "Техническа поддръжка", "Мерки за сигурност", "Редовни резервни копия", "Уведомление за промени"] },
       article12: { title: "Член 12 - Интелектуална собственост", platform: { title: "Платформа", content: "Всички права принадлежат на Доставчика." }, clientData: { title: "Данни на Клиента", content: "Клиентът запазва правата върху своите данни." }, license: { title: "Лиценз", content: "Неизключителен лиценз за срока на абонамента." } },
       article13: { title: "Член 13 - Ограничение на отговорността", items: ["Услуга 'както е'", "Без отговорност за непреки загуби", "Максимална отговорност: 3 месечни абонамента", "Изтритите данни не могат да бъдат възстановени"] },
@@ -3266,6 +3324,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Commencer",
+      choosePlan: "Choisir le plan",
       contactUs: "Nous contacter",
       includedFeatures: "Ce qui est inclus:",
       feature1: "Check-ins illimites",
@@ -3389,7 +3448,7 @@ export const translations = {
     seo: {
       title: "Logistiq - Plateforme #1 de gestion d'entrepot | Check-in numerique chauffeurs",
       description:
-        "Logistiq numerise les operations d'entrepot. Check-in QR pour chauffeurs, gestion des quais en temps reel, communication instantanee. Reduction de 50% du temps d'attente. Demo gratuite!",
+        "Logistiq numerise les operations d'entrepot. Check-in QR pour chauffeurs, gestion des quais en temps reel, communication instantanee. Temps d'attente réduit. Demo gratuite!",
       keywords:
         "gestion entrepot, check-in chauffeurs, logistique, logiciel entrepot, quais de chargement, WMS, transport, digitalisation logistique, qrgo",
     },
@@ -3521,7 +3580,7 @@ export const translations = {
           { term: "Utilisateur", def: "Toute personne qui accède ou utilise la Plateforme, y compris le Client et les personnes qu'il désigne" },
           { term: "Abonnement", def: "Contrat de services conclu entre le Prestataire et le Client pour l'accès à la Plateforme" },
           { term: "Dashboard", def: "Interface d'administration disponible sur cloud.logistiq.ro pour la gestion des entrepôts" },
-          { term: "Driver App", def: "Application d'enregistrement pour chauffeurs disponible sur qrgo.ro" },
+          { term: "Driver App / QRGO Driver", def: "Application web ou mobile d'enregistrement pour chauffeurs disponible sur qrgo.ro (web) ou sur Google Play / App Store" },
         ],
       },
       article2: {
@@ -3530,7 +3589,7 @@ export const translations = {
         items: [
           "La gestion des opérations d'enregistrement dans les entrepôts logistiques",
           "L'accès à l'interface Dashboard (cloud.logistiq.ro) pour les gestionnaires et opérateurs",
-          "L'accès à l'application Driver App (qrgo.ro) pour les chauffeurs effectuant l'enregistrement",
+          "L'accès à l'application QRGO Driver (qrgo.ro) pour les chauffeurs effectuant l'enregistrement",
           "Les fonctionnalités incluses dans le plan d'abonnement choisi",
           "Le support technique selon le niveau d'abonnement",
         ],
@@ -3570,7 +3629,7 @@ export const translations = {
       article7: {
         title: "Article 7 - Mise à niveau et Rétrogradation",
         upgrade: { title: "Mise à niveau", content: "Le passage à un plan supérieur prend effet immédiatement avec paiement de la différence au prorata." },
-        downgrade: { title: "Rétrogradation", content: "Le passage à un plan inférieur prend effet à la prochaine facturation. Impossible de rétrograder en dessous du nombre actuel d'entrepôts." },
+        downgrade: { title: "Rétrogradation", content: "Le passage à un plan inférieur peut être effectué à tout moment, avec remboursement proportionnel pour la période restante. Impossible de rétrograder en dessous du nombre actuel d'entrepôts actifs." },
       },
       article8: {
         title: "Article 8 - Fonctionnalités et Limitations",
@@ -3584,7 +3643,7 @@ export const translations = {
       },
       article10: {
         title: "Article 10 - Obligations du Client",
-        items: ["Paiement dans les délais", "Données de facturation correctes", "Utilisation légale de la Plateforme", "Conformité RGPD pour les données des chauffeurs", "Interdiction de revente du service"],
+        items: ["Paiement anticipé de l'abonnement", "Données de facturation correctes", "Utilisation légale de la Plateforme", "Conformité RGPD pour les données des chauffeurs", "Interdiction de revente du service"],
       },
       article11: {
         title: "Article 11 - Obligations du Prestataire",
@@ -3794,6 +3853,7 @@ export const translations = {
       price10: "800",
       price25: "1590",
       getStarted: "Start Nu",
+      choosePlan: "Kies plan",
       contactUs: "Neem contact op",
       includedFeatures: "Wat is inbegrepen:",
       feature1: "Onbeperkte check-ins",
@@ -3917,7 +3977,7 @@ export const translations = {
     seo: {
       title: "Logistiq - #1 Magazijnbeheer Platform | Digitale Chauffeur Check-in",
       description:
-        "Logistiq digitaliseert magazijnoperaties. QR check-in voor chauffeurs, realtime dok beheer, directe communicatie. 50% wachttijd reductie. Gratis demo!",
+        "Logistiq digitaliseert magazijnoperaties. QR check-in voor chauffeurs, realtime dok beheer, directe communicatie. Verminderde wachttijd. Gratis demo!",
       keywords:
         "magazijnbeheer, chauffeur check-in, logistiek, magazijn software, laaddokken, WMS, transport, logistiek digitalisering, qrgo",
     },
@@ -4049,7 +4109,7 @@ export const translations = {
           { term: "Gebruiker", def: "Elke persoon die toegang heeft tot of gebruik maakt van het Platform, inclusief de Klant en door hem aangewezen personen" },
           { term: "Abonnement", def: "Dienstverleningsovereenkomst gesloten tussen de Dienstverlener en de Klant voor toegang tot het Platform" },
           { term: "Dashboard", def: "Beheerinterface beschikbaar op cloud.logistiq.ro voor magazijnbeheer" },
-          { term: "Driver App", def: "Check-in applicatie voor chauffeurs beschikbaar op qrgo.ro" },
+          { term: "Driver App / QRGO Driver", def: "Web- of mobiele check-in applicatie voor chauffeurs beschikbaar op qrgo.ro (web) of via Google Play / App Store" },
         ],
       },
       article2: {
@@ -4058,7 +4118,7 @@ export const translations = {
         items: [
           "Het beheer van check-in operaties in logistieke magazijnen",
           "Toegang tot de Dashboard-interface (cloud.logistiq.ro) voor managers en operators",
-          "Toegang tot de Driver App (qrgo.ro) voor chauffeurs die inchecken",
+          "Toegang tot QRGO Driver (qrgo.ro) voor chauffeurs die inchecken",
           "De functionaliteiten inbegrepen in het gekozen abonnementsplan",
           "Technische ondersteuning volgens het abonnementsniveau",
         ],
@@ -4098,7 +4158,7 @@ export const translations = {
       article7: {
         title: "Artikel 7 - Upgrade en Downgrade",
         upgrade: { title: "Upgrade", content: "Overstap naar een hoger plan wordt onmiddellijk van kracht met betaling van het evenredige verschil." },
-        downgrade: { title: "Downgrade", content: "Overstap naar een lager plan wordt van kracht bij de volgende facturering. Downgrade onder het huidige aantal magazijnen is niet mogelijk." },
+        downgrade: { title: "Downgrade", content: "Overstap naar een lager plan kan op elk moment, met proportionele terugbetaling voor de resterende periode. Downgrade onder het huidige aantal actieve magazijnen is niet mogelijk." },
       },
       article8: {
         title: "Artikel 8 - Functionaliteiten en Beperkingen",
@@ -4112,7 +4172,7 @@ export const translations = {
       },
       article10: {
         title: "Artikel 10 - Verplichtingen van de Klant",
-        items: ["Tijdige betaling", "Correcte factureringsgegevens", "Wettig gebruik van het Platform", "AVG-naleving voor chauffeurgegevens", "Verbod op wederverkoop van de dienst"],
+        items: ["Vooruitbetaling van het abonnement", "Correcte factureringsgegevens", "Wettig gebruik van het Platform", "AVG-naleving voor chauffeurgegevens", "Verbod op wederverkoop van de dienst"],
       },
       article11: {
         title: "Artikel 11 - Verplichtingen van de Dienstverlener",
