@@ -203,7 +203,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth dark">
       <head>
         <script
           type="application/ld+json"

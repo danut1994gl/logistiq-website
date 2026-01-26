@@ -2037,28 +2037,30 @@ function ContactSection({ t }: { t: Translations }) {
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    {t.contact.name}
+                    {t.contact.name} <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="contact-name"
                     type="text"
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder={t.contact.namePlaceholder}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                     autoComplete="name"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    {t.contact.email}
+                    {t.contact.email} <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="contact-email"
                     type="email"
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder={t.contact.emailPlaceholder}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                     autoComplete="email"
                   />
@@ -2068,27 +2070,29 @@ function ContactSection({ t }: { t: Translations }) {
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="contact-company" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    {t.contact.company}
+                    {t.contact.company} <span className="text-slate-400 text-xs">({t.contact.optional})</span>
                   </label>
                   <input
                     id="contact-company"
                     type="text"
                     value={formState.company}
                     onChange={(e) => setFormState({ ...formState, company: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder={t.contact.companyPlaceholder}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     autoComplete="organization"
                   />
                 </div>
                 <div>
                   <label htmlFor="contact-phone" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    {t.contact.phone}
+                    {t.contact.phone} <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="contact-phone"
                     type="tel"
                     value={formState.phone}
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder={t.contact.phonePlaceholder}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     autoComplete="tel"
                     required
                   />
@@ -2097,7 +2101,7 @@ function ContactSection({ t }: { t: Translations }) {
 
               <div>
                 <label htmlFor="contact-message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t.contact.message}
+                  {t.contact.message} <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -2105,7 +2109,7 @@ function ContactSection({ t }: { t: Translations }) {
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   rows={4}
                   placeholder={t.contact.messagePlaceholder}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                   required
                 />
               </div>

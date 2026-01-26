@@ -30,8 +30,8 @@ const COOKIE_CONSENT_KEY = "logistiq_cookie_consent";
 
 // Icons
 const CookieIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10c0-.34-.017-.677-.05-1.01a.75.75 0 00-1.06-.605 2.5 2.5 0 01-1.14.275 2.5 2.5 0 01-2.5-2.5c0-.4.094-.777.26-1.113a.75.75 0 00-.607-1.063A10.055 10.055 0 0012 2zm-1.5 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm-3 5a1 1 0 110 2 1 1 0 010-2zm5.5 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm-3 3.5a1 1 0 110 2 1 1 0 010-2z" />
   </svg>
 );
 
