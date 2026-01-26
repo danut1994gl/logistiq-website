@@ -98,7 +98,7 @@ export const translations = {
       warehouse6: "Fără echipament suplimentar - totul în cloud",
       drivers1: "Check-in rapid în mai puțin de 30 secunde",
       drivers2: "Primesc rampa și instrucțiuni direct în aplicație",
-      drivers3: "Pot programa sosirea din drum (early check-in)",
+      drivers3: "Pot programa ora sosirii (early check-in)",
       drivers4: "Notificare automată la sosire - fără să caute biroul",
       drivers5: "Ghidare pas cu pas pentru depozite noi",
       drivers6: "Disponibil în limba lor nativă",

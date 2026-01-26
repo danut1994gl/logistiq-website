@@ -1699,18 +1699,49 @@ function PricingSection({ t }: { t: Translations }) {
               {t.pricing.multipleLocations}
             </div>
 
-            <div className="mb-6 pt-2">
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+            {/* Illustration - Multiple warehouses */}
+            <div className="flex justify-center mb-6 pt-2">
+              <div className="relative">
+                <svg className="w-24 h-24 text-purple-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                  {/* Main warehouse */}
+                  <rect x="30" y="35" width="40" height="35" rx="2" className="fill-purple-100 dark:fill-purple-900/30" />
+                  <path d="M25 35 L50 15 L75 35" strokeLinejoin="round" className="fill-purple-200 dark:fill-purple-800/30" />
+                  <rect x="44" y="50" width="12" height="20" rx="1" className="fill-purple-300 dark:fill-purple-700/50" />
+                  {/* Left small warehouse */}
+                  <rect x="5" y="50" width="22" height="20" rx="2" className="fill-purple-100 dark:fill-purple-900/30" />
+                  <path d="M3 50 L16 38 L29 50" strokeLinejoin="round" className="fill-purple-200 dark:fill-purple-800/30" />
+                  {/* Right small warehouse */}
+                  <rect x="73" y="50" width="22" height="20" rx="2" className="fill-purple-100 dark:fill-purple-900/30" />
+                  <path d="M71 50 L84 38 L97 50" strokeLinejoin="round" className="fill-purple-200 dark:fill-purple-800/30" />
+                  {/* Connection lines */}
+                  <path d="M27 60 L30 60" strokeDasharray="2 2" className="text-purple-400" />
+                  <path d="M70 60 L73 60" strokeDasharray="2 2" className="text-purple-400" />
+                </svg>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 text-center">
                 {t.pricing.enterprise}
               </h3>
-              <p className="text-slate-600 dark:text-slate-400">
+              <p className="text-slate-600 dark:text-slate-400 text-center">
                 {t.pricing.enterpriseDesc}
               </p>
             </div>
 
             <div className="mb-6">
+              {/* Price display */}
+              <div className="flex items-baseline justify-center gap-1 mb-4">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">
+                  {enterprisePrices[selectedWarehouses]}€
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  {t.pricing.perMonth}
+                </span>
+              </div>
+
               {/* Warehouse selector buttons */}
-              <div className="grid grid-cols-3 gap-2 mb-6">
+              <div className="grid grid-cols-3 gap-2">
                 {(['5', '10', '25'] as const).map((count) => (
                   <button
                     key={count}
@@ -1724,16 +1755,6 @@ function PricingSection({ t }: { t: Translations }) {
                     {warehouseLabels[count]}
                   </button>
                 ))}
-              </div>
-
-              {/* Price display */}
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">
-                  {enterprisePrices[selectedWarehouses]}€
-                </span>
-                <span className="text-slate-500 dark:text-slate-400">
-                  {t.pricing.perMonth}
-                </span>
               </div>
             </div>
 
@@ -2175,7 +2196,7 @@ export default function HomePage({ params }: { params: Promise<{ locale: string 
       <QRGODriverSection t={t} />
       <TestimonialsSection t={t} />
       <PricingSection t={t} />
-      <FAQSection t={t} />
+      {/* <FAQSection t={t} /> */}
       <CTASection t={t} />
       <ContactSection t={t} />
       <Footer t={t} locale={locale} />
