@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-// SMTP configuration - same as dashboard password reset
+// SMTP configuration from environment variables
 const SMTP_CONFIG = {
-  host: 'cloud342.c-f.ro',
-  port: 465,
+  host: process.env.SMTP_HOST || 'cloud342.c-f.ro',
+  port: parseInt(process.env.SMTP_PORT || '465'),
   secure: true,
   auth: {
-    user: 'noreply@logistiq.ro',
-    pass: 'hYuQOgOFU3dI1whS',
+    user: process.env.SMTP_USER || 'noreply@logistiq.ro',
+    pass: process.env.SMTP_PASS || '',
   },
   tls: {
     rejectUnauthorized: false,

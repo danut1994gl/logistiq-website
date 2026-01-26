@@ -2183,6 +2183,18 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
             </div>
           </div>
 
+          {/* Company Info */}
+          <div>
+            <h3 className="font-semibold mb-4">{t.footer.company}</h3>
+            <ul className="space-y-2 text-slate-400 text-sm">
+              <li className="font-medium text-slate-300">HOSTLIFE DIGITAL SRL</li>
+              <li>CUI: RO47796807</li>
+              <li>Nr. Reg. Com.: J40/1791/2023</li>
+              <li>Str. Barbu Văcărescu 164A</li>
+              <li>Sector 2, București</li>
+            </ul>
+          </div>
+
           {/* Product */}
           <div>
             <h3 className="font-semibold mb-4">{t.footer.product}</h3>
@@ -2202,18 +2214,6 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
                   {t.nav.contact}
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Company Info */}
-          <div>
-            <h3 className="font-semibold mb-4">{t.footer.company}</h3>
-            <ul className="space-y-2 text-slate-400 text-sm">
-              <li className="font-medium text-slate-300">HOSTLIFE DIGITAL SRL</li>
-              <li>CUI: RO47796807</li>
-              <li>Nr. Reg. Com.: J40/1791/2023</li>
-              <li>Str. Barbu Văcărescu 164A</li>
-              <li>Sector 2, București</li>
             </ul>
           </div>
 
