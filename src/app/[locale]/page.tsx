@@ -283,7 +283,17 @@ function useInView(threshold: number = 0.1) {
 function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Check for authentication cookie from cloud.logistiq.ro
+  useEffect(() => {
+    const cookies = document.cookie.split(';');
+    const authCookie = cookies.find(c => c.trim().startsWith('logistiq_authenticated='));
+    if (authCookie && authCookie.split('=')[1] === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   // Close language dropdown when clicking outside
   useEffect(() => {
@@ -393,12 +403,12 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
               )}
             </div>
 
-            {/* Login Link */}
+            {/* Login/Dashboard Link */}
             <Link
-              href="https://cloud.logistiq.ro"
+              href={isAuthenticated ? "https://cloud.logistiq.ro/dashboard" : "https://cloud.logistiq.ro"}
               className="hidden sm:block text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium"
             >
-              {t.nav.login}
+              {isAuthenticated ? t.nav.dashboard : t.nav.login}
             </Link>
 
             {/* CTA Button */}
@@ -2188,10 +2198,10 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
             <h3 className="font-semibold mb-4">{t.footer.company}</h3>
             <ul className="space-y-2 text-slate-400 text-sm">
               <li className="font-medium text-slate-300">HOSTLIFE DIGITAL SRL</li>
-              <li>CUI: RO47796807</li>
-              <li>Nr. Reg. Com.: J40/1791/2023</li>
-              <li>Str. Barbu Văcărescu 164A</li>
-              <li>Sector 2, București</li>
+              <li>CUI: 52638053</li>
+              <li>Nr. Reg. Com.: J25/759/2025</li>
+              <li>Str. Vidin 37, Tecuci</li>
+              <li>Jud. Galați, 805300</li>
             </ul>
           </div>
 

@@ -9,6 +9,7 @@ export const translations = {
       getStarted: "Începe Acum",
       requestDemo: "Solicită Demo",
       login: "Autentificare",
+      dashboard: "Dashboard",
     },
     cookieConsent: {
       title: "Utilizăm cookie-uri",
@@ -693,6 +694,7 @@ export const translations = {
       getStarted: "Get Started",
       requestDemo: "Request Demo",
       login: "Login",
+      dashboard: "Dashboard",
     },
     cookieConsent: {
       title: "We use cookies",
