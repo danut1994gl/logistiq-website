@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, use } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
+import CookieConsent, { CookiePreferencesButton } from "@/components/CookieConsent";
 
 // Icons
 const QrCodeIcon = () => (
@@ -2159,6 +2160,11 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
                   {t.footer.cookies}
                 </Link>
               </li>
+              <li>
+                <CookiePreferencesButton
+                  label={t.cookieConsent.managePreferences}
+                />
+              </li>
             </ul>
           </div>
         </div>
@@ -2200,6 +2206,7 @@ export default function HomePage({ params }: { params: Promise<{ locale: string 
       <CTASection t={t} />
       <ContactSection t={t} />
       <Footer t={t} locale={locale} />
+      <CookieConsent locale={locale} t={t.cookieConsent} />
     </main>
   );
 }
