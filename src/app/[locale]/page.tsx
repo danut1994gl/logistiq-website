@@ -1733,10 +1733,10 @@ function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <Link
-              href="#contact"
+              href="https://cloud.logistiq.ro"
               className="block w-full py-4 rounded-xl font-semibold text-center bg-purple-600 hover:bg-purple-700 text-white transition-colors"
             >
-              {t.pricing.contactUs}
+              {t.pricing.getStarted}
             </Link>
           </div>
         </div>
