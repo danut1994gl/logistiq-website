@@ -2145,17 +2145,17 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
             <h3 className="font-semibold mb-4">{t.footer.legal}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+                <Link href={`/${locale}/privacy`} className="text-slate-400 hover:text-white transition-colors">
                   {t.footer.privacy}
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+                <Link href={`/${locale}/terms`} className="text-slate-400 hover:text-white transition-colors">
                   {t.footer.terms}
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+                <Link href={`/${locale}/cookies`} className="text-slate-400 hover:text-white transition-colors">
                   {t.footer.cookies}
                 </Link>
               </li>
