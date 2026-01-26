@@ -1580,6 +1580,8 @@ function TestimonialsSection({ t }: { t: Translations }) {
 
 // Pricing Section
 function PricingSection({ t }: { t: Translations }) {
+  const [selectedWarehouses, setSelectedWarehouses] = useState<'5' | '10' | '25'>('5');
+
   const professionalFeatures = [
     t.pricing.feature1,
     t.pricing.feature2,
@@ -1588,18 +1590,27 @@ function PricingSection({ t }: { t: Translations }) {
     t.pricing.feature5,
     t.pricing.feature6,
     t.pricing.feature7,
+    t.pricing.feature8,
+    t.pricing.feature9,
+    t.pricing.feature10,
   ];
 
   const enterpriseFeatures = [
     t.pricing.enterpriseFeature1,
     t.pricing.enterpriseFeature2,
-    t.pricing.enterpriseFeature3,
-    t.pricing.enterpriseFeature4,
-    t.pricing.enterpriseFeature5,
-    t.pricing.enterpriseFeature6,
-    t.pricing.enterpriseFeature7,
-    t.pricing.enterpriseFeature8,
   ];
+
+  const enterprisePrices = {
+    '5': t.pricing.price5,
+    '10': t.pricing.price10,
+    '25': t.pricing.price25,
+  };
+
+  const warehouseLabels = {
+    '5': t.pricing.warehouses5,
+    '10': t.pricing.warehouses10,
+    '25': t.pricing.warehouses25,
+  };
 
   return (
     <section id="pricing" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
@@ -1629,6 +1640,17 @@ function PricingSection({ t }: { t: Translations }) {
               <p className="text-slate-600 dark:text-slate-400">
                 {t.pricing.professionalDesc}
               </p>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">
+                  {t.pricing.professionalPrice}€
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  {t.pricing.perMonth}
+                </span>
+              </div>
             </div>
 
             <div className="mb-8">
@@ -1673,9 +1695,23 @@ function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <div className="mb-6">
-              <div className="text-3xl font-bold text-slate-900 dark:text-white">
-                {t.pricing.customPricing}
+              <div className="flex items-baseline gap-1 mb-4">
+                <span className="text-4xl font-bold text-slate-900 dark:text-white">
+                  {enterprisePrices[selectedWarehouses]}€
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  {t.pricing.perMonth}
+                </span>
               </div>
+              <select
+                value={selectedWarehouses}
+                onChange={(e) => setSelectedWarehouses(e.target.value as '5' | '10' | '25')}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="5">{warehouseLabels['5']}</option>
+                <option value="10">{warehouseLabels['10']}</option>
+                <option value="25">{warehouseLabels['25']}</option>
+              </select>
             </div>
 
             <div className="mb-8">
@@ -1733,7 +1769,6 @@ function CTASection({ t }: { t: Translations }) {
             {t.cta.button}
             <ArrowRightIcon />
           </Link>
-          <p className="text-blue-200 text-sm">{t.cta.noCreditCard}</p>
         </div>
       </div>
     </section>
