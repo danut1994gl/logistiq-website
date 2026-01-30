@@ -321,13 +321,13 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-shadow">
-              <span className="text-white font-bold text-xl">L</span>
-            </div>
-            <span className="text-xl font-bold text-slate-900 dark:text-white">
-              Logistiq
-            </span>
+          <Link href={`/${locale}`} className="flex items-center gap-3 group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/banner.svg"
+              alt="Logistiq"
+              className="h-9 md:h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -2196,10 +2196,12 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href={`/${locale}`} className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">L</span>
-              </div>
-              <span className="text-xl font-bold">Logistiq</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/banner.svg"
+                alt="Logistiq"
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-slate-400 mb-6 max-w-sm">
               {t.footer.description}
