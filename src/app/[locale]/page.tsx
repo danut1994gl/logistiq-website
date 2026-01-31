@@ -326,7 +326,13 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
             <img
               src="/banner.svg"
               alt="Logistiq"
-              className="h-9 md:h-10 w-auto"
+              className="h-9 md:h-10 w-auto dark:hidden"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/banner-dark.svg"
+              alt="Logistiq"
+              className="h-9 md:h-10 w-auto hidden dark:block"
             />
           </Link>
 
@@ -2198,9 +2204,9 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
             <Link href={`/${locale}`} className="flex items-center gap-2 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/banner.svg"
+                src="/banner-dark.svg"
                 alt="Logistiq"
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="text-slate-400 mb-6 max-w-sm">
