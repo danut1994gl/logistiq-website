@@ -324,15 +324,9 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
           <Link href={`/${locale}`} className="flex items-center gap-3 group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/banner.svg"
-              alt="Logistiq"
-              className="h-9 md:h-10 w-auto dark:hidden"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
               src="/banner-dark.svg"
               alt="Logistiq"
-              className="h-9 md:h-10 w-auto hidden dark:block"
+              className="h-9 md:h-10 w-auto"
             />
           </Link>
 
