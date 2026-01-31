@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef, use } from "react";
+import { useState, useEffect, useRef, use, Fragment } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
 import CookieConsent, { CookiePreferencesButton } from "@/components/CookieConsent";
@@ -324,9 +324,9 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
           <Link href={`/${locale}`} className="flex items-center gap-3 group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/banner-dark.svg"
+              src="/banner-nav.svg"
               alt="Logistiq"
-              className="h-9 md:h-10 w-auto"
+              className="h-10 md:h-11 w-auto"
             />
           </Link>
 
@@ -828,8 +828,6 @@ function HowItWorksSection({ t }: { t: Translations }) {
 
   return (
     <section id="how-it-works" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
-      {/* Gradient transition from blue stats section */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-blue-600 to-transparent dark:from-blue-700 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -973,8 +971,6 @@ function FeaturesSection({ t }: { t: Translations }) {
 
   return (
     <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Gradient transition from how-it-works section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-slate-50 to-transparent dark:from-slate-900/50 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1039,8 +1035,6 @@ function BenefitsSection({ t }: { t: Translations }) {
 
   return (
     <section id="benefits" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
-      {/* Gradient transition at top */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-transparent dark:from-slate-950 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1471,8 +1465,6 @@ function DriverMockupInfo({ t }: { t: Translations }) {
 function QRGODriverSection({ t }: { t: Translations }) {
   return (
     <section id="qrgo-driver" className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
-      {/* Gradient transition at top */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent dark:from-slate-900/50 pointer-events-none z-10" />
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-[100px]" />
@@ -1581,8 +1573,6 @@ function TestimonialsSection({ t }: { t: Translations }) {
 
   return (
     <section className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Gradient transition from QRGO driver section */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-800 to-transparent dark:from-slate-800 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1671,8 +1661,6 @@ function PricingSection({ t }: { t: Translations }) {
 
   return (
     <section id="pricing" className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
-      {/* Gradient transition at top */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-transparent dark:from-slate-950 pointer-events-none" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1858,8 +1846,6 @@ function FAQSection({ t }: { t: Translations }) {
 
   return (
     <section id="faq" className="py-20 lg:py-32 bg-white dark:bg-slate-800 relative overflow-hidden">
-      {/* Gradient transition from pricing */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-slate-50 to-transparent dark:from-slate-900/50 pointer-events-none" />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
@@ -2032,14 +2018,34 @@ function ContactSection({ t }: { t: Translations }) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{t.contact.info}</h3>
-                  <div className="text-slate-600 dark:text-slate-300 text-sm space-y-0.5">
-                    <p>{t.contact.schedule.monday}</p>
-                    <p>{t.contact.schedule.tuesday}</p>
-                    <p>{t.contact.schedule.wednesday}</p>
-                    <p>{t.contact.schedule.thursday}</p>
-                    <p>{t.contact.schedule.friday}</p>
-                    <p className="text-slate-400">{t.contact.schedule.saturday}</p>
-                    <p className="text-slate-400">{t.contact.schedule.sunday}</p>
+                  <div className="text-slate-600 dark:text-slate-300 text-sm grid grid-cols-[auto_auto] gap-x-4 gap-y-0.5">
+                    {[
+                      t.contact.schedule.monday,
+                      t.contact.schedule.tuesday,
+                      t.contact.schedule.wednesday,
+                      t.contact.schedule.thursday,
+                      t.contact.schedule.friday,
+                    ].map((day, i) => {
+                      const [name, hours] = day.split(': ');
+                      return (
+                        <Fragment key={i}>
+                          <span>{name}</span>
+                          <span className="tabular-nums">{hours}</span>
+                        </Fragment>
+                      );
+                    })}
+                    {[
+                      t.contact.schedule.saturday,
+                      t.contact.schedule.sunday,
+                    ].map((day, i) => {
+                      const [name, hours] = day.split(': ');
+                      return (
+                        <Fragment key={`we-${i}`}>
+                          <span className="text-slate-400">{name}</span>
+                          <span className="text-slate-400">{hours}</span>
+                        </Fragment>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2198,9 +2204,9 @@ function Footer({ t, locale }: { t: Translations; locale: Locale }) {
             <Link href={`/${locale}`} className="flex items-center gap-2 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/banner-dark.svg"
+                src="/banner-white.svg"
                 alt="Logistiq"
-                className="h-10 w-auto"
+                className="h-10 w-auto opacity-70"
               />
             </Link>
             <p className="text-slate-400 mb-6 max-w-sm">
