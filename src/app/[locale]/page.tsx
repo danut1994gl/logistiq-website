@@ -285,6 +285,7 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Check for authentication cookie from cloud.logistiq.ro
   useEffect(() => {
@@ -312,8 +313,26 @@ function Navbar({ t, locale }: { t: Translations; locale: Locale }) {
     };
   }, [isLangOpen]);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <nav
+      ref={navRef}
       className="fixed top-0 w-full z-50 transition-all duration-300 glass shadow-lg"
       role="navigation"
       aria-label="Main navigation"
