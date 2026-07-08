@@ -761,22 +761,75 @@ function HeroSection({ t }: { t: Translations }) {
 function StatsSection({ t }: { t: Translations }) {
   const { ref, isInView } = useInView(0.3);
 
-  // Calculate daily varying stats based on date
-  const getDailyStats = () => {
+  // Deterministic seeded random (mulberry32-based, single iteration)
+  function seededRandom(seed: number): number {
+    let t = (seed + 0x6d2b79f5) | 0;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= (t + Math.imul(t ^ (t >>> 7), t | 61)) | 0;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+
+  // Shared algorithm — must be identical in website and dashboard
+  function getPlatformStats() {
     const today = new Date();
-    const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-    const seed = dayOfYear + today.getFullYear() * 365;
+    const baseDate = new Date(2024, 5, 1); // June 1, 2024 — platform reference
+    const daysSinceBase = Math.floor(
+      (today.getTime() - baseDate.getTime()) / 86400000
+    );
+    const dayOfWeek = today.getDay(); // 0=Sun, 6=Sat
+    const month = today.getMonth(); // 0-11
 
-    // Pseudo-random but consistent for each day
-    const driversBase = 2100 + (seed % 400); // 2100-2499
-    const checkinsBase = 35000 + ((seed * 7) % 8000); // 35000-42999
+    // Knuth multiplicative hash for better distribution across days
+    const hash = Math.imul(daysSinceBase, 2654435761);
+    const r1 = seededRandom(hash);
+    const r2 = seededRandom(hash + 7919);
+    const r3 = seededRandom(hash + 104729);
+    const r4 = seededRandom(hash + 224737);
+    const r5 = seededRandom(hash + 350377);
 
-    return { drivers: driversBase, checkins: checkinsBase };
-  };
+    // Seasonality: logistics busier in Q1/Q4, slower in summer
+    const seasonFactor = [1.06, 1.03, 1.0, 0.97, 0.94, 0.89, 0.87, 0.91, 0.96, 1.02, 1.07, 1.1][month];
 
-  const dailyStats = getDailyStats();
+    // Weekday factor (Mon-Fri more active, weekends quieter)
+    const weekdayFactor = [0.91, 1.04, 1.06, 1.05, 1.03, 1.0, 0.88][dayOfWeek];
+
+    // ~7% of days get a notable spike (busy day, new client onboarding, etc.)
+    const spikeFactor = r5 > 0.93 ? 1.12 + r1 * 0.18 : 1.0;
+
+    // === ACTIVE DRIVERS ===
+    const driversBase = 1800 + daysSinceBase * 1.0;
+    const driversNoise = (r1 - 0.5) * 160;
+    const drivers = Math.max(
+      1500,
+      Math.round((driversBase + driversNoise) * weekdayFactor * spikeFactor)
+    );
+
+    // === CONNECTED WAREHOUSES ===
+    const whGrowth = Math.floor(daysSinceBase / 50);
+    const whNoise = Math.floor(r2 * 3);
+    const warehouses = Math.max(30, 35 + whGrowth + whNoise);
+
+    // === CHECK-INS PER MONTH ===
+    const checkinsBase = 25000 + daysSinceBase * 18;
+    const checkinsNoise = (r3 - 0.5) * 5000;
+    const checkins = Math.max(
+      20000,
+      Math.round((checkinsBase + checkinsNoise) * seasonFactor * spikeFactor)
+    );
+
+    // === WAIT TIME REDUCTION ===
+    const reductionBase = 8 + daysSinceBase * 0.005;
+    const reductionNoise = (r4 - 0.5) * 2.5;
+    const reduction = Math.round(
+      Math.min(20, Math.max(5, reductionBase + reductionNoise))
+    );
+
+    return { drivers, warehouses, checkins, reduction };
+  }
+
+  const dailyStats = getPlatformStats();
   const drivers = useCountUp(dailyStats.drivers, 2000, false);
-  const warehouses = useCountUp(47, 2000, false);
+  const warehouses = useCountUp(dailyStats.warehouses, 2000, false);
   const checkins = useCountUp(dailyStats.checkins, 2500, false);
 
   useEffect(() => {
@@ -791,7 +844,7 @@ function StatsSection({ t }: { t: Translations }) {
     { value: `${drivers.count.toLocaleString()}+`, label: t.stats.drivers, icon: TruckIcon },
     { value: `${warehouses.count}+`, label: t.stats.warehouses, icon: UsersIcon },
     { value: `${(checkins.count / 1000).toFixed(0)}K+`, label: t.stats.checkins, icon: QrCodeIcon },
-    { value: "11%", label: t.stats.timeReduction, icon: ChartIcon },
+    { value: `${dailyStats.reduction}%`, label: t.stats.timeReduction, icon: ChartIcon },
   ];
 
   return (

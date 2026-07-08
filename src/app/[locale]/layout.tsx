@@ -25,7 +25,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#1e40af",
+  themeColor: "#2563eb",
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -91,11 +91,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t.seo.title,
       description: t.seo.description,
       images: ["/og-image.png"],
-      creator: "@logistiq",
     },
-    verification: {
-      google: "your-google-verification-code",
-    },
+    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to emit the Search Console meta tag.
+    verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : undefined,
     category: "technology",
     appleWebApp: {
       capable: true,
@@ -110,6 +110,22 @@ export default async function LocaleLayout({ children, params }: Props) {
   const locale = isValidLocale(localeParam) ? localeParam : "ro";
   const t = translations[locale];
   const baseUrl = "https://logistiq.ro";
+
+  // Build FAQ entities from the translations that are rendered on-page (FAQ section),
+  // so the FAQPage rich result stays in sync with visible content.
+  const faq = t.faq as unknown as Record<string, string>;
+  const faqEntities = [];
+  for (let i = 1; i <= 20; i++) {
+    const q = faq[`q${i}`];
+    const a = faq[`a${i}`];
+    if (q && a) {
+      faqEntities.push({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      });
+    }
+  }
 
   // JSON-LD Structured Data
   const jsonLd = {
@@ -126,16 +142,6 @@ export default async function LocaleLayout({ children, params }: Props) {
           width: 512,
           height: 512,
         },
-        sameAs: [
-          "https://www.linkedin.com/company/logistiq",
-          "https://twitter.com/logistiq",
-        ],
-        contactPoint: {
-          "@type": "ContactPoint",
-          telephone: "+40-xxx-xxx-xxx",
-          contactType: "sales",
-          availableLanguage: ["Romanian", "English", "German", "Polish", "Hungarian", "Bulgarian"],
-        },
       },
       {
         "@type": "WebSite",
@@ -144,11 +150,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         name: "Logistiq",
         publisher: {
           "@id": `${baseUrl}/#organization`,
-        },
-        potentialAction: {
-          "@type": "SearchAction",
-          target: `${baseUrl}/search?q={search_term_string}`,
-          "query-input": "required name=search_term_string",
         },
       },
       {
@@ -162,13 +163,6 @@ export default async function LocaleLayout({ children, params }: Props) {
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
           offerCount: 2,
-        },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          ratingCount: "150",
-          bestRating: "5",
-          worstRating: "1",
         },
         description: t.seo.description,
         featureList: [
@@ -196,6 +190,16 @@ export default async function LocaleLayout({ children, params }: Props) {
         },
         inLanguage: localeToHreflang[locale],
       },
+      ...(faqEntities.length
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${baseUrl}/${locale}/#faq`,
+              inLanguage: localeToHreflang[locale],
+              mainEntity: faqEntities,
+            },
+          ]
+        : []),
     ],
   };
 
