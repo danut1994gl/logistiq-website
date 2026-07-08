@@ -1,6 +1,3 @@
-"use client";
-
-import { use } from "react";
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -16,8 +13,8 @@ import { ContactSection } from "@/components/sections/ContactSection";
 
 // Home page. Chrome (header/footer/cookie-consent) is provided by the marketing
 // layout; this page only composes the landing sections.
-export default function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale: localeParam } = use(params);
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : "ro";
   const t = translations[locale];
 
