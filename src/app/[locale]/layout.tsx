@@ -6,7 +6,9 @@ import { locales, localeToHreflang, isValidLocale, type Locale } from "@/lib/i18
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  // "latin-ext" covers Romanian (ș ț), Polish (ł ą ę ż ź ń), Hungarian (ő ű),
+  // Czech/Slovak glyphs — the default locale is RO and we target PL/HU too.
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
