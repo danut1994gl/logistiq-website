@@ -22,6 +22,7 @@ export const primaryNav: NavItem[] = [
   { key: "howItWorks", label: (t) => t.nav.howItWorks, href: (l) => anchorHref(l, "how-it-works") },
   { key: "benefits", label: (t) => t.nav.benefits, href: (l) => anchorHref(l, "benefits") },
   { key: "pricing", label: (t) => t.nav.pricing, href: (l) => anchorHref(l, "pricing") },
+  { key: "resources", label: (t) => t.nav.resources, href: (l) => routeHref(l, "/resurse") },
   { key: "contact", label: (t) => t.nav.contact, href: (l) => anchorHref(l, "contact") },
 ];
 

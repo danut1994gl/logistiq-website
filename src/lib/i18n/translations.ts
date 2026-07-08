@@ -10,6 +10,8 @@ export const translations = {
       requestDemo: "Solicită Demo",
       login: "Autentificare",
       dashboard: "Dashboard",
+      resources: "Resurse",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Utilizăm cookie-uri",
@@ -708,6 +710,8 @@ export const translations = {
       requestDemo: "Request Demo",
       login: "Login",
       dashboard: "Dashboard",
+      resources: "Resources",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "We use cookies",
@@ -1389,6 +1393,8 @@ export const translations = {
       requestDemo: "Demo anfordern",
       login: "Anmelden",
       dashboard: "Dashboard",
+      resources: "Ressourcen",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Wir verwenden Cookies",
@@ -1855,6 +1861,8 @@ export const translations = {
       requestDemo: "Zamow demo",
       login: "Logowanie",
       dashboard: "Dashboard",
+      resources: "Zasoby",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Używamy plików cookie",
@@ -2321,6 +2329,8 @@ export const translations = {
       requestDemo: "Demo keres",
       login: "Belepes",
       dashboard: "Dashboard",
+      resources: "Erőforrások",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Cookie-kat használunk",
@@ -2787,6 +2797,8 @@ export const translations = {
       requestDemo: "Zajavka za demo",
       login: "Vhod",
       dashboard: "Dashboard",
+      resources: "Ресурси",
+      blog: "Блог",
     },
     cookieConsent: {
       title: "Използваме бисквитки",
@@ -3253,6 +3265,8 @@ export const translations = {
       requestDemo: "Demander une demo",
       login: "Connexion",
       dashboard: "Dashboard",
+      resources: "Ressources",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Nous utilisons des cookies",
@@ -3796,6 +3810,8 @@ export const translations = {
       requestDemo: "Demo aanvragen",
       login: "Inloggen",
       dashboard: "Dashboard",
+      resources: "Bronnen",
+      blog: "Blog",
     },
     cookieConsent: {
       title: "Wij gebruiken cookies",
