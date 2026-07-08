@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { translations } from "@/lib/i18n/translations";
-import { locales, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { locales, isValidLocale } from "@/lib/i18n/config";
+import { buildAlternates } from "@/lib/seo/metadata";
 
 type Props = {
   children: React.ReactNode;
@@ -26,12 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: {
-      canonical: `${baseUrl}/${locale}/privacy`,
-      languages: Object.fromEntries(
-        locales.map((loc) => [loc, `${baseUrl}/${loc}/privacy`])
-      ),
-    },
+    alternates: buildAlternates(locale, (l) => `/${l}/privacy`),
     openGraph: {
       title: `${title} | Logistiq`,
       description,

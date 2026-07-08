@@ -3,6 +3,20 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { translations } from "@/lib/i18n/translations";
 import { locales, localeToHreflang, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { buildAlternates } from "@/lib/seo/metadata";
+import { JsonLd, siteGraph } from "@/lib/seo/jsonld";
+
+// Canonical Logistiq feature list — mirrored in the SoftwareApplication schema.
+const SOFTWARE_FEATURES = [
+  "Digital QR Check-in",
+  "Real-time Dock Management",
+  "Driver Communication",
+  "Analytics & Reports",
+  "Multi-language Support",
+  "API Integrations",
+  "Early Check-in & Scheduling",
+  "Automatic Location Detection",
+];
 
 const inter = Inter({
   variable: "--font-inter",
@@ -63,12 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "max-snippet": -1,
       },
     },
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: Object.fromEntries(
-        locales.map((loc) => [localeToHreflang[loc], `${baseUrl}/${loc}`])
-      ),
-    },
+    alternates: buildAlternates(locale, (l) => `/${l}`),
     openGraph: {
       type: "website",
       locale: localeToHreflang[locale],
@@ -111,107 +120,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : "ro";
   const t = translations[locale];
-  const baseUrl = "https://logistiq.ro";
-
-  // Build FAQ entities from the translations that are rendered on-page (FAQ section),
-  // so the FAQPage rich result stays in sync with visible content.
-  const faq = t.faq as unknown as Record<string, string>;
-  const faqEntities = [];
-  for (let i = 1; i <= 20; i++) {
-    const q = faq[`q${i}`];
-    const a = faq[`a${i}`];
-    if (q && a) {
-      faqEntities.push({
-        "@type": "Question",
-        name: q,
-        acceptedAnswer: { "@type": "Answer", text: a },
-      });
-    }
-  }
-
-  // JSON-LD Structured Data
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${baseUrl}/#organization`,
-        name: "Logistiq",
-        url: baseUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}/logo.png`,
-          width: 512,
-          height: 512,
-        },
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${baseUrl}/#website`,
-        url: baseUrl,
-        name: "Logistiq",
-        publisher: {
-          "@id": `${baseUrl}/#organization`,
-        },
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": `${baseUrl}/#software`,
-        name: "Logistiq",
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Web, iOS, Android",
-        offers: {
-          "@type": "AggregateOffer",
-          priceCurrency: "EUR",
-          availability: "https://schema.org/InStock",
-          offerCount: 2,
-        },
-        description: t.seo.description,
-        featureList: [
-          "Digital QR Check-in",
-          "Real-time Dock Management",
-          "Driver Communication",
-          "Analytics & Reports",
-          "Multi-language Support",
-          "API Integrations",
-          "Early Check-in & Scheduling",
-          "Automatic Location Detection",
-        ],
-      },
-      {
-        "@type": "WebPage",
-        "@id": `${baseUrl}/${locale}/#webpage`,
-        url: `${baseUrl}/${locale}`,
-        name: t.seo.title,
-        description: t.seo.description,
-        isPartOf: {
-          "@id": `${baseUrl}/#website`,
-        },
-        about: {
-          "@id": `${baseUrl}/#software`,
-        },
-        inLanguage: localeToHreflang[locale],
-      },
-      ...(faqEntities.length
-        ? [
-            {
-              "@type": "FAQPage",
-              "@id": `${baseUrl}/${locale}/#faq`,
-              inLanguage: localeToHreflang[locale],
-              mainEntity: faqEntities,
-            },
-          ]
-        : []),
-    ],
-  };
-
   return (
     <html lang={locale} className="scroll-smooth dark">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {/* Site-wide entities only. Page-specific entities (WebPage/FAQPage/Article)
+            are emitted by the owning page so they don't leak onto every route. */}
+        <JsonLd data={siteGraph(t.seo.description, SOFTWARE_FEATURES)} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

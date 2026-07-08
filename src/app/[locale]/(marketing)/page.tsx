@@ -1,5 +1,6 @@
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
+import { JsonLd, webPageSchema } from "@/lib/seo/jsonld";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
@@ -20,6 +21,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      <JsonLd
+        data={webPageSchema({
+          locale,
+          path: "/",
+          title: t.seo.title,
+          description: t.seo.description,
+        })}
+      />
       <HeroSection t={t} />
       <StatsSection t={t} />
       <HowItWorksSection t={t} />
