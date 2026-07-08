@@ -23,7 +23,7 @@ export const primaryNav: NavItem[] = [
   { key: "benefits", label: (t) => t.nav.benefits, href: (l) => anchorHref(l, "benefits") },
   { key: "pricing", label: (t) => t.nav.pricing, href: (l) => anchorHref(l, "pricing") },
   { key: "resources", label: (t) => t.nav.resources, href: (l) => routeHref(l, "/resurse") },
-  { key: "contact", label: (t) => t.nav.contact, href: (l) => anchorHref(l, "contact") },
+  { key: "contact", label: (t) => t.nav.contact, href: (l) => routeHref(l, "/contact") },
 ];
 
 export type FooterColumn = {
@@ -39,7 +39,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { key: "features", label: (t) => t.footer.features, href: (l) => anchorHref(l, "features") },
       { key: "pricing", label: (t) => t.footer.pricing, href: (l) => anchorHref(l, "pricing") },
-      { key: "contact", label: (t) => t.nav.contact, href: (l) => anchorHref(l, "contact") },
+      { key: "contact", label: (t) => t.nav.contact, href: (l) => routeHref(l, "/contact") },
     ],
   },
   {
