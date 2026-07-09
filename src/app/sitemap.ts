@@ -1,14 +1,22 @@
 import { MetadataRoute } from "next";
 import { locales, localeToHreflang, defaultLocale } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { features } from "@/lib/features";
 
-// Static routes (path after /{locale}). Feature/blog routes are appended as they ship.
+// Static routes (path after /{locale}). Blog routes are appended when the blog ships.
 const ROUTES: {
   path: string;
   priority: number;
   changeFrequency: "weekly" | "monthly" | "yearly";
 }[] = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
+  { path: "/functionalitati", priority: 0.9, changeFrequency: "monthly" },
+  ...features.map((f) => ({
+    path: `/functionalitati/${f.slug}`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  })),
+  { path: "/contact", priority: 0.7, changeFrequency: "yearly" },
   { path: "/resurse", priority: 0.8, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" },

@@ -15,16 +15,17 @@ export type NavItem = {
   href: (locale: Locale) => string;
 };
 
-// Primary navigation. These point at home-page sections for now, but are
-// route-aware (/{locale}#id) so they keep working from any page.
+// Primary navigation. "Funcționalități" is rendered separately in SiteHeader as a
+// mega-menu (it reads the feature registry), so it is not in this list. The rest are
+// simple links — "Prețuri" is still a route-aware anchor to the home pricing section.
 export const primaryNav: NavItem[] = [
-  { key: "features", label: (t) => t.nav.features, href: (l) => anchorHref(l, "features") },
-  { key: "howItWorks", label: (t) => t.nav.howItWorks, href: (l) => anchorHref(l, "how-it-works") },
-  { key: "benefits", label: (t) => t.nav.benefits, href: (l) => anchorHref(l, "benefits") },
   { key: "pricing", label: (t) => t.nav.pricing, href: (l) => anchorHref(l, "pricing") },
   { key: "resources", label: (t) => t.nav.resources, href: (l) => routeHref(l, "/resurse") },
   { key: "contact", label: (t) => t.nav.contact, href: (l) => routeHref(l, "/contact") },
 ];
+
+// The "Funcționalități" entry (mega-menu). Its dropdown lists the feature registry.
+export const featuresNavHref = (l: Locale) => routeHref(l, "/functionalitati");
 
 export type FooterColumn = {
   key: string;
