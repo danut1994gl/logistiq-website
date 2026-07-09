@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { translations } from "@/lib/i18n/translations";
 import { locales, isValidLocale } from "@/lib/i18n/config";
-import { buildAlternates } from "@/lib/seo/metadata";
+import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 
 type Props = {
   children: React.ReactNode;
@@ -14,9 +14,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
-  const baseUrl = "https://logistiq.ro";
+  const baseUrl = SITE_URL;
 
   const title = t.terms.title;
   const description =

@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
   return {
     title: t.contact.title,
@@ -34,7 +34,7 @@ export async function generateMetadata({
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
 
   return (

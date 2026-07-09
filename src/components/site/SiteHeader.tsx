@@ -9,7 +9,7 @@ import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu } from "@/lib/navigation";
 import { anchorHref, swapLocale } from "@/lib/href";
-import { features, featureTitle, featureColorMap } from "@/lib/features";
+import { features, featureTitle, featureColorMap, featurePath } from "@/lib/features";
 
 type Menu = null | "features" | "resources" | "lang";
 
@@ -110,7 +110,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                         <Link
                           key={f.id}
                           role="menuitem"
-                          href={`/${locale}/functionalitati/${f.slug}`}
+                          href={featurePath(locale, f.id)}
                           className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
                         >
                           <span className={`flex-shrink-0 w-9 h-9 rounded-lg ${c.bg} ${c.darkBg} flex items-center justify-center`}>
@@ -276,7 +276,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                   {features.map((f) => (
                     <Link
                       key={f.id}
-                      href={`/${locale}/functionalitati/${f.slug}`}
+                      href={featurePath(locale, f.id)}
                       onClick={() => setIsMobileOpen(false)}
                       className="px-4 py-2.5 rounded-lg text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
                     >

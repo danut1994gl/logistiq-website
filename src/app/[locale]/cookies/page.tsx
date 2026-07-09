@@ -168,7 +168,7 @@ export default function CookiesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: localeParam } = use(params);
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale].cookies;
 
   return (

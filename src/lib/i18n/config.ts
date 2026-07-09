@@ -1,7 +1,9 @@
 export const locales = ["ro", "en", "de", "pl", "hu", "bg", "fr", "nl"] as const;
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "ro";
+// English is the neutral international default (root redirect + hreflang x-default).
+// Geo/Accept-Language detection in middleware still routes RO visitors to /ro, etc.
+export const defaultLocale: Locale = "en";
 
 export const localeNames: Record<Locale, string> = {
   ro: "Romana",
@@ -47,16 +49,18 @@ export const countryToLocale: Record<string, Locale> = {
   NL: "nl", // Netherlands
 };
 
-// SEO: Language codes for hreflang
+// SEO: hreflang codes. Language-level targeting (not country) — a single German
+// page serves DE/AT/CH, etc. Switch to language-region (de-DE, de-AT) only once
+// content is differentiated per country (local pricing, VAT, legal, case studies).
 export const localeToHreflang: Record<Locale, string> = {
-  ro: "ro-RO",
+  ro: "ro",
   en: "en",
-  de: "de-DE",
-  pl: "pl-PL",
-  hu: "hu-HU",
-  bg: "bg-BG",
-  fr: "fr-FR",
-  nl: "nl-NL",
+  de: "de",
+  pl: "pl",
+  hu: "hu",
+  bg: "bg",
+  fr: "fr",
+  nl: "nl",
 };
 
 export function isValidLocale(locale: string): locale is Locale {

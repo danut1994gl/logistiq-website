@@ -4,7 +4,7 @@ import { translations } from "@/lib/i18n/translations";
 import { locales, isValidLocale } from "@/lib/i18n/config";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
-import { features, featureTitle, featureDesc, featureColorMap } from "@/lib/features";
+import { features, featureTitle, featureDesc, featureColorMap, featurePath, featuresIndexPath, FEATURES_SEGMENT } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/site/PageHero";
 
@@ -18,16 +18,16 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
   return {
     title: t.features.title,
     description: t.features.subtitle,
-    alternates: buildAlternates(locale, (l) => `/${l}/functionalitati`),
+    alternates: buildAlternates(locale, (l) => featuresIndexPath(l)),
     openGraph: {
       title: `${t.features.title} | Logistiq`,
       description: t.features.subtitle,
-      url: `${SITE_URL}/${locale}/functionalitati`,
+      url: `${SITE_URL}${featuresIndexPath(locale)}`,
       siteName: "Logistiq",
       type: "website",
     },
@@ -36,18 +36,18 @@ export async function generateMetadata({
 
 export default async function FeaturesIndexPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
 
   return (
     <>
       <JsonLd
-        data={webPageSchema({ locale, path: "/functionalitati", title: t.features.title, description: t.features.subtitle })}
+        data={webPageSchema({ locale, path: `/${FEATURES_SEGMENT}`, title: t.features.title, description: t.features.subtitle })}
       />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Logistiq", url: `${SITE_URL}/${locale}` },
-          { name: t.nav.features, url: `${SITE_URL}/${locale}/functionalitati` },
+          { name: t.nav.features, url: `${SITE_URL}${featuresIndexPath(locale)}` },
         ])}
       />
 
@@ -66,7 +66,7 @@ export default async function FeaturesIndexPage({ params }: { params: Promise<{ 
               return (
                 <Link
                   key={feature.id}
-                  href={`/${locale}/functionalitati/${feature.slug}`}
+                  href={featurePath(locale, feature.id)}
                   className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 card-hover flex flex-col"
                 >
                   <div

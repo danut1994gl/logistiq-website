@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    // The feature section moved from /{locale}/functionalitati/... (shared RO slug)
+    // to /{locale}/features/... (neutral segment + localized slug). Redirect the old
+    // URLs to the features index so nothing 404s.
+    return [
+      { source: "/:locale/functionalitati/:path*", destination: "/:locale/features", permanent: true },
+      { source: "/:locale/functionalitati", destination: "/:locale/features", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

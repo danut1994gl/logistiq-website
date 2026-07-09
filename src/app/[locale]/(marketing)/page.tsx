@@ -16,7 +16,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 // layout; this page only composes the landing sections.
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
 
   return (

@@ -1,38 +1,44 @@
 import type { FC } from "react";
-import { type Translations } from "@/lib/i18n/translations";
+import { translations, type Translations } from "@/lib/i18n/translations";
+import { type Locale } from "@/lib/i18n/config";
 import {
   QrCodeIcon, GateIcon, ChatIcon, UsersIcon, ChartIcon, MobileIcon,
   GlobeIcon, ApiIcon, CloudIcon, CompassIcon, ClockIcon, MapPinIcon,
 } from "@/components/icons";
 
-// Canonical feature registry — the single source that drives the /functionalitati
-// index, the per-feature pages, the mega-menu, and the sitemap. Titles/descriptions
-// live in translations (features.featureNTitle / featureNDesc, all 8 locales); the
-// URL slug is shared across locales (the /functionalitati/ segment stays constant).
+// Canonical feature registry — drives the /features index, per-feature pages, the
+// mega-menu, and the sitemap. Slugs are LOCALIZED per language (derived from the
+// already-native feature titles) for correct international SEO, e.g.
+//   /en/features/digital-check-in · /de/features/qr-check-in · /fr/features/...
+// The path segment ("features") is kept neutral English on all locales; fully
+// localizing the segment (/de/funktionen/) is a follow-up that needs next.config
+// rewrites and native-slug review.
 export type Feature = {
   id: number; // 1..12 -> features.feature{id}Title / feature{id}Desc
-  slug: string;
   icon: FC;
   color: string;
 };
 
 export const features: Feature[] = [
-  { id: 1, slug: "check-in-digital", icon: QrCodeIcon, color: "blue" },
-  { id: 2, slug: "management-rampe", icon: GateIcon, color: "green" },
-  { id: 3, slug: "chat-notificari", icon: ChatIcon, color: "purple" },
-  { id: 4, slug: "categorisire", icon: UsersIcon, color: "orange" },
-  { id: 5, slug: "rapoarte-analytics", icon: ChartIcon, color: "cyan" },
-  { id: 6, slug: "aplicatie-mobila", icon: MobileIcon, color: "pink" },
-  { id: 7, slug: "multi-limba", icon: GlobeIcon, color: "indigo" },
-  { id: 8, slug: "white-label-api", icon: ApiIcon, color: "teal" },
-  { id: 9, slug: "cloud", icon: CloudIcon, color: "sky" },
-  { id: 10, slug: "ghidare-soferi", icon: CompassIcon, color: "amber" },
-  { id: 11, slug: "programare", icon: ClockIcon, color: "lime" },
-  { id: 12, slug: "detectare-locatie", icon: MapPinIcon, color: "rose" },
+  { id: 1, icon: QrCodeIcon, color: "blue" },
+  { id: 2, icon: GateIcon, color: "green" },
+  { id: 3, icon: ChatIcon, color: "purple" },
+  { id: 4, icon: UsersIcon, color: "orange" },
+  { id: 5, icon: ChartIcon, color: "cyan" },
+  { id: 6, icon: MobileIcon, color: "pink" },
+  { id: 7, icon: GlobeIcon, color: "indigo" },
+  { id: 8, icon: ApiIcon, color: "teal" },
+  { id: 9, icon: CloudIcon, color: "sky" },
+  { id: 10, icon: CompassIcon, color: "amber" },
+  { id: 11, icon: ClockIcon, color: "lime" },
+  { id: 12, icon: MapPinIcon, color: "rose" },
 ];
 
-export function getFeature(slug: string): Feature | undefined {
-  return features.find((f) => f.slug === slug);
+// Neutral English path segment (same on every locale, no rewrites needed).
+export const FEATURES_SEGMENT = "features";
+
+export function featuresIndexPath(locale: Locale): string {
+  return `/${locale}/${FEATURES_SEGMENT}`;
 }
 
 export function featureTitle(t: Translations, id: number): string {
@@ -43,7 +49,39 @@ export function featureDesc(t: Translations, id: number): string {
   return (t.features as unknown as Record<string, string>)[`feature${id}Desc`];
 }
 
-// Tailwind classes per accent color (icon tile), matching the home Features grid.
+// Minimal Cyrillic -> Latin map so Bulgarian titles produce readable ASCII slugs.
+const CYRILLIC: Record<string, string> = {
+  а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ж: "zh", з: "z", и: "i",
+  й: "y", к: "k", л: "l", м: "m", н: "n", о: "o", п: "p", р: "r", с: "s",
+  т: "t", у: "u", ф: "f", х: "h", ц: "ts", ч: "ch", ш: "sh", щ: "sht",
+  ъ: "a", ь: "", ю: "yu", я: "ya",
+};
+
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/[а-я]/g, (c) => CYRILLIC[c] ?? "")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // strip Latin diacritics (ș ț ł ő é …)
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+// Localized slug for a feature in a given locale, derived from its native title.
+export function featureSlug(id: number, locale: Locale): string {
+  return slugify(featureTitle(translations[locale], id));
+}
+
+export function featurePath(locale: Locale, id: number): string {
+  return `${featuresIndexPath(locale)}/${featureSlug(id, locale)}`;
+}
+
+// Resolve a feature from a localized slug within a locale (for the [slug] route).
+export function getFeatureBySlug(locale: Locale, slug: string): Feature | undefined {
+  return features.find((f) => featureSlug(f.id, locale) === slug);
+}
+
 export const featureColorMap: Record<string, { bg: string; text: string; darkBg: string; darkText: string }> = {
   blue: { bg: "bg-blue-100", text: "text-blue-600", darkBg: "dark:bg-blue-900/30", darkText: "dark:text-blue-400" },
   green: { bg: "bg-green-100", text: "text-green-600", darkBg: "dark:bg-green-900/30", darkText: "dark:text-green-400" },

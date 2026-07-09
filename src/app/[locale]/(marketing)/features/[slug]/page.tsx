@@ -5,12 +5,22 @@ import { translations } from "@/lib/i18n/translations";
 import { locales, isValidLocale } from "@/lib/i18n/config";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
-import { features, getFeature, featureTitle, featureDesc, featureColorMap } from "@/lib/features";
+import {
+  features,
+  getFeatureBySlug,
+  featureSlug,
+  featurePath,
+  featuresIndexPath,
+  featureTitle,
+  featureDesc,
+  featureColorMap,
+  FEATURES_SEGMENT,
+} from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/site/PageHero";
 
 export async function generateStaticParams() {
-  return locales.flatMap((locale) => features.map((f) => ({ locale, slug: f.slug })));
+  return locales.flatMap((locale) => features.map((f) => ({ locale, slug: featureSlug(f.id, locale) })));
 }
 
 export async function generateMetadata({
@@ -19,8 +29,8 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
-  const feature = getFeature(slug);
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
+  const feature = getFeatureBySlug(locale, slug);
   if (!feature) return {};
   const t = translations[locale];
   const title = featureTitle(t, feature.id);
@@ -28,11 +38,11 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: buildAlternates(locale, (l) => `/${l}/functionalitati/${feature.slug}`),
+    alternates: buildAlternates(locale, (l) => featurePath(l, feature.id)),
     openGraph: {
       title: `${title} | Logistiq`,
       description,
-      url: `${SITE_URL}/${locale}/functionalitati/${feature.slug}`,
+      url: `${SITE_URL}${featurePath(locale, feature.id)}`,
       siteName: "Logistiq",
       type: "website",
     },
@@ -41,8 +51,8 @@ export async function generateMetadata({
 
 export default async function FeaturePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: localeParam, slug } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
-  const feature = getFeature(slug);
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
+  const feature = getFeatureBySlug(locale, slug);
   if (!feature) notFound();
 
   const t = translations[locale];
@@ -54,19 +64,26 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <JsonLd data={webPageSchema({ locale, path: `/functionalitati/${feature.slug}`, title, description })} />
+      <JsonLd
+        data={webPageSchema({
+          locale,
+          path: `/${FEATURES_SEGMENT}/${featureSlug(feature.id, locale)}`,
+          title,
+          description,
+        })}
+      />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Logistiq", url: `${SITE_URL}/${locale}` },
-          { name: t.nav.features, url: `${SITE_URL}/${locale}/functionalitati` },
-          { name: title, url: `${SITE_URL}/${locale}/functionalitati/${feature.slug}` },
+          { name: t.nav.features, url: `${SITE_URL}${featuresIndexPath(locale)}` },
+          { name: title, url: `${SITE_URL}${featurePath(locale, feature.id)}` },
         ])}
       />
 
       <PageHero
         breadcrumb={[
           { label: "Logistiq", href: `/${locale}` },
-          { label: t.nav.features, href: `/${locale}/functionalitati` },
+          { label: t.nav.features, href: featuresIndexPath(locale) },
           { label: title },
         ]}
         eyebrow={t.nav.features}
@@ -110,7 +127,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
               return (
                 <Link
                   key={rf.id}
-                  href={`/${locale}/functionalitati/${rf.slug}`}
+                  href={featurePath(locale, rf.id)}
                   className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 card-hover"
                 >
                   <div

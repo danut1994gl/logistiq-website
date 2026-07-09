@@ -15,7 +15,7 @@ export default async function MarketingLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
 
   return (

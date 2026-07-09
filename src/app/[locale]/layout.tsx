@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { translations } from "@/lib/i18n/translations";
 import { locales, localeToHreflang, isValidLocale, type Locale } from "@/lib/i18n/config";
-import { buildAlternates } from "@/lib/seo/metadata";
+import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, siteGraph } from "@/lib/seo/jsonld";
 
 // Canonical Logistiq feature list — mirrored in the SoftwareApplication schema.
@@ -46,9 +46,9 @@ export const viewport: Viewport = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
-  const baseUrl = "https://logistiq.ro";
+  const baseUrl = SITE_URL;
 
   return {
     metadataBase: new URL(baseUrl),
@@ -118,7 +118,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale: localeParam } = await params;
-  const locale = isValidLocale(localeParam) ? localeParam : "ro";
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale];
   return (
     <html lang={locale} className="scroll-smooth dark">

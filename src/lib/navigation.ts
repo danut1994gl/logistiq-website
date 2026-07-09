@@ -17,7 +17,7 @@ export type NavItem = {
 
 // Top-level destinations.
 export const homeHref = (l: Locale) => routeHref(l, "/");
-export const featuresNavHref = (l: Locale) => routeHref(l, "/functionalitati");
+export const featuresNavHref = (l: Locale) => routeHref(l, "/features");
 export const pricingHref = (l: Locale) => anchorHref(l, "pricing");
 export const contactHref = (l: Locale) => routeHref(l, "/contact");
 export const resourcesNavHref = (l: Locale) => routeHref(l, "/resurse");
@@ -46,7 +46,7 @@ export const footerColumns: FooterColumn[] = [
     key: "product",
     title: (t) => t.footer.product,
     links: [
-      { key: "features", label: (t) => t.footer.features, href: (l) => routeHref(l, "/functionalitati") },
+      { key: "features", label: (t) => t.footer.features, href: (l) => routeHref(l, "/features") },
       { key: "pricing", label: (t) => t.footer.pricing, href: (l) => anchorHref(l, "pricing") },
       { key: "resources", label: (t) => t.nav.resources, href: (l) => routeHref(l, "/resurse") },
       { key: "contact", label: (t) => t.nav.contact, href: (l) => routeHref(l, "/contact") },
