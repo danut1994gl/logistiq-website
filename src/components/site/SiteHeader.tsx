@@ -4,12 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
-import { locales, localeNames, type Locale } from "@/lib/i18n/config";
+import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { featuresSegment } from "@/lib/i18n/segments";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu } from "@/lib/navigation";
 import { anchorHref, swapLocale } from "@/lib/href";
-import { features, featureTitle, featureColorMap, featurePath } from "@/lib/features";
+import {
+  features,
+  featureTitle,
+  featureColorMap,
+  featurePath,
+  featuresIndexPath,
+  getFeatureBySlug,
+} from "@/lib/features";
 
 type Menu = null | "features" | "resources" | "lang";
 
@@ -62,6 +70,21 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
 
   const link = "text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium";
   const toggle = (m: Menu) => setOpen((cur) => (cur === m ? null : m));
+
+  // Locale switch: map the CURRENT url to the SAME content in the target locale.
+  // Feature pages localize BOTH the segment and the slug, so a naive locale swap
+  // would 404 — resolve the feature and rebuild its localized path instead.
+  const localeHref = (target: Locale): string => {
+    const [curLoc, seg, slug] = pathname.split("/").filter(Boolean);
+    if (isValidLocale(curLoc) && seg && seg === featuresSegment[curLoc]) {
+      if (slug) {
+        const feature = getFeatureBySlug(curLoc, slug);
+        return feature ? featurePath(target, feature.id) : featuresIndexPath(target);
+      }
+      return featuresIndexPath(target);
+    }
+    return swapLocale(target, pathname);
+  };
 
   return (
     <nav
@@ -207,7 +230,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                       <Link
                         key={loc}
                         role="menuitem"
-                        href={swapLocale(loc, pathname)}
+                        href={localeHref(loc)}
                         aria-current={loc === locale ? "true" : undefined}
                         className={`flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${
                           loc === locale ? "bg-blue-50 dark:bg-blue-900/20" : ""
