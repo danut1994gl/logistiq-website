@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { type Translations } from "@/lib/i18n/translations";
 import { ArrowRightIcon } from "@/components/icons";
 
-export function ContactSection({ t }: { t: Translations }) {
+export function ContactSection({ t, compact = false }: { t: Translations; compact?: boolean }) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -46,7 +46,7 @@ export function ContactSection({ t }: { t: Translations }) {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="contact" className={`${compact ? "pt-6 pb-20 lg:pt-8 lg:pb-28" : "py-20 lg:py-32"} relative overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left - Info */}

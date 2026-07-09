@@ -6,6 +6,7 @@ import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
 import { features, featureTitle, featureDesc, featureColorMap } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
+import { PageHero } from "@/components/site/PageHero";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -50,29 +51,13 @@ export default async function FeaturesIndexPage({ params }: { params: Promise<{ 
         ])}
       />
 
-      <section className="hero-gradient pt-28 md:pt-36 pb-14 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <nav aria-label="breadcrumb" className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link href={`/${locale}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Logistiq
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li aria-current="page" className="text-slate-700 dark:text-slate-200">
-                {t.nav.features}
-              </li>
-            </ol>
-          </nav>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 max-w-3xl">
-            {t.features.title}
-          </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl">{t.features.subtitle}</p>
-        </div>
-      </section>
+      <PageHero
+        breadcrumb={[{ label: "Logistiq", href: `/${locale}` }, { label: t.nav.features }]}
+        title={t.features.title}
+        description={t.features.subtitle}
+      />
 
-      <section className="py-16 lg:py-20">
+      <section className="pb-16 lg:pb-24 -mt-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature) => {

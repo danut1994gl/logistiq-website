@@ -13,6 +13,15 @@
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
+
+  /* Semantic surfaces + rhythm (dark identity, systematized) */
+  --surface-1: #0f172a;
+  --surface-2: #1e293b;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --fg-muted: #94a3b8; /* slate-400 — AA on dark surfaces */
+  --link: #60a5fa;     /* blue-400 — interactive text on dark (NOT --primary) */
+  --section-y: clamp(4rem, 7vw, 6.5rem);
+  --nav-h: 5rem;
 }
 
 @theme inline {
@@ -209,29 +218,32 @@ body {
   }
 }
 
-/* Animation utilities */
+/* Animation utilities.
+   `both` fill-mode holds the "from" state during any stagger delay, so elements
+   stay hidden until their turn instead of flashing in then jumping — this is what
+   makes the entrance feel smooth. Easing is a gentle ease-out-expo. */
 .animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
+  animation: fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+  animation: fade-in-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade-in-down {
-  animation: fade-in-down 0.6s ease-out forwards;
+  animation: fade-in-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade-in-left {
-  animation: fade-in-left 0.8s ease-out forwards;
+  animation: fade-in-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade-in-right {
-  animation: fade-in-right 0.8s ease-out forwards;
+  animation: fade-in-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
+  animation: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-float {

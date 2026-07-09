@@ -5,20 +5,32 @@ import { type Translations } from "@/lib/i18n/translations";
 import { ChevronDownIcon } from "@/components/icons";
 import { faqEntries } from "@/lib/faq";
 
-export function FAQSection({ t }: { t: Translations }) {
+export function FAQSection({
+  t,
+  showHeader = true,
+  compact = false,
+}: {
+  t: Translations;
+  showHeader?: boolean;
+  compact?: boolean;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const faqs = faqEntries(t);
 
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-white dark:bg-slate-800 relative overflow-hidden">
+    <section
+      id="faq"
+      className={`${compact ? "pt-6 pb-20 lg:pt-8 lg:pb-28" : "py-20 lg:py-32"} bg-white dark:bg-slate-800 relative overflow-hidden`}
+    >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-            {t.faq.title}
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300">{t.faq.subtitle}</p>
-        </div>
+        {showHeader && (
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+              {t.faq.title}
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300">{t.faq.subtitle}</p>
+          </div>
+        )}
 
         {/* FAQ Items */}
         <div className="space-y-4">

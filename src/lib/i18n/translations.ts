@@ -1,6 +1,7 @@
 export const translations = {
   ro: {
     nav: {
+      home: "Acasă",
       features: "Funcționalități",
       howItWorks: "Cum funcționează",
       benefits: "Beneficii",
@@ -701,6 +702,7 @@ export const translations = {
   },
   en: {
     nav: {
+      home: "Home",
       features: "Features",
       howItWorks: "How it works",
       benefits: "Benefits",
@@ -1384,6 +1386,7 @@ export const translations = {
   },
   de: {
     nav: {
+      home: "Startseite",
       features: "Funktionen",
       howItWorks: "So funktioniert's",
       benefits: "Vorteile",
@@ -1852,6 +1855,7 @@ export const translations = {
   },
   pl: {
     nav: {
+      home: "Strona główna",
       features: "Funkcje",
       howItWorks: "Jak to dziala",
       benefits: "Korzysci",
@@ -2320,6 +2324,7 @@ export const translations = {
   },
   hu: {
     nav: {
+      home: "Főoldal",
       features: "Funkciok",
       howItWorks: "Hogyan mukodik",
       benefits: "Elonyok",
@@ -2788,6 +2793,7 @@ export const translations = {
   },
   bg: {
     nav: {
+      home: "Начало",
       features: "Funkcii",
       howItWorks: "Kak raboti",
       benefits: "Predimstva",
@@ -3256,6 +3262,7 @@ export const translations = {
   },
   fr: {
     nav: {
+      home: "Accueil",
       features: "Fonctionnalites",
       howItWorks: "Comment ca marche",
       benefits: "Avantages",
@@ -3801,6 +3808,7 @@ export const translations = {
   },
   nl: {
     nav: {
+      home: "Home",
       features: "Functies",
       howItWorks: "Hoe het werkt",
       benefits: "Voordelen",

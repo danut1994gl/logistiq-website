@@ -7,6 +7,7 @@ import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
 import { features, getFeature, featureTitle, featureDesc, featureColorMap } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
+import { PageHero } from "@/components/site/PageHero";
 
 export async function generateStaticParams() {
   return locales.flatMap((locale) => features.map((f) => ({ locale, slug: f.slug })));
@@ -62,40 +63,17 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
         ])}
       />
 
-      <section className="hero-gradient pt-28 md:pt-36 pb-16 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <nav aria-label="breadcrumb" className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-            <ol className="flex items-center gap-2 flex-wrap">
-              <li>
-                <Link href={`/${locale}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Logistiq
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li>
-                <Link
-                  href={`/${locale}/functionalitati`}
-                  className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  {t.nav.features}
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li aria-current="page" className="text-slate-700 dark:text-slate-200">
-                {title}
-              </li>
-            </ol>
-          </nav>
-
-          <div className={`w-16 h-16 rounded-2xl ${colors.bg} ${colors.darkBg} flex items-center justify-center mb-6`}>
-            <div className={`${colors.text} ${colors.darkText}`}>
-              <Icon />
-            </div>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-6">{title}</h1>
-          <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">{description}</p>
-
-          <div className="mt-8 flex flex-wrap gap-4">
+      <PageHero
+        breadcrumb={[
+          { label: "Logistiq", href: `/${locale}` },
+          { label: t.nav.features, href: `/${locale}/functionalitati` },
+          { label: title },
+        ]}
+        eyebrow={t.nav.features}
+        title={title}
+        description={description}
+        actions={
+          <>
             <Link
               href={`/${locale}/contact`}
               className="btn-primary text-white px-6 py-3 rounded-xl font-medium inline-flex items-center gap-2"
@@ -108,9 +86,18 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
             >
               {t.nav.pricing}
             </Link>
+          </>
+        }
+        visual={
+          <div
+            className={`w-44 h-44 sm:w-52 sm:h-52 lg:w-64 lg:h-64 rounded-[2rem] ${colors.bg} ${colors.darkBg} flex items-center justify-center shadow-xl [&_svg]:w-20 [&_svg]:h-20 lg:[&_svg]:w-24 lg:[&_svg]:h-24`}
+          >
+            <span className={`${colors.text} ${colors.darkText}`}>
+              <Icon />
+            </span>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Related features */}
       <section className="py-16 lg:py-20">

@@ -7,24 +7,25 @@ import { translations, type Translations } from "@/lib/i18n/translations";
 import { locales, localeNames, type Locale } from "@/lib/i18n/config";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
-import { primaryNav, featuresNavHref } from "@/lib/navigation";
+import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu } from "@/lib/navigation";
 import { anchorHref, swapLocale } from "@/lib/href";
 import { features, featureTitle, featureColorMap } from "@/lib/features";
 
-// Shared site header — data-driven from lib/navigation.ts + lib/features.ts and
-// mounted once in the marketing layout. "Funcționalități" is a mega-menu that lists
-// the feature registry and links to the per-feature pages.
+type Menu = null | "features" | "resources" | "lang";
+
+// Shared site header — data-driven, mounted once in the marketing layout.
+// Order: Home · Funcționalități (mega) · Prețuri · Resurse (dropdown) · Contact.
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const t: Translations = translations[locale];
   const pathname = usePathname();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
-  const [isMobileFeaturesOpen, setIsMobileFeaturesOpen] = useState(false);
+  const [open, setOpen] = useState<Menu>(null);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [mobileSub, setMobileSub] = useState<Menu>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const langDropdownRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -33,28 +34,34 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     if (authCookie && authCookie.split("=")[1] === "true") setIsAuthenticated(true);
   }, []);
 
-  // Close any open dropdown when clicking outside it.
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (langDropdownRef.current && !langDropdownRef.current.contains(target)) setIsLangOpen(false);
-      if (featuresRef.current && !featuresRef.current.contains(target)) setIsFeaturesOpen(false);
-      if (navRef.current && !navRef.current.contains(target)) setIsOpen(false);
+    const handle = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const refs = { features: featuresRef, resources: resourcesRef, lang: langRef };
+      if (open && refs[open]?.current && !refs[open].current!.contains(target)) setOpen(null);
+      if (navRef.current && !navRef.current.contains(target)) setIsMobileOpen(false);
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, [open]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, []);
 
   // Close everything on route change (nav is global).
   useEffect(() => {
-    setIsOpen(false);
-    setIsLangOpen(false);
-    setIsFeaturesOpen(false);
-    setIsMobileFeaturesOpen(false);
+    setOpen(null);
+    setIsMobileOpen(false);
+    setMobileSub(null);
   }, [pathname]);
 
-  const linkClass =
-    "text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium";
+  const link = "text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium";
+  const toggle = (m: Menu) => setOpen((cur) => (cur === m ? null : m));
 
   return (
     <nav
@@ -66,30 +73,34 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-3 group">
+          <Link href={homeHref(locale)} className="flex items-center gap-3 group shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/banner-nav.svg" alt="Logistiq" className="h-10 md:h-11 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-7">
+            <Link href={homeHref(locale)} className={link}>
+              {t.nav.home}
+            </Link>
+
             {/* Funcționalități mega-menu */}
             <div ref={featuresRef} className="relative">
               <button
-                onClick={() => setIsFeaturesOpen((v) => !v)}
-                className={`flex items-center gap-1 ${linkClass}`}
-                aria-expanded={isFeaturesOpen}
+                onClick={() => toggle("features")}
+                className={`flex items-center gap-1 ${link}`}
+                aria-expanded={open === "features"}
                 aria-haspopup="menu"
               >
                 {t.nav.features}
-                <span className={`transition-transform ${isFeaturesOpen ? "rotate-180" : ""}`}>
+                <span className={`transition-transform ${open === "features" ? "rotate-180" : ""}`}>
                   <ChevronDownIcon />
                 </span>
               </button>
-              {isFeaturesOpen && (
+              {open === "features" && (
                 <div
                   role="menu"
-                  className="absolute left-1/2 -translate-x-1/2 mt-4 w-[640px] max-w-[92vw] bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 animate-fade-in-down"
+                  className="absolute left-0 mt-4 w-[640px] max-w-[92vw] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 p-4 animate-fade-in-down"
                 >
                   <div className="grid grid-cols-2 gap-1">
                     {features.map((f) => {
@@ -100,7 +111,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                           key={f.id}
                           role="menuitem"
                           href={`/${locale}/functionalitati/${f.slug}`}
-                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
                         >
                           <span className={`flex-shrink-0 w-9 h-9 rounded-lg ${c.bg} ${c.darkBg} flex items-center justify-center`}>
                             <span className={`${c.text} ${c.darkText}`}>
@@ -126,22 +137,57 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               )}
             </div>
 
-            {primaryNav.map((item) => (
-              <Link key={item.key} href={item.href(locale)} className={linkClass}>
-                {item.label(t)}
-              </Link>
-            ))}
+            <Link href={pricingHref(locale)} className={link}>
+              {t.nav.pricing}
+            </Link>
+
+            {/* Resurse dropdown */}
+            <div ref={resourcesRef} className="relative">
+              <button
+                onClick={() => toggle("resources")}
+                className={`flex items-center gap-1 ${link}`}
+                aria-expanded={open === "resources"}
+                aria-haspopup="menu"
+              >
+                {t.nav.resources}
+                <span className={`transition-transform ${open === "resources" ? "rotate-180" : ""}`}>
+                  <ChevronDownIcon />
+                </span>
+              </button>
+              {open === "resources" && (
+                <div
+                  role="menu"
+                  className="absolute left-0 mt-4 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 p-2 animate-fade-in-down"
+                >
+                  {resourcesMenu.map((item) => (
+                    <Link
+                      key={item.key}
+                      role="menuitem"
+                      href={item.href(locale)}
+                      className="flex flex-col gap-0.5 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors"
+                    >
+                      <span className="text-sm font-medium text-slate-800 dark:text-slate-100">{item.label(t)}</span>
+                      {item.desc && <span className="text-xs text-slate-500 dark:text-slate-400">{item.desc(t)}</span>}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href={contactHref(locale)} className={link}>
+              {t.nav.contact}
+            </Link>
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             {/* Language Switcher */}
-            <div ref={langDropdownRef} className="relative">
+            <div ref={langRef} className="relative">
               <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
+                onClick={() => toggle("lang")}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Select language"
-                aria-expanded={isLangOpen}
+                aria-expanded={open === "lang"}
                 aria-haspopup="menu"
               >
                 {(() => {
@@ -150,10 +196,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                 })()}
                 <ChevronDownIcon />
               </button>
-              {isLangOpen && (
+              {open === "lang" && (
                 <div
                   role="menu"
-                  className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-2 animate-fade-in-down"
+                  className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 rounded-xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 py-2 animate-fade-in-down"
                 >
                   {locales.map((loc) => {
                     const FlagComponent = localeToFlag[loc];
@@ -166,7 +212,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                         className={`flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${
                           loc === locale ? "bg-blue-50 dark:bg-blue-900/20" : ""
                         }`}
-                        onClick={() => setIsLangOpen(false)}
+                        onClick={() => setOpen(null)}
                       >
                         <FlagComponent />
                         <span className="text-sm font-medium">{localeNames[loc]}</span>
@@ -195,69 +241,92 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
+              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileOpen}
               aria-controls="mobile-menu"
             >
-              {isOpen ? <CloseIcon /> : <MenuIcon />}
+              {isMobileOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
+        {isMobileOpen && (
           <div id="mobile-menu" className="lg:hidden py-4 border-t border-slate-200 dark:border-slate-700 animate-fade-in">
             <div className="flex flex-col gap-1" role="menu">
+              <Link href={homeHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium">
+                {t.nav.home}
+              </Link>
+
               {/* Funcționalități accordion */}
               <button
-                onClick={() => setIsMobileFeaturesOpen((v) => !v)}
-                aria-expanded={isMobileFeaturesOpen}
+                onClick={() => setMobileSub((s) => (s === "features" ? null : "features"))}
+                aria-expanded={mobileSub === "features"}
                 className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium flex items-center justify-between"
               >
                 {t.nav.features}
-                <span className={`transition-transform ${isMobileFeaturesOpen ? "rotate-180" : ""}`}>
+                <span className={`transition-transform ${mobileSub === "features" ? "rotate-180" : ""}`}>
                   <ChevronDownIcon />
                 </span>
               </button>
-              {isMobileFeaturesOpen && (
+              {mobileSub === "features" && (
                 <div className="pl-4 flex flex-col gap-1">
                   {features.map((f) => (
                     <Link
                       key={f.id}
                       href={`/${locale}/functionalitati/${f.slug}`}
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => setIsMobileOpen(false)}
                       className="px-4 py-2.5 rounded-lg text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
                     >
                       {featureTitle(t, f.id)}
                     </Link>
                   ))}
-                  <Link
-                    href={featuresNavHref(locale)}
-                    onClick={() => setIsOpen(false)}
-                    className="px-4 py-2.5 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400"
-                  >
+                  <Link href={featuresNavHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-2.5 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400">
                     {t.nav.features} →
                   </Link>
                 </div>
               )}
 
-              {primaryNav.map((item) => (
-                <Link
-                  key={item.key}
-                  href={item.href(locale)}
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium"
-                >
-                  {item.label(t)}
-                </Link>
-              ))}
+              <Link href={pricingHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium">
+                {t.nav.pricing}
+              </Link>
+
+              {/* Resurse accordion */}
+              <button
+                onClick={() => setMobileSub((s) => (s === "resources" ? null : "resources"))}
+                aria-expanded={mobileSub === "resources"}
+                className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium flex items-center justify-between"
+              >
+                {t.nav.resources}
+                <span className={`transition-transform ${mobileSub === "resources" ? "rotate-180" : ""}`}>
+                  <ChevronDownIcon />
+                </span>
+              </button>
+              {mobileSub === "resources" && (
+                <div className="pl-4 flex flex-col gap-1">
+                  {resourcesMenu.map((item) => (
+                    <Link
+                      key={item.key}
+                      href={item.href(locale)}
+                      onClick={() => setIsMobileOpen(false)}
+                      className="px-4 py-2.5 rounded-lg text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
+                    >
+                      {item.label(t)}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              <Link href={contactHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium">
+                {t.nav.contact}
+              </Link>
 
               <div className="pt-4 mt-2 border-t border-slate-200 dark:border-slate-700">
                 <Link
                   href={anchorHref(locale, "contact")}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setIsMobileOpen(false)}
                   className="block btn-primary text-white px-4 py-3 rounded-xl font-medium text-center"
                 >
                   {t.nav.requestDemo}
