@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { type Locale } from "@/lib/i18n/config";
+import { featuresSegment } from "@/lib/i18n/segments";
 import {
   QrCodeIcon, GateIcon, ChatIcon, UsersIcon, ChartIcon, MobileIcon,
   GlobeIcon, ApiIcon, CloudIcon, CompassIcon, ClockIcon, MapPinIcon,
@@ -34,11 +35,19 @@ export const features: Feature[] = [
   { id: 12, icon: MapPinIcon, color: "rose" },
 ];
 
-// Neutral English path segment (same on every locale, no rewrites needed).
-export const FEATURES_SEGMENT = "features";
+// Path helpers. The public segment is localized per locale (see lib/i18n/segments
+// + next.config rewrites); "Rel" variants return the path AFTER /{locale} (for
+// JSON-LD path fields), the others return the full path.
+export function featuresIndexRel(locale: Locale): string {
+  return `/${featuresSegment[locale]}`;
+}
 
 export function featuresIndexPath(locale: Locale): string {
-  return `/${locale}/${FEATURES_SEGMENT}`;
+  return `/${locale}${featuresIndexRel(locale)}`;
+}
+
+export function featureRel(locale: Locale, id: number): string {
+  return `${featuresIndexRel(locale)}/${featureSlug(id, locale)}`;
 }
 
 export function featureTitle(t: Translations, id: number): string {

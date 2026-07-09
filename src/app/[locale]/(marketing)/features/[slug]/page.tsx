@@ -10,11 +10,11 @@ import {
   getFeatureBySlug,
   featureSlug,
   featurePath,
+  featureRel,
   featuresIndexPath,
   featureTitle,
   featureDesc,
   featureColorMap,
-  FEATURES_SEGMENT,
 } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/site/PageHero";
@@ -67,7 +67,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
       <JsonLd
         data={webPageSchema({
           locale,
-          path: `/${FEATURES_SEGMENT}/${featureSlug(feature.id, locale)}`,
+          path: featureRel(locale, feature.id),
           title,
           description,
         })}

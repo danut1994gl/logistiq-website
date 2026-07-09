@@ -4,7 +4,7 @@ import { translations } from "@/lib/i18n/translations";
 import { locales, isValidLocale } from "@/lib/i18n/config";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
-import { features, featureTitle, featureDesc, featureColorMap, featurePath, featuresIndexPath, FEATURES_SEGMENT } from "@/lib/features";
+import { features, featureTitle, featureDesc, featureColorMap, featurePath, featuresIndexPath, featuresIndexRel } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/site/PageHero";
 
@@ -42,7 +42,7 @@ export default async function FeaturesIndexPage({ params }: { params: Promise<{ 
   return (
     <>
       <JsonLd
-        data={webPageSchema({ locale, path: `/${FEATURES_SEGMENT}`, title: t.features.title, description: t.features.subtitle })}
+        data={webPageSchema({ locale, path: featuresIndexRel(locale), title: t.features.title, description: t.features.subtitle })}
       />
       <JsonLd
         data={breadcrumbSchema([

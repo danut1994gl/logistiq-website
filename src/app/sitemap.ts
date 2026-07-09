@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { locales, localeToHreflang, defaultLocale } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/seo/metadata";
-import { features, featurePath } from "@/lib/features";
+import { features, featurePath, featuresIndexPath } from "@/lib/features";
 
 // Static routes with a SHARED path across locales (path after /{locale}).
 // Blog routes are appended when the blog ships.
@@ -11,7 +11,6 @@ const STATIC_ROUTES: {
   changeFrequency: "weekly" | "monthly" | "yearly";
 }[] = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
-  { path: "/features", priority: 0.9, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.7, changeFrequency: "yearly" },
   { path: "/resurse", priority: 0.8, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
@@ -35,6 +34,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: now,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
+        alternates: { languages },
+      });
+    }
+  }
+
+  // Features index — localized segment per locale (/de/funktionen, …).
+  {
+    const languages: Record<string, string> = {};
+    for (const loc of locales) languages[localeToHreflang[loc]] = `${SITE_URL}${featuresIndexPath(loc)}`;
+    languages["x-default"] = `${SITE_URL}${featuresIndexPath(defaultLocale)}`;
+    for (const loc of locales) {
+      entries.push({
+        url: `${SITE_URL}${featuresIndexPath(loc)}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.9,
         alternates: { languages },
       });
     }
