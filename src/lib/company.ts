@@ -5,7 +5,20 @@ export const company = {
   cui: "52638053",
   regCom: "J25/759/2025",
   addressLines: ["Str. Vidin 37, Tecuci", "Jud. Galați, 805300"],
+  address: {
+    street: "Str. Vidin 37",
+    city: "Tecuci",
+    region: "Galați",
+    postalCode: "805300",
+    country: "RO",
+  },
   email: "contact@logistiq.ro",
+  phone: "+40771570577",
+  // Pricing (EUR / month): Professional 139, Enterprise 500 / 800 / 1590.
+  priceLow: "139",
+  priceHigh: "1590",
+  priceCurrency: "EUR",
+  offerCount: 4,
   // Real social profile URLs. Leave a value empty to omit that network entirely —
   // we never render dead links.
   socials: {

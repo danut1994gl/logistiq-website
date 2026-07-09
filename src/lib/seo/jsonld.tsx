@@ -1,5 +1,6 @@
 import { type Locale, localeToHreflang } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { company } from "@/lib/company";
 
 type Json = Record<string, unknown>;
 
@@ -14,10 +15,12 @@ export function JsonLd({ data }: { data: Json }) {
 // --- Site-wide entities (emitted once, in the locale layout, on every page) -----
 
 export function organizationSchema(): Json {
+  const sameAs = Object.values(company.socials).filter(Boolean);
   return {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: "Logistiq",
+    legalName: company.legalName,
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
@@ -25,6 +28,24 @@ export function organizationSchema(): Json {
       width: 512,
       height: 512,
     },
+    email: company.email,
+    telephone: company.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressRegion: company.address.region,
+      postalCode: company.address.postalCode,
+      addressCountry: company.address.country,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: company.phone,
+      email: company.email,
+      contactType: "customer support",
+      availableLanguage: ["ro", "en", "de", "fr", "pl", "hu", "bg", "nl"],
+    },
+    ...(sameAs.length ? { sameAs } : {}),
   };
 }
 
@@ -47,6 +68,14 @@ export function softwareApplicationSchema(description: string, featureList: stri
     operatingSystem: "Web, iOS, Android",
     description,
     featureList,
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: company.priceCurrency,
+      lowPrice: company.priceLow,
+      highPrice: company.priceHigh,
+      offerCount: company.offerCount,
+      availability: "https://schema.org/InStock",
+    },
   };
 }
 
