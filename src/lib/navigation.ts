@@ -21,6 +21,7 @@ export const featuresNavHref = (l: Locale) => routeHref(l, "/features");
 export const pricingHref = (l: Locale) => anchorHref(l, "pricing");
 export const contactHref = (l: Locale) => routeHref(l, "/contact");
 export const resourcesNavHref = (l: Locale) => routeHref(l, "/resurse");
+export const blogNavHref = (l: Locale) => routeHref(l, "/blog");
 
 // Dropdown item.
 export type MenuItem = {
@@ -30,9 +31,10 @@ export type MenuItem = {
   href: (l: Locale) => string;
 };
 
-// Resurse dropdown — only FAQ for now; Blog joins here later.
+// Resurse dropdown — FAQ + Blog. SiteHeader is data-driven from this list.
 export const resourcesMenu: MenuItem[] = [
   { key: "faq", label: () => "FAQ", desc: (t) => t.faq.title, href: (l) => routeHref(l, "/resurse") },
+  { key: "blog", label: (t) => t.nav.blog, desc: (t) => t.blog.subtitle, href: (l) => routeHref(l, "/blog") },
 ];
 
 export type FooterColumn = {

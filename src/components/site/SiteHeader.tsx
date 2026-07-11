@@ -9,6 +9,7 @@ import { featuresSegment } from "@/lib/i18n/segments";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu } from "@/lib/navigation";
+import { blogIndexPath } from "@/lib/blog";
 import { anchorHref, swapLocale } from "@/lib/href";
 import {
   features,
@@ -82,6 +83,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
         return feature ? featurePath(target, feature.id) : featuresIndexPath(target);
       }
       return featuresIndexPath(target);
+    }
+    // Blog: shared "/blog" segment, localized article slugs. The client can't map an
+    // article slug to the target locale, so a locale switch on an article goes to the
+    // target-locale blog index (the per-locale hreflang is still emitted server-side).
+    if (isValidLocale(curLoc) && seg === "blog") {
+      return blogIndexPath(target);
     }
     return swapLocale(target, pathname);
   };
