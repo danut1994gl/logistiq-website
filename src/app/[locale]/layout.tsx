@@ -126,6 +126,12 @@ export default async function LocaleLayout({ children, params }: Props) {
         {/* Site-wide entities only. Page-specific entities (WebPage/FAQPage/Article)
             are emitted by the owning page so they don't leak onto every route. */}
         <JsonLd data={siteGraph(t.seo.description, SOFTWARE_FEATURES)} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Logistiq Blog"
+          href={`${SITE_URL}/rss.xml`}
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
