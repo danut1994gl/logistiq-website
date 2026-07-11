@@ -8,6 +8,13 @@ import {
   categoryPath,
   sanitizeArticleHtml,
   slugify,
+  getAllPublishedPosts,
+  getPublishedPosts,
+  getPostBySlug,
+  getAllCategories,
+  getCategoryBySlug,
+  getPublishedPostsByCategory,
+  postAvailableLocales,
 } from "@/lib/blog";
 
 describe("blog path helpers", () => {
@@ -50,5 +57,21 @@ describe("sanitizeArticleHtml", () => {
   });
   it("forces rel=noopener on links", () => {
     expect(sanitizeArticleHtml('<a href="https://x.com">x</a>')).toContain("noopener");
+  });
+});
+
+describe("blog data layer exports", () => {
+  it("exposes the cached readers", () => {
+    for (const fn of [
+      getAllPublishedPosts, getPublishedPosts, getPostBySlug,
+      getAllCategories, getCategoryBySlug, getPublishedPostsByCategory,
+      postAvailableLocales,
+    ]) {
+      expect(typeof fn).toBe("function");
+    }
+  });
+  it("postAvailableLocales sorts by canonical locale order", () => {
+    const post = { translations: [{ locale: "en" }, { locale: "ro" }] } as never;
+    expect(postAvailableLocales(post)).toEqual(["ro", "en"]);
   });
 });
