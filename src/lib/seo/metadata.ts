@@ -25,3 +25,23 @@ export function buildAlternates(
     languages,
   };
 }
+
+// Like buildAlternates, but hreflang is limited to the locales an article actually
+// exists in (partial-locale publishing), so we never emit a 404 alternate. x-default
+// points at the default locale when present, else the first available locale.
+export function buildAlternatesFor(
+  locale: Locale,
+  available: Locale[],
+  pathFor: (l: Locale) => string
+): { canonical: string; languages: Record<string, string> } {
+  const languages: Record<string, string> = {};
+  for (const loc of available) {
+    languages[localeToHreflang[loc]] = `${SITE_URL}${pathFor(loc)}`;
+  }
+  const xDefault = available.includes(defaultLocale) ? defaultLocale : available[0];
+  languages["x-default"] = `${SITE_URL}${pathFor(xDefault)}`;
+  return {
+    canonical: `${SITE_URL}${pathFor(locale)}`,
+    languages,
+  };
+}
