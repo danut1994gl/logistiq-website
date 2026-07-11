@@ -145,3 +145,39 @@ export function breadcrumbSchema(items: { name: string; url: string }[]): Json {
     })),
   };
 }
+
+// BlogPosting for an individual article. Organization/WebSite/Software stay
+// site-wide in [locale]/layout.tsx — do NOT re-emit them here. Images must be
+// absolute Supabase URLs. mainEntityOfPage matches the page's webPageSchema @id.
+export function articleSchema(opts: {
+  locale: Locale;
+  url: string;
+  headline: string;
+  description: string;
+  images: string[];
+  datePublished: string;
+  dateModified: string;
+  authorName?: string | null;
+  section?: string | null;
+  keywords?: string[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${opts.url}/#article`,
+    mainEntityOfPage: { "@id": `${opts.url}/#webpage` },
+    headline: opts.headline,
+    description: opts.description,
+    ...(opts.images.length ? { image: opts.images } : {}),
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    inLanguage: localeToHreflang[opts.locale],
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    author: opts.authorName
+      ? { "@type": "Person", name: opts.authorName }
+      : { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    ...(opts.section ? { articleSection: opts.section } : {}),
+    ...(opts.keywords && opts.keywords.length ? { keywords: opts.keywords.join(", ") } : {}),
+  };
+}
