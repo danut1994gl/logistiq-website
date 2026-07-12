@@ -55,7 +55,7 @@ export function CheckinJourneySection({ t }: { t: Translations }) {
         {/* Stage: SVG scenes + phone overlay. min-h keeps the stage (and the
             phone) readable on narrow screens; the SVG letterboxes invisibly
             against the same dark background. */}
-        <div className="relative aspect-[3/1] min-h-[240px] rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl">
+        <div className="relative w-full aspect-[3/1] min-h-[240px] rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl">
           <CheckinJourneyScene dockLabel={c.dockBadge} />
           <CheckinJourneyPhone t={t} />
         </div>
