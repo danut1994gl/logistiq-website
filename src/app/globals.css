@@ -325,7 +325,9 @@ body {
   0%     { transform: translateX(-300px); }
   1.11%  { transform: translateX(-300px); animation-timing-function: cubic-bezier(0.3, 0.15, 0.25, 1); }
   24.07% { transform: translateX(570px); }
-  100%   { transform: translateX(570px); }
+  96.3%  { transform: translateX(570px); }
+  96.31% { transform: translateX(-300px); }
+  100%   { transform: translateX(-300px); }
 }
 
 .cj2-truck3 {
@@ -335,8 +337,8 @@ body {
 }
 @keyframes cj2-truck3 {
   0%, 70.37% { transform: translateX(-300px); animation-timing-function: cubic-bezier(0.3, 0.15, 0.25, 1); }
-  79.63%     { transform: translateX(452px); }
-  85.19%     { transform: translateX(452px); animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+  79.63%     { transform: translateX(411px); }
+  85.19%     { transform: translateX(411px); animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95); }
   92.59%     { transform: translateX(902px); }
   100%       { transform: translateX(902px); }
 }
@@ -398,6 +400,32 @@ body {
   88.5%   { opacity: 1; transform: translateY(0); }
   96.3%   { opacity: 1; }
   100%    { opacity: 0; }
+}
+
+/* Driver's phone tapping the gate scanner (scene 3) */
+.cj2-gatephone { opacity: 0; animation: cj2-gatephone 27s linear infinite; }
+@keyframes cj2-gatephone {
+  0%, 78.5%    { opacity: 0; transform: translateY(6px); }
+  79.63%       { opacity: 1; transform: translateY(0); }
+  84.5%        { opacity: 1; }
+  85.19%, 100% { opacity: 0; }
+}
+
+/* Parking signboard QR pulse, right after the truck parks (scene 1) */
+.cj2-signpulse {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cj2-signpulse 27s linear infinite;
+}
+@keyframes cj2-signpulse {
+  0%, 24.07% { transform: scale(0.5); opacity: 0; }
+  24.8%      { opacity: 0.8; }
+  27%        { transform: scale(1.8); opacity: 0; }
+  27.2%      { transform: scale(0.5); opacity: 0; }
+  27.9%      { opacity: 0.8; }
+  29.6%      { transform: scale(1.8); opacity: 0; }
+  100%       { opacity: 0; }
 }
 
 /* Step-card active glows, synced to the scenes (crossfades at the edges). */
@@ -531,7 +559,7 @@ body {
   .cj2-glow-1, .cj2-glow-2, .cj2-glow-3,
   .cj2-phone, .cj2-ph1, .cj2-ph2, .cj2-ph3, .cj2-ph4, .cj2-ph5,
   .cj2-scanline, .cj2-row-1, .cj2-row-2, .cj2-row-3, .cj2-btn,
-  .cj2-hg, .cj2-dot {
+  .cj2-hg, .cj2-dot, .cj2-gatephone, .cj2-signpulse {
     animation: none !important;
   }
 }

@@ -90,6 +90,8 @@ export const translations = {
       step3Title: "Acces la rampă",
       step3Desc: "La poartă, scanarea deschide bariera, iar camionul merge direct la rampa alocată.",
       dockBadge: "RAMPA 12",
+      scanSignLine1: "Scanează codul QR",
+      scanSignLine2: "pentru check-in",
     },
     features: {
       title: "Tot ce ai nevoie pentru un depozit eficient",
@@ -818,6 +820,8 @@ export const translations = {
       step3Title: "Access to the dock",
       step3Desc: "At the gate, a scan opens the barrier and the truck drives straight to its assigned dock.",
       dockBadge: "DOCK 12",
+      scanSignLine1: "Scan the QR code",
+      scanSignLine2: "to check in",
     },
     features: {
       title: "Everything you need for an efficient warehouse",
@@ -1529,6 +1533,8 @@ export const translations = {
       step3Title: "Zufahrt zur Rampe",
       step3Desc: "Am Tor öffnet der Scan die Schranke, und der Lkw fährt direkt zur zugewiesenen Rampe.",
       dockBadge: "RAMPE 12",
+      scanSignLine1: "QR-Code scannen",
+      scanSignLine2: "für den Check-in",
     },
     features: {
       title: "Alles, was Sie fur ein effizientes Lager brauchen",
@@ -2025,6 +2031,8 @@ export const translations = {
       step3Title: "Dojazd do doku",
       step3Desc: "Przy bramie skan otwiera szlaban, a ciężarówka jedzie prosto do przydzielonego doku.",
       dockBadge: "DOK 12",
+      scanSignLine1: "Zeskanuj kod QR",
+      scanSignLine2: "aby się zarejestrować",
     },
     features: {
       title: "Wszystko, czego potrzebujesz do wydajnego magazynu",
@@ -2521,6 +2529,8 @@ export const translations = {
       step3Title: "Behajtás a dokkhoz",
       step3Desc: "A kapunál a beolvasás nyitja a sorompót, és a kamion egyenesen a kijelölt dokkhoz hajt.",
       dockBadge: "DOKK 12",
+      scanSignLine1: "Olvasd be a QR-kódot",
+      scanSignLine2: "a bejelentkezéshez",
     },
     features: {
       title: "Minden, amire hatekony raktarhoz szuksege van",
@@ -3017,6 +3027,8 @@ export const translations = {
       step3Title: "Достъп до рампата",
       step3Desc: "На портата сканирането отваря бариерата и камионът отива направо към разпределената рампа.",
       dockBadge: "РАМПА 12",
+      scanSignLine1: "Сканирайте QR кода",
+      scanSignLine2: "за регистрация",
     },
     features: {
       title: "Vsichko, ot koeto se nuzhdaete za efektiven sklad",
@@ -3513,6 +3525,8 @@ export const translations = {
       step3Title: "Accès au quai",
       step3Desc: "Au portail, le scan ouvre la barrière et le camion se rend directement au quai attribué.",
       dockBadge: "QUAI 12",
+      scanSignLine1: "Scannez le code QR",
+      scanSignLine2: "pour le check-in",
     },
     features: {
       title: "Tout ce dont vous avez besoin pour un entrepot efficace",
@@ -4086,6 +4100,8 @@ export const translations = {
       step3Title: "Toegang tot het dock",
       step3Desc: "Bij de poort opent de scan de slagboom en rijdt de vrachtwagen rechtstreeks naar het toegewezen dock.",
       dockBadge: "DOCK 12",
+      scanSignLine1: "Scan de QR-code",
+      scanSignLine2: "om in te checken",
     },
     features: {
       title: "Alles wat u nodig heeft voor een efficient magazijn",
