@@ -26,7 +26,7 @@ export function CheckinJourneySection({ t }: { t: Translations }) {
           <CheckinJourneyScene dockLabel={c.dockBadge} />
         </div>
 
-        <ol className="grid gap-6 sm:grid-cols-3 mt-10 list-none">
+        <ol role="list" className="grid gap-6 sm:grid-cols-3 mt-10 list-none">
           {steps.map((step, i) => {
             const n = `0${i + 1}`;
             return (

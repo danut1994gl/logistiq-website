@@ -353,6 +353,7 @@ body {
   95%, 100% { opacity: 0; }
 }
 
+/* transform-box: fill-box needs Safari 11+; older WebKit mis-pivots only while animating (static base state unaffected) */
 .cj-barrier-arm {
   transform: rotate(-55deg);
   transform-box: fill-box;
@@ -371,7 +372,8 @@ body {
 .cj-glow-2 { animation: cj-active-2 13s linear infinite; }
 .cj-glow-3 { animation: cj-active-3 13s linear infinite; }
 @keyframes cj-active-1 {
-  0%        { opacity: 1; }
+  0%        { opacity: 0; }
+  4%        { opacity: 1; }
   28%       { opacity: 1; }
   33%, 100% { opacity: 0; }
 }
