@@ -78,6 +78,19 @@ export const translations = {
       step4Desc:
         "La finalizare, totul este documentat automat. Rapoarte detaliate, timpi de operare, statistici, evidență.",
     },
+    checkinJourney: {
+      title: "Cum funcționează check-in-ul digital",
+      subtitle:
+        "De la sosirea camionului până la ridicarea barierei — tot procesul durează sub un minut.",
+      stepLabel: "PAS",
+      step1Title: "Sosire la depozit",
+      step1Desc: "Camionul ajunge la poartă și oprește în parcare.",
+      step2Title: "Scanare cod QR",
+      step2Desc: "Șoferul scanează codul de la poartă cu telefonul.",
+      step3Title: "Check-in digital",
+      step3Desc: "Check-in confirmat, doc alocat, bariera se ridică.",
+      dockBadge: "DOC 12",
+    },
     features: {
       title: "Tot ce ai nevoie pentru un depozit eficient",
       subtitle:
@@ -793,6 +806,19 @@ export const translations = {
       step4Desc:
         "Upon completion, everything is automatically documented. Detailed reports, operation times, statistics, records.",
     },
+    checkinJourney: {
+      title: "How digital check-in works",
+      subtitle:
+        "From truck arrival to barrier lift — the whole process takes under a minute.",
+      stepLabel: "STEP",
+      step1Title: "Arrival at the warehouse",
+      step1Desc: "The truck arrives at the gate and stops in the parking area.",
+      step2Title: "Scan the QR code",
+      step2Desc: "The driver scans the gate code with their phone.",
+      step3Title: "Digital check-in",
+      step3Desc: "Check-in confirmed, dock assigned, the barrier lifts.",
+      dockBadge: "DOCK 12",
+    },
     features: {
       title: "Everything you need for an efficient warehouse",
       subtitle:
@@ -1491,6 +1517,19 @@ export const translations = {
       step4Desc:
         "Nach Abschluss wird alles automatisch dokumentiert. Detaillierte Berichte, Betriebszeiten, Statistiken, Aufzeichnungen.",
     },
+    checkinJourney: {
+      title: "So funktioniert der digitale Check-in",
+      subtitle:
+        "Von der Ankunft des Lkw bis zum Öffnen der Schranke – der gesamte Prozess dauert weniger als eine Minute.",
+      stepLabel: "SCHRITT",
+      step1Title: "Ankunft am Lager",
+      step1Desc: "Der Lkw erreicht das Tor und hält auf dem Parkplatz.",
+      step2Title: "QR-Code scannen",
+      step2Desc: "Der Fahrer scannt den Code am Tor mit dem Smartphone.",
+      step3Title: "Digitaler Check-in",
+      step3Desc: "Check-in bestätigt, Rampe zugewiesen, die Schranke öffnet sich.",
+      dockBadge: "RAMPE 12",
+    },
     features: {
       title: "Alles, was Sie fur ein effizientes Lager brauchen",
       subtitle:
@@ -1973,6 +2012,19 @@ export const translations = {
       step4Title: "Operacja zakonczona",
       step4Desc:
         "Po zakończeniu wszystko jest automatycznie dokumentowane. Szczegółowe raporty, czasy operacji, statystyki, ewidencja.",
+    },
+    checkinJourney: {
+      title: "Jak działa cyfrowa rejestracja",
+      subtitle:
+        "Od przyjazdu ciężarówki do podniesienia szlabanu — cały proces trwa niecałą minutę.",
+      stepLabel: "KROK",
+      step1Title: "Przyjazd do magazynu",
+      step1Desc: "Ciężarówka podjeżdża pod bramę i zatrzymuje się na parkingu.",
+      step2Title: "Skanowanie kodu QR",
+      step2Desc: "Kierowca skanuje telefonem kod przy bramie.",
+      step3Title: "Cyfrowa rejestracja",
+      step3Desc: "Rejestracja potwierdzona, dok przydzielony, szlaban się podnosi.",
+      dockBadge: "DOK 12",
     },
     features: {
       title: "Wszystko, czego potrzebujesz do wydajnego magazynu",
@@ -2457,6 +2509,19 @@ export const translations = {
       step4Desc:
         "Befejezés után minden automatikusan dokumentálódik. Részletes jelentések, működési idők, statisztikák, nyilvántartás.",
     },
+    checkinJourney: {
+      title: "Így működik a digitális bejelentkezés",
+      subtitle:
+        "A kamion érkezésétől a sorompó felnyílásáig — a teljes folyamat kevesebb mint egy perc.",
+      stepLabel: "LÉPÉS",
+      step1Title: "Érkezés a raktárhoz",
+      step1Desc: "A kamion a kapuhoz ér, és megáll a parkolóban.",
+      step2Title: "QR-kód beolvasása",
+      step2Desc: "A sofőr a telefonjával beolvassa a kapunál lévő kódot.",
+      step3Title: "Digitális bejelentkezés",
+      step3Desc: "Bejelentkezés megerősítve, dokk kijelölve, a sorompó felnyílik.",
+      dockBadge: "DOKK 12",
+    },
     features: {
       title: "Minden, amire hatekony raktarhoz szuksege van",
       subtitle:
@@ -2940,6 +3005,19 @@ export const translations = {
       step4Desc:
         "При завършване всичко се документира автоматично. Подробни отчети, работни времена, статистики, отчетност.",
     },
+    checkinJourney: {
+      title: "Как работи дигиталната регистрация",
+      subtitle:
+        "От пристигането на камиона до вдигането на бариерата — целият процес отнема под минута.",
+      stepLabel: "СТЪПКА",
+      step1Title: "Пристигане в склада",
+      step1Desc: "Камионът пристига на портала и спира на паркинга.",
+      step2Title: "Сканиране на QR код",
+      step2Desc: "Шофьорът сканира кода на портала с телефона си.",
+      step3Title: "Дигитална регистрация",
+      step3Desc: "Регистрацията е потвърдена, докът е разпределен, бариерата се вдига.",
+      dockBadge: "ДОК 12",
+    },
     features: {
       title: "Vsichko, ot koeto se nuzhdaete za efektiven sklad",
       subtitle:
@@ -3422,6 +3500,19 @@ export const translations = {
       step4Title: "Operation terminee",
       step4Desc:
         "Une fois terminé, tout est documenté automatiquement. Rapports détaillés, temps d'opération, statistiques, registres.",
+    },
+    checkinJourney: {
+      title: "Comment fonctionne le check-in numérique",
+      subtitle:
+        "De l'arrivée du camion à la levée de la barrière — l'ensemble du processus prend moins d'une minute.",
+      stepLabel: "ÉTAPE",
+      step1Title: "Arrivée à l'entrepôt",
+      step1Desc: "Le camion arrive au portail et s'arrête sur le parking.",
+      step2Title: "Scan du code QR",
+      step2Desc: "Le chauffeur scanne le code du portail avec son téléphone.",
+      step3Title: "Check-in numérique",
+      step3Desc: "Check-in confirmé, quai attribué, la barrière se lève.",
+      dockBadge: "QUAI 12",
     },
     features: {
       title: "Tout ce dont vous avez besoin pour un entrepot efficace",
@@ -3982,6 +4073,19 @@ export const translations = {
       step4Title: "Operatie voltooid",
       step4Desc:
         "Na voltooiing wordt alles automatisch gedocumenteerd. Gedetailleerde rapporten, operatietijden, statistieken, registratie.",
+    },
+    checkinJourney: {
+      title: "Zo werkt digitale check-in",
+      subtitle:
+        "Van de aankomst van de vrachtwagen tot het openen van de slagboom — het hele proces duurt minder dan een minuut.",
+      stepLabel: "STAP",
+      step1Title: "Aankomst bij het magazijn",
+      step1Desc: "De vrachtwagen komt aan bij de poort en stopt op de parkeerplaats.",
+      step2Title: "QR-code scannen",
+      step2Desc: "De chauffeur scant de code bij de poort met zijn telefoon.",
+      step3Title: "Digitale check-in",
+      step3Desc: "Check-in bevestigd, dok toegewezen, de slagboom gaat omhoog.",
+      dockBadge: "DOK 12",
     },
     features: {
       title: "Alles wat u nodig heeft voor een efficient magazijn",
