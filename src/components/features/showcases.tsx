@@ -1,10 +1,12 @@
 import type { FC } from "react";
 import type { Translations } from "@/lib/i18n/translations";
-import { CheckinJourneySection } from "./CheckinJourneySection";
+import type { Locale } from "@/lib/i18n/config";
+import { DigitalCheckinShowcase } from "./DigitalCheckinShowcase";
 
-// Per-feature showcase slot: feature id -> rich section rendered under the
-// hero on that feature's page. Kept out of lib/features.ts so the data
+// Per-feature showcase slot: feature id -> rich content rendered under the
+// hero on that feature's page (animation, narrative, benefits, FAQ — each
+// feature composes its own). Kept out of lib/features.ts so the data
 // registry stays free of component imports.
-export const featureShowcases: Partial<Record<number, FC<{ t: Translations }>>> = {
-  1: CheckinJourneySection,
+export const featureShowcases: Partial<Record<number, FC<{ t: Translations; locale: Locale }>>> = {
+  1: DigitalCheckinShowcase,
 };

@@ -118,7 +118,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
         }
       />
 
-      {Showcase ? <Showcase t={t} /> : null}
+      {Showcase ? <Showcase t={t} locale={locale} /> : null}
 
       {/* Related features */}
       <section className="py-16 lg:py-20">
