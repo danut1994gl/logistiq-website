@@ -2512,7 +2512,7 @@ export const translations = {
     checkinJourney: {
       title: "Így működik a digitális bejelentkezés",
       subtitle:
-        "A kamion érkezésétől a sorompó felnyílásáig — a teljes folyamat kevesebb mint egy perc.",
+        "A kamion érkezésétől a sorompó felnyílásáig — a teljes folyamat kevesebb mint egy percig tart.",
       stepLabel: "LÉPÉS",
       step1Title: "Érkezés a raktárhoz",
       step1Desc: "A kamion a kapuhoz ér, és megáll a parkolóban.",
@@ -3011,12 +3011,12 @@ export const translations = {
         "От пристигането на камиона до вдигането на бариерата — целият процес отнема под минута.",
       stepLabel: "СТЪПКА",
       step1Title: "Пристигане в склада",
-      step1Desc: "Камионът пристига на портала и спира на паркинга.",
+      step1Desc: "Камионът пристига на портата и спира на паркинга.",
       step2Title: "Сканиране на QR код",
-      step2Desc: "Шофьорът сканира кода на портала с телефона си.",
+      step2Desc: "Шофьорът сканира кода на портата с телефона си.",
       step3Title: "Дигитална регистрация",
-      step3Desc: "Регистрацията е потвърдена, докът е разпределен, бариерата се вдига.",
-      dockBadge: "ДОК 12",
+      step3Desc: "Регистрацията е потвърдена, рампата е разпределена, бариерата се вдига.",
+      dockBadge: "РАМПА 12",
     },
     features: {
       title: "Vsichko, ot koeto se nuzhdaete za efektiven sklad",
@@ -4084,8 +4084,8 @@ export const translations = {
       step2Title: "QR-code scannen",
       step2Desc: "De chauffeur scant de code bij de poort met zijn telefoon.",
       step3Title: "Digitale check-in",
-      step3Desc: "Check-in bevestigd, dok toegewezen, de slagboom gaat omhoog.",
-      dockBadge: "DOK 12",
+      step3Desc: "Check-in bevestigd, dock toegewezen, de slagboom gaat omhoog.",
+      dockBadge: "DOCK 12",
     },
     features: {
       title: "Alles wat u nodig heeft voor een efficient magazijn",
