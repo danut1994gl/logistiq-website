@@ -473,8 +473,8 @@ body {
 @keyframes cj2-scanline {
   0%, 33.33%   { transform: translateY(0); opacity: 0; }
   34%          { opacity: 1; }
-  36.5%        { transform: translateY(72px); }
-  39.5%        { transform: translateY(4px); opacity: 1; }
+  36.5%        { transform: translateY(40cqw); }
+  39.5%        { transform: translateY(2cqw); opacity: 1; }
   40.74%, 100% { opacity: 0; }
 }
 
