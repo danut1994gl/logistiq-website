@@ -21,6 +21,11 @@ CSS animation, existing tokens/keyframes, `prefers-reduced-motion` support.
 Layout (decided): **panoramic scene on top, 3 step cards below**, active card
 highlighted in sync with the scene. Truck journey reads left → right.
 
+**Mobile-ready (required):** the scene is a responsive SVG (`viewBox` +
+`w-full h-auto`) that scales down cleanly; the three step cards stack
+vertically below `sm`. No horizontal page scroll at any viewport. Verified at
+375px width during the Playwright pass.
+
 ## Architecture
 
 ### Per-feature showcase slot
@@ -79,6 +84,7 @@ New translations block `checkinJourney` added to **all 8 locales**
 | Key | RO (source, user-provided) | EN |
 |---|---|---|
 | `title` | Cum funcționează check-in-ul digital | How digital check-in works |
+| `subtitle` | De la sosirea camionului până la ridicarea barierei — tot procesul durează sub un minut. | From truck arrival to barrier lift — the whole process takes under a minute. |
 | `step1Title` | Sosire la depozit | Arrival at the warehouse |
 | `step1Desc` | Camionul ajunge la poartă și oprește în parcare. | The truck arrives at the gate and stops in the parking area. |
 | `step2Title` | Scanare cod QR | Scan the QR code |
