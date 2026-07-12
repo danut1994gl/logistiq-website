@@ -317,15 +317,15 @@ body {
 }
 
 .cj2-truck1 {
-  transform: translateX(570px);
+  transform: translateX(546px);
   animation: cj2-truck1 27s linear infinite;
   will-change: transform;
 }
 @keyframes cj2-truck1 {
   0%     { transform: translateX(-300px); }
   1.11%  { transform: translateX(-300px); animation-timing-function: cubic-bezier(0.3, 0.15, 0.25, 1); }
-  24.07% { transform: translateX(570px); }
-  96.3%  { transform: translateX(570px); }
+  24.07% { transform: translateX(546px); }
+  96.3%  { transform: translateX(546px); }
   96.31% { transform: translateX(-300px); }
   100%   { transform: translateX(-300px); }
 }
@@ -337,8 +337,8 @@ body {
 }
 @keyframes cj2-truck3 {
   0%, 70.37% { transform: translateX(-300px); animation-timing-function: cubic-bezier(0.3, 0.15, 0.25, 1); }
-  79.63%     { transform: translateX(411px); }
-  85.19%     { transform: translateX(411px); animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+  79.63%     { transform: translateX(348px); }
+  85.19%     { transform: translateX(348px); animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95); }
   92.59%     { transform: translateX(902px); }
   100%       { transform: translateX(902px); }
 }
