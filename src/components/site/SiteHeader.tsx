@@ -8,7 +8,7 @@ import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/con
 import { featuresSegment } from "@/lib/i18n/segments";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
-import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu } from "@/lib/navigation";
+import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu, blogNavHref } from "@/lib/navigation";
 import { blogIndexPath } from "@/lib/blog";
 import { anchorHref, swapLocale } from "@/lib/href";
 import {
@@ -204,6 +204,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               )}
             </div>
 
+            <Link href={blogNavHref(locale)} className={link}>
+              {t.nav.blog}
+            </Link>
+
             <Link href={contactHref(locale)} className={link}>
               {t.nav.contact}
             </Link>
@@ -348,6 +352,10 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                   ))}
                 </div>
               )}
+
+              <Link href={blogNavHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium">
+                {t.nav.blog}
+              </Link>
 
               <Link href={contactHref(locale)} onClick={() => setIsMobileOpen(false)} className="px-4 py-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium">
                 {t.nav.contact}

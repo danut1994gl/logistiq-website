@@ -31,10 +31,10 @@ export type MenuItem = {
   href: (l: Locale) => string;
 };
 
-// Resurse dropdown — FAQ + Blog. SiteHeader is data-driven from this list.
+// Resurse dropdown — FAQ. Blog is a top-level nav item (between Resurse and Contact),
+// wired directly in SiteHeader via blogNavHref. SiteHeader is data-driven from this list.
 export const resourcesMenu: MenuItem[] = [
   { key: "faq", label: () => "FAQ", desc: (t) => t.faq.title, href: (l) => routeHref(l, "/resurse") },
-  { key: "blog", label: (t) => t.nav.blog, desc: (t) => t.blog.subtitle, href: (l) => routeHref(l, "/blog") },
 ];
 
 export type FooterColumn = {
