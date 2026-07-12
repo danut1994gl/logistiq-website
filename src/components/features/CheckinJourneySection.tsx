@@ -60,7 +60,7 @@ export function CheckinJourneySection({ t }: { t: Translations }) {
           <CheckinJourneyPhone t={t} />
         </div>
 
-        <CheckinJourneyController cards={cards} />
+        <CheckinJourneyController cards={cards} labels={[c.step1Title, c.step2Title, c.step3Title]} />
       </div>
     </section>
   );

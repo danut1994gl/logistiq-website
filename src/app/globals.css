@@ -542,14 +542,35 @@ body {
   100%      { transform: rotate(360deg); }
 }
 
-.cj2-dot { animation: cj2-dot 27s linear infinite; }
-@keyframes cj2-dot {
-  0%, 53.7%    { opacity: 0.3; }
-  54.6%        { opacity: 1; }
-  55.5%        { opacity: 0.3; }
-  56.4%        { opacity: 1; }
-  57.3%        { opacity: 0.3; }
-  58.2%        { opacity: 1; }
+/* Waiting ellipsis: three dots staggered via shifted keyframes (no delays). */
+.cj2-dot-1 { animation: cj2-dot-1 27s linear infinite; }
+.cj2-dot-2 { animation: cj2-dot-2 27s linear infinite; }
+.cj2-dot-3 { animation: cj2-dot-3 27s linear infinite; }
+@keyframes cj2-dot-1 {
+  0%, 53.7% { opacity: 0.3; }
+  54.4%     { opacity: 1; }
+  55.2%     { opacity: 0.3; }
+  56.2%     { opacity: 1; }
+  57%       { opacity: 0.3; }
+  58%       { opacity: 1; }
+  58.8%, 100% { opacity: 0.3; }
+}
+@keyframes cj2-dot-2 {
+  0%, 54.2% { opacity: 0.3; }
+  54.9%     { opacity: 1; }
+  55.7%     { opacity: 0.3; }
+  56.7%     { opacity: 1; }
+  57.5%     { opacity: 0.3; }
+  58.5%     { opacity: 1; }
+  59.26%, 100% { opacity: 0.3; }
+}
+@keyframes cj2-dot-3 {
+  0%, 54.7% { opacity: 0.3; }
+  55.4%     { opacity: 1; }
+  56.2%     { opacity: 0.3; }
+  57.2%     { opacity: 1; }
+  58%       { opacity: 0.3; }
+  59%       { opacity: 1; }
   59.26%, 100% { opacity: 0.3; }
 }
 
@@ -559,7 +580,7 @@ body {
   .cj2-glow-1, .cj2-glow-2, .cj2-glow-3,
   .cj2-phone, .cj2-ph1, .cj2-ph2, .cj2-ph3, .cj2-ph4, .cj2-ph5,
   .cj2-scanline, .cj2-row-1, .cj2-row-2, .cj2-row-3, .cj2-btn,
-  .cj2-hg, .cj2-dot, .cj2-gatephone, .cj2-signpulse {
+  .cj2-hg, .cj2-dot-1, .cj2-dot-2, .cj2-dot-3, .cj2-gatephone, .cj2-signpulse {
     animation: none !important;
   }
 }

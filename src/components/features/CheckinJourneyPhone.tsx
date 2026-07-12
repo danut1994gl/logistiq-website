@@ -91,9 +91,9 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
             </svg>
             <div className="text-white font-semibold text-[6cqw] leading-tight">
               {q.waiting}
-              <span className="cj2-dot">.</span>
-              <span className="cj2-dot">.</span>
-              <span className="cj2-dot">.</span>
+              <span className="cj2-dot-1">.</span>
+              <span className="cj2-dot-2">.</span>
+              <span className="cj2-dot-3">.</span>
             </div>
             <div className="text-slate-400 text-[4.6cqw] leading-snug">{q.pleaseWait}</div>
           </div>
