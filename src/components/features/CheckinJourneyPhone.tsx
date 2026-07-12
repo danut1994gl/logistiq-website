@@ -1,6 +1,5 @@
 import type { Translations } from "@/lib/i18n/translations";
 import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
-import { QrCodeIcon } from "@/components/icons";
 
 // Scene-2 phone: large, realistic driver-app mockup rendered as an HTML
 // overlay on top of the SVG stage (PhoneFrame visual language, localized via
@@ -27,9 +26,8 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
         <div className="absolute inset-x-[4.5%] top-[6.5%] bottom-[4.5%] bg-slate-900 rounded-[9cqw] overflow-hidden">
           {/* app header — QRGO Driver branding */}
           <div className="absolute inset-x-0 top-0 h-[16%] bg-blue-600 flex items-center justify-center gap-[2.5cqw] px-[5cqw] z-10">
-            <span className="flex items-center justify-center shrink-0 w-[9cqw] h-[9cqw] rounded-[2.2cqw] bg-white text-blue-600 [&_svg]:w-[6.5cqw] [&_svg]:h-[6.5cqw]">
-              <QrCodeIcon />
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative SVG logo, next/image adds nothing here */}
+            <img src="/qrgo-icon.svg" alt="" className="shrink-0 w-[9.5cqw] h-[9.5cqw] rounded-[2.2cqw] bg-white p-[0.8cqw]" />
             <span className="flex flex-col items-start leading-none min-w-0">
               <span className="text-white font-extrabold text-[5.8cqw] leading-none tracking-tight">
                 QRGO <span className="font-medium">Driver</span>

@@ -32,10 +32,9 @@ function TruckArt({ variant = "hero" }: { variant?: "hero" | "parked" }) {
       <rect x="124" y="336" width="13" height="4" rx="1.5" className="fill-slate-600" />
       {/* trailer rear axles (clustered at the tail) + mudflap */}
       <rect x="66" y="330" width="9" height="13" className="fill-slate-900" />
-      {/* tractor frame under the trailer nose + cab, fuel tank, mudflap */}
+      {/* tractor frame + full-length side skirt (wheel to wheel) */}
       <rect x="150" y="314" width="92" height="7" className="fill-slate-800" />
-      <rect x="196" y="320" width="30" height="12" rx="6" className="fill-slate-500" />
-      <rect x="150" y="330" width="8" height="13" className="fill-slate-900" />
+      <rect x="152" y="318" width="95" height="13" rx="3" className="fill-blue-700" />
       {/* exhaust stack in the cab–trailer gap */}
       <rect x="180" y="250" width="4" height="60" rx="2" className="fill-slate-500" />
       {/* cab-over tractor (body at trailer level, wheels exposed below) */}
@@ -156,9 +155,7 @@ export function CheckinJourneyScene({
         {/* warehouse, canopy, numbered docks */}
         <rect x="780" y="120" width="400" height="224" rx="4" className="fill-slate-800 stroke-slate-700" strokeWidth="2" />
         <rect x="780" y="120" width="400" height="10" className="fill-blue-600" />
-        <text x="980" y="164" textAnchor="middle" className="fill-slate-500" style={{ fontSize: 20, fontWeight: 700, letterSpacing: 6 }}>
-          LOGISTIQ
-        </text>
+        <image href="/banner-nav.svg" x="848" y="132" width="200" height="50" opacity="0.9" />
         <rect x="770" y="196" width="420" height="12" rx="3" className="fill-slate-600" />
         <rect x="792" y="208" width="5" height="20" className="fill-slate-600" />
         <rect x="1166" y="208" width="5" height="20" className="fill-slate-600" />
