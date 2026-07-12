@@ -1,6 +1,6 @@
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
-import { UsersIcon, SteeringWheelIcon, ChartIcon } from "@/components/icons";
+import { UsersIcon, SteeringWheelIcon, ChartIcon, CompassIcon } from "@/components/icons";
 import { featureRel } from "@/lib/features";
 import { CheckinJourneySection } from "./CheckinJourneySection";
 import { FeatureProblemSection } from "./FeatureProblemSection";
@@ -45,6 +45,11 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
             icon: ChartIcon,
             title: c.benefitManagerTitle,
             items: [c.benefitManager1, c.benefitManager2, c.benefitManager3],
+          },
+          {
+            icon: CompassIcon,
+            title: c.benefitNewTitle,
+            items: [c.benefitNew1, c.benefitNew2, c.benefitNew3],
           },
         ]}
       />

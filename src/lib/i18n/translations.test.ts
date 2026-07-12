@@ -13,6 +13,10 @@ const CHECKIN_JOURNEY_KEYS = [
   "step3Title",
   "step3Desc",
   "dockBadge",
+  "scanSignLine1",
+  "scanSignLine2",
+  "fieldTruck",
+  "submitLabel",
 ] as const;
 
 const CHECKIN_CONTENT_KEYS = [
@@ -44,6 +48,10 @@ const CHECKIN_CONTENT_KEYS = [
   "benefitManager1",
   "benefitManager2",
   "benefitManager3",
+  "benefitNewTitle",
+  "benefitNew1",
+  "benefitNew2",
+  "benefitNew3",
   "faqTitle",
   "faq1Q",
   "faq1A",

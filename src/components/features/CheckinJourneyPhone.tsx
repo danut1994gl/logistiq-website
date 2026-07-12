@@ -56,22 +56,34 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
             </div>
           </div>
 
-          {/* 2 — form */}
-          <div className="cj2-ph2 absolute inset-0 top-[16%] px-[7cqw] py-[6cqw] flex flex-col gap-[4.5cqw]">
-            <div className="cj2-row-1 bg-slate-800 rounded-[3cqw] px-[5cqw] py-[3cqw]">
-              <div className="text-slate-400 uppercase tracking-wide text-[4cqw] leading-tight">{q.driverNameLabel}</div>
-              <div className="text-white font-medium text-[5.4cqw] leading-tight truncate">{q.driverName}</div>
+          {/* 2 — the QRGO fill-form page: fields type themselves in */}
+          <div className="cj2-ph2 absolute inset-0 top-[16%] px-[6cqw] py-[4cqw] flex flex-col gap-[2.8cqw]">
+            <div className="cj2-row-1 bg-slate-800 rounded-[3cqw] px-[4.5cqw] py-[2.2cqw]">
+              <div className="text-slate-400 uppercase tracking-wide text-[3.6cqw] leading-tight">{q.driverNameLabel}</div>
+              <div className="text-white font-medium text-[5cqw] leading-tight whitespace-nowrap overflow-hidden">
+                <span className="cj2-type-1">{q.driverName}</span>
+              </div>
             </div>
-            <div className="cj2-row-2 bg-slate-800 rounded-[3cqw] px-[5cqw] py-[3cqw]">
-              <div className="text-slate-400 uppercase tracking-wide text-[4cqw] leading-tight">{q.driverPhoneLabel}</div>
-              <div className="text-white font-medium text-[5.4cqw] leading-tight truncate">{q.driverPhone}</div>
+            <div className="cj2-row-2 bg-slate-800 rounded-[3cqw] px-[4.5cqw] py-[2.2cqw]">
+              <div className="text-slate-400 uppercase tracking-wide text-[3.6cqw] leading-tight">{q.driverPhoneLabel}</div>
+              <div className="text-white font-medium text-[5cqw] leading-tight whitespace-nowrap overflow-hidden">
+                <span className="cj2-type-2">{q.driverPhone}</span>
+              </div>
             </div>
-            <div className="cj2-row-3 bg-slate-800 rounded-[3cqw] px-[5cqw] py-[3.5cqw] flex flex-col gap-[2cqw]">
-              <div className="w-1/3 h-[2.6cqw] bg-slate-600 rounded-full" />
-              <div className="w-2/3 h-[3.4cqw] bg-slate-500 rounded-full" />
+            <div className="cj2-row-3 bg-slate-800 rounded-[3cqw] px-[4.5cqw] py-[2.2cqw]">
+              <div className="text-slate-400 uppercase tracking-wide text-[3.6cqw] leading-tight">{t.checkinJourney.fieldTruck}</div>
+              <div className="text-white font-medium text-[5cqw] leading-tight whitespace-nowrap overflow-hidden">
+                <span className="cj2-type-3">AB 123 CD</span>
+              </div>
             </div>
-            <div className="cj2-btn mt-auto h-[13%] min-h-[9cqw] bg-blue-600 rounded-[3cqw] flex items-center justify-center text-white font-semibold text-[5.4cqw]">
-              Check-in
+            <div className="cj2-row-4 bg-slate-800 rounded-[3cqw] px-[4.5cqw] py-[2.2cqw]">
+              <div className="text-slate-400 uppercase tracking-wide text-[3.6cqw] leading-tight">{q.unloadRef}</div>
+              <div className="text-white font-medium text-[5cqw] leading-tight whitespace-nowrap overflow-hidden">
+                <span className="cj2-type-4">{q.unloadRefValue}</span>
+              </div>
+            </div>
+            <div className="cj2-btn mt-auto h-[11%] min-h-[8cqw] bg-blue-600 rounded-[3cqw] flex items-center justify-center text-white font-semibold text-[5cqw]">
+              {t.checkinJourney.submitLabel}
             </div>
           </div>
 

@@ -21,7 +21,7 @@ export function FeatureBenefitsSection({
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300">{subtitle}</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className={`grid gap-6 md:grid-cols-2 ${groups.length >= 4 ? "xl:grid-cols-4" : "lg:grid-cols-3"}`}>
           {groups.map((group, i) => (
             <div
               key={i}
