@@ -7,38 +7,50 @@ import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 // to the same currentTime). Base (unanimated) styles compose the scene-3 end
 // state, which is the prefers-reduced-motion static frame. Server Component.
 
-// Clean, modern European cab-over truck (side view), drawn once and reused
-// (hero + parked variants). Local coords: trailer x0–162, cab x180–247
-// (nose = 247), wheels cy=331, ground contact y=344.
+// European articulated semi (cab-over tractor + semi-trailer), side view,
+// drawn once and reused (hero + parked variants). The trailer overhangs the
+// tractor frame (fifth-wheel coupling): rear axles clustered at the trailer's
+// tail, landing gear mid-front, tractor rear axle under the trailer nose.
+// Local coords: trailer x0–178, cab x186–247 (nose = 247, mirror to 254),
+// wheels cy=331, ground contact y=344.
 function TruckArt({ variant = "hero" }: { variant?: "hero" | "parked" }) {
   return (
     <g className={variant === "parked" ? "cj2-parked" : undefined}>
-      {/* trailer: clean box, subtle panel lines, brand stripe, brake light */}
-      <rect x="0" y="228" width="162" height="90" rx="8" fill="url(#cj2-trailer)" />
-      {[42, 84, 126].map((x) => (
-        <line key={x} x1={x} y1="236" x2={x} y2="310" className="stroke-slate-500" strokeWidth="1.5" opacity="0.3" />
+      {/* semi-trailer box: clean panels, brand stripe, brake light, hinges */}
+      <rect x="0" y="224" width="178" height="90" rx="6" fill="url(#cj2-trailer)" />
+      {[36, 72, 108, 144].map((x) => (
+        <line key={x} x1={x} y1="232" x2={x} y2="306" className="stroke-slate-500" strokeWidth="1.5" opacity="0.3" />
       ))}
-      <rect x="14" y="242" width="56" height="9" rx="4.5" className="fill-blue-500" />
-      <rect x="1" y="231" width="3" height="8" rx="1.5" className="cj2-brake fill-red-500" />
-      <rect x="10" y="318" width="116" height="8" rx="4" className="fill-slate-700" />
-      {/* chassis, coupling, fuel tank */}
-      <rect x="158" y="304" width="24" height="9" rx="2" className="fill-slate-700" />
-      <rect x="162" y="313" width="78" height="6" rx="3" className="fill-slate-800" />
-      <rect x="186" y="320" width="30" height="12" rx="6" className="fill-slate-500" />
-      {/* smooth cab-over body (sits at trailer level, wheels exposed below)
-          + roof deflector bridging to trailer height */}
-      <path d="M180 318 V250 Q180 238 192 238 H226 Q240 238 244 250 L246 260 Q247 263 247 267 V318 Z" fill="url(#cj2-cab)" />
-      <path d="M182 238 L188 226 Q189 224 192 224 H210 Q213 224 214 226 L220 238 Z" className="fill-blue-700" />
+      <rect x="14" y="238" width="56" height="9" rx="4.5" className="fill-blue-500" />
+      <rect x="1" y="227" width="3" height="8" rx="1.5" className="cj2-brake fill-red-500" />
+      <rect x="2" y="248" width="4" height="10" rx="1" className="fill-slate-400" />
+      <rect x="2" y="278" width="4" height="10" rx="1" className="fill-slate-400" />
+      {/* under-frame, side skirt, landing gear (support legs) */}
+      <rect x="8" y="314" width="162" height="5" className="fill-slate-800" />
+      <rect x="76" y="316" width="44" height="8" rx="3" className="fill-slate-700" />
+      <rect x="128" y="314" width="5" height="22" className="fill-slate-500" />
+      <rect x="124" y="336" width="13" height="4" rx="1.5" className="fill-slate-600" />
+      {/* trailer rear axles (clustered at the tail) + mudflap */}
+      <rect x="66" y="330" width="9" height="13" className="fill-slate-900" />
+      {/* tractor frame under the trailer nose + cab, fuel tank, mudflap */}
+      <rect x="150" y="314" width="92" height="7" className="fill-slate-800" />
+      <rect x="196" y="320" width="30" height="12" rx="6" className="fill-slate-500" />
+      <rect x="150" y="330" width="8" height="13" className="fill-slate-900" />
+      {/* exhaust stack in the cab–trailer gap */}
+      <rect x="180" y="250" width="4" height="60" rx="2" className="fill-slate-500" />
+      {/* cab-over tractor (body at trailer level, wheels exposed below) */}
+      <path d="M186 318 V250 Q186 238 198 238 H226 Q240 238 244 250 L246 260 Q247 263 247 267 V318 Z" fill="url(#cj2-cab)" />
+      <path d="M188 238 L194 226 Q195 224 198 224 H212 Q215 224 216 226 L222 238 Z" className="fill-blue-700" />
       {/* one-piece wrap-around glass */}
-      <path d="M196 246 H228 Q238 246 241 254 L243 262 Q244 266 240 266 H196 Q190 266 190 260 V252 Q190 246 196 246 Z" className="fill-cyan-200" opacity="0.85" />
+      <path d="M200 246 H228 Q238 246 241 254 L243 262 Q244 266 240 266 H200 Q194 266 194 260 V252 Q194 246 200 246 Z" className="fill-cyan-200" opacity="0.85" />
       {/* forward-mounted mirror */}
       <line x1="240" y1="244" x2="248" y2="238" className="stroke-slate-400" strokeWidth="2" />
       <rect x="246" y="234" width="5" height="13" rx="2.5" className="fill-slate-500" />
       {/* LED strip + headlight on the front face */}
       <rect x="239" y="300" width="8" height="3" rx="1.5" className="fill-slate-100" opacity="0.9" />
       <rect x="239" y="306" width="8" height="5" rx="2" className="fill-amber-300" />
-      {/* wheels */}
-      {[34, 62, 196, 232].map((cx) => (
+      {/* wheels: trailer tail pair, tractor rear (under trailer) + front */}
+      {[30, 58, 166, 232].map((cx) => (
         <g key={cx}>
           <circle cx={cx} cy="331" r="13" fill="#0f172a" className="stroke-slate-700" strokeWidth="1.5" />
           <circle cx={cx} cy="331" r="6.5" className="fill-slate-400" />
@@ -177,16 +189,18 @@ export function CheckinJourneyScene({
         <rect x="646" y="252" width="64" height="92" rx="4" className="fill-slate-800 stroke-slate-700" strokeWidth="2" />
         <rect x="640" y="246" width="76" height="8" rx="3" className="fill-slate-600" />
         <rect x="658" y="266" width="40" height="24" rx="3" className="fill-cyan-900" opacity="0.55" />
-        {/* hero truck: stops at the gate scanner, then docks at ramp 12 */}
-        <g className="cj2-truck3"><TruckArt /></g>
-        {/* gate scanner terminal on the driver side (in front of the cab):
-            the driver taps their phone on it and the barrier opens */}
+        {/* gate scanner terminal on the driver's side lane — drawn BEFORE the
+            truck so the passing truck covers it (device sits behind/left of
+            the truck as it enters the gate) */}
         <rect x="620" y="300" width="6" height="44" className="fill-slate-600" />
         <rect x="604" y="256" width="38" height="50" rx="6" className="fill-slate-800 stroke-slate-600" strokeWidth="2" />
         <rect x="610" y="264" width="26" height="16" rx="3" className="fill-cyan-950" />
         <rect x="613" y="270" width="20" height="3" rx="1.5" className="fill-cyan-400" opacity="0.8" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="fill-cyan-500" opacity="0.18" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="stroke-cyan-400" fill="none" strokeWidth="1.5" />
+        {/* hero truck: stops short of the scanner, then docks at ramp 12 */}
+        <g className="cj2-truck3"><TruckArt /></g>
+        {/* driver's phone tapping the scanner + confirmation pulse */}
         <g className="cj2-gatephone">
           <rect x="592" y="282" width="17" height="30" rx="4" className="fill-slate-900 stroke-slate-500" strokeWidth="1.5" />
           <rect x="595" y="286" width="11" height="19" rx="2" className="fill-cyan-400" opacity="0.7" />
