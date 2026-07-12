@@ -2168,7 +2168,7 @@ export const translations = {
       dockBadge: "DOK 12",
       scanSignLine1: "Zeskanuj kod QR",
       scanSignLine2: "aby się zarejestrować",
-      fieldTruck: "POJAZD",
+      fieldTruck: "CIĘŻARÓWKA",
       submitLabel: "Rejestracja",
     },
     checkinContent: {
@@ -4417,7 +4417,7 @@ export const translations = {
       dockBadge: "DOCK 12",
       scanSignLine1: "Scan de QR-code",
       scanSignLine2: "om in te checken",
-      fieldTruck: "TRUCK",
+      fieldTruck: "VRACHTWAGEN",
       submitLabel: "Check-in",
     },
     checkinContent: {
@@ -4451,7 +4451,7 @@ export const translations = {
       benefitManager3: "Volledige, controleerbare historie van elke check-in",
       benefitNewTitle: "Voor chauffeurs die voor het eerst komen",
       benefitNew1: "Ziet de te volgen stappen direct in de app — zonder de procedures van de locatie te kennen",
-      benefitNew2: "Aanrij- en looproutes: waar parkeren, waar naar binnen, waar het dock is",
+      benefitNew2: "Toegangs- en oriëntatiewijzers: waar parkeren, waar naar binnen, waar het dock is",
       benefitNew3: "De instructies en regels van de locatie, in zijn eigen taal, nog voor hij uit de cabine stapt",
       faqTitle: "Veelgestelde vragen over digitale check-in",
       faq1Q: "Wat als een chauffeur geen smartphone heeft?",
