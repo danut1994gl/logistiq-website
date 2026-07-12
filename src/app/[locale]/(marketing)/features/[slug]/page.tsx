@@ -18,6 +18,7 @@ import {
 } from "@/lib/features";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageHero } from "@/components/site/PageHero";
+import { featureShowcases } from "@/components/features/showcases";
 
 export async function generateStaticParams() {
   return locales.flatMap((locale) => features.map((f) => ({ locale, slug: featureSlug(f.id, locale) })));
@@ -61,6 +62,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
   const colors = featureColorMap[feature.color];
   const Icon = feature.icon;
   const related = features.filter((f) => f.id !== feature.id).slice(0, 3);
+  const Showcase = featureShowcases[feature.id];
 
   return (
     <>
@@ -115,6 +117,8 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
           </div>
         }
       />
+
+      {Showcase ? <Showcase t={t} /> : null}
 
       {/* Related features */}
       <section className="py-16 lg:py-20">
