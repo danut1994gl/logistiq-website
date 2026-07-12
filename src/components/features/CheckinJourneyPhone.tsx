@@ -1,5 +1,6 @@
 import type { Translations } from "@/lib/i18n/translations";
 import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
+import { QrCodeIcon } from "@/components/icons";
 
 // Scene-2 phone: large, realistic driver-app mockup rendered as an HTML
 // overlay on top of the SVG stage (PhoneFrame visual language, localized via
@@ -24,10 +25,17 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
         <div className="absolute top-[2.6%] left-1/2 -translate-x-1/2 w-[36%] h-[3%] bg-slate-900 rounded-full z-10" />
         {/* screen */}
         <div className="absolute inset-x-[4.5%] top-[6.5%] bottom-[4.5%] bg-slate-900 rounded-[9cqw] overflow-hidden">
-          {/* app header */}
-          <div className="absolute inset-x-0 top-0 h-[16%] bg-blue-600 flex flex-col items-center justify-center gap-[1cqw] px-[6cqw] z-10">
-            <span className="text-white font-bold leading-none text-[6.5cqw]">Logistiq</span>
-            <span className="text-blue-200 leading-none text-[4.6cqw] truncate max-w-full">{q.warehouseName}</span>
+          {/* app header — QRGO Driver branding */}
+          <div className="absolute inset-x-0 top-0 h-[16%] bg-blue-600 flex items-center justify-center gap-[2.5cqw] px-[5cqw] z-10">
+            <span className="flex items-center justify-center shrink-0 w-[9cqw] h-[9cqw] rounded-[2.2cqw] bg-white text-blue-600 [&_svg]:w-[6.5cqw] [&_svg]:h-[6.5cqw]">
+              <QrCodeIcon />
+            </span>
+            <span className="flex flex-col items-start leading-none min-w-0">
+              <span className="text-white font-extrabold text-[5.8cqw] leading-none tracking-tight">
+                QRGO <span className="font-medium">Driver</span>
+              </span>
+              <span className="text-blue-200 text-[4.2cqw] leading-none mt-[1.4cqw] truncate max-w-full">{q.warehouseName}</span>
+            </span>
           </div>
 
           {/* 1 — QR scan */}
