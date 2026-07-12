@@ -4,8 +4,6 @@ import {
   locales,
   defaultLocale,
   isValidLocale,
-  getLocaleFromCountry,
-  getLocaleFromAcceptLanguage,
   type Locale,
 } from "@/lib/i18n/config";
 
@@ -53,27 +51,15 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  // No locale in URL - determine the best locale
+  // No locale in URL — English-first: default to `en` for every visitor. Only an
+  // EXPLICIT prior choice stored in the cookie (via the language switcher or by
+  // visiting a /xx URL) overrides it. Geo/Accept-Language auto-routing is intentionally
+  // disabled so the default landing language is always English.
   let detectedLocale: Locale = defaultLocale;
 
-  // 1. Check cookie first (user preference)
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value;
   if (cookieLocale && isValidLocale(cookieLocale)) {
     detectedLocale = cookieLocale;
-  } else {
-    // 2. Try geo-detection (Vercel/Cloudflare headers)
-    const country = request.headers.get("x-vercel-ip-country") ||
-      request.headers.get("cf-ipcountry");
-
-    if (country) {
-      detectedLocale = getLocaleFromCountry(country);
-    } else {
-      // 3. Fallback to Accept-Language header
-      const acceptLanguage = request.headers.get("accept-language");
-      if (acceptLanguage) {
-        detectedLocale = getLocaleFromAcceptLanguage(acceptLanguage);
-      }
-    }
   }
 
   // Redirect to the detected locale
