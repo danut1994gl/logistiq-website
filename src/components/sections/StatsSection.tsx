@@ -80,13 +80,17 @@ export function StatsSection({ t }: { t: Translations }) {
   const warehouses = useCountUp(dailyStats.warehouses, 2000, false);
   const checkins = useCountUp(dailyStats.checkins, 2500, false);
 
+  const { startCounting: startDrivers } = drivers;
+  const { startCounting: startWarehouses } = warehouses;
+  const { startCounting: startCheckins } = checkins;
+
   useEffect(() => {
     if (isInView) {
-      drivers.startCounting();
-      warehouses.startCounting();
-      checkins.startCounting();
+      startDrivers();
+      startWarehouses();
+      startCheckins();
     }
-  }, [isInView]);
+  }, [isInView, startDrivers, startWarehouses, startCheckins]);
 
   const stats = [
     { value: `${drivers.count.toLocaleString()}+`, label: t.stats.drivers, icon: TruckIcon },

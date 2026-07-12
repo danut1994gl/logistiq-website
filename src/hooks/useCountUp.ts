@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 // Counter animation hook — extracted verbatim from the landing page.
 export function useCountUp(end: number, duration: number = 2000, startOnView: boolean = true) {
@@ -25,5 +25,7 @@ export function useCountUp(end: number, duration: number = 2000, startOnView: bo
     return () => cancelAnimationFrame(animationFrame);
   }, [end, duration, hasStarted]);
 
-  return { count, startCounting: () => setHasStarted(true) };
+  // Stable identity so consumers can list it in effect deps.
+  const startCounting = useCallback(() => setHasStarted(true), []);
+  return { count, startCounting };
 }

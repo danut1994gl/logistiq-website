@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { translations } from "@/lib/i18n/translations";
-import { locales, localeToHreflang, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { locales, localeToHreflang, isValidLocale } from "@/lib/i18n/config";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, siteGraph } from "@/lib/seo/jsonld";
 

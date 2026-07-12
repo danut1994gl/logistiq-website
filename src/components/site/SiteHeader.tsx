@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
 import { featuresSegment } from "@/lib/i18n/segments";
@@ -22,6 +22,17 @@ import {
 
 type Menu = null | "features" | "resources" | "lang";
 
+// The auth cookie is an external store — read it via useSyncExternalStore
+// (server snapshot: false; no live subscription needed, it only changes on
+// navigation to/from the dashboard).
+const noopSubscribe = () => () => {};
+const readAuthCookie = () =>
+  document.cookie.split(";").some((c) => {
+    const [key, value] = c.trim().split("=");
+    return key === "logistiq_authenticated" && value === "true";
+  });
+const authServerSnapshot = () => false;
+
 // Shared site header — data-driven, mounted once in the marketing layout.
 // Order: Home · Funcționalități (mega) · Prețuri · Resurse (dropdown) · Contact.
 export default function SiteHeader({ locale }: { locale: Locale }) {
@@ -31,17 +42,11 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState<Menu>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSub, setMobileSub] = useState<Menu>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useSyncExternalStore(noopSubscribe, readAuthCookie, authServerSnapshot);
   const featuresRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const cookies = document.cookie.split(";");
-    const authCookie = cookies.find((c) => c.trim().startsWith("logistiq_authenticated="));
-    if (authCookie && authCookie.split("=")[1] === "true") setIsAuthenticated(true);
-  }, []);
 
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -62,12 +67,16 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // Close everything on route change (nav is global).
-  useEffect(() => {
+  // Close everything on route change (nav is global). Adjusted during render
+  // (React's "adjusting state when a prop changes" pattern) rather than in an
+  // effect, so the closed menus paint in the same pass as the new route.
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (prevPath !== pathname) {
+    setPrevPath(pathname);
     setOpen(null);
     setIsMobileOpen(false);
     setMobileSub(null);
-  }, [pathname]);
+  }
 
   const link = "text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium";
   const toggle = (m: Menu) => setOpen((cur) => (cur === m ? null : m));

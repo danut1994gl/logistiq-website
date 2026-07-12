@@ -28,6 +28,23 @@ type CookieConsentTranslations = {
 
 const COOKIE_CONSENT_KEY = "logistiq_cookie_consent";
 
+const DEFAULT_PREFERENCES: CookiePreferences = {
+  essential: true,
+  functional: true,
+  analytics: true,
+};
+
+// Read the saved choice (null when unset or corrupted). Used lazily for the
+// initial state and once in the mount effect to decide banner visibility.
+function readSavedPreferences(): CookiePreferences | null {
+  try {
+    const raw = localStorage.getItem(COOKIE_CONSENT_KEY);
+    return raw ? (JSON.parse(raw) as CookiePreferences) : null;
+  } catch {
+    return null;
+  }
+}
+
 // Icons
 const CookieIcon = () => (
   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -91,28 +108,17 @@ export default function CookieConsent({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    essential: true,
-    functional: true,
-    analytics: true,
-  });
+  const [preferences, setPreferences] = useState<CookiePreferences>(() =>
+    typeof window === "undefined" ? DEFAULT_PREFERENCES : (readSavedPreferences() ?? DEFAULT_PREFERENCES)
+  );
 
   useEffect(() => {
-    // Check if user has already set preferences
-    const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setPreferences(parsed);
-        setIsVisible(false);
-      } catch {
-        setIsVisible(true);
-      }
-    } else {
-      // Show banner after a short delay for better UX
-      const timer = setTimeout(() => setIsVisible(true), 1000);
-      return () => clearTimeout(timer);
-    }
+    // A valid saved choice keeps the banner hidden (preferences were already
+    // read lazily in the state initializer). Otherwise show the banner after
+    // a short delay for better UX.
+    if (readSavedPreferences()) return;
+    const timer = setTimeout(() => setIsVisible(true), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const savePreferences = (prefs: CookiePreferences) => {

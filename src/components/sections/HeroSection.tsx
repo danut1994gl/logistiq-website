@@ -56,7 +56,7 @@ export function HeroSection({ t }: { t: Translations }) {
                 {t.hero.trustedBy}
               </p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
-                {["Kaufland", "Metro", "Carrefour", "Lidl"].map((brand, i) => (
+                {["Kaufland", "Metro", "Carrefour", "Lidl"].map((brand) => (
                   <div
                     key={brand}
                     className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-500 dark:text-slate-400 font-medium text-sm"
