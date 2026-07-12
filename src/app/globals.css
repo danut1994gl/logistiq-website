@@ -283,6 +283,118 @@ body {
 .stagger-7 { animation-delay: 0.7s; }
 .stagger-8 { animation-delay: 0.8s; }
 
+/* ---- Check-in journey scene (Digital Check-in feature page) ----
+   One shared 13s loop. Phases: arrival 0–30.8%, QR scan 30.8–61.5%,
+   confirmed 61.5–92.3%, reset 92.3–100%. Base (unanimated) styles form a
+   complete static scene for prefers-reduced-motion. */
+
+.cj-truck {
+  transform: translateX(322px);
+  animation: cj-truck 13s linear infinite;
+  will-change: transform;
+}
+@keyframes cj-truck {
+  0%   { transform: translateX(-280px); animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); }
+  24%  { transform: translateX(322px); }
+  68%  { transform: translateX(322px); animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.45); }
+  90%  { transform: translateX(1320px); }
+  100% { transform: translateX(1320px); }
+}
+
+.cj-phone { animation: cj-phone 13s linear infinite; }
+@keyframes cj-phone {
+  0%, 30%   { opacity: 0; transform: translateY(10px); }
+  34%       { opacity: 1; transform: translateY(0); }
+  62%       { opacity: 1; }
+  66%, 100% { opacity: 0; }
+}
+
+.cj-scan { opacity: 0; animation: cj-scan 13s linear infinite; }
+@keyframes cj-scan {
+  0%, 34%   { opacity: 0; transform: translateY(0); }
+  37%       { opacity: 1; }
+  46%       { transform: translateY(40px); }
+  55%       { opacity: 1; transform: translateY(4px); }
+  59%, 100% { opacity: 0; }
+}
+
+.cj-pulse {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cj-pulse 13s linear infinite;
+}
+.cj-pulse-2 { animation-delay: 1s; }
+@keyframes cj-pulse {
+  0%, 40%   { transform: scale(0.3); opacity: 0; }
+  45%       { opacity: 0.7; }
+  58%       { transform: scale(2.6); opacity: 0; }
+  100%      { transform: scale(2.6); opacity: 0; }
+}
+
+.cj-check {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cj-check 13s linear infinite;
+}
+@keyframes cj-check {
+  0%, 61%   { opacity: 0; transform: scale(0.4); }
+  65%       { opacity: 1; transform: scale(1.12); }
+  68%       { transform: scale(1); }
+  91%       { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+
+.cj-dock-badge { animation: cj-dock-badge 13s linear infinite; }
+@keyframes cj-dock-badge {
+  0%, 64%   { opacity: 0; transform: translateY(8px); }
+  68%       { opacity: 1; transform: translateY(0); }
+  91%       { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+
+.cj-barrier-arm {
+  transform: rotate(-55deg);
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: cj-barrier 13s linear infinite;
+}
+@keyframes cj-barrier {
+  0%, 63%   { transform: rotate(0deg); }
+  69%       { transform: rotate(-55deg); }
+  91%       { transform: rotate(-55deg); }
+  96%, 100% { transform: rotate(0deg); }
+}
+
+/* Step-card active glow, synced to the same loop (crossfades at phase edges) */
+.cj-glow-1 { animation: cj-active-1 13s linear infinite; }
+.cj-glow-2 { animation: cj-active-2 13s linear infinite; }
+.cj-glow-3 { animation: cj-active-3 13s linear infinite; }
+@keyframes cj-active-1 {
+  0%        { opacity: 1; }
+  28%       { opacity: 1; }
+  33%, 100% { opacity: 0; }
+}
+@keyframes cj-active-2 {
+  0%, 28%   { opacity: 0; }
+  33%       { opacity: 1; }
+  59%       { opacity: 1; }
+  64%, 100% { opacity: 0; }
+}
+@keyframes cj-active-3 {
+  0%, 59%   { opacity: 0; }
+  64%       { opacity: 1; }
+  90%       { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cj-truck, .cj-phone, .cj-scan, .cj-pulse, .cj-check,
+  .cj-dock-badge, .cj-barrier-arm, .cj-glow-1, .cj-glow-2, .cj-glow-3 {
+    animation: none !important;
+  }
+}
+
 /* Initially hidden for animations */
 .animate-on-scroll {
   opacity: 0;
