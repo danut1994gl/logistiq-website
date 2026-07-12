@@ -98,7 +98,7 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <Link
-              href="https://cloud.logistiq.ro/signup?plan=professional"
+              href="https://logistiq.cloud/signup?plan=professional"
               className="block w-full py-4 rounded-xl font-semibold text-center btn-primary text-white"
             >
               {t.pricing.choosePlan}
@@ -189,7 +189,7 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <Link
-              href={`https://cloud.logistiq.ro/signup?plan=enterprise-${selectedWarehouses}`}
+              href={`https://logistiq.cloud/signup?plan=enterprise-${selectedWarehouses}`}
               className="block w-full py-4 rounded-xl font-semibold text-center bg-purple-600 hover:bg-purple-700 text-white transition-colors"
             >
               {t.pricing.choosePlan}

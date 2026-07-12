@@ -17,7 +17,7 @@ export function GET() {
     "Logistiq is a multi-tenant logistics platform for warehouse check-in operations:",
     "digital QR check-in for truck drivers, real-time dock/ramp management, driver",
     "communication, scheduling, analytics, and multi-language support (12 languages).",
-    "The manager dashboard is at cloud.logistiq.ro; the public driver check-in is at qrgo.ro.",
+    "The manager dashboard is at logistiq.cloud; the public driver check-in is at qrgo.ro.",
     "",
     "## Pages",
     `- [Home](${SITE_URL}/en): product overview, features, pricing, contact`,

@@ -19,7 +19,7 @@ export function GET() {
     "operations. Truck drivers check in digitally via QR codes; warehouse managers get",
     "real-time dock/ramp management, driver communication, early check-in & scheduling,",
     "automatic location detection, analytics & reports, API integrations, and support for",
-    "12 languages. The manager dashboard is at cloud.logistiq.ro and the public driver",
+    "12 languages. The manager dashboard is at logistiq.cloud and the public driver",
     "check-in experience is at qrgo.ro. Operated by HOSTLIFE DIGITAL SRL (Romania).",
     "",
     "## Pages",

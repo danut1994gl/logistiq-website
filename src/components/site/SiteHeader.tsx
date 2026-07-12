@@ -259,7 +259,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
 
             {/* Login/Dashboard Link */}
             <Link
-              href={isAuthenticated ? "https://cloud.logistiq.ro/dashboard" : "https://cloud.logistiq.ro"}
+              href={isAuthenticated ? "https://logistiq.cloud/dashboard" : "https://logistiq.cloud"}
               className="hidden sm:block text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium"
             >
               {isAuthenticated ? t.nav.dashboard : t.nav.login}
