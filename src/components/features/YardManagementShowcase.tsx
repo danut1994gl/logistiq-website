@@ -1,6 +1,6 @@
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
-import { MapPinIcon, GateIcon, ClockIcon, UsersIcon, ChartIcon, CompassIcon } from "@/components/icons";
+import { UsersIcon, ChartIcon, CompassIcon } from "@/components/icons";
 import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { YardScene } from "./YardScene";
@@ -18,15 +18,10 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
         title={y.title}
         subtitle={y.subtitle}
         stepLabel={y.stepLabel}
-        glowPrefix="ym-"
-        sceneStartsMs={[0, 6000, 16000]}
-        aspectClass="aspect-[16/9] sm:aspect-[12/5]"
-        minHClass="min-h-[300px]"
-        steps={[
-          { icon: MapPinIcon, title: y.s1t, desc: y.s1d },
-          { icon: GateIcon, title: y.s2t, desc: y.s2d },
-          { icon: ClockIcon, title: y.s3t, desc: y.s3d },
-        ]}
+        glowPrefix="ym2-"
+        sceneStartsMs={[]}
+        aspectClass="aspect-[4/3] sm:aspect-[3/2]"
+        minHClass="min-h-[360px]"
       >
         <YardScene t={t} />
       </ShowcaseStage>
