@@ -209,10 +209,11 @@ export function CheckinJourneyScene({
             <circle cx="166" cy="0" r="4" className="fill-emerald-400" />
           </g>
         </g>
-        {/* assigned badge — drawn last so it floats over the docked truck */}
+        {/* assigned badge — floats above the building, pointing at dock 12 */}
         <g className="cj2-badge">
-          <rect x="1053" y="238" width="104" height="30" rx="15" className="fill-blue-600" />
-          <text x="1105" y="258" textAnchor="middle" className="fill-white" style={{ fontSize: 14, fontWeight: 700, letterSpacing: 1 }}>
+          <line x1="1105" y1="118" x2="1105" y2="218" className="stroke-blue-500" strokeWidth="2" strokeDasharray="4 4" opacity="0.8" />
+          <rect x="1053" y="86" width="104" height="30" rx="15" className="fill-blue-600" />
+          <text x="1105" y="106" textAnchor="middle" className="fill-white" style={{ fontSize: 14, fontWeight: 700, letterSpacing: 1 }}>
             {dockLabel}
           </text>
         </g>
