@@ -19,7 +19,7 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
         subtitle={y.subtitle}
         stepLabel={y.stepLabel}
         glowPrefix="ym-"
-        sceneStartsMs={[]}
+        sceneStartsMs={[0, 6000, 16000]}
         aspectClass="aspect-[16/9] sm:aspect-[12/5]"
         minHClass="min-h-[300px]"
         steps={[

@@ -41,7 +41,7 @@ export function NotificationsScene({ t }: { t: Translations }) {
           {/* clock */}
           <div className="pt-[12cqw] text-center text-white">
             <div className="text-[16cqw] font-light leading-none tracking-tight">14:32</div>
-            <div className="text-[4cqw] text-slate-300 mt-[1.5cqw]">Monday, 13 July</div>
+            <div className="text-[4cqw] text-slate-300 mt-[1.5cqw]">{c.notifDate}</div>
           </div>
           {/* notification stack */}
           <div className="absolute inset-x-[4cqw] top-[42cqw] flex flex-col gap-[2.6cqw]">

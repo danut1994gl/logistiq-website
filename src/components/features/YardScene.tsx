@@ -46,7 +46,7 @@ export function YardScene({ t }: { t: Translations }) {
         <g key={i}>
           <rect
             x={dx} y="110" width="94" height="20" rx="3"
-            className={i === 2 ? "ym-dock3" : ""}
+            className={i === 2 ? "ym-dock3" : i === 0 ? "ym-dock1" : ""}
             fill={i === 0 ? C.unloading : "#334155"}
           />
           <text x={dx + 47} y="107" textAnchor="middle" fill="#64748b" style={{ fontSize: 12, fontWeight: 700 }}>

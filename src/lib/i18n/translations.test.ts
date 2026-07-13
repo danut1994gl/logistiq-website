@@ -93,7 +93,7 @@ describe("checkinContent translations", () => {
 // present and non-empty in all 8 locales.
 describe.each(["dockPage", "chatPage", "ymsPage"])("%s translations", (block) => {
   it("has every key, non-empty, in every locale", () => {
-    const keys = Object.keys((translations.ro as Record<string, Record<string, string>>)[block]);
+    const keys = Object.keys((translations.ro as unknown as Record<string, Record<string, string>>)[block]);
     expect(keys.length).toBeGreaterThan(0);
     expectBlockComplete(block, keys);
   });

@@ -950,10 +950,10 @@ select:focus {
 
 .ch-push { opacity: 0; transform: translateY(-130%); animation: ch-push 32s linear infinite; }
 @keyframes ch-push {
-  0%, 1.5% { opacity: 0; transform: translateY(-130%); }
-  4%       { opacity: 1; transform: translateY(0); }
-  15.6%    { opacity: 1; transform: translateY(0); }
-  18.75%, 100% { opacity: 0; transform: translateY(-130%); }
+  0%, 9% { opacity: 0; transform: translateY(-130%); }
+  11.5%  { opacity: 1; transform: translateY(0); }
+  20%    { opacity: 1; transform: translateY(0); }
+  23%, 100% { opacity: 0; transform: translateY(-130%); }
 }
 
 .ch-assignbtn { opacity: 0; animation: ch-assignbtn 32s linear infinite; }
@@ -1087,6 +1087,17 @@ select:focus {
 .ym-idletext { fill: #f59e0b; animation: ym-idletext 24s linear infinite; }
 @keyframes ym-idletext { 0%, 22% { fill: #64748b; } 34% { fill: #f59e0b; } 68% { fill: #f59e0b; } 78% { fill: #ef4444; } 100% { fill: #ef4444; } }
 
+.ym-dock1 { fill: #6a9e7e; animation: ym-dock1 24s linear infinite; }
+@keyframes ym-dock1 { 0%, 50% { fill: #334155; } 55% { fill: #6a9e7e; } 92% { fill: #6a9e7e; } 96%, 100% { fill: #334155; } }
+
+.ym-glow-1 { animation: ym-active-1 24s linear infinite; }
+.ym-glow-2 { animation: ym-active-2 24s linear infinite; }
+.ym-glow-3 { animation: ym-active-3 24s linear infinite; }
+@keyframes ym-active-1 { 0% { opacity: 0; } 2% { opacity: 1; } 26% { opacity: 1; } 30%, 100% { opacity: 0; } }
+@keyframes ym-active-2 { 0%, 22% { opacity: 0; } 26% { opacity: 1; } 60% { opacity: 1; } 64%, 100% { opacity: 0; } }
+@keyframes ym-active-3 { 0%, 54% { opacity: 0; } 58% { opacity: 1; } 90% { opacity: 1; } 94%, 100% { opacity: 0; } }
+
 @media (prefers-reduced-motion: reduce) {
-  .ym-a, .ym-a-body, .ym-c, .ym-c-body, .ym-dock3, .ym-idle, .ym-idletext { animation: none !important; }
+  .ym-a, .ym-a-body, .ym-c, .ym-c-body, .ym-dock1, .ym-dock3, .ym-idle, .ym-idletext,
+  .ym-glow-1, .ym-glow-2, .ym-glow-3 { animation: none !important; }
 }

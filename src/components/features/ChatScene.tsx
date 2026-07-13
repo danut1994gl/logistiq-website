@@ -76,7 +76,7 @@ export function ChatScene({ t }: { t: Translations }) {
           </div>
           {/* input row */}
           <div className="flex items-center gap-[1cqw] px-[1.8cqw] py-[1.1cqw] border-t border-slate-700/70">
-            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.9cqw] text-slate-500 text-[1.4cqw]">Message…</span>
+            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.9cqw] text-slate-500 text-[1.4cqw]">{c.uiMessage}…</span>
             <span className="w-[3cqw] h-[3cqw] rounded-full bg-blue-600 flex items-center justify-center text-white [&_svg]:w-[1.7cqw] [&_svg]:h-[1.7cqw]">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z" /></svg>
             </span>
@@ -103,7 +103,7 @@ export function ChatScene({ t }: { t: Translations }) {
               <span className="flex flex-col leading-tight min-w-0">
                 <span className="text-white font-bold text-[4.6cqw] truncate">London Warehouse</span>
                 <span className="relative text-[3.4cqw] leading-none h-[3.8cqw]">
-                  <span className="ch-phonline text-blue-200">online</span>
+                  <span className="ch-phonline text-blue-200">{c.uiOnline}</span>
                   <span className="ch-phtyping absolute left-0 top-0 text-white font-medium">{c.uiTyping}</span>
                 </span>
               </span>
@@ -128,7 +128,7 @@ export function ChatScene({ t }: { t: Translations }) {
             </div>
             {/* input bar */}
             <div className="shrink-0 flex items-center gap-[2.4cqw] px-[4cqw] py-[2.6cqw] bg-slate-900 border-t border-slate-800">
-              <span className="flex-1 rounded-full bg-slate-800 px-[4cqw] py-[2.4cqw] text-slate-500 text-[4cqw]">Message</span>
+              <span className="flex-1 rounded-full bg-slate-800 px-[4cqw] py-[2.4cqw] text-slate-500 text-[4cqw]">{c.uiMessage}</span>
               <svg viewBox="0 0 24 24" className="w-[6cqw] h-[6cqw] text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.5-2.5h5L16 6"/></svg>
               <span className="w-[9cqw] h-[9cqw] rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0"><svg viewBox="0 0 24 24" className="w-[4.6cqw] h-[4.6cqw]" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z"/></svg></span>
             </div>

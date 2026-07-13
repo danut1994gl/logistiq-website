@@ -1,7 +1,6 @@
 import type { Translations } from "@/lib/i18n/translations";
 
-// Product-faithful operator "dock board" mockup (HTML overlay, scales via
-// @container units). A live waiting queue on the left; two department dock
+// Product-faithful operator "dock board" mockup (HTML overlay, scales via @container units). A live waiting queue on the left; two department dock
 // grids on the right. One shared dm-* CSS timeline (28s) animates the real
 // assignment flow: operator opens a waiting truck -> picks a free dock ->
 // the dock flips available->assigned->loading and the driver is notified.
@@ -65,7 +64,7 @@ export function DockManagementScene({ t }: { t: Translations }) {
                     key={n}
                     className={`text-[1.6cqw] rounded-[0.6cqw] px-[1.3cqw] py-[0.8cqw] ${n === "04" ? "bg-blue-600 text-white font-semibold" : "text-slate-300"}`}
                   >
-                    {d.uiLoading} · {d.uiBoard.slice(0, 4)} {n}
+                    {d.uiLoading} · {n}
                   </div>
                 ))}
               </div>
