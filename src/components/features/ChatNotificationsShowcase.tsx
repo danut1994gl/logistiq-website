@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { UsersIcon, SteeringWheelIcon, ChartIcon } from "@/components/icons";
 import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
-import { ChatScene } from "./ChatScene";
+import { ChatPlayer } from "./ChatPlayer";
 import { NotificationsScene } from "./NotificationsScene";
 import { FeatureProblemSection } from "./FeatureProblemSection";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
@@ -21,11 +21,11 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
         stepLabel={c.stepLabel}
         glowPrefix="ch-"
         sceneStartsMs={[]}
-        aspectClass="aspect-[16/10] sm:aspect-[2/1]"
-        minHClass="min-h-[340px]"
+        aspectClass="aspect-[4/3] sm:aspect-[16/9]"
+        minHClass="min-h-[360px]"
         headingId="chat-showcase-title"
       >
-        <ChatScene t={t} />
+        <ChatPlayer t={t} />
       </ShowcaseStage>
 
       <ShowcaseStage
