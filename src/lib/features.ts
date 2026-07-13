@@ -4,7 +4,7 @@ import { type Locale } from "@/lib/i18n/config";
 import { featuresSegment } from "@/lib/i18n/segments";
 import {
   QrCodeIcon, GateIcon, ChatIcon, UsersIcon, ChartIcon, MobileIcon,
-  GlobeIcon, ApiIcon, CloudIcon, CompassIcon, ClockIcon, MapPinIcon,
+  GlobeIcon, ApiIcon, CloudIcon, CompassIcon, ClockIcon, MapPinIcon, TruckIcon,
 } from "@/components/icons";
 
 // Canonical feature registry — drives the /features index, per-feature pages, the
@@ -15,7 +15,7 @@ import {
 // localizing the segment (/de/funktionen/) is a follow-up that needs next.config
 // rewrites and native-slug review.
 export type Feature = {
-  id: number; // 1..12 -> features.feature{id}Title / feature{id}Desc
+  id: number; // 1..13 -> features.feature{id}Title / feature{id}Desc
   icon: FC;
   color: string;
 };
@@ -33,6 +33,7 @@ export const features: Feature[] = [
   { id: 10, icon: CompassIcon, color: "amber" },
   { id: 11, icon: ClockIcon, color: "lime" },
   { id: 12, icon: MapPinIcon, color: "rose" },
+  { id: 13, icon: TruckIcon, color: "emerald" },
 ];
 
 // Path helpers. The public segment is localized per locale (see lib/i18n/segments
@@ -104,4 +105,5 @@ export const featureColorMap: Record<string, { bg: string; text: string; darkBg:
   amber: { bg: "bg-amber-100", text: "text-amber-600", darkBg: "dark:bg-amber-900/30", darkText: "dark:text-amber-400" },
   lime: { bg: "bg-lime-100", text: "text-lime-600", darkBg: "dark:bg-lime-900/30", darkText: "dark:text-lime-400" },
   rose: { bg: "bg-rose-100", text: "text-rose-600", darkBg: "dark:bg-rose-900/30", darkText: "dark:text-rose-400" },
+  emerald: { bg: "bg-emerald-100", text: "text-emerald-600", darkBg: "dark:bg-emerald-900/30", darkText: "dark:text-emerald-400" },
 };

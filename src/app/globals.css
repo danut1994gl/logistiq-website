@@ -852,3 +852,90 @@ select:focus {
     padding-right: 2rem;
   }
 }
+
+/* ---- Dock Management showcase (feature 2) ----
+   Operator dock-board mockup on one shared 24s dm-* loop: waiting truck ->
+   operator opens the dock dropdown -> picks Dock 4 -> the dock flips
+   available->assigned->loading and the driver is notified. NO animation-delay
+   (the step controller seeks by currentTime); base (unanimated) styles = the
+   idle board (empty docks, full queue) for prefers-reduced-motion. 1s=4.1667%. */
+
+.dm-livedot { animation: dm-livedot 1.6s ease-in-out infinite; }
+@keyframes dm-livedot { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.dm-assignbtn { animation: dm-assignbtn 24s linear infinite; }
+@keyframes dm-assignbtn {
+  0% { box-shadow: 0 0 0 0 rgba(37,99,235,0.5); }
+  8% { box-shadow: 0 0 0 0.9cqw rgba(37,99,235,0); }
+  16%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+}
+
+.dm-dropdown { opacity: 0; transform: scale(0.96) translateY(-0.5cqw); animation: dm-dropdown 24s linear infinite; }
+@keyframes dm-dropdown {
+  0%, 15%      { opacity: 0; transform: scale(0.96) translateY(-0.5cqw); }
+  18%          { opacity: 1; transform: scale(1) translateY(0); }
+  27%          { opacity: 1; }
+  29%, 100%    { opacity: 0; transform: scale(0.98) translateY(0); }
+}
+
+.dm-qcard-1 { animation: dm-qcard-1 24s linear infinite; }
+@keyframes dm-qcard-1 {
+  0%, 29%     { opacity: 1; }
+  33%         { opacity: 0.35; }
+  82%         { opacity: 0.35; }
+  86%, 100%   { opacity: 1; }
+}
+
+.dm-dock { animation: dm-dock 24s linear infinite; }
+@keyframes dm-dock {
+  0%, 29%     { box-shadow: inset 0 0 0 0 rgba(59,130,246,0); background-color: rgba(30,41,59,0.4); }
+  33%         { box-shadow: inset 0 0 0 0.4cqw rgba(59,130,246,0.9); background-color: rgba(37,99,235,0.18); }
+  82%         { box-shadow: inset 0 0 0 0.4cqw rgba(16,185,129,0.9); background-color: rgba(16,185,129,0.14); }
+  86%, 100%   { box-shadow: inset 0 0 0 0 rgba(59,130,246,0); background-color: rgba(30,41,59,0.4); }
+}
+
+.dm-dockplate { opacity: 0; transform: translateY(0.6cqw); animation: dm-dockplate 24s linear infinite; }
+@keyframes dm-dockplate {
+  0%, 31%    { opacity: 0; transform: translateY(0.6cqw); }
+  35%        { opacity: 1; transform: translateY(0); }
+  82%        { opacity: 1; }
+  86%, 100%  { opacity: 0; }
+}
+
+.dm-dockbar { transform: scaleX(0); transform-origin: left; animation: dm-dockbar 24s linear infinite; }
+@keyframes dm-dockbar {
+  0%, 37%   { transform: scaleX(0); }
+  45%       { transform: scaleX(1); }
+  82%       { transform: scaleX(1); }
+  86%, 100% { transform: scaleX(0); }
+}
+
+.dm-toast { opacity: 0; transform: translateX(1.2cqw); animation: dm-toast 24s linear infinite; }
+@keyframes dm-toast {
+  0%, 37%    { opacity: 0; transform: translateX(1.2cqw); }
+  41%        { opacity: 1; transform: translateX(0); }
+  79%        { opacity: 1; }
+  83%, 100%  { opacity: 0; }
+}
+
+.dm-phone { opacity: 0; transform: translateY(1.2cqw); animation: dm-phone 24s linear infinite; }
+@keyframes dm-phone {
+  0%, 39%    { opacity: 0; transform: translateY(1.2cqw); }
+  43%        { opacity: 1; transform: translateY(0); }
+  79%        { opacity: 1; }
+  83%, 100%  { opacity: 0; }
+}
+
+.dm-glow-1 { animation: dm-active-1 24s linear infinite; }
+.dm-glow-2 { animation: dm-active-2 24s linear infinite; }
+.dm-glow-3 { animation: dm-active-3 24s linear infinite; }
+@keyframes dm-active-1 { 0% { opacity: 0; } 2% { opacity: 1; } 26% { opacity: 1; } 30%, 100% { opacity: 0; } }
+@keyframes dm-active-2 { 0%, 15% { opacity: 0; } 19% { opacity: 1; } 38% { opacity: 1; } 42%, 100% { opacity: 0; } }
+@keyframes dm-active-3 { 0%, 37% { opacity: 0; } 41% { opacity: 1; } 80% { opacity: 1; } 84%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-livedot, .dm-assignbtn, .dm-dropdown, .dm-qcard-1, .dm-dock, .dm-dockplate,
+  .dm-dockbar, .dm-toast, .dm-phone, .dm-glow-1, .dm-glow-2, .dm-glow-3 {
+    animation: none !important;
+  }
+}
