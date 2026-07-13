@@ -2,7 +2,7 @@ import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 
 // 3-scene animated check-in journey (parking → phone close-up backdrop →
 // gate & ramp). Decorative: the step cards carry the full story as text.
-// One shared 27s CSS timeline (cj2-* classes in globals.css, NO
+// One shared 32s CSS timeline (cj2-* classes in globals.css, NO
 // animation-delay anywhere — the scene-jump controller seeks every animation
 // to the same currentTime). Base (unanimated) styles compose the scene-3 end
 // state, which is the prefers-reduced-motion static frame. Server Component.

@@ -4,7 +4,7 @@ import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 // Scene-2 phone: large, realistic driver-app mockup rendered as an HTML
 // overlay on top of the SVG stage (PhoneFrame visual language, localized via
 // the existing t.qrgoDriver keys). Five screen states crossfade on the shared
-// 27s cj2 timeline: scan → form → OK → waiting → ramp assigned. Sized with
+// 32s cj2 timeline: scan → form → OK → waiting → ramp assigned. Sized with
 // clamp() + container-query units so it stays legible on mobile regardless
 // of the SVG scale. Decorative (aria-hidden). Server Component.
 export function CheckinJourneyPhone({ t }: { t: Translations }) {

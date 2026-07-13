@@ -2,12 +2,12 @@
 
 import { useRef, type ReactNode } from "react";
 
-// Scene start times on the shared 27s cj2 timeline (ms).
-const SCENE_STARTS_MS = [0, 7500, 19000];
+// Scene start times on the shared 32s cj2 timeline (ms).
+const SCENE_STARTS_MS = [0, 7500, 24000];
 
 // The feature's only client code: renders the step cards as buttons and, on
 // click, seeks every cj2 animation inside the section to that scene's start
-// via the Web Animations API. All cj2 animations share one 27s duration with
+// via the Web Animations API. All cj2 animations share one 32s duration with
 // no animation-delay, so a uniform currentTime keeps scene, phone overlay and
 // card glows in sync. No-ops under prefers-reduced-motion (nothing to seek).
 export function CheckinJourneyController({ cards, labels }: { cards: ReactNode[]; labels: string[] }) {

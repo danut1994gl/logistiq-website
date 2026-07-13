@@ -6,7 +6,7 @@ import { CheckinJourneyController } from "./CheckinJourneyController";
 
 // "How digital check-in works" — 3-scene animated stage (SVG + phone HTML
 // overlay) + 3 step cards. Cards are buttons (via the controller) that jump
-// the shared 27s cj2 timeline to their scene; the active card glow stays in
+// the shared 32s cj2 timeline to their scene; the active card glow stays in
 // sync with the scenes through the same timeline. Server Component.
 export function CheckinJourneySection({ t }: { t: Translations }) {
   const c = t.checkinJourney;
