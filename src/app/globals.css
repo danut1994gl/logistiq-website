@@ -939,3 +939,101 @@ select:focus {
     animation: none !important;
   }
 }
+
+/* ---- Chat & Notifications showcase (feature 3) ----
+   Realistic dispatcher dashboard <-> driver phone conversation on one shared
+   32s ch-* loop: assign a dock -> push -> a natural back-and-forth (dispatcher
+   asks for the CMR, driver replies, sends a document photo, dispatcher
+   confirms, driver thanks) with header "typing..." status and read ticks. NO
+   animation-delay (nothing to seek here); base (unanimated) styles = the
+   finished conversation for prefers-reduced-motion. 1s = 3.125%. */
+
+.ch-push { opacity: 0; transform: translateY(-130%); animation: ch-push 32s linear infinite; }
+@keyframes ch-push {
+  0%, 1.5% { opacity: 0; transform: translateY(-130%); }
+  4%       { opacity: 1; transform: translateY(0); }
+  15.6%    { opacity: 1; transform: translateY(0); }
+  18.75%, 100% { opacity: 0; transform: translateY(-130%); }
+}
+
+.ch-assignbtn { opacity: 0; animation: ch-assignbtn 32s linear infinite; }
+@keyframes ch-assignbtn { 0% { opacity: 1; } 6.25% { opacity: 1; } 7.5%, 100% { opacity: 0; } }
+.ch-toast { animation: ch-toast 32s linear infinite; }
+@keyframes ch-toast { 0%, 7% { opacity: 0; } 9% { opacity: 1; } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+
+/* header "typing..." status crossfades (phone shows dispatcher typing;
+   dashboard shows driver typing) */
+.ch-phtyping { opacity: 0; animation: ch-phtyping 32s linear infinite; }
+@keyframes ch-phtyping {
+  0%, 6%    { opacity: 0; }
+  8%        { opacity: 1; }
+  12.5%     { opacity: 1; }
+  13.5%     { opacity: 0; }
+  39%       { opacity: 0; }
+  40.5%     { opacity: 1; }
+  45.3%     { opacity: 1; }
+  46.5%, 100% { opacity: 0; }
+}
+.ch-dbtyping { opacity: 0; animation: ch-dbtyping 32s linear infinite; }
+@keyframes ch-dbtyping {
+  0%, 17%   { opacity: 0; }
+  18.5%     { opacity: 1; }
+  24.5%     { opacity: 1; }
+  25.5%     { opacity: 0; }
+  47%       { opacity: 0; }
+  48.5%     { opacity: 1; }
+  53%       { opacity: 1; }
+  54%, 100% { opacity: 0; }
+}
+
+.ch-d1  { animation: ch-msg 32s linear infinite; }
+.ch-u1  { animation: ch-u1 32s linear infinite; }
+.ch-doc { animation: ch-doc 32s linear infinite; }
+.ch-d2  { animation: ch-d2 32s linear infinite; }
+.ch-u2  { animation: ch-u2 32s linear infinite; }
+@keyframes ch-msg { 0%, 12.5% { opacity: 0; transform: translateY(0.8cqw); } 14.5% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes ch-u1  { 0%, 25% { opacity: 0; transform: translateY(0.8cqw); } 27% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes ch-doc { 0%, 33% { opacity: 0; transform: translateY(0.8cqw); } 35.5% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes ch-d2  { 0%, 46% { opacity: 0; transform: translateY(0.8cqw); } 48.5% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes ch-u2  { 0%, 53.5% { opacity: 0; transform: translateY(0.8cqw); } 56% { opacity: 1; transform: translateY(0); } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+
+.ch-dbonline { animation: ch-dbonline 32s linear infinite; }
+@keyframes ch-dbonline { 0%, 17% { opacity: 1; } 18.5% { opacity: 0; } 25% { opacity: 0; } 26% { opacity: 1; } 47% { opacity: 1; } 48.5% { opacity: 0; } 54% { opacity: 0; } 55%, 100% { opacity: 1; } }
+.ch-phonline { animation: ch-phonline 32s linear infinite; }
+@keyframes ch-phonline { 0%, 6% { opacity: 1; } 8% { opacity: 0; } 13.5% { opacity: 0; } 14.5% { opacity: 1; } 39% { opacity: 1; } 40.5% { opacity: 0; } 46.5% { opacity: 0; } 47.5%, 100% { opacity: 1; } }
+.ch-seen { animation: ch-seen 32s linear infinite; }
+@keyframes ch-seen { 0%, 58% { opacity: 0.45; } 60% { opacity: 1; } 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-push, .ch-assignbtn, .ch-toast, .ch-phtyping, .ch-dbtyping,
+  .ch-d1, .ch-u1, .ch-doc, .ch-d2, .ch-u2, .ch-seen, .ch-dbonline, .ch-phonline {
+    animation: none !important;
+  }
+}
+
+/* ---- Driver notifications scene (feature 3, second frame) ----
+   Phone lock screen where dispatcher actions arrive as push, trigger list
+   lighting up in sync. One shared 16s nt-* loop. Base (unanimated) = all
+   notifications shown, for prefers-reduced-motion. 1s = 6.25%. */
+
+.nt-n1 { animation: nt-slide 16s linear infinite; }
+.nt-n2 { animation: nt-n2 16s linear infinite; }
+.nt-n3 { animation: nt-n3 16s linear infinite; }
+.nt-n4 { animation: nt-n4 16s linear infinite; }
+@keyframes nt-slide { 0%, 6.25% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 12.5% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
+@keyframes nt-n2 { 0%, 21.9% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 28.1% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
+@keyframes nt-n3 { 0%, 37.5% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 43.75% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
+@keyframes nt-n4 { 0%, 53.1% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 59.4% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
+
+.nt-t1 { animation: nt-t1 16s linear infinite; }
+.nt-t2 { animation: nt-t2 16s linear infinite; }
+.nt-t3 { animation: nt-t3 16s linear infinite; }
+.nt-t4 { animation: nt-t4 16s linear infinite; }
+@keyframes nt-t1 { 0%, 6.25% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 12.5% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 20% { border-color: rgba(59,130,246,0.8); } 26%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
+@keyframes nt-t2 { 0%, 21.9% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 28.1% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 36% { border-color: rgba(59,130,246,0.8); } 42%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
+@keyframes nt-t3 { 0%, 37.5% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 43.75% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 52% { border-color: rgba(59,130,246,0.8); } 58%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
+@keyframes nt-t4 { 0%, 53.1% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 59.4% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 68% { border-color: rgba(59,130,246,0.8); } 74%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nt-n1, .nt-n2, .nt-n3, .nt-n4, .nt-t1, .nt-t2, .nt-t3, .nt-t4 { animation: none !important; }
+}

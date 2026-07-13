@@ -3,6 +3,7 @@ import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
 import { DigitalCheckinShowcase } from "./DigitalCheckinShowcase";
 import { DockManagementShowcase } from "./DockManagementShowcase";
+import { ChatNotificationsShowcase } from "./ChatNotificationsShowcase";
 
 // Per-feature showcase slot: feature id -> rich content rendered under the
 // hero on that feature's page (animation, narrative, benefits, FAQ — each
@@ -11,4 +12,5 @@ import { DockManagementShowcase } from "./DockManagementShowcase";
 export const featureShowcases: Partial<Record<number, FC<{ t: Translations; locale: Locale }>>> = {
   1: DigitalCheckinShowcase,
   2: DockManagementShowcase,
+  3: ChatNotificationsShowcase,
 };

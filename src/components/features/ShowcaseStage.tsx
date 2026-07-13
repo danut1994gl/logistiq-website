@@ -14,16 +14,22 @@ export function ShowcaseStage({
   glowPrefix,
   sceneStartsMs,
   children,
+  aspectClass = "aspect-[3/1]",
+  minHClass = "min-h-[260px]",
+  headingId = "showcase-title",
 }: {
   title: string;
   subtitle: string;
   stepLabel: string;
-  steps: { icon: FC; title: string; desc: string }[];
+  steps?: { icon: FC; title: string; desc: string }[];
   glowPrefix: string;
   sceneStartsMs: number[];
   children: ReactNode;
+  aspectClass?: string;
+  minHClass?: string;
+  headingId?: string;
 }) {
-  const cards = steps.map((step, i) => {
+  const cards = (steps ?? []).map((step, i) => {
     const n = `0${i + 1}`;
     return (
       <div
@@ -50,23 +56,28 @@ export function ShowcaseStage({
   });
 
   return (
-    <section aria-labelledby="showcase-title" className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50">
+    <section aria-labelledby={headingId} className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 id="showcase-title" className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          <h2 id={headingId} className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             {title}
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300">{subtitle}</p>
         </div>
-        <div className="relative w-full aspect-[3/1] min-h-[260px] rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl">
+        <div
+          data-showcase-stage
+          className={`relative w-full ${aspectClass} ${minHClass} rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl`}
+        >
           {children}
         </div>
-        <ShowcaseSteps
-          cards={cards}
-          labels={steps.map((s) => s.title)}
-          sceneStartsMs={sceneStartsMs}
-          prefix={glowPrefix}
-        />
+        {cards.length > 0 && (
+          <ShowcaseSteps
+            cards={cards}
+            labels={(steps ?? []).map((s) => s.title)}
+            sceneStartsMs={sceneStartsMs}
+            prefix={glowPrefix}
+          />
+        )}
       </div>
     </section>
   );
