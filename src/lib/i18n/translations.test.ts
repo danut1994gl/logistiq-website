@@ -86,3 +86,15 @@ describe("checkinContent translations", () => {
     expectBlockComplete("checkinContent", CHECKIN_CONTENT_KEYS);
   });
 });
+
+// The feature-showcase page blocks (dock/chat/yms) — derive the key set from
+// the `ro` block (the structural source of truth) so the test stays in step
+// with the copy without a hand-maintained list, and assert every key is
+// present and non-empty in all 8 locales.
+describe.each(["dockPage", "chatPage", "ymsPage"])("%s translations", (block) => {
+  it("has every key, non-empty, in every locale", () => {
+    const keys = Object.keys((translations.ro as Record<string, Record<string, string>>)[block]);
+    expect(keys.length).toBeGreaterThan(0);
+    expectBlockComplete(block, keys);
+  });
+});
