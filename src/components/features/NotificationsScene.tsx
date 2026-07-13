@@ -1,12 +1,12 @@
 import type { Translations } from "@/lib/i18n/translations";
 import { GateIcon, ChatIcon, UsersIcon, ChartIcon } from "@/components/icons";
+import { PhoneFrame16 } from "./PhoneFrame16";
 
-// Driver-notifications scene: a phone lock screen where every dispatcher action
-// (dock assigned, custom instruction, come-to-office, status update) arrives as
-// a push notification, with a trigger list on the left lighting up in sync.
-// One shared 16s nt-* loop. Decorative (aria-hidden). Phone is its own
-// @container. Server Component. Base styles = all notifications shown (reduced
-// motion). No animation-delay.
+// Driver-notifications scene: an iPhone 16 Pro Max lock screen where every
+// dispatcher action (dock assigned, custom instruction, come-to-office, status
+// update) arrives as a push notification, with a trigger list on the left
+// lighting up in sync. One shared 16s nt-* loop. Decorative (aria-hidden).
+// Server Component. Base styles = all notifications shown (reduced motion).
 export function NotificationsScene({ t }: { t: Translations }) {
   const c = t.chatPage;
   const items = [
@@ -33,35 +33,35 @@ export function NotificationsScene({ t }: { t: Translations }) {
         ))}
       </div>
 
-      {/* phone lock screen */}
-      <div className="@container relative h-[92%] aspect-[10/19] shrink-0">
-        <div className="absolute inset-0 bg-slate-800 rounded-[13cqw] border-[1cqw] border-slate-600 shadow-2xl" />
-        <div className="absolute inset-[3cqw] rounded-[10cqw] overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950">
-          <div className="absolute top-[3cqw] left-1/2 -translate-x-1/2 w-[26%] h-[2.4cqw] bg-slate-950 rounded-full z-20" />
-          {/* clock */}
-          <div className="pt-[12cqw] text-center text-white">
-            <div className="text-[16cqw] font-light leading-none tracking-tight">14:32</div>
-            <div className="text-[4cqw] text-slate-300 mt-[1.5cqw]">{c.notifDate}</div>
-          </div>
-          {/* notification stack */}
-          <div className="absolute inset-x-[4cqw] top-[42cqw] flex flex-col gap-[2.6cqw]">
-            {items.map((it, i) => (
-              <div
-                key={i}
-                className={`nt-n${i + 1} rounded-[4cqw] bg-slate-100/95 backdrop-blur px-[3.4cqw] py-[3cqw] flex items-center gap-[3cqw] shadow-lg`}
-              >
-                <span className="w-[9cqw] h-[9cqw] rounded-[2.4cqw] bg-blue-600 flex items-center justify-center text-white text-[4.6cqw] font-bold shrink-0">Q</span>
-                <span className="flex flex-col leading-tight min-w-0">
-                  <span className="flex items-center gap-[1.4cqw]">
-                    <span className="text-slate-900 font-semibold text-[4cqw] truncate">{it.title}</span>
-                    <span className="text-slate-500 text-[3cqw] ml-auto shrink-0">{c.notifNow}</span>
+      {/* iPhone 16 Pro Max lock screen */}
+      <div className="h-[96%] shrink-0">
+        <PhoneFrame16 time="14:32" screenClassName="bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950">
+          <div className="flex-1 min-h-0 flex flex-col px-[5cqw]">
+            {/* clock */}
+            <div className="pt-[8cqw] text-center text-white">
+              <div className="text-[4.4cqw] text-slate-300 font-medium">{c.notifDate}</div>
+              <div className="text-[19cqw] font-light leading-none tracking-tight mt-[1cqw]">14:32</div>
+            </div>
+            {/* notification stack */}
+            <div className="mt-[7cqw] flex flex-col gap-[2.6cqw]">
+              {items.map((it, i) => (
+                <div
+                  key={i}
+                  className={`nt-n${i + 1} rounded-[4cqw] bg-slate-100/95 backdrop-blur px-[3.4cqw] py-[3cqw] flex items-center gap-[3cqw] shadow-lg`}
+                >
+                  <span className="w-[9cqw] h-[9cqw] rounded-[2.4cqw] bg-blue-600 flex items-center justify-center text-white text-[4.6cqw] font-bold shrink-0">Q</span>
+                  <span className="flex flex-col leading-tight min-w-0">
+                    <span className="flex items-center gap-[1.4cqw]">
+                      <span className="text-slate-900 font-semibold text-[4cqw] truncate">{it.title}</span>
+                      <span className="text-slate-500 text-[3cqw] ml-auto shrink-0">{c.notifNow}</span>
+                    </span>
+                    <span className="text-slate-600 text-[3.4cqw] leading-tight line-clamp-2">{it.body}</span>
                   </span>
-                  <span className="text-slate-600 text-[3.4cqw] leading-tight line-clamp-2">{it.body}</span>
-                </span>
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </PhoneFrame16>
       </div>
     </div>
   );

@@ -1,15 +1,17 @@
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
-import { TruckIcon, GateIcon, MobileIcon, UsersIcon, SteeringWheelIcon, ChartIcon } from "@/components/icons";
+import { UsersIcon, SteeringWheelIcon, ChartIcon } from "@/components/icons";
 import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
-import { DockManagementScene } from "./DockManagementScene";
+import { DockBoardPlayer } from "./DockBoardPlayer";
 import { FeatureProblemSection } from "./FeatureProblemSection";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
-// Dock Management (feature 2) rich showcase: operator dock-board animation +
-// problem narrative + benefits by role + FAQ. Server Component.
+// Dock Management (feature 2) rich showcase: a live operator dock board that
+// loops through 5 real assignment situations (wait -> assign, reassign,
+// call-to-office, complete -> next truck, cancel) + problem narrative +
+// benefits by role + FAQ. Server Component (the board itself is a client leaf).
 export function DockManagementShowcase({ t, locale }: { t: Translations; locale: Locale }) {
   const d = t.dockPage;
   return (
@@ -18,15 +20,13 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
         title={d.title}
         subtitle={d.subtitle}
         stepLabel={d.stepLabel}
-        glowPrefix="dm-"
-        sceneStartsMs={[0, 4000, 9000]}
-        steps={[
-          { icon: TruckIcon, title: d.s1t, desc: d.s1d },
-          { icon: GateIcon, title: d.s2t, desc: d.s2d },
-          { icon: MobileIcon, title: d.s3t, desc: d.s3d },
-        ]}
+        glowPrefix="db-"
+        sceneStartsMs={[]}
+        aspectClass="aspect-[4/3] sm:aspect-[16/10]"
+        minHClass="min-h-[420px]"
+        headingId="dock-showcase-title"
       >
-        <DockManagementScene t={t} />
+        <DockBoardPlayer t={t} />
       </ShowcaseStage>
 
       <FeatureProblemSection
