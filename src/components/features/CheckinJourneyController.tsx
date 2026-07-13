@@ -3,7 +3,7 @@
 import { useRef, type ReactNode } from "react";
 
 // Scene start times on the shared 27s cj2 timeline (ms).
-const SCENE_STARTS_MS = [0, 9000, 19000];
+const SCENE_STARTS_MS = [0, 7500, 19000];
 
 // The feature's only client code: renders the step cards as buttons and, on
 // click, seeks every cj2 animation inside the section to that scene's start

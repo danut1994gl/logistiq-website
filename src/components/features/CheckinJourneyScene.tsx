@@ -155,7 +155,7 @@ export function CheckinJourneyScene({
         {/* warehouse, canopy, numbered docks */}
         <rect x="780" y="120" width="400" height="224" rx="4" className="fill-slate-800 stroke-slate-700" strokeWidth="2" />
         <rect x="780" y="120" width="400" height="10" className="fill-blue-600" />
-        <image href="/banner-nav.svg" x="848" y="132" width="200" height="50" opacity="0.9" />
+        <image href="/banner-nav.svg" x="880" y="132" width="200" height="50" opacity="0.9" />
         <rect x="770" y="196" width="420" height="12" rx="3" className="fill-slate-600" />
         <rect x="792" y="208" width="5" height="20" className="fill-slate-600" />
         <rect x="1166" y="208" width="5" height="20" className="fill-slate-600" />
@@ -174,14 +174,8 @@ export function CheckinJourneyScene({
             </text>
           </g>
         ))}
-        {/* dock 12 highlight + assigned badge */}
+        {/* dock 12 highlight */}
         <rect x="1060" y="224" width="90" height="120" className="cj2-dockglow stroke-emerald-400" fill="none" strokeWidth="3" />
-        <g className="cj2-badge">
-          <rect x="1053" y="166" width="104" height="30" rx="15" className="fill-blue-600" />
-          <text x="1105" y="186" textAnchor="middle" className="fill-white" style={{ fontSize: 14, fontWeight: 700, letterSpacing: 1 }}>
-            {dockLabel}
-          </text>
-        </g>
         {/* booth */}
         <rect x="646" y="252" width="64" height="92" rx="4" className="fill-slate-800 stroke-slate-700" strokeWidth="2" />
         <rect x="640" y="246" width="76" height="8" rx="3" className="fill-slate-600" />
@@ -214,6 +208,13 @@ export function CheckinJourneyScene({
             ))}
             <circle cx="166" cy="0" r="4" className="fill-emerald-400" />
           </g>
+        </g>
+        {/* assigned badge — drawn last so it floats over the docked truck */}
+        <g className="cj2-badge">
+          <rect x="1053" y="238" width="104" height="30" rx="15" className="fill-blue-600" />
+          <text x="1105" y="258" textAnchor="middle" className="fill-white" style={{ fontSize: 14, fontWeight: 700, letterSpacing: 1 }}>
+            {dockLabel}
+          </text>
         </g>
       </g>
     </svg>

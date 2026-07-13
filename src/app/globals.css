@@ -294,16 +294,16 @@ body {
 .cj2-s1 { opacity: 0; animation: cj2-s1 27s linear infinite; }
 @keyframes cj2-s1 {
   0%     { opacity: 1; }
-  29.63% { opacity: 1; }
-  33.33% { opacity: 0; }
+  24.07% { opacity: 1; }
+  27.78% { opacity: 0; }
   96.3%  { opacity: 0; }
   100%   { opacity: 1; }
 }
 
 .cj2-s2 { opacity: 0; animation: cj2-s2 27s linear infinite; }
 @keyframes cj2-s2 {
-  0%, 29.63%   { opacity: 0; }
-  33.33%       { opacity: 1; }
+  0%, 24.07%   { opacity: 0; }
+  27.78%       { opacity: 1; }
   66.67%       { opacity: 1; }
   70.37%, 100% { opacity: 0; }
 }
@@ -324,7 +324,7 @@ body {
 @keyframes cj2-truck1 {
   0%     { transform: translateX(-300px); }
   1.11%  { transform: translateX(-300px); animation-timing-function: cubic-bezier(0.3, 0.15, 0.25, 1); }
-  24.07% { transform: translateX(546px); }
+  16.67% { transform: translateX(546px); }
   96.3%  { transform: translateX(546px); }
   96.31% { transform: translateX(-300px); }
   100%   { transform: translateX(-300px); }
@@ -347,10 +347,10 @@ body {
 .cj2-brake { opacity: 0.35; animation: cj2-brake 27s linear infinite; }
 .cj2-parked .cj2-brake { animation: none; opacity: 0.25; }
 @keyframes cj2-brake {
-  0%, 24.07%   { opacity: 0.35; }
-  25%          { opacity: 1; }
-  26.5%        { opacity: 1; }
-  27.04%       { opacity: 0.35; }
+  0%, 16.67%   { opacity: 0.35; }
+  17.4%        { opacity: 1; }
+  18.9%        { opacity: 1; }
+  19.6%        { opacity: 0.35; }
   79.63%       { opacity: 0.35; }
   80.5%        { opacity: 1; }
   81.8%        { opacity: 1; }
@@ -419,12 +419,12 @@ body {
   animation: cj2-signpulse 27s linear infinite;
 }
 @keyframes cj2-signpulse {
-  0%, 24.07% { transform: scale(0.5); opacity: 0; }
-  24.8%      { opacity: 0.8; }
-  27%        { transform: scale(1.8); opacity: 0; }
-  27.2%      { transform: scale(0.5); opacity: 0; }
-  27.9%      { opacity: 0.8; }
-  29.6%      { transform: scale(1.8); opacity: 0; }
+  0%, 17%    { transform: scale(0.5); opacity: 0; }
+  17.7%      { opacity: 0.8; }
+  19.9%      { transform: scale(1.8); opacity: 0; }
+  20.1%      { transform: scale(0.5); opacity: 0; }
+  20.8%      { opacity: 0.8; }
+  22.5%      { transform: scale(1.8); opacity: 0; }
   100%       { opacity: 0; }
 }
 
@@ -435,12 +435,12 @@ body {
 @keyframes cj2-active-1 {
   0%          { opacity: 0; }
   2%          { opacity: 1; }
-  28%         { opacity: 1; }
-  32.5%, 100% { opacity: 0; }
+  22.5%       { opacity: 1; }
+  26.5%, 100% { opacity: 0; }
 }
 @keyframes cj2-active-2 {
-  0%, 30%     { opacity: 0; }
-  34.5%       { opacity: 1; }
+  0%, 24.5%   { opacity: 0; }
+  28.5%       { opacity: 1; }
   65%         { opacity: 1; }
   69.5%, 100% { opacity: 0; }
 }
@@ -454,56 +454,56 @@ body {
 /* Phone overlay (HTML, scene 2): container + 5 screen states + micro-anims. */
 .cj2-phone { opacity: 0; animation: cj2-phone 27s linear infinite; }
 @keyframes cj2-phone {
-  0%, 30.5%   { opacity: 0; transform: translateY(10px) scale(0.98); }
-  34.5%       { opacity: 1; transform: translateY(0) scale(1); }
+  0%, 25%     { opacity: 0; transform: translateY(10px) scale(0.98); }
+  28.8%       { opacity: 1; transform: translateY(0) scale(1); }
   65.5%       { opacity: 1; }
   69.5%, 100% { opacity: 0; }
 }
 
 .cj2-ph1 { opacity: 0; animation: cj2-ph1 27s linear infinite; }
 @keyframes cj2-ph1 {
-  0%, 32%      { opacity: 0; }
-  33.33%       { opacity: 1; }
-  37.2%        { opacity: 1; }
-  37.78%, 100% { opacity: 0; }
+  0%, 26.5%    { opacity: 0; }
+  27.78%       { opacity: 1; }
+  34.9%        { opacity: 1; }
+  35.56%, 100% { opacity: 0; }
 }
 .cj2-ph2 { opacity: 0; animation: cj2-ph2 27s linear infinite; }
 @keyframes cj2-ph2 {
-  0%, 37.78%    { opacity: 0; }
-  38.5%         { opacity: 1; }
-  52.6%         { opacity: 1; }
-  53.33%, 100%  { opacity: 0; }
+  0%, 35.56%    { opacity: 0; }
+  36.3%         { opacity: 1; }
+  51.9%         { opacity: 1; }
+  52.59%, 100%  { opacity: 0; }
 }
 .cj2-ph3 { opacity: 0; animation: cj2-ph3 27s linear infinite; }
 @keyframes cj2-ph3 {
-  0%, 53.33%   { opacity: 0; transform: scale(0.7); }
-  54%          { opacity: 1; transform: scale(1.08); }
-  54.8%        { transform: scale(1); }
-  55.4%        { opacity: 1; }
-  55.93%, 100% { opacity: 0; }
+  0%, 52.59%   { opacity: 0; transform: scale(0.7); }
+  53.3%        { opacity: 1; transform: scale(1.08); }
+  54.1%        { transform: scale(1); }
+  55%          { opacity: 1; }
+  55.56%, 100% { opacity: 0; }
 }
 .cj2-ph4 { opacity: 0; animation: cj2-ph4 27s linear infinite; }
 @keyframes cj2-ph4 {
-  0%, 55.93% { opacity: 0; }
-  56.6%      { opacity: 1; }
-  59.3%      { opacity: 1; }
-  60%, 100%  { opacity: 0; }
+  0%, 55.56%  { opacity: 0; }
+  56.3%       { opacity: 1; }
+  59.8%       { opacity: 1; }
+  60.49%, 100% { opacity: 0; }
 }
 .cj2-ph5 { opacity: 0; animation: cj2-ph5 27s linear infinite; }
 @keyframes cj2-ph5 {
-  0%, 60%      { opacity: 0; transform: translateY(8px); }
-  61.2%        { opacity: 1; transform: translateY(0); }
+  0%, 60.49%   { opacity: 0; transform: translateY(8px); }
+  61.7%        { opacity: 1; transform: translateY(0); }
   65.5%        { opacity: 1; }
   66.67%, 100% { opacity: 0; }
 }
 
 .cj2-scanline { opacity: 0; animation: cj2-scanline 27s linear infinite; }
 @keyframes cj2-scanline {
-  0%, 33.33%   { transform: translateY(0); opacity: 0; }
-  34%          { opacity: 1; }
-  35.8%        { transform: translateY(40cqw); }
-  37.3%        { transform: translateY(2cqw); opacity: 1; }
-  37.78%, 100% { opacity: 0; }
+  0%, 28.2%    { transform: translateY(0); opacity: 0; }
+  29%          { opacity: 1; }
+  31.8%        { transform: translateY(40cqw); }
+  34.6%        { transform: translateY(2cqw); opacity: 1; }
+  35.56%, 100% { opacity: 0; }
 }
 
 .cj2-row-1 { opacity: 0; animation: cj2-row-1 27s linear infinite; }
@@ -511,24 +511,24 @@ body {
 .cj2-row-3 { opacity: 0; animation: cj2-row-3 27s linear infinite; }
 .cj2-btn   { opacity: 0.55; animation: cj2-btn 27s linear infinite; }
 @keyframes cj2-row-1 {
-  0%, 38.8% { opacity: 0; transform: translateY(4px); }
-  39.6%     { opacity: 1; transform: translateY(0); }
+  0%, 36.6% { opacity: 0; transform: translateY(4px); }
+  37.4%     { opacity: 1; transform: translateY(0); }
   100%      { opacity: 1; }
 }
 @keyframes cj2-row-2 {
-  0%, 39.4% { opacity: 0; transform: translateY(4px); }
-  40.2%     { opacity: 1; transform: translateY(0); }
+  0%, 37.2% { opacity: 0; transform: translateY(4px); }
+  38%       { opacity: 1; transform: translateY(0); }
   100%      { opacity: 1; }
 }
 @keyframes cj2-row-3 {
-  0%, 40%   { opacity: 0; transform: translateY(4px); }
-  40.8%     { opacity: 1; transform: translateY(0); }
+  0%, 37.8% { opacity: 0; transform: translateY(4px); }
+  38.6%     { opacity: 1; transform: translateY(0); }
   100%      { opacity: 1; }
 }
 .cj2-row-4 { opacity: 0; animation: cj2-row-4 27s linear infinite; }
 @keyframes cj2-row-4 {
-  0%, 40.6% { opacity: 0; transform: translateY(4px); }
-  41.4%     { opacity: 1; transform: translateY(0); }
+  0%, 38.4% { opacity: 0; transform: translateY(4px); }
+  39.2%     { opacity: 1; transform: translateY(0); }
   100%      { opacity: 1; }
 }
 
@@ -539,27 +539,27 @@ body {
 .cj2-type-3 { clip-path: inset(0 100% 0 0); animation: cj2-type-3 27s linear infinite; }
 .cj2-type-4 { clip-path: inset(0 100% 0 0); animation: cj2-type-4 27s linear infinite; }
 @keyframes cj2-type-1 {
-  0%, 41.2%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(12, end); }
-  44.2%, 100% { clip-path: inset(0 0 0 0); }
+  0%, 39.7%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(12, end); }
+  44.1%, 100% { clip-path: inset(0 0 0 0); }
 }
 @keyframes cj2-type-2 {
-  0%, 44.6%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(12, end); }
-  47.4%, 100% { clip-path: inset(0 0 0 0); }
+  0%, 44.8%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(12, end); }
+  49.2%, 100% { clip-path: inset(0 0 0 0); }
 }
 @keyframes cj2-type-3 {
-  0%, 47.8%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(8, end); }
-  50%, 100%   { clip-path: inset(0 0 0 0); }
+  0%, 49.9%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(8, end); }
+  53.4%, 100% { clip-path: inset(0 0 0 0); }
 }
 @keyframes cj2-type-4 {
-  0%, 50.2%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(10, end); }
-  52.2%, 100% { clip-path: inset(0 0 0 0); }
+  0%, 54.1%   { clip-path: inset(0 100% 0 0); animation-timing-function: steps(10, end); }
+  57.5%, 100% { clip-path: inset(0 0 0 0); }
 }
 
 @keyframes cj2-btn {
-  0%, 52.3% { opacity: 0.55; transform: scale(1); }
-  52.6%     { opacity: 1; }
-  52.9%     { transform: scale(0.96); }
-  53.2%     { transform: scale(1); opacity: 1; }
+  0%, 58.2% { opacity: 0.55; transform: scale(1); }
+  58.6%     { opacity: 1; }
+  59%       { transform: scale(0.96); }
+  59.4%     { transform: scale(1); opacity: 1; }
   100%      { opacity: 1; }
 }
 
