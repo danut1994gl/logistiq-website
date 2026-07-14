@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Translations } from "@/lib/i18n/translations";
+import type { Locale } from "@/lib/i18n/config";
+import { DRIVER_POOLS } from "./driverPools";
 import { PhoneFrame16 } from "./PhoneFrame16";
 
 type Side = "driver" | "disp";
@@ -42,8 +44,9 @@ function Dots({ unit }: { unit: string }) {
   );
 }
 
-export function ChatPlayer({ t }: { t: Translations }) {
+export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const c = t.chatPage;
+  const driver = DRIVER_POOLS[locale][0];
   const txt = (k?: string) => (k ? (c as unknown as Record<string, string>)[k] : "");
   const [shown, setShown] = useState<Shown[]>([]);
   const [typing, setTyping] = useState<Side | null>(null);
@@ -111,7 +114,7 @@ export function ChatPlayer({ t }: { t: Translations }) {
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h11v8H3zM14 9h4l3 3v2h-7z" /><circle cx="6.5" cy="16" r="1.6" /><circle cx="17.5" cy="16" r="1.6" /></svg>
             </span>
             <span className="flex flex-col leading-tight min-w-0">
-              <span className="font-bold text-white text-[1.8cqw] truncate">John Smith · B 218 QRG</span>
+              <span className="font-bold text-white text-[1.8cqw] truncate">{driver.name} · {driver.plate}</span>
               <span className="text-slate-400 text-[1.3cqw]">{c.uiDriver}</span>
             </span>
             <span className="ml-auto inline-flex items-center gap-[0.7cqw] rounded-full px-[1.4cqw] py-[0.5cqw] text-[1.4cqw] font-semibold text-emerald-400 bg-emerald-500/15">
@@ -128,7 +131,7 @@ export function ChatPlayer({ t }: { t: Translations }) {
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h11v8H3zM14 9h4l3 3v2h-7z" /><circle cx="6.5" cy="16" r="1.6" /><circle cx="17.5" cy="16" r="1.6" /></svg>
                     </span>
                   )}
-                  <div className={`max-w-[74%] rounded-[1.1cqw] px-[1.4cqw] py-[0.9cqw] ${own ? "bg-blue-600 rounded-br-[0.3cqw]" : "bg-slate-700 rounded-bl-[0.3cqw]"}`}>
+                  <div className={`ch-pop max-w-[74%] rounded-[1.1cqw] px-[1.4cqw] py-[0.9cqw] ${own ? "bg-blue-600 rounded-br-[0.3cqw]" : "bg-slate-700 rounded-bl-[0.3cqw]"}`} style={{ transformOrigin: own ? "bottom right" : "bottom left" }}>
                     {m.img ? (
                       <div className="w-[16cqw]"><DocThumb /></div>
                     ) : (
@@ -149,7 +152,7 @@ export function ChatPlayer({ t }: { t: Translations }) {
             {typing === "driver" && (
               <div className="flex items-center gap-[1cqw] text-slate-400">
                 <span className="w-[3cqw] h-[3cqw] rounded-full bg-amber-100 text-amber-600 shrink-0" />
-                <span className="rounded-[1.1cqw] rounded-bl-[0.3cqw] bg-slate-700 px-[1.6cqw] py-[1.1cqw] text-slate-300"><Dots unit="1.6cqw" /></span>
+                <span className="ch-pop rounded-[1.1cqw] rounded-bl-[0.3cqw] bg-slate-700 px-[1.6cqw] py-[1.1cqw] text-slate-300" style={{ transformOrigin: "bottom left" }}><Dots unit="1.6cqw" /></span>
               </div>
             )}
           </div>
@@ -179,7 +182,7 @@ export function ChatPlayer({ t }: { t: Translations }) {
               return (
                 <div key={i} className={`flex items-end gap-[2cqw] ${own ? "flex-row-reverse" : "flex-row"}`}>
                   {!own && <span className="w-[7cqw] h-[7cqw] rounded-full bg-blue-100 text-blue-600 shrink-0 flex items-center justify-center text-[3cqw] font-bold">LW</span>}
-                  <div className={`max-w-[80%] rounded-[4cqw] px-[3.4cqw] py-[2.6cqw] ${own ? "bg-blue-600 rounded-br-[1cqw]" : "bg-slate-700 rounded-bl-[1cqw]"}`}>
+                  <div className={`ch-pop max-w-[80%] rounded-[4cqw] px-[3.4cqw] py-[2.6cqw] ${own ? "bg-blue-600 rounded-br-[1cqw]" : "bg-slate-700 rounded-bl-[1cqw]"}`} style={{ transformOrigin: own ? "bottom right" : "bottom left" }}>
                     {m.img ? (
                       <div className="w-[42cqw]"><DocThumb /></div>
                     ) : (
@@ -200,7 +203,7 @@ export function ChatPlayer({ t }: { t: Translations }) {
             {typing === "disp" && (
               <div className="flex items-center gap-[2cqw] text-slate-400">
                 <span className="w-[7cqw] h-[7cqw] rounded-full bg-blue-100 text-blue-600 shrink-0 flex items-center justify-center text-[3cqw] font-bold">LW</span>
-                <span className="rounded-[4cqw] rounded-bl-[1cqw] bg-slate-700 px-[4cqw] py-[3cqw] text-slate-300"><Dots unit="3.6cqw" /></span>
+                <span className="ch-pop rounded-[4cqw] rounded-bl-[1cqw] bg-slate-700 px-[4cqw] py-[3cqw] text-slate-300" style={{ transformOrigin: "bottom left" }}><Dots unit="3.6cqw" /></span>
               </div>
             )}
           </div>

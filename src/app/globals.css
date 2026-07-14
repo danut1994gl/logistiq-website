@@ -853,63 +853,16 @@ select:focus {
   }
 }
 
-/* ---- Driver notifications scene (feature 3, second frame) ----
-   Phone lock screen where dispatcher actions arrive as push, trigger list
-   lighting up in sync. One shared 16s nt-* loop. Base (unanimated) = all
-   notifications shown, for prefers-reduced-motion. 1s = 6.25%. */
-
-.nt-n1 { animation: nt-slide 16s linear infinite; }
-.nt-n2 { animation: nt-n2 16s linear infinite; }
-.nt-n3 { animation: nt-n3 16s linear infinite; }
-.nt-n4 { animation: nt-n4 16s linear infinite; }
-@keyframes nt-slide { 0%, 6.25% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 12.5% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
-@keyframes nt-n2 { 0%, 21.9% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 28.1% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
-@keyframes nt-n3 { 0%, 37.5% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 43.75% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
-@keyframes nt-n4 { 0%, 53.1% { opacity: 0; transform: translateY(-3cqw) scale(0.96); } 59.4% { opacity: 1; transform: translateY(0) scale(1); } 87% { opacity: 1; } 94%, 100% { opacity: 0; } }
-
-.nt-t1 { animation: nt-t1 16s linear infinite; }
-.nt-t2 { animation: nt-t2 16s linear infinite; }
-.nt-t3 { animation: nt-t3 16s linear infinite; }
-.nt-t4 { animation: nt-t4 16s linear infinite; }
-@keyframes nt-t1 { 0%, 6.25% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 12.5% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 20% { border-color: rgba(59,130,246,0.8); } 26%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
-@keyframes nt-t2 { 0%, 21.9% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 28.1% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 36% { border-color: rgba(59,130,246,0.8); } 42%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
-@keyframes nt-t3 { 0%, 37.5% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 43.75% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 52% { border-color: rgba(59,130,246,0.8); } 58%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
-@keyframes nt-t4 { 0%, 53.1% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } 59.4% { border-color: rgba(59,130,246,0.8); background-color: rgba(37,99,235,0.14); } 68% { border-color: rgba(59,130,246,0.8); } 74%, 100% { border-color: rgba(51,65,85,0.7); background-color: rgba(30,41,59,0.5); } }
-
+/* ---- Chat bubble entrance (WhatsApp-style pop) ----
+   Each newly-mounted chat bubble / typing indicator scales up from its tail
+   corner with a quick spring. transform-origin is set inline per side. */
+.ch-pop { animation: ch-pop 0.34s cubic-bezier(0.2, 0.85, 0.25, 1) both; }
+@keyframes ch-pop {
+  0%   { opacity: 0; transform: translateY(0.5em) scale(0.82); }
+  55%  { opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .nt-n1, .nt-n2, .nt-n3, .nt-n4, .nt-t1, .nt-t2, .nt-t3, .nt-t4 { animation: none !important; }
+  .ch-pop { animation: none !important; }
 }
 
-/* ---- YMS yard scene v3 (feature 13) ----
-   Intuitive top-down yard; one truck enters the gate -> waits in the yard
-   (yellow) -> is assigned (blue) -> backs into dock D4 (unloading sage) on a
-   22s ym3-* loop, real status palette. Transforms in SVG user units (px maps
-   to user units on SVG elements). Base transform lives on the SVG group so the
-   static/dev/reduced-motion frame shows the truck waiting in the yard. */
-.ym3-truck { transform: translate(455px, 520px); animation: ym3-truck 22s linear infinite; }
-@keyframes ym3-truck {
-  0%       { transform: translate(185px, 690px); opacity: 0; }
-  4%       { opacity: 1; }
-  14%      { transform: translate(185px, 545px); }
-  26%      { transform: translate(455px, 520px); }
-  56%      { transform: translate(455px, 520px); }
-  70%      { transform: translate(600px, 430px); }
-  82%      { transform: translate(600px, 252px); }
-  94%      { transform: translate(600px, 252px); opacity: 1; }
-  97%, 100% { transform: translate(600px, 252px); opacity: 0; }
-}
-.ym3-body { animation: ym3-body 22s linear infinite; }
-@keyframes ym3-body {
-  0%, 56%  { fill: #eab308; }
-  60%      { fill: #3b82f6; }
-  72%      { fill: #3b82f6; }
-  78%      { fill: #6a9e7e; }
-  100%     { fill: #6a9e7e; }
-}
-.ym3-idle { animation: ym3-idle 22s linear infinite; }
-@keyframes ym3-idle { 0%, 56% { opacity: 1; } 60%, 100% { opacity: 0; } }
-.ym3-target { animation: ym3-target 22s linear infinite; }
-@keyframes ym3-target { 0%, 74% { opacity: 0; } 80% { opacity: 1; } 94% { opacity: 1; } 97%, 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) {
-  .ym3-truck, .ym3-body, .ym3-idle, .ym3-target { animation: none !important; }
-}

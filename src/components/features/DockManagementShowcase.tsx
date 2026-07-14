@@ -26,7 +26,7 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
         minHClass="min-h-[500px]"
         headingId="dock-showcase-title"
       >
-        <DockBoardPlayer t={t} />
+        <DockBoardPlayer t={t} locale={locale} />
       </ShowcaseStage>
 
       <FeatureProblemSection

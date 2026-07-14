@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { Translations } from "@/lib/i18n/translations";
+import type { Locale } from "@/lib/i18n/config";
+import { DRIVER_POOLS } from "./driverPools";
 
 type Op = "loading" | "unloading" | "both";
 type CardState = "in" | "entering" | "leaving";
-type Card = { id: number; name: string; phone: string; plate: string; company: string; op: Op; waitMin: number; parking?: boolean; state: CardState };
+type Card = { id: number; name: string; plate: string; company: string; op: Op; waitMin: number; parking?: boolean; state: CardState };
 type Dock = { plate: string; op: Op; status: "assigned" | "in_progress"; seq: number } | null;
 type ActKey = "assign" | "wait" | "office" | "parking" | "cancel";
 
@@ -22,6 +24,9 @@ const OP_TILE: Record<Op, string> = {
 const OP_ICONCOL: Record<Op, string> = { loading: "text-orange-400", unloading: "text-blue-400", both: "text-purple-400" };
 const DOCKS_L = [1, 2, 3, 4];
 const DOCKS_U = [5, 6, 7, 8];
+// international freight brands — same across locales (only names/plates localize)
+const COMPANIES = ["Tranself", "Delamode", "Waberer's", "Girteka", "DSV", "Raben", "Dachser", "Gebrüder Weiss", "Kühne+Nagel", "DB Schenker", "Rhenus", "Duvenbeck", "LKW Walter", "Ekol", "Hödlmayr", "GEODIS"];
+const OPS: Op[] = ["loading", "unloading", "both"];
 
 // operation arrow: up = loading, down = unloading, dual = both
 function OpArrow({ op, className }: { op: Op; className?: string }) {
@@ -44,43 +49,26 @@ const ICONS: Record<ActKey, ReactNode> = {
 };
 const ACT_COLOR: Record<ActKey, string> = { assign: "text-purple-400", wait: "text-yellow-400", office: "text-blue-400", parking: "text-teal-400", cancel: "text-orange-400" };
 
-const POOL = [
-  { name: "Alex T", phone: "+40 771 570 577", plate: "B 123 BBB", company: "Tranself" },
-  { name: "Andrei M", phone: "+40 745 210 004", plate: "CJ 07 LGX", company: "Delamode" },
-  { name: "Ionuț P", phone: "+40 722 118 090", plate: "TM 44 DEL", company: "Waberer's" },
-  { name: "Marius V", phone: "+40 733 662 141", plate: "B 451 TRK", company: "Girteka" },
-  { name: "Sergiu D", phone: "+40 766 900 312", plate: "CT 09 QRG", company: "DSV" },
-  { name: "Paul R", phone: "+40 799 004 556", plate: "IS 22 LOG", company: "Raben" },
-  { name: "Vlad N", phone: "+40 741 335 218", plate: "GL 99 LKJ", company: "Tranself" },
-  { name: "Cosmin A", phone: "+40 788 120 673", plate: "AR 18 FRT", company: "Dachser" },
-  { name: "Robert S", phone: "+40 726 551 900", plate: "BV 30 TRK", company: "Gebrüder Weiss" },
-  { name: "Daniel C", phone: "+40 744 018 220", plate: "CJ 55 QRG", company: "Kühne+Nagel" },
-  { name: "Florin T", phone: "+40 755 402 118", plate: "MM 12 LOG", company: "DB Schenker" },
-  { name: "Radu I", phone: "+40 768 331 776", plate: "SB 77 DEL", company: "Rhenus" },
-  { name: "Ovidiu L", phone: "+40 731 209 845", plate: "BC 41 FRT", company: "Hödlmayr" },
-  { name: "Nicu P", phone: "+40 749 662 013", plate: "PH 63 QRG", company: "Duvenbeck" },
-  { name: "Mihai G", phone: "+40 777 815 240", plate: "AG 28 TRK", company: "LKW Walter" },
-  { name: "Bogdan E", phone: "+40 723 947 508", plate: "DJ 90 LOG", company: "Ekol" },
-];
-const OPS: Op[] = ["loading", "unloading", "both"];
-
-export function DockBoardPlayer({ t }: { t: Translations }) {
+export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const d = t.dockPage;
+  const POOL = DRIVER_POOLS[locale];
   const opLabel = (op: Op) => (op === "loading" ? d.uiLoading : op === "unloading" ? d.uiUnloading : d.uiBoth);
 
-  // initial (SSR-stable) frame: 4 waiting cards + 2 occupied docks
+  // initial (SSR-stable) frame: 5 waiting cards + 2 occupied docks (localized)
   const [cards, setCards] = useState<Card[]>(() =>
-    [0, 1, 2, 3, 4].map((i) => ({ id: i, ...POOL[i], op: OPS[i % 3], waitMin: [8, 21, 14, 33, 5][i], state: "in" as CardState }))
+    [0, 1, 2, 3, 4].map((i) => ({ id: i, name: POOL[i].name, plate: POOL[i].plate, company: COMPANIES[i % COMPANIES.length], op: OPS[i % 3], waitMin: [8, 21, 14, 33, 5][i], state: "in" as CardState }))
   );
-  const [docks, setDocks] = useState<Record<number, Dock>>(() => ({ 3: { plate: "IS 22 LOG", op: "loading", status: "in_progress", seq: -2 }, 6: { plate: "GL 99 LKJ", op: "unloading", status: "assigned", seq: -1 } }));
+  const [docks, setDocks] = useState<Record<number, Dock>>(() => ({ 3: { plate: POOL[5].plate, op: "loading", status: "in_progress", seq: -2 }, 6: { plate: POOL[6].plate, op: "unloading", status: "assigned", seq: -1 } }));
   const [cursor, setCursor] = useState<{ x: number; y: number; down: boolean; on: boolean }>({ x: 50, y: 60, down: false, on: false });
   const [menu, setMenu] = useState<{ cardId: number; active: number | null; up: boolean } | null>(null);
+  const [rampPick, setRampPick] = useState<{ driver: string; free: number[]; picked: number | null } | null>(null);
   const [toast, setToast] = useState<{ text: string; tone: "success" | "info" } | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
 
   const stageRef = useRef<HTMLDivElement>(null);
   const btnRefs = useRef<Map<number, HTMLElement>>(new Map());
   const itemRefs = useRef<Map<number, HTMLElement>>(new Map());
+  const rampRefs = useRef<Map<number, HTMLElement>>(new Map());
   const cardsRef = useRef(cards);
   const docksRef = useRef(docks);
   const idRef = useRef(5);
@@ -115,24 +103,24 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
       await sleep(ms);
     };
     const click = async () => { setCursor((c) => ({ ...c, down: true })); await sleep(140); setCursor((c) => ({ ...c, down: false })); await sleep(160); };
+    const hideCursor = () => setCursor((c) => ({ ...c, on: false }));
     // refs are the authoritative store (kept in sync synchronously so the async
     // loop never reads stale state and double-assigns a plate/dock)
     const applyCards = (fn: (c: Card[]) => Card[]) => { cardsRef.current = fn(cardsRef.current); setCards(cardsRef.current); };
     const applyDocks = (fn: (dk: Record<number, Dock>) => Record<number, Dock>) => { docksRef.current = fn(docksRef.current); setDocks(docksRef.current); };
-    const freeDock = (op: Op): number | null => {
+    const freeDocks = (op: Op): number[] => {
       const pool = op === "loading" ? DOCKS_L : op === "unloading" ? DOCKS_U : [...DOCKS_L, ...DOCKS_U];
-      const free = pool.filter((n) => !docksRef.current[n]);
-      return free.length ? free[Math.floor(Math.random() * free.length)] : null;
+      return pool.filter((n) => !docksRef.current[n]);
     };
     const addCard = (): boolean => {
       const used = new Set<string>([...cardsRef.current.map((c) => c.plate), ...Object.values(docksRef.current).filter(Boolean).map((o) => (o as NonNullable<Dock>).plate)]);
-      const avail = POOL.filter((p) => !used.has(p.plate));
-      if (!avail.length) return false; // never duplicate a plate
-      const p = avail[Math.floor(Math.random() * avail.length)];
+      const availIdx = POOL.map((_, i) => i).filter((i) => !used.has(POOL[i].plate));
+      if (!availIdx.length) return false; // never duplicate a plate
+      const i = availIdx[Math.floor(Math.random() * availIdx.length)];
       const id = idRef.current++;
       const r = Math.random();
       const op: Op = r < 0.42 ? "loading" : r < 0.84 ? "unloading" : "both";
-      const card: Card = { id, name: p.name, phone: p.phone, plate: p.plate, company: p.company, op, waitMin: 1 + Math.floor(Math.random() * 6), state: "entering" };
+      const card: Card = { id, name: POOL[i].name, plate: POOL[i].plate, company: COMPANIES[i % COMPANIES.length], op, waitMin: 1 + Math.floor(Math.random() * 6), state: "entering" };
       applyCards((cs) => [...cs, card]);
       setTimeout(() => { if (!cancelled) applyCards((cs) => cs.map((c) => (c.id === id ? { ...c, state: "in" } : c))); }, 60);
       return true;
@@ -160,8 +148,7 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
         // keep the queue populated (longer queue)
         while (cardsRef.current.filter((c) => c.state !== "leaving").length < 5) { if (!addCard()) break; await sleep(360); }
 
-        // housekeeping: cycle docks only once the board is fairly full, so it
-        // stays visibly busy but keeps breathing
+        // housekeeping: cycle docks only once the board is fairly full
         const occCount = Object.keys(docksRef.current).length;
         if (occCount >= 5 || (occCount >= 3 && Math.random() < 0.45)) { advanceDocks(); await sleep(450); }
 
@@ -169,7 +156,7 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
         if (!live.length) { await sleep(400); continue; }
         const card = live[Math.floor(Math.random() * live.length)];
 
-        // move cursor to the card's Actions button and click
+        // move cursor to the card's Actions button and click to open the menu
         await moveTo(btnRefs.current.get(card.id));
         const bp = rectPct(btnRefs.current.get(card.id));
         const up = bp ? bp.y > 52 : false;
@@ -178,43 +165,58 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
         await sleep(560);
 
         // choose a random valid action
-        const canAssign = freeDock(card.op) !== null;
+        const canAssign = freeDocks(card.op).length > 0;
         const choices: ActKey[] = [];
         if (canAssign) { choices.push("assign", "assign", "assign", "assign", "assign"); } // assignment dominates
         choices.push("wait", "parking", "office", "cancel");
         const act = choices[Math.floor(Math.random() * choices.length)];
         const order: ActKey[] = ["assign", "wait", "office", "parking", "cancel"];
         const activeIdx = order.indexOf(act);
-        setMenu({ cardId: card.id, active: activeIdx, up });
+        // move cursor onto the item FIRST, then highlight when it arrives (fix)
         await moveTo(itemRefs.current.get(activeIdx), 460);
+        setMenu({ cardId: card.id, active: activeIdx, up });
+        await sleep(240);
         await click();
         setMenu(null);
-        await sleep(160);
-        setCursor((c) => ({ ...c, on: false }));
+        await sleep(120);
 
         // execute
         if (act === "assign") {
-          const dock = freeDock(card.op);
-          if (dock) {
+          const free = freeDocks(card.op);
+          if (free.length) {
+            // ramp-picker dialog: operator chooses which ramp to give the driver
+            setRampPick({ driver: card.name, free, picked: null });
+            await sleep(650);
+            const dock = free[Math.floor(Math.random() * free.length)];
+            await moveTo(rampRefs.current.get(dock), 560);
+            setRampPick((rp) => (rp ? { ...rp, picked: dock } : rp));
+            await sleep(300);
+            await click();
+            setRampPick(null);
+            hideCursor();
             // reserve the dock synchronously (no double-book) and fade the card out
             applyCards((cs) => cs.map((c) => (c.id === card.id ? { ...c, state: "leaving" } : c)));
             applyDocks((dk) => ({ ...dk, [dock]: { plate: card.plate, op: card.op, status: "assigned", seq: seqRef.current++ } }));
-            showToast(`${d.uiDock} ${dock} ${d.evAssigned}`, "success");
+            showToast(`${d.uiDock} ${dock} ${d.evAssignedTo} ${card.name}`, "success");
             setTimeout(() => { if (!cancelled) applyCards((cs) => cs.filter((c) => c.id !== card.id)); }, 480);
-          }
+          } else hideCursor();
         } else if (act === "wait") {
+          hideCursor();
           applyCards((cs) => cs.map((c) => (c.id === card.id ? { ...c, waitMin: c.waitMin + 30 } : c)));
           showToast(d.evWaitBanner, "info");
         } else if (act === "parking") {
+          hideCursor();
           applyCards((cs) => cs.map((c) => (c.id === card.id ? { ...c, parking: true } : c)));
-          showToast(`${card.plate} — ${d.uiParkingBadge}`, "info");
+          showToast(`${card.name} — ${d.uiParkingBadge}`, "info");
           setTimeout(() => { if (!cancelled) applyCards((cs) => cs.map((c) => (c.id === card.id ? { ...c, state: "leaving" } : c))); }, 1100);
           setTimeout(() => { if (!cancelled) applyCards((cs) => cs.filter((c) => c.id !== card.id)); }, 1600);
         } else if (act === "office") {
-          setBanner(`${card.plate} — ${d.evOffice}`);
+          hideCursor();
+          setBanner(`${card.name} — ${d.evOffice}`);
           await sleep(2400);
           if (!cancelled) setBanner(null);
         } else if (act === "cancel") {
+          hideCursor();
           applyCards((cs) => cs.map((c) => (c.id === card.id ? { ...c, state: "leaving" } : c)));
           showToast(d.evCancelled, "info");
           setTimeout(() => { if (!cancelled) applyCards((cs) => cs.filter((c) => c.id !== card.id)); }, 480);
@@ -242,14 +244,23 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
   return (
     <div ref={stageRef} className="@container absolute inset-0 p-[2cqw] text-slate-200 select-none" aria-hidden="true">
       <div className="w-full h-full rounded-[1.4cqw] bg-slate-900/70 border border-slate-700/70 flex flex-col overflow-hidden">
-        {/* header */}
-        <div className="flex items-center gap-[1.2cqw] px-[1.8cqw] py-[1.1cqw] border-b border-slate-700/70 bg-slate-800/60 shrink-0">
+        {/* header (assignment toast surfaces centered here) */}
+        <div className="relative flex items-center gap-[1.2cqw] px-[1.8cqw] py-[1.1cqw] border-b border-slate-700/70 bg-slate-800/60 shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="" className="w-[2.6cqw] h-[2.6cqw] rounded-[0.6cqw]" />
-          <span className="font-bold text-white text-[2cqw]">{d.uiBoard}</span>
+          <span className="font-bold text-white text-[2cqw]">{d.uiBoardTitle}</span>
           <span className="ml-auto inline-flex items-center gap-[0.6cqw] text-[1.35cqw] font-semibold text-emerald-400 bg-emerald-500/15 rounded-full px-[1.2cqw] py-[0.4cqw]">
             <span className="w-[0.9cqw] h-[0.9cqw] rounded-full bg-emerald-400" /> {d.uiLive}
           </span>
+          {/* centered notification in the header */}
+          {toast && (
+            <div className={`absolute left-1/2 -translate-x-1/2 z-40 flex items-center gap-[1cqw] rounded-full bg-slate-900 border shadow-2xl px-[1.6cqw] py-[0.7cqw] ${toast.tone === "success" ? "border-emerald-500/60" : "border-blue-500/50"}`}>
+              <span className={`w-[2cqw] h-[2cqw] rounded-full flex items-center justify-center text-white [&_svg]:w-[1.3cqw] [&_svg]:h-[1.3cqw] ${toast.tone === "success" ? "bg-emerald-500" : "bg-blue-500"}`}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">{toast.tone === "success" ? <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M12 8v5M12 16.5v.01" strokeLinecap="round" />}</svg>
+              </span>
+              <span className="text-[1.45cqw] font-semibold text-white whitespace-nowrap">{toast.text}</span>
+            </div>
+          )}
         </div>
 
         <div className="flex-1 flex gap-[1.6cqw] p-[1.6cqw] min-h-0">
@@ -371,13 +382,32 @@ export function DockBoardPlayer({ t }: { t: Translations }) {
           {banner}
         </div>
       )}
-      {/* toast */}
-      {toast && (
-        <div className={`absolute right-[2.4cqw] top-[8cqw] z-40 flex items-center gap-[1cqw] rounded-[1cqw] bg-slate-800 border shadow-2xl px-[1.6cqw] py-[1cqw] ${toast.tone === "success" ? "border-emerald-500/50" : "border-blue-500/40"}`}>
-          <span className={`w-[2.2cqw] h-[2.2cqw] rounded-full flex items-center justify-center text-white [&_svg]:w-[1.4cqw] [&_svg]:h-[1.4cqw] ${toast.tone === "success" ? "bg-emerald-500" : "bg-blue-500"}`}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">{toast.tone === "success" ? <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M12 8v5M12 16.5v.01" strokeLinecap="round" />}</svg>
-          </span>
-          <span className="text-[1.5cqw] font-semibold text-white">{toast.text}</span>
+
+      {/* ramp-picker dialog (opens after "Assign to ramp") */}
+      {rampPick && (
+        <div className="absolute inset-0 z-40 flex items-center justify-center">
+          <div className="absolute inset-0 bg-slate-950/55" />
+          <div className="relative rounded-[1.4cqw] border border-slate-600 bg-slate-800 shadow-2xl px-[2.2cqw] py-[1.8cqw] w-[38cqw]">
+            <div className="flex items-center gap-[1cqw] mb-[0.3cqw]">
+              <span className="w-[2.6cqw] h-[2.6cqw] rounded-[0.7cqw] bg-purple-500/20 text-purple-300 flex items-center justify-center [&_svg]:w-[1.6cqw] [&_svg]:h-[1.6cqw]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20V9l8-5 8 5v11M4 20h16M9 20v-6h6v6" /></svg>
+              </span>
+              <span className="text-white font-bold text-[1.75cqw]">{d.rampDialogTitle}</span>
+            </div>
+            <div className="text-slate-400 text-[1.3cqw] mb-[1.3cqw] ml-[0.2cqw]">{rampPick.driver}</div>
+            <div className="grid grid-cols-4 gap-[0.9cqw]">
+              {rampPick.free.map((n) => (
+                <div
+                  key={n}
+                  ref={(el) => { if (el) rampRefs.current.set(n, el); }}
+                  className={`rounded-[0.9cqw] border py-[1.2cqw] flex flex-col items-center gap-[0.2cqw] transition-all duration-200 ${rampPick.picked === n ? "border-purple-400 bg-purple-500/25 text-purple-100" : "border-slate-600 bg-slate-700/40 text-slate-300"}`}
+                >
+                  <span className="text-[1.7cqw] font-bold">{n}</span>
+                  <span className="text-[1cqw] opacity-70">{d.uiDock}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 

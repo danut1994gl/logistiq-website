@@ -25,7 +25,7 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
         minHClass="min-h-[360px]"
         headingId="chat-showcase-title"
       >
-        <ChatPlayer t={t} />
+        <ChatPlayer t={t} locale={locale} />
       </ShowcaseStage>
 
       <ShowcaseStage
@@ -34,8 +34,8 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
         stepLabel={c.stepLabel}
         glowPrefix="nt-"
         sceneStartsMs={[]}
-        aspectClass="aspect-[16/10] sm:aspect-[5/2]"
-        minHClass="min-h-[320px]"
+        aspectClass="aspect-[4/3] sm:aspect-[16/9]"
+        minHClass="min-h-[440px]"
         headingId="notif-showcase-title"
       >
         <NotificationsScene t={t} />
