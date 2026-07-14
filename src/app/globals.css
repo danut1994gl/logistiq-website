@@ -862,7 +862,10 @@ select:focus {
   55%  { opacity: 1; }
   100% { transform: translateY(0) scale(1); }
 }
+/* blinking caret in the chat compose field while a message is being typed */
+.ch-caret { animation: ch-caret 1s steps(1) infinite; }
+@keyframes ch-caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .ch-pop { animation: none !important; }
+  .ch-pop, .ch-caret { animation: none !important; }
 }
 

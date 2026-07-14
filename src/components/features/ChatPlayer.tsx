@@ -34,6 +34,19 @@ function DocThumb() {
   );
 }
 
+function ImgMsg({ w, sending }: { w: string; sending: boolean }) {
+  return (
+    <div className={`relative ${w}`}>
+      <DocThumb />
+      {sending && (
+        <div className="absolute inset-0 rounded-[0.5em] bg-slate-900/45 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="animate-spin text-white" style={{ width: "28%", height: "28%" }} fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M12 3a9 9 0 1 0 9 9" strokeLinecap="round" /></svg>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Dots({ unit }: { unit: string }) {
   return (
     <span className="inline-flex items-center gap-[0.35em]" style={{ fontSize: unit }}>
@@ -60,8 +73,10 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const dispInit = dispatcher.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
   const txt = (k?: string) => (k ? (c as unknown as Record<string, string>)[k] : "");
   const [msgs, setMsgs] = useState<Msg[]>([]);
-  const [dashTyping, setDashTyping] = useState(false); // driver typing, seen on the dashboard
-  const [phoneTyping, setPhoneTyping] = useState(false); // dispatcher typing, seen on the phone
+  const [dashTyping, setDashTyping] = useState(false); // driver typing, dots on the dashboard
+  const [phoneTyping, setPhoneTyping] = useState(false); // dispatcher typing, dots on the phone
+  const [dashInput, setDashInput] = useState(""); // dispatcher's live compose text (dashboard input)
+  const [phoneInput, setPhoneInput] = useState(""); // driver's live compose text (phone input)
   const [sendFx, setSendFx] = useState<"dash" | "phone" | null>(null);
   const dashRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
@@ -70,7 +85,6 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMsgs(SCENARIOS[0].map((s, i) => ({ mid: i, from: s.f, k: s.k, img: s.img, time: `14:3${1 + i}`, onDash: true, onPhone: true, tick: "read" as Tick })));
       return;
     }
@@ -91,35 +105,56 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
       while (!cancelled) {
         const scenario = SCENARIOS[s];
         apply(() => []);
-        setDashTyping(false); setPhoneTyping(false);
+        setDashTyping(false); setPhoneTyping(false); setDashInput(""); setPhoneInput("");
         await sleep(700);
         let mid = 0;
         let clock = 33;
         for (let i = 0; i < scenario.length && !cancelled; i++) {
           const step = scenario[i];
           const time = `14:${clock}`; clock = clock >= 59 ? 33 : clock + 1;
-          // 1) the composer types → the OTHER device shows "typing…"
-          if (step.f === "disp") setPhoneTyping(true); else setDashTyping(true);
-          await sleep(step.img ? 900 : 1200);
-          if (cancelled) break;
-          if (step.f === "disp") setPhoneTyping(false); else setDashTyping(false);
-          // 2) send → appears on the SENDER's device first (sending → sent)
+          const composePane: "dash" | "phone" = step.f === "disp" ? "dash" : "phone";
+          const setInput = composePane === "dash" ? setDashInput : setPhoneInput;
+          const setRx = step.f === "disp" ? setPhoneTyping : setDashTyping; // dots on the recipient's device
+          if (step.img) {
+            // photo: the recipient briefly sees typing dots, then it uploads
+            setRx(true);
+            await sleep(1200);
+            if (cancelled) break;
+            setRx(false);
+          } else {
+            // the composer types the message out, character by character, in the input
+            const full = txt(step.k);
+            const per = Math.max(1, Math.ceil(full.length / 22));
+            let rxOn = false;
+            for (let ci = per; ci < full.length && !cancelled; ci += per) {
+              setInput(full.slice(0, ci));
+              if (!rxOn && ci >= 2) { setRx(true); rxOn = true; } // after the first letters the other sees the dots
+              await sleep(58);
+            }
+            if (cancelled) break;
+            setInput(full);
+            await sleep(360);
+          }
+          // send: pulse the send button, clear the input, drop the message into the thread
+          setSendFx(composePane);
+          await sleep(220);
+          setSendFx(null);
+          setInput("");
+          setRx(false);
           const id = mid++;
           const m: Msg = { mid: id, from: step.f, k: step.k, img: step.img, time, onDash: step.f === "disp", onPhone: step.f === "driver", tick: "sending" };
           apply((ms) => [...ms, m]);
-          setSendFx(step.f === "disp" ? "dash" : "phone");
-          await sleep(230);
-          setSendFx(null);
+          await sleep(step.img ? 750 : 240); // image: brief upload spinner
           setTick(id, { tick: "sent" });
-          // 3) network latency → arrives on the OTHER device (delivered)
-          await sleep(step.img ? 1050 : 780);
+          // network latency → arrives on the other device (delivered)
+          await sleep(step.img ? 850 : 760);
           if (cancelled) break;
           setTick(id, { onDash: true, onPhone: true, tick: "delivered" });
-          // 4) the recipient sees it (read)
+          // recipient reads it
           await sleep(760);
           if (cancelled) break;
           setTick(id, { tick: "read" });
-          await sleep(360);
+          await sleep(420);
         }
         await sleep(2600);
         s = (s + 1) % SCENARIOS.length;
@@ -127,6 +162,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
     };
     run();
     return () => { cancelled = true; io.disconnect(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -147,7 +183,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             </span>
             <span className="flex flex-col leading-tight min-w-0">
               <span className="font-bold text-white text-[1.8cqw] truncate">{driver.name} · {driver.plate}</span>
-              <span className="text-[1.3cqw] leading-none h-[1.5cqw] text-emerald-400/90">{dashTyping ? `${c.uiDriver} ${c.uiTyping}` : c.uiDriver}</span>
+              <span className="text-[1.3cqw] leading-none h-[1.5cqw] text-slate-400">{c.uiDriver}</span>
             </span>
             <span className="ml-auto inline-flex items-center gap-[0.7cqw] rounded-full px-[1.4cqw] py-[0.5cqw] text-[1.4cqw] font-semibold text-emerald-400 bg-emerald-500/15">
               <span className="w-[1cqw] h-[1cqw] rounded-full bg-emerald-400" /> {c.uiOnline}
@@ -164,7 +200,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
                     </span>
                   )}
                   <div className={`ch-pop max-w-[74%] rounded-[1.1cqw] px-[1.4cqw] py-[0.9cqw] ${own ? "bg-blue-600 rounded-br-[0.3cqw]" : "bg-slate-700 rounded-bl-[0.3cqw]"}`} style={{ transformOrigin: own ? "bottom right" : "bottom left" }}>
-                    {m.img ? <div className="w-[16cqw]"><DocThumb /></div> : <span className="text-white text-[1.5cqw] leading-snug block">{txt(m.k)}</span>}
+                    {m.img ? <ImgMsg w="w-[16cqw]" sending={m.tick === "sending"} /> : <span className="text-white text-[1.5cqw] leading-snug block">{txt(m.k)}</span>}
                     <span className={`flex items-center gap-[0.4cqw] mt-[0.3cqw] text-[1.1cqw] ${own ? "justify-end text-blue-200" : "text-slate-400"}`}>
                       {m.time}
                       {own && <StatusTick tick={m.tick} size="1.6cqw" ownLight="text-blue-200/80" />}
@@ -181,7 +217,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             )}
           </div>
           <div className="flex items-center gap-[1cqw] px-[1.8cqw] py-[1.1cqw] border-t border-slate-700/70">
-            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.9cqw] text-slate-500 text-[1.4cqw]">{c.uiMessage}…</span>
+            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.9cqw] text-[1.4cqw] truncate">{dashInput ? <span className="text-white">{dashInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500">{c.uiMessage}…</span>}</span>
             <span className="w-[3cqw] h-[3cqw] rounded-full bg-blue-600 flex items-center justify-center text-white [&_svg]:w-[1.7cqw] [&_svg]:h-[1.7cqw] transition-transform duration-200" style={{ transform: sendFx === "dash" ? "scale(1.25)" : "scale(1)" }}><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z" /></svg></span>
           </div>
         </div>
@@ -195,7 +231,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             </span>
             <span className="flex flex-col leading-tight min-w-0">
               <span className="text-white font-bold text-[4.4cqw]">{dispatcher.name}</span>
-              <span className="text-[3.4cqw] leading-none h-[3.8cqw] text-blue-100">{phoneTyping ? c.uiTyping : c.uiOnline}</span>
+              <span className="text-[3.4cqw] leading-none h-[3.8cqw] text-blue-100">{c.uiOnline}</span>
             </span>
           </div>
           <div ref={phoneRef} className="flex-1 flex flex-col gap-[2.4cqw] px-[3.5cqw] py-[3cqw] min-h-0 overflow-hidden bg-slate-950">
@@ -205,7 +241,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
                 <div key={m.mid} className={`flex items-end gap-[2cqw] ${own ? "flex-row-reverse" : "flex-row"}`}>
                   {!own && <span className="w-[7cqw] h-[7cqw] rounded-full bg-blue-100 text-blue-600 shrink-0 flex items-center justify-center text-[3cqw] font-bold">{dispInit}</span>}
                   <div className={`ch-pop max-w-[80%] rounded-[4cqw] px-[3.4cqw] py-[2.6cqw] ${own ? "bg-blue-600 rounded-br-[1cqw]" : "bg-slate-700 rounded-bl-[1cqw]"}`} style={{ transformOrigin: own ? "bottom right" : "bottom left" }}>
-                    {m.img ? <div className="w-[42cqw]"><DocThumb /></div> : <span className="text-white text-[4.4cqw] leading-snug block">{txt(m.k)}</span>}
+                    {m.img ? <ImgMsg w="w-[42cqw]" sending={m.tick === "sending"} /> : <span className="text-white text-[4.4cqw] leading-snug block">{txt(m.k)}</span>}
                     <span className={`flex items-center gap-[1cqw] mt-[0.8cqw] text-[3cqw] ${own ? "justify-end text-blue-200" : "text-slate-400"}`}>
                       {m.time}
                       {own && <StatusTick tick={m.tick} size="3.6cqw" ownLight="text-blue-200/80" />}
@@ -224,7 +260,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
           <div className="shrink-0 flex items-center gap-[2.4cqw] px-[4cqw] py-[2.6cqw] bg-slate-900 border-t border-slate-800">
             <svg viewBox="0 0 24 24" className="w-[5.4cqw] h-[5.4cqw] text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14a4 4 0 0 0 7 0M9 10h.01M15 10h.01" strokeLinecap="round" /></svg>
             <svg viewBox="0 0 24 24" className="w-[5.8cqw] h-[5.8cqw] text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="6" width="18" height="14" rx="2" /><circle cx="12" cy="13" r="3.2" /><path d="M8 6l1.5-2.5h5L16 6" /></svg>
-            <span className="flex-1 rounded-full bg-slate-800 px-[4cqw] py-[2.4cqw] text-slate-500 text-[4cqw]">{c.uiMessage}</span>
+            <span className="flex-1 rounded-full bg-slate-800 px-[4cqw] py-[2.4cqw] text-[4cqw] truncate">{phoneInput ? <span className="text-white">{phoneInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500">{c.uiMessage}</span>}</span>
             <span className="w-[9cqw] h-[9cqw] rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 transition-transform duration-200" style={{ transform: sendFx === "phone" ? "scale(1.25)" : "scale(1)" }}><svg viewBox="0 0 24 24" className="w-[4.6cqw] h-[4.6cqw]" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z" /></svg></span>
           </div>
         </PhoneFrame16>

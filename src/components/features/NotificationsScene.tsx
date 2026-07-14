@@ -58,25 +58,25 @@ export function NotificationsScene({ t }: { t: Translations }) {
   }, []);
 
   return (
-    <div ref={rootRef} className="@container absolute inset-0 p-[2.5cqw] flex items-center justify-center gap-[4cqw]" aria-hidden="true">
+    <div ref={rootRef} className="@container absolute inset-0 p-[2.5cqw] flex items-center justify-center gap-[3.5cqw]" aria-hidden="true">
       {/* trigger grid (dispatcher actions) — 2 columns × 3 rows */}
-      <div className="hidden sm:grid grid-cols-2 gap-[1.4cqw] w-[50%] max-w-[66cqw] content-center">
+      <div className="hidden sm:grid grid-cols-2 gap-[1.8cqw] w-[54%] max-w-[74cqw] content-center">
         {items.map((it, i) => (
           <div
             key={i}
-            className="flex items-center gap-[1.4cqw] rounded-[1.4cqw] border bg-slate-800/50 px-[1.6cqw] py-[1.4cqw] transition-all duration-300"
+            className="flex items-center gap-[1.8cqw] rounded-[1.6cqw] border bg-slate-800/50 px-[2.4cqw] py-[2.2cqw] transition-all duration-300"
             style={{ borderColor: active === i ? "rgba(59,130,246,0.8)" : "rgba(51,65,85,0.7)", backgroundColor: active === i ? "rgba(37,99,235,0.14)" : "rgba(30,41,59,0.5)" }}
           >
-            <span className="w-[4cqw] h-[4cqw] rounded-[1cqw] bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-              <svg viewBox="0 0 24 24" className="w-[2.4cqw] h-[2.4cqw]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{ICONS[i]}</svg>
+            <span className="w-[5.4cqw] h-[5.4cqw] rounded-[1.2cqw] bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+              <svg viewBox="0 0 24 24" className="w-[3.2cqw] h-[3.2cqw]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{ICONS[i]}</svg>
             </span>
-            <span className="text-slate-200 text-[1.55cqw] font-medium leading-tight line-clamp-2">{it.title}</span>
+            <span className="text-slate-200 text-[2.1cqw] font-medium leading-tight line-clamp-2">{it.title}</span>
           </div>
         ))}
       </div>
 
-      {/* iPhone 16 Pro Max lock screen (larger) */}
-      <div className="h-full shrink-0">
+      {/* iPhone 16 Pro Max lock screen */}
+      <div className="h-[84%] shrink-0">
         <PhoneFrame16 time="14:32" screenClassName="bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950">
           <div className="flex-1 min-h-0 flex flex-col px-[4.5cqw]">
             <div className="pt-[7cqw] text-center text-white">

@@ -202,17 +202,22 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
   ];
 
   return (
-    <div ref={rootRef} className="@container absolute inset-0 select-none" aria-hidden="true">
+    <div className="@container absolute inset-0 p-[2cqw] select-none" aria-hidden="true">
+      <div className="w-full h-full rounded-[1.4cqw] bg-slate-900/70 border border-slate-700/70 flex flex-col overflow-hidden">
+        {/* header (like the Dock board) */}
+        <div className="flex items-center gap-[1.2cqw] px-[1.8cqw] py-[1.1cqw] border-b border-slate-700/70 bg-slate-800/60 shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="" className="w-[2.6cqw] h-[2.6cqw] rounded-[0.6cqw]" />
+          <span className="font-bold text-white text-[2cqw]">{y.uiBoardTitle}</span>
+          <span className="ml-auto inline-flex items-center gap-[0.6cqw] text-[1.35cqw] font-semibold text-emerald-400 bg-emerald-500/15 rounded-full px-[1.2cqw] py-[0.4cqw]">
+            <span className="w-[0.9cqw] h-[0.9cqw] rounded-full bg-emerald-400" /> {y.uiLiveView}
+          </span>
+        </div>
+        <div ref={rootRef} className="relative flex-1 min-h-0">
       <svg ref={svgRef} viewBox="0 0 1200 820" className="w-full h-full block" preserveAspectRatio="xMidYMid meet">
         <defs><pattern id="ymGrid" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill={C.grid} /></pattern></defs>
         <rect x="0" y="0" width="1200" height="820" fill={C.ground} />
         <rect x="0" y="0" width="1200" height="820" fill="url(#ymGrid)" />
-
-        <g transform="translate(24 22)">
-          <rect x="0" y="0" width="150" height="34" rx="8" fill={C.surface} stroke={C.border} />
-          <circle cx="18" cy="17" r="4.5" fill={C.green} />
-          <text x="32" y="22" fill="#cbd5e1" style={{ fontSize: 14, fontWeight: 700 }}>{y.uiLiveView}</text>
-        </g>
 
         {/* warehouse + dock doors */}
         <rect x={WH.x} y={WH.y} width={WH.w} height={WH.h} rx="8" fill={C.wh} stroke={C.whStroke} strokeWidth="2" />
@@ -263,7 +268,7 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
         })}
 
         {/* legend */}
-        <g transform="translate(760 24)">
+        <g transform="translate(752 788)">
           <rect x="-10" y="-4" width="426" height="34" rx="8" fill={C.surface} fillOpacity="0.92" stroke={C.border} />
           {legend.map((item, i, arr) => { const off = arr.slice(0, i).reduce((a, it) => a + 26 + it.l.length * 7.2, 0); return (<g key={i} transform={`translate(${off + 4} 13)`}><rect x="0" y="-7" width="13" height="13" rx="3" fill={item.c} /><text x="18" y="3" fill="#cbd5e1" style={{ fontSize: 12, fontWeight: 500 }}>{item.l}</text></g>); })}
         </g>
@@ -374,6 +379,8 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
       {/* ===== operator cursor ===== */}
       <div className="absolute z-50 pointer-events-none transition-all duration-[600ms] ease-out" style={{ left: `${cursor.x}%`, top: `${cursor.y}%`, opacity: cursor.on ? 1 : 0, transform: `translate(-12%, -8%) scale(${cursor.down ? 0.84 : 1})` }}>
         <svg viewBox="0 0 24 24" className="w-[3cqw] h-[3cqw] drop-shadow-lg" fill="#ffffff" stroke="#0f172a" strokeWidth="1.4" strokeLinejoin="round"><path d="M5 3l14 7-6 2-2 6-6-15z" /></svg>
+      </div>
+        </div>
       </div>
     </div>
   );
