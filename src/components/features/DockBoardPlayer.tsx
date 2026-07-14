@@ -108,10 +108,9 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
     // loop never reads stale state and double-assigns a plate/dock)
     const applyCards = (fn: (c: Card[]) => Card[]) => { cardsRef.current = fn(cardsRef.current); setCards(cardsRef.current); };
     const applyDocks = (fn: (dk: Record<number, Dock>) => Record<number, Dock>) => { docksRef.current = fn(docksRef.current); setDocks(docksRef.current); };
-    const freeDocks = (op: Op): number[] => {
-      const pool = op === "loading" ? DOCKS_L : op === "unloading" ? DOCKS_U : [...DOCKS_L, ...DOCKS_U];
-      return pool.filter((n) => !docksRef.current[n]);
-    };
+    // any truck (loading/unloading/both) can be assigned to any free dock in
+    // either department — departments are named zones, not operation types
+    const freeDocks = (): number[] => [...DOCKS_L, ...DOCKS_U].filter((n) => !docksRef.current[n]);
     const addCard = (): boolean => {
       const used = new Set<string>([...cardsRef.current.map((c) => c.plate), ...Object.values(docksRef.current).filter(Boolean).map((o) => (o as NonNullable<Dock>).plate)]);
       const availIdx = POOL.map((_, i) => i).filter((i) => !used.has(POOL[i].plate));
@@ -165,7 +164,7 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
         await sleep(560);
 
         // choose a random valid action
-        const canAssign = freeDocks(card.op).length > 0;
+        const canAssign = freeDocks().length > 0;
         const choices: ActKey[] = [];
         if (canAssign) { choices.push("assign", "assign", "assign", "assign", "assign"); } // assignment dominates
         choices.push("wait", "parking", "office", "cancel");
@@ -182,7 +181,7 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
 
         // execute
         if (act === "assign") {
-          const free = freeDocks(card.op);
+          const free = freeDocks();
           if (free.length) {
             // ramp-picker dialog: operator chooses which ramp to give the driver
             setRampPick({ driver: card.name, free, picked: null });
@@ -236,9 +235,9 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
     { key: "parking", label: d.actParking },
     { key: "cancel", label: d.actCancel },
   ];
-  const depts = [
-    { label: d.uiLoading, docks: DOCKS_L },
-    { label: d.uiUnloading, docks: DOCKS_U },
+  const depts: { label: string; docks: number[]; icon: ReactNode }[] = [
+    { label: d.dept1, docks: DOCKS_L, icon: <><path d="M5 21c0-9 7-15 15-15 0 9-6 15-15 15z" /><path d="M5 21c3-6 7-10 12-12" /></> },
+    { label: d.dept2, docks: DOCKS_U, icon: <><path d="M12 2v20M2 12h20M4.6 4.6l14.8 14.8M19.4 4.6L4.6 19.4" /><path d="M12 7l2.4-2.4M12 7L9.6 4.6M12 17l2.4 2.4M12 17l-2.4 2.4M7 12L4.6 9.6M7 12l-2.4 2.4M17 12l2.4-2.4M17 12l2.4 2.4" /></> },
   ];
 
   return (
@@ -253,12 +252,19 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
             <span className="w-[0.9cqw] h-[0.9cqw] rounded-full bg-emerald-400" /> {d.uiLive}
           </span>
           {/* centered notification in the header */}
-          {toast && (
+          {toast && !banner && (
             <div className={`absolute left-1/2 -translate-x-1/2 z-40 flex items-center gap-[1cqw] rounded-full bg-slate-900 border shadow-2xl px-[1.6cqw] py-[0.7cqw] ${toast.tone === "success" ? "border-emerald-500/60" : "border-blue-500/50"}`}>
               <span className={`w-[2cqw] h-[2cqw] rounded-full flex items-center justify-center text-white [&_svg]:w-[1.3cqw] [&_svg]:h-[1.3cqw] ${toast.tone === "success" ? "bg-emerald-500" : "bg-blue-500"}`}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">{toast.tone === "success" ? <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M12 8v5M12 16.5v.01" strokeLinecap="round" />}</svg>
               </span>
               <span className="text-[1.45cqw] font-semibold text-white whitespace-nowrap">{toast.text}</span>
+            </div>
+          )}
+          {/* call-to-office banner, in the header */}
+          {banner && (
+            <div className="absolute left-1/2 -translate-x-1/2 z-40 flex items-center gap-[1cqw] rounded-full bg-blue-600 shadow-2xl px-[1.8cqw] py-[0.7cqw]">
+              <svg viewBox="0 0 24 24" className="w-[1.7cqw] h-[1.7cqw] text-white" fill="none" stroke="currentColor" strokeWidth="2.2"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" strokeLinecap="round" /></svg>
+              <span className="text-[1.45cqw] font-semibold text-white whitespace-nowrap">{banner}</span>
             </div>
           )}
         </div>
@@ -339,7 +345,7 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
               return (
                 <div key={dept.label} className="flex-1 flex flex-col min-h-0">
                   <div className="flex items-center gap-[0.7cqw] mb-[0.8cqw]">
-                    <svg viewBox="0 0 24 24" className="w-[1.7cqw] h-[1.7cqw] text-slate-500" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 20V9l8-5 8 5v11M4 20h16M9 20v-6h6v6" strokeLinejoin="round" /></svg>
+                    <svg viewBox="0 0 24 24" className="w-[1.7cqw] h-[1.7cqw] text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{dept.icon}</svg>
                     <span className="text-[1.35cqw] font-semibold text-slate-400 uppercase tracking-wide">{dept.label}</span>
                     <span className="text-[1.2cqw] text-slate-500">({occ}/{dept.docks.length})</span>
                   </div>
@@ -374,14 +380,6 @@ export function DockBoardPlayer({ t, locale }: { t: Translations; locale: Locale
           </div>
         </div>
       </div>
-
-      {/* banner (call to office) */}
-      {banner && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-[8cqw] z-40 rounded-[1cqw] bg-blue-600/95 text-white text-[1.55cqw] font-semibold px-[1.8cqw] py-[1cqw] shadow-2xl flex items-center gap-[1cqw]">
-          <svg viewBox="0 0 24 24" className="w-[1.8cqw] h-[1.8cqw]" fill="none" stroke="currentColor" strokeWidth="2.2"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" strokeLinecap="round" /></svg>
-          {banner}
-        </div>
-      )}
 
       {/* ramp-picker dialog (opens after "Assign to ramp") */}
       {rampPick && (

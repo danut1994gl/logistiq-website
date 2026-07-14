@@ -23,7 +23,7 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
         aspectClass="aspect-[4/3] sm:aspect-[3/2]"
         minHClass="min-h-[420px]"
       >
-        <YardScene t={t} />
+        <YardScene t={t} locale={locale} />
       </ShowcaseStage>
 
       <FeatureProblemSection
