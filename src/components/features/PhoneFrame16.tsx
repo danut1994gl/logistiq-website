@@ -1,10 +1,14 @@
 import type { ReactNode } from "react";
 
-// Shared iPhone 16 Pro Max frame — titanium body, thin uniform bezels, large
-// corner radius, centered Dynamic Island, and an iOS status bar (time +
-// signal / wifi / battery). Its own @container so screen content sizes in cqw
-// relative to the phone, not the page. Presentational Server Component.
-// Aspect ratio ~ 440:956 (≈ 19.5:9). Pass the screen as children.
+// Shared iPhone 16 Pro Max frame, dimensionally 1:1 with the real device:
+//   body    163.0 x 77.6 mm            -> aspectRatio 776 / 1630
+//   display 6.9", 2868x1320 @ 460ppi   -> 440 x 956 pt viewport (72.9 x 158.4 mm)
+//   bezel   (77.6-72.9)/2 = 2.34 mm    -> a uniform 3.02% of body width (3.02cqw)
+//   radius  62 pt display corner       -> 13.24cqw screen / +bezel = 16.26cqw body
+//   Dynamic Island 125 x 36.67 pt      -> 26.7 x 7.83cqw, 11 pt (2.35cqw) from the top
+// Because cqw is width-relative, a uniform cqw inset is a uniform physical bezel,
+// which makes the inner screen land on exactly 440:956. Its own @container so screen
+// content sizes in cqw relative to the phone. Presentational Server Component.
 export function PhoneFrame16({
   children,
   time = "14:32",
@@ -18,14 +22,15 @@ export function PhoneFrame16({
   statusDark?: boolean;
 }) {
   return (
-    <div className="@container relative h-full" style={{ aspectRatio: "440 / 956" }}>
+    <div className="@container relative h-full" style={{ aspectRatio: "776 / 1630" }}>
       {/* titanium body */}
-      <div className="absolute inset-0 rounded-[16cqw] bg-gradient-to-b from-slate-700 to-slate-800 shadow-2xl" />
-      <div className="absolute inset-[0.7cqw] rounded-[15cqw] bg-slate-950" />
-      {/* screen */}
-      <div className={`absolute inset-[2.4cqw] rounded-[13cqw] overflow-hidden flex flex-col ${screenClassName}`}>
-        {/* status bar */}
-        <div className={`relative h-[4.6%] shrink-0 flex items-center justify-between px-[7cqw] text-[3.6cqw] font-semibold z-30 ${statusDark ? "text-slate-900" : "text-white"}`}>
+      <div className="absolute inset-0 rounded-[16.26cqw] bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 shadow-2xl" />
+      {/* black bezel under the glass */}
+      <div className="absolute inset-[0.9cqw] rounded-[15.4cqw] bg-black" />
+      {/* display — 440 x 956 pt */}
+      <div className={`absolute inset-[3.02cqw] rounded-[13.24cqw] overflow-hidden flex flex-col ${screenClassName}`}>
+        {/* status bar (62 pt safe-area top) */}
+        <div className={`relative h-[6.2%] shrink-0 flex items-center justify-between px-[7cqw] text-[3.5cqw] font-semibold z-30 ${statusDark ? "text-slate-900" : "text-white"}`}>
           <span className="tabular-nums">{time}</span>
           <span className="flex items-center gap-[1.6cqw]">
             {/* signal */}
@@ -47,8 +52,8 @@ export function PhoneFrame16({
             </svg>
           </span>
         </div>
-        {/* Dynamic Island */}
-        <div className="absolute top-[2.4cqw] left-1/2 -translate-x-1/2 w-[30%] h-[5cqw] bg-black rounded-full z-40" />
+        {/* Dynamic Island — 125 x 36.67 pt, 11 pt from the top */}
+        <div className="absolute top-[2.35cqw] left-1/2 -translate-x-1/2 w-[26.7cqw] h-[7.83cqw] bg-black rounded-full z-40" />
         {/* screen content */}
         <div className="flex-1 min-h-0 flex flex-col">{children}</div>
       </div>
