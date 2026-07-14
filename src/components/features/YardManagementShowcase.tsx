@@ -18,10 +18,10 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
         title={y.title}
         subtitle={y.subtitle}
         stepLabel={y.stepLabel}
-        glowPrefix="ym2-"
+        glowPrefix="ym3-"
         sceneStartsMs={[]}
         aspectClass="aspect-[4/3] sm:aspect-[3/2]"
-        minHClass="min-h-[360px]"
+        minHClass="min-h-[420px]"
       >
         <YardScene t={t} />
       </ShowcaseStage>

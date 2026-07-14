@@ -880,32 +880,36 @@ select:focus {
   .nt-n1, .nt-n2, .nt-n3, .nt-n4, .nt-t1, .nt-t2, .nt-t3, .nt-t4 { animation: none !important; }
 }
 
-/* ---- YMS yard scene v2 (feature 13) ----
-   Warehouse-centered top-down yard; a truck moves gate -> parking -> backs
-   into a bottom dock on one 24s ym2-* loop, real status palette. Base
-   (unanimated) styles = truck docked (populated yard) for reduced motion.
-   Transforms in SVG user units. 1s = 4.1667%. */
-.ym2-truck { transform: translate(-433px, -58px); animation: ym2-truck 24s linear infinite; }
-@keyframes ym2-truck {
-  0%     { transform: translate(0, 0); opacity: 0; }
-  3%     { opacity: 1; }
-  10%    { transform: translate(0, 0); animation-timing-function: cubic-bezier(0.5,0,0.5,1); }
-  28%    { transform: translate(-929px, -166px); }
-  46%    { transform: translate(-929px, -166px); animation-timing-function: cubic-bezier(0.5,0,0.5,1); }
-  62%    { transform: translate(-433px, -58px); }
-  92%    { transform: translate(-433px, -58px); opacity: 1; }
-  96%, 100% { transform: translate(-433px, -58px); opacity: 0; }
+/* ---- YMS yard scene v3 (feature 13) ----
+   Intuitive top-down yard; one truck enters the gate -> waits in the yard
+   (yellow) -> is assigned (blue) -> backs into dock D4 (unloading sage) on a
+   22s ym3-* loop, real status palette. Transforms in SVG user units (px maps
+   to user units on SVG elements). Base transform lives on the SVG group so the
+   static/dev/reduced-motion frame shows the truck waiting in the yard. */
+.ym3-truck { transform: translate(455px, 520px); animation: ym3-truck 22s linear infinite; }
+@keyframes ym3-truck {
+  0%       { transform: translate(185px, 690px); opacity: 0; }
+  4%       { opacity: 1; }
+  14%      { transform: translate(185px, 545px); }
+  26%      { transform: translate(455px, 520px); }
+  56%      { transform: translate(455px, 520px); }
+  70%      { transform: translate(600px, 430px); }
+  82%      { transform: translate(600px, 252px); }
+  94%      { transform: translate(600px, 252px); opacity: 1; }
+  97%, 100% { transform: translate(600px, 252px); opacity: 0; }
 }
-.ym2-body { fill: #6a9e7e; animation: ym2-body 24s linear infinite; }
-@keyframes ym2-body { 0%, 28% { fill: #eab308; } 32% { fill: #3b82f6; } 58% { fill: #3b82f6; } 62% { fill: #6a9e7e; } 100% { fill: #6a9e7e; } }
-.ym2-dock { fill: #6a9e7e; animation: ym2-dock 24s linear infinite; }
-@keyframes ym2-dock { 0%, 60% { fill: #1e293b; } 64% { fill: #6a9e7e; } 92% { fill: #6a9e7e; } 96%, 100% { fill: #1e293b; } }
-.ym2-barrier { transform: rotate(0deg); transform-box: fill-box; transform-origin: 100% 50%; animation: ym2-barrier 24s linear infinite; }
-@keyframes ym2-barrier { 0%, 3% { transform: rotate(0deg); } 7% { transform: rotate(58deg); } 12% { transform: rotate(58deg); } 16% { transform: rotate(0deg); } 100% { transform: rotate(0deg); } }
-.ym2-idle { stroke: #f59e0b; animation: ym2-idle 24s linear infinite; }
-@keyframes ym2-idle { 0%, 30% { stroke: #334155; } 42% { stroke: #f59e0b; } 100% { stroke: #f59e0b; } }
-.ym2-idletext { fill: #f59e0b; animation: ym2-idletext 24s linear infinite; }
-@keyframes ym2-idletext { 0%, 30% { fill: #64748b; } 42% { fill: #f59e0b; } 100% { fill: #f59e0b; } }
+.ym3-body { animation: ym3-body 22s linear infinite; }
+@keyframes ym3-body {
+  0%, 56%  { fill: #eab308; }
+  60%      { fill: #3b82f6; }
+  72%      { fill: #3b82f6; }
+  78%      { fill: #6a9e7e; }
+  100%     { fill: #6a9e7e; }
+}
+.ym3-idle { animation: ym3-idle 22s linear infinite; }
+@keyframes ym3-idle { 0%, 56% { opacity: 1; } 60%, 100% { opacity: 0; } }
+.ym3-target { animation: ym3-target 22s linear infinite; }
+@keyframes ym3-target { 0%, 74% { opacity: 0; } 80% { opacity: 1; } 94% { opacity: 1; } 97%, 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .ym2-truck, .ym2-body, .ym2-dock, .ym2-barrier, .ym2-idle, .ym2-idletext { animation: none !important; }
+  .ym3-truck, .ym3-body, .ym3-idle, .ym3-target { animation: none !important; }
 }

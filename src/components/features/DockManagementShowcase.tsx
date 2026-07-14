@@ -22,8 +22,8 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
         stepLabel={d.stepLabel}
         glowPrefix="db-"
         sceneStartsMs={[]}
-        aspectClass="aspect-[4/3] sm:aspect-[16/10]"
-        minHClass="min-h-[420px]"
+        aspectClass="aspect-[4/3] sm:aspect-[3/2]"
+        minHClass="min-h-[500px]"
         headingId="dock-showcase-title"
       >
         <DockBoardPlayer t={t} />
