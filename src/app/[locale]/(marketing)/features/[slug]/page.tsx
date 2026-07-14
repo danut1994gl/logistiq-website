@@ -83,6 +83,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
       />
 
       <PageHero
+        compact
         breadcrumb={[
           { label: "Logistiq", href: `/${locale}` },
           { label: t.nav.features, href: featuresIndexPath(locale) },

@@ -11,6 +11,7 @@ export function PageHero({
   description,
   actions,
   visual,
+  compact = false,
 }: {
   breadcrumb: Crumb[];
   eyebrow?: string;
@@ -18,12 +19,18 @@ export function PageHero({
   description?: string;
   actions?: ReactNode;
   visual?: ReactNode;
+  // compact = tighter vertical rhythm (used on feature pages so the hero sits
+  // closer to the content that follows)
+  compact?: boolean;
 }) {
   const twoCol = Boolean(visual);
+  const pad = compact
+    ? "pt-[calc(var(--nav-h)+1.25rem)] md:pt-[calc(var(--nav-h)+1.75rem)] pb-6 lg:pb-8"
+    : "pt-[calc(var(--nav-h)+2.5rem)] md:pt-[calc(var(--nav-h)+3.5rem)] pb-14 lg:pb-20";
   return (
     <section className="hero-gradient relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[calc(var(--nav-h)+2.5rem)] md:pt-[calc(var(--nav-h)+3.5rem)] pb-14 lg:pb-20 relative z-10">
-        <Breadcrumbs items={breadcrumb} className="animate-fade-in-up mb-8" />
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${pad} relative z-10`}>
+        <Breadcrumbs items={breadcrumb} className={`animate-fade-in-up ${compact ? "mb-5" : "mb-8"}`} />
 
         <div className={twoCol ? "grid lg:grid-cols-12 gap-10 lg:gap-8 items-center" : ""}>
           <div className={twoCol ? "lg:col-span-7" : "max-w-3xl"}>
