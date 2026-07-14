@@ -195,7 +195,7 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
     { l: y.actSendParking, col: "text-teal-300 bg-teal-500/15", ic: <><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M9.5 17V8h3.2a2.6 2.6 0 0 1 0 5.2H9.5" /></> },
     { l: y.actChangeDept, col: "text-purple-300 bg-purple-500/15", ic: SB_ICONS.dept },
     { l: y.actUnassign, col: "text-slate-300 bg-slate-500/15", ic: <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M3 12h18" /> },
-    { l: y.actWaitYms, col: "text-yellow-300 bg-yellow-500/15", ic: <path d="M7 3h10M7 21h10M8 3c0 4 8 5 8 9s-8 5-8 9M16 3c0 4-8 5-8 9" /> },
+    { l: y.actWaitYms, col: "text-yellow-300 bg-yellow-500/15", ic: <path d="M6 2h12M6 22h12M7 2v3l5 5 5-5V2M7 22v-3l5-5 5 5v3" /> },
     { l: y.actCallOffice, col: "text-blue-300 bg-blue-500/15", ic: SB_ICONS.driver },
     { l: y.actOther, col: "text-orange-300 bg-orange-500/15", ic: <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z" /> },
     { l: y.actCompleteYms, col: "text-emerald-300 bg-emerald-500/15", ic: <path d="M5 21V4l7 3 7-3v11l-7 3-7-3" /> },

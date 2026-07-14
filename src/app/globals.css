@@ -865,7 +865,10 @@ select:focus {
 /* blinking caret in the chat compose field while a message is being typed */
 .ch-caret { animation: ch-caret 1s steps(1) infinite; }
 @keyframes ch-caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+/* messages leave the thread sliding up + fading out */
+.ch-out { animation: ch-out 0.5s cubic-bezier(0.4, 0, 1, 1) both; }
+@keyframes ch-out { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-45%); } }
 @media (prefers-reduced-motion: reduce) {
-  .ch-pop, .ch-caret { animation: none !important; }
+  .ch-pop, .ch-caret, .ch-out { animation: none !important; }
 }
 

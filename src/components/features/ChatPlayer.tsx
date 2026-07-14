@@ -9,7 +9,7 @@ import { PhoneFrame16 } from "./PhoneFrame16";
 type Side = "driver" | "disp";
 type Step = { f: Side; k?: string; img?: boolean };
 type Tick = "sending" | "sent" | "delivered" | "read";
-type Msg = { mid: number; from: Side; k?: string; img?: boolean; time: string; onDash: boolean; onPhone: boolean; tick: Tick };
+type Msg = { mid: number; from: Side; k?: string; img?: boolean; time: string; onDash: boolean; onPhone: boolean; tick: Tick; leaving?: boolean };
 
 // The five scripted field scenarios (from the real check-in chat). Text lives
 // in i18n (t.chatPage.s{n}m{k}); from/type live here.
@@ -77,6 +77,9 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const [phoneTyping, setPhoneTyping] = useState(false); // dispatcher typing, dots on the phone
   const [dashInput, setDashInput] = useState(""); // dispatcher's live compose text (dashboard input)
   const [phoneInput, setPhoneInput] = useState(""); // driver's live compose text (phone input)
+  const [dashPreview, setDashPreview] = useState(false); // a photo is selected & previewed in the composer
+  const [phonePreview, setPhonePreview] = useState(false);
+  const [pickFx, setPickFx] = useState<"dash" | "phone" | null>(null); // gallery/camera icon tapped
   const [sendFx, setSendFx] = useState<"dash" | "phone" | null>(null);
   const dashRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
@@ -104,9 +107,14 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
       let s = 0;
       while (!cancelled) {
         const scenario = SCENARIOS[s];
+        // fade the previous conversation out, bottom-to-top
+        if (msgsRef.current.length) {
+          apply((ms) => ms.map((m) => ({ ...m, leaving: true })));
+          await sleep(560);
+        }
         apply(() => []);
-        setDashTyping(false); setPhoneTyping(false); setDashInput(""); setPhoneInput("");
-        await sleep(700);
+        setDashTyping(false); setPhoneTyping(false); setDashInput(""); setPhoneInput(""); setDashPreview(false); setPhonePreview(false); setPickFx(null);
+        await sleep(600);
         let mid = 0;
         let clock = 33;
         for (let i = 0; i < scenario.length && !cancelled; i++) {
@@ -116,9 +124,15 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
           const setInput = composePane === "dash" ? setDashInput : setPhoneInput;
           const setRx = step.f === "disp" ? setPhoneTyping : setDashTyping; // dots on the recipient's device
           if (step.img) {
-            // photo: the recipient briefly sees typing dots, then it uploads
-            setRx(true);
-            await sleep(1200);
+            const setPrev = composePane === "dash" ? setDashPreview : setPhonePreview;
+            // tap the gallery/camera icon and pick a photo from the gallery
+            setPickFx(composePane);
+            await sleep(360);
+            setPickFx(null);
+            setPrev(true); // the chosen photo previews in the compose bar
+            await sleep(650);
+            setRx(true); // the other device sees the dots while the photo is attached
+            await sleep(1100);
             if (cancelled) break;
             setRx(false);
           } else {
@@ -140,6 +154,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
           await sleep(220);
           setSendFx(null);
           setInput("");
+          setDashPreview(false); setPhonePreview(false);
           setRx(false);
           const id = mid++;
           const m: Msg = { mid: id, from: step.f, k: step.k, img: step.img, time, onDash: step.f === "disp", onPhone: step.f === "driver", tick: "sending" };
@@ -193,7 +208,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             {dashMsgs.map((m) => {
               const own = m.from === "disp";
               return (
-                <div key={m.mid} className={`flex items-end gap-[1cqw] ${own ? "flex-row-reverse" : "flex-row"}`}>
+                <div key={m.mid} className={`flex items-end gap-[1cqw] ${own ? "flex-row-reverse" : "flex-row"} ${m.leaving ? "ch-out" : ""}`}>
                   {!own && (
                     <span className="w-[3cqw] h-[3cqw] rounded-full bg-amber-100 text-amber-600 shrink-0 flex items-center justify-center [&_svg]:w-[1.7cqw] [&_svg]:h-[1.7cqw]">
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h11v8H3zM14 9h4l3 3v2h-7z" /><circle cx="6.5" cy="16" r="1.6" /><circle cx="17.5" cy="16" r="1.6" /></svg>
@@ -217,7 +232,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             )}
           </div>
           <div className="flex items-center gap-[1cqw] px-[1.8cqw] py-[1.1cqw] border-t border-slate-700/70">
-            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.9cqw] text-[1.4cqw] truncate">{dashInput ? <span className="text-white">{dashInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500">{c.uiMessage}…</span>}</span>
+            <span className="flex-1 rounded-full bg-slate-800 border border-slate-700 px-[1.6cqw] py-[0.7cqw] text-[1.4cqw] flex items-center gap-[1cqw] min-w-0 min-h-[3cqw]">{dashPreview ? <span className="w-[5cqw] shrink-0" style={{ fontSize: "1.2cqw" }}><DocThumb /></span> : dashInput ? <span className="text-white truncate">{dashInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500 truncate">{c.uiMessage}…</span>}</span>
             <span className="w-[3cqw] h-[3cqw] rounded-full bg-blue-600 flex items-center justify-center text-white [&_svg]:w-[1.7cqw] [&_svg]:h-[1.7cqw] transition-transform duration-200" style={{ transform: sendFx === "dash" ? "scale(1.25)" : "scale(1)" }}><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z" /></svg></span>
           </div>
         </div>
@@ -238,7 +253,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
             {phoneMsgs.map((m) => {
               const own = m.from === "driver";
               return (
-                <div key={m.mid} className={`flex items-end gap-[2cqw] ${own ? "flex-row-reverse" : "flex-row"}`}>
+                <div key={m.mid} className={`flex items-end gap-[2cqw] ${own ? "flex-row-reverse" : "flex-row"} ${m.leaving ? "ch-out" : ""}`}>
                   {!own && <span className="w-[7cqw] h-[7cqw] rounded-full bg-blue-100 text-blue-600 shrink-0 flex items-center justify-center text-[3cqw] font-bold">{dispInit}</span>}
                   <div className={`ch-pop max-w-[80%] rounded-[4cqw] px-[3.4cqw] py-[2.6cqw] ${own ? "bg-blue-600 rounded-br-[1cqw]" : "bg-slate-700 rounded-bl-[1cqw]"}`} style={{ transformOrigin: own ? "bottom right" : "bottom left" }}>
                     {m.img ? <ImgMsg w="w-[42cqw]" sending={m.tick === "sending"} /> : <span className="text-white text-[4.4cqw] leading-snug block">{txt(m.k)}</span>}
@@ -259,8 +274,8 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
           </div>
           <div className="shrink-0 flex items-center gap-[2.4cqw] px-[4cqw] py-[2.6cqw] bg-slate-900 border-t border-slate-800">
             <svg viewBox="0 0 24 24" className="w-[5.4cqw] h-[5.4cqw] text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M8.5 14a4 4 0 0 0 7 0M9 10h.01M15 10h.01" strokeLinecap="round" /></svg>
-            <svg viewBox="0 0 24 24" className="w-[5.8cqw] h-[5.8cqw] text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="6" width="18" height="14" rx="2" /><circle cx="12" cy="13" r="3.2" /><path d="M8 6l1.5-2.5h5L16 6" /></svg>
-            <span className="flex-1 rounded-full bg-slate-800 px-[4cqw] py-[2.4cqw] text-[4cqw] truncate">{phoneInput ? <span className="text-white">{phoneInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500">{c.uiMessage}</span>}</span>
+            <svg viewBox="0 0 24 24" className={`w-[5.8cqw] h-[5.8cqw] shrink-0 transition-all duration-200 ${pickFx === "phone" ? "text-blue-400" : "text-slate-400"}`} style={{ transform: pickFx === "phone" ? "scale(1.28)" : "scale(1)" }} fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="6" width="18" height="14" rx="2" /><circle cx="12" cy="13" r="3.2" /><path d="M8 6l1.5-2.5h5L16 6" /></svg>
+            <span className="flex-1 rounded-full bg-slate-800 px-[3.2cqw] py-[1.8cqw] text-[4cqw] flex items-center gap-[2cqw] min-w-0">{phonePreview ? <span className="w-[9cqw] shrink-0" style={{ fontSize: "2.2cqw" }}><DocThumb /></span> : phoneInput ? <span className="text-white truncate">{phoneInput}<span className="ch-caret text-white">|</span></span> : <span className="text-slate-500 truncate">{c.uiMessage}</span>}</span>
             <span className="w-[9cqw] h-[9cqw] rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 transition-transform duration-200" style={{ transform: sendFx === "phone" ? "scale(1.25)" : "scale(1)" }}><svg viewBox="0 0 24 24" className="w-[4.6cqw] h-[4.6cqw]" fill="currentColor"><path d="M3 20l18-8L3 4l4 8-4 8z" /></svg></span>
           </div>
         </PhoneFrame16>

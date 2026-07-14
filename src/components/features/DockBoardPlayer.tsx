@@ -42,7 +42,7 @@ function OpArrow({ op, className }: { op: Op; className?: string }) {
 // small action-menu icons (match the real dashboard Actions dropdown)
 const ICONS: Record<ActKey, ReactNode> = {
   assign: <path d="M4 20V9l8-5 8 5v11M4 20h16M9 20v-6h6v6" />,
-  wait: <path d="M7 3h10M7 21h10M8 3c0 4 8 5 8 9s-8 5-8 9M16 3c0 4-8 5-8 9" />,
+  wait: <path d="M6 2h12M6 22h12M7 2v3l5 5 5-5V2M7 22v-3l5-5 5 5v3" />,
   office: <><circle cx="12" cy="8" r="3.4" /><path d="M5 21a7 7 0 0 1 14 0" /></>,
   parking: <><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M9.5 17V8h3.2a2.6 2.6 0 0 1 0 5.2H9.5" /></>,
   cancel: <><circle cx="12" cy="12" r="8.5" /><path d="M6 6l12 12" /></>,
