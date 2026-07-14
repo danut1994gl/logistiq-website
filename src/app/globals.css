@@ -872,3 +872,9 @@ select:focus {
   .ch-pop, .ch-caret, .ch-out { animation: none !important; }
 }
 
+
+/* ---- App tour (feature 6) scanner scan-line + routing pop-in (feature 4) ---- */
+.app-scan { top: 12%; animation: app-scan 2.2s ease-in-out infinite; }
+@keyframes app-scan { 0%, 100% { top: 12%; } 50% { top: 82%; } }
+@keyframes chpop { from { opacity: 0; transform: translateY(20%) scale(0.96); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .app-scan { animation: none !important; } }

@@ -5,6 +5,9 @@ import { DigitalCheckinShowcase } from "./DigitalCheckinShowcase";
 import { DockManagementShowcase } from "./DockManagementShowcase";
 import { ChatNotificationsShowcase } from "./ChatNotificationsShowcase";
 import { YardManagementShowcase } from "./YardManagementShowcase";
+import { ReportsAnalyticsShowcase } from "./ReportsAnalyticsShowcase";
+import { CategoryRoutingShowcase } from "./CategoryRoutingShowcase";
+import { MobileAppShowcase } from "./MobileAppShowcase";
 
 // Per-feature showcase slot: feature id -> rich content rendered under the
 // hero on that feature's page (animation, narrative, benefits, FAQ — each
@@ -14,5 +17,8 @@ export const featureShowcases: Partial<Record<number, FC<{ t: Translations; loca
   1: DigitalCheckinShowcase,
   2: DockManagementShowcase,
   3: ChatNotificationsShowcase,
+  4: CategoryRoutingShowcase,
+  5: ReportsAnalyticsShowcase,
+  6: MobileAppShowcase,
   13: YardManagementShowcase,
 };

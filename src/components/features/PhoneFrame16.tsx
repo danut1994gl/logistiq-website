@@ -9,10 +9,13 @@ export function PhoneFrame16({
   children,
   time = "14:32",
   screenClassName = "bg-slate-950",
+  statusDark = false,
 }: {
   children: ReactNode;
   time?: string;
   screenClassName?: string;
+  // dark status-bar glyphs for light-themed app screens
+  statusDark?: boolean;
 }) {
   return (
     <div className="@container relative h-full" style={{ aspectRatio: "440 / 956" }}>
@@ -22,7 +25,7 @@ export function PhoneFrame16({
       {/* screen */}
       <div className={`absolute inset-[2.4cqw] rounded-[13cqw] overflow-hidden flex flex-col ${screenClassName}`}>
         {/* status bar */}
-        <div className="relative h-[4.6%] shrink-0 flex items-center justify-between px-[7cqw] text-white text-[3.6cqw] font-semibold z-30">
+        <div className={`relative h-[4.6%] shrink-0 flex items-center justify-between px-[7cqw] text-[3.6cqw] font-semibold z-30 ${statusDark ? "text-slate-900" : "text-white"}`}>
           <span className="tabular-nums">{time}</span>
           <span className="flex items-center gap-[1.6cqw]">
             {/* signal */}
