@@ -8,6 +8,15 @@ export const QrCodeIcon = () => (
   </svg>
 );
 
+// Driver Self Check (QRGO Self): a counter kiosk — tablet on a stand with a
+// printed ticket coming out of it.
+export const KioskIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4h11a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.5 15v5M6 20h7M18 9h3v11h-3zM18 13h3" />
+  </svg>
+);
+
 export const TruckIcon = () => (
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m-8 6H4m0 0l4 4m-4-4l4-4" />

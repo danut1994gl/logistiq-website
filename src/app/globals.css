@@ -906,3 +906,252 @@ select:focus {
   81%, 100% { transform: translateY(-48%); }
 }
 @media (prefers-reduced-motion: reduce) { .app-stscroll { animation: none !important; } }
+
+/* ---- Cloud - No Equipment (feature 9): packets travelling both ways ----
+   Dots animate along each straight link via a per-dot --dx/--dy delta.
+   transform-box: view-box makes the px translate resolve in SVG user units. */
+.cl9-pkt {
+  transform-box: view-box;
+  animation: cl9-pkt 2.4s linear infinite;
+}
+@keyframes cl9-pkt {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+}
+.cl9-breathe { transform-box: view-box; transform-origin: center; animation: cl9-breathe 5s ease-in-out infinite; }
+@keyframes cl9-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+.cl9-live { animation: cl9-live 2s ease-in-out infinite; }
+@keyframes cl9-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) {
+  .cl9-pkt { animation: none !important; opacity: 1 !important; }
+  .cl9-breathe, .cl9-live { animation: none !important; }
+}
+
+/* ---- Scheduling (feature 11): the slot grid filling up ----
+   A booking chip drops into its time-slot row, the available/total counter
+   ticks down, and the row's "Full" badge pops once the slot has no places
+   left. Each runs on mount (chips) or on value change (the counter is keyed
+   on its own value, so the tick replays), never in a loop. */
+.sc11-land { animation: sc11-land 0.42s cubic-bezier(0.2, 0.85, 0.25, 1) both; }
+@keyframes sc11-land {
+  0%   { opacity: 0; transform: translateY(-55%) scale(0.86); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.sc11-tick { animation: sc11-tick 0.45s cubic-bezier(0.2, 0.85, 0.25, 1) both; }
+@keyframes sc11-tick {
+  0%   { transform: scale(1.55); }
+  100% { transform: scale(1); }
+}
+.sc11-full { animation: sc11-full 0.45s ease-out both; }
+@keyframes sc11-full {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sc11-land, .sc11-tick, .sc11-full { animation: none !important; }
+}
+
+/* ---- Multi-language (feature 7): four drivers speak in turn ----
+   One 16s loop, four 4s slots (animation-delay 0/4/8/12s), so exactly one driver
+   occupies the 0-25% window at any time. Per slot: greeting pops (3%) -> his card
+   lights (8%) -> the check-in runs the rail (10-20%) -> the matching row on the
+   Romanian dispatcher panel flashes (21-24%). --ml7-run is the rail travel, set on
+   the scene root so the 8cqw rail width stays owned by the component.
+   Every base style below is the resting state, so reduced-motion drops straight to a
+   legible static frame (all four bubbles shown, dots parked at the rail start). */
+.ml7-bubble { animation: ml7-bubble 16s ease-in-out infinite; }
+@keyframes ml7-bubble {
+  0%        { opacity: 0; transform: translateY(18%) scale(0.9); }
+  3%, 20%   { opacity: 1; transform: none; }
+  24%       { opacity: 0; transform: translateY(-12%) scale(0.97); }
+  100%      { opacity: 0; transform: translateY(18%) scale(0.9); }
+}
+.ml7-flag { animation: ml7-flag 16s ease-in-out infinite; }
+@keyframes ml7-flag {
+  0%, 3%    { box-shadow: 0 0 0 0 rgb(37 99 235 / 0); transform: scale(1); }
+  8%, 20%   { box-shadow: 0 0 0 0.3cqw rgb(37 99 235 / 0.4); transform: scale(1.07); }
+  25%, 100% { box-shadow: 0 0 0 0 rgb(37 99 235 / 0); transform: scale(1); }
+}
+.ml7-lit { animation: ml7-lit 16s ease-in-out infinite; }
+@keyframes ml7-lit {
+  0%, 3%    { border-color: #334155; box-shadow: none; }
+  8%, 20%   { border-color: #2563eb; box-shadow: 0 0 0 0.28cqw rgb(37 99 235 / 0.18); }
+  25%, 100% { border-color: #334155; box-shadow: none; }
+}
+/* X only. The dot's vertical centring comes from Tailwind's -translate-y-1/2, which
+   v4 emits as the STANDALONE `translate` property — it composes with `transform`
+   rather than being overridden by it, so repeating -50% here would centre it twice
+   and float the dot a half-height above the rail. */
+.ml7-pkt { animation: ml7-pkt 16s ease-in-out infinite; }
+@keyframes ml7-pkt {
+  0%, 8%    { opacity: 0; transform: translateX(0); }
+  10%       { opacity: 1; transform: translateX(0); }
+  20%       { opacity: 1; transform: translateX(var(--ml7-run, 5.4cqw)); }
+  22%, 100% { opacity: 0; transform: translateX(var(--ml7-run, 5.4cqw)); }
+}
+.ml7-row { animation: ml7-row 16s ease-in-out infinite; }
+@keyframes ml7-row {
+  0%, 16%   { background-color: #141d28; border-color: #243040; }
+  21%, 24%  { background-color: #1b2b47; border-color: #2563eb; }
+  29%, 100% { background-color: #141d28; border-color: #243040; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ml7-bubble, .ml7-flag, .ml7-lit, .ml7-pkt, .ml7-row { animation: none !important; }
+}
+
+/* ---- Driver Instructions (feature 10) ----
+   f10-menu: the Actions dropdown opening off its button.
+   f10-cardin: the driver's single "What to do" card. A new action outranks the
+   old one, so the slot is REPLACED — the element is keyed by action type and
+   this plays on each swap (the real card uses animate-fade-slide-in).
+   f10-pkt: the instruction crossing the realtime link; --f10-dx is the span it
+   travels, passed inline so the CSS stays independent of the scene's geometry. */
+.f10-menu { animation: f10-menu 0.22s ease-out both; transform-origin: top right; }
+@keyframes f10-menu {
+  from { opacity: 0; transform: translateY(-8%) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+.f10-cardin { animation: f10-cardin 0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes f10-cardin {
+  from { opacity: 0; transform: translateY(9%) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+.f10-pkt { opacity: 0; animation: f10-pkt 0.62s ease-in-out both; }
+@keyframes f10-pkt {
+  0%   { transform: translateX(0); opacity: 0; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translateX(var(--f10-dx)); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .f10-menu, .f10-cardin { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .f10-pkt { animation: none !important; opacity: 0 !important; }
+}
+
+/* ---- QRGO Self (feature 14): the counter kiosk ----
+   Mount-triggered, one-shot animations. The scene's client player steps the
+   story and mounts each element when its stage arrives, so every animation
+   here uses `both` fill and runs exactly once per loop — no shared timeline,
+   no animation-delay bookkeeping across scenes. */
+
+/* a value being typed into a kiosk field (per-field animation-delay is inline) */
+.qs14-type { clip-path: inset(0 100% 0 0); animation: qs14-type 1.2s steps(16) both; }
+@keyframes qs14-type { to { clip-path: inset(0 0 0 0); } }
+
+/* the segmented control's selected fill landing after the fields are typed */
+.qs14-fade { animation: qs14-fade 0.45s ease both; }
+@keyframes qs14-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* the ticket feeding up out of the printer slot. Stepped rather than smooth:
+   a thermal printer advances paper in bursts, and the stutter is what makes it
+   read as printing rather than sliding. Clipped by its overflow-hidden mask. */
+.qs14-feed { animation: qs14-feed 1.6s linear both; }
+@keyframes qs14-feed {
+  0%   { transform: translateY(100%); }
+  18%  { transform: translateY(74%); }
+  34%  { transform: translateY(62%); }
+  52%  { transform: translateY(38%); }
+  72%  { transform: translateY(16%); }
+  100% { transform: translateY(0); }
+}
+/* printer chassis buzzing while it feeds */
+.qs14-print { animation: qs14-print 0.16s linear infinite; }
+@keyframes qs14-print { 0%, 100% { transform: translateY(-0.06cqw); } 50% { transform: translateY(0.06cqw); } }
+/* printer status LED */
+.qs14-led { animation: qs14-led 0.55s steps(1) infinite; }
+@keyframes qs14-led { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0.25; } }
+
+/* the feature phone jolting as an SMS lands */
+.qs14-buzz { animation: qs14-buzz 0.5s ease-in-out; }
+@keyframes qs14-buzz {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  15%      { transform: translateX(-0.35cqw) rotate(-0.8deg); }
+  40%      { transform: translateX(0.3cqw) rotate(0.7deg); }
+  65%      { transform: translateX(-0.2cqw) rotate(-0.4deg); }
+  85%      { transform: translateX(0.1cqw) rotate(0.2deg); }
+}
+
+/* the truck rolling in to the ramp once the SMS has named it */
+.qs14-truck { animation: qs14-truck 1.9s cubic-bezier(0.16, 0.84, 0.3, 1) both; }
+@keyframes qs14-truck { from { transform: translateX(150%); } to { transform: translateX(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .qs14-type { animation: none !important; clip-path: none !important; }
+  .qs14-fade { animation: none !important; opacity: 1 !important; }
+  .qs14-feed, .qs14-truck { animation: none !important; transform: none !important; }
+  .qs14-print, .qs14-led, .qs14-buzz { animation: none !important; }
+}
+
+/* ---- White-Label & API (feature 8): the QRGoBox gate call ----
+   The controller POSTs /api/gate/validate up the wire (blue) and the 200 comes
+   back down (green), after which the barrier lifts. Both dots mount only for
+   their phase, so the animation restarts naturally on each cycle — no delays to
+   keep in sync. transform-box: view-box makes the px translate resolve in SVG
+   user units: the wire spans y=4..126 of the `0 0 300 250` viewBox, so the
+   travel is 122 user units. Keep these in step with WhiteLabelScene's wire. */
+.wl8-up {
+  transform-box: view-box;
+  animation: wl8-up 0.75s ease-in both;
+}
+@keyframes wl8-up {
+  0%   { transform: translateY(0); opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(-122px); opacity: 0; }
+}
+.wl8-down {
+  transform-box: view-box;
+  animation: wl8-down 0.75s ease-out both;
+}
+@keyframes wl8-down {
+  0%   { transform: translateY(0); opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(122px); opacity: 0; }
+}
+/* the controller's power LED — it heartbeats to /api/device/heartbeat */
+.wl8-led { animation: wl8-led 2.4s ease-in-out infinite; }
+@keyframes wl8-led { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) {
+  .wl8-up, .wl8-down { animation: none !important; opacity: 0 !important; }
+  .wl8-led { animation: none !important; }
+}
+
+/* ---- Automatic Location Detection (feature 12): geofence draw + on-device test ----
+   Map side is driven by React state; these only carry the per-element motion.
+   transform-box: view-box makes px transforms resolve in SVG user units, and
+   transform-origin: 0 0 pins rotation to the marker's own anchor after translate.
+   Phone side reproduces auto_checkin_banner.dart exactly: fadeIn+slideY over
+   300ms, and two white rings scaling 0.5 -> 1.5 over 1500ms, 750ms apart. */
+.gf12-cursor { transform-box: view-box; transform-origin: 0 0; transition: transform 520ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms ease; }
+.gf12-truck { transform-box: view-box; transform-origin: 0 0; transition: transform 1600ms linear; }
+.gf12-click { transform-box: view-box; animation: gf12-click 440ms ease-out both; }
+@keyframes gf12-click { from { transform: scale(0.2); opacity: 0.9; } to { transform: scale(1.7); opacity: 0; } }
+.gf12-vtx { transform-box: view-box; animation: gf12-vtx 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes gf12-vtx { from { transform: scale(0); } to { transform: scale(1); } }
+.gf12-ping { transform-box: view-box; animation: gf12-ping 1400ms ease-out infinite; }
+@keyframes gf12-ping { 0% { transform: scale(0.7); opacity: 0.9; } 100% { transform: scale(1.9); opacity: 0; } }
+.gf12-fill { animation: gf12-fade 420ms ease-out both; }
+.gf12-chip { animation: gf12-fade 320ms ease-out both; }
+@keyframes gf12-fade { from { opacity: 0; } to { opacity: 1; } }
+/* the ray draws out from the marker; the crossing lights up when it gets there
+   (it sits ~60% along, hence the 420ms delay) */
+.gf12-ray { stroke-dasharray: 360; stroke-dashoffset: 360; animation: gf12-ray 700ms ease-out both; }
+@keyframes gf12-ray { to { stroke-dashoffset: 0; } }
+.gf12-xdot { transform-box: view-box; animation: gf12-vtx 300ms cubic-bezier(0.34, 1.56, 0.64, 1) 420ms both; }
+.gf12-bannerin { animation: gf12-bannerin 300ms ease-out both; }
+@keyframes gf12-bannerin { from { opacity: 0; transform: translateY(-20%); } to { opacity: 1; transform: none; } }
+.gf12-pulse { animation: gf12-pulse 1500ms cubic-bezier(0, 0, 0.58, 1) infinite; }
+.gf12-pulse2 { animation-delay: 750ms; }
+@keyframes gf12-pulse { from { transform: scale(0.5); opacity: 0.6; } to { transform: scale(1.5); opacity: 0; } }
+.gf12-coach { animation: gf12-bannerin 300ms ease-out 220ms both; }
+.gf12-ripple { animation: gf12-ripple 520ms ease-out both; }
+@keyframes gf12-ripple { from { transform: scale(0.15); opacity: 0.55; } to { transform: scale(1.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .gf12-cursor, .gf12-truck { transition: none !important; }
+  .gf12-click, .gf12-vtx, .gf12-ping, .gf12-fill, .gf12-chip, .gf12-ray, .gf12-xdot,
+  .gf12-bannerin, .gf12-pulse, .gf12-coach, .gf12-ripple { animation: none !important; }
+  .gf12-ray { stroke-dashoffset: 0 !important; }
+  .gf12-ping { opacity: 0 !important; }
+}

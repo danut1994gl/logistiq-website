@@ -5,6 +5,7 @@ import { featuresSegment } from "@/lib/i18n/segments";
 import {
   QrCodeIcon, GateIcon, ChatIcon, UsersIcon, ChartIcon, MobileIcon,
   GlobeIcon, ApiIcon, CloudIcon, CompassIcon, ClockIcon, MapPinIcon, TruckIcon,
+  KioskIcon,
 } from "@/components/icons";
 
 // Canonical feature registry — drives the /features index, per-feature pages, the
@@ -15,7 +16,7 @@ import {
 // localizing the segment (/de/funktionen/) is a follow-up that needs next.config
 // rewrites and native-slug review.
 export type Feature = {
-  id: number; // 1..13 -> features.feature{id}Title / feature{id}Desc
+  id: number; // 1..14 -> features.feature{id}Title / feature{id}Desc
   icon: FC;
   color: string;
 };
@@ -34,6 +35,7 @@ export const features: Feature[] = [
   { id: 11, icon: ClockIcon, color: "lime" },
   { id: 12, icon: MapPinIcon, color: "rose" },
   { id: 13, icon: TruckIcon, color: "emerald" },
+  { id: 14, icon: KioskIcon, color: "purple" },
 ];
 
 // Path helpers. The public segment is localized per locale (see lib/i18n/segments
