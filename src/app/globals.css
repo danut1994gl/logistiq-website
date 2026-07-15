@@ -878,3 +878,31 @@ select:focus {
 @keyframes app-scan { 0%, 100% { top: 12%; } 50% { top: 82%; } }
 @keyframes chpop { from { opacity: 0; transform: translateY(20%) scale(0.96); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .app-scan { animation: none !important; } }
+
+/* ---- App tour (feature 6): highlight sweeping down the language list ---- */
+.app-langsweep {
+  top: -14%;
+  background: linear-gradient(to bottom, rgba(59,130,246,0) 0%, rgba(59,130,246,0.22) 50%, rgba(59,130,246,0) 100%);
+  animation: app-langsweep 3.2s ease-in-out infinite;
+}
+@keyframes app-langsweep {
+  0%   { top: -14%; opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .app-langsweep { animation: none !important; opacity: 0 !important; } }
+
+/* The status screen holds the whole real check-in status page (status+QR, what
+   to do, assigned ramp, driver/vehicle/check-in info, timeline, times). It
+   auto-scrolls through it the way a driver would, pausing to read each block.
+   Duration must match DWELL[2] in AppTourScene. Percentages are of the tall
+   content's own height, so this stays correct at any stage size. */
+.app-stscroll { animation: app-stscroll 12s ease-in-out infinite; }
+@keyframes app-stscroll {
+  0%, 9%    { transform: translateY(0); }
+  27%, 36%  { transform: translateY(-16%); }
+  54%, 63%  { transform: translateY(-32%); }
+  81%, 100% { transform: translateY(-48%); }
+}
+@media (prefers-reduced-motion: reduce) { .app-stscroll { animation: none !important; } }

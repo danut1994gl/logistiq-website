@@ -25,7 +25,7 @@ export function PageHero({
 }) {
   const twoCol = Boolean(visual);
   const pad = compact
-    ? "pt-[calc(var(--nav-h)+1.25rem)] md:pt-[calc(var(--nav-h)+1.75rem)] pb-6 lg:pb-8"
+    ? "pt-[calc(var(--nav-h)+1.5rem)] md:pt-[calc(var(--nav-h)+2rem)] pb-10 lg:pb-14"
     : "pt-[calc(var(--nav-h)+2.5rem)] md:pt-[calc(var(--nav-h)+3.5rem)] pb-14 lg:pb-20";
   return (
     <section className="hero-gradient relative overflow-hidden">

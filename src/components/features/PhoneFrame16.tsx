@@ -22,7 +22,7 @@ export function PhoneFrame16({
   statusDark?: boolean;
 }) {
   return (
-    <div className="@container relative h-full" style={{ aspectRatio: "776 / 1630" }}>
+    <div className="@container relative isolate h-full" style={{ aspectRatio: "776 / 1630" }}>
       {/* titanium body */}
       <div className="absolute inset-0 rounded-[16.26cqw] bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 shadow-2xl" />
       {/* black bezel under the glass */}

@@ -67,10 +67,10 @@ function TruckBody({ op, cabDown, idleMin, lifted }: { op: Op; cabDown: boolean;
 // sidebar helpers
 function Row({ icon, label, value, valueClass }: { icon: ReactNode; label: string; value: string; valueClass?: string }) {
   return (
-    <div className="flex items-center gap-[1.4cqw] py-[0.7cqw]">
-      <svg viewBox="0 0 24 24" className="w-[2cqw] h-[2cqw] text-slate-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icon}</svg>
-      <span className="text-slate-400 text-[1.55cqw]">{label}</span>
-      <span className={`ml-auto text-[1.6cqw] font-semibold text-white text-right ${valueClass ?? ""}`}>{value}</span>
+    <div className="flex items-center gap-[2.1cqw] py-[1.05cqw]">
+      <svg viewBox="0 0 24 24" className="w-[3cqw] h-[3cqw] text-slate-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{icon}</svg>
+      <span className="text-slate-400 text-[2.33cqw]">{label}</span>
+      <span className={`ml-auto text-[2.4cqw] font-semibold text-white text-right ${valueClass ?? ""}`}>{value}</span>
     </div>
   );
 }
@@ -100,6 +100,8 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
   const [cursor, setCursor] = useState<{ x: number; y: number; down: boolean; on: boolean }>({ x: 88, y: 74, down: false, on: false });
   const [dragId, setDragId] = useState<number | null>(null);
   const [sidebar, setSidebar] = useState<number | null>(null);
+  // the ramp/spot the operator is about to drop onto — highlighted, never hidden
+  const [dropTarget, setDropTarget] = useState<string | null>(null);
   const [dialog, setDialog] = useState<{ tid: number; from: string; to: Slot } | null>(null);
   const trucksRef = useRef(trucks);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -163,11 +165,20 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
           setCursor((c) => ({ ...c, down: true }));
           setDragId(truck.id);
           await sleep(260);
+          // The truck rides its own CSS transition to the destination while the
+          // cursor travels alongside. It stays `dragId` for the whole trip, so
+          // the target slot keeps rendering as an empty bay (see `occ` below)
+          // instead of vanishing the moment the truck is reassigned.
           setT((ts) => ts.map((tk) => (tk.id === truck.id ? { ...tk, slot: dest.id } : tk)));
-          await moveTo(toPct(dest.x, dest.y), 900);
+          const dp = toPct(dest.x, dest.y)!;
+          setCursor((c) => ({ ...c, x: dp.x, y: dp.y, on: true }));
+          await sleep(560);
+          setDropTarget(dest.id); // highlight only as the truck arrives, just before the drop
+          await sleep(340);
           setCursor((c) => ({ ...c, down: false }));
           setDragId(null);
           await sleep(220);
+          setDropTarget(null);
           // move-confirmation dialog
           setDialog({ tid: truck.id, from: fullLabel(from), to: dest });
           await sleep(700);
@@ -224,12 +235,16 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
         {Array.from({ length: 22 }).map((_, i) => (<line key={i} x1={WH.x + 22 + i * 46} y1={WH.y + 14} x2={WH.x + 22 + i * 46} y2={WALL - 12} stroke={C.whStroke} strokeOpacity="0.26" strokeWidth="1" />))}
         <text x={WH.x + WH.w / 2} y={WH.y + 82} textAnchor="middle" fill="#cbd5e1" style={{ fontSize: 28, fontWeight: 800, letterSpacing: 7 }}>WAREHOUSE</text>
         {DOCKS.map((s) => {
-          const occ = trucks.some((t) => t.slot === s.id);
+          // exclude the in-flight truck so the bay it is heading for keeps its
+          // outline + number until the drop actually lands
+          const occ = trucks.some((t) => t.slot === s.id && t.id !== dragId);
+          const tgt = dropTarget === s.id;
           return (
             <g key={s.id}>
               <rect x={s.x - 38} y={WALL - 6} width={76} height={12} rx={2} fill="#0f1720" stroke={C.border} strokeWidth="1.5" />
-              <rect x={s.x - 56} y={WALL + 2} width={112} height={150} rx={6} fill="none" stroke={occ ? "transparent" : "#3b4a5e"} strokeWidth="1.5" strokeDasharray="5 5" />
-              {!occ && <text x={s.x} y={s.y + 8} textAnchor="middle" fill="#64748b" style={{ fontSize: 22, fontWeight: 800 }}>{s.label}</text>}
+              {tgt && <rect x={s.x - 56} y={WALL + 2} width={112} height={150} rx={6} fill={C.green} fillOpacity="0.14" />}
+              <rect x={s.x - 56} y={WALL + 2} width={112} height={150} rx={6} fill="none" stroke={tgt ? C.green : occ ? "transparent" : "#3b4a5e"} strokeWidth={tgt ? 3 : 1.5} strokeDasharray={tgt ? undefined : "5 5"} />
+              {!occ && <text x={s.x} y={s.y + 8} textAnchor="middle" fill={tgt ? C.green : "#64748b"} style={{ fontSize: 22, fontWeight: 800 }}>{s.label}</text>}
             </g>
           );
         })}
@@ -240,11 +255,13 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
         <text x={PARK.x + 16} y={PARK.y + 24} fill="#e2e8f0" style={{ fontSize: 16, fontWeight: 700 }}>{y.uiParking}</text>
         <text x={PARK.x + PARK.w - 14} y={PARK.y + 24} textAnchor="end" fill="#94a3b8" style={{ fontSize: 13 }}>{parkOcc}/8</text>
         {SPOTS.map((s) => {
-          const occ = trucks.some((t) => t.slot === s.id);
+          const occ = trucks.some((t) => t.slot === s.id && t.id !== dragId);
+          const tgt = dropTarget === s.id;
           return (
             <g key={s.id}>
-              <rect x={s.x - 30} y={s.y - 75} width={60} height={150} rx={4} fill="none" stroke="#3b4a5e" strokeWidth="1.2" strokeDasharray="4 3" />
-              {!occ && <text x={s.x} y={s.y + 5} textAnchor="middle" fill="#5b6b7f" style={{ fontSize: 13, fontFamily: "monospace" }}>{s.label}</text>}
+              {tgt && <rect x={s.x - 30} y={s.y - 75} width={60} height={150} rx={4} fill={C.green} fillOpacity="0.14" />}
+              <rect x={s.x - 30} y={s.y - 75} width={60} height={150} rx={4} fill="none" stroke={tgt ? C.green : "#3b4a5e"} strokeWidth={tgt ? 2.5 : 1.2} strokeDasharray={tgt ? undefined : "4 3"} />
+              {!occ && <text x={s.x} y={s.y + 5} textAnchor="middle" fill={tgt ? C.green : "#5b6b7f"} style={{ fontSize: 13, fontFamily: "monospace" }}>{s.label}</text>}
             </g>
           );
         })}
@@ -280,42 +297,42 @@ export function YardScene({ t, locale }: { t: Translations; locale: Locale }) {
           const s = slotById(sbTruck.slot);
           return (
             <div className="h-full bg-slate-900/97 border-l border-slate-700 shadow-2xl flex flex-col overflow-hidden">
-              <div className="shrink-0 px-[3cqw] pt-[3cqw] pb-[2cqw] border-b border-slate-800">
+              <div className="shrink-0 px-[4.5cqw] pt-[4.5cqw] pb-[3cqw] border-b border-slate-800">
                 <div className="flex items-center">
-                  <span className="text-white font-bold text-[2.6cqw]">{sbTruck.plate}</span>
-                  <button ref={closeRef} className="ml-auto w-[3.4cqw] h-[3.4cqw] text-slate-400 [&_svg]:w-[2.2cqw] [&_svg]:h-[2.2cqw] flex items-center justify-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" /></svg></button>
+                  <span className="text-white font-bold text-[3.9cqw]">{sbTruck.plate}</span>
+                  <button ref={closeRef} className="ml-auto w-[5.1cqw] h-[5.1cqw] text-slate-400 [&_svg]:w-[3.3cqw] [&_svg]:h-[3.3cqw] flex items-center justify-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" /></svg></button>
                 </div>
-                <div className="flex items-center gap-[1.4cqw] mt-[1.4cqw]">
-                  <span className={`inline-flex items-center gap-[0.6cqw] rounded-full px-[1.2cqw] py-[0.5cqw] text-[1.5cqw] font-semibold ${OP_TXT[sbTruck.op]}`}><svg viewBox="0 0 24 24" className="w-[1.5cqw] h-[1.5cqw]" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M8 20V7M4.5 10.5 8 7l3.5 3.5M16 4v13M12.5 13.5 16 17l3.5-3.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{opLabel(sbTruck.op)}</span>
-                  <span className="inline-flex items-center gap-[0.6cqw] rounded-full px-[1.2cqw] py-[0.5cqw] text-[1.5cqw] font-semibold text-indigo-300 bg-indigo-500/15"><span className="w-[1cqw] h-[1cqw] rounded-full bg-indigo-400" />{y.sbAssignedAt}</span>
-                  <span className="ml-auto inline-flex items-center gap-[0.5cqw] text-slate-400 text-[1.5cqw]"><svg viewBox="0 0 24 24" className="w-[1.6cqw] h-[1.6cqw]" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" /></svg>{fmtIdle(sbTruck.idleMin)}</span>
+                <div className="flex items-center gap-[2.1cqw] mt-[2.1cqw]">
+                  <span className={`inline-flex items-center gap-[0.9cqw] rounded-full px-[1.8cqw] py-[0.75cqw] text-[2.25cqw] font-semibold ${OP_TXT[sbTruck.op]}`}><svg viewBox="0 0 24 24" className="w-[2.25cqw] h-[2.25cqw]" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M8 20V7M4.5 10.5 8 7l3.5 3.5M16 4v13M12.5 13.5 16 17l3.5-3.5" strokeLinecap="round" strokeLinejoin="round" /></svg>{opLabel(sbTruck.op)}</span>
+                  <span className="inline-flex items-center gap-[0.9cqw] rounded-full px-[1.8cqw] py-[0.75cqw] text-[2.25cqw] font-semibold text-indigo-300 bg-indigo-500/15"><span className="w-[1.5cqw] h-[1.5cqw] rounded-full bg-indigo-400" />{y.sbAssignedAt}</span>
+                  <span className="ml-auto inline-flex items-center gap-[0.75cqw] text-slate-400 text-[2.25cqw]"><svg viewBox="0 0 24 24" className="w-[2.4cqw] h-[2.4cqw]" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" strokeLinecap="round" /></svg>{fmtIdle(sbTruck.idleMin)}</span>
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto px-[3cqw] py-[1.4cqw]">
+              <div className="flex-1 overflow-y-auto px-[4.5cqw] py-[2.1cqw]">
                 <Row icon={SB_ICONS.driver} label={y.sbDriver} value={sbTruck.name} />
                 <Row icon={SB_ICONS.phone} label={y.sbPhone} value={sbTruck.phone} />
                 <Row icon={SB_ICONS.truck} label={y.sbTruck} value={sbTruck.plate} />
                 <Row icon={SB_ICONS.trailer} label={y.sbTrailer} value={sbTruck.trailer} />
                 <Row icon={SB_ICONS.company} label={y.sbCompany} value={sbTruck.company} />
                 <Row icon={SB_ICONS.truck} label={y.sbTruckType} value={y.valTruckTrailer} />
-                <div className="border-t border-slate-800 my-[1cqw]" />
+                <div className="border-t border-slate-800 my-[1.5cqw]" />
                 <Row icon={SB_ICONS.dept} label={y.sbDept} value={y.valDeptOffice} />
                 <Row icon={SB_ICONS.ramp} label={y.sbRamp} value={fullLabel(s)} valueClass="text-blue-400" />
                 <Row icon={SB_ICONS.cargo} label={y.sbCargo} value={y.valCargo} />
-                <div className="border-t border-slate-800 my-[1cqw]" />
+                <div className="border-t border-slate-800 my-[1.5cqw]" />
                 <Row icon={SB_ICONS.clock} label={y.sbCheckedIn} value="16.04 08:55" />
                 <Row icon={SB_ICONS.clock} label={y.sbConfirmed} value="16.04 08:55" />
                 <Row icon={SB_ICONS.clock} label={y.sbAssignedAt} value="11:27" />
-                <div className="grid grid-cols-2 gap-[1.4cqw] mt-[1.6cqw]">
+                <div className="grid grid-cols-2 gap-[2.1cqw] mt-[2.4cqw]">
                   {ACTIONS.map((a, i) => (
-                    <div key={i} className="rounded-[1.2cqw] border border-slate-700 bg-slate-800/50 py-[1.6cqw] flex flex-col items-center gap-[0.9cqw]">
-                      <span className={`w-[4cqw] h-[4cqw] rounded-[1cqw] flex items-center justify-center [&_svg]:w-[2.4cqw] [&_svg]:h-[2.4cqw] ${a.col}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{a.ic}</svg></span>
-                      <span className="text-white text-[1.5cqw] font-medium text-center leading-tight px-[0.5cqw]">{a.l}</span>
+                    <div key={i} className="rounded-[1.8cqw] border border-slate-700 bg-slate-800/50 py-[2.4cqw] flex flex-col items-center gap-[1.35cqw]">
+                      <span className={`w-[6cqw] h-[6cqw] rounded-[1.5cqw] flex items-center justify-center [&_svg]:w-[3.6cqw] [&_svg]:h-[3.6cqw] ${a.col}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{a.ic}</svg></span>
+                      <span className="text-white text-[2.25cqw] font-medium text-center leading-tight px-[0.75cqw]">{a.l}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-[1.4cqw] rounded-[1.2cqw] border border-red-500/40 py-[1.4cqw] flex items-center justify-center gap-[1cqw] text-red-400 text-[1.6cqw] font-semibold">
-                  <svg viewBox="0 0 24 24" className="w-[2cqw] h-[2cqw]" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M6 6l12 12" /></svg>{y.actCancelYms}
+                <div className="mt-[2.1cqw] rounded-[1.8cqw] border border-red-500/40 py-[2.1cqw] flex items-center justify-center gap-[1.5cqw] text-red-400 text-[2.4cqw] font-semibold">
+                  <svg viewBox="0 0 24 24" className="w-[3cqw] h-[3cqw]" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="9" /><path d="M6 6l12 12" /></svg>{y.actCancelYms}
                 </div>
               </div>
             </div>

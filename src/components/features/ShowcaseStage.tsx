@@ -66,7 +66,10 @@ export function ShowcaseStage({
         </div>
         <div
           data-showcase-stage
-          className={`relative w-full ${aspectClass} ${minHClass} rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl`}
+          // `isolate` keeps every z-index inside a scene (e.g. YardScene's z-50
+          // operator cursor) in the stage's own stacking context, so scene chrome
+          // can never paint over the fixed z-50 site header / Features menu.
+          className={`relative isolate w-full ${aspectClass} ${minHClass} rounded-3xl overflow-hidden border border-slate-700/60 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl`}
         >
           {children}
         </div>

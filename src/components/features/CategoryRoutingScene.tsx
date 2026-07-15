@@ -16,7 +16,21 @@ type Cargo = { key: string; label: string; dept: DeptKey; icon: ReactNode };
 type TruckType = { key: string; label: string };
 type Card = { id: number; plate: string; cargo: Cargo; tt: TruckType; state: "in" | "leaving" };
 
-const SNOW = <path d="M12 2v20M4.2 6.6l15.6 10.8M19.8 6.6 4.2 17.4M12 6l-3 2 3 2 3-2zM6 9l-.3 3.5L3 14M18 9l.3 3.5L21 14" />;
+// a real 6-fold snowflake: three full-diameter arms 60° apart, each end carrying
+// a pair of branches angled out toward the tip. Built by rotating one arm so the
+// symmetry is exact (the old hand-plotted path had a stray diamond in the middle,
+// which is what made it read as fake).
+const SNOW = (
+  <>
+    {[0, 60, 120].map((a) => (
+      <g key={a} transform={`rotate(${a} 12 12)`}>
+        <path d="M12 3v18" />
+        <path d="M9.6 5.4 12 7.8l2.4-2.4" />
+        <path d="M9.6 18.6 12 16.2l2.4 2.4" />
+      </g>
+    ))}
+  </>
+);
 const LEAF = <path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-10-1 10-4 16-9 17zM4 21c1.5-4 4-6.5 8-8.5" />;
 const BOX = <path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3zM3 7.5 12 12l9-4.5M12 12v9" />;
 
@@ -41,6 +55,19 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
     { key: "tanker", label: f.ttTanker },
   ];
   const deptMeta = (k: DeptKey) => DEPTS.find((d) => d.key === k)!;
+  // Which trailers may serve each department. Cold Storage is refrigerated-only —
+  // a tarp or tanker physically cannot hold the cold chain — so the routing never
+  // sends anything else there. Dry goods never travel refrigerated.
+  const TT_BY_DEPT: Record<DeptKey, string[]> = {
+    cold: ["refrigerated"],
+    fresh: ["refrigerated", "tarp", "trailer"],
+    dry: ["tarp", "trailer", "tanker"],
+  };
+  const ttFor = (dept: DeptKey, i?: number) => {
+    const keys = TT_BY_DEPT[dept];
+    const k = keys[i === undefined ? Math.floor(Math.random() * keys.length) : i % keys.length];
+    return TTS.find((tt) => tt.key === k)!;
+  };
 
   const [cols, setCols] = useState<Record<DeptKey, Card[]>>({ cold: [], fresh: [], dry: [] });
   const [incoming, setIncoming] = useState<Card | null>(null);
@@ -53,7 +80,7 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       // static populated board
-      const mk = (dept: DeptKey, cargoKey: string, i: number): Card => ({ id: i, plate: plates[i % plates.length], cargo: CARGOS.find((c) => c.key === cargoKey)!, tt: TTS[i % TTS.length], state: "in" });
+      const mk = (dept: DeptKey, cargoKey: string, i: number): Card => ({ id: i, plate: plates[i % plates.length], cargo: CARGOS.find((c) => c.key === cargoKey)!, tt: ttFor(dept, i), state: "in" });
       setCols({ cold: [mk("cold", "frozen", 1), mk("cold", "frozen", 2)], fresh: [mk("fresh", "vegetables", 3), mk("fresh", "fruits", 4)], dry: [mk("dry", "dry", 5)] });
       return;
     }
@@ -67,7 +94,7 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
       await sleep(700);
       while (!cancelled) {
         const cargo = CARGOS[Math.floor(Math.random() * CARGOS.length)];
-        const card: Card = { id: idRef.current++, plate: plates[pi++ % plates.length], cargo, tt: TTS[Math.floor(Math.random() * TTS.length)], state: "in" };
+        const card: Card = { id: idRef.current++, plate: plates[pi++ % plates.length], cargo, tt: ttFor(cargo.dept), state: "in" };
         // 1) arrives at the entry, routing rule highlights the target department
         setIncoming(card);
         await sleep(500);

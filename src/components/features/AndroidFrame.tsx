@@ -18,7 +18,7 @@ export function AndroidFrame({
   screenClassName?: string;
 }) {
   return (
-    <div className="@container relative h-full" style={{ aspectRatio: "765 / 1626" }}>
+    <div className="@container relative isolate h-full" style={{ aspectRatio: "765 / 1626" }}>
       {/* aluminium body */}
       <div className="absolute inset-0 rounded-[12.5cqw] bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 shadow-2xl" />
       <div className="absolute inset-[0.9cqw] rounded-[11.8cqw] bg-black" />
