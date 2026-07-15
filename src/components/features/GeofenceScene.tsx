@@ -44,8 +44,11 @@ const TRUCK = [
   { x: 304, y: 414, r: 0, d: 1800 },
   { x: 304, y: 268, r: -90, d: 1500 },
 ];
-// where the ray-cast lands: a horizontal ray right from the marker crosses edge
-// V2->V3 exactly once => odd => inside (location_service.dart:60-87)
+// where the ray-cast lands: a horizontal ray right from the marker crosses the
+// right-hand edge V1->V2 (at x=514.7) exactly once => odd => inside. The left
+// edge V3->V0 also spans this y, but it sits at x=160 — behind the marker, so a
+// rightward ray never counts it. That asymmetry is the whole reason the real
+// algorithm only tallies crossings with `P.x < x` (location_service.dart:60-87).
 const RAY_Y = 268;
 const RAY_X0 = 304;
 const HIT_X = 515;
@@ -504,14 +507,6 @@ export function GeofenceScene({ t, locale }: { t: Translations; locale: Locale }
                 </g>
               )}
             </g>
-
-            {/* the operator's cursor */}
-            <g className="gf12-cursor" style={{ transform: `translate(${cur.x}px, ${cur.y}px)`, opacity: curOn ? 1 : 0 }}>
-              <path d="M0 0 0 19 4.7 14.7 7.6 21.2 10.7 19.7 7.8 13.4 13.4 13.4Z" fill="#ffffff" stroke="#0f1720" strokeWidth={1.4} strokeLinejoin="round" />
-            </g>
-            {clickN > 0 && curOn && (
-              <circle key={clickN} className="gf12-click" cx={cur.x} cy={cur.y} r={12} fill="none" stroke="#34d399" strokeWidth={2.5} style={{ transformOrigin: `${cur.x}px ${cur.y}px` }} />
-            )}
           </g>
           <rect x={2} y={2} width={656} height={450} rx={12} fill="none" stroke="#334155" strokeWidth={1.5} />
 
@@ -531,6 +526,19 @@ export function GeofenceScene({ t, locale }: { t: Translations; locale: Locale }
                 {f.uiGeofence} {pts} {f.uiPoints}
               </text>
             </g>
+          )}
+
+          {/* The operator's cursor, drawn last so it paints over both the map and
+              the footer. Deliberately OUTSIDE #gf12-mapclip: that clip stops at
+              y=452 and the Draw Zone button sits at y=464..504, so a clipped
+              cursor would vanish at the exact moment it arms the tool. Nothing it
+              touches (button, vertices, home) falls outside the viewBox, so it
+              needs no clipping of its own. */}
+          <g className="gf12-cursor" style={{ transform: `translate(${cur.x}px, ${cur.y}px)`, opacity: curOn ? 1 : 0 }}>
+            <path d="M0 0 0 19 4.7 14.7 7.6 21.2 10.7 19.7 7.8 13.4 13.4 13.4Z" fill="#ffffff" stroke="#0f1720" strokeWidth={1.4} strokeLinejoin="round" />
+          </g>
+          {clickN > 0 && curOn && (
+            <circle key={clickN} className="gf12-click" cx={cur.x} cy={cur.y} r={12} fill="none" stroke="#34d399" strokeWidth={2.5} style={{ transformOrigin: `${cur.x}px ${cur.y}px` }} />
           )}
         </svg>
       </div>
