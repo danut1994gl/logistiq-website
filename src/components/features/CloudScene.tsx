@@ -1,35 +1,65 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import type { Translations } from "@/lib/i18n/translations";
 
 // Cloud - No Equipment (feature 9): logistiq.cloud in the middle with the
 // Logistiq mark, FOUR named warehouses hanging off it, and driver phones that
-// pop up beside a warehouse, run through a check-in and vanish — the way real
-// traffic actually arrives. Packets travel BOTH ways on every warehouse link.
+// appear at random spots around a warehouse, run through a check-in and leave —
+// the way real traffic actually arrives.
 //
 // Grounded in the reality audit: there is no on-prem component anywhere — a
 // warehouse is onboarded through a web form and its check-in link is live, so
 // the only thing on site is a browser and the driver's phone.
 //
-// Layout is deliberately symmetric: the cloud sits at the centre of a 1200x760
-// viewBox and the four warehouses are placed on a fixed radius around it, so
-// nothing crowds anything. Pure CSS (cl9-*), no client JS. aria-hidden.
+// The phones are a client player because the brief is genuine randomness (random
+// spot, random timing, random warehouse), which CSS delays can only fake. The
+// cloud's breathing and the warehouse<->cloud packets stay pure CSS.
+// SSR renders zero phones, so there is nothing to mismatch on hydration.
 
 const CX = 600, CY = 330;          // cloud centre — everything is measured from here
 
-// Four warehouses on a symmetric arc, each with its own phone anchor. `n` numbers
-// the warehouse label; `pd` staggers its phone so they never pop in together.
 const NODES = [
-  { x: 170, y: 150, n: 1, pd: 0.0, px: -122, py: 0 },
-  { x: 1030, y: 150, n: 2, pd: 1.6, px: 122, py: 0 },
-  { x: 170, y: 560, n: 3, pd: 3.2, px: -122, py: 0 },
-  { x: 1030, y: 560, n: 4, pd: 4.8, px: 122, py: 0 },
+  { x: 170, y: 150, n: 1 },
+  { x: 1030, y: 150, n: 2 },
+  { x: 170, y: 560, n: 3 },
+  { x: 1030, y: 560, n: 4 },
 ];
 
-// An upright, symmetric cloud: three lobes on a flat base, centred on x=0 so the
-// label and the logo land dead centre. (The previous path was authored off-axis,
-// which pushed the label out of the shape.)
-const CLOUD_D =
-  "M-150 40 A46 46 0 0 1 -150 -34 A62 62 0 0 1 -34 -74 A70 70 0 0 1 96 -50 " +
-  "A48 48 0 0 1 150 40 Z";
+// Spots a phone can pop up in around a warehouse. All clear of the box (x +-86,
+// y +-52) and of its label band (y 62..80), so a phone never lands on the
+// warehouse it belongs to.
+// (no slot directly above: that one lands under warehouse 1's "Browser only" badge)
+const SLOTS = [
+  { dx: -132, dy: -4 }, { dx: 132, dy: -4 },
+  { dx: -120, dy: -74 }, { dx: 120, dy: -74 },
+  { dx: -120, dy: 78 }, { dx: 120, dy: 78 },
+];
+
+// The lobes the cloud is built from. Drawn as a union of CIRCLES rather than one
+// path: that keeps the outline continuous and round on EVERY side including the
+// bottom (a path with a flat base is what this replaced), with no internal seams
+// — the outline is a slightly larger copy of the same circles drawn behind.
+const LOBES = [
+  { cx: -108, cy: 8, r: 50 },
+  { cx: -48, cy: -30, r: 58 },
+  { cx: 28, cy: -40, r: 66 },
+  { cx: 104, cy: 4, r: 52 },
+  { cx: 60, cy: 40, r: 46 },
+  { cx: -8, cy: 46, r: 50 },
+  { cx: -66, cy: 40, r: 44 },
+];
+
+type Phone = { id: number; w: number; slot: number; state: 0 | 1 | 2 };
+
+const DocIc = <><rect x="4" y="2.5" width="16" height="19" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></>;
+const HourIc = <path d="M6 2h12M6 22h12M7 2v3l5 5 5-5V2M7 22v-3l5-5 5 5v3" />;
+const SeenIc = <path d="M1 13l4 4L14 7M10 15l1.5 1.5L21 7" />;
+const STATE = [
+  { ic: DocIc, col: "#60a5fa" },   // filling the check-in in
+  { ic: HourIc, col: "#f59e0b" },  // waiting for the operator
+  { ic: SeenIc, col: "#22c55e" },  // seen
+];
 
 function Warehouse({ x, y, label }: { x: number; y: number; label: string }) {
   return (
@@ -42,7 +72,6 @@ function Warehouse({ x, y, label }: { x: number; y: number; label: string }) {
         <circle key={i} cx={cx} cy={-41} r={3} fill={["#ef4444", "#f59e0b", "#22c55e"][i]} />
       ))}
       <rect x={-38} y={-47} width={120} height={11} rx={5.5} fill="#1b2532" />
-      {/* a tiny live check-in list */}
       {[0, 1, 2].map((i) => (
         <g key={i} transform={`translate(0 ${-16 + i * 20})`}>
           <rect x={-72} y={-7.5} width={144} height={15} rx={4} fill="#141d28" />
@@ -56,40 +85,88 @@ function Warehouse({ x, y, label }: { x: number; y: number; label: string }) {
   );
 }
 
-// A driver's phone: appears beside its warehouse, steps through three check-in
-// frames, then leaves. Minimal on purpose — it reads as traffic, not as a mockup.
-function DriverPhone({ x, y, delay, label }: { x: number; y: number; delay: number; label?: string }) {
+// A driver's phone at one spot: a link back to its warehouse carrying a packet
+// each way, and one of three check-in states on screen.
+function DriverPhone({ p, label }: { p: Phone; label?: string }) {
+  const n = NODES[p.w], s = SLOTS[p.slot];
+  const x = n.x + s.dx, y = n.y + s.dy;
+  const st = STATE[p.state];
   return (
-    <g className="cl9-phone" transform={`translate(${x} ${y})`} style={{ animationDelay: `${delay}s` }}>
-      <rect x={-17} y={-29} width={34} height={58} rx={6} fill="#0f1720" stroke="#475569" strokeWidth="1.4" />
-      <rect x={-4} y={-26} width={8} height={2.4} rx={1.2} fill="#475569" />
-      {/* three frames of a check-in, cross-fading in place */}
-      <g className="cl9-f1">
-        <rect x={-11} y={-19} width={22} height={22} rx={2.5} fill="#e2e8f0" />
-        {[[-8, -16], [-8, -6], [2, -16]].map(([qx, qy], i) => (
-          <g key={i}><rect x={qx} y={qy} width={7} height={7} fill="#1f2937" /><rect x={qx + 1.8} y={qy + 1.8} width={3.4} height={3.4} fill="#e2e8f0" /></g>
-        ))}
+    <g className="cl9-phone">
+      {/* phone <-> warehouse, both directions */}
+      <line x1={x} y1={y} x2={n.x} y2={n.y} stroke="#334155" strokeWidth="1.4" strokeDasharray="3 4" />
+      <circle className="cl9-ppkt" cx={x} cy={y} r={3.4} fill="#38bdf8"
+        style={{ ["--dx" as string]: `${n.x - x}px`, ["--dy" as string]: `${n.y - y}px` }} />
+      <circle className="cl9-ppkt" cx={n.x} cy={n.y} r={3.4} fill="#22c55e"
+        style={{ ["--dx" as string]: `${x - n.x}px`, ["--dy" as string]: `${y - n.y}px`, animationDelay: "0.9s" }} />
+
+      <g transform={`translate(${x} ${y})`}>
+        <rect x={-17} y={-29} width={34} height={58} rx={6} fill="#0f1720" stroke="#475569" strokeWidth="1.4" />
+        <rect x={-4} y={-26} width={8} height={2.4} rx={1.2} fill="#475569" />
+        <rect x={-13} y={-21} width={26} height={42} rx={3} fill="#141d28" />
+        {/* the state icon — swapped by the player, cross-faded by key */}
+        <g key={p.state} className="cl9-icon" transform="translate(0 -4)" style={{ color: st.col }}>
+          <svg x={-9} y={-9} width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{st.ic}</svg>
+        </g>
+        <rect x={-9} y={12} width={18} height={2.6} rx={1.3} fill="#334155" />
+        {label && <text x={0} y={44} textAnchor="middle" fill="#64748b" style={{ fontSize: 11, fontWeight: 600 }}>{label}</text>}
       </g>
-      <g className="cl9-f2">
-        <rect x={-11} y={-19} width={22} height={4} rx={2} fill="#334155" />
-        <rect x={-11} y={-12} width={22} height={4} rx={2} fill="#334155" />
-        <rect x={-11} y={-5} width={14} height={4} rx={2} fill="#334155" />
-        <rect x={-11} y={3} width={22} height={7} rx={2} fill="#2563eb" />
-      </g>
-      <g className="cl9-f3">
-        <circle cx={0} cy={-8} r={9} fill="#22c55e" fillOpacity="0.18" stroke="#22c55e" strokeWidth="1.4" />
-        <path d="M-4 -8 l3 3 l5.5 -6" fill="none" stroke="#22c55e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x={-11} y={6} width={22} height={3.4} rx={1.7} fill="#334155" />
-      </g>
-      {label && <text x={0} y={42} textAnchor="middle" fill="#64748b" style={{ fontSize: 11, fontWeight: 600 }}>{label}</text>}
     </g>
   );
 }
 
 export function CloudScene({ t }: { t: Translations }) {
   const f = t.f9Page;
+  const [phones, setPhones] = useState<Phone[]>([]);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const idRef = useRef(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Static frame: one phone per warehouse, caught mid-flow. Set here rather
+      // than in the initial state because matchMedia does not exist during SSR —
+      // same pattern as NotificationsScene/SelfCheckScene. It runs once and then
+      // the effect returns, so there are no cascading renders to worry about.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPhones(NODES.map((_, w) => ({ id: w, w, slot: w % SLOTS.length, state: (w % 3) as 0 | 1 | 2 })));
+      return;
+    }
+    let cancelled = false, visible = true;
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.15 });
+    if (rootRef.current) io.observe(rootRef.current);
+
+    // Spawn a phone at a random free spot; step it doc -> hourglass -> seen; drop
+    // it. Each phone owns its own timers, so arrivals and departures never fall
+    // into lockstep — which is the whole point of doing this in JS.
+    const spawn = () => {
+      if (cancelled || !visible) return;
+      setPhones((cur) => {
+        if (cur.length >= 5) return cur;
+        const w = Math.floor(Math.random() * NODES.length);
+        const taken = new Set(cur.filter((p) => p.w === w).map((p) => p.slot));
+        const free = SLOTS.map((_, i) => i).filter((i) => !taken.has(i));
+        if (!free.length) return cur;
+        const slot = free[Math.floor(Math.random() * free.length)];
+        const id = idRef.current++;
+        const step = (state: 1 | 2) =>
+          setTimeout(() => { if (!cancelled) setPhones((c) => c.map((p) => (p.id === id ? { ...p, state } : p))); },
+                     state === 1 ? 1100 : 2300);
+        step(1); step(2);
+        setTimeout(() => { if (!cancelled) setPhones((c) => c.filter((p) => p.id !== id)); }, 3500);
+        return [...cur, { id, w, slot, state: 0 }];
+      });
+    };
+    const tick = () => {
+      if (cancelled) return;
+      spawn();
+      setTimeout(tick, 500 + Math.random() * 900);
+    };
+    const to = setTimeout(tick, 400);
+    return () => { cancelled = true; clearTimeout(to); io.disconnect(); };
+  }, []);
+
   return (
-    <div className="@container absolute inset-0 p-[2cqw] select-none" aria-hidden="true">
+    <div ref={rootRef} className="@container absolute inset-0 p-[2cqw] select-none" aria-hidden="true">
       <svg viewBox="0 0 1200 760" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="cl9-cloud" x1="0" y1="0" x2="0" y2="1">
@@ -118,49 +195,51 @@ export function CloudScene({ t }: { t: Translations }) {
           );
         })}
 
-        {/* warehouses + their drivers */}
-        {NODES.map((n, i) => (
-          <g key={i}>
-            <Warehouse x={n.x} y={n.y} label={`${f.uiWarehouse} ${n.n}`} />
-            <DriverPhone x={n.x + n.px} y={n.y + n.py} delay={n.pd} label={i === 0 ? f.uiDriver : undefined} />
-          </g>
-        ))}
+        {NODES.map((n, i) => <Warehouse key={i} x={n.x} y={n.y} label={`${f.uiWarehouse} ${n.n}`} />)}
+        {phones.map((p, i) => <DriverPhone key={p.id} p={p} label={i === 0 ? f.uiDriver : undefined} />)}
 
-        {/* the cloud — drawn last so it sits above the links converging on it.
-            Logo + wordmark are laid out as ONE row centred on the cloud's axis:
-            the mark occupies x -100..-56, the label starts at -46 and runs ~150,
-            so the pair is optically centred without either touching a lobe. */}
+        {/* The cloud. Mark + wordmark live INSIDE the breathing group, so they
+            move with it instead of sitting still while the shape swells. */}
+        {/* The translate lives on the OUTER g and the animation on the inner one:
+            a CSS `transform` REPLACES an element's SVG transform attribute, so
+            putting .cl9-breathe here would silently drop the translate and fling
+            the cloud into the corner. (It did exactly that once.) */}
         <g transform={`translate(${CX} ${CY})`}>
-          <path className="cl9-breathe" d={CLOUD_D} fill="url(#cl9-cloud)" stroke="#60a5fa" strokeWidth="2" />
-          {/* the Logistiq mark on a white tile — icon.svg is the square mark
-              (logo.svg bakes in a wordmark and collides with the label) */}
+          <g className="cl9-breathe">
+            {/* outline: the same lobes, slightly larger, behind the fill */}
+            <g fill="#60a5fa">
+              {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r + 2} />)}
+          </g>
+          <g fill="url(#cl9-cloud)">
+            {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r} />)}
+          </g>
           <rect x={-100} y={-24} width={44} height={44} rx={10} fill="#fff" />
           <image href="/icon.svg" x={-96} y={-20} width={36} height={36} preserveAspectRatio="xMidYMid meet" />
-          <text x={-46} y={8} textAnchor="start" fill="#fff" style={{ fontSize: 25, fontWeight: 800 }}>{f.uiCloud}</text>
+            <text x={-46} y={8} textAnchor="start" fill="#fff" style={{ fontSize: 25, fontWeight: 800 }}>{f.uiCloud}</text>
+          </g>
         </g>
 
-        {/* Live sync sits just under the cloud — inside it, the cloud's base
-            would clip the pill and crowd the wordmark */}
-        <g transform={`translate(${CX} ${CY + 62})`}>
+        {/* Live sync sits under the cloud — inside, the lower lobes crowd it */}
+        <g transform={`translate(${CX} ${CY + 118})`}>
           <rect x={-62} y={-14} width={124} height={28} rx={14} fill="#1b2532" stroke="#3b82f6" strokeOpacity="0.45" />
           <circle className="cl9-live" cx={-44} cy={0} r={4.5} fill="#4ade80" />
           <text x={10} y={5} textAnchor="middle" fill="#93c5fd" style={{ fontSize: 14, fontWeight: 600 }}>{f.uiRealtime}</text>
         </g>
 
         {/* both-directions caption, on the link with room for it */}
-        <g transform="translate(392 250)">
+        <g transform="translate(370 236)">
           <rect x={-60} y={-14} width={120} height={28} rx={14} fill="#0f1720" fillOpacity="0.92" stroke="#334155" />
           <text x={0} y={5} textAnchor="middle" fill="#7dd3fc" style={{ fontSize: 13.5, fontWeight: 600 }}>{f.uiSync}</text>
         </g>
 
         {/* browser-only badge over the first warehouse */}
-        <g transform="translate(170 66)">
+        <g transform="translate(170 40)">
           <rect x={-56} y={-14} width={112} height={28} rx={14} fill="#22c55e" fillOpacity="0.14" stroke="#22c55e" strokeOpacity="0.5" />
           <text x={0} y={5} textAnchor="middle" fill="#4ade80" style={{ fontSize: 13.5, fontWeight: 600 }}>{f.uiBrowser}</text>
         </g>
 
         {/* what you do NOT need */}
-        <g transform="translate(600 712)">
+        <g transform="translate(600 716)">
           {[f.uiNoServer, f.uiNoInstall, f.uiNoHardware].map((label, i, arr) => {
             const w = 196, gap = 14;
             const total = arr.length * w + (arr.length - 1) * gap;
