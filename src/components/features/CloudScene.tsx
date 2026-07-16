@@ -32,15 +32,27 @@ const NODES = [
   { x: 1030, y: 560, n: 4 },
 ];
 
-// Spots a phone can pop up in around a warehouse. All clear of the box (x +-86,
-// y +-52) and of its label band (y 62..80), so a phone never lands on the
-// warehouse it belongs to.
-// (no slot directly above: that one lands under warehouse 1's "Browser only" badge)
+// Spots a phone can pop up in, held well off the warehouse so the link between
+// them is readable. |dx| stays <= 150: the warehouses sit at x=170/1030 in a
+// 1200-wide viewBox, so anything further would clip a phone off the canvas.
+// (No slot directly above: that one lands under warehouse 1's "Browser only" badge.)
 const SLOTS = [
-  { dx: -132, dy: -4 }, { dx: 132, dy: -4 },
-  { dx: -120, dy: -74 }, { dx: 120, dy: -74 },
-  { dx: -120, dy: 78 }, { dx: 120, dy: 78 },
+  { dx: -150, dy: -10 }, { dx: 150, dy: -10 },
+  { dx: -142, dy: -88 }, { dx: 142, dy: -88 },
+  { dx: -142, dy: 92 }, { dx: 142, dy: 92 },
 ];
+
+// The warehouse card's half-extents — the link stops here rather than at the
+// centre, so it never runs underneath the card.
+const WH_HW = 86, WH_HH = 52;
+
+// Where a link from (fx,fy) meets the warehouse box: scale the ray from the
+// centre until it hits the nearer pair of edges.
+function edgePoint(fx: number, fy: number, n: { x: number; y: number }) {
+  const dx = fx - n.x, dy = fy - n.y;
+  const t = Math.min(WH_HW / Math.abs(dx || 1e-6), WH_HH / Math.abs(dy || 1e-6));
+  return { x: n.x + dx * t, y: n.y + dy * t };
+}
 
 // The lobes the cloud is built from. Drawn as a union of CIRCLES rather than one
 // path: that keeps the outline continuous and round on EVERY side including the
@@ -56,7 +68,7 @@ const LOBES = [
   { cx: -66, cy: 40, r: 44 },
 ];
 
-type Phone = { id: number; w: number; slot: number; state: 0 | 1 | 2 };
+type Phone = { id: number; w: number; slot: number; state: 0 | 1 | 2; leaving?: boolean };
 
 const DocIc = <><rect x="4" y="2.5" width="16" height="19" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></>;
 const HourIc = <path d="M6 2h12M6 22h12M7 2v3l5 5 5-5V2M7 22v-3l5-5 5 5v3" />;
@@ -96,15 +108,16 @@ function Warehouse({ x, y, label }: { x: number; y: number; label: string }) {
 function DriverPhone({ p, label }: { p: Phone; label?: string }) {
   const n = NODES[p.w], s = SLOTS[p.slot];
   const x = n.x + s.dx, y = n.y + s.dy;
+  const e = edgePoint(x, y, n);
   const st = STATE[p.state];
   return (
-    <g className="cl9-phone">
-      {/* phone <-> warehouse, both directions */}
-      <line x1={x} y1={y} x2={n.x} y2={n.y} stroke="#334155" strokeWidth="1.4" strokeDasharray="3 4" />
+    <g className={`cl9-phone${p.leaving ? " cl9-out" : ""}`}>
+      {/* phone <-> warehouse, both directions — stopping at the card's edge */}
+      <line x1={x} y1={y} x2={e.x} y2={e.y} stroke="#334155" strokeWidth="1.4" strokeDasharray="3 4" />
       <circle className="cl9-ppkt" cx={x} cy={y} r={3.4} fill="#38bdf8"
-        style={{ ["--dx" as string]: `${n.x - x}px`, ["--dy" as string]: `${n.y - y}px` }} />
-      <circle className="cl9-ppkt" cx={n.x} cy={n.y} r={3.4} fill="#22c55e"
-        style={{ ["--dx" as string]: `${x - n.x}px`, ["--dy" as string]: `${y - n.y}px`, animationDelay: "0.9s" }} />
+        style={{ ["--dx" as string]: `${e.x - x}px`, ["--dy" as string]: `${e.y - y}px` }} />
+      <circle className="cl9-ppkt" cx={e.x} cy={e.y} r={3.4} fill="#22c55e"
+        style={{ ["--dx" as string]: `${x - e.x}px`, ["--dy" as string]: `${y - e.y}px`, animationDelay: "0.9s" }} />
 
       <g transform={`translate(${x} ${y})`}>
         <rect x={-17} y={-29} width={34} height={58} rx={6} fill="#0f1720" stroke="#475569" strokeWidth="1.4" />
@@ -158,7 +171,10 @@ export function CloudScene({ t }: { t: Translations }) {
           setTimeout(() => { if (!cancelled) setPhones((c) => c.map((p) => (p.id === id ? { ...p, state } : p))); },
                      state === 1 ? 1100 : 2300);
         step(1); step(2);
-        setTimeout(() => { if (!cancelled) setPhones((c) => c.filter((p) => p.id !== id)); }, 3500);
+        // flag it first so CSS can fade it out, THEN unmount — React would rip it
+        // out mid-frame otherwise and the phone would just blink off
+        setTimeout(() => { if (!cancelled) setPhones((c) => c.map((p) => (p.id === id ? { ...p, leaving: true } : p))); }, 3400);
+        setTimeout(() => { if (!cancelled) setPhones((c) => c.filter((p) => p.id !== id)); }, 3900);
         return [...cur, { id, w, slot, state: 0 }];
       });
     };

@@ -934,10 +934,14 @@ select:focus {
 .cl9-live { animation: cl9-live 2s ease-in-out infinite; }
 @keyframes cl9-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-/* a phone arrives and leaves; the player controls WHEN it mounts/unmounts, this
-   only softens the two edges. `both` holds the fade-in's start state. */
-.cl9-phone { animation: cl9-phone-in 0.45s ease-out both; }
-@keyframes cl9-phone-in { from { opacity: 0; } to { opacity: 1; } }
+/* a phone arrives and leaves. The player flags `leaving` ~500ms before it
+   unmounts, which is what gives the exit animation time to play — React would
+   otherwise remove the node mid-frame and the phone would blink off.
+   `both` holds each animation's end state so neither edge snaps. */
+.cl9-phone { animation: cl9-phone-in 0.5s ease-out both; }
+@keyframes cl9-phone-in { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.cl9-phone.cl9-out { animation: cl9-phone-out 0.5s ease-in both; }
+@keyframes cl9-phone-out { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.9); } }
 
 /* the state icon is keyed on the state, so React remounts it and this replays */
 .cl9-icon { animation: cl9-icon 0.3s ease-out both; }
@@ -946,7 +950,7 @@ select:focus {
 @media (prefers-reduced-motion: reduce) {
   .cl9-pkt, .cl9-ppkt { animation: none !important; opacity: 1 !important; }
   .cl9-breathe, .cl9-live { animation: none !important; }
-  .cl9-phone, .cl9-icon { animation: none !important; opacity: 1 !important; }
+  .cl9-phone, .cl9-phone.cl9-out, .cl9-icon { animation: none !important; opacity: 1 !important; }
 }
 
 /* ---- Scheduling (feature 11): the slot grid filling up ----
