@@ -56,14 +56,22 @@ export function ShowcaseStage({
   });
 
   return (
-    <section aria-labelledby={headingId} className="pt-10 lg:pt-14 pb-16 lg:pb-24 bg-slate-50 dark:bg-slate-900/50">
+    <section
+      aria-labelledby={title ? headingId : undefined}
+      aria-label={title ? undefined : "Illustration"}
+      className="pt-10 lg:pt-14 pb-16 lg:pb-24 bg-slate-50 dark:bg-slate-900/50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 id={headingId} className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300">{subtitle}</p>
-        </div>
+        {/* The heading is optional: a page whose hero already carries the intro
+            (e.g. Systems Integrations) passes an empty title to drop it. */}
+        {title ? (
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <h2 id={headingId} className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              {title}
+            </h2>
+            {subtitle ? <p className="text-lg text-slate-600 dark:text-slate-300">{subtitle}</p> : null}
+          </div>
+        ) : null}
         <div
           data-showcase-stage
           // `isolate` keeps every z-index inside a scene (e.g. YardScene's z-50
