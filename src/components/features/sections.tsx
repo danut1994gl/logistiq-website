@@ -128,8 +128,8 @@ export function FeatureSpecSection({
   const hid = `${idPrefix}-spec-title`;
   return (
     <Section labelledBy={hid} tinted={tinted}>
-      <Heading id={hid} title={title} sub={subtitle} align="left" />
-      <div className="max-w-4xl rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <Heading id={hid} title={title} sub={subtitle} />
+      <div className="max-w-4xl mx-auto rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
         <dl className="divide-y divide-slate-200 dark:divide-slate-700">
           {rows.map((r, i) => (
             <div key={i} className={`grid sm:grid-cols-3 gap-1 sm:gap-4 px-5 py-4 ${i % 2 ? "bg-slate-50 dark:bg-slate-900/40" : "bg-white dark:bg-slate-800/40"}`}>
