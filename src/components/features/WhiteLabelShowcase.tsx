@@ -7,7 +7,7 @@ import { FeatureFAQSection } from "./FeatureFAQSection";
 import { FeatureProblemSection } from "./FeatureProblemSection";
 import { FeatureFlowSection, FeatureSpecSection, FeatureCalloutSection } from "./sections";
 
-// White-Label (feature 8): branding the driver check-in page. QRGOBox and the API
+// White-Label (feature 8): branding the driver check-in page. QRGoBox and the API
 // were split out to their own pages (15 and 16) — nothing here touches either.
 //
 // Section order is deliberate and specific to this page:

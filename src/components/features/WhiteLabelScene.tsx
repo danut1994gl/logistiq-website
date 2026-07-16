@@ -31,7 +31,7 @@ import { DRIVER_POOLS } from "./driverPools";
 // The browser tab is drawn on purpose and never changes either: it reads
 // "QRGO Driver" with our icon, on every custom domain.
 //
-// Nothing about QRGOBox, gates, barriers, device keys or any API appears here —
+// Nothing about QRGoBox, gates, barriers, device keys or any API appears here —
 // those are separate pages, and the integrations audit forbids dressing any of
 // it up as a customer-facing API.
 //
