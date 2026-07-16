@@ -4,24 +4,34 @@ import { CheckIcon, CloseIcon } from "@/components/icons";
 // comparison card right. Reusable across feature pages (props = localized
 // strings only). Server Component.
 export function FeatureProblemSection({
+  idPrefix = "feature",
   eyebrow,
   title,
   paragraphs,
   compare,
+  reverse = false,
+  tinted = false,
 }: {
+  // pages compose sections in different orders and may repeat a type — a
+  // hard-coded heading id would collide and break aria-labelledby
+  idPrefix?: string;
   eyebrow: string;
   title: string;
   paragraphs: string[];
   compare: { oldTitle: string; newTitle: string; oldRows: string[]; newRows: string[] };
+  /** put the compare cards on the LEFT and the narrative on the right */
+  reverse?: boolean;
+  tinted?: boolean;
 }) {
+  const hid = `${idPrefix}-problem-title`;
   return (
-    <section aria-labelledby="feature-problem-title" className="py-16 lg:py-24">
+    <section aria-labelledby={hid} className={`py-16 lg:py-24 ${tinted ? "bg-slate-50 dark:bg-slate-900/50" : ""}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-        <div>
+        <div className={reverse ? "lg:order-2" : ""}>
           <div className="text-sm font-semibold tracking-widest uppercase text-blue-600 dark:text-blue-400 mb-3">
             {eyebrow}
           </div>
-          <h2 id="feature-problem-title" className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+          <h2 id={hid} className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6">
             {title}
           </h2>
           {paragraphs.map((p, i) => (

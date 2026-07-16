@@ -2,38 +2,38 @@ import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
 import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
-import { WhiteLabelScene } from "./WhiteLabelScene";
+import { IntegrationsScene } from "./IntegrationsScene";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 import { FeatureProblemSection } from "./FeatureProblemSection";
-import { FeatureFlowSection, FeatureSpecSection, FeatureCalloutSection } from "./sections";
+import { FeatureSpecSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
 
-// White-Label (feature 8): branding the driver check-in page. QRGOBox and the API
-// were split out to their own pages (15 and 16) — nothing here touches either.
+// Systems Integrations & API (feature 16): deliberately forward-looking — what is
+// live today (the keyed gate device API, the carrier portal) vs what is roadmap.
 //
 // Section order is deliberate and specific to this page:
-// problem (recognition at the gate is queue time), then the DNS flow that is the
-// real achievement, then the hard limits, then the callout that states there is
-// no per-org theme colour before a buyer can feel misled.
+// problem (the real pain is data entry), then the ONE true endpoint table we can
+// show, then the objects that already exist, then a roadmap callout that says
+// plainly what is not built. The callout is load-bearing, not decoration.
 // Server Component.
-export function WhiteLabelShowcase({ t, locale }: { t: Translations; locale: Locale }) {
-  const f = t.f8Page;
+export function IntegrationsShowcase({ t, locale }: { t: Translations; locale: Locale }) {
+  const f = t.f16Page;
   return (
     <>
       <ShowcaseStage
         title={f.title}
         subtitle={f.subtitle}
         stepLabel={f.stepLabel}
-        glowPrefix="wl8-"
+        glowPrefix="in16-"
         sceneStartsMs={[]}
-        aspectClass="aspect-[4/3] sm:aspect-[16/10]"
+        aspectClass="aspect-[4/3] sm:aspect-[16/9]"
         minHClass="min-h-[440px]"
-        headingId="whitelabel-showcase-title"
+        headingId="integrations-showcase-title"
       >
-        <WhiteLabelScene t={t} locale={locale} />
+        <IntegrationsScene t={t} />
       </ShowcaseStage>
 
       <FeatureProblemSection
-        idPrefix="wl8"
+        idPrefix="in16"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -46,22 +46,8 @@ export function WhiteLabelShowcase({ t, locale }: { t: Translations; locale: Loc
         
       />
 
-      <FeatureFlowSection
-        idPrefix="wl8"
-        title={f.flowTitle}
-        subtitle={f.flowSub}
-        steps={[
-          { title: f.s1t, desc: f.s1d },
-          { title: f.s2t, desc: f.s2d },
-          { title: f.s3t, desc: f.s3d },
-          { title: f.s4t, desc: f.s4d },
-          { title: f.s5t, desc: f.s5d },
-        ]}
-        tinted
-      />
-
       <FeatureSpecSection
-        idPrefix="wl8"
+        idPrefix="in16"
         title={f.specTitle}
         subtitle={f.specSub}
         rows={[
@@ -72,18 +58,26 @@ export function WhiteLabelShowcase({ t, locale }: { t: Translations; locale: Loc
           { k: f.k5, v: f.v5 },
           { k: f.k6, v: f.v6 },
         ]}
+        tinted
+      />
+
+      <FeatureSplitSection
+        idPrefix="in16"
+        title={f.spTitle}
+        body={f.spBody}
+        side={f.spSide === "left" ? "left" : "right"}
         
       />
 
       <FeatureCalloutSection
-        idPrefix="wl8"
+        idPrefix="in16"
         title={f.coTitle}
         body={f.coBody}
         kind={f.coKind === "roadmap" ? "roadmap" : f.coKind === "pilot" ? "pilot" : "note"}
       />
 
       <FeatureFAQSection
-        idPrefix="wl8"
+        idPrefix="in16"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },
@@ -92,7 +86,7 @@ export function WhiteLabelShowcase({ t, locale }: { t: Translations; locale: Loc
           { q: f.q4, a: f.a4 },
         ]}
         locale={locale}
-        path={featureRel(locale, 8)}
+        path={featureRel(locale, 16)}
         tinted
       />
     </>

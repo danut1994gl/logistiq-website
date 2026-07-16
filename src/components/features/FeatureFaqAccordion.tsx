@@ -6,7 +6,7 @@ import { ChevronDownIcon } from "@/components/icons";
 // Generic accordion for feature-page FAQs (same interaction/ARIA pattern as
 // the homepage FAQSection, data-driven via props). First item starts open so
 // the section reads as content, not an empty list of bars.
-export function FeatureFaqAccordion({ items }: { items: { q: string; a: string }[] }) {
+export function FeatureFaqAccordion({ items, idPrefix = "feature" }: { items: { q: string; a: string }[]; idPrefix?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -23,10 +23,10 @@ export function FeatureFaqAccordion({ items }: { items: { q: string; a: string }
             }`}
           >
             <button
-              id={`feature-faq-btn-${i}`}
+              id={`${idPrefix}-faq-btn-${i}`}
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
-              aria-controls={`feature-faq-panel-${i}`}
+              aria-controls={`${idPrefix}-faq-panel-${i}`}
               className="w-full px-5 sm:px-6 py-5 flex items-center gap-4 text-left"
             >
               <span
@@ -53,9 +53,9 @@ export function FeatureFaqAccordion({ items }: { items: { q: string; a: string }
             </button>
             {/* grid-rows 0fr -> 1fr animates to ANY content height (no max-h clip) */}
             <div
-              id={`feature-faq-panel-${i}`}
+              id={`${idPrefix}-faq-panel-${i}`}
               role="region"
-              aria-labelledby={`feature-faq-btn-${i}`}
+              aria-labelledby={`${idPrefix}-faq-btn-${i}`}
               className={`grid transition-[grid-template-rows] duration-200 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
             >
               <div className="overflow-hidden">

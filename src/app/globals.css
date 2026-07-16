@@ -1155,3 +1155,55 @@ select:focus {
   .gf12-ray { stroke-dashoffset: 0 !important; }
   .gf12-ping { opacity: 0 !important; }
 }
+
+/* ---- Systems Integrations & API (feature 16): live edges vs roadmap edges ----
+   Packets travel ONLY the solid edges — the gate device API, the carrier portal
+   and realtime into our own apps — because those are the only surfaces that
+   exist. The dashed TMS/WMS/ERP edges get no keyframe at all, deliberately: no
+   packet, no dash drift, no shimmer. A moving dash would read as flow and the
+   connectors are not built, so those lines stay dead. Same per-dot --dx/--dy
+   delta technique as .cl9-pkt; transform-box: view-box makes the px translate
+   resolve in SVG user units. */
+.ix16-pkt {
+  transform-box: view-box;
+  animation: ix16-pkt 2.8s linear infinite;
+}
+@keyframes ix16-pkt {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 1; }
+  86%  { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+}
+.ix16-live { animation: ix16-live 2s ease-in-out infinite; }
+@keyframes ix16-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+/* fill-box, not view-box: the ring must scale about its OWN centre, not the
+   viewBox centre (which would fling it across the diagram). */
+.ix16-ping { transform-box: fill-box; transform-origin: center; animation: ix16-ping 2.4s ease-out infinite; }
+@keyframes ix16-ping { 0% { transform: scale(0.6); opacity: 0.6; } 100% { transform: scale(2.4); opacity: 0; } }
+.ix16-breathe { animation: ix16-breathe 6s ease-in-out infinite; }
+@keyframes ix16-breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ix16-pkt { animation: none !important; opacity: 1 !important; }
+  .ix16-live, .ix16-breathe { animation: none !important; }
+  .ix16-ping { animation: none !important; opacity: 0 !important; }
+}
+
+/* ---- White-Label branding (feature 8): the driver page re-skinning ----
+   WhiteLabelScene's React state decides WHICH brand each part of the check-in
+   page is showing; these carry only the per-element motion as a field lands.
+   Both are applied to keyed elements, so the animation replays on every swap
+   without any delay bookkeeping. Neither element carries a Tailwind translate
+   utility (which would compose with, not override, these transforms). */
+.br8-pop { animation: br8-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes br8-pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.br8-in { animation: br8-in 0.5s ease-out both; }
+@keyframes br8-in {
+  from { opacity: 0; transform: translateY(10%); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .br8-pop, .br8-in { animation: none !important; }
+}

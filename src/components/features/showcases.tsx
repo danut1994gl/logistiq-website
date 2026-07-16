@@ -15,6 +15,9 @@ import { InstructionsShowcase } from "./InstructionsShowcase";
 import { SchedulingShowcase } from "./SchedulingShowcase";
 import { GeofenceShowcase } from "./GeofenceShowcase";
 import { SelfCheckShowcase } from "./SelfCheckShowcase";
+import { GateAccessShowcase } from "./GateAccessShowcase";
+import { IntegrationsShowcase } from "./IntegrationsShowcase";
+import { AccessControlShowcase } from "./AccessControlShowcase";
 
 // Per-feature showcase slot: feature id -> rich content rendered under the
 // hero on that feature's page (animation, narrative, benefits, FAQ — each
@@ -35,4 +38,7 @@ export const featureShowcases: Partial<Record<number, FC<{ t: Translations; loca
   12: GeofenceShowcase,
   13: YardManagementShowcase,
   14: SelfCheckShowcase,
+  15: GateAccessShowcase,
+  16: IntegrationsShowcase,
+  17: AccessControlShowcase,
 };

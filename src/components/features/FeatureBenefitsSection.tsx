@@ -4,19 +4,24 @@ import { CheckIcon } from "@/components/icons";
 // Generic benefits-by-role grid (3 persona cards). Reusable across feature
 // pages (props = localized strings + icons only). Server Component.
 export function FeatureBenefitsSection({
+  idPrefix = "feature",
   title,
   subtitle,
   groups,
+  tinted = true,
 }: {
+  idPrefix?: string;
   title: string;
   subtitle: string;
   groups: { icon: FC; title: string; items: string[] }[];
+  tinted?: boolean;
 }) {
+  const hid = `${idPrefix}-benefits-title`;
   return (
-    <section aria-labelledby="feature-benefits-title" className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-900/50">
+    <section aria-labelledby={hid} className={`py-16 lg:py-24 ${tinted ? "bg-slate-50 dark:bg-slate-900/50" : ""}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 id="feature-benefits-title" className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          <h2 id={hid} className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             {title}
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300">{subtitle}</p>
