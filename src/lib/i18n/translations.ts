@@ -957,6 +957,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Doar spre exterior",
+      uiNoInbound: "Nicio regulă de intrare",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Un singur API pentru echipamente astăzi, un API pentru parteneri pe roadmap",
@@ -1014,6 +1018,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Programări, check-in-uri",
+      uiLifecycle: "Ciclu de viață",
+      uiYourId: "ID-ul sistemului tău",
     },
     f17Page: {
       title: "Rolurile și departamentele stabilesc cine ce face",
@@ -1066,6 +1072,8 @@ export const translations = {
       a3: "Un manager de depozit sau un professional poate crea dispeceri, și doar în propriul depozit — contul nou preia automat acel depozit. Rolul de logistics admin este cel care poate crea și manageri de depozit, pe lângă dispeceri. Regula este verificată pe server, iar legătura rol–depozit este o constrângere în baza de date, nu o convenție de interfață.",
       q4: "Ce face departamentul Office — este un rol?",
       a4: "Este un marcaj pe un departament, nu un rol și nici un nivel de acces. Marcarea unui departament ca Office / Reception înseamnă că transportatorii care fac o rezervare sunt rutați automat către el. Nu există utilizator de birou și nicio permisiune de birou. Celălalt marcaj este Entry Point: departamentul unde începe procesul de check-in al șoferului, iar un depozit poate avea cel mult unul.",
+      uiEntryPoint: "Punct de intrare",
+      uiOnePer: "unul per depozit",
     },
     f4Page: {
       title: "Camionul potrivit, departamentul potrivit",
@@ -2787,6 +2795,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Outbound only",
+      uiNoInbound: "No inbound rule",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "One machine API today, a partner API on the roadmap",
@@ -2844,6 +2856,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Bookings, check-ins",
+      uiLifecycle: "Lifecycle",
+      uiYourId: "your system's ID",
     },
     f17Page: {
       title: "Roles and departments control who does what",
@@ -2896,6 +2910,8 @@ export const translations = {
       a3: "A warehouse manager or professional can create dispatchers, and only inside their own warehouse — the new account inherits that warehouse automatically. A logistics admin is the role that can create warehouse managers as well as dispatchers. The rule is checked on the server, and the role-to-warehouse binding is a constraint in the database rather than a UI convention.",
       q4: "What does the Office department do — is it a role?",
       a4: "It is a flag on a department, not a role or an access level. Marking a department as Office / Reception means carriers making a booking are routed to it automatically. There is no office user and no office permission. The other flag is Entry Point: the department where the driver check-in process begins, and a warehouse can have at most one.",
+      uiEntryPoint: "Entry Point",
+      uiOnePer: "one per warehouse",
     },
     f4Page: {
       title: "The right truck, the right department",
@@ -4600,6 +4616,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Nur ausgehend",
+      uiNoInbound: "Keine Inbound-Regel",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Heute eine Maschinen-API, eine Partner-API auf der Roadmap",
@@ -4657,6 +4677,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Buchungen, Check-ins",
+      uiLifecycle: "Lebenszyklus",
+      uiYourId: "ID Ihres Systems",
     },
     f17Page: {
       title: "Rollen und Abteilungen regeln, wer was darf",
@@ -4709,6 +4731,8 @@ export const translations = {
       a3: "Ein Lagerleiter oder Professional kann Disponenten anlegen, und zwar nur innerhalb des eigenen Lagers — das neue Konto übernimmt dieses Lager automatisch. Der Logistics Admin ist die Rolle, die neben Disponenten auch Lagerleiter anlegen kann. Die Regel wird serverseitig geprüft, und die Bindung von Rolle an Lager ist ein Constraint in der Datenbank, keine reine UI-Konvention.",
       q4: "Was macht die Office-Abteilung — ist das eine Rolle?",
       a4: "Es ist ein Flag an einer Abteilung, keine Rolle und keine Berechtigungsstufe. Eine Abteilung als Office / Reception zu markieren bedeutet, dass Frachtführer beim Anlegen einer Buchung automatisch dorthin geroutet werden. Es gibt keinen Office-Benutzer und keine Office-Berechtigung. Das andere Flag ist Entry Point: die Abteilung, in der der Fahrer-Check-in-Prozess beginnt — und ein Lager kann höchstens einen haben.",
+      uiEntryPoint: "Einstiegspunkt",
+      uiOnePer: "einer pro Lager",
     },
     f4Page: {
       title: "Der richtige Lkw, die richtige Abteilung",
@@ -6198,6 +6222,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Tylko wychodzące",
+      uiNoInbound: "Bez reguły przychodzącej",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Dziś jedno API maszynowe, API partnerskie w planach rozwoju",
@@ -6255,6 +6283,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Rezerwacje, check-iny",
+      uiLifecycle: "Cykl życia",
+      uiYourId: "ID Twojego systemu",
     },
     f17Page: {
       title: "Role i działy decydują, kto co robi",
@@ -6307,6 +6337,8 @@ export const translations = {
       a3: "Kierownik magazynu lub professional może tworzyć dyspozytorów i wyłącznie w obrębie własnego magazynu — nowe konto automatycznie dziedziczy ten magazyn. Rolą, która może tworzyć zarówno kierowników magazynu, jak i dyspozytorów, jest logistics admin. Reguła jest sprawdzana po stronie serwera, a powiązanie roli z magazynem to ograniczenie w bazie danych, a nie konwencja interfejsu.",
       q4: "Co robi dział Office — czy to rola?",
       a4: "To flaga na dziale, a nie rola ani poziom dostępu. Oznaczenie działu jako Office / Reception sprawia, że przewoźnicy składający rezerwację są do niego kierowani automatycznie. Nie ma użytkownika biurowego ani uprawnienia biurowego. Drugą flagą jest Entry Point: dział, w którym zaczyna się proces check-inu kierowcy — magazyn może mieć najwyżej jeden taki dział.",
+      uiEntryPoint: "Punkt wejścia",
+      uiOnePer: "jeden na magazyn",
     },
     f4Page: {
       title: "Właściwa ciężarówka, właściwy dział",
@@ -7796,6 +7828,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Csak kimenő",
+      uiNoInbound: "Nincs bejövő szabály",
+      uiFirewall: "Tűzfal",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Ma egy gépi API, partner API az útitervben",
@@ -7853,6 +7889,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Foglalások, check-inek",
+      uiLifecycle: "Életciklus",
+      uiYourId: "az Ön rendszerének azonosítója",
     },
     f17Page: {
       title: "A szerepkörök és a részlegek döntik el, ki mit csinálhat",
@@ -7905,6 +7943,8 @@ export const translations = {
       a3: "A raktárvezető vagy a professional diszpécsereket hozhat létre, kizárólag a saját raktárán belül — az új fiók automatikusan örökli azt a raktárat. A logistics admin az a szerepkör, amely raktárvezetőket is létrehozhat, nemcsak diszpécsereket. A szabály a szerveren ellenőrződik, a szerepkör–raktár kötés pedig adatbázis-szintű megszorítás, nem csupán felületi konvenció.",
       q4: "Mit csinál az Office részleg — ez egy szerepkör?",
       a4: "Ez egy jelölő a részlegen, nem szerepkör és nem hozzáférési szint. Ha egy részleget Office / Reception jelöléssel lát el, a foglalást leadó fuvarozók automatikusan oda kerülnek. Nincs irodai felhasználó és nincs irodai jogosultság. A másik jelölő az Entry Point: az a részleg, ahol a sofőrök check-in folyamata kezdődik, és egy raktárnak legfeljebb egy lehet.",
+      uiEntryPoint: "Belépési pont",
+      uiOnePer: "raktáranként egy",
     },
     f4Page: {
       title: "A megfelelő kamion, a megfelelő részleg",
@@ -9394,6 +9434,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Само изходящи",
+      uiNoInbound: "Без входящо правило",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Днес — един машинен API, а партньорският API е в пътната карта",
@@ -9451,6 +9495,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Резервации, check-in-и",
+      uiLifecycle: "Жизнен цикъл",
+      uiYourId: "ID във вашата система",
     },
     f17Page: {
       title: "Ролите и отделите определят кой какво прави",
@@ -9503,6 +9549,8 @@ export const translations = {
       a3: "Складов мениджър или professional може да създава диспечери и то само в собствения си склад — новият профил автоматично наследява този склад. Logistics admin е ролята, която може да създава както складови мениджъри, така и диспечери. Правилото се проверява на сървъра, а обвързването роля–склад е ограничение в базата данни, а не конвенция на интерфейса.",
       q4: "Какво прави отделът Office — роля ли е?",
       a4: "Това е флаг върху отдел, а не роля или ниво на достъп. Маркирането на отдел като Office / Reception означава, че превозвачите, които правят заявка, се маршрутизират автоматично към него. Няма офис потребител и няма офис право. Другият флаг е Entry Point: отделът, в който започва процесът на check-in за шофьора, а един склад може да има най-много един.",
+      uiEntryPoint: "Входна точка",
+      uiOnePer: "по едно на склад",
     },
     f4Page: {
       title: "Правилният камион, правилният отдел",
@@ -10992,6 +11040,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Sortant uniquement",
+      uiNoInbound: "Aucune règle entrante",
+      uiFirewall: "Pare-feu",
+      uiHeartbeat: "Heartbeat · 30 s",
     },
     f16Page: {
       title: "Une seule API machine aujourd'hui, une API partenaires à la feuille de route",
@@ -11049,6 +11101,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Réservations, check-in",
+      uiLifecycle: "Cycle de vie",
+      uiYourId: "l'ID de votre système",
     },
     f17Page: {
       title: "Les rôles et les départements décident qui fait quoi",
@@ -11101,6 +11155,8 @@ export const translations = {
       a3: "Un responsable d'entrepôt ou un professionnel peut créer des dispatchers, et uniquement au sein de son propre entrepôt — le nouveau compte hérite automatiquement de cet entrepôt. C'est l'administrateur logistique qui peut créer des responsables d'entrepôt en plus des dispatchers. La règle est vérifiée côté serveur, et le lien rôle–entrepôt est une contrainte en base de données, pas une simple convention d'interface.",
       q4: "À quoi sert le département Bureau — est-ce un rôle ?",
       a4: "C'est un indicateur posé sur un département, pas un rôle ni un niveau d'accès. Marquer un département comme Office / Reception signifie que les transporteurs qui créent une réservation y sont routés automatiquement. Il n'existe ni utilisateur bureau ni permission bureau. L'autre indicateur est Entry Point : le département où commence le processus de check-in des chauffeurs, et un entrepôt ne peut en avoir qu'un seul au maximum.",
+      uiEntryPoint: "Point d'entrée",
+      uiOnePer: "un seul par entrepôt",
     },
     f4Page: {
       title: "Le bon camion, le bon département",
@@ -12667,6 +12723,10 @@ export const translations = {
       uiGate: "Poarta Principală",
       uiTimeline: "Entry: Poarta Principală",
       uiChecks: "/api/gate/validate — 8/8",
+      uiOutbound: "Alleen uitgaand",
+      uiNoInbound: "Geen inkomende regel",
+      uiFirewall: "Firewall",
+      uiHeartbeat: "Heartbeat · 30s",
     },
     f16Page: {
       title: "Vandaag één machine-API, een partner-API op de roadmap",
@@ -12724,6 +12784,8 @@ export const translations = {
       uiWms: "WMS",
       uiErp: "ERP",
       uiObjects: "Boekingen, check-ins",
+      uiLifecycle: "Levenscyclus",
+      uiYourId: "ID van uw systeem",
     },
     f17Page: {
       title: "Rollen en afdelingen bepalen wie wat doet",
@@ -12776,6 +12838,8 @@ export const translations = {
       a3: "Een warehousemanager of professional kan dispatchers aanmaken, en alleen binnen het eigen magazijn — het nieuwe account neemt dat magazijn automatisch over. Een logistics admin is de rol die zowel warehousemanagers als dispatchers kan aanmaken. De regel wordt op de server gecontroleerd, en de koppeling van rol aan magazijn is een constraint in de database, geen UI-afspraak.",
       q4: "Wat doet de Office-afdeling — is dat een rol?",
       a4: "Het is een vlag op een afdeling, geen rol en geen toegangsniveau. Een afdeling markeren als Office / Reception betekent dat vervoerders die een boeking maken er automatisch naartoe worden gerouteerd. Er is geen office-gebruiker en geen office-recht. De andere vlag is Entry Point: de afdeling waar het check-inproces van de chauffeur begint, en een magazijn kan er hoogstens één hebben.",
+      uiEntryPoint: "Toegangspunt",
+      uiOnePer: "één per magazijn",
     },
     f4Page: {
       title: "De juiste vrachtwagen, de juiste afdeling",

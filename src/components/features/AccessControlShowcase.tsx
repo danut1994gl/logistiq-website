@@ -4,6 +4,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { AccessControlScene } from "./AccessControlScene";
 import { FeatureFAQSection } from "./FeatureFAQSection";
+import { DeptFlagsArt } from "./splitArt";
 import { FeatureMatrixSection, FeatureFlowSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
 
 // Access Control (feature 17): staff roles, department assignment and what each
@@ -62,6 +63,7 @@ export function AccessControlShowcase({ t, locale }: { t: Translations; locale: 
         title={f.spTitle}
         body={f.spBody}
         side={f.spSide === "left" ? "left" : "right"}
+        visual={<DeptFlagsArt t={t} />}
         
       />
 

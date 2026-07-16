@@ -4,6 +4,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { GateAccessScene } from "./GateAccessScene";
 import { FeatureFAQSection } from "./FeatureFAQSection";
+import { GateNetworkArt } from "./splitArt";
 import { FeatureFlowSection, FeatureSpecSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
 
 // Yard Access Control / QRGOBox (feature 15): the real chain — the driver's QR,
@@ -65,6 +66,7 @@ export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Loc
         title={f.spTitle}
         body={f.spBody}
         side={f.spSide === "left" ? "left" : "right"}
+        visual={<GateNetworkArt t={t} />}
         
       />
 

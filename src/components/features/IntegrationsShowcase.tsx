@@ -4,6 +4,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { IntegrationsScene } from "./IntegrationsScene";
 import { FeatureFAQSection } from "./FeatureFAQSection";
+import { SchemaArt } from "./splitArt";
 import { FeatureProblemSection } from "./FeatureProblemSection";
 import { FeatureSpecSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
 
@@ -66,6 +67,7 @@ export function IntegrationsShowcase({ t, locale }: { t: Translations; locale: L
         title={f.spTitle}
         body={f.spBody}
         side={f.spSide === "left" ? "left" : "right"}
+        visual={<SchemaArt t={t} />}
         
       />
 
