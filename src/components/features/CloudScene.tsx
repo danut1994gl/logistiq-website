@@ -19,6 +19,12 @@ import type { Translations } from "@/lib/i18n/translations";
 
 const CX = 600, CY = 330;          // cloud centre — everything is measured from here
 
+// The logistiq.cloud banner, sized from the asset's own viewBox (1162.5 x 187.5)
+// so it is never squashed. It already carries the wordmark, so the scene draws no
+// separate label — f9Page.uiCloud stays the accessible/i18n source of that name.
+const BANNER_W = 228;
+const BANNER_H = Math.round((BANNER_W * 187.5) / 1162.5);
+
 const NODES = [
   { x: 170, y: 150, n: 1 },
   { x: 1030, y: 150, n: 2 },
@@ -209,13 +215,17 @@ export function CloudScene({ t }: { t: Translations }) {
             {/* outline: the same lobes, slightly larger, behind the fill */}
             <g fill="#60a5fa">
               {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r + 2} />)}
-          </g>
-          <g fill="url(#cl9-cloud)">
-            {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r} />)}
-          </g>
-          <rect x={-100} y={-24} width={44} height={44} rx={10} fill="#fff" />
-          <image href="/icon.svg" x={-96} y={-20} width={36} height={36} preserveAspectRatio="xMidYMid meet" />
-            <text x={-46} y={8} textAnchor="start" fill="#fff" style={{ fontSize: 25, fontWeight: 800 }}>{f.uiCloud}</text>
+            </g>
+            <g fill="url(#cl9-cloud)">
+              {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r} />)}
+            </g>
+            {/* The official logistiq.cloud banner on a white plate. The banner is
+                the dark-on-light variant (its wordmark is #373636), so the plate
+                is what makes it legible on the blue cloud — and it keeps the white
+                background the icon at its front already had. Sized from the asset's
+                own 1162.5:187.5 ratio so the artwork is never squashed. */}
+            <rect x={-BANNER_W / 2 - 13} y={-BANNER_H / 2 - 11} width={BANNER_W + 26} height={BANNER_H + 22} rx={12} fill="#fff" />
+            <image href="/logistiq-banner-dark.svg" x={-BANNER_W / 2} y={-BANNER_H / 2} width={BANNER_W} height={BANNER_H} preserveAspectRatio="xMidYMid meet" />
           </g>
         </g>
 
