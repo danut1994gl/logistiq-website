@@ -5,6 +5,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { SchedulingScene } from "./SchedulingScene";
 import { FeatureProblemSection } from "./FeatureProblemSection";
+import { FeatureCalloutSection, FeatureFlowSection } from "./sections";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
@@ -28,6 +29,19 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
         <SchedulingScene t={t} locale={locale} />
       </ShowcaseStage>
 
+      <FeatureFlowSection
+        idPrefix="sc11"
+        title={f.flowTitle}
+        subtitle={f.flowSub}
+        steps={[
+          { title: f.s1t, desc: f.s1d },
+          { title: f.s2t, desc: f.s2d },
+          { title: f.s3t, desc: f.s3d },
+          { title: f.s4t, desc: f.s4d },
+          { title: f.s5t, desc: f.s5d },
+        ]}
+        tinted
+      />
       <FeatureProblemSection
         idPrefix="sc11"
         eyebrow={f.probEyebrow}
@@ -52,6 +66,12 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
         ]}
       />
 
+      <FeatureCalloutSection
+        idPrefix="sc11"
+        title={f.coTitle}
+        body={f.coBody}
+        kind="note"
+      />
       <FeatureFAQSection
         idPrefix="sc11"
         title={f.faqTitle}

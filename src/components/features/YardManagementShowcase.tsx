@@ -5,6 +5,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { YardScene } from "./YardScene";
 import { FeatureProblemSection } from "./FeatureProblemSection";
+import { FeatureFactsSection } from "./sections";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
@@ -26,6 +27,14 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
         <YardScene t={t} locale={locale} />
       </ShowcaseStage>
 
+      <FeatureFactsSection
+        facts={[
+          { n: y.f1n, l: y.f1l },
+          { n: y.f2n, l: y.f2l },
+          { n: y.f3n, l: y.f3l },
+        ]}
+        tinted
+      />
       <FeatureProblemSection
         idPrefix="ym13"
         reverse

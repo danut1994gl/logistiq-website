@@ -5,6 +5,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { MultiLanguageScene } from "./MultiLanguageScene";
 import { FeatureProblemSection } from "./FeatureProblemSection";
+import { FeatureSpecSection } from "./sections";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
@@ -28,6 +29,20 @@ export function MultiLanguageShowcase({ t, locale }: { t: Translations; locale: 
         <MultiLanguageScene t={t} />
       </ShowcaseStage>
 
+      <FeatureSpecSection
+        idPrefix="ml7"
+        title={f.specTitle}
+        subtitle={f.specSub}
+        rows={[
+          { k: f.k1, v: f.v1 },
+          { k: f.k2, v: f.v2 },
+          { k: f.k3, v: f.v3 },
+          { k: f.k4, v: f.v4 },
+          { k: f.k5, v: f.v5 },
+          { k: f.k6, v: f.v6 },
+        ]}
+        tinted
+      />
       <FeatureProblemSection
         idPrefix="ml7"
         eyebrow={f.probEyebrow}

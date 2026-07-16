@@ -5,6 +5,7 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { AppTourScene } from "./AppTourScene";
 import { FeatureProblemSection } from "./FeatureProblemSection";
+import { FeatureFactsSection } from "./sections";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
@@ -51,6 +52,14 @@ export function MobileAppShowcase({ t, locale }: { t: Translations; locale: Loca
         <StoreBadges />
       </div>
 
+      <FeatureFactsSection
+        facts={[
+          { n: f.f1n, l: f.f1l },
+          { n: f.f2n, l: f.f2l },
+          { n: f.f3n, l: f.f3l },
+        ]}
+        tinted
+      />
       <FeatureProblemSection
         idPrefix="ma6"
         reverse

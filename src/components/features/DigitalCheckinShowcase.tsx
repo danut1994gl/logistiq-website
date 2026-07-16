@@ -4,6 +4,7 @@ import { UsersIcon, SteeringWheelIcon, ChartIcon, CompassIcon } from "@/componen
 import { featureRel } from "@/lib/features";
 import { CheckinJourneySection } from "./CheckinJourneySection";
 import { FeatureProblemSection } from "./FeatureProblemSection";
+import { FeatureFlowSection } from "./sections";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
@@ -16,6 +17,19 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
   return (
     <>
       <CheckinJourneySection t={t} />
+      <FeatureFlowSection
+        idPrefix="dc1"
+        title={c.flowTitle}
+        subtitle={c.flowSub}
+        steps={[
+          { title: c.s1t, desc: c.s1d },
+          { title: c.s2t, desc: c.s2d },
+          { title: c.s3t, desc: c.s3d },
+          { title: c.s4t, desc: c.s4d },
+          { title: c.s5t, desc: c.s5d },
+        ]}
+        tinted
+      />
       <FeatureProblemSection
         idPrefix="dc1"
         eyebrow={c.problemEyebrow}
