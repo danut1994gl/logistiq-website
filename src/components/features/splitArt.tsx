@@ -1,4 +1,5 @@
 import type { Translations } from "@/lib/i18n/translations";
+import { LogistiqCloud } from "./LogistiqCloud";
 
 // Second illustrations for the mid-page `split` sections on f15/f16/f17. Small,
 // static, presentational diagrams — they sit beside prose, so they explain one
@@ -16,15 +17,28 @@ export function GateNetworkArt({ t }: { t: Translations }) {
   return (
     <div className="@container absolute inset-0 p-[3cqw] select-none" aria-hidden="true">
       <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-        {/* the yard, left of the firewall */}
-        <rect x="14" y="96" width="150" height="108" rx="10" fill="#1b2532" stroke="#334155" strokeWidth="1.5" />
-        <text x="89" y="118" textAnchor="middle" fill="#94a3b8" style={{ fontSize: 11, fontWeight: 600 }}>{f.uiGate}</text>
-        {/* the ESP32 box */}
-        <rect x="52" y="130" width="74" height="52" rx="6" fill="#0f1720" stroke="#475569" strokeWidth="1.5" />
-        <rect x="60" y="140" width="58" height="8" rx="2" fill="#243040" />
-        <circle cx="66" cy="162" r="3" fill="#22c55e" />
-        <rect x="74" y="159" width="44" height="6" rx="3" fill="#334155" />
-        <rect x="60" y="170" width="34" height="6" rx="3" fill="#2a3644" />
+        {/* the yard, left of the firewall: the QRGoBox device wired to the gate */}
+        <rect x="14" y="90" width="168" height="124" rx="10" fill="#1b2532" stroke="#334155" strokeWidth="1.5" />
+        <text x="98" y="110" textAnchor="middle" fill="#94a3b8" style={{ fontSize: 11, fontWeight: 600 }}>{f.uiGate}</text>
+
+        {/* the wire from the box to the barrier's motor */}
+        <path d="M80 152 C100 152 110 168 122 168" fill="none" stroke="#3f4a5a" strokeWidth="2" />
+
+        {/* the QRGoBox device */}
+        <rect x="28" y="128" width="52" height="42" rx="6" fill="#0f1720" stroke="#475569" strokeWidth="1.5" />
+        <rect x="36" y="136" width="36" height="7" rx="2" fill="#243040" />
+        <circle cx="41" cy="158" r="3" fill="#22c55e" />
+        <rect x="48" y="155" width="26" height="6" rx="3" fill="#334155" />
+        <text x="54" y="184" textAnchor="middle" fill="#7dd3fc" style={{ fontSize: 10, fontWeight: 700 }}>QRGoBox</text>
+
+        {/* the barrier it controls: motor housing, post, raised boom */}
+        <rect x="118" y="160" width="16" height="16" rx="2" fill="#334155" stroke="#475569" strokeWidth="1" />
+        <rect x="124" y="136" width="4" height="24" rx="1" fill="#475569" />
+        <g transform="translate(126 138) rotate(-32)">
+          <rect x="0" y="-3" width="46" height="6" rx="3" fill="#e2e8f0" />
+          <rect x="1" y="-2" width="40" height="1.6" rx="0.8" fill="#3b82f6" />
+          <rect x="34" y="-3" width="12" height="6" rx="3" fill="#3b82f6" />
+        </g>
 
         {/* the firewall wall */}
         <g>
@@ -39,12 +53,9 @@ export function GateNetworkArt({ t }: { t: Translations }) {
           <text x="204" y="290" textAnchor="middle" fill="#f87171" style={{ fontSize: 11, fontWeight: 700 }}>{f.uiFirewall}</text>
         </g>
 
-        {/* the cloud/broker, right of the firewall */}
-        <g>
-          <ellipse cx="336" cy="150" rx="52" ry="34" fill="#1d4ed8" />
-          <ellipse cx="312" cy="150" rx="30" ry="24" fill="#2563eb" />
-          <ellipse cx="356" cy="152" rx="26" ry="22" fill="#2563eb" />
-          <text x="336" y="154" textAnchor="middle" fill="#fff" style={{ fontSize: 10, fontWeight: 700 }}>logistiq.cloud</text>
+        {/* the cloud/broker, right of the firewall — the shared logistiq.cloud mark */}
+        <g transform="translate(336 150) scale(0.36)">
+          <LogistiqCloud id="gnet" />
         </g>
 
         {/* OUTBOUND: two arrows leaving the yard, crossing the wall unimpeded */}

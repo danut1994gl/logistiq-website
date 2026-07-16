@@ -94,6 +94,10 @@ const TX_AWAY = -320;
 const TX_GATE = 713; // nose (local x 247) lands just short of the barrier post
 const TX_THROUGH = 1290;
 
+// the control cable, from the relay card's output (top edge, x≈1112 — directly
+// under the relay controller card) down into the barrier's motor housing (≈980,146).
+const CABLE = "M1112 4 C1112 74 1046 106 980 146";
+
 // European articulated semi, side view — same drawing as the Digital Check-in
 // scene, but its gradients are re-declared under OUR prefix (url(#cj2-…) would
 // resolve to nothing on this page) and the cj2-brake class is dropped: it drags
@@ -471,8 +475,10 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
 
           <Hop active={hop === 3} />
 
-          {/* ---- 4. the ESP32 relay controller: no camera, no decision ---- */}
-          <div className="w-[15cqw] shrink-0 self-center rounded-[1cqw] border border-slate-700 bg-slate-800/40 p-[0.9cqw] flex flex-col gap-[0.7cqw]">
+          {/* ---- 4. the ESP32 relay controller: no camera, no decision. Sits low
+                in the row (self-end) so it is right above the gate, and its output
+                terminal lines up with the cable that runs down to the barrier. ---- */}
+          <div className="w-[15cqw] shrink-0 self-end rounded-[1cqw] border border-slate-700 bg-slate-800/40 p-[0.9cqw] flex flex-col gap-[0.7cqw]">
             <svg viewBox="0 0 140 96" className="w-full block">
               {/* wifi arcs: the box holds an outbound session — it is told, it never asks */}
               <g fill="none" stroke={pulse ? "#22c55e" : "#64748b"} strokeWidth="2.6" strokeLinecap="round" className="transition-colors duration-200">
@@ -510,6 +516,12 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                 {pulse ? <span className="ga15-pulsebar block h-full rounded-full bg-emerald-400" /> : null}
               </span>
             </div>
+            {/* output terminal — the dry contact, wired down to the barrier motor.
+                It pokes out the card's bottom edge and lines up with the cable. */}
+            <span className="self-center -mb-[1.5cqw] flex flex-col items-center">
+              <span className="w-[2.2cqw] h-[0.5cqw] rounded-full bg-slate-600" />
+              <span className={`w-[0.6cqw] h-[1.2cqw] rounded-b-[0.3cqw] transition-colors duration-200 ${pulse ? "bg-emerald-400" : "bg-slate-600"}`} />
+            </span>
           </div>
         </div>
 
@@ -527,16 +539,20 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
               </linearGradient>
             </defs>
 
-            {/* the cable from the box down to the barrier — the pulse runs down it
-                and nothing comes back up */}
-            <path d="M1100 -6 C1100 60 1010 66 981 118" fill="none" stroke="#334155" strokeWidth="3" />
+            {/* the control cable: it leaves the relay controller card (directly
+                above, at x≈1112) and runs down into the barrier's motor housing —
+                the pulse runs down it and nothing comes back up. Same path for the
+                grey run and the green pulse overlay, so they stay registered. */}
+            <path d={CABLE} fill="none" stroke="#334155" strokeWidth="3.5" strokeLinecap="round" />
             {pulse ? (
-              <path d="M1100 -6 C1100 60 1010 66 981 118" fill="none" stroke="#22c55e" strokeWidth="3" className="ga15-wire" />
+              <path d={CABLE} fill="none" stroke="#22c55e" strokeWidth="3.5" strokeLinecap="round" className="ga15-wire" />
             ) : null}
+            {/* the plug where the cable leaves the relay card above */}
+            <rect x="1104" y="-2" width="16" height="8" rx="2" fill="#475569" stroke="#334155" strokeWidth="1" />
 
             {/* ground */}
             <rect x="0" y="176" width="1200" height="10" className="fill-slate-800" />
-            <line x1="0" y1="181" x2="940" y2="181" className="stroke-slate-600" strokeWidth="2" strokeDasharray="22 16" />
+            <line x1="0" y1="181" x2="900" y2="181" className="stroke-slate-600" strokeWidth="2" strokeDasharray="22 16" />
 
             {/* the truck (drawn before the barrier so the arm reads in front) */}
             <g transform="translate(0 -168)">
@@ -545,15 +561,21 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
               </g>
             </g>
 
-            {/* the barrier */}
-            <rect x="974" y="126" width="11" height="50" rx="2" className="fill-slate-600" />
-            <g transform="translate(980 132)">
-              <g className="ga15-barrier" style={{ transform: `rotate(${barrier ? -55 : 0}deg)` }}>
-                <rect x="4" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
-                {[24, 64, 104, 144].map((x) => (
-                  <rect key={x} x={x} y="-6" width="20" height="12" className="fill-blue-600" />
-                ))}
-                <circle cx="166" cy="0" r="4" className={barrier ? "fill-emerald-400" : "fill-slate-500"} />
+            {/* the barrier — a compact motor housing at the post base that the
+                cable plugs into, the post, then the boom. */}
+            <rect x="966" y="150" width="28" height="26" rx="3" className="fill-slate-700" stroke="#475569" strokeWidth="1.5" />
+            <circle cx="973" cy="156" r="2.2" className={pulse ? "fill-emerald-400" : "fill-slate-500"} />
+            <rect x="975" y="122" width="10" height="30" rx="2" className="fill-slate-600" />
+            <g transform="translate(980 126)">
+              <g className="ga15-barrier" style={{ transform: `rotate(${barrier ? -58 : 0}deg)` }}>
+                {/* one continuous boom — a white bar with a full-length blue stripe
+                    and a solid tip, so it reads as a single arm, not chopped into
+                    sections. */}
+                <rect x="-3" y="-7" width="15" height="14" rx="3" className="fill-slate-500" />
+                <rect x="6" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
+                <rect x="10" y="-4.4" width="150" height="3" rx="1.5" className="fill-blue-500" />
+                <rect x="150" y="-6" width="24" height="12" rx="6" className="fill-blue-600" />
+                <circle cx="170" cy="0" r="3" className={barrier ? "fill-emerald-300" : "fill-slate-300"} />
               </g>
             </g>
           </svg>

@@ -7,7 +7,7 @@ import { FeatureFAQSection } from "./FeatureFAQSection";
 import { GateNetworkArt } from "./splitArt";
 import { FeatureFlowSection, FeatureSpecSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
 
-// Yard Access Control / QRGOBox (feature 15): the real chain — the driver's QR,
+// Yard Access Control / QRGoBox (feature 15): the real chain — the driver's QR,
 // a gate terminal, eight checks, an MQTT open command, a one-second relay pulse.
 //
 // Section order is deliberate and specific to this page:
@@ -55,8 +55,6 @@ export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Loc
           { k: f.k2, v: f.v2 },
           { k: f.k3, v: f.v3 },
           { k: f.k4, v: f.v4 },
-          { k: f.k5, v: f.v5 },
-          { k: f.k6, v: f.v6 },
         ]}
         tinted
       />
