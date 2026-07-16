@@ -1,6 +1,7 @@
 import { type Locale } from "@/lib/i18n/config";
 import { type Translations } from "@/lib/i18n/translations";
 import { anchorHref, routeHref } from "@/lib/href";
+import { isSelfServeEnabled } from "@/lib/self-serve";
 
 // ---------------------------------------------------------------------------
 // Single source of truth for site navigation + footer.
@@ -43,13 +44,20 @@ export type FooterColumn = {
   links: NavItem[];
 };
 
+// ADR-005: self-serve pricing hidden while self-serve is off (reversible — see isSelfServeEnabled).
+const pricingFooterLink: NavItem = {
+  key: "pricing",
+  label: (t) => t.footer.pricing,
+  href: (l) => anchorHref(l, "pricing"),
+};
+
 export const footerColumns: FooterColumn[] = [
   {
     key: "product",
     title: (t) => t.footer.product,
     links: [
       { key: "features", label: (t) => t.footer.features, href: (l) => routeHref(l, "/features") },
-      { key: "pricing", label: (t) => t.footer.pricing, href: (l) => anchorHref(l, "pricing") },
+      ...(isSelfServeEnabled() ? [pricingFooterLink] : []),
       { key: "resources", label: (t) => t.nav.resources, href: (l) => routeHref(l, "/resurse") },
       { key: "contact", label: (t) => t.nav.contact, href: (l) => routeHref(l, "/contact") },
     ],

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { translations } from "@/lib/i18n/translations";
 import { locales, isValidLocale } from "@/lib/i18n/config";
+import { isSelfServeEnabled } from "@/lib/self-serve";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, webPageSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
 import {
@@ -111,12 +112,14 @@ export default async function FeaturePage({ params }: { params: Promise<{ locale
             >
               {t.nav.requestDemo}
             </Link>
-            <Link
-              href={`/${locale}#pricing`}
-              className="btn-secondary px-6 py-3 rounded-xl font-medium inline-flex items-center gap-2"
-            >
-              {t.nav.pricing}
-            </Link>
+            {isSelfServeEnabled() && (
+              <Link
+                href={`/${locale}#pricing`}
+                className="btn-secondary px-6 py-3 rounded-xl font-medium inline-flex items-center gap-2"
+              >
+                {t.nav.pricing}
+              </Link>
+            )}
           </>
         }
         visual={
