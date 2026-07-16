@@ -35,7 +35,8 @@ const readAuthCookie = () =>
 const authServerSnapshot = () => false;
 
 // Shared site header — data-driven, mounted once in the marketing layout.
-// Order: Home · Funcționalități (mega) · Prețuri · Resurse (dropdown) · Contact.
+// Order: Home · Funcționalități (mega) · Prețuri (shown only when isSelfServeEnabled(),
+// ADR-005) · Resurse (dropdown) · Contact.
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const t: Translations = translations[locale];
   const pathname = usePathname();

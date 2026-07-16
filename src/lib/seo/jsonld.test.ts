@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { articleSchema } from "@/lib/seo/jsonld";
+import { describe, it, expect, afterEach } from "vitest";
+import { articleSchema, softwareApplicationSchema } from "@/lib/seo/jsonld";
 import { SITE_URL } from "@/lib/seo/metadata";
 
 describe("articleSchema", () => {
@@ -33,5 +33,31 @@ describe("articleSchema", () => {
   it("falls back to the organization as author when no author name", () => {
     const s = articleSchema({ ...base, authorName: null });
     expect((s.author as { "@id": string })["@id"]).toBe(`${SITE_URL}/#organization`);
+  });
+});
+
+describe("softwareApplicationSchema", () => {
+  const orig = process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED;
+  afterEach(() => {
+    process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED = orig;
+  });
+
+  // ADR-005: prices must not leak into crawler-visible JSON-LD while self-serve is off.
+  it("omits offers/AggregateOffer when self-serve is OFF", () => {
+    delete process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED;
+    const s = softwareApplicationSchema("desc", ["feature"]);
+    expect(s["@type"]).toBe("SoftwareApplication");
+    expect(s.offers).toBeUndefined();
+    expect(JSON.stringify(s)).not.toMatch(/AggregateOffer|priceCurrency|139|1590/);
+  });
+
+  it("restores offers/AggregateOffer when self-serve is ON", () => {
+    process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED = "true";
+    const s = softwareApplicationSchema("desc", ["feature"]);
+    const offers = s.offers as Record<string, unknown>;
+    expect(offers["@type"]).toBe("AggregateOffer");
+    expect(offers.priceCurrency).toBe("EUR");
+    expect(offers.lowPrice).toBe("139");
+    expect(offers.highPrice).toBe("1590");
   });
 });

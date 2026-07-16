@@ -1,6 +1,7 @@
 import { type Locale, localeToHreflang } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { company } from "@/lib/company";
+import { isSelfServeEnabled } from "@/lib/self-serve";
 
 type Json = Record<string, unknown>;
 
@@ -68,14 +69,21 @@ export function softwareApplicationSchema(description: string, featureList: stri
     operatingSystem: "Web, iOS, Android",
     description,
     featureList,
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: company.priceCurrency,
-      lowPrice: company.priceLow,
-      highPrice: company.priceHigh,
-      offerCount: company.offerCount,
-      availability: "https://schema.org/InStock",
-    },
+    // ADR-005: public prices hidden while self-serve is off (reversible — see
+    // isSelfServeEnabled). Crawlers/rich-snippets must not see prices we don't
+    // publish on the page itself.
+    ...(isSelfServeEnabled()
+      ? {
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: company.priceCurrency,
+            lowPrice: company.priceLow,
+            highPrice: company.priceHigh,
+            offerCount: company.offerCount,
+            availability: "https://schema.org/InStock",
+          },
+        }
+      : {}),
   };
 }
 

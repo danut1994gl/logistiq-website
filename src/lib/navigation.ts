@@ -5,9 +5,10 @@ import { isSelfServeEnabled } from "@/lib/self-serve";
 
 // ---------------------------------------------------------------------------
 // Single source of truth for site navigation + footer.
-// Header order (see SiteHeader): Home · Funcționalități (mega) · Prețuri ·
-// Resurse (dropdown) · Contact. Labels are typed functions of the translations
-// object (compile-time checked); hrefs are functions of the locale.
+// Header order (see SiteHeader): Home · Funcționalități (mega) · Prețuri (shown only
+// when isSelfServeEnabled(), ADR-005) · Resurse (dropdown) · Contact. Labels are typed
+// functions of the translations object (compile-time checked); hrefs are functions of
+// the locale.
 // ---------------------------------------------------------------------------
 
 export type NavItem = {
