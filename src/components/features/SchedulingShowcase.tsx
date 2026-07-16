@@ -41,6 +41,7 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
           { title: f.s5t, desc: f.s5d },
         ]}
         tinted
+        seo={{ locale, path: featureRel(locale, 11) }}
       />
       <FeatureProblemSection
         idPrefix="sc11"

@@ -133,6 +133,38 @@ export function faqPageSchema(opts: {
   };
 }
 
+// Emitted ONLY on a page that visibly renders the numbered steps (Google
+// requires the how-to steps to be present on the page — our flow section shows
+// them). Needs at least two steps to be a meaningful "how to"; returns null
+// otherwise. `name`/`description` come from the section's own visible heading.
+export function howToSchema(opts: {
+  locale: Locale;
+  path: string;
+  name: string;
+  description?: string;
+  /** matches the step <li> ids the flow section renders: `${idPrefix}-flow-step-N` */
+  idPrefix: string;
+  steps: { name: string; text: string }[];
+}): Json | null {
+  if (opts.steps.length < 2) return null;
+  const url = `${SITE_URL}/${opts.locale}${opts.path === "/" ? "" : opts.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `${url}/#howto`,
+    name: opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    inLanguage: localeToHreflang[opts.locale],
+    step: opts.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+      url: `${url}#${opts.idPrefix}-flow-step-${i + 1}`,
+    })),
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; url: string }[]): Json {
   return {
     "@context": "https://schema.org",

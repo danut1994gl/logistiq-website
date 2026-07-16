@@ -29,6 +29,7 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
           { title: c.s5t, desc: c.s5d },
         ]}
         tinted
+        seo={{ locale, path: featureRel(locale, 1) }}
       />
       <FeatureProblemSection
         idPrefix="dc1"

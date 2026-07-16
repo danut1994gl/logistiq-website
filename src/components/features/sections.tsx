@@ -1,5 +1,7 @@
 import type { FC, ReactNode } from "react";
 import { CheckIcon } from "@/components/icons";
+import type { Locale } from "@/lib/i18n/config";
+import { JsonLd, howToSchema } from "@/lib/seo/jsonld";
 
 // Layout kit for feature pages.
 //
@@ -59,20 +61,36 @@ export function FeatureFlowSection({
   subtitle,
   steps,
   tinted,
+  seo,
 }: {
   idPrefix: string;
   title: string;
   subtitle?: string;
   steps: { title: string; desc: string }[];
   tinted?: boolean;
+  /** Opt in to HowTo structured data. Only pass this for a flow that is a
+   *  genuine "how to accomplish X" sequence — the visible steps below become
+   *  the HowToSteps, so the schema always matches what the page renders. */
+  seo?: { locale: Locale; path: string };
 }) {
   const hid = `${idPrefix}-flow-title`;
+  const howTo =
+    seo &&
+    howToSchema({
+      locale: seo.locale,
+      path: seo.path,
+      name: title,
+      description: subtitle,
+      idPrefix,
+      steps: steps.map((s) => ({ name: s.title, text: s.desc })),
+    });
   return (
     <Section labelledBy={hid} tinted={tinted}>
+      {howTo ? <JsonLd data={howTo} /> : null}
       <Heading id={hid} title={title} sub={subtitle} />
       <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 lg:gap-4">
         {steps.map((s, i) => (
-          <li key={i} className="relative flex lg:flex-col gap-4 lg:gap-3">
+          <li key={i} id={`${idPrefix}-flow-step-${i + 1}`} className="relative flex lg:flex-col gap-4 lg:gap-3 scroll-mt-24">
             {/* the rail: only between cards, and only once they sit in a row */}
             {i < steps.length - 1 && (
               <span aria-hidden="true" className="hidden lg:block absolute top-5 left-[calc(50%+1.75rem)] right-[calc(-50%+1.75rem)] h-px bg-slate-300 dark:bg-slate-700" />

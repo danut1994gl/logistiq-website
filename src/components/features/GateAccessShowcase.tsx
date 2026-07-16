@@ -43,7 +43,7 @@ export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Loc
           { title: f.s4t, desc: f.s4d },
           { title: f.s5t, desc: f.s5d },
         ]}
-        
+        seo={{ locale, path: featureRel(locale, 15) }}
       />
 
       <FeatureSpecSection

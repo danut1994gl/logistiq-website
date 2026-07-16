@@ -56,6 +56,7 @@ export function AccessControlShowcase({ t, locale }: { t: Translations; locale: 
           { title: f.s5t, desc: f.s5d },
         ]}
         tinted
+        seo={{ locale, path: featureRel(locale, 17) }}
       />
 
       <FeatureSplitSection

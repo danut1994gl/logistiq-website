@@ -36,6 +36,10 @@ export async function generateMetadata({
   const t = translations[locale];
   const title = featureTitle(t, feature.id);
   const description = featureDesc(t, feature.id);
+  // Redefining `openGraph`/`twitter` here REPLACES the layout's blocks for this
+  // route (Next merges metadata shallowly), so the shared og-image must be
+  // repeated or the feature cards ship imageless.
+  const ogImage = { url: "/og-image.png", width: 1200, height: 630, alt: `${title} — Logistiq` };
   return {
     title,
     description,
@@ -46,6 +50,13 @@ export async function generateMetadata({
       url: `${SITE_URL}${featurePath(locale, feature.id)}`,
       siteName: "Logistiq",
       type: "website",
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Logistiq`,
+      description,
+      images: [ogImage.url],
     },
   };
 }

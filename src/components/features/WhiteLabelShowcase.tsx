@@ -58,6 +58,7 @@ export function WhiteLabelShowcase({ t, locale }: { t: Translations; locale: Loc
           { title: f.s5t, desc: f.s5d },
         ]}
         tinted
+        seo={{ locale, path: featureRel(locale, 8) }}
       />
 
       <FeatureSpecSection
