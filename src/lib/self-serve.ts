@@ -1,0 +1,9 @@
+/**
+ * Master switch for the self-serve go-to-market surface (public signup + public
+ * pricing + Stripe self-checkout). Fail-closed: ON only when the env value is
+ * exactly 'true'. See ADR-005. Flip NEXT_PUBLIC_SELF_SERVE_ENABLED in Vercel to
+ * re-enable; no code change required.
+ */
+export function isSelfServeEnabled(): boolean {
+  return process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED === 'true'
+}
