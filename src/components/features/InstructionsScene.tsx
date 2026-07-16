@@ -79,6 +79,8 @@ const SEQ = [1, 2, 3, 0];
 // Every step of the loop is one frame object, so a render never has to stitch
 // several useStates together.
 type Frame = {
+  gate: boolean;   // the yard-rules briefing, shown BEFORE the check-in is submitted
+  agreed: boolean; // he pressed "I Agree" -> the acceptance is recorded
   menu: boolean;
   hover: number | null;
   sel: number | null;
@@ -86,11 +88,11 @@ type Frame = {
   pkt: number; // bumped per send -> remounts the packet so its flight replays
   cur: { r: number; t: number; down: boolean; on: boolean };
 };
-const LIVE_START: Frame = { menu: false, hover: null, sel: null, card: 0, pkt: 0, cur: { ...AT_IDLE, down: false, on: false } };
+const LIVE_START: Frame = { gate: true, agreed: false, menu: false, hover: null, sel: null, card: 0, pkt: 0, cur: { ...AT_IDLE, down: false, on: false } };
 // reduced motion gets the frame that carries the most meaning: the menu open on
 // Call to Office and its blue card already on the phone — the whole mechanic
 // readable without a single frame of motion.
-const STATIC_FRAME: Frame = { menu: true, hover: 1, sel: 1, card: 1, pkt: 0, cur: { ...AT_ITEM(1), down: false, on: true } };
+const STATIC_FRAME: Frame = { gate: false, agreed: false, menu: true, hover: 1, sel: 1, card: 1, pkt: 0, cur: { ...AT_ITEM(1), down: false, on: true } };
 
 // prefers-reduced-motion read as an external store rather than synced into state
 // from an effect: setState in an effect body is a cascading render, and the
@@ -146,6 +148,10 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
   // labels are index-aligned with ACTIONS — the same string the dispatcher picks
   // is the one the driver's card is headed with
   const LABELS = [f.actWait, f.actOffice, f.actParking, f.actCustom];
+  // what the driver actually reads under the heading — the real bodies from the
+  // driver app, not the dispatcher's menu wording (custom is free text, so it is
+  // shown verbatim exactly as the dispatcher typed it)
+  const BODIES = [f.descWait, f.descOffice, f.descParking, f.descCustom];
 
   const reduced = useSyncExternalStore(rmSubscribe, rmGet, rmGetServer);
   const [s, set] = useState<Frame>(LIVE_START);
@@ -161,9 +167,20 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
     const click = async () => { await down(true); await sleep(160); await down(false); };
     const moveTo = (p: { r: number; t: number }) => set((v) => ({ ...v, cur: { ...v.cur, ...p, on: true } }));
     (async () => {
-      await sleep(800);
       for (let k = 0; !cancelled; k++) {
         const i = SEQ[k % SEQ.length];
+        // Each full pass is one driver's journey, and every journey starts at the
+        // briefing — so the gate replays per cycle rather than once per mount,
+        // which almost nobody would ever see. It is still a ONE-time gate within
+        // a check-in: it never reappears between instructions.
+        if (k % SEQ.length === 0) {
+          set((v) => ({ ...v, gate: true, agreed: false, menu: false, sel: null, hover: null }));
+          await sleep(1100);
+          set((v) => ({ ...v, agreed: true }));
+          await sleep(1600);
+          set((v) => ({ ...v, gate: false }));
+          await sleep(500);
+        }
         // 1) open the Actions dropdown
         moveTo(AT_BTN); await sleep(650);
         await click();
@@ -186,7 +203,7 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
     return () => { cancelled = true; io.disconnect(); };
   }, [reduced]);
 
-  const { menu, hover, sel, card, pkt, cur } = reduced ? STATIC_FRAME : s;
+  const { gate, agreed, menu, hover, sel, card, pkt, cur } = reduced ? STATIC_FRAME : s;
   const a = ACTIONS[card];
 
   return (
@@ -306,6 +323,38 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
               </span>
             </div>
 
+            {/* The yard-rules briefing. It is a GATE, and it comes BEFORE the
+                check-in is submitted — not after — so it opens the loop. It is an
+                "I Agree" button, not a tickbox: that is what the product does.
+                The acceptance line is only claimable because the check-in now
+                records rules_accepted_at + locale + a hash of the exact text. */}
+            {gate && (
+              <div className="absolute inset-x-0 top-[16cqw] bottom-0 z-20 bg-slate-900/97 px-[3cqw] pt-[3cqw] flex flex-col gap-[2.4cqw]">
+                <span className="flex items-center gap-[2cqw]">
+                  <span className="w-[9cqw] h-[9cqw] rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0">
+                    <Ic d={LISTCHECK} className="w-[4.6cqw] h-[4.6cqw]" w="1.9" />
+                  </span>
+                  <span className="text-white font-bold text-[3.4cqw]">{f.uiRules}</span>
+                </span>
+                {/* the manager's own rich text, per language */}
+                <span className="flex flex-col gap-[1.6cqw]">
+                  {[92, 78, 96, 64, 88, 71].map((w, i) => (
+                    <span key={i} className="h-[1.8cqw] rounded-full bg-slate-700/70" style={{ width: `${w}%` }} />
+                  ))}
+                </span>
+                <span className="mt-auto mb-[3cqw] flex flex-col gap-[1.6cqw]">
+                  <span className={`rounded-[2.2cqw] text-white text-center font-bold text-[3.2cqw] py-[2.6cqw] transition-colors duration-300 ${agreed ? "bg-green-600" : ""}`} style={agreed ? undefined : { background: HDR }}>
+                    {f.uiAgree}
+                  </span>
+                  {agreed && (
+                    <span className="f10-cardin flex items-center justify-center gap-[1.2cqw] text-green-400 text-[2.3cqw] font-medium">
+                      <Ic d={LISTCHECK} className="w-[2.6cqw] h-[2.6cqw]" w="2.2" />{f.uiRulesLogged}
+                    </span>
+                  )}
+                </span>
+              </div>
+            )}
+
             {/* THE card. There is only ever one: a newer action outranks the old
                 one, so this slot is replaced, never appended to. */}
             <div className="p-[3cqw] shrink-0">
@@ -317,6 +366,7 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
                   <span className={`font-semibold text-[3.2cqw] ${a.head}`}>{f.uiWhatToDo}</span>
                 </span>
                 <span className={`font-bold leading-tight ${a.ttl} ${a.small ? "text-[4.4cqw]" : "text-[5.2cqw]"}`}>{LABELS[card]}</span>
+                <span className="text-slate-300 text-[2.7cqw] leading-snug">{BODIES[card]}</span>
               </div>
             </div>
 
