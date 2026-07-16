@@ -1,5 +1,6 @@
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
+import { isSelfServeEnabled } from "@/lib/self-serve";
 import { JsonLd, webPageSchema } from "@/lib/seo/jsonld";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { StatsSection } from "@/components/sections/StatsSection";
@@ -36,7 +37,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <BenefitsSection t={t} />
       <QRGODriverSection t={t} />
       <TestimonialsSection t={t} />
-      <PricingSection t={t} />
+      {isSelfServeEnabled() && <PricingSection t={t} />}
       {/* <FAQSection t={t} /> */}
       <CTASection t={t} />
       <ContactSection t={t} />
