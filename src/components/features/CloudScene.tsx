@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Translations } from "@/lib/i18n/translations";
+import { LogistiqCloud } from "./LogistiqCloud";
 
 // Cloud - No Equipment (feature 9): logistiq.cloud in the middle with the
 // Logistiq mark, FOUR named warehouses hanging off it, and driver phones that
@@ -18,12 +19,6 @@ import type { Translations } from "@/lib/i18n/translations";
 // SSR renders zero phones, so there is nothing to mismatch on hydration.
 
 const CX = 600, CY = 330;          // cloud centre — everything is measured from here
-
-// The logistiq.cloud banner, sized from the asset's own viewBox (1162.5 x 187.5)
-// so it is never squashed. It already carries the wordmark, so the scene draws no
-// separate label — f9Page.uiCloud stays the accessible/i18n source of that name.
-const BANNER_W = 228;
-const BANNER_H = Math.round((BANNER_W * 187.5) / 1162.5);
 
 const NODES = [
   { x: 170, y: 150, n: 1 },
@@ -54,21 +49,7 @@ function edgePoint(fx: number, fy: number, n: { x: number; y: number }) {
   return { x: n.x + dx * t, y: n.y + dy * t };
 }
 
-// The lobes the cloud is built from. Drawn as a union of CIRCLES rather than one
-// path: that keeps the outline continuous and round on EVERY side including the
-// bottom (a path with a flat base is what this replaced), with no internal seams
-// — the outline is a slightly larger copy of the same circles drawn behind.
-const LOBES = [
-  { cx: -108, cy: 8, r: 50 },
-  { cx: -48, cy: -30, r: 58 },
-  { cx: 28, cy: -40, r: 66 },
-  { cx: 104, cy: 4, r: 52 },
-  { cx: 60, cy: 40, r: 46 },
-  { cx: -8, cy: 46, r: 50 },
-  { cx: -66, cy: 40, r: 44 },
-];
-
-type Phone = { id: number; w: number; slot: number; state: 0 | 1 | 2; leaving?: boolean };
+type Phone = { id: number; w: number; slot: number; state: 0 | 1 | 2; leaving?: boolean; driver?: boolean };
 
 const DocIc = <><rect x="4" y="2.5" width="16" height="19" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></>;
 const HourIc = <path d="M6 2h12M6 22h12M7 2v3l5 5 5-5V2M7 22v-3l5-5 5 5v3" />;
@@ -147,7 +128,7 @@ export function CloudScene({ t }: { t: Translations }) {
       // same pattern as NotificationsScene/SelfCheckScene. It runs once and then
       // the effect returns, so there are no cascading renders to worry about.
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPhones(NODES.map((_, w) => ({ id: w, w, slot: w % SLOTS.length, state: (w % 3) as 0 | 1 | 2 })));
+      setPhones(NODES.map((_, w) => ({ id: w, w, slot: w % SLOTS.length, state: (w % 3) as 0 | 1 | 2, driver: w === 0 })));
       return;
     }
     let cancelled = false, visible = true;
@@ -175,7 +156,11 @@ export function CloudScene({ t }: { t: Translations }) {
         // out mid-frame otherwise and the phone would just blink off
         setTimeout(() => { if (!cancelled) setPhones((c) => c.map((p) => (p.id === id ? { ...p, leaving: true } : p))); }, 3400);
         setTimeout(() => { if (!cancelled) setPhones((c) => c.filter((p) => p.id !== id)); }, 3900);
-        return [...cur, { id, w, slot, state: 0 }];
+        // Exactly one live phone carries the "Driver phone" label. It is chosen at
+        // spawn, so the label fades IN with that phone and OUT with it — never
+        // hopping onto a phone that is already on screen.
+        const driver = !cur.some((p) => p.driver);
+        return [...cur, { id, w, slot, state: 0, driver }];
       });
     };
     const tick = () => {
@@ -191,10 +176,6 @@ export function CloudScene({ t }: { t: Translations }) {
     <div ref={rootRef} className="@container absolute inset-0 p-[2cqw] select-none" aria-hidden="true">
       <svg viewBox="0 0 1200 760" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <linearGradient id="cl9-cloud" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#1d4ed8" />
-          </linearGradient>
           <radialGradient id="cl9-glow">
             <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.28" />
             <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
@@ -218,30 +199,16 @@ export function CloudScene({ t }: { t: Translations }) {
         })}
 
         {NODES.map((n, i) => <Warehouse key={i} x={n.x} y={n.y} label={`${f.uiWarehouse} ${n.n}`} />)}
-        {phones.map((p, i) => <DriverPhone key={p.id} p={p} label={i === 0 ? f.uiDriver : undefined} />)}
+        {phones.map((p) => <DriverPhone key={p.id} p={p} label={p.driver ? f.uiDriver : undefined} />)}
 
-        {/* The cloud. Mark + wordmark live INSIDE the breathing group, so they
-            move with it instead of sitting still while the shape swells. */}
-        {/* The translate lives on the OUTER g and the animation on the inner one:
-            a CSS `transform` REPLACES an element's SVG transform attribute, so
-            putting .cl9-breathe here would silently drop the translate and fling
-            the cloud into the corner. (It did exactly that once.) */}
+        {/* The shared logistiq.cloud mark (same drawing as f15/f16). The translate
+            lives on the OUTER g and the breathing animation on the inner one: a CSS
+            `transform` REPLACES an element's SVG transform attribute, so putting
+            .cl9-breathe on the translated g would drop the translate and fling the
+            cloud into the corner. (It did exactly that once.) */}
         <g transform={`translate(${CX} ${CY})`}>
           <g className="cl9-breathe">
-            {/* outline: the same lobes, slightly larger, behind the fill */}
-            <g fill="#60a5fa">
-              {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r + 2} />)}
-            </g>
-            <g fill="url(#cl9-cloud)">
-              {LOBES.map((l, i) => <circle key={i} cx={l.cx} cy={l.cy} r={l.r} />)}
-            </g>
-            {/* The official logistiq.cloud banner on a white plate. The banner is
-                the dark-on-light variant (its wordmark is #373636), so the plate
-                is what makes it legible on the blue cloud — and it keeps the white
-                background the icon at its front already had. Sized from the asset's
-                own 1162.5:187.5 ratio so the artwork is never squashed. */}
-            <rect x={-BANNER_W / 2 - 13} y={-BANNER_H / 2 - 11} width={BANNER_W + 26} height={BANNER_H + 22} rx={12} fill="#fff" />
-            <image href="/logistiq-banner-dark.svg" x={-BANNER_W / 2} y={-BANNER_H / 2} width={BANNER_W} height={BANNER_H} preserveAspectRatio="xMidYMid meet" />
+            <LogistiqCloud id="cl9" />
           </g>
         </g>
 
