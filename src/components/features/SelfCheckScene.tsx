@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
 import { DRIVER_POOLS } from "./driverPools";
+import { TruckArt, TruckDefs } from "./TruckArt";
 import { FlagRO, FlagGB, FlagDE, FlagPL, FlagHU, FlagBG, FlagFR, FlagNL } from "@/components/icons/flags";
 
 // QRGO Self (feature 14) — an ANNOUNCED, not-yet-built counter kiosk. The scene
@@ -25,6 +26,7 @@ import { FlagRO, FlagGB, FlagDE, FlagPL, FlagHU, FlagBG, FlagFR, FlagNL } from "
 // frame and deliberately sorts last, so every `step >= X` reveal below lights up
 // for it without a special case; only the handful of "this stage only" states
 // (which screen is up, the truck, the spotlight) test it explicitly.
+const REFERENCE = "DL-2026-4471";
 const S = { COUNTER: 0, FORM: 1, PHONE: 2, CODE: 3, VERIFY: 4, TICKET: 5, SMS: 6, RAMP: 7, STATIC: 8 } as const;
 const DWELL = [2600, 4600, 3000, 4000, 2200, 4400, 3000, 3400]; // ≈ 27s loop
 
@@ -49,12 +51,11 @@ const PHONES: Record<Locale, { flag: typeof FlagRO; dial: string; num: string }>
 const HDR = "linear-gradient(to right, #2563eb, #1d4ed8)";
 
 const UserIc = <><circle cx="12" cy="8" r="3.4" /><path d="M5 21a7 7 0 0 1 14 0" /></>;
+const BarcodeIc = <path d="M4 5v14M7 5v14M10 5v10M13 5v14M16 5v10M20 5v14" />;
 const TruckIc = <><path d="M1 6h13v8H1zM14 9h4l3 3v2h-7z" /><circle cx="5" cy="17" r="1.6" /><circle cx="18" cy="17" r="1.6" /></>;
 const PhoneIc = <path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />;
 const MailIc = <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2.5 6.5 12 13l9.5-6.5" /></>;
 const CheckIc = <path d="M4 12.5l5 5L20 6.5" />;
-const DownIc = <path d="M12 5v14M6 13l6 6 6-6" />;
-const UpIc = <path d="M12 19V5M6 11l6-6 6 6" />;
 const KeyIc = <><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></>;
 const PrinterIc = <><path d="M6 9V3h12v6" /><rect x="2" y="9" width="20" height="8" rx="2" /><path d="M6 14h12v7H6z" /></>;
 
@@ -104,7 +105,7 @@ function Ic({ d, cls, w = "1.9" }: { d: ReactNode; cls: string; w?: string }) {
 // `on` mounts the value, which is what fires its type-in animation exactly once.
 function FormRow({ icon, value, on, delay, mono }: { icon: ReactNode; value: string; on: boolean; delay: string; mono?: boolean }) {
   return (
-    <span className={`rounded-[0.8cqw] border bg-[#0b1219] px-[1.2cqw] py-[1.25cqw] flex items-center gap-[1cqw] min-w-0 transition-colors duration-300 ${on ? "border-slate-600" : "border-slate-700/60"}`}>
+    <span className={`rounded-[0.8cqw] border bg-[#0b1219] px-[1.2cqw] py-[0.95cqw] flex items-center gap-[1cqw] min-w-0 transition-colors duration-300 ${on ? "border-slate-600" : "border-slate-700/60"}`}>
       <Ic d={icon} cls="w-[2cqw] h-[2cqw] text-blue-400 shrink-0" />
       {/* the name is the longest value the row ever holds (up to ~14 chars across
           the pools), so it runs a step smaller than the short mono plate */}
@@ -170,17 +171,16 @@ function FeaturePhone({ screen, codeLabel, notify, buzzKey }: { screen: "idle" |
 }
 
 // Side-view truck for the yard window
+// The queue outside uses the SAME truck as the Digital Check-in journey — the
+// owner's ask, and one truck across the site beats five. TruckArt draws at
+// x 0..251 / y 224..344 in its host's space, so the viewBox lifts it to the origin.
+// Its gradients are declared here under our own prefix: the fills resolve against
+// the document, so borrowing cj2's would render black on any page without it.
 function Truck({ cls }: { cls: string }) {
   return (
-    <svg viewBox="0 0 64 24" className={cls}>
-      <rect x="2" y="3.5" width="35" height="13.5" rx="1.5" fill="#334155" stroke="#64748b" strokeWidth="0.7" />
-      <path d="M39 7.5h9.5l5 4.5v5H39z" fill="#2563eb" stroke="#60a5fa" strokeWidth="0.7" strokeLinejoin="round" />
-      <path d="M41 9h6.5l3.4 3H41z" fill="#93c5fd" />
-      <rect x="37" y="5" width="2" height="12" fill="#475569" />
-      <rect x="53" y="12.5" width="1.6" height="2" rx="0.6" fill="#fbbf24" />
-      {[10, 30, 48].map((cx) => (
-        <g key={cx}><circle cx={cx} cy="18.5" r="3.2" fill="#0f1720" stroke="#64748b" strokeWidth="0.7" /><circle cx={cx} cy="18.5" r="1.1" fill="#475569" /></g>
-      ))}
+    <svg viewBox="0 0 252 122" className={cls}>
+      <defs><TruckDefs idPrefix="qs14" /></defs>
+      <g transform="translate(0 -223)"><TruckArt idPrefix="qs14" /></g>
     </svg>
   );
 }
@@ -312,26 +312,22 @@ export function SelfCheckScene({ t, locale }: { t: Translations; locale: Locale 
                     <span className="text-blue-100 text-[1.2cqw] truncate">{f.uiForm}</span>
                   </span>
                 </div>
-                <div className="flex-1 min-h-0 grid grid-cols-2 gap-[1.7cqw] p-[1.5cqw]">
+                <div className="flex-1 min-h-0 grid grid-cols-2 gap-[1.5cqw] p-[1.2cqw]">
                   {/* who + what he drives */}
-                  <div className="flex flex-col justify-between gap-[1.4cqw] min-w-0">
+                  <div className="flex flex-col justify-between gap-[1cqw] min-w-0">
                     <FormRow icon={UserIc} value={driver.name} on={step >= S.FORM} delay="0.35s" />
                     <FormRow icon={TruckIc} value={driver.plate} on={step >= S.FORM} delay="1.9s" mono />
-                    {/* Unloading · Loading · Both — the real 3-way, icon-only here */}
-                    <span className="grid grid-cols-3 gap-[0.9cqw]">
-                      {[[DownIc], [UpIc], [DownIc, UpIc]].map((icons, i) => (
-                        <span key={i} className="relative rounded-[0.8cqw] bg-slate-700/40 py-[1.15cqw] flex items-center justify-center gap-[0.4cqw] overflow-hidden">
-                          {i === 0 && step >= S.FORM && <span className="qs14-fade absolute inset-0 bg-[#16a34a]" style={{ animationDelay: "3.3s" }} />}
-                          {icons.map((d, k) => (
-                            <Ic key={k} d={d} cls={`relative w-[1.8cqw] h-[1.8cqw] ${i === 0 && step >= S.FORM ? "text-white" : "text-slate-400"}`} w="2.4" />
-                          ))}
-                        </span>
-                      ))}
+                    {/* the reference he was given for this delivery — typed, not picked */}
+                    <span className="flex flex-col gap-[0.6cqw] min-w-0">
+                      <span className="flex items-center gap-[0.7cqw] text-[1.25cqw] font-semibold text-slate-400">
+                        <Ic d={BarcodeIc} cls="w-[1.4cqw] h-[1.4cqw] text-blue-400" />{f.uiReference}
+                      </span>
+                      <FormRow icon={BarcodeIc} value={REFERENCE} on={step >= S.FORM} delay="2.5s" mono />
                     </span>
                   </div>
 
                   {/* his number, then the code that proves it */}
-                  <div className="flex flex-col justify-between gap-[1.4cqw] min-w-0">
+                  <div className="flex flex-col justify-between gap-[1cqw] min-w-0">
                     <span className="flex flex-col gap-[0.6cqw] min-w-0">
                       <span className="flex items-center gap-[0.7cqw] text-[1.25cqw] font-semibold text-slate-400">
                         <Ic d={PhoneIc} cls="w-[1.4cqw] h-[1.4cqw] text-blue-400" />{f.uiPhone}
@@ -365,15 +361,23 @@ export function SelfCheckScene({ t, locale }: { t: Translations; locale: Locale 
                       </span>
                     </span>
 
-                    {/* Confirmed — the number is now provably his. The slot keeps
-                        its height whether or not the badge is in it, so the rows
-                        above never shift when it lands. */}
+                    {/* Confirm is on screen from the start but DEAD until the SMS
+                        code is in — that is the whole point of the step, and a
+                        button that only appears once it works teaches nothing.
+                        It enables at S.VERIFY, i.e. the moment the code lands. */}
                     <span className="h-[3.6cqw] flex items-end shrink-0">
-                      {step >= S.VERIFY && (
-                        <span className="w-full rounded-[0.8cqw] bg-green-500/15 border border-green-500/50 text-green-300 py-[0.7cqw] flex items-center justify-center gap-[0.7cqw] text-[1.4cqw] font-bold" style={{ animation: "chpop 0.4s ease both" }}>
-                          <Ic d={CheckIc} cls="w-[1.7cqw] h-[1.7cqw]" w="2.6" />{f.uiVerify}
-                        </span>
-                      )}
+                      <span
+                        aria-disabled={step < S.VERIFY}
+                        className={`w-full rounded-[0.8cqw] border py-[0.7cqw] flex items-center justify-center gap-[0.7cqw] text-[1.4cqw] font-bold transition-colors duration-300 ${
+                          step >= S.VERIFY
+                            ? "bg-green-500/15 border-green-500/50 text-green-300"
+                            : "bg-slate-800/60 border-slate-700 text-slate-600"
+                        }`}
+                        style={step >= S.VERIFY ? { animation: "chpop 0.4s ease both" } : undefined}
+                      >
+                        <Ic d={CheckIc} cls="w-[1.7cqw] h-[1.7cqw]" w="2.6" />
+                        {step >= S.VERIFY ? f.uiVerify : f.uiConfirm}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -415,6 +419,8 @@ export function SelfCheckScene({ t, locale }: { t: Translations; locale: Locale 
                     <QRBlock />
                   </span>
                   <span className="text-slate-900 font-mono font-bold text-[1.3cqw] tracking-wide">{driver.plate}</span>
+                  {/* the reference he typed, printed under the plate */}
+                  <span className="text-slate-700 font-mono font-bold text-[1.05cqw] tracking-wide">{REFERENCE}</span>
                   <span className="text-slate-500 font-mono text-[1cqw]">{CHECKIN_ID}</span>
                   <svg viewBox="0 0 60 8" preserveAspectRatio="none" className="w-full h-[1.2cqw] block" fill="#0f172a">
                     {[0, 3, 5, 9, 12, 14, 18, 22, 25, 27, 31, 35, 38, 42, 45, 47, 51, 54, 57].map((x, i) => (

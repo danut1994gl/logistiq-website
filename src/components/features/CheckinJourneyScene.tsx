@@ -1,4 +1,5 @@
 import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
+import { TruckArt } from "./TruckArt";
 
 // 3-scene animated check-in journey (parking → phone close-up backdrop →
 // gate & ramp). Decorative: the step cards carry the full story as text.
@@ -13,52 +14,6 @@ import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 // tail, landing gear mid-front, tractor rear axle under the trailer nose.
 // Local coords: trailer x0–178, cab x186–247 (nose = 247, mirror to 254),
 // wheels cy=331, ground contact y=344.
-function TruckArt({ variant = "hero" }: { variant?: "hero" | "parked" }) {
-  return (
-    <g className={variant === "parked" ? "cj2-parked" : undefined}>
-      {/* semi-trailer box: clean panels, brand stripe, brake light, hinges */}
-      <rect x="0" y="224" width="178" height="90" rx="6" fill="url(#cj2-trailer)" />
-      {[36, 72, 108, 144].map((x) => (
-        <line key={x} x1={x} y1="232" x2={x} y2="306" className="stroke-slate-500" strokeWidth="1.5" opacity="0.3" />
-      ))}
-      <rect x="14" y="238" width="56" height="9" rx="4.5" className="fill-blue-500" />
-      <rect x="1" y="227" width="3" height="8" rx="1.5" className="cj2-brake fill-red-500" />
-      <rect x="2" y="248" width="4" height="10" rx="1" className="fill-slate-400" />
-      <rect x="2" y="278" width="4" height="10" rx="1" className="fill-slate-400" />
-      {/* under-frame, side skirt, landing gear (support legs) */}
-      <rect x="8" y="314" width="162" height="5" className="fill-slate-800" />
-      <rect x="76" y="316" width="44" height="8" rx="3" className="fill-slate-700" />
-      <rect x="128" y="314" width="5" height="22" className="fill-slate-500" />
-      <rect x="124" y="336" width="13" height="4" rx="1.5" className="fill-slate-600" />
-      {/* trailer rear axles (clustered at the tail) + mudflap */}
-      <rect x="66" y="330" width="9" height="13" className="fill-slate-900" />
-      {/* tractor frame + full-length side skirt (wheel to wheel) */}
-      <rect x="150" y="314" width="92" height="7" className="fill-slate-800" />
-      <rect x="152" y="318" width="95" height="13" rx="3" className="fill-blue-700" />
-      {/* exhaust stack in the cab–trailer gap */}
-      <rect x="180" y="250" width="4" height="60" rx="2" className="fill-slate-500" />
-      {/* cab-over tractor (body at trailer level, wheels exposed below) */}
-      <path d="M186 318 V250 Q186 238 198 238 H226 Q240 238 244 250 L246 260 Q247 263 247 267 V318 Z" fill="url(#cj2-cab)" />
-      <path d="M188 238 L194 226 Q195 224 198 224 H212 Q215 224 216 226 L222 238 Z" className="fill-blue-700" />
-      {/* one-piece wrap-around glass */}
-      <path d="M200 246 H228 Q238 246 241 254 L243 262 Q244 266 240 266 H200 Q194 266 194 260 V252 Q194 246 200 246 Z" className="fill-cyan-200" opacity="0.85" />
-      {/* forward-mounted mirror */}
-      <line x1="240" y1="244" x2="248" y2="238" className="stroke-slate-400" strokeWidth="2" />
-      <rect x="246" y="234" width="5" height="13" rx="2.5" className="fill-slate-500" />
-      {/* LED strip + headlight on the front face */}
-      <rect x="239" y="300" width="8" height="3" rx="1.5" className="fill-slate-100" opacity="0.9" />
-      <rect x="239" y="306" width="8" height="5" rx="2" className="fill-amber-300" />
-      {/* wheels: trailer tail pair, tractor rear (under trailer) + front */}
-      {[30, 58, 166, 232].map((cx) => (
-        <g key={cx}>
-          <circle cx={cx} cy="331" r="13" fill="#0f172a" className="stroke-slate-700" strokeWidth="1.5" />
-          <circle cx={cx} cy="331" r="6.5" className="fill-slate-400" />
-          <circle cx={cx} cy="331" r="2" className="fill-slate-200" />
-        </g>
-      ))}
-    </g>
-  );
-}
 
 export function CheckinJourneyScene({
   dockLabel,
@@ -115,9 +70,9 @@ export function CheckinJourneyScene({
         </text>
         <circle cx="590" cy="176" r="30" className="cj2-signpulse stroke-cyan-400" fill="none" strokeWidth="2" />
         {/* parked trucks (slots 1 and 3), hero parks in slot 2 */}
-        <g transform="translate(270 0)"><TruckArt variant="parked" /></g>
-        <g transform="translate(830 0)"><TruckArt variant="parked" /></g>
-        <g className="cj2-truck1"><TruckArt /></g>
+        <g transform="translate(270 0)"><TruckArt idPrefix="cj2" className="cj2-parked" brakeClass="cj2-brake" /></g>
+        <g transform="translate(830 0)"><TruckArt idPrefix="cj2" className="cj2-parked" brakeClass="cj2-brake" /></g>
+        <g className="cj2-truck1"><TruckArt idPrefix="cj2" brakeClass="cj2-brake" /></g>
       </g>
 
       {/* ============ Scene 2 — driver close-up backdrop ============ */}
@@ -125,8 +80,8 @@ export function CheckinJourneyScene({
       <g className="cj2-s2">
         <g opacity="0.14">
           <rect x="0" y="318" width="1200" height="50" className="fill-slate-800" />
-          <g transform="translate(40 0)"><TruckArt variant="parked" /></g>
-          <g transform="translate(930 0)"><TruckArt variant="parked" /></g>
+          <g transform="translate(40 0)"><TruckArt idPrefix="cj2" className="cj2-parked" brakeClass="cj2-brake" /></g>
+          <g transform="translate(930 0)"><TruckArt idPrefix="cj2" className="cj2-parked" brakeClass="cj2-brake" /></g>
         </g>
         {/* driver, facing left toward the phone */}
         <g transform="translate(-52 0)">
@@ -190,7 +145,7 @@ export function CheckinJourneyScene({
         <rect x="610" y="288" width="26" height="10" rx="3" className="fill-cyan-500" opacity="0.18" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="stroke-cyan-400" fill="none" strokeWidth="1.5" />
         {/* hero truck: stops short of the scanner, then docks at ramp 12 */}
-        <g className="cj2-truck3"><TruckArt /></g>
+        <g className="cj2-truck3"><TruckArt idPrefix="cj2" brakeClass="cj2-brake" /></g>
         {/* driver's phone tapping the scanner + confirmation pulse */}
         <g className="cj2-gatephone">
           <rect x="592" y="282" width="17" height="30" rx="4" className="fill-slate-900 stroke-slate-500" strokeWidth="1.5" />
