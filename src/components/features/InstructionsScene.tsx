@@ -28,6 +28,9 @@ const COMMENT = <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 
 const LISTCHECK = <><path d="M3 6.5 4.6 8 7.5 5" /><path d="M3 15.5 4.6 17 7.5 14" /><path d="M11 6.5h10M11 15.5h10" /></>;
 const TRUCK = <><rect x="1" y="6" width="13" height="10" rx="1" /><path d="M14 9h4l3 3v4h-7z" /><circle cx="5.5" cy="18" r="1.6" /><circle cx="18" cy="18" r="1.6" /></>;
 const PLANE = <path d="M3 20l18-8L3 4l4 8-4 8z" />;
+const WAREHOUSE = <><path d="M3 21V9l9-5 9 5v12" /><path d="M8 21v-6h8v6" /><path d="M8 12h8" /></>;
+const ROUTE = <><circle cx="6" cy="19" r="2.5" /><circle cx="18" cy="5" r="2.5" /><path d="M8.5 19H15a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h6.5" /></>;
+const CAMERA = <><rect x="3" y="6" width="18" height="14" rx="2" /><circle cx="12" cy="13" r="3.2" /><path d="M8 6l1.5-2.5h5L16 6" /></>;
 
 const HDR = "linear-gradient(to right, #2563eb, #1d4ed8)";
 
@@ -53,6 +56,8 @@ const ACTIONS: Act[] = [
   { key: "call_to_office", menuIc: USER, menuCol: "#3b82f6", cardIc: USER, pulse: true, wrap: "bg-blue-900/25 border-blue-500/30", chip: "bg-blue-500/20", ic: "text-blue-400", head: "text-blue-300", ttl: "text-blue-200" },
   { key: "send_to_parking", menuIc: PARKING, menuCol: "#14b8a6", cardIc: PARKING, pulse: false, wrap: "bg-teal-900/25 border-teal-500/30", chip: "bg-teal-500/20", ic: "text-teal-400", head: "text-teal-300", ttl: "text-teal-200" },
   { key: "custom", menuIc: COMMENT, menuCol: "#f97316", cardIc: LISTCHECK, pulse: false, small: true, wrap: "bg-orange-900/25 border-orange-500/30", chip: "bg-orange-500/20", ic: "text-orange-400", head: "text-orange-300", ttl: "text-orange-200" },
+  // the ramp handoff — green, and the only card that carries a photo and a route
+  { key: "ramp", menuIc: WAREHOUSE, menuCol: "#22c55e", cardIc: WAREHOUSE, pulse: false, wrap: "bg-green-900/25 border-green-500/30", chip: "bg-green-500/20", ic: "text-green-400", head: "text-green-300", ttl: "text-green-200" },
 ];
 
 // ---- dispatcher card geometry, in cqw of the stage ----
@@ -74,7 +79,9 @@ const AT_SEND = { r: 8, t: CARD_H - 4.4 };
 // the order the loop sends in. Starts on `call_to_office` so the very first
 // swap is a colour change away from the amber card the phone opens on, and all
 // four types get their turn before it repeats.
-const SEQ = [1, 2, 3, 0];
+// wait -> office -> parking -> free text -> RAMP. The ramp closes the cycle
+// because it is what the whole exchange was for; the briefing then opens the next.
+const SEQ = [1, 2, 3, 0, 4];
 
 // Every step of the loop is one frame object, so a render never has to stitch
 // several useStates together.
@@ -147,11 +154,11 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
   const driver = DRIVER_POOLS[locale][0];
   // labels are index-aligned with ACTIONS — the same string the dispatcher picks
   // is the one the driver's card is headed with
-  const LABELS = [f.actWait, f.actOffice, f.actParking, f.actCustom];
+  const LABELS = [f.actWait, f.actOffice, f.actParking, f.actCustom, f.actRamp];
   // what the driver actually reads under the heading — the real bodies from the
   // driver app, not the dispatcher's menu wording (custom is free text, so it is
   // shown verbatim exactly as the dispatcher typed it)
-  const BODIES = [f.descWait, f.descOffice, f.descParking, f.descCustom];
+  const BODIES = [f.descWait, f.descOffice, f.descParking, f.descCustom, f.descRamp];
 
   const reduced = useSyncExternalStore(rmSubscribe, rmGet, rmGetServer);
   const [s, set] = useState<Frame>(LIVE_START);
@@ -367,6 +374,31 @@ export function InstructionsScene({ t, locale }: { t: Translations; locale: Loca
                 </span>
                 <span className={`font-bold leading-tight ${a.ttl} ${a.small ? "text-[4.4cqw]" : "text-[5.2cqw]"}`}>{LABELS[card]}</span>
                 <span className="text-slate-300 text-[2.7cqw] leading-snug">{BODIES[card]}</span>
+                {/* Only the ramp card carries these. The photo is the ramp's own
+                    (ramps_docks.photos) and Maps is a DEEP LINK into the driver's
+                    native app — the product has no embedded map, so none is drawn. */}
+                {a.key === "ramp" && (
+                  <>
+                    <span className="relative block h-[17cqw] rounded-[1.8cqw] overflow-hidden bg-gradient-to-b from-slate-500 to-slate-700">
+                      <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+                        <rect width="100" height="40" fill="#64748b" />
+                        <rect y="26" width="100" height="14" fill="#475569" />
+                        <rect x="8" y="6" width="28" height="22" rx="1" fill="#334155" />
+                        <rect x="11" y="9" width="22" height="16" rx="1" fill="#1e293b" />
+                        <rect x="46" y="6" width="28" height="22" rx="1" fill="#334155" />
+                        <rect x="49" y="9" width="22" height="16" rx="1" fill="#1e293b" />
+                        <rect x="20" y="27" width="60" height="1.6" fill="#fbbf24" />
+                        <text x="22" y="22" fontSize="9" fontWeight="bold" fill="#e2e8f0">4</text>
+                      </svg>
+                      <span className="absolute bottom-[1.2cqw] right-[1.2cqw] rounded-full bg-black/60 text-white text-[2cqw] px-[1.8cqw] py-[0.7cqw] flex items-center gap-[0.9cqw]">
+                        <Ic d={CAMERA} className="w-[2.4cqw] h-[2.4cqw]" w="1.9" />{f.uiPhotos}
+                      </span>
+                    </span>
+                    <span className="rounded-[1.8cqw] text-white text-center font-medium text-[2.7cqw] py-[2.2cqw] flex items-center justify-center gap-[1.4cqw]" style={{ background: "#2563eb" }}>
+                      <Ic d={ROUTE} className="w-[3cqw] h-[3cqw]" w="2" />{f.uiOpenMaps}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
 
