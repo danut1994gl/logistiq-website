@@ -29,6 +29,8 @@ export function CategoryRoutingShowcase({ t, locale }: { t: Translations; locale
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="cr4"
+        reverse
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +43,7 @@ export function CategoryRoutingShowcase({ t, locale }: { t: Translations; locale
       />
 
       <FeatureBenefitsSection
+        idPrefix="cr4"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +54,7 @@ export function CategoryRoutingShowcase({ t, locale }: { t: Translations; locale
       />
 
       <FeatureFAQSection
+        idPrefix="cr4"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

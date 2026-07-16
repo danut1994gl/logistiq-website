@@ -30,6 +30,8 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="dm2"
+        reverse
         eyebrow={d.probEyebrow}
         title={d.probTitle}
         paragraphs={[d.probP1, d.probP2]}
@@ -42,6 +44,7 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
       />
 
       <FeatureBenefitsSection
+        idPrefix="dm2"
         title={d.benTitle}
         subtitle={d.benSub}
         groups={[
@@ -52,6 +55,7 @@ export function DockManagementShowcase({ t, locale }: { t: Translations; locale:
       />
 
       <FeatureFAQSection
+        idPrefix="dm2"
         title={d.faqTitle}
         items={[
           { q: d.q1, a: d.a1 },

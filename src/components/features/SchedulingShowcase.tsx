@@ -29,6 +29,7 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="sc11"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +42,7 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
       />
 
       <FeatureBenefitsSection
+        idPrefix="sc11"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +53,7 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
       />
 
       <FeatureFAQSection
+        idPrefix="sc11"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

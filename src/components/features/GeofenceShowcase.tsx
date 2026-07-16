@@ -29,6 +29,7 @@ export function GeofenceShowcase({ t, locale }: { t: Translations; locale: Local
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="gf12"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +42,7 @@ export function GeofenceShowcase({ t, locale }: { t: Translations; locale: Local
       />
 
       <FeatureBenefitsSection
+        idPrefix="gf12"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +53,7 @@ export function GeofenceShowcase({ t, locale }: { t: Translations; locale: Local
       />
 
       <FeatureFAQSection
+        idPrefix="gf12"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

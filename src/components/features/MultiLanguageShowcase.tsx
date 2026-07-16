@@ -29,6 +29,7 @@ export function MultiLanguageShowcase({ t, locale }: { t: Translations; locale: 
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="ml7"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +42,7 @@ export function MultiLanguageShowcase({ t, locale }: { t: Translations; locale: 
       />
 
       <FeatureBenefitsSection
+        idPrefix="ml7"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +53,7 @@ export function MultiLanguageShowcase({ t, locale }: { t: Translations; locale: 
       />
 
       <FeatureFAQSection
+        idPrefix="ml7"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

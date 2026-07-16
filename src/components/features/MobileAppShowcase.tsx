@@ -52,6 +52,8 @@ export function MobileAppShowcase({ t, locale }: { t: Translations; locale: Loca
       </div>
 
       <FeatureProblemSection
+        idPrefix="ma6"
+        reverse
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -64,6 +66,7 @@ export function MobileAppShowcase({ t, locale }: { t: Translations; locale: Loca
       />
 
       <FeatureBenefitsSection
+        idPrefix="ma6"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -74,6 +77,7 @@ export function MobileAppShowcase({ t, locale }: { t: Translations; locale: Loca
       />
 
       <FeatureFAQSection
+        idPrefix="ma6"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

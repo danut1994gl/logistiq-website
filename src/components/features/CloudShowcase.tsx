@@ -29,6 +29,7 @@ export function CloudShowcase({ t, locale }: { t: Translations; locale: Locale }
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="cl9"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +42,7 @@ export function CloudShowcase({ t, locale }: { t: Translations; locale: Locale }
       />
 
       <FeatureBenefitsSection
+        idPrefix="cl9"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +53,7 @@ export function CloudShowcase({ t, locale }: { t: Translations; locale: Locale }
       />
 
       <FeatureFAQSection
+        idPrefix="cl9"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

@@ -29,6 +29,8 @@ export function InstructionsShowcase({ t, locale }: { t: Translations; locale: L
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="in10"
+        reverse
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +43,7 @@ export function InstructionsShowcase({ t, locale }: { t: Translations; locale: L
       />
 
       <FeatureBenefitsSection
+        idPrefix="in10"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +54,7 @@ export function InstructionsShowcase({ t, locale }: { t: Translations; locale: L
       />
 
       <FeatureFAQSection
+        idPrefix="in10"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

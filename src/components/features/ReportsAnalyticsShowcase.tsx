@@ -29,6 +29,7 @@ export function ReportsAnalyticsShowcase({ t, locale }: { t: Translations; local
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="ra5"
         eyebrow={f.probEyebrow}
         title={f.probTitle}
         paragraphs={[f.probP1, f.probP2]}
@@ -41,6 +42,7 @@ export function ReportsAnalyticsShowcase({ t, locale }: { t: Translations; local
       />
 
       <FeatureBenefitsSection
+        idPrefix="ra5"
         title={f.benTitle}
         subtitle={f.benSub}
         groups={[
@@ -51,6 +53,7 @@ export function ReportsAnalyticsShowcase({ t, locale }: { t: Translations; local
       />
 
       <FeatureFAQSection
+        idPrefix="ra5"
         title={f.faqTitle}
         items={[
           { q: f.q1, a: f.a1 },

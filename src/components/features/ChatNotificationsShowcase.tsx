@@ -42,6 +42,7 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="ch3"
         eyebrow={c.probEyebrow}
         title={c.probTitle}
         paragraphs={[c.probP1, c.probP2]}
@@ -54,6 +55,7 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
       />
 
       <FeatureBenefitsSection
+        idPrefix="ch3"
         title={c.benTitle}
         subtitle={c.benSub}
         groups={[
@@ -64,6 +66,7 @@ export function ChatNotificationsShowcase({ t, locale }: { t: Translations; loca
       />
 
       <FeatureFAQSection
+        idPrefix="ch3"
         title={c.faqTitle}
         items={[
           { q: c.q1, a: c.a1 },

@@ -27,6 +27,8 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
       </ShowcaseStage>
 
       <FeatureProblemSection
+        idPrefix="ym13"
+        reverse
         eyebrow={y.probEyebrow}
         title={y.probTitle}
         paragraphs={[y.probP1, y.probP2]}
@@ -39,6 +41,7 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
       />
 
       <FeatureBenefitsSection
+        idPrefix="ym13"
         title={y.benTitle}
         subtitle={y.benSub}
         groups={[
@@ -49,6 +52,7 @@ export function YardManagementShowcase({ t, locale }: { t: Translations; locale:
       />
 
       <FeatureFAQSection
+        idPrefix="ym13"
         title={y.faqTitle}
         items={[
           { q: y.q1, a: y.a1 },

@@ -17,6 +17,7 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
     <>
       <CheckinJourneySection t={t} />
       <FeatureProblemSection
+        idPrefix="dc1"
         eyebrow={c.problemEyebrow}
         title={c.problemTitle}
         paragraphs={[c.problemP1, c.problemP2]}
@@ -28,6 +29,7 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
         }}
       />
       <FeatureBenefitsSection
+        idPrefix="dc1"
         title={c.benefitsTitle}
         subtitle={c.benefitsSubtitle}
         groups={[
@@ -54,6 +56,7 @@ export function DigitalCheckinShowcase({ t, locale }: { t: Translations; locale:
         ]}
       />
       <FeatureFAQSection
+        idPrefix="dc1"
         title={c.faqTitle}
         items={[
           { q: c.faq1Q, a: c.faq1A },
