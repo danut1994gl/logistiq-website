@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { createReadClient } from '@/lib/supabase'
 
 // SMTP configuration from environment variables
 const SMTP_CONFIG = {
@@ -102,6 +103,26 @@ export async function POST(request: NextRequest) {
       subject: `[Contact] Mesaj nou de la ${name}`,
       html: emailHtml,
     })
+
+    // Persist a lead row in addition to the email notification (ADR-005). The email is the
+    // source of truth for the human reply — a DB failure here must never turn an already-sent
+    // email into a 500, so this is best-effort and only logged on failure.
+    try {
+      const supabase = createReadClient()
+      const { error: leadError } = await supabase.from('leads').insert({
+        name,
+        email,
+        phone,
+        company: company || null,
+        message,
+        source: 'website_contact',
+      })
+      if (leadError) {
+        console.error('lead persist failed (email already sent):', leadError)
+      }
+    } catch (leadError) {
+      console.error('lead persist failed (email already sent):', leadError)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
