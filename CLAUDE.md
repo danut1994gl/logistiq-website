@@ -25,6 +25,12 @@ no `tailwind.config`). Deploys to Vercel project `logistiq-website` → logistiq
    Never inline canonical/hreflang/JSON-LD by hand.
 5. **Verify before pushing:** `npm run build` must pass; drive the change (curl or
    Playwright on a localized route) and confirm behaviour before committing.
+6. **A Client Component's first render must not depend on the day, the host,
+   `Math.random` or browser storage.** Pages are prerendered once per build and served
+   to every domain on every day; read such values after hydration (`useEffect`,
+   `useSyncExternalStore` with a fixed server snapshot). A mismatch makes React throw
+   the whole server-rendered page away and paint it again (error #418) — the home
+   page "loaded twice" for this reason until 2026-11-06 (`StatsSection.test.tsx`).
 
 ## Structure
 

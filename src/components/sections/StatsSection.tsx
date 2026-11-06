@@ -75,28 +75,35 @@ export function StatsSection({ t }: { t: Translations }) {
     return { drivers, warehouses, checkins, reduction };
   }
 
+  // Every stat is counted up from 0, never rendered straight: the home page is
+  // prerendered at build time, so a date-seeded number in the server HTML would
+  // disagree with the visitor's day, and React would throw the whole page away
+  // and paint it again (hydration error #418).
   const dailyStats = getPlatformStats();
   const drivers = useCountUp(dailyStats.drivers, 2000, false);
   const warehouses = useCountUp(dailyStats.warehouses, 2000, false);
   const checkins = useCountUp(dailyStats.checkins, 2500, false);
+  const reduction = useCountUp(dailyStats.reduction, 2000, false);
 
   const { startCounting: startDrivers } = drivers;
   const { startCounting: startWarehouses } = warehouses;
   const { startCounting: startCheckins } = checkins;
+  const { startCounting: startReduction } = reduction;
 
   useEffect(() => {
     if (isInView) {
       startDrivers();
       startWarehouses();
       startCheckins();
+      startReduction();
     }
-  }, [isInView, startDrivers, startWarehouses, startCheckins]);
+  }, [isInView, startDrivers, startWarehouses, startCheckins, startReduction]);
 
   const stats = [
     { value: `${drivers.count.toLocaleString()}+`, label: t.stats.drivers, icon: TruckIcon },
     { value: `${warehouses.count}+`, label: t.stats.warehouses, icon: UsersIcon },
     { value: `${(checkins.count / 1000).toFixed(0)}K+`, label: t.stats.checkins, icon: QrCodeIcon },
-    { value: `${dailyStats.reduction}%`, label: t.stats.timeReduction, icon: ChartIcon },
+    { value: `${reduction.count}%`, label: t.stats.timeReduction, icon: ChartIcon },
   ];
 
   return (
