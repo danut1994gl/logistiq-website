@@ -4,8 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
-import { locales, localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
 import { featuresSegment } from "@/lib/i18n/segments";
+import { siteForHost } from "@/lib/i18n/sites";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu, blogNavHref } from "@/lib/navigation";
@@ -34,6 +35,12 @@ const readAuthCookie = () =>
   });
 const authServerSnapshot = () => false;
 
+// The domain decides which languages the switcher offers (logistiq.be: nl/fr/en).
+// Read from the URL after hydration — the page is prerendered once for every
+// host, so the server snapshot ("" -> all locales) must not depend on it.
+const readHost = () => window.location.host;
+const hostServerSnapshot = () => "";
+
 // Shared site header — data-driven, mounted once in the marketing layout.
 // Order: Home · Funcționalități (mega) · Prețuri (shown only when isSelfServeEnabled(),
 // ADR-005) · Resurse (dropdown) · Contact.
@@ -45,6 +52,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSub, setMobileSub] = useState<Menu>(null);
   const isAuthenticated = useSyncExternalStore(noopSubscribe, readAuthCookie, authServerSnapshot);
+  const switcherLocales = siteForHost(useSyncExternalStore(noopSubscribe, readHost, hostServerSnapshot)).locales;
   const featuresRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
@@ -248,7 +256,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                   role="menu"
                   className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 rounded-xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 py-2 animate-fade-in-down"
                 >
-                  {locales.map((loc) => {
+                  {switcherLocales.map((loc) => {
                     const FlagComponent = localeToFlag[loc];
                     return (
                       <Link

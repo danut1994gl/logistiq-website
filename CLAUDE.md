@@ -57,8 +57,13 @@ src/lib/
 
 ## i18n & URLs (international SEO — critical)
 
-- **Default locale = `en`** (`config.ts`); geo/Accept-Language in `middleware.ts`
-  still routes RO/DE/… visitors to their language. `x-default` → `/en`.
+- **Default locale = `en`** (`config.ts`); geo/Accept-Language auto-routing is
+  disabled — `middleware.ts` sends a bare URL to the visitor's saved choice (cookie)
+  or the default. `x-default` → `/en`.
+- **Per-domain language sets** live in `lib/i18n/sites.ts`: **logistiq.be** serves
+  only `nl` (default), `fr`, `en` — `middleware.ts` moves every other locale's URL to
+  the same page in Dutch and remembers the choice in its own `NEXT_LOCALE_BE` cookie;
+  `SiteHeader`'s switcher lists only the domain's set. Every other host serves all 8.
 - **hreflang is language-level** (`de`, `fr`, …), not country (`de-DE`). Only switch
   to language-region when content is actually differentiated per country.
 - **`SITE_URL` is env-driven** (`NEXT_PUBLIC_SITE_URL`, falls back to logistiq.ro).
