@@ -22,6 +22,9 @@ const LOCALES = Object.keys(SEG);
 // every rename must leave a 301 behind — recorded here, per locale, oldest first.
 //   2026-07-15  feature 7  dropped "(12 languages)" — more languages are coming
 //               feature 8  dropped "& API" — the API moved to its own page
+//   2026-11-08  bg 3/10/11 written in Cyrillic (were Latin transliteration);
+//               hu 10/12 accents restored, "Sofőrutasítások" joined, 12 renamed to
+//               "Helyfelismerés" (its page's own term; the old title was misspelled)
 // The `slug` route resolves by matching the CURRENT title, so a stale slug would
 // otherwise 404 rather than fall through.
 const RENAMED_FEATURE_SLUGS: Record<string, [string, string][]> = {
@@ -29,8 +32,19 @@ const RENAMED_FEATURE_SLUGS: Record<string, [string, string][]> = {
   en: [["multi-language-12-languages", "multi-language"], ["white-label-api", "white-label"]],
   de: [["mehrsprachig-12-sprachen", "mehrsprachig"], ["white-label-api", "white-label"]],
   pl: [["wielojezycznosc-12-jezykow", "wielojezycznosc"], ["white-label-api", "white-label"]],
-  hu: [["tobbnyelvuseg-12-nyelv", "tobbnyelvuseg"], ["white-label-api", "white-label"]],
-  bg: [["mnogoezinovost-12-ezika", "mnogoezichnost"], ["white-label-api", "white-label"]],
+  hu: [
+    ["tobbnyelvuseg-12-nyelv", "tobbnyelvuseg"],
+    ["white-label-api", "white-label"],
+    ["sofor-utasitasok-es-utmutatas", "soforutasitasok-es-utmutatas"],
+    ["automatikus-helyzeterkenites", "automatikus-helyfelismeres"],
+  ],
+  bg: [
+    ["mnogoezinovost-12-ezika", "mnogoezichnost"],
+    ["white-label-api", "white-label"],
+    ["chat-i-uvedomlenija-v-realno-vreme", "chat-i-izvestiya-v-realno-vreme"],
+    ["instrukcii-i-nasochvane-za-voditeli", "instruktsii-i-nasochvane-za-shofori"],
+    ["ranna-registracija-i-planirane", "ranna-registratsiya-i-planirane"],
+  ],
   fr: [["multi-langue-12-langues", "multi-langue"], ["white-label-api", "white-label"]],
   nl: [["meertalig-12-talen", "meertalig"], ["white-label-api", "white-label"]],
 };

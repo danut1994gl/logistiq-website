@@ -75,6 +75,11 @@ src/lib/
   A localized segment is rewritten to its internal folder in `next.config`; the raw
   folder segment is deduped via **canonical** (a redirect there forms a rewrite loop
   — don't add one). When a public URL changes, add a redirect in `next.config`.
+  `feature-slugs.test.ts` pins every public feature slug, so a title edit that moves
+  one fails until its old slug is in `RENAMED_FEATURE_SLUGS` (next.config.ts).
+- **Write each language in its own alphabet, with all its diacritics.** Until
+  2026-11-08 the older copy of fr/de/pl/hu had been written accent-stripped and
+  Bulgarian in Latin transliteration ("Kompanija", "fur", "entrepot").
 
 ## SEO helpers (always use these)
 
