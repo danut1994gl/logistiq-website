@@ -31,6 +31,13 @@ no `tailwind.config`). Deploys to Vercel project `logistiq-website` → logistiq
    `useSyncExternalStore` with a fixed server snapshot). A mismatch makes React throw
    the whole server-rendered page away and paint it again (error #418) — the home
    page "loaded twice" for this reason until 2026-11-06 (`StatsSection.test.tsx`).
+7. **No public prices.** No amount, currency or monthly rate anywhere on the site
+   (owner, 2026-11-08): the price is set by the offer or contract. The pricing section
+   shows the plans, what each includes and "price on request", with a request-a-quote
+   CTA (`#contact`); the terms list the plans without amounts; the JSON-LD has no
+   `offers`; `company.ts` and `llms.txt` carry no price. Every client component gets a
+   whole locale's translations, so a price in `translations.ts` ships in every page's
+   RSC payload even where it isn't shown. `no-public-prices.test.ts` guards all of it.
 
 ## Structure
 
@@ -48,18 +55,41 @@ src/app/
     privacy/ terms/ cookies/ # legal pages (own <main>, outside the marketing group)
   not-found.tsx              # root 404 (own <html>, for non-locale unmatched)
   sitemap.ts  robots.ts  llms.txt/  llms-full.txt/
+  api/contact/route.ts       # contact form → email + lead row, behind the anti-spam layers
+src/instrumentation-client.ts  # browser init before hydration: Vercel BotID for POST /api/contact
 src/components/{icons,mockups,sections,site}/   # site/ = SiteHeader, SiteFooter, PageHero, Breadcrumbs
 src/lib/
   navigation.ts  company.ts  href.ts  features.ts  faq.ts
-  i18n/{config,translations,segments}.ts
+  i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
+  contact/{protocol,email,recaptcha,recaptcha-client}.ts  # contact form anti-spam + email
 ```
 
 ## i18n & URLs (international SEO — critical)
 
-- **Default locale = `en`** (`config.ts`); geo/Accept-Language auto-routing is
-  disabled — `middleware.ts` sends a bare URL to the visitor's saved choice (cookie)
-  or the default. `x-default` → `/en`.
+- **A first visit opens in Romanian on logistiq.ro** (and every host but logistiq.be):
+  `middleware.ts` sends a bare URL to the visitor's saved language (cookie
+  `NEXT_LOCALE`, 1 year), else the domain's `defaultLocale` in `lib/i18n/sites.ts`
+  (`ro`; `nl` on logistiq.be). Geo/Accept-Language auto-routing is disabled.
+- **The saved choice always wins.** The language switcher writes the cookie itself on
+  click (`localeCookie()`: a switch to a prefetched page opens from the router cache
+  and never reaches the server), and the middleware writes it whenever a page in a
+  language is served (a link, a search result, a reload; also the page a first visit
+  lands on, so it ends up saved as `ro`). The default redirect itself writes nothing,
+  and a prefetch never does: the language menu prefetches all 8 languages, and until
+  2026-11-08 merely opening it overwrote the visitor's choice. Next strips its router
+  headers before the middleware runs, so prefetches are kept out by
+  `config.matcher`'s `missing`, not by code. A bare visit only renews a saved cookie
+  with its own value. Visitors whose cookie the old default stamped `en` (every first
+  visit until 2026-11-08) keep English until they pick a language; renaming the cookie
+  (as logistiq.be did) would reset them, and is the way to go if the first-visit
+  language ever changes again.
+- **`config.ts`'s `defaultLocale` = `en` is the international fallback, not the
+  first-visit language:** hreflang **`x-default` → `/en`**, the sitemap's x-default,
+  RSS, unknown-locale fallbacks. x-default serves searchers whose language we don't
+  offer (Italian, Spanish, Czech…), who read English better than Romanian; Romanian
+  searchers get the `ro` alternate, and the bare `/` is a redirect, not a page. To
+  change where a visit lands, change `sites.ts`, never `config.ts`.
 - **Per-domain language sets** live in `lib/i18n/sites.ts`: **logistiq.be** serves
   only `nl` (default), `fr`, `en` — `middleware.ts` moves every other locale's URL to
   the same page in Dutch and remembers the choice in its own `NEXT_LOCALE_BE` cookie;
@@ -128,8 +158,32 @@ src/lib/
   blog/rich content. The `<JsonLd>` helper already escapes `<`.
 - The website is **anon-only** to Supabase: it may hold `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   and read via `SECURITY DEFINER` RPCs. **Never** ship the service-role key here.
-- Any anonymous write path (contact → ticket) must verify reCAPTCHA server-side +
-  rate-limit before hitting the DB.
+- **Every anonymous write path keeps its anti-spam layers.** The contact form's
+  (`app/api/contact/route.ts`, shared protocol in `lib/contact/protocol.ts`), cheapest
+  first, all in place since 2026-11-08:
+  1. **honeypot** field `reference` (off-screen, `tabIndex -1`, `aria-hidden`);
+  2. **fill time** `elapsedMs`, measured by the form on the monotonic clock: under 3 s
+     or over a day is dropped;
+  3. **Vercel BotID**, basic level (free on Hobby): `src/instrumentation-client.ts`
+     protects `POST /api/contact`, the route calls `checkBotId` at the same level;
+     `withBotId` in `next.config.ts`; `middleware.ts` skips BotID's paths;
+  4. **Vercel WAF rate limit per IP**: `checkRateLimit('contact')` from
+     `@vercel/firewall` against a Firewall rule (condition `@vercel/firewall`, Rate
+     limit ID `contact`), answered **429**. Fails open while the rule is missing;
+  5. **reCAPTCHA v3, built in but off** until both `RECAPTCHA_SECRET_KEY` (server) and
+     `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` (inlined at build: redeploy) are set. Score ≥ 0.5,
+     action `contact`, fail closed; Google's script loads only once a visitor uses the
+     form. Before setting the keys, the privacy and cookie policies must name
+     reCAPTCHA (Google).
+
+  A request layers 1, 2, 3 or 5 catch gets the same 200 as a delivered message and
+  nothing is sent or stored, so the answer teaches a bot nothing. BotID and the rate
+  limit fail open (logged), so an outage can't take the form down.
+- **Escape user input in emails.** The notification email escapes every field
+  (`lib/contact/email.ts`, tested); until 2026-11-08 they were interpolated raw.
+- **Never send a real email or insert a real lead when testing**: the route test mocks
+  SMTP, Supabase, BotID, the firewall and Google; a local `npm start` points `SMTP_HOST`
+  at 127.0.0.1.
 
 ## Deploy / git
 
