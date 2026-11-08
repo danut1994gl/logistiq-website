@@ -50,18 +50,19 @@ export function HeroSection({ t }: { t: Translations }) {
               </Link>
             </div>
 
-            {/* Trust badges */}
+            {/* The kinds of warehouse it is built for. Generic on purpose: no company
+                is named here unless it is a confirmed customer that agreed to it. */}
             <div className="mt-12 animate-fade-in-up stagger-4">
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                {t.hero.trustedBy}
+                {t.hero.builtFor}
               </p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
-                {["Kaufland", "Metro", "Carrefour", "Lidl"].map((brand) => (
+                {t.hero.segments.map((segment) => (
                   <div
-                    key={brand}
+                    key={segment}
                     className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-500 dark:text-slate-400 font-medium text-sm"
                   >
-                    {brand}
+                    {segment}
                   </div>
                 ))}
               </div>

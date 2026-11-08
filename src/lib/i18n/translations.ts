@@ -52,7 +52,8 @@ export const translations = {
         "Logistiq conectează șoferii cu operatorii din depozit în timp real. Check-in digital prin cod QR sau aplicație mobilă, alocare rampă, comunicare instantanee - totul într-o singură platformă.",
       cta1: "Cere o ofertă",
       cta2: "Vezi cum funcționează",
-      trustedBy: "Folosit de depozite din toată Europa",
+      builtFor: "Gândit pentru orice tip de depozit",
+      segments: ["Centre de distribuție", "Logistică 3PL", "Depozite frigorifice", "Retail & FMCG"],
       watchVideo: "Vizualizați demo",
     },
     stats: {
@@ -1959,7 +1960,8 @@ export const translations = {
         "Logistiq connects drivers with warehouse operators in real-time. Digital check-in via QR code or mobile app, dock allocation, instant communication - all in one platform.",
       cta1: "Request a quote",
       cta2: "See how it works",
-      trustedBy: "Trusted by warehouses across Europe",
+      builtFor: "Built for every kind of warehouse",
+      segments: ["Distribution centers", "3PL logistics", "Cold storage", "Retail & FMCG"],
       watchVideo: "Watch demo",
     },
     stats: {
@@ -3849,7 +3851,8 @@ export const translations = {
         "Logistiq verbindet Fahrer mit Lagerbetreibern in Echtzeit. Digitaler Check-in per QR-Code oder mobiler App, Rampenzuweisung, sofortige Kommunikation - alles auf einer Plattform.",
       cta1: "Angebot anfordern",
       cta2: "So funktioniert es",
-      trustedBy: "Vertrauenswürdig von Lagern in ganz Europa",
+      builtFor: "Entwickelt für jede Art von Lager",
+      segments: ["Distributionszentren", "3PL-Logistik", "Kühllager", "Handel & FMCG"],
       watchVideo: "Demo ansehen",
     },
     stats: {
@@ -5524,7 +5527,8 @@ export const translations = {
         "Logistiq łączy kierowców z operatorami magazynu w czasie rzeczywistym. Cyfrowa rejestracja przez kod QR lub aplikację mobilną, przydzielanie doków, natychmiastowa komunikacja - wszystko na jednej platformie.",
       cta1: "Poproś o wycenę",
       cta2: "Zobacz jak to działa",
-      trustedBy: "Zaufanie magazynów w całej Europie",
+      builtFor: "Stworzony dla każdego rodzaju magazynu",
+      segments: ["Centra dystrybucyjne", "Logistyka 3PL", "Chłodnie", "Handel i FMCG"],
       watchVideo: "Obejrzyj demo",
     },
     stats: {
@@ -7199,7 +7203,8 @@ export const translations = {
         "A Logistiq valós időben kapcsolja össze a sofőröket a raktári operátorokkal. Digitális bejelentkezés QR kóddal vagy mobilalkalmazással, dokk kiosztás, azonnali kommunikáció - minden egy platformon.",
       cta1: "Kérjen ajánlatot",
       cta2: "Nézze meg hogyan működik",
-      trustedBy: "Raktárak bizalmával egész Európában",
+      builtFor: "Minden raktártípusra tervezve",
+      segments: ["Elosztóközpontok", "3PL-logisztika", "Hűtőházak", "Kiskereskedelem és FMCG"],
       watchVideo: "Demó megtekintése",
     },
     stats: {
@@ -8874,7 +8879,8 @@ export const translations = {
         "Logistiq свързва водачи с операторите на склада в реално време. Цифрово регистриране чрез QR код или мобилно приложение, разпределение на докове, мигновена комуникация - всичко на една платформа.",
       cta1: "Поискайте оферта",
       cta2: "Вижте как работи",
-      trustedBy: "С доверието на складове в цяла Европа",
+      builtFor: "Създаден за всеки тип склад",
+      segments: ["Дистрибуционни центрове", "3PL логистика", "Хладилни складове", "Ритейл и FMCG"],
       watchVideo: "Гледайте демо",
     },
     stats: {
@@ -10549,7 +10555,8 @@ export const translations = {
         "Logistiq connecte les chauffeurs aux opérateurs d'entrepôt en temps réel. Check-in numérique via code QR ou application mobile, attribution des quais, communication instantanée - tout sur une seule plateforme.",
       cta1: "Demander un devis",
       cta2: "Voir comment ça marche",
-      trustedBy: "Fait confiance par les entrepôts de toute l'Europe",
+      builtFor: "Conçu pour tous les types d'entrepôts",
+      segments: ["Centres de distribution", "Logistique 3PL", "Entrepôts frigorifiques", "Grande distribution"],
       watchVideo: "Voir la démo",
     },
     stats: {
@@ -12301,7 +12308,8 @@ export const translations = {
         "Logistiq verbindt chauffeurs met magazijnoperators in realtime. Digitale check-in via QR-code of mobiele app, dok toewijzing, directe communicatie - alles op een platform.",
       cta1: "Vraag een offerte aan",
       cta2: "Bekijk hoe het werkt",
-      trustedBy: "Vertrouwd door magazijnen in heel Europa",
+      builtFor: "Gemaakt voor elk type magazijn",
+      segments: ["Distributiecentra", "3PL-logistiek", "Koelhuizen", "Retail & FMCG"],
       watchVideo: "Bekijk demo",
     },
     stats: {
