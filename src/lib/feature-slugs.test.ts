@@ -39,6 +39,22 @@ describe("feature page URLs", () => {
     }
   });
 
+  it("a localized features index rewrites to the folder itself, never to a trailing slash", async () => {
+    const rewrites = await nextConfig.rewrites!();
+    const list = Array.isArray(rewrites)
+      ? rewrites
+      : [...(rewrites.beforeFiles ?? []), ...(rewrites.afterFiles ?? []), ...(rewrites.fallback ?? [])];
+    for (const locale of locales) {
+      const seg = featuresSegment[locale];
+      if (seg === "features") continue;
+      // The first rule that can see /{locale}/{seg} must be the exact one: a `:slug*`
+      // rule before it would send the index to /{locale}/features/ (RSC 404 on Vercel).
+      const first = list.find((r) => new RegExp(`^/${locale}/${seg}(/|$)`).test(r.source));
+      expect(first).toEqual({ source: `/${locale}/${seg}`, destination: `/${locale}/features` });
+    }
+    expect(list.filter((r) => r.source.includes(":slug*"))).toEqual([]);
+  });
+
   it("the 2026-11-08 spelling fixes left redirects behind", async () => {
     const rules = await nextConfig.redirects!();
     const has = (source: string, destination: string) =>

@@ -67,8 +67,13 @@ const nextConfig: NextConfig = {
     for (const loc of LOCALES) {
       const s = SEG[loc];
       if (s === FOLDER) continue; // segment already IS the folder (en) — no rewrite
-      rules.push({ source: `/${loc}/${s}/:slug*`, destination: `/${loc}/${FOLDER}/:slug*` });
+      // The index first, and `:slug+` (one or more), never `:slug*`: zero segments
+      // would rewrite /de/funktionen to /de/features/ (trailing slash), and on Vercel
+      // the router's RSC request for that path matches /[locale]/features/[slug]
+      // with an empty slug and gets a 404 (seen until 2026-11-08 on every link to a
+      // localized features index).
       rules.push({ source: `/${loc}/${s}`, destination: `/${loc}/${FOLDER}` });
+      rules.push({ source: `/${loc}/${s}/:slug+`, destination: `/${loc}/${FOLDER}/:slug+` });
     }
     return rules;
   },
