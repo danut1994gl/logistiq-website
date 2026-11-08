@@ -19,10 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = SITE_URL;
 
   const title = t.privacy.title;
-  const description =
-    locale === "ro"
-      ? "Politica de confidențialitate Logistiq - Cum colectăm, utilizăm și protejăm datele dvs. personale conform GDPR."
-      : "Logistiq Privacy Policy - How we collect, use and protect your personal data in compliance with GDPR.";
+  const description = t.legal.meta.privacy;
 
   return {
     title,

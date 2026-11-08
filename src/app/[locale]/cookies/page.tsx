@@ -53,10 +53,14 @@ function CookieTypeCard({
   );
 }
 
+type CookieHeaders = { name: string; duration: string; purpose: string };
+
 function CookieTable({
   cookies,
+  headers,
 }: {
   cookies: { name: string; duration: string; purpose: string }[];
+  headers: CookieHeaders;
 }) {
   return (
     <div className="overflow-x-auto">
@@ -64,13 +68,13 @@ function CookieTable({
         <thead>
           <tr className="border-b border-slate-200 dark:border-slate-700">
             <th className="text-left py-2 pr-4 font-medium text-slate-900 dark:text-white">
-              Cookie
+              {headers.name}
             </th>
             <th className="text-left py-2 pr-4 font-medium text-slate-900 dark:text-white">
-              {/* Duration header - localized in content */}
+              {headers.duration}
             </th>
             <th className="text-left py-2 font-medium text-slate-900 dark:text-white">
-              {/* Purpose header - localized in content */}
+              {headers.purpose}
             </th>
           </tr>
         </thead>
@@ -101,10 +105,12 @@ function CookieCategoryCard({
   title,
   desc,
   cookies,
+  headers,
 }: {
   title: string;
   desc: string;
   cookies: { name: string; duration: string; purpose: string }[];
+  headers: CookieHeaders;
 }) {
   return (
     <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-5 mb-4">
@@ -112,7 +118,7 @@ function CookieCategoryCard({
         {title}
       </h3>
       <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{desc}</p>
-      <CookieTable cookies={cookies} />
+      <CookieTable cookies={cookies} headers={headers} />
     </div>
   );
 }
@@ -170,6 +176,7 @@ export default function CookiesPage({
   const { locale: localeParam } = use(params);
   const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale].cookies;
+  const legal = translations[locale].legal;
 
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950">
@@ -196,7 +203,9 @@ export default function CookiesPage({
             {t.title}
           </h1>
           <p className="text-slate-500 dark:text-slate-400">
-            {t.lastUpdated}: 26 Ianuarie 2026
+            {t.lastUpdated}
+            {locale === "fr" ? "\u00a0: " : ": "}
+            {legal.updatedOn}
           </p>
         </header>
 
@@ -241,16 +250,19 @@ export default function CookiesPage({
             title={t.cookiesWeUse.essential.title}
             desc={t.cookiesWeUse.essential.desc}
             cookies={t.cookiesWeUse.essential.cookies}
+            headers={legal.cookieHeaders}
           />
           <CookieCategoryCard
             title={t.cookiesWeUse.functional.title}
             desc={t.cookiesWeUse.functional.desc}
             cookies={t.cookiesWeUse.functional.cookies}
+            headers={legal.cookieHeaders}
           />
           <CookieCategoryCard
             title={t.cookiesWeUse.analytics.title}
             desc={t.cookiesWeUse.analytics.desc}
             cookies={t.cookiesWeUse.analytics.cookies}
+            headers={legal.cookieHeaders}
           />
         </Section>
 
@@ -337,15 +349,13 @@ export default function CookiesPage({
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm">
             &copy; 2026 Logistiq.{" "}
-            {locale === "ro"
-              ? "Toate drepturile rezervate."
-              : "All rights reserved."}
+            {translations[locale].footer.allRights}
           </p>
           <Link
             href={`/${locale}`}
             className="text-blue-600 dark:text-blue-400 hover:underline text-sm mt-2 inline-block"
           >
-            {locale === "ro" ? "Înapoi la pagina principală" : "Back to home"}
+            {legal.backHome}
           </Link>
         </div>
       </footer>

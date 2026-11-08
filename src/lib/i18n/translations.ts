@@ -1552,7 +1552,7 @@ export const translations = {
       a15: "Da, includem training personalizat pentru echipa de operatori în toate planurile. Training-ul acoperă configurarea sistemului, utilizarea dashboard-ului și generarea rapoartelor.",
     },
     privacy: {
-      title: "Politica de Confidențialitate",
+      title: "Politica de confidențialitate",
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
@@ -1692,7 +1692,7 @@ export const translations = {
       },
     },
     terms: {
-      title: "Termeni și Condiții",
+      title: "Termeni și condiții",
       lastUpdated: "Ultima actualizare",
       intro: "Acești termeni și condiții reglementează utilizarea platformei Logistiq. Prin accesarea sau utilizarea serviciilor noastre, acceptați acești termeni în întregime.",
       article1: {
@@ -1827,7 +1827,7 @@ export const translations = {
       },
     },
     cookies: {
-      title: "Politica de Utilizare a Cookie-urilor",
+      title: "Politica de utilizare a cookie-urilor",
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
@@ -1904,6 +1904,24 @@ export const translations = {
         intro: "Pentru întrebări despre utilizarea cookie-urilor sau pentru a vă exercita drepturile conform GDPR:",
         operator: "Operator", operatorName: "HOSTLIFE DIGITAL SRL", cui: "CUI: 52638053", regNo: "Nr. Înreg.: J20/7592/5001",
         address: "Str. Vidin 37, 805300 Tecuci, Galați, România", email: "E-mail", emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26 ianuarie 2026",
+      backHome: "Înapoi la pagina principală",
+      retentionHeaders: {
+        type: "Tip date",
+        period: "Durată",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Durată",
+        purpose: "Scop",
+      },
+      meta: {
+        privacy: "Politica de confidențialitate Logistiq - Cum colectăm, utilizăm și protejăm datele dvs. personale conform GDPR.",
+        terms: "Termenii și condițiile de utilizare a platformei Logistiq - management depozite și check-in șoferi.",
+        cookies: "Politica de utilizare cookie-uri Logistiq - Cum utilizăm cookie-urile pentru a vă oferi o experiență optimă.",
       },
     },
   },
@@ -3797,6 +3815,24 @@ export const translations = {
         address: "Str. Vidin 37, 805300 Tecuci, Galați, Romania", email: "Email", emailAddress: "contact@logistiq.ro",
       },
     },
+    legal: {
+      updatedOn: "26 January 2026",
+      backHome: "Back to home",
+      retentionHeaders: {
+        type: "Data type",
+        period: "Retention period",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Duration",
+        purpose: "Purpose",
+      },
+      meta: {
+        privacy: "Logistiq Privacy Policy - How we collect, use and protect your personal data in compliance with GDPR.",
+        terms: "Logistiq Terms and Conditions - warehouse management platform and driver check-in service.",
+        cookies: "Logistiq Cookie Policy - How we use cookies to provide you with an optimal experience.",
+      },
+    },
   },
   de: {
     nav: {
@@ -5351,127 +5387,675 @@ export const translations = {
       a15: "Ja, wir bieten in allen Plänen personalisierte Schulungen für das Betriebsteam an. Die Schulung umfasst Systemkonfiguration, Dashboard-Nutzung und Berichtserstellung.",
     },
     privacy: {
-      title: "Datenschutzrichtlinie",
+      title: "Datenschutzerklärung",
       lastUpdated: "Zuletzt aktualisiert",
       intro: {
         title: "1. Einleitung",
-        p1: "HOSTLIFE DIGITAL SRL (\"Datenverantwortlicher\"), mit Sitz in Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, USt-IdNr. 52638053, respektiert die Privatsphäre Ihrer personenbezogenen Daten.",
-        p2: "Diese Richtlinie beschreibt, wie wir personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO - EU-Verordnung 2016/679) erheben, verwenden und schützen.",
+        p1:
+          "Die HOSTLIFE DIGITAL SRL („Verantwortlicher“), mit Sitz in der Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, CUI 52638053, respektiert die Vertraulichkeit Ihrer personenbezogenen Daten.",
+        p2:
+          "Diese Datenschutzerklärung beschreibt, wie wir personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO - Verordnung (EU) 2016/679) erheben, verwenden und schützen.",
       },
       dataCollected: {
         title: "2. Welche personenbezogenen Daten wir erheben",
-        identification: { title: "Identifikationsdaten", items: ["Vollständiger Name", "E-Mail-Adresse", "Systemrolle", "Profilbild (optional)"] },
-        contact: { title: "Kontaktdaten", items: ["Telefonnummer", "E-Mail-Adresse"] },
-        billing: { title: "Rechnungsdaten", items: ["Firmenname", "USt-IdNr.", "Registernummer", "Rechnungsadresse", "Zahlungshistorie"] },
-        technical: { title: "Technische Daten", items: ["IP-Adresse", "User Agent", "GPS-Koordinaten (mit Ihrer Zustimmung)"] },
-        activity: { title: "Aktivitätsdaten", items: ["Check-in-Verlauf", "Nachrichten mit Betreibern", "Anhänge (CMR, Fotos)", "Zeit in jeder Betriebsphase"] },
+        identification: {
+          title: "Identifikationsdaten",
+          items: [
+            "Vollständiger Name",
+            "E-Mail-Adresse",
+            "Rolle im System (Operator, Administrator)",
+            "Profilbild (optional)",
+          ],
+        },
+        contact: {
+          title: "Kontaktdaten",
+          items: [
+            "Telefonnummer",
+            "E-Mail-Adresse",
+          ],
+        },
+        billing: {
+          title: "Rechnungsdaten",
+          items: [
+            "Firmenname",
+            "Steuernummer (CUI/CIF)",
+            "Registernummer",
+            "Rechnungsadresse",
+            "Zahlungshistorie",
+          ],
+        },
+        technical: {
+          title: "Technische Daten",
+          items: [
+            "IP-Adresse",
+            "User Agent (Browser/Gerät)",
+            "GPS-Koordinaten (mit Ihrer Einwilligung, zur automatischen Standorterkennung)",
+          ],
+        },
+        activity: {
+          title: "Aktivitätsdaten",
+          items: [
+            "Check-in-Verlauf",
+            "Mit den Operatoren ausgetauschte Nachrichten",
+            "Anhänge (CMR, Fotos von Dokumenten)",
+            "In jeder Phase des Vorgangs verbrachte Zeit",
+          ],
+        },
       },
       purposes: {
-        title: "3. Verarbeitungszwecke",
-        list: ["Bereitstellung des digitalen Check-in-Dienstes", "Kontoverwaltung und Benutzerauthentifizierung", "Zahlungsabwicklung und Rechnungserstellung", "Echtzeitkommunikation", "Berichte und Analysen", "Technischer Support", "Serviceverbesserung", "Einhaltung gesetzlicher Verpflichtungen"],
+        title: "3. Zwecke der Verarbeitung",
+        list: [
+          "Bereitstellung des digitalen Check-in-Dienstes für Lager",
+          "Kontoverwaltung und Authentifizierung der Nutzer",
+          "Zahlungsabwicklung und Ausstellung steuerlich gültiger Rechnungen",
+          "Echtzeitkommunikation zwischen Fahrern und Lageroperatoren",
+          "Erstellung von Berichten und Analysen zur Optimierung der Betriebsabläufe",
+          "Bereitstellung von technischem Support und Kundenbetreuung",
+          "Kontinuierliche Verbesserung unserer Dienste",
+          "Erfüllung rechtlicher Verpflichtungen (Aufbewahrung der Rechnungen gemäß dem Steuergesetzbuch)",
+        ],
       },
       legalBasis: {
-        title: "4. Rechtsgrundlage für die Verarbeitung",
-        contract: { title: "Vertragserfüllung (Art. 6.1.b DSGVO)", desc: "Wir verarbeiten Daten, die für die Erbringung der vertraglich vereinbarten Dienste erforderlich sind." },
-        legal: { title: "Rechtliche Verpflichtung (Art. 6.1.c DSGVO)", desc: "Wir bewahren Rechnungsdaten gemäß dem Steuerrecht auf (10 Jahre)." },
-        legitimate: { title: "Berechtigte Interessen (Art. 6.1.f DSGVO)", desc: "Wir erheben technische Daten für Systemsicherheit und Serviceverbesserung." },
-        consent: { title: "Einwilligung (Art. 6.1.a DSGVO)", desc: "Für GPS-Koordinaten und Marketingmitteilungen bitten wir um Ihre ausdrückliche Zustimmung." },
+        title: "4. Rechtsgrundlagen der Verarbeitung",
+        contract: {
+          title: "Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)",
+          desc:
+            "Wir verarbeiten die Daten, die erforderlich sind, um Ihnen die vertraglich vereinbarten Dienste bereitzustellen: digitaler Check-in, Echtzeitkommunikation, Rampenmanagement.",
+        },
+        legal: {
+          title: "Rechtliche Verpflichtung (Art. 6 Abs. 1 lit. c DSGVO)",
+          desc:
+            "Wir bewahren die Rechnungsdaten gemäß dem rumänischen Steuerrecht auf (Steuergesetzbuch - 10 Jahre).",
+        },
+        legitimate: {
+          title: "Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO)",
+          desc:
+            "Wir erheben technische Daten für die Systemsicherheit, die Betrugsprävention und die Verbesserung der Dienste.",
+        },
+        consent: {
+          title: "Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)",
+          desc:
+            "Für GPS-Koordinaten und Marketingmitteilungen bitten wir um Ihre ausdrückliche Einwilligung, die Sie jederzeit widerrufen können.",
+        },
       },
       thirdParties: {
-        title: "5. Datenweitergabe an Dritte",
-        intro: "Wir arbeiten mit folgenden vertrauenswürdigen Partnern zusammen:",
+        title: "5. Weitergabe von Daten an Dritte",
+        intro:
+          "Zur Erbringung unserer Dienste arbeiten wir mit den folgenden vertrauenswürdigen Partnern zusammen:",
         partners: [
-          { name: "Supabase", purpose: "Datenbank und Authentifizierung (EU-Server - Frankfurt)" },
-          { name: "Stripe", purpose: "Sichere Zahlungsabwicklung (PCI DSS zertifiziert)" },
-          { name: "SmartBill", purpose: "Konforme Rechnungserstellung (Rumänien)" },
-          { name: "Vercel", purpose: "Hosting und globale Verteilung (CDN)" },
+          {
+            name: "Supabase",
+            purpose: "Datenbank und Authentifizierung (Server in der EU - Frankfurt, Deutschland)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Sichere Zahlungsabwicklung (PCI-DSS-zertifiziert)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Ausstellung vorschriftsgemäßer, steuerlich gültiger Rechnungen (Rumänien)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting und globale Verteilung (CDN)",
+          },
         ],
-        note: "Wir verkaufen oder teilen Ihre Daten nicht zu Marketingzwecken mit Dritten.",
+        note:
+          "Wir verkaufen oder teilen Ihre personenbezogenen Daten nicht zu Marketingzwecken mit Dritten.",
       },
-      internationalTransfers: { title: "6. Internationale Datenübermittlungen", content: "Einige Daten können außerhalb des EWR übermittelt werden. In solchen Fällen wenden wir Standardvertragsklauseln an, die von der Europäischen Kommission genehmigt wurden." },
+      internationalTransfers: {
+        title: "6. Internationale Datenübermittlungen",
+        content:
+          "Einige Daten können außerhalb des Europäischen Wirtschaftsraums (EWR) an unsere Partner übermittelt werden. In diesen Fällen sehen wir geeignete Garantien vor, einschließlich der von der Europäischen Kommission genehmigten Standardvertragsklauseln, um ein gleichwertiges Datenschutzniveau zu gewährleisten.",
+      },
       retention: {
-        title: "7. Aufbewahrungsfristen",
+        title: "7. Speicherdauer der Daten",
         periods: [
-          { type: "Kontodaten", duration: "Dauer des aktiven Kontos + 30 Tage" },
-          { type: "Rechnungsdaten", duration: "10 Jahre" },
-          { type: "Check-in-Daten", duration: "2 Jahre" },
-          { type: "Technische Daten", duration: "6 Monate" },
-          { type: "Anhänge", duration: "1 Jahr nach Abschluss" },
+          {
+            type: "Daten des Nutzerkontos",
+            duration: "Für die Dauer des aktiven Kontos + 30 Tage nach der Löschung",
+          },
+          {
+            type: "Rechnungsdaten",
+            duration: "10 Jahre (gemäß dem rumänischen Steuergesetzbuch)",
+          },
+          {
+            type: "Check-in- und Vorgangsdaten",
+            duration: "2 Jahre oder gemäß den Vertragsbedingungen",
+          },
+          {
+            type: "Technische Daten (IP, Logs)",
+            duration: "6 Monate",
+          },
+          {
+            type: "Anhänge (CMR, Fotos)",
+            duration: "1 Jahr nach Abschluss des Vorgangs",
+          },
         ],
-        note: "Nach Ablauf werden Daten automatisch gelöscht oder anonymisiert.",
+        note:
+          "Nach Ablauf der Speicherfristen werden die Daten automatisch gelöscht oder anonymisiert.",
       },
       rights: {
         title: "8. Ihre Rechte",
-        intro: "Gemäß DSGVO haben Sie folgende Rechte:",
+        intro:
+          "Nach der DSGVO haben Sie in Bezug auf Ihre personenbezogenen Daten die folgenden Rechte:",
         list: [
-          { name: "Auskunftsrecht", desc: "Sie können eine Kopie Ihrer Daten anfordern." },
-          { name: "Berichtigungsrecht", desc: "Sie können unrichtige Daten korrigieren." },
-          { name: "Löschungsrecht", desc: "Sie können die Löschung Ihrer Daten verlangen." },
-          { name: "Einschränkungsrecht", desc: "Sie können die Verarbeitung einschränken." },
-          { name: "Datenübertragbarkeit", desc: "Sie können Ihre Daten in einem gängigen Format erhalten." },
-          { name: "Widerspruchsrecht", desc: "Sie können der Verarbeitung widersprechen." },
-          { name: "Widerrufsrecht", desc: "Sie können Ihre Einwilligung jederzeit widerrufen." },
+          {
+            name: "Auskunftsrecht",
+            desc:
+              "Sie können eine Kopie aller personenbezogenen Daten anfordern, die uns über Sie vorliegen.",
+          },
+          {
+            name: "Recht auf Berichtigung",
+            desc: "Sie können unrichtige oder unvollständige Daten in Ihrem Konto berichtigen.",
+          },
+          {
+            name: "Recht auf Löschung",
+            desc:
+              "Sie können die Löschung Ihrer Daten verlangen („Recht auf Vergessenwerden“), mit Ausnahme der Daten, die aufgrund rechtlicher Verpflichtungen aufbewahrt werden.",
+          },
+          {
+            name: "Recht auf Einschränkung der Verarbeitung",
+            desc:
+              "Sie können unter bestimmten Umständen einschränken, wie wir Ihre Daten verarbeiten.",
+          },
+          {
+            name: "Recht auf Datenübertragbarkeit",
+            desc:
+              "Sie können Ihre Daten in einem strukturierten, gängigen und interoperablen Format erhalten.",
+          },
+          {
+            name: "Widerspruchsrecht",
+            desc:
+              "Sie können einer Verarbeitung, die auf berechtigten Interessen beruht, widersprechen.",
+          },
+          {
+            name: "Recht auf Widerruf der Einwilligung",
+            desc:
+              "Sie können Ihre erteilte Einwilligung jederzeit widerrufen, ohne dass dadurch die Rechtmäßigkeit der zuvor erfolgten Verarbeitung berührt wird.",
+          },
         ],
-        complaint: "Bei Beschwerden können Sie sich an die zuständige Datenschutzbehörde wenden.",
+        complaint:
+          "Wenn Sie der Ansicht sind, dass Ihre Rechte nicht gewahrt werden, können Sie bei der rumänischen Nationalen Aufsichtsbehörde für die Verarbeitung personenbezogener Daten (ANSPDCP) eine Beschwerde einreichen - www.dataprotection.ro",
       },
       security: {
         title: "9. Datensicherheit",
-        intro: "Wir implementieren technische und organisatorische Maßnahmen:",
-        measures: ["Verschlüsselung (TLS/SSL)", "Row Level Security (RLS)", "Sichere Authentifizierung", "Kontinuierliche Überwachung", "Automatische Backups", "Zugriffsbeschränkung"],
+        intro: "Wir setzen technische und organisatorische Maßnahmen zum Schutz der Daten um:",
+        measures: [
+          "Verschlüsselung bei der Übertragung (TLS/SSL) für die gesamte Kommunikation",
+          "Row Level Security (RLS) zur Isolierung der Daten zwischen Organisationen",
+          "Sichere Authentifizierung mit bcrypt-Passwort-Hashes",
+          "Kontinuierliche Überwachung und Auditierung der Datenzugriffe",
+          "Automatische Backups und Verfahren zur Notfallwiederherstellung",
+          "Beschränkter Zugriff nach dem „Need-to-know“-Prinzip",
+        ],
       },
-      cookies: { title: "10. Cookies", content: "Wir verwenden nur essenzielle Cookies für den Plattformbetrieb. Keine Werbe- oder Tracking-Cookies." },
-      children: { title: "11. Kinderdaten", content: "Logistiq-Dienste sind für Personen ab 16 Jahren bestimmt. Wir erheben wissentlich keine Daten von Minderjährigen." },
-      changes: { title: "12. Richtlinienänderungen", content: "Wir können diese Richtlinie regelmäßig aktualisieren. Über wesentliche Änderungen informieren wir Sie per E-Mail oder Banner." },
+      cookies: {
+        title: "10. Cookies und ähnliche Technologien",
+        content:
+          "Wir verwenden essenzielle Cookies für den Betrieb der Plattform (Authentifizierung, Nutzersitzung, Spracheinstellungen). Wir verwenden weder Cookies für Werbe-Tracking noch Cookies von Drittanbietern zum Profiling.",
+      },
+      children: {
+        title: "11. Daten von Kindern",
+        content:
+          "Die Logistiq-Dienste sind ausschließlich für Nutzer bestimmt, die mindestens 16 Jahre alt sind. Wir erheben wissentlich keine personenbezogenen Daten von Personen unter diesem Alter. Wenn Sie feststellen, dass eine minderjährige Person personenbezogene Daten angegeben hat, wenden Sie sich bitte an uns, damit diese Daten gelöscht werden.",
+      },
+      changes: {
+        title: "12. Änderungen der Datenschutzerklärung",
+        content:
+          "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren, um Änderungen unserer Praktiken oder der gesetzlichen Anforderungen Rechnung zu tragen. Über wesentliche Änderungen informieren wir Sie per E-Mail oder durch die Anzeige eines Banners auf der Plattform. Das Datum der letzten Aktualisierung ist oben auf dieser Seite angegeben.",
+      },
       contact: {
         title: "13. Kontakt",
-        intro: "Bei Fragen zu Ihren Daten oder zur Ausübung Ihrer DSGVO-Rechte kontaktieren Sie uns:",
-        operator: "Datenverantwortlicher", operatorName: "HOSTLIFE DIGITAL SRL", cui: "USt-IdNr.: 52638053", regNo: "Reg.-Nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien", email: "E-Mail", emailAddress: "contact@logistiq.ro",
-        responseTime: "Wir antworten innerhalb von 30 Kalendertagen.",
+        intro:
+          "Bei allen Fragen zu Ihren personenbezogenen Daten oder zur Ausübung Ihrer Rechte nach der DSGVO können Sie sich an uns wenden:",
+        operator: "Verantwortlicher",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Reg.-Nr.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
+        email: "E-Mail",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "Wir beantworten Anfragen innerhalb von 30 Kalendertagen.",
       },
     },
     terms: {
       title: "Allgemeine Geschäftsbedingungen",
       lastUpdated: "Zuletzt aktualisiert",
-      intro: "Diese Allgemeinen Geschäftsbedingungen regeln die Nutzung der Logistiq-Plattform. Durch den Zugriff oder die Nutzung unserer Dienste akzeptieren Sie diese Bedingungen vollständig.",
+      intro:
+        "Diese Allgemeinen Geschäftsbedingungen regeln die Nutzung der Logistiq-Plattform. Durch den Zugriff auf unsere Dienste oder deren Nutzung akzeptieren Sie diese Bedingungen in vollem Umfang.",
       article1: {
         title: "Artikel 1 - Definitionen",
-        content: "Im Sinne dieser Vereinbarung haben folgende Begriffe diese Bedeutungen:",
+        content: "Im Sinne dieses Vertrags haben die nachstehenden Begriffe folgende Bedeutung:",
         definitions: [
-          { term: "Anbieter", def: "HOSTLIFE DIGITAL SRL, Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, USt-IdNr. 52638053" },
-          { term: "Plattform", def: "Die über logistiq.ro, logistiq.cloud und qrgo.ro verfügbaren Dienste" },
-          { term: "Kunde", def: "Juristische oder autorisierte natürliche Person, die ein Abonnement erwirbt" },
-          { term: "Nutzer", def: "Jede Person, die auf die Plattform zugreift oder sie nutzt" },
-          { term: "Abonnement", def: "Der Dienstleistungsvertrag zwischen Anbieter und Kunde" },
-          { term: "Dashboard", def: "Die Admin-Oberfläche unter logistiq.cloud" },
-          { term: "Fahrer-App", def: "Die Check-in-App für Fahrer unter qrgo.ro" },
+          {
+            term: "Anbieter",
+            def:
+              "HOSTLIFE DIGITAL SRL, mit Sitz in der Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, CUI 52638053",
+          },
+          {
+            term: "Plattform",
+            def:
+              "Die Gesamtheit der Dienste, die über die Websites logistiq.ro, logistiq.cloud und qrgo.ro verfügbar sind",
+          },
+          {
+            term: "Kunde",
+            def:
+              "Die juristische Person oder autorisierte natürliche Person, die ein Abonnement zur Nutzung der Plattform erwirbt",
+          },
+          {
+            term: "Nutzer",
+            def:
+              "Jede Person, die auf die Plattform zugreift oder sie nutzt, einschließlich des Kunden und der von ihm benannten Personen",
+          },
+          {
+            term: "Abonnement",
+            def:
+              "Der zwischen dem Anbieter und dem Kunden geschlossene Dienstleistungsvertrag über den Zugang zur Plattform",
+          },
+          {
+            term: "Dashboard",
+            def:
+              "Die unter logistiq.cloud verfügbare Verwaltungsoberfläche für das Management der Lager",
+          },
+          {
+            term: "Driver App / QRGO Driver",
+            def:
+              "Die webbasierte oder mobile Check-in-App für Fahrer, verfügbar unter qrgo.ro (Web) oder über Google Play / App Store",
+          },
         ],
       },
-      article2: { title: "Artikel 2 - Vertragsgegenstand", content: "Der Anbieter verpflichtet sich, dem Kunden Zugang zur Logistiq-Plattform zu gewähren für:", items: ["Verwaltung von Check-in-Operationen", "Zugang zum Dashboard", "Zugang zur Fahrer-App", "Funktionen gemäß gewähltem Plan", "Technischer Support"] },
-      article3: { title: "Artikel 3 - Annahme der Bedingungen", content: "Durch folgende Handlungen bestätigt der Kunde die Annahme dieser Bedingungen:", items: ["Kontoerstellung", "Abonnementzahlung", "Nutzung der Plattform"], note: "Die aktuelle Version ist immer auf logistiq.ro verfügbar." },
-      article4: { title: "Artikel 4 - Registrierung und Konto", items: ["Korrekte Registrierungsdaten", "Kontosicherheit liegt beim Kunden", "Recht auf Kontosperrung", "Keine Kontoübertragung ohne Zustimmung"] },
-      article5: { title: "Artikel 5 - Vertragsdauer", trial: { title: "Testphase", content: "10 Tage kostenlose Testphase." }, subscription: { title: "Abonnement", content: "Monatlich mit automatischer Verlängerung." }, cancellation: { title: "Kündigung", content: "Jederzeit möglich, Zugang bis Ende der bezahlten Periode." } },
-      article6: { title: "Artikel 6 - Preise und Zahlung", items: ["Preise in EUR", "Monatliche Vorauszahlung", "Zahlung per Karte oder Überweisung", "Rechnungen über SmartBill (Rumänien)", "Preisänderungen mit 30 Tagen Vorlauf"], plans: { title: "Verfügbare Pläne", professional: "Professional: 139 EUR/Monat - 1 Lager", enterprise5: "Enterprise 5: 500 EUR/Monat - bis 5 Lager", enterprise10: "Enterprise 10: 800 EUR/Monat - bis 10 Lager", enterprise25: "Enterprise 25: 1.590 EUR/Monat - bis 25 Lager" } },
-      article7: { title: "Artikel 7 - Upgrade und Downgrade", upgrade: { title: "Upgrade", content: "Sofort wirksam mit anteiliger Zahlung." }, downgrade: { title: "Downgrade", content: "Kann jederzeit durchgeführt werden, mit anteiliger Rückerstattung für den verbleibenden Zeitraum. Downgrade unter die aktuelle Anzahl aktiver Lager nicht möglich." } },
-      article8: { title: "Artikel 8 - Funktionen und Einschränkungen", included: { title: "In allen Plänen enthalten", items: ["Unbegrenzte Check-ins", "Unbegrenzte Abteilungen", "Benutzerdefinierte Felder", "Vollständige Berichte", "QR-Check-in", "Fahrer-App", "E-Mail-Support"] }, enterprise: { title: "Enterprise-Funktionen", items: ["API-Zugang (Enterprise 5+)", "Eigene Domain (Enterprise 5+)", "Priority-Support (Enterprise 5+)", "Dedizierter Support (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
-      article9: { title: "Artikel 9 - Serviceverfügbarkeit", content: "Der Anbieter verpflichtet sich zu mindestens 99,9% jährlicher Verfügbarkeit.", exclusions: { title: "Ausnahmen", items: ["Geplante Wartung", "Höhere Gewalt", "Cyberangriffe", "Drittanbieterprobleme"] } },
-      article10: { title: "Artikel 10 - Kundenpflichten", items: ["Vorauszahlung des Abonnements", "Korrekte Rechnungsdaten", "Legale Nutzung", "DSGVO-Konformität", "Kein Weiterverkauf"] },
-      article11: { title: "Artikel 11 - Anbieterpflichten", items: ["Zugang gemäß Plan", "Technischer Support", "Sicherheitsmaßnahmen", "Regelmäßige Backups", "Benachrichtigung bei Änderungen"] },
-      article12: { title: "Artikel 12 - Geistiges Eigentum", platform: { title: "Plattform", content: "Alle Rechte gehören dem Anbieter." }, clientData: { title: "Kundendaten", content: "Kunde behält alle Rechte an seinen Daten." }, license: { title: "Lizenz", content: "Nicht-exklusive Lizenz für die Abonnementdauer." } },
-      article13: { title: "Artikel 13 - Haftungsbeschränkung", items: ["Dienst 'wie besehen'", "Keine Haftung für indirekte Schäden", "Maximale Haftung: 3 Monatsabonnements", "Gelöschte Daten nicht wiederherstellbar"] },
-      article14: { title: "Artikel 14 - Vertragsbeendigung", byClient: { title: "Kündigung durch Kunde", content: "Jederzeit möglich." }, byProvider: { title: "Kündigung durch Anbieter", content: "Bei Nichtzahlung, Missbrauch oder Verstoß." }, effects: { title: "Folgen", content: "30 Tage für Datenexport, dann endgültige Löschung." } },
-      article15: { title: "Artikel 15 - Schlussbestimmungen", items: [{ title: "Anwendbares Recht", content: "Rumänisches Recht" }, { title: "Gerichtsstand", content: "Bukarest" }, { title: "Änderungen", content: "Mit 30 Tagen Vorlauf" }], contact: { title: "Kontakt", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien" } },
+      article2: {
+        title: "Artikel 2 - Vertragsgegenstand",
+        content:
+          "Der Anbieter verpflichtet sich, dem Kunden Zugang zur Logistiq-Plattform für Folgendes zu gewähren:",
+        items: [
+          "Verwaltung von Check-in-Vorgängen in Logistiklagern",
+          "Zugang zur Dashboard-Oberfläche (logistiq.cloud) für Manager und Operatoren",
+          "Zugang zur App QRGO Driver (qrgo.ro) für die Fahrer, die den Check-in durchführen",
+          "Die im gewählten Abonnementplan enthaltenen Funktionen",
+          "Technischer Support entsprechend der Abonnementstufe",
+        ],
+      },
+      article3: {
+        title: "Artikel 3 - Annahme der Bedingungen",
+        content:
+          "Durch jede der folgenden Handlungen bestätigt der Kunde, dass er diese Bedingungen gelesen, verstanden und akzeptiert hat:",
+        items: [
+          "Erstellung eines Kontos auf der Plattform",
+          "Bezahlung eines Abonnements",
+          "Nutzung einer beliebigen Funktion der Plattform",
+        ],
+        note:
+          "Die aktuelle Fassung der Bedingungen ist stets auf der Website logistiq.ro verfügbar.",
+      },
+      article4: {
+        title: "Artikel 4 - Registrierung und Konto",
+        items: [
+          "Der Kunde garantiert, dass die bei der Registrierung angegebenen Informationen richtig, vollständig und aktuell sind",
+          "Die Sicherheit des Passworts und des Zugangs zum Konto liegt in der alleinigen Verantwortung des Kunden",
+          "Der Anbieter behält sich das Recht vor, die Registrierung abzulehnen oder das Konto zu sperren, wenn gegen die Bedingungen verstoßen wird",
+          "Der Kunde darf das Konto nicht ohne vorherige Zustimmung des Anbieters auf Dritte übertragen",
+        ],
+      },
+      article5: {
+        title: "Artikel 5 - Vertragsdauer",
+        trial: {
+          title: "Testphase",
+          content:
+            "Die Plattform bietet eine kostenlose Testphase von 10 Tagen. Nach deren Ablauf setzt der Zugang den Erwerb eines Abonnements voraus.",
+        },
+        subscription: {
+          title: "Abonnement",
+          content:
+            "Das Abonnement wird monatlich abgeschlossen und verlängert sich automatisch, sofern der Kunde es nicht kündigt.",
+        },
+        cancellation: {
+          title: "Kündigung",
+          content:
+            "Der Kunde kann jederzeit kündigen. Der Zugang bleibt bis zum Ende des bezahlten Zeitraums aktiv.",
+        },
+      },
+      article6: {
+        title: "Artikel 6 - Preise und Zahlungen",
+        items: [
+          "Die Preise verstehen sich in EUR; es gelten die zum Zeitpunkt der Bestellung auf der Website angezeigten Preise",
+          "Die Rechnungsstellung erfolgt monatlich im Voraus",
+          "Die Zahlung kann per Karte (Stripe) oder per Banküberweisung erfolgen",
+          "Für Rumänien werden steuerlich gültige Rechnungen über SmartBill ausgestellt",
+          "Preisänderungen mit einer Vorankündigung von 30 Tagen",
+        ],
+        plans: {
+          title: "Verfügbare Pläne",
+          professional: "Professional: 139 EUR/Monat - 1 Lager",
+          enterprise5: "Enterprise 5: 500 EUR/Monat - bis zu 5 Lager",
+          enterprise10: "Enterprise 10: 800 EUR/Monat - bis zu 10 Lager",
+          enterprise25: "Enterprise 25: 1.590 EUR/Monat - bis zu 25 Lager",
+        },
+      },
+      article7: {
+        title: "Artikel 7 - Upgrade und Downgrade",
+        upgrade: {
+          title: "Upgrade",
+          content:
+            "Der Wechsel zu einem höheren Plan wird sofort gegen Zahlung der anteiligen Differenz wirksam.",
+        },
+        downgrade: {
+          title: "Downgrade",
+          content:
+            "Der Wechsel zu einem niedrigeren Plan ist jederzeit möglich, mit anteiliger Erstattung der Differenz für den verbleibenden Zeitraum. Ein Downgrade unter die aktuelle Anzahl aktiver Lager ist nicht möglich.",
+        },
+      },
+      article8: {
+        title: "Artikel 8 - Funktionen und Einschränkungen",
+        included: {
+          title: "In allen Plänen enthalten",
+          items: [
+            "Digitaler Check-in - Fahrer scannen einen QR-Code oder nutzen die App QRGO Driver",
+            "Rampenmanagement - Zuweisung und Optimierung des Lkw-Flusses",
+            "Chat und Benachrichtigungen in Echtzeit zwischen Operator und Fahrer",
+            "Kategorisierung nach Abteilungen und Lkw-Typen",
+            "Berichte und Analysen - interaktive Dashboards mit KPIs",
+            "App QRGO Driver (Web, Android, iOS)",
+            "Mehrsprachigkeit - Oberfläche in 12 europäischen Sprachen",
+            "Cloudbasiert - ohne Geräte oder lokale Installationen",
+            "Anweisungen und Orientierungshilfe für Fahrer in der App",
+            "Early Check-in und Planung der Ankunftszeit",
+            "Automatische Standorterkennung (mobile App)",
+            "Unbegrenzte Check-ins, Abteilungen und Rampen",
+            "E-Mail-Support",
+          ],
+        },
+        enterprise: {
+          title: "Enterprise-Funktionen",
+          items: [
+            "White-Label auf eigener Domain (Enterprise 5+)",
+            "API-Zugang für Integrationen (Enterprise 5+)",
+            "Priorisierter Support (Enterprise 5+)",
+            "Dedizierter Support (Enterprise 10+)",
+            "SLA 99,9% (Enterprise 25)",
+          ],
+        },
+      },
+      article9: {
+        title: "Artikel 9 - Verfügbarkeit des Dienstes",
+        content:
+          "Der Anbieter verpflichtet sich, eine Verfügbarkeit von mindestens 99,9% pro Jahr aufrechtzuerhalten.",
+        exclusions: {
+          title: "Ausnahmen",
+          items: [
+            "Geplante Wartung (24 Stunden im Voraus angekündigt)",
+            "Höhere Gewalt",
+            "Cyberangriffe",
+            "Probleme bei Drittanbietern",
+          ],
+        },
+      },
+      article10: {
+        title: "Artikel 10 - Pflichten des Kunden",
+        items: [
+          "Vorauszahlung des Abonnements",
+          "Korrekte Rechnungsdaten",
+          "Rechtmäßige Nutzung der Plattform",
+          "Einhaltung der DSGVO in Bezug auf die Daten der Fahrer",
+          "Verbot des Weiterverkaufs des Dienstes",
+        ],
+      },
+      article11: {
+        title: "Artikel 11 - Pflichten des Anbieters",
+        items: [
+          "Bereitstellung des Zugangs gemäß dem Abonnementplan",
+          "Angemessener technischer Support",
+          "Angemessene Sicherheitsmaßnahmen",
+          "Regelmäßige Backups",
+          "Benachrichtigung über wichtige Änderungen",
+        ],
+      },
+      article12: {
+        title: "Artikel 12 - Geistiges Eigentum",
+        platform: {
+          title: "Plattform",
+          content: "Alle Rechte des geistigen Eigentums an der Plattform stehen dem Anbieter zu.",
+        },
+        clientData: {
+          title: "Kundendaten",
+          content: "Der Kunde behält alle Rechte an seinen Daten.",
+        },
+        license: {
+          title: "Lizenz",
+          content:
+            "Der Kunde erhält für die Dauer des Abonnements eine nicht ausschließliche Nutzungslizenz.",
+        },
+      },
+      article13: {
+        title: "Artikel 13 - Haftungsbeschränkung",
+        items: [
+          "Der Dienst wird „wie besehen“ bereitgestellt",
+          "Keine Haftung für indirekte Verluste",
+          "Maximale Haftung: Wert der letzten 3 Monate des Abonnements",
+          "Gelöschte Daten können nicht wiederhergestellt werden",
+        ],
+      },
+      article14: {
+        title: "Artikel 14 - Vertragsbeendigung",
+        byClient: {
+          title: "Kündigung durch den Kunden",
+          content:
+            "Der Kunde kann jederzeit kündigen. Der Zugang bleibt bis zum Ende des Zeitraums aktiv.",
+        },
+        byProvider: {
+          title: "Kündigung durch den Anbieter",
+          content: "Bei Nichtzahlung, Missbrauch oder Verstoß gegen die Bedingungen.",
+        },
+        effects: {
+          title: "Folgen",
+          content: "30 Tage für den Datenexport, danach endgültige Löschung.",
+        },
+      },
+      article15: {
+        title: "Artikel 15 - Schlussbestimmungen",
+        items: [
+          {
+            title: "Anwendbares Recht",
+            content: "Rumänisches Recht",
+          },
+          {
+            title: "Gerichtsstand",
+            content: "Die Gerichte in Bukarest",
+          },
+          {
+            title: "Änderungen",
+            content: "Mit einer Vorankündigung von 30 Tagen",
+          },
+        ],
+        contact: {
+          title: "Kontakt",
+          email: "contact@logistiq.ro",
+          address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
+        },
+      },
     },
     cookies: {
       title: "Cookie-Richtlinie",
-      lastUpdated: "Letzte Aktualisierung",
-      intro: { title: "1. Einleitung", p1: "Diese Richtlinie erklärt, wie die Logistiq-Plattform (logistiq.ro, logistiq.cloud, qrgo.ro) Cookies und ähnliche Technologien verwendet, um Ihnen ein sicheres und personalisiertes Erlebnis zu bieten.", p2: "Durch die weitere Nutzung unserer Websites akzeptieren Sie die Verwendung von Cookies gemäß dieser Richtlinie." },
-      whatAreCookies: { title: "2. Was sind Cookies?", content: "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie eine Website besuchen. Sie ermöglichen es der Website, Ihr Gerät zu erkennen und bestimmte Informationen zu speichern.", types: { title: "Cookie-Arten:", session: { name: "Sitzungs-Cookies", desc: "Werden beim Schließen des Browsers automatisch gelöscht" }, persistent: { name: "Persistente Cookies", desc: "Bleiben bis zum Ablauf oder manuellen Löschen" }, firstParty: { name: "Eigene Cookies", desc: "Von der besuchten Website platziert" }, thirdParty: { name: "Drittanbieter-Cookies", desc: "Von anderen integrierten Diensten platziert" } } },
-      cookiesWeUse: { title: "3. Cookies die wir verwenden", essential: { title: "Essentielle Cookies", desc: "Für den Plattformbetrieb erforderlich. Können nicht deaktiviert werden.", cookies: [{ name: "sb-access-token", duration: "1 Stunde", purpose: "Supabase-Authentifizierung - Zugriffstoken" }, { name: "sb-refresh-token", duration: "7 Tage", purpose: "Supabase-Authentifizierung - Sitzungsaktualisierung" }, { name: "NEXT_LOCALE", duration: "1 Jahr", purpose: "Speicherung der bevorzugten Sprache" }] }, functional: { title: "Funktionale Cookies", desc: "Verbessern die Benutzererfahrung.", cookies: [{ name: "theme", duration: "1 Jahr", purpose: "Speicherung der Theme-Präferenz" }, { name: "sidebar_collapsed", duration: "30 Tage", purpose: "Seitenleistenstatus im Dashboard" }] }, analytics: { title: "Analyse-Cookies", desc: "Helfen uns zu verstehen, wie Sie die Plattform nutzen.", cookies: [{ name: "_ga", duration: "2 Jahre", purpose: "Google Analytics - Besucheridentifikation" }, { name: "_gid", duration: "24 Stunden", purpose: "Google Analytics - Sitzungsidentifikation" }] } },
-      thirdParty: { title: "4. Drittanbieter-Cookies", intro: "Die Logistiq-Plattform verwendet folgende Drittanbieterdienste:", services: [{ name: "Supabase", purpose: "Authentifizierung und Datenbank", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Zahlungsabwicklung", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Hosting und Analytics", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Verkehrsstatistiken", url: "policies.google.com/privacy" }], note: "Wir empfehlen die Datenschutzrichtlinien dieser Dienste zu lesen." },
-      manageCookies: { title: "5. Cookies verwalten", intro: "Sie können Cookies nach Ihren Wünschen kontrollieren und/oder löschen:", browsers: [{ name: "Google Chrome", steps: "Einstellungen → Datenschutz und Sicherheit → Cookies" }, { name: "Mozilla Firefox", steps: "Einstellungen → Datenschutz & Sicherheit → Cookies" }, { name: "Safari", steps: "Einstellungen → Datenschutz → Website-Daten verwalten" }, { name: "Microsoft Edge", steps: "Einstellungen → Cookies und Websiteberechtigungen" }], warning: "Warnung: Das Deaktivieren essentieller Cookies kann die Plattformfunktionalität beeinträchtigen." },
-      changes: { title: "6. Richtlinienänderungen", content: "Wir behalten uns das Recht vor, diese Richtlinie zu aktualisieren. Wesentliche Änderungen werden per Plattformbenachrichtigung oder E-Mail angekündigt." },
-      contact: { title: "7. Kontakt", intro: "Bei Fragen zur Cookie-Nutzung oder zur Ausübung Ihrer DSGVO-Rechte:", operator: "Betreiber", operatorName: "HOSTLIFE DIGITAL SRL", cui: "USt-IdNr.: 52638053", regNo: "Reg.-Nr.: J20/7592/5001", address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien", email: "E-Mail", emailAddress: "contact@logistiq.ro" },
+      lastUpdated: "Zuletzt aktualisiert",
+      intro: {
+        title: "1. Einleitung",
+        p1:
+          "Diese Richtlinie erläutert, wie die Logistiq-Plattform (logistiq.ro, logistiq.cloud, qrgo.ro) Cookies und ähnliche Technologien verwendet, um Ihnen ein sicheres und personalisiertes Erlebnis zu bieten.",
+        p2:
+          "Wenn Sie weiter auf unseren Websites navigieren, akzeptieren Sie die Verwendung von Cookies gemäß dieser Richtlinie.",
+      },
+      whatAreCookies: {
+        title: "2. Was sind Cookies?",
+        content:
+          "Cookies sind kleine Textdateien, die auf Ihrem Gerät (Computer, Mobiltelefon, Tablet) gespeichert werden, wenn Sie eine Website besuchen. Sie ermöglichen es der Website, Ihr Gerät zu erkennen und sich bestimmte Informationen über Ihren Besuch oder Ihre Präferenzen zu merken.",
+        types: {
+          title: "Arten von Cookies:",
+          session: {
+            name: "Sitzungs-Cookies",
+            desc: "Werden automatisch gelöscht, wenn Sie den Browser schließen",
+          },
+          persistent: {
+            name: "Persistente Cookies",
+            desc: "Verbleiben bis zu ihrem Ablauf oder ihrer manuellen Löschung auf dem Gerät",
+          },
+          firstParty: {
+            name: "Eigene Cookies",
+            desc: "Werden von der Website gesetzt, die Sie besuchen",
+          },
+          thirdParty: {
+            name: "Drittanbieter-Cookies",
+            desc: "Werden von anderen integrierten Websites/Diensten gesetzt",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Cookies, die wir verwenden",
+        essential: {
+          title: "Essenzielle Cookies",
+          desc: "Für den Betrieb der Plattform erforderlich. Sie können nicht deaktiviert werden.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 Stunde",
+              purpose: "Supabase-Authentifizierung - Zugriffstoken",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 Tage",
+              purpose: "Supabase-Authentifizierung - Sitzungsaktualisierung",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 Jahr",
+              purpose: "Speicherung der bevorzugten Sprache",
+            },
+          ],
+        },
+        functional: {
+          title: "Funktionale Cookies",
+          desc: "Verbessern die Nutzungserfahrung auf der Plattform.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 Jahr",
+              purpose: "Speicherung der Präferenz für das dunkle/helle Design",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 Tage",
+              purpose: "Zustand des Seitenmenüs im Dashboard",
+            },
+          ],
+        },
+        analytics: {
+          title: "Analyse-Cookies",
+          desc:
+            "Helfen uns zu verstehen, wie Sie die Plattform nutzen, damit wir sie verbessern können.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 Jahre",
+              purpose: "Google Analytics - Besucheridentifikation",
+            },
+            {
+              name: "_gid",
+              duration: "24 Stunden",
+              purpose: "Google Analytics - Sitzungsidentifikation",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Drittanbieter-Cookies",
+        intro:
+          "Die Logistiq-Plattform nutzt die folgenden Dienste von Drittanbietern, die Cookies setzen können:",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Authentifizierung und Datenbank",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Zahlungsabwicklung",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting und Analysen",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Zugriffsstatistiken",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "Für Einzelheiten empfehlen wir Ihnen, die Datenschutzerklärungen dieser Dienste zu lesen.",
+      },
+      manageCookies: {
+        title: "5. So verwalten Sie Cookies",
+        intro:
+          "Sie können Cookies nach Ihren Wünschen kontrollieren und/oder löschen. So gehen Sie dabei in den wichtigsten Browsern vor:",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Einstellungen → Datenschutz und Sicherheit → Cookies und andere Websitedaten",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Einstellungen → Datenschutz & Sicherheit → Cookies und Website-Daten",
+          },
+          {
+            name: "Safari",
+            steps: "Einstellungen → Datenschutz → Websitedaten verwalten",
+          },
+          {
+            name: "Microsoft Edge",
+            steps:
+              "Einstellungen → Cookies und Websiteberechtigungen → Cookies verwalten und löschen",
+          },
+        ],
+        warning:
+          "Achtung: Die Deaktivierung essenzieller Cookies kann die Funktionsfähigkeit der Plattform beeinträchtigen. Möglicherweise können Sie sich nicht anmelden oder verlieren den Zugang zu bestimmten Funktionen.",
+      },
+      changes: {
+        title: "6. Änderungen dieser Richtlinie",
+        content:
+          "Wir behalten uns das Recht vor, diese Richtlinie von Zeit zu Zeit zu aktualisieren. Wesentliche Änderungen werden durch eine Benachrichtigung auf der Plattform oder per E-Mail angekündigt.",
+      },
+      contact: {
+        title: "7. Kontakt",
+        intro:
+          "Bei Fragen zur Verwendung von Cookies oder zur Ausübung Ihrer Rechte nach der DSGVO:",
+        operator: "Verantwortlicher",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Reg.-Nr.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
+        email: "E-Mail",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26. Januar 2026",
+      backHome: "Zurück zur Startseite",
+      retentionHeaders: {
+        type: "Datenart",
+        period: "Speicherdauer",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Speicherdauer",
+        purpose: "Zweck",
+      },
+      meta: {
+        privacy: "Datenschutzerklärung von Logistiq – wie wir Ihre personenbezogenen Daten gemäß DSGVO erheben, verwenden und schützen.",
+        terms: "Allgemeine Geschäftsbedingungen von Logistiq – Plattform für Lagerverwaltung und digitalen Fahrer-Check-in.",
+        cookies: "Cookie-Richtlinie von Logistiq – wie wir Cookies verwenden, um Ihnen ein optimales Erlebnis zu bieten.",
+      },
     },
   },
   pl: {
@@ -7027,127 +7611,671 @@ export const translations = {
       a15: "Tak, we wszystkich planach oferujemy spersonalizowane szkolenia dla zespołu operacyjnego. Szkolenie obejmuje konfigurację systemu, korzystanie z dashboardu i generowanie raportów.",
     },
     privacy: {
-      title: "Polityka Prywatności",
+      title: "Polityka prywatności",
       lastUpdated: "Ostatnia aktualizacja",
       intro: {
         title: "1. Wprowadzenie",
-        p1: "HOSTLIFE DIGITAL SRL (\"Administrator Danych\"), z siedzibą pod adresem Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, NIP 52638053, szanuje prywatność Twoich danych osobowych.",
-        p2: "Niniejsza polityka opisuje, w jaki sposób zbieramy, wykorzystujemy i chronimy dane osobowe zgodnie z Ogólnym Rozporządzeniem o Ochronie Danych (RODO - Rozporządzenie UE 2016/679).",
+        p1:
+          "HOSTLIFE DIGITAL SRL („Administrator”), z siedzibą pod adresem Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, CUI 52638053, szanuje prywatność Twoich danych osobowych.",
+        p2:
+          "Niniejsza polityka opisuje, w jaki sposób zbieramy, wykorzystujemy i chronimy dane osobowe zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO - rozporządzenie (UE) 2016/679).",
       },
       dataCollected: {
         title: "2. Jakie dane osobowe zbieramy",
-        identification: { title: "Dane identyfikacyjne", items: ["Imię i nazwisko", "Adres e-mail", "Rola w systemie", "Zdjęcie profilowe (opcjonalnie)"] },
-        contact: { title: "Dane kontaktowe", items: ["Numer telefonu", "Adres e-mail"] },
-        billing: { title: "Dane rozliczeniowe", items: ["Nazwa firmy", "NIP", "Numer rejestracyjny", "Adres rozliczeniowy", "Historia płatności"] },
-        technical: { title: "Dane techniczne", items: ["Adres IP", "User Agent", "Współrzędne GPS (za Twoją zgodą)"] },
-        activity: { title: "Dane aktywności", items: ["Historia check-inów", "Wiadomości z operatorami", "Załączniki (CMR, zdjęcia)", "Czas w każdym etapie"] },
+        identification: {
+          title: "Dane identyfikacyjne",
+          items: [
+            "Imię i nazwisko",
+            "Adres e-mail",
+            "Rola w systemie (operator, administrator)",
+            "Zdjęcie profilowe (opcjonalnie)",
+          ],
+        },
+        contact: {
+          title: "Dane kontaktowe",
+          items: [
+            "Numer telefonu",
+            "Adres e-mail",
+          ],
+        },
+        billing: {
+          title: "Dane rozliczeniowe",
+          items: [
+            "Nazwa firmy",
+            "Numer identyfikacji podatkowej (CUI/CIF)",
+            "Numer rejestrowy",
+            "Adres rozliczeniowy",
+            "Historia płatności",
+          ],
+        },
+        technical: {
+          title: "Dane techniczne",
+          items: [
+            "Adres IP",
+            "User Agent (przeglądarka/urządzenie)",
+            "Współrzędne GPS (za Twoją zgodą, w celu automatycznego wykrywania lokalizacji)",
+          ],
+        },
+        activity: {
+          title: "Dane dotyczące aktywności",
+          items: [
+            "Historia check-inów",
+            "Wiadomości wymieniane z operatorami",
+            "Załączniki (CMR, zdjęcia dokumentów)",
+            "Czas spędzony na każdym etapie operacji",
+          ],
+        },
       },
       purposes: {
         title: "3. Cele przetwarzania",
-        list: ["Świadczenie usługi cyfrowego check-inu", "Zarządzanie kontem i uwierzytelnianie", "Przetwarzanie płatności i wystawianie faktur", "Komunikacja w czasie rzeczywistym", "Raporty i analizy", "Wsparcie techniczne", "Doskonalenie usług", "Zgodność z obowiązkami prawnymi"],
+        list: [
+          "Świadczenie usługi cyfrowego check-inu dla magazynów",
+          "Zarządzanie kontem i uwierzytelnianie użytkowników",
+          "Przetwarzanie płatności i wystawianie faktur",
+          "Komunikacja w czasie rzeczywistym między kierowcami a operatorami magazynów",
+          "Generowanie raportów i analiz w celu optymalizacji operacji",
+          "Zapewnianie wsparcia technicznego i obsługi klienta",
+          "Ciągłe doskonalenie naszych usług",
+          "Wypełnianie obowiązków prawnych (przechowywanie faktur zgodnie z Kodeksem podatkowym)",
+        ],
       },
       legalBasis: {
-        title: "4. Podstawa prawna przetwarzania",
-        contract: { title: "Wykonanie umowy (Art. 6.1.b RODO)", desc: "Przetwarzamy dane niezbędne do świadczenia usług objętych umową." },
-        legal: { title: "Obowiązek prawny (Art. 6.1.c RODO)", desc: "Przechowujemy dane rozliczeniowe zgodnie z przepisami podatkowymi (10 lat)." },
-        legitimate: { title: "Prawnie uzasadnione interesy (Art. 6.1.f RODO)", desc: "Zbieramy dane techniczne dla bezpieczeństwa systemu i doskonalenia usług." },
-        consent: { title: "Zgoda (Art. 6.1.a RODO)", desc: "Na współrzędne GPS i komunikację marketingową prosimy o Twoją wyraźną zgodę." },
+        title: "4. Podstawy prawne przetwarzania",
+        contract: {
+          title: "Wykonanie umowy (art. 6 ust. 1 lit. b RODO)",
+          desc:
+            "Przetwarzamy dane niezbędne do świadczenia na Twoją rzecz usług objętych umową: cyfrowego check-inu, komunikacji w czasie rzeczywistym, zarządzania rampami.",
+        },
+        legal: {
+          title: "Obowiązek prawny (art. 6 ust. 1 lit. c RODO)",
+          desc:
+            "Przechowujemy dane rozliczeniowe zgodnie z rumuńskimi przepisami podatkowymi (Kodeks podatkowy - 10 lat).",
+        },
+        legitimate: {
+          title: "Prawnie uzasadnione interesy (art. 6 ust. 1 lit. f RODO)",
+          desc:
+            "Zbieramy dane techniczne na potrzeby bezpieczeństwa systemu, zapobiegania oszustwom i doskonalenia usług.",
+        },
+        consent: {
+          title: "Zgoda (art. 6 ust. 1 lit. a RODO)",
+          desc:
+            "W przypadku współrzędnych GPS i komunikacji marketingowej prosimy o Twoją wyraźną zgodę, którą możesz w dowolnym momencie wycofać.",
+        },
       },
       thirdParties: {
-        title: "5. Udostępnianie danych stronom trzecim",
-        intro: "Współpracujemy z następującymi zaufanymi partnerami:",
+        title: "5. Udostępnianie danych podmiotom trzecim",
+        intro: "W celu świadczenia usług współpracujemy z następującymi zaufanymi partnerami:",
         partners: [
-          { name: "Supabase", purpose: "Baza danych i uwierzytelnianie (serwery w UE - Frankfurt)" },
-          { name: "Stripe", purpose: "Bezpieczne przetwarzanie płatności (certyfikat PCI DSS)" },
-          { name: "SmartBill", purpose: "Wystawianie faktur (Rumunia)" },
-          { name: "Vercel", purpose: "Hosting i globalna dystrybucja (CDN)" },
+          {
+            name: "Supabase",
+            purpose: "Baza danych i uwierzytelnianie (serwery w UE - Frankfurt, Niemcy)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Bezpieczne przetwarzanie płatności (certyfikat PCI DSS)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Wystawianie faktur zgodnych z przepisami (Rumunia)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting i globalna dystrybucja (CDN)",
+          },
         ],
-        note: "Nie sprzedajemy ani nie udostępniamy Twoich danych stronom trzecim w celach marketingowych.",
+        note:
+          "Nie sprzedajemy Twoich danych osobowych ani nie udostępniamy ich podmiotom trzecim w celach marketingowych.",
       },
-      internationalTransfers: { title: "6. Międzynarodowe transfery danych", content: "Niektóre dane mogą być przekazywane poza EOG. W takich przypadkach stosujemy standardowe klauzule umowne zatwierdzone przez Komisję Europejską." },
+      internationalTransfers: {
+        title: "6. Międzynarodowe przekazywanie danych",
+        content:
+          "Niektóre dane mogą być przekazywane naszym partnerom poza Europejski Obszar Gospodarczy (EOG). W takich przypadkach stosujemy odpowiednie zabezpieczenia, w tym standardowe klauzule umowne zatwierdzone przez Komisję Europejską, aby zapewnić równoważny stopień ochrony danych.",
+      },
       retention: {
         title: "7. Okres przechowywania danych",
         periods: [
-          { type: "Dane konta", duration: "Czas trwania aktywnego konta + 30 dni" },
-          { type: "Dane rozliczeniowe", duration: "10 lat" },
-          { type: "Dane check-inów", duration: "2 lata" },
-          { type: "Dane techniczne", duration: "6 miesięcy" },
-          { type: "Załączniki", duration: "1 rok po zakończeniu" },
+          {
+            type: "Dane konta użytkownika",
+            duration: "Przez okres aktywności konta + 30 dni po jego usunięciu",
+          },
+          {
+            type: "Dane rozliczeniowe",
+            duration: "10 lat (zgodnie z rumuńskim Kodeksem podatkowym)",
+          },
+          {
+            type: "Dane check-inów i operacji",
+            duration: "2 lata lub zgodnie z warunkami umowy",
+          },
+          {
+            type: "Dane techniczne (IP, logi)",
+            duration: "6 miesięcy",
+          },
+          {
+            type: "Załączniki (CMR, zdjęcia)",
+            duration: "1 rok po zakończeniu operacji",
+          },
         ],
         note: "Po upływie okresów przechowywania dane są automatycznie usuwane lub anonimizowane.",
       },
       rights: {
         title: "8. Twoje prawa",
-        intro: "Zgodnie z RODO masz następujące prawa:",
+        intro: "Zgodnie z RODO przysługują Ci następujące prawa dotyczące Twoich danych osobowych:",
         list: [
-          { name: "Prawo dostępu", desc: "Możesz zażądać kopii swoich danych." },
-          { name: "Prawo do sprostowania", desc: "Możesz poprawić nieprawidłowe dane." },
-          { name: "Prawo do usunięcia", desc: "Możesz zażądać usunięcia swoich danych." },
-          { name: "Prawo do ograniczenia", desc: "Możesz ograniczyć przetwarzanie." },
-          { name: "Prawo do przenoszenia", desc: "Możesz otrzymać swoje dane w powszechnym formacie." },
-          { name: "Prawo do sprzeciwu", desc: "Możesz sprzeciwić się przetwarzaniu." },
-          { name: "Prawo do cofnięcia zgody", desc: "Możesz cofnąć zgodę w dowolnym momencie." },
+          {
+            name: "Prawo dostępu do danych",
+            desc:
+              "Możesz zażądać kopii wszystkich danych osobowych, które posiadamy na Twój temat.",
+          },
+          {
+            name: "Prawo do sprostowania danych",
+            desc: "Możesz poprawić nieprawidłowe lub niekompletne dane na swoim koncie.",
+          },
+          {
+            name: "Prawo do usunięcia danych",
+            desc:
+              "Możesz zażądać usunięcia swoich danych („prawo do bycia zapomnianym”), z wyjątkiem danych przechowywanych zgodnie z obowiązkami prawnymi.",
+          },
+          {
+            name: "Prawo do ograniczenia przetwarzania",
+            desc:
+              "W określonych okolicznościach możesz ograniczyć sposób, w jaki przetwarzamy Twoje dane.",
+          },
+          {
+            name: "Prawo do przenoszenia danych",
+            desc:
+              "Możesz otrzymać swoje dane w ustrukturyzowanym, powszechnie używanym i interoperacyjnym formacie.",
+          },
+          {
+            name: "Prawo do sprzeciwu",
+            desc:
+              "Możesz wnieść sprzeciw wobec przetwarzania opartego na prawnie uzasadnionych interesach.",
+          },
+          {
+            name: "Prawo do wycofania zgody",
+            desc:
+              "Możesz w dowolnym momencie wycofać udzieloną zgodę, bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem.",
+          },
         ],
-        complaint: "W przypadku skarg możesz zwrócić się do właściwego organu ochrony danych.",
+        complaint:
+          "Jeżeli uważasz, że Twoje prawa nie są przestrzegane, możesz wnieść skargę do Krajowego Organu Nadzoru nad Przetwarzaniem Danych Osobowych (ANSPDCP, rumuński organ nadzorczy) - www.dataprotection.ro",
       },
       security: {
         title: "9. Bezpieczeństwo danych",
-        intro: "Wdrażamy środki techniczne i organizacyjne:",
-        measures: ["Szyfrowanie (TLS/SSL)", "Row Level Security (RLS)", "Bezpieczne uwierzytelnianie", "Ciągłe monitorowanie", "Automatyczne kopie zapasowe", "Ograniczony dostęp"],
+        intro: "Wdrażamy środki techniczne i organizacyjne w celu ochrony danych:",
+        measures: [
+          "Szyfrowanie całej komunikacji w trakcie przesyłania (TLS/SSL)",
+          "Row Level Security (RLS) do izolowania danych między organizacjami",
+          "Bezpieczne uwierzytelnianie z haszowaniem haseł algorytmem bcrypt",
+          "Ciągłe monitorowanie i audytowanie dostępu do danych",
+          "Automatyczne kopie zapasowe i procedury odtwarzania po awarii",
+          "Dostęp ograniczony zgodnie z zasadą wiedzy koniecznej („need-to-know”)",
+        ],
       },
-      cookies: { title: "10. Pliki cookie", content: "Używamy tylko niezbędnych plików cookie do działania platformy. Brak plików cookie reklamowych lub śledzących." },
-      children: { title: "11. Dane dzieci", content: "Usługi Logistiq są przeznaczone dla osób w wieku 16 lat lub starszych. Nie zbieramy świadomie danych od nieletnich." },
-      changes: { title: "12. Zmiany polityki", content: "Możemy okresowo aktualizować tę politykę. O istotnych zmianach poinformujemy Cię e-mailem lub banerem." },
+      cookies: {
+        title: "10. Pliki cookie i podobne technologie",
+        content:
+          "Używamy niezbędnych plików cookie na potrzeby działania platformy (uwierzytelnianie, sesja użytkownika, preferencje językowe). Nie używamy plików cookie śledzących w celach reklamowych ani plików cookie podmiotów trzecich służących profilowaniu.",
+      },
+      children: {
+        title: "11. Dane dzieci",
+        content:
+          "Usługi Logistiq są przeznaczone wyłącznie dla użytkowników w wieku co najmniej 16 lat. Nie zbieramy świadomie danych osobowych od osób poniżej tego wieku. Jeżeli dowiesz się, że osoba małoletnia przekazała dane osobowe, prosimy o kontakt z nami w celu ich usunięcia.",
+      },
+      changes: {
+        title: "12. Zmiany polityki",
+        content:
+          "Możemy okresowo aktualizować niniejszą politykę, aby uwzględnić zmiany w naszych praktykach lub w wymogach prawnych. O istotnych zmianach powiadomimy Cię e-mailem lub poprzez wyświetlenie banera na platformie. Data ostatniej aktualizacji jest podana na górze tej strony.",
+      },
       contact: {
         title: "13. Kontakt",
-        intro: "W przypadku pytań dotyczących Twoich danych lub skorzystania z praw RODO, skontaktuj się z nami:",
-        operator: "Administrator danych", operatorName: "HOSTLIFE DIGITAL SRL", cui: "NIP: 52638053", regNo: "Nr rej.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia", email: "E-mail", emailAddress: "contact@logistiq.ro",
-        responseTime: "Odpowiemy w ciągu 30 dni kalendarzowych.",
+        intro:
+          "W przypadku jakichkolwiek pytań dotyczących Twoich danych osobowych lub w celu skorzystania z praw przysługujących Ci na mocy RODO możesz się z nami skontaktować:",
+        operator: "Administrator danych",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Nr rej.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "Odpowiemy na zgłoszenia w terminie 30 dni kalendarzowych.",
       },
     },
     terms: {
       title: "Regulamin",
       lastUpdated: "Ostatnia aktualizacja",
-      intro: "Niniejszy regulamin określa zasady korzystania z platformy Logistiq. Korzystając z naszych usług, akceptujesz te warunki w całości.",
+      intro:
+        "Niniejszy regulamin określa zasady korzystania z platformy Logistiq. Uzyskując dostęp do naszych usług lub korzystając z nich, akceptujesz niniejszy regulamin w całości.",
       article1: {
         title: "Artykuł 1 - Definicje",
-        content: "Na potrzeby niniejszej umowy następujące terminy mają następujące znaczenia:",
+        content: "Na potrzeby niniejszej umowy poniższe terminy mają następujące znaczenie:",
         definitions: [
-          { term: "Usługodawca", def: "HOSTLIFE DIGITAL SRL, Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, NIP 52638053" },
-          { term: "Platforma", def: "Usługi dostępne przez logistiq.ro, logistiq.cloud i qrgo.ro" },
-          { term: "Klient", def: "Osoba prawna lub fizyczna kupująca subskrypcję" },
-          { term: "Użytkownik", def: "Każda osoba korzystająca z Platformy" },
-          { term: "Subskrypcja", def: "Umowa o świadczenie usług między Usługodawcą a Klientem" },
-          { term: "Panel", def: "Interfejs administracyjny na logistiq.cloud" },
-          { term: "Aplikacja kierowcy", def: "Aplikacja check-in na qrgo.ro" },
+          {
+            term: "Usługodawca",
+            def:
+              "HOSTLIFE DIGITAL SRL z siedzibą pod adresem Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, CUI 52638053",
+          },
+          {
+            term: "Platforma",
+            def:
+              "Ogół usług dostępnych za pośrednictwem stron internetowych logistiq.ro, logistiq.cloud i qrgo.ro",
+          },
+          {
+            term: "Klient",
+            def:
+              "Osoba prawna lub osoba fizyczna prowadząca działalność gospodarczą, która wykupuje subskrypcję w celu korzystania z Platformy",
+          },
+          {
+            term: "Użytkownik",
+            def:
+              "Każda osoba, która uzyskuje dostęp do Platformy lub z niej korzysta, w tym Klient i osoby przez niego wyznaczone",
+          },
+          {
+            term: "Subskrypcja",
+            def:
+              "Umowa o świadczenie usług zawarta między Usługodawcą a Klientem, dotycząca dostępu do Platformy",
+          },
+          {
+            term: "Dashboard",
+            def:
+              "Interfejs administracyjny dostępny pod adresem logistiq.cloud, służący do zarządzania magazynami",
+          },
+          {
+            term: "Driver App / QRGO Driver",
+            def:
+              "Webowa lub mobilna aplikacja do check-inu dla kierowców, dostępna pod adresem qrgo.ro (wersja webowa) lub w Google Play / App Store",
+          },
         ],
       },
-      article2: { title: "Artykuł 2 - Przedmiot umowy", content: "Usługodawca zobowiązuje się zapewnić Klientowi dostęp do platformy Logistiq:", items: ["Zarządzanie operacjami check-in", "Dostęp do Panelu", "Dostęp do Aplikacji kierowcy", "Funkcje według wybranego planu", "Wsparcie techniczne"] },
-      article3: { title: "Artykuł 3 - Akceptacja warunków", content: "Poprzez następujące działania Klient potwierdza akceptację tych warunków:", items: ["Utworzenie konta", "Opłacenie subskrypcji", "Korzystanie z Platformy"], note: "Aktualna wersja jest zawsze dostępna na logistiq.ro." },
-      article4: { title: "Artykuł 4 - Rejestracja i konto", items: ["Prawidłowe dane rejestracyjne", "Bezpieczeństwo konta to odpowiedzialność Klienta", "Prawo do zawieszenia konta", "Zakaz transferu konta bez zgody"] },
-      article5: { title: "Artykuł 5 - Czas trwania umowy", trial: { title: "Okres próbny", content: "10 dni bezpłatnego okresu próbnego." }, subscription: { title: "Subskrypcja", content: "Miesięczna z automatycznym odnowieniem." }, cancellation: { title: "Anulowanie", content: "Możliwe w dowolnym momencie, dostęp do końca opłaconego okresu." } },
-      article6: { title: "Artykuł 6 - Ceny i płatności", items: ["Ceny w EUR", "Miesięczna płatność z góry", "Płatność kartą lub przelewem", "Faktury przez SmartBill (Rumunia)", "Zmiany cen z 30-dniowym wyprzedzeniem"], plans: { title: "Dostępne plany", professional: "Professional: 139 EUR/miesiąc - 1 magazyn", enterprise5: "Enterprise 5: 500 EUR/miesiąc - do 5 magazynów", enterprise10: "Enterprise 10: 800 EUR/miesiąc - do 10 magazynów", enterprise25: "Enterprise 25: 1590 EUR/miesiąc - do 25 magazynów" } },
-      article7: { title: "Artykuł 7 - Upgrade i Downgrade", upgrade: { title: "Upgrade", content: "Natychmiastowy z proporcjonalną płatnością." }, downgrade: { title: "Downgrade", content: "Można dokonać w dowolnym momencie, z proporcjonalnym zwrotem za pozostały okres. Nie można obniżyć planu poniżej aktualnej liczby aktywnych magazynów." } },
-      article8: { title: "Artykuł 8 - Funkcje i ograniczenia", included: { title: "We wszystkich planach", items: ["Nielimitowane check-iny", "Nielimitowane działy", "Pola niestandardowe", "Pełne raporty", "QR check-in", "Aplikacja kierowcy", "Wsparcie email"] }, enterprise: { title: "Funkcje Enterprise", items: ["Dostęp API (Enterprise 5+)", "Własna domena (Enterprise 5+)", "Wsparcie priorytetowe (Enterprise 5+)", "Dedykowane wsparcie (Enterprise 10+)", "SLA 99,9% (Enterprise 25)"] } },
-      article9: { title: "Artykuł 9 - Dostępność usługi", content: "Usługodawca zobowiązuje się do minimum 99,9% rocznej dostępności.", exclusions: { title: "Wykluczenia", items: ["Planowana konserwacja", "Siła wyższa", "Ataki cybernetyczne", "Problemy dostawców zewnętrznych"] } },
-      article10: { title: "Artykuł 10 - Obowiązki Klienta", items: ["Płatność z góry za subskrypcję", "Prawidłowe dane rozliczeniowe", "Legalne korzystanie", "Zgodność z RODO", "Zakaz odsprzedaży"] },
-      article11: { title: "Artykuł 11 - Obowiązki Usługodawcy", items: ["Dostęp według planu", "Wsparcie techniczne", "Środki bezpieczeństwa", "Regularne kopie zapasowe", "Powiadomienia o zmianach"] },
-      article12: { title: "Artykuł 12 - Własność intelektualna", platform: { title: "Platforma", content: "Wszelkie prawa należą do Usługodawcy." }, clientData: { title: "Dane Klienta", content: "Klient zachowuje prawa do swoich danych." }, license: { title: "Licencja", content: "Niewyłączna licencja na czas subskrypcji." } },
-      article13: { title: "Artykuł 13 - Ograniczenie odpowiedzialności", items: ["Usługa 'tak jak jest'", "Brak odpowiedzialności za straty pośrednie", "Maksymalna odpowiedzialność: 3 miesiące subskrypcji", "Usunięte dane nie do odzyskania"] },
-      article14: { title: "Artykuł 14 - Rozwiązanie umowy", byClient: { title: "Anulowanie przez Klienta", content: "Możliwe w dowolnym momencie." }, byProvider: { title: "Rozwiązanie przez Usługodawcę", content: "Za brak płatności, nadużycia lub naruszenie warunków." }, effects: { title: "Skutki", content: "30 dni na eksport danych, potem trwałe usunięcie." } },
-      article15: { title: "Artykuł 15 - Postanowienia końcowe", items: [{ title: "Prawo właściwe", content: "Prawo rumuńskie" }, { title: "Jurysdykcja", content: "Sądy w Bukareszcie" }, { title: "Zmiany", content: "Z 30-dniowym wyprzedzeniem" }], contact: { title: "Kontakt", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia" } },
+      article2: {
+        title: "Artykuł 2 - Przedmiot umowy",
+        content:
+          "Usługodawca zobowiązuje się zapewnić Klientowi dostęp do Platformy Logistiq w następującym zakresie:",
+        items: [
+          "Zarządzanie operacjami check-in w magazynach logistycznych",
+          "Dostęp do interfejsu Dashboard (logistiq.cloud) dla menedżerów i operatorów",
+          "Dostęp do aplikacji QRGO Driver (qrgo.ro) dla kierowców dokonujących check-inu",
+          "Funkcje objęte wybranym planem subskrypcji",
+          "Wsparcie techniczne zgodnie z poziomem subskrypcji",
+        ],
+      },
+      article3: {
+        title: "Artykuł 3 - Akceptacja regulaminu",
+        content:
+          "Dokonując którejkolwiek z poniższych czynności, Klient potwierdza, że zapoznał się z niniejszym regulaminem, zrozumiał go i zaakceptował:",
+        items: [
+          "Utworzenie konta na Platformie",
+          "Opłacenie subskrypcji",
+          "Korzystanie z dowolnej funkcji Platformy",
+        ],
+        note: "Aktualna wersja regulaminu jest zawsze dostępna na stronie logistiq.ro.",
+      },
+      article4: {
+        title: "Artykuł 4 - Rejestracja i konto",
+        items: [
+          "Klient gwarantuje, że informacje podane podczas rejestracji są prawidłowe, kompletne i aktualne",
+          "Za bezpieczeństwo hasła i dostępu do konta odpowiada wyłącznie Klient",
+          "Usługodawca zastrzega sobie prawo do odmowy rejestracji lub zawieszenia konta w przypadku naruszenia regulaminu",
+          "Klient nie może przenieść konta na osoby trzecie bez uprzedniej zgody Usługodawcy",
+        ],
+      },
+      article5: {
+        title: "Artykuł 5 - Czas trwania umowy",
+        trial: {
+          title: "Okres próbny",
+          content:
+            "Platforma oferuje bezpłatny 10-dniowy okres próbny. Po jego upływie dostęp jest uzależniony od wykupienia subskrypcji.",
+        },
+        subscription: {
+          title: "Subskrypcja",
+          content:
+            "Subskrypcja jest zawierana na okres miesięczny i odnawia się automatycznie, chyba że Klient ją anuluje.",
+        },
+        cancellation: {
+          title: "Anulowanie",
+          content:
+            "Klient może anulować subskrypcję w dowolnym momencie. Dostęp pozostaje aktywny do końca opłaconego okresu.",
+        },
+      },
+      article6: {
+        title: "Artykuł 6 - Ceny i płatności",
+        items: [
+          "Ceny są wyrażone w EUR i odpowiadają cenom wyświetlanym na stronie w momencie złożenia zamówienia",
+          "Fakturowanie odbywa się co miesiąc, z góry",
+          "Płatności można dokonać kartą (Stripe) lub przelewem bankowym",
+          "W przypadku Rumunii faktury są wystawiane za pośrednictwem SmartBill",
+          "Zmiana cen wymaga powiadomienia z 30-dniowym wyprzedzeniem",
+        ],
+        plans: {
+          title: "Dostępne plany",
+          professional: "Professional: 139 EUR/miesiąc - 1 magazyn",
+          enterprise5: "Enterprise 5: 500 EUR/miesiąc - do 5 magazynów",
+          enterprise10: "Enterprise 10: 800 EUR/miesiąc - do 10 magazynów",
+          enterprise25: "Enterprise 25: 1590 EUR/miesiąc - do 25 magazynów",
+        },
+      },
+      article7: {
+        title: "Artykuł 7 - Upgrade i downgrade",
+        upgrade: {
+          title: "Upgrade",
+          content:
+            "Przejście na wyższy plan następuje ze skutkiem natychmiastowym, z dopłatą proporcjonalnej różnicy.",
+        },
+        downgrade: {
+          title: "Downgrade",
+          content:
+            "Przejście na niższy plan jest możliwe w dowolnym momencie, z proporcjonalnym zwrotem różnicy za pozostały okres. Downgrade nie jest możliwy poniżej aktualnej liczby aktywnych magazynów.",
+        },
+      },
+      article8: {
+        title: "Artykuł 8 - Funkcje i ograniczenia",
+        included: {
+          title: "Zawarte we wszystkich planach",
+          items: [
+            "Cyfrowy check-in - kierowcy skanują kod QR lub korzystają z aplikacji QRGO Driver",
+            "Zarządzanie rampami - przydział i optymalizacja przepływu ciężarówek",
+            "Czat i powiadomienia w czasie rzeczywistym między operatorem a kierowcą",
+            "Kategoryzacja według działów i typów ciężarówek",
+            "Raporty i analityka - interaktywne dashboardy ze wskaźnikami KPI",
+            "Aplikacja QRGO Driver (Web, Android, iOS)",
+            "Wielojęzyczność - interfejs w 12 językach europejskich",
+            "W chmurze - bez sprzętu ani lokalnych instalacji",
+            "Instrukcje i wskazówki dla kierowców w aplikacji",
+            "Wczesny check-in i planowanie godziny przyjazdu",
+            "Automatyczne wykrywanie lokalizacji (aplikacja mobilna)",
+            "Nielimitowana liczba check-inów, działów i ramp",
+            "Wsparcie przez e-mail",
+          ],
+        },
+        enterprise: {
+          title: "Funkcje Enterprise",
+          items: [
+            "White-label pod własną domeną (Enterprise 5+)",
+            "Dostęp do API na potrzeby integracji (Enterprise 5+)",
+            "Wsparcie priorytetowe (Enterprise 5+)",
+            "Dedykowane wsparcie (Enterprise 10+)",
+            "SLA 99,9% (Enterprise 25)",
+          ],
+        },
+      },
+      article9: {
+        title: "Artykuł 9 - Dostępność usługi",
+        content:
+          "Usługodawca zobowiązuje się utrzymywać dostępność na poziomie co najmniej 99,9% w skali roku.",
+        exclusions: {
+          title: "Wyłączenia",
+          items: [
+            "Planowane prace konserwacyjne (zapowiadane z 24-godzinnym wyprzedzeniem)",
+            "Siła wyższa",
+            "Ataki cybernetyczne",
+            "Problemy po stronie dostawców zewnętrznych",
+          ],
+        },
+      },
+      article10: {
+        title: "Artykuł 10 - Obowiązki Klienta",
+        items: [
+          "Płatność za subskrypcję z góry",
+          "Prawidłowe dane rozliczeniowe",
+          "Korzystanie z Platformy zgodnie z prawem",
+          "Przestrzeganie RODO w odniesieniu do danych kierowców",
+          "Zakaz odsprzedaży usługi",
+        ],
+      },
+      article11: {
+        title: "Artykuł 11 - Obowiązki Usługodawcy",
+        items: [
+          "Zapewnienie dostępu zgodnie z planem",
+          "Odpowiednie wsparcie techniczne",
+          "Adekwatne środki bezpieczeństwa",
+          "Regularne kopie zapasowe",
+          "Powiadamianie o istotnych zmianach",
+        ],
+      },
+      article12: {
+        title: "Artykuł 12 - Własność intelektualna",
+        platform: {
+          title: "Platforma",
+          content: "Wszelkie prawa własności intelektualnej do Platformy należą do Usługodawcy.",
+        },
+        clientData: {
+          title: "Dane Klienta",
+          content: "Klient zachowuje wszelkie prawa do swoich danych.",
+        },
+        license: {
+          title: "Licencja",
+          content:
+            "Klient otrzymuje niewyłączną licencję na korzystanie z Platformy na czas trwania subskrypcji.",
+        },
+      },
+      article13: {
+        title: "Artykuł 13 - Ograniczenie odpowiedzialności",
+        items: [
+          "Usługa jest świadczona w stanie, w jakim się znajduje („as is”)",
+          "Brak odpowiedzialności za straty pośrednie",
+          "Maksymalna odpowiedzialność: wartość subskrypcji za ostatnie 3 miesiące",
+          "Usuniętych danych nie można odzyskać",
+        ],
+      },
+      article14: {
+        title: "Artykuł 14 - Rozwiązanie umowy",
+        byClient: {
+          title: "Anulowanie przez Klienta",
+          content:
+            "Klient może anulować subskrypcję w dowolnym momencie. Dostęp pozostaje aktywny do końca okresu.",
+        },
+        byProvider: {
+          title: "Rozwiązanie przez Usługodawcę",
+          content: "W przypadku braku płatności, nadużyć lub naruszenia regulaminu.",
+        },
+        effects: {
+          title: "Skutki",
+          content: "30 dni na eksport danych, a następnie trwałe usunięcie.",
+        },
+      },
+      article15: {
+        title: "Artykuł 15 - Postanowienia końcowe",
+        items: [
+          {
+            title: "Prawo właściwe",
+            content: "Prawo rumuńskie",
+          },
+          {
+            title: "Jurysdykcja",
+            content: "Sądy w Bukareszcie",
+          },
+          {
+            title: "Zmiany",
+            content: "Po powiadomieniu z 30-dniowym wyprzedzeniem",
+          },
+        ],
+        contact: {
+          title: "Kontakt",
+          email: "contact@logistiq.ro",
+          address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
+        },
+      },
     },
     cookies: {
-      title: "Polityka Cookies",
+      title: "Polityka cookies",
       lastUpdated: "Ostatnia aktualizacja",
-      intro: { title: "1. Wprowadzenie", p1: "Niniejsza polityka wyjaśnia, w jaki sposób platforma Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) wykorzystuje pliki cookies i podobne technologie.", p2: "Kontynuując przeglądanie naszych stron, akceptujesz wykorzystanie cookies zgodnie z niniejszą polityką." },
-      whatAreCookies: { title: "2. Czym są Cookies?", content: "Cookies to małe pliki tekstowe przechowywane na Twoim urządzeniu podczas odwiedzania strony internetowej. Pozwalają one stronie rozpoznać Twoje urządzenie i zapamiętać preferencje.", types: { title: "Rodzaje cookies:", session: { name: "Cookies sesyjne", desc: "Usuwane automatycznie po zamknięciu przeglądarki" }, persistent: { name: "Cookies trwałe", desc: "Pozostają do wygaśnięcia lub ręcznego usunięcia" }, firstParty: { name: "Cookies własne", desc: "Umieszczane przez odwiedzaną stronę" }, thirdParty: { name: "Cookies zewnętrzne", desc: "Umieszczane przez zintegrowane usługi" } } },
-      cookiesWeUse: { title: "3. Cookies których używamy", essential: { title: "Cookies niezbędne", desc: "Wymagane do działania platformy. Nie można ich wyłączyć.", cookies: [{ name: "sb-access-token", duration: "1 godzina", purpose: "Uwierzytelnianie Supabase - token dostępu" }, { name: "sb-refresh-token", duration: "7 dni", purpose: "Uwierzytelnianie Supabase - odświeżanie sesji" }, { name: "NEXT_LOCALE", duration: "1 rok", purpose: "Zapamiętanie preferowanego języka" }] }, functional: { title: "Cookies funkcjonalne", desc: "Poprawiają doświadczenie użytkownika.", cookies: [{ name: "theme", duration: "1 rok", purpose: "Zapamiętanie preferencji motywu" }, { name: "sidebar_collapsed", duration: "30 dni", purpose: "Stan paska bocznego w Dashboard" }] }, analytics: { title: "Cookies analityczne", desc: "Pomagają zrozumieć jak korzystasz z platformy.", cookies: [{ name: "_ga", duration: "2 lata", purpose: "Google Analytics - identyfikacja odwiedzającego" }, { name: "_gid", duration: "24 godziny", purpose: "Google Analytics - identyfikacja sesji" }] } },
-      thirdParty: { title: "4. Cookies zewnętrzne", intro: "Platforma Logistiq korzysta z następujących usług zewnętrznych:", services: [{ name: "Supabase", purpose: "Uwierzytelnianie i baza danych", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Przetwarzanie płatności", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Hosting i analityka", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Statystyki ruchu", url: "policies.google.com/privacy" }], note: "Zalecamy zapoznanie się z politykami prywatności tych usług." },
-      manageCookies: { title: "5. Zarządzanie Cookies", intro: "Możesz kontrolować i/lub usuwać cookies według własnych preferencji:", browsers: [{ name: "Google Chrome", steps: "Ustawienia → Prywatność i bezpieczeństwo → Cookies" }, { name: "Mozilla Firefox", steps: "Ustawienia → Prywatność i bezpieczeństwo → Cookies" }, { name: "Safari", steps: "Preferencje → Prywatność → Zarządzaj danymi witryn" }, { name: "Microsoft Edge", steps: "Ustawienia → Cookies i uprawnienia witryn" }], warning: "Uwaga: Wyłączenie niezbędnych cookies może wpłynąć na funkcjonalność platformy." },
-      changes: { title: "6. Zmiany polityki", content: "Zastrzegamy sobie prawo do aktualizacji tej polityki. Istotne zmiany będą ogłaszane poprzez powiadomienie na platformie lub e-mail." },
-      contact: { title: "7. Kontakt", intro: "W przypadku pytań dotyczących cookies lub realizacji praw RODO:", operator: "Operator", operatorName: "HOSTLIFE DIGITAL SRL", cui: "NIP: 52638053", regNo: "Nr rej.: J20/7592/5001", address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia", email: "E-mail", emailAddress: "contact@logistiq.ro" },
+      intro: {
+        title: "1. Wprowadzenie",
+        p1:
+          "Niniejsza polityka wyjaśnia, w jaki sposób platforma Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) wykorzystuje pliki cookie i podobne technologie, aby zapewnić Ci bezpieczne i spersonalizowane doświadczenie.",
+        p2:
+          "Kontynuując przeglądanie naszych stron internetowych, akceptujesz wykorzystywanie plików cookie zgodnie z niniejszą polityką.",
+      },
+      whatAreCookies: {
+        title: "2. Czym są pliki cookie?",
+        content:
+          "Pliki cookie to niewielkie pliki tekstowe zapisywane na Twoim urządzeniu (komputerze, telefonie komórkowym, tablecie) podczas odwiedzania strony internetowej. Pozwalają one stronie rozpoznać Twoje urządzenie i zapamiętać określone informacje o Twojej wizycie lub preferencjach.",
+        types: {
+          title: "Rodzaje plików cookie:",
+          session: {
+            name: "Sesyjne pliki cookie",
+            desc: "Są automatycznie usuwane po zamknięciu przeglądarki",
+          },
+          persistent: {
+            name: "Trwałe pliki cookie",
+            desc: "Pozostają na urządzeniu do czasu wygaśnięcia lub ręcznego usunięcia",
+          },
+          firstParty: {
+            name: "Własne pliki cookie",
+            desc: "Umieszczane przez stronę, którą odwiedzasz",
+          },
+          thirdParty: {
+            name: "Pliki cookie podmiotów trzecich",
+            desc: "Umieszczane przez inne zintegrowane strony/usługi",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Pliki cookie, których używamy",
+        essential: {
+          title: "Niezbędne pliki cookie",
+          desc: "Wymagane do działania platformy. Nie można ich wyłączyć.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 godzina",
+              purpose: "Uwierzytelnianie Supabase - token dostępu",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 dni",
+              purpose: "Uwierzytelnianie Supabase - odświeżanie sesji",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 rok",
+              purpose: "Zapamiętywanie preferowanego języka",
+            },
+          ],
+        },
+        functional: {
+          title: "Funkcjonalne pliki cookie",
+          desc: "Poprawiają komfort korzystania z platformy.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 rok",
+              purpose: "Zapamiętywanie preferencji motywu ciemnego/jasnego",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 dni",
+              purpose: "Stan menu bocznego w Dashboardzie",
+            },
+          ],
+        },
+        analytics: {
+          title: "Analityczne pliki cookie",
+          desc:
+            "Pomagają nam zrozumieć, w jaki sposób korzystasz z platformy, abyśmy mogli ją ulepszać.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 lata",
+              purpose: "Google Analytics - identyfikacja odwiedzającego",
+            },
+            {
+              name: "_gid",
+              duration: "24 godziny",
+              purpose: "Google Analytics - identyfikacja sesji",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Pliki cookie podmiotów trzecich",
+        intro:
+          "Platforma Logistiq korzysta z następujących usług podmiotów trzecich, które mogą umieszczać pliki cookie:",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Uwierzytelnianie i baza danych",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Przetwarzanie płatności",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting i analityka",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Statystyki ruchu",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "W celu uzyskania szczegółowych informacji zalecamy zapoznanie się z politykami prywatności tych usług.",
+      },
+      manageCookies: {
+        title: "5. Jak zarządzać plikami cookie",
+        intro:
+          "Możesz kontrolować i/lub usuwać pliki cookie zgodnie ze swoimi preferencjami. Oto jak to zrobić w głównych przeglądarkach:",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Ustawienia → Prywatność i bezpieczeństwo → Pliki cookie i inne dane witryn",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Ustawienia → Prywatność i bezpieczeństwo → Ciasteczka i dane stron",
+          },
+          {
+            name: "Safari",
+            steps: "Preferencje → Prywatność → Zarządzaj danymi witryn",
+          },
+          {
+            name: "Microsoft Edge",
+            steps:
+              "Ustawienia → Pliki cookie i uprawnienia witryny → Zarządzaj plikami cookie i usuwaj je",
+          },
+        ],
+        warning:
+          "Uwaga: wyłączenie niezbędnych plików cookie może wpłynąć na działanie platformy. Logowanie może okazać się niemożliwe lub możesz utracić dostęp do niektórych funkcji.",
+      },
+      changes: {
+        title: "6. Zmiany polityki",
+        content:
+          "Zastrzegamy sobie prawo do okresowej aktualizacji niniejszej polityki. Istotne zmiany będą ogłaszane za pośrednictwem powiadomienia na platformie lub e-mailem.",
+      },
+      contact: {
+        title: "7. Kontakt",
+        intro:
+          "W przypadku pytań dotyczących wykorzystywania plików cookie lub w celu skorzystania z praw przysługujących Ci na mocy RODO:",
+        operator: "Administrator",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Nr rej.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26 stycznia 2026",
+      backHome: "Powrót do strony głównej",
+      retentionHeaders: {
+        type: "Rodzaj danych",
+        period: "Okres przechowywania",
+      },
+      cookieHeaders: {
+        name: "Plik cookie",
+        duration: "Okres przechowywania",
+        purpose: "Cel",
+      },
+      meta: {
+        privacy: "Polityka prywatności Logistiq – jak zbieramy, wykorzystujemy i chronimy Twoje dane osobowe zgodnie z RODO.",
+        terms: "Regulamin Logistiq – platforma do zarządzania magazynem i check-inu kierowców.",
+        cookies: "Polityka cookies Logistiq – jak wykorzystujemy pliki cookie, aby zapewnić Ci jak najlepsze doświadczenia.",
+      },
     },
   },
   hu: {
@@ -8602,8 +9730,8 @@ export const translations = {
       careers: "Karrier",
       blog: "Blog",
       press: "Sajtó",
-      privacy: "Adatvédelmi irányelvek",
-      terms: "Felhasználási feltételek",
+      privacy: "Adatvédelmi szabályzat",
+      terms: "Általános szerződési feltételek",
       cookies: "Cookie-szabályzat",
       gdpr: "GDPR",
       helpCenter: "Súgó",
@@ -8703,127 +9831,669 @@ export const translations = {
       a15: "Igen, minden csomagban személyre szabott képzést kínálunk az üzemeltetési csapat számára. A képzés kiterjed a rendszer konfigurálására, az irányítópult használatára és a jelentések generálására.",
     },
     privacy: {
-      title: "Adatvédelmi Irányelvek",
+      title: "Adatvédelmi szabályzat",
       lastUpdated: "Utolsó frissítés",
       intro: {
         title: "1. Bevezetés",
-        p1: "A HOSTLIFE DIGITAL SRL (\"Adatkezelő\"), székhelye: Str. Vidin 37, 805300 Tecuci, Galați, Románia, adószám: 52638053, tiszteletben tartja személyes adatai védelmét.",
-        p2: "Ez a szabályzat leírja, hogyan gyűjtjük, használjuk és védjük a személyes adatokat az Általános Adatvédelmi Rendelet (GDPR - EU 2016/679 rendelet) szerint.",
+        p1:
+          "A HOSTLIFE DIGITAL SRL („Adatkezelő”), székhelye: Str. Vidin 37, 805300 Tecuci, Galați, Románia, adószáma (CUI): 52638053, tiszteletben tartja az Ön személyes adatainak bizalmas jellegét.",
+        p2:
+          "Ez a szabályzat ismerteti, hogyan gyűjtjük, használjuk fel és védjük a személyes adatokat az általános adatvédelmi rendeletnek (GDPR – az (EU) 2016/679 rendelet) megfelelően.",
       },
       dataCollected: {
         title: "2. Milyen személyes adatokat gyűjtünk",
-        identification: { title: "Azonosító adatok", items: ["Teljes név", "E-mail cím", "Rendszerszerep", "Profilkép (opcionális)"] },
-        contact: { title: "Kapcsolattartási adatok", items: ["Telefonszám", "E-mail cím"] },
-        billing: { title: "Számlázási adatok", items: ["Cégnév", "Adószám", "Cégjegyzékszám", "Számlázási cím", "Fizetési előzmények"] },
-        technical: { title: "Technikai adatok", items: ["IP-cím", "User Agent", "GPS-koordináták (az Ön beleegyezésével)"] },
-        activity: { title: "Tevékenységi adatok", items: ["Check-in előzmények", "Üzenetek az operátorokkal", "Mellékletek (CMR, fotók)", "Idő az egyes szakaszokban"] },
+        identification: {
+          title: "Azonosító adatok",
+          items: [
+            "Teljes név",
+            "E-mail-cím",
+            "Szerepkör a rendszerben (operátor, adminisztrátor)",
+            "Profilkép (opcionális)",
+          ],
+        },
+        contact: {
+          title: "Kapcsolattartási adatok",
+          items: [
+            "Telefonszám",
+            "E-mail-cím",
+          ],
+        },
+        billing: {
+          title: "Számlázási adatok",
+          items: [
+            "Cégnév",
+            "Adószám (CUI/CIF)",
+            "Cégjegyzékszám",
+            "Számlázási cím",
+            "Fizetési előzmények",
+          ],
+        },
+        technical: {
+          title: "Technikai adatok",
+          items: [
+            "IP-cím",
+            "User Agent (böngésző/eszköz)",
+            "GPS-koordináták (az Ön hozzájárulásával, az automatikus helymeghatározáshoz)",
+          ],
+        },
+        activity: {
+          title: "Tevékenységi adatok",
+          items: [
+            "Check-in-előzmények",
+            "Az operátorokkal váltott üzenetek",
+            "Mellékletek (CMR, dokumentumfotók)",
+            "A művelet egyes szakaszaiban eltöltött idő",
+          ],
+        },
       },
       purposes: {
-        title: "3. Feldolgozási célok",
-        list: ["Digitális check-in szolgáltatás nyújtása", "Fiókkezelés és felhasználói hitelesítés", "Fizetések feldolgozása és számlakiállítás", "Valós idejű kommunikáció", "Jelentések és elemzések", "Technikai támogatás", "Szolgáltatásfejlesztés", "Jogi kötelezettségek betartása"],
+        title: "3. Az adatkezelés céljai",
+        list: [
+          "Digitális check-in-szolgáltatás nyújtása raktárak számára",
+          "A fiók kezelése és a felhasználók hitelesítése",
+          "A fizetések feldolgozása és a számlák kiállítása",
+          "Valós idejű kommunikáció a sofőrök és a raktári operátorok között",
+          "Jelentések és elemzések készítése a műveletek optimalizálása érdekében",
+          "Technikai támogatás és ügyfélszolgálati segítség nyújtása",
+          "Szolgáltatásaink folyamatos fejlesztése",
+          "A jogi kötelezettségek teljesítése (a számlák megőrzése az Adótörvénykönyv szerint)",
+        ],
       },
       legalBasis: {
-        title: "4. A feldolgozás jogalapja",
-        contract: { title: "Szerződés teljesítése (GDPR 6.1.b cikk)", desc: "A szerződéses szolgáltatásokhoz szükséges adatokat dolgozzuk fel." },
-        legal: { title: "Jogi kötelezettség (GDPR 6.1.c cikk)", desc: "A számlázási adatokat az adójogszabályoknak megfelelően őrizzük (10 év)." },
-        legitimate: { title: "Jogos érdek (GDPR 6.1.f cikk)", desc: "Technikai adatokat gyűjtünk a rendszerbiztonság és szolgáltatásfejlesztés érdekében." },
-        consent: { title: "Hozzájárulás (GDPR 6.1.a cikk)", desc: "GPS-koordinátákhoz és marketing kommunikációhoz kifejezett hozzájárulását kérjük." },
+        title: "4. Az adatkezelés jogalapjai",
+        contract: {
+          title: "Szerződés teljesítése (a GDPR 6. cikk (1) bekezdés b) pontja)",
+          desc:
+            "Kezeljük azokat az adatokat, amelyekre szükség van ahhoz, hogy Önnek nyújtsuk a szerződés szerinti szolgáltatásokat: digitális check-in, valós idejű kommunikáció, rámpakezelés.",
+        },
+        legal: {
+          title: "Jogi kötelezettség (a GDPR 6. cikk (1) bekezdés c) pontja)",
+          desc:
+            "A számlázási adatokat a román adójogszabályoknak megfelelően őrizzük meg (Adótörvénykönyv – 10 év).",
+        },
+        legitimate: {
+          title: "Jogos érdek (a GDPR 6. cikk (1) bekezdés f) pontja)",
+          desc:
+            "Technikai adatokat gyűjtünk a rendszer biztonsága, a csalások megelőzése és a szolgáltatások fejlesztése érdekében.",
+        },
+        consent: {
+          title: "Hozzájárulás (a GDPR 6. cikk (1) bekezdés a) pontja)",
+          desc:
+            "A GPS-koordináták és a marketingkommunikáció esetében kifejezett hozzájárulását kérjük, amelyet bármikor visszavonhat.",
+        },
       },
       thirdParties: {
-        title: "5. Adatmegosztás harmadik felekkel",
-        intro: "A következő megbízható partnerekkel dolgozunk:",
+        title: "5. Az adatok megosztása harmadik felekkel",
+        intro:
+          "Szolgáltatásaink nyújtása érdekében az alábbi megbízható partnerekkel működünk együtt:",
         partners: [
-          { name: "Supabase", purpose: "Adatbázis és hitelesítés (EU szerverek - Frankfurt)" },
-          { name: "Stripe", purpose: "Biztonságos fizetésfeldolgozás (PCI DSS tanúsítvány)" },
-          { name: "SmartBill", purpose: "Számlakiállítás (Románia)" },
-          { name: "Vercel", purpose: "Hosting és globális terjesztés (CDN)" },
+          {
+            name: "Supabase",
+            purpose: "Adatbázis és hitelesítés (EU-beli szerverek – Frankfurt, Németország)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Biztonságos fizetésfeldolgozás (PCI DSS-tanúsítvánnyal)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Szabályszerű számlák kiállítása (Románia)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Tárhelyszolgáltatás és globális terjesztés (CDN)",
+          },
         ],
-        note: "Nem értékesítjük és nem osztjuk meg adatait harmadik felekkel marketing célokra.",
+        note:
+          "Személyes adatait nem értékesítjük és nem osztjuk meg harmadik felekkel marketingcélokra.",
       },
-      internationalTransfers: { title: "6. Nemzetközi adattovábbítások", content: "Egyes adatok az EGT-n kívülre továbbíthatók. Ilyen esetekben az Európai Bizottság által jóváhagyott általános szerződési feltételeket alkalmazzuk." },
+      internationalTransfers: {
+        title: "6. Nemzetközi adattovábbítások",
+        content:
+          "Egyes adatok az Európai Gazdasági Térségen (EGT) kívülre, partnereink részére továbbíthatók. Ilyen esetekben megfelelő védelmi intézkedéseket alkalmazunk – ideértve az Európai Bizottság által jóváhagyott általános szerződési feltételeket is –, hogy az adatvédelem egyenértékű szintjét biztosítsuk.",
+      },
       retention: {
-        title: "7. Adatmegőrzési időszak",
+        title: "7. Az adatok megőrzésének időtartama",
         periods: [
-          { type: "Fiókadatok", duration: "Aktív fiók időtartama + 30 nap" },
-          { type: "Számlázási adatok", duration: "10 év" },
-          { type: "Check-in adatok", duration: "2 év" },
-          { type: "Technikai adatok", duration: "6 hónap" },
-          { type: "Mellékletek", duration: "1 év a befejezés után" },
+          {
+            type: "Felhasználói fiók adatai",
+            duration: "Az aktív fiók fennállásának időtartama + a törlést követő 30 nap",
+          },
+          {
+            type: "Számlázási adatok",
+            duration: "10 év (a román Adótörvénykönyv szerint)",
+          },
+          {
+            type: "Check-in- és műveleti adatok",
+            duration: "2 év vagy a szerződéses feltételek szerint",
+          },
+          {
+            type: "Technikai adatok (IP, naplók)",
+            duration: "6 hónap",
+          },
+          {
+            type: "Mellékletek (CMR, fényképek)",
+            duration: "1 év a művelet befejezését követően",
+          },
         ],
-        note: "A megőrzési időszakok lejárta után az adatok automatikusan törlésre vagy anonimizálásra kerülnek.",
+        note:
+          "A megőrzési idők lejártát követően az adatokat automatikusan töröljük vagy anonimizáljuk.",
       },
       rights: {
         title: "8. Az Ön jogai",
-        intro: "A GDPR szerint a következő jogokkal rendelkezik:",
+        intro: "A GDPR alapján a személyes adataival kapcsolatban a következő jogok illetik meg:",
         list: [
-          { name: "Hozzáférési jog", desc: "Kérheti adatai másolatát." },
-          { name: "Helyesbítési jog", desc: "Javíthatja a pontatlan adatokat." },
-          { name: "Törlési jog", desc: "Kérheti adatai törlését." },
-          { name: "Korlátozási jog", desc: "Korlátozhatja a feldolgozást." },
-          { name: "Adathordozhatóság", desc: "Adatait általános formátumban kaphatja meg." },
-          { name: "Tiltakozási jog", desc: "Tiltakozhat a feldolgozás ellen." },
-          { name: "Visszavonási jog", desc: "Bármikor visszavonhatja hozzájárulását." },
+          {
+            name: "Hozzáférési jog",
+            desc: "Másolatot kérhet az Önre vonatkozó, birtokunkban lévő összes személyes adatról.",
+          },
+          {
+            name: "Helyesbítéshez való jog",
+            desc: "Kijavíthatja a fiókjában szereplő pontatlan vagy hiányos adatokat.",
+          },
+          {
+            name: "Törléshez való jog",
+            desc:
+              "Kérheti adatai törlését („az elfeledtetéshez való jog”), kivéve a jogi kötelezettségek alapján megőrzött adatokat.",
+          },
+          {
+            name: "Az adatkezelés korlátozásához való jog",
+            desc: "Bizonyos körülmények között korlátozhatja, hogy miként kezeljük az adatait.",
+          },
+          {
+            name: "Adathordozhatósághoz való jog",
+            desc:
+              "Adatait tagolt, széles körben használt és interoperábilis formátumban kaphatja meg.",
+          },
+          {
+            name: "Tiltakozáshoz való jog",
+            desc: "Tiltakozhat a jogos érdeken alapuló adatkezelés ellen.",
+          },
+          {
+            name: "A hozzájárulás visszavonásához való jog",
+            desc:
+              "Megadott hozzájárulását bármikor visszavonhatja; ez nem érinti a visszavonás előtti adatkezelés jogszerűségét.",
+          },
         ],
-        complaint: "Panasz esetén fordulhat az illetékes adatvédelmi hatósághoz.",
+        complaint:
+          "Ha úgy ítéli meg, hogy jogait nem tartják tiszteletben, panaszt tehet a román Személyes Adatok Kezelésének Országos Felügyeleti Hatóságánál (ANSPDCP) – www.dataprotection.ro",
       },
       security: {
         title: "9. Adatbiztonság",
-        intro: "Technikai és szervezési intézkedéseket alkalmazunk:",
-        measures: ["Titkosítás (TLS/SSL)", "Row Level Security (RLS)", "Biztonságos hitelesítés", "Folyamatos monitorozás", "Automatikus biztonsági mentések", "Korlátozott hozzáférés"],
+        intro: "Az adatok védelme érdekében technikai és szervezési intézkedéseket alkalmazunk:",
+        measures: [
+          "Átvitel közbeni titkosítás (TLS/SSL) minden kommunikáció esetében",
+          "Row Level Security (RLS) a szervezetek közötti adatelkülönítéshez",
+          "Biztonságos hitelesítés, a jelszavak bcrypt-alapú hashelésével",
+          "Az adatokhoz való hozzáférés folyamatos monitorozása és auditálása",
+          "Automatikus biztonsági mentések és katasztrófa utáni helyreállítási eljárások",
+          "Korlátozott hozzáférés a szükséges ismeret („need-to-know”) elve alapján",
+        ],
       },
-      cookies: { title: "10. Cookie-k", content: "Csak a platform működéséhez szükséges cookie-kat használunk. Nincs reklám- vagy nyomkövető cookie." },
-      children: { title: "11. Gyermekek adatai", content: "A Logistiq szolgáltatások 16 éves vagy idősebb felhasználóknak szólnak. Tudatosan nem gyűjtünk adatokat kiskorúaktól." },
-      changes: { title: "12. Szabályzat változások", content: "Időnként frissíthetjük ezt a szabályzatot. Jelentős változásokról e-mailben vagy bannerrel értesítjük." },
+      cookies: {
+        title: "10. Cookie-k és hasonló technológiák",
+        content:
+          "Alapvető cookie-kat használunk a platform működéséhez (hitelesítés, felhasználói munkamenet, nyelvi beállítások). Nem használunk reklámcélú nyomkövető cookie-kat, sem harmadik féltől származó, profilalkotásra szolgáló cookie-kat.",
+      },
+      children: {
+        title: "11. Gyermekek adatai",
+        content:
+          "A Logistiq szolgáltatásai kizárólag legalább 16 éves felhasználók számára készültek. Ennél fiatalabb személyektől tudatosan nem gyűjtünk személyes adatokat. Ha tudomást szerez arról, hogy egy kiskorú személyes adatokat adott meg, kérjük, vegye fel velünk a kapcsolatot azok törlése érdekében.",
+      },
+      changes: {
+        title: "12. A szabályzat módosításai",
+        content:
+          "Ezt a szabályzatot időről időre frissíthetjük, hogy tükrözze a gyakorlatunkban vagy a jogszabályi követelményekben bekövetkezett változásokat. A jelentős változásokról e-mailben vagy a platformon megjelenített bannerrel értesítjük Önt. Az utolsó frissítés dátuma ennek az oldalnak a tetején látható.",
+      },
       contact: {
         title: "13. Kapcsolat",
-        intro: "Adataival kapcsolatos kérdésekért vagy GDPR jogai gyakorlásához forduljon hozzánk:",
-        operator: "Adatkezelő", operatorName: "HOSTLIFE DIGITAL SRL", cui: "Adószám: 52638053", regNo: "Cégjegyzékszám: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia", email: "E-mail", emailAddress: "contact@logistiq.ro",
-        responseTime: "30 naptári napon belül válaszolunk.",
+        intro:
+          "Személyes adataival kapcsolatos bármely kérdés esetén, illetve a GDPR szerinti jogai gyakorlása érdekében kapcsolatba léphet velünk:",
+        operator: "Adatkezelő",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "Adószám (CUI): 52638053",
+        regNo: "Cégjegyzékszám: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "A kérelmekre 30 naptári napon belül válaszolunk.",
       },
     },
     terms: {
-      title: "Általános Szerződési Feltételek",
+      title: "Általános szerződési feltételek",
       lastUpdated: "Utolsó frissítés",
-      intro: "Ezek az általános szerződési feltételek szabályozzák a Logistiq platform használatát. Szolgáltatásaink használatával elfogadja ezeket a feltételeket.",
+      intro:
+        "Jelen általános szerződési feltételek a Logistiq platform használatát szabályozzák. Szolgáltatásaink elérésével vagy használatával Ön teljes egészében elfogadja ezeket a feltételeket.",
       article1: {
-        title: "1. cikk - Meghatározások",
-        content: "Jelen megállapodás alkalmazásában az alábbi kifejezések az alábbi jelentéssel bírnak:",
+        title: "1. cikk – Fogalommeghatározások",
+        content:
+          "Jelen szerződés alkalmazásában az alábbi fogalmak a következő jelentéssel bírnak:",
         definitions: [
-          { term: "Szolgáltató", def: "HOSTLIFE DIGITAL SRL, Str. Vidin 37, 805300 Tecuci, Galați, Románia, Adószám 52638053" },
-          { term: "Platform", def: "A logistiq.ro, logistiq.cloud és qrgo.ro alatt elérhető szolgáltatások" },
-          { term: "Ügyfél", def: "Előfizetést vásárló jogi vagy természetes személy" },
-          { term: "Felhasználó", def: "A Platformot használó személy" },
-          { term: "Előfizetés", def: "Szolgáltatási szerződés a Szolgáltató és az Ügyfél között" },
-          { term: "Irányítópult", def: "Admin felület a logistiq.cloud címen" },
-          { term: "Sofőr App", def: "Check-in alkalmazás a qrgo.ro címen" },
+          {
+            term: "Szolgáltató",
+            def:
+              "HOSTLIFE DIGITAL SRL, székhelye: Str. Vidin 37, 805300 Tecuci, Galați, Románia, adószáma (CUI): 52638053",
+          },
+          {
+            term: "Platform",
+            def:
+              "A logistiq.ro, a logistiq.cloud és a qrgo.ro webhelyeken keresztül elérhető szolgáltatások összessége",
+          },
+          {
+            term: "Ügyfél",
+            def:
+              "Jogi személy vagy egyéni vállalkozó, amely, illetve aki a Platform használatára előfizetést vásárol",
+          },
+          {
+            term: "Felhasználó",
+            def:
+              "Bármely személy, aki a Platformot eléri vagy használja, ideértve az Ügyfelet és az általa kijelölt személyeket is",
+          },
+          {
+            term: "Előfizetés",
+            def:
+              "A Szolgáltató és az Ügyfél között a Platformhoz való hozzáférésre kötött szolgáltatási szerződés",
+          },
+          {
+            term: "Irányítópult",
+            def: "A logistiq.cloud címen elérhető adminisztrációs felület a raktárak kezeléséhez",
+          },
+          {
+            term: "Sofőralkalmazás / QRGO Driver",
+            def:
+              "A sofőrök számára készült webes vagy mobil check-in-alkalmazás, amely a qrgo.ro címen (web), illetve a Google Play / App Store áruházban érhető el",
+          },
         ],
       },
-      article2: { title: "2. cikk - Szerződés tárgya", content: "A Szolgáltató hozzáférést biztosít a Logistiq platformhoz:", items: ["Check-in műveletek kezelése", "Irányítópult hozzáférés", "Sofőr App hozzáférés", "A választott csomag funkciói", "Technikai támogatás"] },
-      article3: { title: "3. cikk - Feltételek elfogadása", content: "Az Ügyfél a következő műveletekkel elfogadja ezeket a feltételeket:", items: ["Fiók létrehozása", "Előfizetés fizetése", "Platform használata"], note: "A frissített verzió mindig elérhető a logistiq.ro-n." },
-      article4: { title: "4. cikk - Regisztráció és fiók", items: ["Pontos regisztrációs adatok", "Fiók biztonsága az Ügyfél felelőssége", "Fiók felfüggesztésének joga", "Fiók átruházása nem lehetséges"] },
-      article5: { title: "5. cikk - Szerződés időtartama", trial: { title: "Próbaidőszak", content: "10 napos ingyenes próbaidőszak." }, subscription: { title: "Előfizetés", content: "Havi, automatikus megújítással." }, cancellation: { title: "Lemondás", content: "Bármikor lehetséges, hozzáférés a fizetett időszak végéig." } },
-      article6: { title: "6. cikk - Árak és fizetés", items: ["Árak EUR-ban", "Havi előre fizetés", "Kártyás vagy banki átutalás", "Számlák SmartBill-en keresztül", "Árváltozások 30 napos előzetes értesítéssel"], plans: { title: "Elérhető csomagok", professional: "Professional: 139 EUR/hó - 1 raktár", enterprise5: "Enterprise 5: 500 EUR/hó - max 5 raktár", enterprise10: "Enterprise 10: 800 EUR/hó - max 10 raktár", enterprise25: "Enterprise 25: 1590 EUR/hó - max 25 raktár" } },
-      article7: { title: "7. cikk - Csomag váltás", upgrade: { title: "Upgrade", content: "Azonnal hatályos arányos fizetéssel." }, downgrade: { title: "Downgrade", content: "Bármikor elvégezhető, a fennmaradó időszakra arányos visszatérítéssel. Nem lehet a jelenlegi aktív raktárak száma alá csökkenteni." } },
-      article8: { title: "8. cikk - Funkciók és korlátozások", included: { title: "Minden csomagban", items: ["Korlátlan check-in", "Korlátlan osztályok", "Egyéni mezők", "Teljes jelentések", "QR check-in", "Sofőr app", "Email támogatás"] }, enterprise: { title: "Enterprise funkciók", items: ["API hozzáférés (Enterprise 5+)", "Egyéni domain (Enterprise 5+)", "Prioritás támogatás (Enterprise 5+)", "Dedikált támogatás (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
-      article9: { title: "9. cikk - Szolgáltatás elérhetősége", content: "A Szolgáltató minimum 99,9% éves elérhetőséget vállal.", exclusions: { title: "Kivételek", items: ["Tervezett karbantartás", "Vis maior", "Kibertámadások", "Harmadik fél problémái"] } },
-      article10: { title: "10. cikk - Ügyfél kötelezettségei", items: ["Előfizetés előre fizetése", "Pontos számlázási adatok", "Legális használat", "GDPR megfelelőség", "Viszonteladás tilalma"] },
-      article11: { title: "11. cikk - Szolgáltató kötelezettségei", items: ["Hozzáférés a csomag szerint", "Technikai támogatás", "Biztonsági intézkedések", "Rendszeres mentések", "Változásokról értesítés"] },
-      article12: { title: "12. cikk - Szellemi tulajdon", platform: { title: "Platform", content: "Minden jog a Szolgáltatóé." }, clientData: { title: "Ügyfél adatai", content: "Az Ügyfél megtartja adatainak jogait." }, license: { title: "Licenc", content: "Nem kizárólagos licenc az előfizetés időtartamára." } },
-      article13: { title: "13. cikk - Felelősség korlátozása", items: ["Szolgáltatás 'ahogy van'", "Közvetett károkért nincs felelősség", "Maximum felelősség: 3 havi előfizetés", "Törölt adatok nem állíthatók vissza"] },
-      article14: { title: "14. cikk - Szerződés megszűnése", byClient: { title: "Ügyfél lemondása", content: "Bármikor lehetséges." }, byProvider: { title: "Szolgáltató felmondása", content: "Nemfizetés, visszaélés vagy feltételek megsértése esetén." }, effects: { title: "Hatások", content: "30 nap adatexportra, majd végleges törlés." } },
-      article15: { title: "15. cikk - Záró rendelkezések", items: [{ title: "Alkalmazandó jog", content: "Román jog" }, { title: "Illetékesség", content: "Bukaresti bíróságok" }, { title: "Módosítások", content: "30 napos előzetes értesítéssel" }], contact: { title: "Kapcsolat", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia" } },
+      article2: {
+        title: "2. cikk – A szerződés tárgya",
+        content:
+          "A Szolgáltató kötelezettséget vállal arra, hogy az Ügyfél részére hozzáférést biztosít a Logistiq Platformhoz a következők céljából:",
+        items: [
+          "A check-in-műveletek kezelése logisztikai raktárakban",
+          "Hozzáférés az Irányítópult felületéhez (logistiq.cloud) a vezetők és az operátorok számára",
+          "Hozzáférés a QRGO Driver alkalmazáshoz (qrgo.ro) a check-int végző sofőrök számára",
+          "A választott előfizetési csomagban foglalt funkciók",
+          "Az előfizetési szintnek megfelelő technikai támogatás",
+        ],
+      },
+      article3: {
+        title: "3. cikk – A feltételek elfogadása",
+        content:
+          "Az alábbi cselekmények bármelyikével az Ügyfél megerősíti, hogy ezeket a feltételeket elolvasta, megértette és elfogadta:",
+        items: [
+          "Fiók létrehozása a Platformon",
+          "Előfizetés kifizetése",
+          "A Platform bármely funkciójának használata",
+        ],
+        note: "A feltételek naprakész változata mindig elérhető a logistiq.ro webhelyen.",
+      },
+      article4: {
+        title: "4. cikk – Regisztráció és fiók",
+        items: [
+          "Az Ügyfél szavatolja, hogy a regisztráció során megadott adatok helytállóak, teljesek és naprakészek",
+          "A jelszó és a fiókhoz való hozzáférés biztonságáért kizárólag az Ügyfél felelős",
+          "A Szolgáltató fenntartja a jogot, hogy a feltételek megsértése esetén a regisztrációt megtagadja vagy a fiókot felfüggessze",
+          "Az Ügyfél a fiókot a Szolgáltató előzetes hozzájárulása nélkül nem ruházhatja át harmadik személyre",
+        ],
+      },
+      article5: {
+        title: "5. cikk – A szerződés időtartama",
+        trial: {
+          title: "Próbaidőszak",
+          content:
+            "A Platform 10 napos ingyenes próbaidőszakot kínál. A próbaidőszak lejártát követően a hozzáférés előfizetés vásárlásához kötött.",
+        },
+        subscription: {
+          title: "Előfizetés",
+          content:
+            "Az előfizetés havi időtartamra jön létre, és automatikusan megújul, kivéve, ha az Ügyfél lemondja.",
+        },
+        cancellation: {
+          title: "Lemondás",
+          content:
+            "Az Ügyfél bármikor lemondhatja az előfizetést. A hozzáférés a kifizetett időszak végéig aktív marad.",
+        },
+      },
+      article6: {
+        title: "6. cikk – Árak és fizetés",
+        items: [
+          "Az árak EUR-ban értendők, és megegyeznek a webhelyen a megrendelés időpontjában feltüntetett árakkal",
+          "A számlázás havonta, előre történik",
+          "A fizetés bankkártyával (Stripe) vagy banki átutalással teljesíthető",
+          "Románia esetében a számlák kiállítása a SmartBill rendszeren keresztül történik",
+          "Az árak módosítása 30 napos előzetes értesítéssel",
+        ],
+        plans: {
+          title: "Elérhető csomagok",
+          professional: "Professional: 139 EUR/hó – 1 raktár",
+          enterprise5: "Enterprise 5: 500 EUR/hó – legfeljebb 5 raktár",
+          enterprise10: "Enterprise 10: 800 EUR/hó – legfeljebb 10 raktár",
+          enterprise25: "Enterprise 25: 1590 EUR/hó – legfeljebb 25 raktár",
+        },
+      },
+      article7: {
+        title: "7. cikk – Upgrade és downgrade",
+        upgrade: {
+          title: "Upgrade",
+          content:
+            "A magasabb csomagra való áttérés azonnal hatályos, a különbözet időarányos megfizetésével.",
+        },
+        downgrade: {
+          title: "Downgrade",
+          content:
+            "Az alacsonyabb csomagra való áttérés bármikor lehetséges, a fennmaradó időszakra eső különbözet időarányos visszatérítésével. A downgrade az aktív raktárak jelenlegi száma alá nem lehetséges.",
+        },
+      },
+      article8: {
+        title: "8. cikk – Funkciók és korlátozások",
+        included: {
+          title: "Minden csomag tartalmazza",
+          items: [
+            "Digitális check-in – a sofőrök QR-kódot olvasnak be, vagy a QRGO Driver alkalmazást használják",
+            "Rámpakezelés – a kamionforgalom elosztása és optimalizálása",
+            "Valós idejű chat és értesítések az operátor és a sofőr között",
+            "Kategorizálás részlegek és kamiontípusok szerint",
+            "Jelentések és analitika – interaktív irányítópultok KPI-mutatókkal",
+            "QRGO Driver alkalmazás (web, Android, iOS)",
+            "Többnyelvűség – a felület 12 európai nyelven érhető el",
+            "Felhőalapú – nincs szükség berendezésekre vagy helyi telepítésre",
+            "Utasítások és útmutatás a sofőrök számára az alkalmazásban",
+            "Korai check-in és az érkezési időpont ütemezése",
+            "Automatikus helymeghatározás (mobilalkalmazás)",
+            "Korlátlan számú check-in, részleg és rámpa",
+            "E-mailes támogatás",
+          ],
+        },
+        enterprise: {
+          title: "Enterprise-funkciók",
+          items: [
+            "White-Label saját domainen (Enterprise 5+)",
+            "API-hozzáférés integrációkhoz (Enterprise 5+)",
+            "Elsőbbségi támogatás (Enterprise 5+)",
+            "Dedikált támogatás (Enterprise 10+)",
+            "99,9%-os SLA (Enterprise 25)",
+          ],
+        },
+      },
+      article9: {
+        title: "9. cikk – A szolgáltatás rendelkezésre állása",
+        content:
+          "A Szolgáltató vállalja, hogy legalább 99,9%-os éves rendelkezésre állást tart fenn.",
+        exclusions: {
+          title: "Kivételek",
+          items: [
+            "Tervezett karbantartás (24 órával előre bejelentve)",
+            "Vis maior",
+            "Kibertámadások",
+            "Harmadik fél szolgáltatóknál felmerülő problémák",
+          ],
+        },
+      },
+      article10: {
+        title: "10. cikk – Az Ügyfél kötelezettségei",
+        items: [
+          "Az előfizetési díj előre történő megfizetése",
+          "Helyes számlázási adatok",
+          "A Platform jogszerű használata",
+          "A GDPR betartása a sofőrök adatai tekintetében",
+          "A szolgáltatás továbbértékesítésének tilalma",
+        ],
+      },
+      article11: {
+        title: "11. cikk – A Szolgáltató kötelezettségei",
+        items: [
+          "Hozzáférés biztosítása a csomagnak megfelelően",
+          "Megfelelő technikai támogatás",
+          "Megfelelő biztonsági intézkedések",
+          "Rendszeres biztonsági mentések",
+          "Értesítés a fontos változásokról",
+        ],
+      },
+      article12: {
+        title: "12. cikk – Szellemi tulajdon",
+        platform: {
+          title: "Platform",
+          content:
+            "A Platformra vonatkozó valamennyi szellemitulajdon-jog a Szolgáltatót illeti meg.",
+        },
+        clientData: {
+          title: "Az Ügyfél adatai",
+          content: "Az Ügyfél megtartja az adataival kapcsolatos valamennyi jogát.",
+        },
+        license: {
+          title: "Licenc",
+          content:
+            "Az Ügyfél az előfizetés időtartamára nem kizárólagos felhasználási licencet kap.",
+        },
+      },
+      article13: {
+        title: "13. cikk – A felelősség korlátozása",
+        items: [
+          "A szolgáltatás nyújtása „ahogy van” („as is”) alapon történik",
+          "Nincs felelősség a közvetett veszteségekért",
+          "A felelősség felső határa: az utolsó 3 havi előfizetési díj összege",
+          "A törölt adatok nem állíthatók helyre",
+        ],
+      },
+      article14: {
+        title: "14. cikk – A szerződés megszűnése",
+        byClient: {
+          title: "Lemondás az Ügyfél részéről",
+          content:
+            "Az Ügyfél bármikor lemondhatja az előfizetést. A hozzáférés az időszak végéig aktív.",
+        },
+        byProvider: {
+          title: "Felmondás a Szolgáltató részéről",
+          content: "A díj meg nem fizetése, visszaélés vagy a feltételek megsértése esetén.",
+        },
+        effects: {
+          title: "Joghatások",
+          content: "30 nap az adatok exportálására, ezt követően végleges törlés.",
+        },
+      },
+      article15: {
+        title: "15. cikk – Záró rendelkezések",
+        items: [
+          {
+            title: "Alkalmazandó jog",
+            content: "Román jog",
+          },
+          {
+            title: "Illetékesség",
+            content: "A bukaresti bíróságok",
+          },
+          {
+            title: "Módosítások",
+            content: "30 napos előzetes értesítéssel",
+          },
+        ],
+        contact: {
+          title: "Kapcsolat",
+          email: "contact@logistiq.ro",
+          address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
+        },
+      },
     },
     cookies: {
-      title: "Cookie szabályzat",
-      lastUpdated: "Utoljára frissítve",
-      intro: { title: "1. Bevezetés", p1: "Ez a szabályzat elmagyarázza, hogyan használja a Logistiq platform (logistiq.ro, logistiq.cloud, qrgo.ro) a cookie-kat és hasonló technológiákat.", p2: "Weboldalunk további böngészésével elfogadja a cookie-k használatát ennek a szabályzatnak megfelelően." },
-      whatAreCookies: { title: "2. Mik azok a cookie-k?", content: "A cookie-k kis szöveges fájlok, amelyek az eszközén tárolódnak egy weboldal meglátogatásakor. Lehetővé teszik az oldal számára, hogy felismerje eszközét és megjegyezze preferenciáit.", types: { title: "Cookie típusok:", session: { name: "Munkamenet cookie-k", desc: "Automatikusan törlődnek a böngésző bezárásakor" }, persistent: { name: "Állandó cookie-k", desc: "A lejáratig vagy kézi törlésig maradnak" }, firstParty: { name: "Saját cookie-k", desc: "A meglátogatott weboldal helyezi el" }, thirdParty: { name: "Harmadik fél cookie-k", desc: "Más integrált szolgáltatások helyezik el" } } },
-      cookiesWeUse: { title: "3. Általunk használt cookie-k", essential: { title: "Alapvető cookie-k", desc: "A platform működéséhez szükségesek. Nem kapcsolhatók ki.", cookies: [{ name: "sb-access-token", duration: "1 óra", purpose: "Supabase hitelesítés - hozzáférési token" }, { name: "sb-refresh-token", duration: "7 nap", purpose: "Supabase hitelesítés - munkamenet frissítés" }, { name: "NEXT_LOCALE", duration: "1 év", purpose: "Preferált nyelv megjegyzése" }] }, functional: { title: "Funkcionális cookie-k", desc: "Javítják a felhasználói élményt.", cookies: [{ name: "theme", duration: "1 év", purpose: "Téma preferencia megjegyzése" }, { name: "sidebar_collapsed", duration: "30 nap", purpose: "Oldalsáv állapota a Dashboard-ban" }] }, analytics: { title: "Elemző cookie-k", desc: "Segítenek megérteni, hogyan használja a platformot.", cookies: [{ name: "_ga", duration: "2 év", purpose: "Google Analytics - látogató azonosítás" }, { name: "_gid", duration: "24 óra", purpose: "Google Analytics - munkamenet azonosítás" }] } },
-      thirdParty: { title: "4. Harmadik fél cookie-k", intro: "A Logistiq platform a következő harmadik fél szolgáltatásokat használja:", services: [{ name: "Supabase", purpose: "Hitelesítés és adatbázis", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Fizetésfeldolgozás", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Hosting és analitika", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Forgalmi statisztikák", url: "policies.google.com/privacy" }], note: "Javasoljuk ezen szolgáltatások adatvédelmi szabályzatainak áttekintését." },
-      manageCookies: { title: "5. Cookie-k kezelése", intro: "Preferenciái szerint vezérelheti és/vagy törölheti a cookie-kat:", browsers: [{ name: "Google Chrome", steps: "Beállítások → Adatvédelem és biztonság → Cookie-k" }, { name: "Mozilla Firefox", steps: "Beállítások → Adatvédelem → Cookie-k" }, { name: "Safari", steps: "Beállítások → Adatvédelem → Webhelyadatok kezelése" }, { name: "Microsoft Edge", steps: "Beállítások → Cookie-k és webhelyengedélyek" }], warning: "Figyelem: Az alapvető cookie-k kikapcsolása befolyásolhatja a platform működését." },
-      changes: { title: "6. Szabályzat változások", content: "Fenntartjuk a jogot ennek a szabályzatnak a frissítésére. A lényeges változásokról platform értesítéssel vagy e-mailben tájékoztatunk." },
-      contact: { title: "7. Kapcsolat", intro: "Cookie használattal vagy GDPR jogok gyakorlásával kapcsolatos kérdések:", operator: "Üzemeltető", operatorName: "HOSTLIFE DIGITAL SRL", cui: "Adószám: 52638053", regNo: "Cégj. sz.: J20/7592/5001", address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia", email: "E-mail", emailAddress: "contact@logistiq.ro" },
+      title: "Cookie-szabályzat",
+      lastUpdated: "Utolsó frissítés",
+      intro: {
+        title: "1. Bevezetés",
+        p1:
+          "Ez a szabályzat ismerteti, hogyan használja a Logistiq platform (logistiq.ro, logistiq.cloud, qrgo.ro) a cookie-kat és a hasonló technológiákat annak érdekében, hogy Önnek biztonságos és személyre szabott élményt nyújtson.",
+        p2:
+          "Webhelyeink további böngészésével Ön elfogadja a cookie-k e szabályzatnak megfelelő használatát.",
+      },
+      whatAreCookies: {
+        title: "2. Mik azok a cookie-k?",
+        content:
+          "A cookie-k olyan kis méretű szöveges fájlok, amelyek az Ön eszközén (számítógép, mobiltelefon, táblagép) tárolódnak, amikor Ön meglátogat egy webhelyet. Lehetővé teszik, hogy a webhely felismerje az Ön eszközét, és megjegyezzen bizonyos információkat a látogatásáról vagy a preferenciáiról.",
+        types: {
+          title: "A cookie-k típusai:",
+          session: {
+            name: "Munkamenet-cookie-k",
+            desc: "A böngésző bezárásakor automatikusan törlődnek",
+          },
+          persistent: {
+            name: "Állandó cookie-k",
+            desc: "Lejáratukig vagy kézi törlésükig az eszközön maradnak",
+          },
+          firstParty: {
+            name: "Saját cookie-k",
+            desc: "Az Ön által meglátogatott webhely helyezi el őket",
+          },
+          thirdParty: {
+            name: "Harmadik féltől származó cookie-k",
+            desc: "Más, integrált webhelyek/szolgáltatások helyezik el őket",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Az általunk használt cookie-k",
+        essential: {
+          title: "Alapvető cookie-k",
+          desc: "A platform működéséhez szükségesek. Nem kapcsolhatók ki.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 óra",
+              purpose: "Supabase-hitelesítés – hozzáférési token",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 nap",
+              purpose: "Supabase-hitelesítés – a munkamenet frissítése",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 év",
+              purpose: "A preferált nyelv megjegyzése",
+            },
+          ],
+        },
+        functional: {
+          title: "Funkcionális cookie-k",
+          desc: "Javítják a platform használati élményét.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 év",
+              purpose: "A sötét/világos témára vonatkozó beállítás megjegyzése",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 nap",
+              purpose: "Az oldalsó menü állapota az Irányítópulton",
+            },
+          ],
+        },
+        analytics: {
+          title: "Elemző cookie-k",
+          desc: "Segítenek megérteni, hogyan használja a platformot, hogy továbbfejleszthessük.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 év",
+              purpose: "Google Analytics – a látogató azonosítása",
+            },
+            {
+              name: "_gid",
+              duration: "24 óra",
+              purpose: "Google Analytics – a munkamenet azonosítása",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Harmadik féltől származó cookie-k",
+        intro:
+          "A Logistiq platform az alábbi, harmadik felek által nyújtott szolgáltatásokat használja, amelyek cookie-kat helyezhetnek el:",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Hitelesítés és adatbázis",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Fizetésfeldolgozás",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Tárhelyszolgáltatás és analitika",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Forgalmi statisztikák",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "A részletekért javasoljuk, hogy tekintse át ezen szolgáltatások adatvédelmi szabályzatait.",
+      },
+      manageCookies: {
+        title: "5. A cookie-k kezelése",
+        intro:
+          "A cookie-kat igényei szerint szabályozhatja és/vagy törölheti. A legelterjedtebb böngészőkben ezt a következőképpen teheti meg:",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Beállítások → Adatvédelem és biztonság → Cookie-k és más webhelyadatok",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Beállítások → Adatvédelem és biztonság → Sütik és oldaladatok",
+          },
+          {
+            name: "Safari",
+            steps: "Beállítások → Adatvédelem → Webhelyadatok kezelése",
+          },
+          {
+            name: "Microsoft Edge",
+            steps: "Beállítások → Cookie-k és webhelyengedélyek → Cookie-k kezelése és törlése",
+          },
+        ],
+        warning:
+          "Figyelem: az alapvető cookie-k letiltása befolyásolhatja a platform működését. Előfordulhat, hogy nem tud bejelentkezni, vagy elveszíti a hozzáférést bizonyos funkciókhoz.",
+      },
+      changes: {
+        title: "6. A szabályzat módosításai",
+        content:
+          "Fenntartjuk a jogot, hogy ezt a szabályzatot időről időre frissítsük. A jelentős változásokat a platformon megjelenő értesítésben vagy e-mailben jelentjük be.",
+      },
+      contact: {
+        title: "7. Kapcsolat",
+        intro:
+          "A cookie-k használatával kapcsolatos kérdések esetén, illetve a GDPR szerinti jogai gyakorlásához:",
+        operator: "Adatkezelő",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "Adószám (CUI): 52638053",
+        regNo: "Cégjegyzékszám: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "2026. január 26.",
+      backHome: "Vissza a főoldalra",
+      retentionHeaders: {
+        type: "Adattípus",
+        period: "Megőrzési idő",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Időtartam",
+        purpose: "Cél",
+      },
+      meta: {
+        privacy: "A Logistiq adatvédelmi tájékoztatója – hogyan gyűjtjük, használjuk és védjük személyes adatait a GDPR szerint.",
+        terms: "A Logistiq általános szerződési feltételei – raktárkezelő platform és sofőrbejelentkezési szolgáltatás.",
+        cookies: "A Logistiq cookie-szabályzata – hogyan használunk cookie-kat az optimális felhasználói élmény érdekében.",
+      },
     },
   },
   bg: {
@@ -10383,123 +12053,664 @@ export const translations = {
       lastUpdated: "Последна актуализация",
       intro: {
         title: "1. Въведение",
-        p1: "HOSTLIFE DIGITAL SRL (\"Администратор на данни\"), със седалище на ул. Vidin 37, 805300 Текучи, Галац, Румъния, ДДС номер 52638053, уважава поверителността на вашите лични данни.",
-        p2: "Тази политика описва как събираме, използваме и защитаваме личните данни в съответствие с Общия регламент за защита на данните (GDPR - Регламент ЕС 2016/679).",
+        p1:
+          "HOSTLIFE DIGITAL SRL („Администраторът“), със седалище и адрес на управление ул. Видин 37, 805300 Текуч, Галац, Румъния, CUI 52638053, уважава поверителността на вашите лични данни.",
+        p2:
+          "Тази политика описва как събираме, използваме и защитаваме личните данни в съответствие с Общия регламент относно защитата на данните (ОРЗД - Регламент (ЕС) 2016/679).",
       },
       dataCollected: {
         title: "2. Какви лични данни събираме",
-        identification: { title: "Идентификационни данни", items: ["Пълно име", "Имейл адрес", "Роля в системата", "Профилна снимка (по избор)"] },
-        contact: { title: "Данни за контакт", items: ["Телефонен номер", "Имейл адрес"] },
-        billing: { title: "Данни за фактуриране", items: ["Име на фирма", "ДДС номер", "Регистрационен номер", "Адрес за фактуриране", "История на плащанията"] },
-        technical: { title: "Технически данни", items: ["IP адрес", "User Agent", "GPS координати (с ваше съгласие)"] },
-        activity: { title: "Данни за дейност", items: ["История на check-in", "Съобщения с оператори", "Прикачени файлове (CMR, снимки)", "Време във всеки етап"] },
+        identification: {
+          title: "Идентификационни данни",
+          items: [
+            "Пълно име",
+            "Имейл адрес",
+            "Роля в системата (оператор, администратор)",
+            "Профилна снимка (по избор)",
+          ],
+        },
+        contact: {
+          title: "Данни за контакт",
+          items: [
+            "Телефонен номер",
+            "Имейл адрес",
+          ],
+        },
+        billing: {
+          title: "Данни за фактуриране",
+          items: [
+            "Име на фирмата",
+            "Данъчен идентификационен номер (CUI/CIF)",
+            "Регистрационен номер",
+            "Адрес за фактуриране",
+            "История на плащанията",
+          ],
+        },
+        technical: {
+          title: "Технически данни",
+          items: [
+            "IP адрес",
+            "User Agent (браузър/устройство)",
+            "GPS координати (с вашето съгласие, за автоматично засичане на местоположението)",
+          ],
+        },
+        activity: {
+          title: "Данни за активността",
+          items: [
+            "История на check-in-ите",
+            "Съобщения, разменени с операторите",
+            "Прикачени файлове (CMR, снимки на документи)",
+            "Време, прекарано във всеки етап на операцията",
+          ],
+        },
       },
       purposes: {
-        title: "3. Цели на обработката",
-        list: ["Предоставяне на цифрова услуга за check-in", "Управление на акаунт и удостоверяване", "Обработка на плащания и издаване на фактури", "Комуникация в реално време", "Доклади и анализи", "Техническа поддръжка", "Подобряване на услугите", "Спазване на законови задължения"],
+        title: "3. Цели на обработването",
+        list: [
+          "Предоставяне на услугата за дигитален check-in за складове",
+          "Управление на акаунта и удостоверяване на потребителите",
+          "Обработка на плащанията и издаване на данъчни фактури",
+          "Комуникация в реално време между шофьорите и складовите оператори",
+          "Генериране на отчети и анализи за оптимизиране на операциите",
+          "Предоставяне на техническа поддръжка и съдействие на клиентите",
+          "Непрекъснато подобряване на нашите услуги",
+          "Спазване на законовите задължения (съхраняване на фактурите съгласно Данъчния кодекс)",
+        ],
       },
       legalBasis: {
-        title: "4. Правно основание за обработка",
-        contract: { title: "Изпълнение на договор (чл. 6.1.б GDPR)", desc: "Обработваме данни, необходими за предоставяне на договорени услуги." },
-        legal: { title: "Правно задължение (чл. 6.1.в GDPR)", desc: "Съхраняваме данни за фактуриране съгласно данъчното законодателство (10 години)." },
-        legitimate: { title: "Законни интереси (чл. 6.1.е GDPR)", desc: "Събираме технически данни за сигурност на системата и подобряване на услугите." },
-        consent: { title: "Съгласие (чл. 6.1.а GDPR)", desc: "За GPS координати и маркетингови комуникации изискваме вашето изрично съгласие." },
+        title: "4. Правни основания за обработването",
+        contract: {
+          title: "Изпълнение на договор (чл. 6, параграф 1, буква „б“ от ОРЗД)",
+          desc:
+            "Обработваме данните, необходими, за да ви предоставим договорените услуги: дигитален check-in, комуникация в реално време, управление на рампите.",
+        },
+        legal: {
+          title: "Законово задължение (чл. 6, параграф 1, буква „в“ от ОРЗД)",
+          desc:
+            "Съхраняваме данните за фактуриране съгласно румънското данъчно законодателство (Данъчен кодекс - 10 години).",
+        },
+        legitimate: {
+          title: "Законни интереси (чл. 6, параграф 1, буква „е“ от ОРЗД)",
+          desc:
+            "Събираме технически данни за сигурността на системата, предотвратяването на измами и подобряването на услугите.",
+        },
+        consent: {
+          title: "Съгласие (чл. 6, параграф 1, буква „а“ от ОРЗД)",
+          desc:
+            "За GPS координатите и маркетинговите комуникации искаме вашето изрично съгласие, което можете да оттеглите по всяко време.",
+        },
       },
       thirdParties: {
         title: "5. Споделяне на данни с трети страни",
-        intro: "Работим със следните надеждни партньори:",
+        intro: "Работим със следните доверени партньори за предоставянето на нашите услуги:",
         partners: [
-          { name: "Supabase", purpose: "База данни и удостоверяване (сървъри в ЕС - Франкфурт)" },
-          { name: "Stripe", purpose: "Сигурна обработка на плащания (PCI DSS сертификат)" },
-          { name: "SmartBill", purpose: "Издаване на фактури (Румъния)" },
-          { name: "Vercel", purpose: "Хостинг и глобално разпространение (CDN)" },
+          {
+            name: "Supabase",
+            purpose: "База данни и удостоверяване (сървъри в ЕС - Франкфурт, Германия)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Сигурна обработка на плащания (сертификат PCI DSS)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Издаване на данъчни фактури в съответствие с изискванията (Румъния)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Хостинг и глобално разпространение (CDN)",
+          },
         ],
-        note: "Не продаваме и не споделяме вашите данни с трети страни за маркетингови цели.",
+        note: "Не продаваме и не споделяме вашите лични данни с трети страни за маркетингови цели.",
       },
-      internationalTransfers: { title: "6. Международни трансфери на данни", content: "Някои данни могат да бъдат прехвърлени извън ЕИП. В такива случаи прилагаме стандартни договорни клаузи, одобрени от Европейската комисия." },
+      internationalTransfers: {
+        title: "6. Международно предаване на данни",
+        content:
+          "Някои данни могат да бъдат предавани извън Европейското икономическо пространство (ЕИП) на нашите партньори. В тези случаи прилагаме подходящи гаранции, включително стандартни договорни клаузи, одобрени от Европейската комисия, за да осигурим равностойно ниво на защита на данните.",
+      },
       retention: {
-        title: "7. Период на съхранение на данни",
+        title: "7. Срок на съхранение на данните",
         periods: [
-          { type: "Данни за акаунт", duration: "Продължителност на активен акаунт + 30 дни" },
-          { type: "Данни за фактуриране", duration: "10 години" },
-          { type: "Данни за check-in", duration: "2 години" },
-          { type: "Технически данни", duration: "6 месеца" },
-          { type: "Прикачени файлове", duration: "1 година след приключване" },
+          {
+            type: "Данни за потребителския акаунт",
+            duration: "Докато акаунтът е активен + 30 дни след изтриването му",
+          },
+          {
+            type: "Данни за фактуриране",
+            duration: "10 години (съгласно румънския Данъчен кодекс)",
+          },
+          {
+            type: "Данни за check-in-и и операции",
+            duration: "2 години или съгласно договорните условия",
+          },
+          {
+            type: "Технически данни (IP, логове)",
+            duration: "6 месеца",
+          },
+          {
+            type: "Прикачени файлове (CMR, снимки)",
+            duration: "1 година след приключване на операцията",
+          },
         ],
-        note: "След изтичане на периодите данните се изтриват или анонимизират автоматично.",
+        note:
+          "След изтичането на сроковете за съхранение данните се изтриват или анонимизират автоматично.",
       },
       rights: {
         title: "8. Вашите права",
-        intro: "Съгласно GDPR имате следните права:",
+        intro: "Съгласно ОРЗД имате следните права по отношение на личните си данни:",
         list: [
-          { name: "Право на достъп", desc: "Можете да поискате копие на вашите данни." },
-          { name: "Право на коригиране", desc: "Можете да коригирате неточни данни." },
-          { name: "Право на изтриване", desc: "Можете да поискате изтриване на данните." },
-          { name: "Право на ограничаване", desc: "Можете да ограничите обработката." },
-          { name: "Право на преносимост", desc: "Можете да получите данните в общ формат." },
-          { name: "Право на възражение", desc: "Можете да възразите срещу обработката." },
-          { name: "Право на оттегляне", desc: "Можете да оттеглите съгласието си по всяко време." },
+          {
+            name: "Право на достъп",
+            desc: "Можете да поискате копие на всички лични данни за вас, с които разполагаме.",
+          },
+          {
+            name: "Право на коригиране",
+            desc: "Можете да коригирате неточните или непълните данни в акаунта си.",
+          },
+          {
+            name: "Право на изтриване",
+            desc:
+              "Можете да поискате изтриване на данните си („правото да бъдеш забравен“), с изключение на данните, които се съхраняват съгласно законови задължения.",
+          },
+          {
+            name: "Право на ограничаване",
+            desc:
+              "Можете да ограничите начина, по който обработваме данните ви, при определени обстоятелства.",
+          },
+          {
+            name: "Право на преносимост",
+            desc:
+              "Можете да получите данните си в структуриран, широко използван и оперативно съвместим формат.",
+          },
+          {
+            name: "Право на възражение",
+            desc: "Можете да възразите срещу обработването, основано на законни интереси.",
+          },
+          {
+            name: "Право на оттегляне на съгласието",
+            desc:
+              "Можете да оттеглите даденото съгласие по всяко време, без това да засяга законосъобразността на обработването, извършено преди оттеглянето.",
+          },
         ],
-        complaint: "При оплаквания можете да се обърнете към компетентния орган за защита на данните.",
+        complaint:
+          "Ако смятате, че правата ви не се спазват, можете да подадете жалба до Националния надзорен орган за обработването на лични данни (ANSPDCP) - www.dataprotection.ro",
       },
       security: {
         title: "9. Сигурност на данните",
-        intro: "Прилагаме технически и организационни мерки:",
-        measures: ["Криптиране (TLS/SSL)", "Row Level Security (RLS)", "Сигурно удостоверяване", "Непрекъснат мониторинг", "Автоматични резервни копия", "Ограничен достъп"],
+        intro: "Прилагаме технически и организационни мерки за защита на данните:",
+        measures: [
+          "Криптиране при пренос (TLS/SSL) за всички комуникации",
+          "Row Level Security (RLS) за изолиране на данните между организациите",
+          "Сигурно удостоверяване с хеширане на паролите чрез bcrypt",
+          "Непрекъснато наблюдение и одит на достъпа до данните",
+          "Автоматични резервни копия и процедури за възстановяване след бедствие",
+          "Ограничен достъп въз основа на принципа „необходимост да се знае“",
+        ],
       },
-      cookies: { title: "10. Бисквитки", content: "Използваме само необходими бисквитки за работа на платформата. Без рекламни или проследяващи бисквитки." },
-      children: { title: "11. Данни за деца", content: "Услугите на Logistiq са предназначени за лица на 16 или повече години. Не събираме съзнателно данни от непълнолетни." },
-      changes: { title: "12. Промени в политиката", content: "Може периодично да актуализираме тази политика. За съществени промени ще ви уведомим по имейл или банер." },
+      cookies: {
+        title: "10. Бисквитки и подобни технологии",
+        content:
+          "Използваме основни бисквитки за функционирането на платформата (удостоверяване, потребителска сесия, езикови предпочитания). Не използваме бисквитки за рекламно проследяване, нито бисквитки на трети страни за профилиране.",
+      },
+      children: {
+        title: "11. Данни за деца",
+        content:
+          "Услугите на Logistiq са предназначени изключително за потребители, навършили 16 години. Не събираме съзнателно лични данни от лица под тази възраст. Ако установите, че лице, ненавършило пълнолетие, е предоставило лични данни, моля, свържете се с нас за изтриването им.",
+      },
+      changes: {
+        title: "12. Промени в политиката",
+        content:
+          "Можем периодично да актуализираме тази политика, за да отразим промени в нашите практики или в законовите изисквания. Ще ви уведомяваме за съществени промени по имейл или чрез банер, показан в платформата. Датата на последната актуализация е посочена в горната част на тази страница.",
+      },
       contact: {
         title: "13. Контакт",
-        intro: "За въпроси относно вашите данни или за упражняване на GDPR права, свържете се с нас:",
-        operator: "Администратор на данни", operatorName: "HOSTLIFE DIGITAL SRL", cui: "ДДС: 52638053", regNo: "Рег. №: J20/7592/5001",
-        address: "ул. Vidin 37, 805300 Текучи, Галац, Румъния", email: "Имейл", emailAddress: "contact@logistiq.ro",
-        responseTime: "Ще отговорим в рамките на 30 календарни дни.",
+        intro:
+          "За всякакви въпроси относно вашите лични данни или за упражняване на правата ви по ОРЗД можете да се свържете с нас:",
+        operator: "Администратор на лични данни",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Рег. №: J20/7592/5001",
+        address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
+        email: "Имейл",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "Ще отговаряме на исканията в срок до 30 календарни дни.",
       },
     },
     terms: {
       title: "Общи условия",
       lastUpdated: "Последна актуализация",
-      intro: "Тези общи условия уреждат използването на платформата Logistiq. С достъпа или използването на нашите услуги приемате тези условия изцяло.",
+      intro:
+        "Тези общи условия уреждат използването на платформата Logistiq. Като осъществявате достъп до нашите услуги или ги използвате, вие приемате изцяло тези условия.",
       article1: {
         title: "Член 1 - Дефиниции",
-        content: "За целите на това споразумение следните термини имат следните значения:",
+        content:
+          "За целите на настоящия договор посочените по-долу термини имат следното значение:",
         definitions: [
-          { term: "Доставчик", def: "HOSTLIFE DIGITAL SRL, ул. Vidin 37, 805300 Текучи, Галац, Румъния, ДДС 52638053" },
-          { term: "Платформа", def: "Услугите, достъпни чрез logistiq.ro, logistiq.cloud и qrgo.ro" },
-          { term: "Клиент", def: "Юридическо или физическо лице, закупило абонамент" },
-          { term: "Потребител", def: "Всяко лице, използващо Платформата" },
-          { term: "Абонамент", def: "Договор за услуги между Доставчика и Клиента" },
-          { term: "Табло", def: "Административен интерфейс на logistiq.cloud" },
-          { term: "Приложение за шофьори", def: "Приложение за check-in на qrgo.ro" },
+          {
+            term: "Доставчик",
+            def:
+              "HOSTLIFE DIGITAL SRL, със седалище и адрес на управление ул. Видин 37, 805300 Текуч, Галац, Румъния, CUI 52638053",
+          },
+          {
+            term: "Платформа",
+            def:
+              "Съвкупност от услуги, достъпни чрез уебсайтовете logistiq.ro, logistiq.cloud и qrgo.ro",
+          },
+          {
+            term: "Клиент",
+            def:
+              "Юридическо лице или физическо лице, оправомощено да извършва стопанска дейност, което закупува абонамент за използване на Платформата",
+          },
+          {
+            term: "Потребител",
+            def:
+              "Всяко лице, което осъществява достъп до Платформата или я използва, включително Клиентът и определените от него лица",
+          },
+          {
+            term: "Абонамент",
+            def:
+              "Договор за предоставяне на услуги, сключен между Доставчика и Клиента за достъп до Платформата",
+          },
+          {
+            term: "Табло",
+            def:
+              "Интерфейс за администриране, достъпен на logistiq.cloud, за управление на складовете",
+          },
+          {
+            term: "Приложение за шофьори / QRGO Driver",
+            def:
+              "Уеб или мобилно приложение за check-in на шофьорите, достъпно на qrgo.ro (уеб) или в Google Play / App Store",
+          },
         ],
       },
-      article2: { title: "Член 2 - Предмет на договора", content: "Доставчикът се задължава да предостави достъп до платформата Logistiq за:", items: ["Управление на check-in операции", "Достъп до Таблото", "Достъп до Приложението за шофьори", "Функции според избрания план", "Техническа поддръжка"] },
-      article3: { title: "Член 3 - Приемане на условията", content: "С следните действия Клиентът потвърждава приемането на тези условия:", items: ["Създаване на акаунт", "Плащане на абонамент", "Използване на Платформата"], note: "Актуалната версия е винаги достъпна на logistiq.ro." },
-      article4: { title: "Член 4 - Регистрация и акаунт", items: ["Точни данни за регистрация", "Сигурността на акаунта е отговорност на Клиента", "Право на спиране на акаунта", "Забрана за прехвърляне на акаунт"] },
-      article5: { title: "Член 5 - Срок на договора", trial: { title: "Пробен период", content: "10 дни безплатен пробен период." }, subscription: { title: "Абонамент", content: "Месечен с автоматично подновяване." }, cancellation: { title: "Отказ", content: "Възможен по всяко време, достъп до края на платения период." } },
-      article6: { title: "Член 6 - Цени и плащания", items: ["Цени в EUR", "Месечно авансово плащане", "Плащане с карта или банков превод", "Фактури чрез SmartBill", "Промени в цените с 30 дни предизвестие"], plans: { title: "Налични планове", professional: "Professional: 139 EUR/месец - 1 склад", enterprise5: "Enterprise 5: 500 EUR/месец - до 5 склада", enterprise10: "Enterprise 10: 800 EUR/месец - до 10 склада", enterprise25: "Enterprise 25: 1590 EUR/месец - до 25 склада" } },
-      article7: { title: "Член 7 - Upgrade и Downgrade", upgrade: { title: "Upgrade", content: "Веднага в сила с пропорционално плащане." }, downgrade: { title: "Downgrade", content: "Може да се направи по всяко време, с пропорционално възстановяване за оставащия период. Не може да се понижи под текущия брой активни складове." } },
-      article8: { title: "Член 8 - Функции и ограничения", included: { title: "Включени във всички планове", items: ["Неограничени check-in-и", "Неограничени отдели", "Персонализирани полета", "Пълни отчети", "QR check-in", "Приложение за шофьори", "Email поддръжка"] }, enterprise: { title: "Enterprise функции", items: ["API достъп (Enterprise 5+)", "Собствен домейн (Enterprise 5+)", "Приоритетна поддръжка (Enterprise 5+)", "Персонална поддръжка (Enterprise 10+)", "99,9% SLA (Enterprise 25)"] } },
-      article9: { title: "Член 9 - Наличност на услугата", content: "Доставчикът се ангажира с минимум 99,9% годишна наличност.", exclusions: { title: "Изключения", items: ["Планирана поддръжка", "Форсмажор", "Кибератаки", "Проблеми с трети страни"] } },
-      article10: { title: "Член 10 - Задължения на Клиента", items: ["Авансово плащане на абонамента", "Точни данни за фактуриране", "Законно използване", "Спазване на GDPR", "Забрана за препродажба"] },
-      article11: { title: "Член 11 - Задължения на Доставчика", items: ["Достъп според плана", "Техническа поддръжка", "Мерки за сигурност", "Редовни резервни копия", "Уведомление за промени"] },
-      article12: { title: "Член 12 - Интелектуална собственост", platform: { title: "Платформа", content: "Всички права принадлежат на Доставчика." }, clientData: { title: "Данни на Клиента", content: "Клиентът запазва правата върху своите данни." }, license: { title: "Лиценз", content: "Неизключителен лиценз за срока на абонамента." } },
-      article13: { title: "Член 13 - Ограничение на отговорността", items: ["Услуга 'както е'", "Без отговорност за непреки загуби", "Максимална отговорност: 3 месечни абонамента", "Изтритите данни не могат да бъдат възстановени"] },
-      article14: { title: "Член 14 - Прекратяване на договора", byClient: { title: "Отказ от Клиента", content: "Възможен по всяко време." }, byProvider: { title: "Прекратяване от Доставчика", content: "При неплащане, злоупотреба или нарушение на условията." }, effects: { title: "Последици", content: "30 дни за експорт на данни, след това окончателно изтриване." } },
-      article15: { title: "Член 15 - Заключителни разпоредби", items: [{ title: "Приложимо право", content: "Румънско право" }, { title: "Юрисдикция", content: "Съдилища в Букурещ" }, { title: "Изменения", content: "С 30 дни предизвестие" }], contact: { title: "Контакт", email: "contact@logistiq.ro", address: "ул. Vidin 37, 805300 Текучи, Галац, Румъния" } },
+      article2: {
+        title: "Член 2 - Предмет на договора",
+        content:
+          "Доставчикът се задължава да предостави на Клиента достъп до Платформата Logistiq за:",
+        items: [
+          "Управление на операциите по check-in в логистични складове",
+          "Достъп до интерфейса Табло (logistiq.cloud) за мениджъри и оператори",
+          "Достъп до приложението QRGO Driver (qrgo.ro) за шофьорите, които извършват check-in",
+          "Функционалностите, включени в избрания абонаментен план",
+          "Техническа поддръжка съобразно нивото на абонамента",
+        ],
+      },
+      article3: {
+        title: "Член 3 - Приемане на условията",
+        content:
+          "С всяко от следните действия Клиентът потвърждава, че е прочел, разбрал и приел тези условия:",
+        items: [
+          "Създаване на акаунт в Платформата",
+          "Заплащане на абонамент",
+          "Използване на която и да е функционалност на Платформата",
+        ],
+        note: "Актуалната версия на условията е винаги достъпна на уебсайта logistiq.ro.",
+      },
+      article4: {
+        title: "Член 4 - Регистрация и акаунт",
+        items: [
+          "Клиентът гарантира, че информацията, предоставена при регистрацията, е вярна, пълна и актуална",
+          "Сигурността на паролата и на достъпа до акаунта е изключителна отговорност на Клиента",
+          "Доставчикът си запазва правото да откаже регистрация или да спре временно акаунта при нарушаване на условията",
+          "Клиентът не може да прехвърля акаунта на трети лица без предварителното съгласие на Доставчика",
+        ],
+      },
+      article5: {
+        title: "Член 5 - Срок на договора",
+        trial: {
+          title: "Пробен период",
+          content:
+            "Платформата предлага безплатен пробен период от 10 дни. След изтичането му достъпът е обусловен от закупуването на абонамент.",
+        },
+        subscription: {
+          title: "Абонамент",
+          content:
+            "Абонаментът се сключва за месечен период и се подновява автоматично, освен ако Клиентът не го анулира.",
+        },
+        cancellation: {
+          title: "Анулиране",
+          content:
+            "Клиентът може да анулира абонамента по всяко време. Достъпът остава активен до края на платения период.",
+        },
+      },
+      article6: {
+        title: "Член 6 - Цени и плащания",
+        items: [
+          "Цените са в EUR и са тези, които са посочени на уебсайта към момента на поръчката",
+          "Фактурирането се извършва ежемесечно, авансово",
+          "Плащането може да се извърши с карта (Stripe) или с банков превод",
+          "За Румъния данъчните фактури се издават чрез SmartBill",
+          "Промяна на цените с 30-дневно предизвестие",
+        ],
+        plans: {
+          title: "Налични планове",
+          professional: "Professional: 139 EUR/месец - 1 склад",
+          enterprise5: "Enterprise 5: 500 EUR/месец - до 5 склада",
+          enterprise10: "Enterprise 10: 800 EUR/месец - до 10 склада",
+          enterprise25: "Enterprise 25: 1590 EUR/месец - до 25 склада",
+        },
+      },
+      article7: {
+        title: "Член 7 - Надграждане и понижаване на плана",
+        upgrade: {
+          title: "Надграждане",
+          content:
+            "Преминаването към по-висок план влиза в сила незабавно срещу заплащане на пропорционалната разлика.",
+        },
+        downgrade: {
+          title: "Понижаване",
+          content:
+            "Преминаването към по-нисък план може да се извърши по всяко време, като разликата за оставащия период се възстановява пропорционално. Не може да се извърши понижаване под текущия брой активни складове.",
+        },
+      },
+      article8: {
+        title: "Член 8 - Функционалности и ограничения",
+        included: {
+          title: "Включено във всички планове",
+          items: [
+            "Дигитален check-in - шофьорите сканират QR код или използват приложението QRGO Driver",
+            "Управление на рампите - разпределяне и оптимизиране на потока от камиони",
+            "Чат и известия в реално време между оператора и шофьора",
+            "Категоризиране по отдели и типове камиони",
+            "Отчети и анализи - интерактивни табла с KPI",
+            "Приложение QRGO Driver (уеб, Android, iOS)",
+            "Многоезичност - интерфейс на 12 европейски езика",
+            "В облака - без оборудване или локални инсталации",
+            "Инструкции и насочване на шофьорите в приложението",
+            "Ранен check-in и планиране на часа на пристигане",
+            "Автоматично засичане на местоположението (мобилно приложение)",
+            "Неограничен брой check-in-и, отдели и рампи",
+            "Поддръжка по имейл",
+          ],
+        },
+        enterprise: {
+          title: "Функционалности Enterprise",
+          items: [
+            "White-Label на собствен домейн (Enterprise 5+)",
+            "Достъп до API за интеграции (Enterprise 5+)",
+            "Приоритетна поддръжка (Enterprise 5+)",
+            "Персонална поддръжка (Enterprise 10+)",
+            "SLA 99,9% (Enterprise 25)",
+          ],
+        },
+      },
+      article9: {
+        title: "Член 9 - Наличност на услугата",
+        content: "Доставчикът се ангажира да поддържа наличност от минимум 99,9% годишно.",
+        exclusions: {
+          title: "Изключения",
+          items: [
+            "Планирана профилактика (обявена 24 часа предварително)",
+            "Непреодолима сила",
+            "Кибератаки",
+            "Проблеми при външни доставчици",
+          ],
+        },
+      },
+      article10: {
+        title: "Член 10 - Задължения на Клиента",
+        items: [
+          "Авансово заплащане на абонамента",
+          "Верни данни за фактуриране",
+          "Законосъобразно използване на Платформата",
+          "Спазване на ОРЗД по отношение на данните на шофьорите",
+          "Забрана за препродажба на услугата",
+        ],
+      },
+      article11: {
+        title: "Член 11 - Задължения на Доставчика",
+        items: [
+          "Предоставяне на достъп съгласно плана",
+          "Подходяща техническа поддръжка",
+          "Адекватни мерки за сигурност",
+          "Редовни резервни копия",
+          "Уведомяване за важни промени",
+        ],
+      },
+      article12: {
+        title: "Член 12 - Интелектуална собственост",
+        platform: {
+          title: "Платформа",
+          content:
+            "Всички права на интелектуална собственост върху Платформата принадлежат на Доставчика.",
+        },
+        clientData: {
+          title: "Данни на Клиента",
+          content: "Клиентът запазва всички права върху своите данни.",
+        },
+        license: {
+          title: "Лиценз",
+          content: "Клиентът получава неизключителен лиценз за ползване за срока на абонамента.",
+        },
+      },
+      article13: {
+        title: "Член 13 - Ограничаване на отговорността",
+        items: [
+          "Услугата се предоставя „във вида, в който е“",
+          "Без отговорност за косвени загуби",
+          "Максимална отговорност: стойността на абонамента за последните 3 месеца",
+          "Изтритите данни не могат да бъдат възстановени",
+        ],
+      },
+      article14: {
+        title: "Член 14 - Прекратяване на договора",
+        byClient: {
+          title: "Анулиране от Клиента",
+          content:
+            "Клиентът може да анулира абонамента по всяко време. Достъпът остава активен до края на периода.",
+        },
+        byProvider: {
+          title: "Прекратяване от Доставчика",
+          content: "При неплащане, злоупотреба или нарушаване на условията.",
+        },
+        effects: {
+          title: "Последици",
+          content: "30 дни за експорт на данните, след това окончателно изтриване.",
+        },
+      },
+      article15: {
+        title: "Член 15 - Заключителни разпоредби",
+        items: [
+          {
+            title: "Приложимо право",
+            content: "Законодателството на Румъния",
+          },
+          {
+            title: "Юрисдикция",
+            content: "Съдилищата в Букурещ",
+          },
+          {
+            title: "Изменения",
+            content: "С 30-дневно предизвестие",
+          },
+        ],
+        contact: {
+          title: "Контакт",
+          email: "contact@logistiq.ro",
+          address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
+        },
+      },
     },
     cookies: {
-      title: "Политика за бисквитки",
+      title: "Политика за използване на бисквитки",
       lastUpdated: "Последна актуализация",
-      intro: { title: "1. Въведение", p1: "Тази политика обяснява как платформата Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) използва бисквитки и подобни технологии.", p2: "Продължавайки да разглеждате нашите сайтове, вие приемате използването на бисквитки в съответствие с тази политика." },
-      whatAreCookies: { title: "2. Какво са бисквитките?", content: "Бисквитките са малки текстови файлове, които се съхраняват на вашето устройство при посещение на уебсайт. Те позволяват на сайта да разпознае вашето устройство и да запомни вашите предпочитания.", types: { title: "Видове бисквитки:", session: { name: "Сесийни бисквитки", desc: "Изтриват се автоматично при затваряне на браузъра" }, persistent: { name: "Постоянни бисквитки", desc: "Остават до изтичане или ръчно изтриване" }, firstParty: { name: "Собствени бисквитки", desc: "Поставени от посещавания сайт" }, thirdParty: { name: "Бисквитки на трети страни", desc: "Поставени от други интегрирани услуги" } } },
-      cookiesWeUse: { title: "3. Бисквитки, които използваме", essential: { title: "Основни бисквитки", desc: "Необходими за работата на платформата. Не могат да бъдат деактивирани.", cookies: [{ name: "sb-access-token", duration: "1 час", purpose: "Supabase удостоверяване - токен за достъп" }, { name: "sb-refresh-token", duration: "7 дни", purpose: "Supabase удостоверяване - опресняване на сесията" }, { name: "NEXT_LOCALE", duration: "1 година", purpose: "Запаметяване на предпочитан език" }] }, functional: { title: "Функционални бисквитки", desc: "Подобряват потребителското изживяване.", cookies: [{ name: "theme", duration: "1 година", purpose: "Запаметяване на предпочитание за тема" }, { name: "sidebar_collapsed", duration: "30 дни", purpose: "Състояние на страничната лента в Dashboard" }] }, analytics: { title: "Аналитични бисквитки", desc: "Помагат да разберем как използвате платформата.", cookies: [{ name: "_ga", duration: "2 години", purpose: "Google Analytics - идентификация на посетител" }, { name: "_gid", duration: "24 часа", purpose: "Google Analytics - идентификация на сесия" }] } },
-      thirdParty: { title: "4. Бисквитки на трети страни", intro: "Платформата Logistiq използва следните услуги на трети страни:", services: [{ name: "Supabase", purpose: "Удостоверяване и база данни", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Обработка на плащания", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Хостинг и анализи", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Статистика на трафика", url: "policies.google.com/privacy" }], note: "Препоръчваме да прегледате политиките за поверителност на тези услуги." },
-      manageCookies: { title: "5. Управление на бисквитките", intro: "Можете да контролирате и/или изтривате бисквитките според вашите предпочитания:", browsers: [{ name: "Google Chrome", steps: "Настройки → Поверителност и сигурност → Бисквитки" }, { name: "Mozilla Firefox", steps: "Настройки → Поверителност → Бисквитки" }, { name: "Safari", steps: "Предпочитания → Поверителност → Управление на данни на сайтове" }, { name: "Microsoft Edge", steps: "Настройки → Бисквитки и разрешения на сайтове" }], warning: "Внимание: Деактивирането на основните бисквитки може да повлияе на функционалността на платформата." },
-      changes: { title: "6. Промени в политиката", content: "Запазваме си правото да актуализираме тази политика. Значителни промени ще бъдат обявени чрез известие на платформата или по имейл." },
-      contact: { title: "7. Контакт", intro: "За въпроси относно използването на бисквитки или за упражняване на вашите GDPR права:", operator: "Оператор", operatorName: "HOSTLIFE DIGITAL SRL", cui: "ДДС: 52638053", regNo: "Рег. №: J20/7592/5001", address: "ул. Vidin 37, 805300 Текучи, Галац, Румъния", email: "Имейл", emailAddress: "contact@logistiq.ro" },
+      intro: {
+        title: "1. Въведение",
+        p1:
+          "Тази политика обяснява как платформата Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) използва бисквитки и подобни технологии, за да ви осигури сигурно и персонализирано изживяване.",
+        p2:
+          "Като продължавате да разглеждате нашите уебсайтове, вие приемате използването на бисквитки в съответствие с тази политика.",
+      },
+      whatAreCookies: {
+        title: "2. Какво представляват бисквитките?",
+        content:
+          "Бисквитките са малки текстови файлове, които се съхраняват на вашето устройство (компютър, мобилен телефон, таблет), когато посещавате уебсайт. Те позволяват на сайта да разпознае устройството ви и да запомни определена информация за посещението ви или за вашите предпочитания.",
+        types: {
+          title: "Видове бисквитки:",
+          session: {
+            name: "Сесийни бисквитки",
+            desc: "Изтриват се автоматично, когато затворите браузъра",
+          },
+          persistent: {
+            name: "Постоянни бисквитки",
+            desc: "Остават на устройството до изтичането на срока им или до ръчното им изтриване",
+          },
+          firstParty: {
+            name: "Собствени бисквитки",
+            desc: "Поставят се от уебсайта, който посещавате",
+          },
+          thirdParty: {
+            name: "Бисквитки на трети страни",
+            desc: "Поставят се от други интегрирани уебсайтове/услуги",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Бисквитките, които използваме",
+        essential: {
+          title: "Основни бисквитки",
+          desc: "Необходими са за функционирането на платформата. Не могат да бъдат деактивирани.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 час",
+              purpose: "Удостоверяване чрез Supabase - токен за достъп",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 дни",
+              purpose: "Удостоверяване чрез Supabase - опресняване на сесията",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 година",
+              purpose: "Запомняне на предпочитания език",
+            },
+          ],
+        },
+        functional: {
+          title: "Функционални бисквитки",
+          desc: "Подобряват потребителското изживяване в платформата.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 година",
+              purpose: "Запомняне на предпочитанието за тъмна/светла тема",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 дни",
+              purpose: "Състояние на страничното меню в Таблото",
+            },
+          ],
+        },
+        analytics: {
+          title: "Аналитични бисквитки",
+          desc: "Помагат ни да разберем как използвате платформата, за да я подобряваме.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 години",
+              purpose: "Google Analytics - идентифициране на посетителя",
+            },
+            {
+              name: "_gid",
+              duration: "24 часа",
+              purpose: "Google Analytics - идентифициране на сесията",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Бисквитки на трети страни",
+        intro:
+          "Платформата Logistiq използва следните услуги на трети страни, които могат да поставят бисквитки:",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Удостоверяване и база данни",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Обработка на плащания",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Хостинг и анализи",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Статистика за трафика",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "Препоръчваме ви да се запознаете с политиките за поверителност на тези услуги за подробности.",
+      },
+      manageCookies: {
+        title: "5. Как да управлявате бисквитките",
+        intro:
+          "Можете да контролирате и/или да изтривате бисквитките според предпочитанията си. Ето как можете да направите това в основните браузъри:",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Настройки → Поверителност и сигурност → Бисквитки и други данни за сайтовете",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Настройки → Поверителност и сигурност → Бисквитки и данни на сайтовете",
+          },
+          {
+            name: "Safari",
+            steps: "Предпочитания → Поверителност → Управление на данните на уебсайтовете",
+          },
+          {
+            name: "Microsoft Edge",
+            steps:
+              "Настройки → Бисквитки и разрешения за сайтовете → Управление и изтриване на бисквитки",
+          },
+        ],
+        warning:
+          "Внимание: Деактивирането на основните бисквитки може да засегне функционирането на платформата. Възможно е да не можете да влезете в акаунта си или да загубите достъп до определени функционалности.",
+      },
+      changes: {
+        title: "6. Промени в политиката",
+        content:
+          "Запазваме си правото периодично да актуализираме тази политика. Съществените промени ще бъдат обявявани чрез известие в платформата или по имейл.",
+      },
+      contact: {
+        title: "7. Контакт",
+        intro:
+          "За въпроси относно използването на бисквитки или за упражняване на правата ви съгласно ОРЗД:",
+        operator: "Администратор",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Рег. №: J20/7592/5001",
+        address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
+        email: "Имейл",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26 януари 2026 г.",
+      backHome: "Обратно към началната страница",
+      retentionHeaders: {
+        type: "Вид данни",
+        period: "Срок на съхранение",
+      },
+      cookieHeaders: {
+        name: "Бисквитка",
+        duration: "Срок",
+        purpose: "Цел",
+      },
+      meta: {
+        privacy: "Политика за поверителност на Logistiq – как събираме, използваме и защитаваме личните Ви данни в съответствие с ОРЗД.",
+        terms: "Общи условия на Logistiq – платформа за управление на складове и check-in на шофьори.",
+        cookies: "Политика за бисквитките на Logistiq – как използваме бисквитки, за да Ви осигурим оптимално изживяване.",
+      },
     },
   },
   fr: {
@@ -11955,7 +14166,7 @@ export const translations = {
       blog: "Blog",
       press: "Presse",
       privacy: "Politique de confidentialité",
-      terms: "Conditions d'utilisation",
+      terms: "Conditions générales",
       cookies: "Politique des cookies",
       gdpr: "RGPD",
       helpCenter: "Centre d'aide",
@@ -12055,204 +14266,678 @@ export const translations = {
       a15: "Oui, tous les forfaits incluent une formation personnalisée de l'équipe d'exploitation. Elle couvre la configuration du système, l'utilisation du tableau de bord et la génération de rapports.",
     },
     privacy: {
-      title: "Politique de Confidentialité",
+      title: "Politique de confidentialité",
       lastUpdated: "Dernière mise à jour",
       intro: {
         title: "1. Introduction",
-        p1: "HOSTLIFE DIGITAL SRL (\"Responsable du traitement\"), dont le siège est situé Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, numéro TVA 52638053, respecte la confidentialité de vos données personnelles.",
-        p2: "Cette politique décrit comment nous collectons, utilisons et protégeons les données personnelles conformément au Règlement Général sur la Protection des Données (RGPD - Règlement UE 2016/679).",
+        p1:
+          "HOSTLIFE DIGITAL SRL (le « responsable du traitement »), dont le siège social est situé Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, numéro d'identification fiscale (CUI) 52638053, respecte la confidentialité de vos données à caractère personnel.",
+        p2:
+          "La présente politique décrit la manière dont nous collectons, utilisons et protégeons les données à caractère personnel, conformément au règlement général sur la protection des données (RGPD – règlement (UE) 2016/679).",
       },
       dataCollected: {
-        title: "2. Quelles données personnelles nous collectons",
-        identification: { title: "Données d'identification", items: ["Nom complet", "Adresse e-mail", "Rôle dans le système", "Photo de profil (optionnel)"] },
-        contact: { title: "Données de contact", items: ["Numéro de téléphone", "Adresse e-mail"] },
-        billing: { title: "Données de facturation", items: ["Nom de l'entreprise", "Numéro TVA", "Numéro d'enregistrement", "Adresse de facturation", "Historique des paiements"] },
-        technical: { title: "Données techniques", items: ["Adresse IP", "User Agent", "Coordonnées GPS (avec votre consentement)"] },
-        activity: { title: "Données d'activité", items: ["Historique des check-ins", "Messages avec les opérateurs", "Pièces jointes (CMR, photos)", "Temps dans chaque étape"] },
+        title: "2. Données à caractère personnel que nous collectons",
+        identification: {
+          title: "Données d'identification",
+          items: [
+            "Nom complet",
+            "Adresse e-mail",
+            "Rôle dans le système (opérateur, administrateur)",
+            "Photo de profil (facultative)",
+          ],
+        },
+        contact: {
+          title: "Données de contact",
+          items: [
+            "Numéro de téléphone",
+            "Adresse e-mail",
+          ],
+        },
+        billing: {
+          title: "Données de facturation",
+          items: [
+            "Nom de l'entreprise",
+            "Numéro d'identification fiscale (CUI/CIF)",
+            "Numéro d'immatriculation",
+            "Adresse de facturation",
+            "Historique des paiements",
+          ],
+        },
+        technical: {
+          title: "Données techniques",
+          items: [
+            "Adresse IP",
+            "User Agent (navigateur/appareil)",
+            "Coordonnées GPS (avec votre consentement, pour la détection automatique de la localisation)",
+          ],
+        },
+        activity: {
+          title: "Données d'activité",
+          items: [
+            "Historique des check-ins",
+            "Messages échangés avec les opérateurs",
+            "Pièces jointes (CMR, photos de documents)",
+            "Temps passé à chaque étape de l'opération",
+          ],
+        },
       },
       purposes: {
         title: "3. Finalités du traitement",
-        list: ["Fourniture du service de check-in numérique", "Gestion de compte et authentification", "Traitement des paiements et émission de factures", "Communication en temps réel", "Rapports et analyses", "Support technique", "Amélioration des services", "Respect des obligations légales"],
+        list: [
+          "Fourniture du service de check-in numérique pour les entrepôts",
+          "Gestion du compte et authentification des utilisateurs",
+          "Traitement des paiements et émission des factures fiscales",
+          "Communication en temps réel entre les chauffeurs et les opérateurs d'entrepôt",
+          "Génération de rapports et d'analyses pour l'optimisation des opérations",
+          "Fourniture d'un support technique et d'une assistance à la clientèle",
+          "Amélioration continue de nos services",
+          "Respect des obligations légales (conservation des factures conformément au Code fiscal)",
+        ],
       },
       legalBasis: {
-        title: "4. Base légale du traitement",
-        contract: { title: "Exécution du contrat (Art. 6.1.b RGPD)", desc: "Nous traitons les données nécessaires à la fourniture des services contractés." },
-        legal: { title: "Obligation légale (Art. 6.1.c RGPD)", desc: "Nous conservons les données de facturation conformément à la législation fiscale (10 ans)." },
-        legitimate: { title: "Intérêts légitimes (Art. 6.1.f RGPD)", desc: "Nous collectons des données techniques pour la sécurité du système et l'amélioration des services." },
-        consent: { title: "Consentement (Art. 6.1.a RGPD)", desc: "Pour les coordonnées GPS et les communications marketing, nous demandons votre consentement explicite." },
+        title: "4. Bases juridiques du traitement",
+        contract: {
+          title: "Exécution du contrat (article 6, paragraphe 1, point b), du RGPD)",
+          desc:
+            "Nous traitons les données nécessaires pour vous fournir les services souscrits : check-in numérique, communication en temps réel, gestion des quais.",
+        },
+        legal: {
+          title: "Obligation légale (article 6, paragraphe 1, point c), du RGPD)",
+          desc:
+            "Nous conservons les données de facturation conformément à la législation fiscale roumaine (Code fiscal – 10 ans).",
+        },
+        legitimate: {
+          title: "Intérêts légitimes (article 6, paragraphe 1, point f), du RGPD)",
+          desc:
+            "Nous collectons des données techniques pour la sécurité du système, la prévention des fraudes et l'amélioration des services.",
+        },
+        consent: {
+          title: "Consentement (article 6, paragraphe 1, point a), du RGPD)",
+          desc:
+            "Pour les coordonnées GPS et les communications marketing, nous vous demandons votre consentement explicite, que vous pouvez retirer à tout moment.",
+        },
       },
       thirdParties: {
-        title: "5. Partage de données avec des tiers",
-        intro: "Nous travaillons avec les partenaires de confiance suivants :",
+        title: "5. Partage des données avec des tiers",
+        intro:
+          "Nous collaborons avec les partenaires de confiance suivants pour la fourniture de nos services :",
         partners: [
-          { name: "Supabase", purpose: "Base de données et authentification (serveurs UE - Francfort)" },
-          { name: "Stripe", purpose: "Traitement sécurisé des paiements (certifié PCI DSS)" },
-          { name: "SmartBill", purpose: "Émission de factures (Roumanie)" },
-          { name: "Vercel", purpose: "Hébergement et distribution mondiale (CDN)" },
+          {
+            name: "Supabase",
+            purpose:
+              "Base de données et authentification (serveurs dans l'UE – Francfort, Allemagne)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Traitement sécurisé des paiements (certifié PCI DSS)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Émission de factures fiscales conformes (Roumanie)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hébergement et distribution mondiale (CDN)",
+          },
         ],
-        note: "Nous ne vendons ni ne partageons vos données avec des tiers à des fins marketing.",
+        note:
+          "Nous ne vendons ni ne partageons vos données à caractère personnel avec des tiers à des fins de marketing.",
       },
-      internationalTransfers: { title: "6. Transferts internationaux de données", content: "Certaines données peuvent être transférées en dehors de l'EEE. Dans ces cas, nous appliquons les clauses contractuelles types approuvées par la Commission européenne." },
+      internationalTransfers: {
+        title: "6. Transferts internationaux de données",
+        content:
+          "Certaines données peuvent être transférées vers nos partenaires en dehors de l'Espace économique européen (EEE). Dans ces cas, nous mettons en place des garanties appropriées, notamment des clauses contractuelles types approuvées par la Commission européenne, afin d'assurer un niveau équivalent de protection des données.",
+      },
       retention: {
         title: "7. Durée de conservation des données",
         periods: [
-          { type: "Données de compte", duration: "Durée du compte actif + 30 jours" },
-          { type: "Données de facturation", duration: "10 ans" },
-          { type: "Données de check-in", duration: "2 ans" },
-          { type: "Données techniques", duration: "6 mois" },
-          { type: "Pièces jointes", duration: "1 an après la fin" },
+          {
+            type: "Données du compte utilisateur",
+            duration: "Pendant la durée d'activité du compte + 30 jours après sa suppression",
+          },
+          {
+            type: "Données de facturation",
+            duration: "10 ans (conformément au Code fiscal roumain)",
+          },
+          {
+            type: "Données de check-in et d'opérations",
+            duration: "2 ans ou selon les conditions contractuelles",
+          },
+          {
+            type: "Données techniques (IP, journaux)",
+            duration: "6 mois",
+          },
+          {
+            type: "Pièces jointes (CMR, photos)",
+            duration: "1 an après la fin de l'opération",
+          },
         ],
-        note: "Après expiration des périodes de conservation, les données sont automatiquement supprimées ou anonymisées.",
+        note:
+          "À l'expiration des durées de conservation, les données sont automatiquement supprimées ou anonymisées.",
       },
       rights: {
         title: "8. Vos droits",
-        intro: "Conformément au RGPD, vous disposez des droits suivants :",
+        intro:
+          "Conformément au RGPD, vous disposez des droits suivants concernant vos données à caractère personnel :",
         list: [
-          { name: "Droit d'accès", desc: "Vous pouvez demander une copie de vos données." },
-          { name: "Droit de rectification", desc: "Vous pouvez corriger les données inexactes." },
-          { name: "Droit à l'effacement", desc: "Vous pouvez demander la suppression de vos données." },
-          { name: "Droit à la limitation", desc: "Vous pouvez limiter le traitement." },
-          { name: "Droit à la portabilité", desc: "Vous pouvez recevoir vos données dans un format courant." },
-          { name: "Droit d'opposition", desc: "Vous pouvez vous opposer au traitement." },
-          { name: "Droit de retrait", desc: "Vous pouvez retirer votre consentement à tout moment." },
+          {
+            name: "Droit d'accès",
+            desc:
+              "Vous pouvez demander une copie de toutes les données à caractère personnel que nous détenons à votre sujet.",
+          },
+          {
+            name: "Droit de rectification",
+            desc:
+              "Vous pouvez corriger les données inexactes ou incomplètes figurant dans votre compte.",
+          },
+          {
+            name: "Droit à l'effacement",
+            desc:
+              "Vous pouvez demander l'effacement de vos données (« droit à l'oubli »), à l'exception de celles conservées en vertu d'obligations légales.",
+          },
+          {
+            name: "Droit à la limitation du traitement",
+            desc:
+              "Vous pouvez limiter la manière dont nous traitons vos données dans certaines circonstances.",
+          },
+          {
+            name: "Droit à la portabilité des données",
+            desc:
+              "Vous pouvez recevoir vos données dans un format structuré, couramment utilisé et interopérable.",
+          },
+          {
+            name: "Droit d'opposition",
+            desc: "Vous pouvez vous opposer au traitement fondé sur des intérêts légitimes.",
+          },
+          {
+            name: "Droit de retrait du consentement",
+            desc:
+              "Vous pouvez retirer à tout moment le consentement que vous avez donné, sans que cela compromette la licéité du traitement effectué antérieurement.",
+          },
         ],
-        complaint: "En cas de plainte, vous pouvez vous adresser à l'autorité de protection des données compétente.",
+        complaint:
+          "Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de l'Autorité nationale de surveillance du traitement des données à caractère personnel (ANSPDCP), l'autorité de contrôle roumaine – www.dataprotection.ro",
       },
       security: {
         title: "9. Sécurité des données",
-        intro: "Nous mettons en œuvre des mesures techniques et organisationnelles :",
-        measures: ["Chiffrement (TLS/SSL)", "Row Level Security (RLS)", "Authentification sécurisée", "Surveillance continue", "Sauvegardes automatiques", "Accès restreint"],
+        intro:
+          "Nous mettons en œuvre des mesures techniques et organisationnelles pour la protection des données :",
+        measures: [
+          "Chiffrement en transit (TLS/SSL) de toutes les communications",
+          "Row Level Security (RLS) pour l'isolation des données entre les organisations",
+          "Authentification sécurisée avec hachage des mots de passe par bcrypt",
+          "Surveillance et audit continus des accès aux données",
+          "Sauvegardes automatiques et procédures de reprise après sinistre",
+          "Accès restreint selon le principe du « besoin d'en connaître »",
+        ],
       },
-      cookies: { title: "10. Cookies", content: "Nous utilisons uniquement des cookies essentiels pour le fonctionnement de la plateforme. Pas de cookies publicitaires ou de suivi." },
-      children: { title: "11. Données des enfants", content: "Les services Logistiq sont destinés aux personnes de 16 ans ou plus. Nous ne collectons pas sciemment de données auprès de mineurs." },
-      changes: { title: "12. Modifications de la politique", content: "Nous pouvons mettre à jour cette politique périodiquement. Nous vous informerons des changements importants par e-mail ou bannière." },
+      cookies: {
+        title: "10. Cookies et technologies similaires",
+        content:
+          "Nous utilisons des cookies essentiels au fonctionnement de la plateforme (authentification, session utilisateur, préférences de langue). Nous n'utilisons pas de cookies de suivi publicitaire ni de cookies tiers à des fins de profilage.",
+      },
+      children: {
+        title: "11. Données concernant les enfants",
+        content:
+          "Les services Logistiq sont destinés exclusivement aux utilisateurs âgés d'au moins 16 ans. Nous ne collectons pas sciemment de données à caractère personnel auprès de personnes n'ayant pas atteint cet âge. Si vous découvrez qu'un mineur a fourni des données à caractère personnel, veuillez nous contacter afin qu'elles soient supprimées.",
+      },
+      changes: {
+        title: "12. Modifications de la politique",
+        content:
+          "Nous pouvons mettre à jour périodiquement la présente politique afin de refléter les changements de nos pratiques ou des exigences légales. Nous vous informerons des modifications importantes par e-mail ou par l'affichage d'une bannière sur la plateforme. La date de la dernière mise à jour est affichée en haut de cette page.",
+      },
       contact: {
         title: "13. Contact",
-        intro: "Pour toute question concernant vos données ou pour exercer vos droits RGPD, contactez-nous :",
-        operator: "Responsable du traitement", operatorName: "HOSTLIFE DIGITAL SRL", cui: "TVA : 52638053", regNo: "N° Reg. : J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie", email: "E-mail", emailAddress: "contact@logistiq.ro",
-        responseTime: "Nous répondrons dans les 30 jours calendaires.",
+        intro:
+          "Pour toute question concernant vos données à caractère personnel ou pour exercer vos droits au titre du RGPD, vous pouvez nous contacter :",
+        operator: "Responsable du traitement",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI : 52638053",
+        regNo: "N° d'immatriculation : J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "Nous répondrons aux demandes dans un délai de 30 jours calendaires.",
       },
     },
     terms: {
-      title: "Conditions Générales",
+      title: "Conditions générales",
       lastUpdated: "Dernière mise à jour",
-      intro: "Ces conditions générales régissent l'utilisation de la plateforme Logistiq. En accédant ou en utilisant nos services, vous acceptez ces conditions dans leur intégralité.",
+      intro:
+        "Les présentes conditions générales régissent l'utilisation de la plateforme Logistiq. En accédant à nos services ou en les utilisant, vous acceptez les présentes conditions dans leur intégralité.",
       article1: {
-        title: "Article 1 - Définitions",
-        content: "Aux fins du présent contrat, les termes ci-dessous ont les significations suivantes :",
+        title: "Article 1 – Définitions",
+        content:
+          "Aux fins du présent contrat, les termes ci-dessous ont les significations suivantes :",
         definitions: [
-          { term: "Prestataire", def: "HOSTLIFE DIGITAL SRL, dont le siège social est Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, TVA 52638053" },
-          { term: "Plateforme", def: "L'ensemble des services disponibles via logistiq.ro, logistiq.cloud et qrgo.ro" },
-          { term: "Client", def: "Personne morale ou physique autorisée qui acquiert un abonnement pour utiliser la Plateforme" },
-          { term: "Utilisateur", def: "Toute personne qui accède ou utilise la Plateforme, y compris le Client et les personnes qu'il désigne" },
-          { term: "Abonnement", def: "Contrat de services conclu entre le Prestataire et le Client pour l'accès à la Plateforme" },
-          { term: "Dashboard", def: "Interface d'administration disponible sur logistiq.cloud pour la gestion des entrepôts" },
-          { term: "Driver App / QRGO Driver", def: "Application web ou mobile d'enregistrement pour chauffeurs disponible sur qrgo.ro (web) ou sur Google Play / App Store" },
+          {
+            term: "Prestataire",
+            def:
+              "HOSTLIFE DIGITAL SRL, dont le siège social est situé Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, numéro d'identification fiscale (CUI) 52638053",
+          },
+          {
+            term: "Plateforme",
+            def:
+              "L'ensemble des services disponibles par l'intermédiaire des sites logistiq.ro, logistiq.cloud et qrgo.ro",
+          },
+          {
+            term: "Client",
+            def:
+              "La personne morale ou la personne physique autorisée qui souscrit un abonnement pour utiliser la Plateforme",
+          },
+          {
+            term: "Utilisateur",
+            def:
+              "Toute personne qui accède à la Plateforme ou qui l'utilise, y compris le Client et les personnes désignées par celui-ci",
+          },
+          {
+            term: "Abonnement",
+            def:
+              "Le contrat de prestation de services conclu entre le Prestataire et le Client pour l'accès à la Plateforme",
+          },
+          {
+            term: "Dashboard",
+            def:
+              "L'interface d'administration disponible sur logistiq.cloud pour la gestion des entrepôts",
+          },
+          {
+            term: "Driver App / QRGO Driver",
+            def:
+              "L'application web ou mobile de check-in destinée aux chauffeurs, disponible sur qrgo.ro (web) ou sur Google Play / App Store",
+          },
         ],
       },
       article2: {
-        title: "Article 2 - Objet du Contrat",
-        content: "Le Prestataire s'engage à fournir au Client l'accès à la Plateforme Logistiq pour :",
+        title: "Article 2 – Objet du contrat",
+        content:
+          "Le Prestataire s'engage à fournir au Client un accès à la Plateforme Logistiq pour :",
         items: [
-          "La gestion des opérations d'enregistrement dans les entrepôts logistiques",
-          "L'accès à l'interface Dashboard (logistiq.cloud) pour les gestionnaires et opérateurs",
-          "L'accès à l'application QRGO Driver (qrgo.ro) pour les chauffeurs effectuant l'enregistrement",
-          "Les fonctionnalités incluses dans le plan d'abonnement choisi",
+          "La gestion des opérations de check-in dans les entrepôts logistiques",
+          "L'accès à l'interface Dashboard (logistiq.cloud) pour les gestionnaires et les opérateurs",
+          "L'accès à l'application QRGO Driver (qrgo.ro) pour les chauffeurs qui effectuent un check-in",
+          "Les fonctionnalités incluses dans le forfait d'abonnement choisi",
           "Le support technique selon le niveau d'abonnement",
         ],
       },
       article3: {
-        title: "Article 3 - Acceptation des Conditions",
-        content: "Par l'une des actions suivantes, le Client confirme avoir lu, compris et accepté ces conditions :",
-        items: ["Création d'un compte sur la Plateforme", "Paiement d'un abonnement", "Utilisation de toute fonctionnalité de la Plateforme"],
-        note: "La version mise à jour des conditions est toujours disponible sur logistiq.ro.",
+        title: "Article 3 – Acceptation des conditions",
+        content:
+          "Par l'une quelconque des actions suivantes, le Client confirme avoir lu, compris et accepté les présentes conditions :",
+        items: [
+          "La création d'un compte sur la Plateforme",
+          "Le paiement d'un abonnement",
+          "L'utilisation de toute fonctionnalité de la Plateforme",
+        ],
+        note:
+          "La version actualisée des conditions est toujours disponible sur le site logistiq.ro.",
       },
       article4: {
-        title: "Article 4 - Inscription et Compte",
+        title: "Article 4 – Inscription et compte",
         items: [
           "Le Client garantit que les informations fournies lors de l'inscription sont exactes, complètes et à jour",
-          "La sécurité du mot de passe et de l'accès au compte est de la responsabilité exclusive du Client",
+          "La sécurité du mot de passe et de l'accès au compte relève de la responsabilité exclusive du Client",
           "Le Prestataire se réserve le droit de refuser l'inscription ou de suspendre le compte en cas de violation des conditions",
           "Le Client ne peut pas transférer le compte à des tiers sans l'accord préalable du Prestataire",
         ],
       },
       article5: {
-        title: "Article 5 - Durée du Contrat",
-        trial: { title: "Période d'essai", content: "La Plateforme offre une période d'essai gratuite de 10 jours. À l'expiration, l'accès est conditionné à l'achat d'un abonnement." },
-        subscription: { title: "Abonnement", content: "L'abonnement est conclu mensuellement et se renouvelle automatiquement, sauf si le Client annule." },
-        cancellation: { title: "Annulation", content: "Le Client peut annuler à tout moment. L'accès reste actif jusqu'à la fin de la période payée." },
+        title: "Article 5 – Durée du contrat",
+        trial: {
+          title: "Période d'essai",
+          content:
+            "La Plateforme offre une période d'essai gratuite de 10 jours. À son expiration, l'accès est subordonné à la souscription d'un abonnement.",
+        },
+        subscription: {
+          title: "Abonnement",
+          content:
+            "L'abonnement est conclu sur une base mensuelle et se renouvelle automatiquement, sauf si le Client l'annule.",
+        },
+        cancellation: {
+          title: "Annulation",
+          content:
+            "Le Client peut annuler à tout moment. L'accès reste actif jusqu'à la fin de la période payée.",
+        },
       },
       article6: {
-        title: "Article 6 - Prix et Paiements",
+        title: "Article 6 – Prix et paiements",
         items: [
-          "Les prix sont en EUR et sont ceux affichés sur le site au moment de la commande",
-          "La facturation est mensuelle, à l'avance",
-          "Le paiement peut être effectué par carte (Stripe) ou virement bancaire",
+          "Les prix sont exprimés en EUR et sont ceux affichés sur le site au moment de la commande",
+          "La facturation est effectuée mensuellement, à l'avance",
+          "Le paiement peut être effectué par carte (Stripe) ou par virement bancaire",
           "Pour la Roumanie, des factures fiscales sont émises via SmartBill",
-          "Modification des prix avec notification 30 jours à l'avance",
+          "Modification des prix avec un préavis de 30 jours",
         ],
-        plans: { title: "Plans disponibles", professional: "Professional : 139 EUR/mois - 1 entrepôt", enterprise5: "Enterprise 5 : 500 EUR/mois - jusqu'à 5 entrepôts", enterprise10: "Enterprise 10 : 800 EUR/mois - jusqu'à 10 entrepôts", enterprise25: "Enterprise 25 : 1 590 EUR/mois - jusqu'à 25 entrepôts" },
+        plans: {
+          title: "Forfaits disponibles",
+          professional: "Professional : 139 EUR/mois – 1 entrepôt",
+          enterprise5: "Enterprise 5 : 500 EUR/mois – jusqu'à 5 entrepôts",
+          enterprise10: "Enterprise 10 : 800 EUR/mois – jusqu'à 10 entrepôts",
+          enterprise25: "Enterprise 25 : 1 590 EUR/mois – jusqu'à 25 entrepôts",
+        },
       },
       article7: {
-        title: "Article 7 - Mise à niveau et Rétrogradation",
-        upgrade: { title: "Mise à niveau", content: "Le passage à un plan supérieur prend effet immédiatement avec paiement de la différence au prorata." },
-        downgrade: { title: "Rétrogradation", content: "Le passage à un plan inférieur peut être effectué à tout moment, avec remboursement proportionnel pour la période restante. Impossible de rétrograder en dessous du nombre actuel d'entrepôts actifs." },
+        title: "Article 7 – Mise à niveau et rétrogradation",
+        upgrade: {
+          title: "Mise à niveau",
+          content:
+            "Le passage à un forfait supérieur prend effet immédiatement, avec paiement de la différence au prorata.",
+        },
+        downgrade: {
+          title: "Rétrogradation",
+          content:
+            "Le passage à un forfait inférieur peut être effectué à tout moment, avec un remboursement proportionnel de la différence pour la période restante. Il n'est pas possible de rétrograder en deçà du nombre actuel d'entrepôts actifs.",
+        },
       },
       article8: {
-        title: "Article 8 - Fonctionnalités et Limitations",
-        included: { title: "Inclus dans tous les plans", items: ["Enregistrements illimités", "Départements et quais illimités", "Champs personnalisés", "Rapports complets", "Enregistrement par code QR", "Application chauffeur", "Support par e-mail"] },
-        enterprise: { title: "Fonctionnalités Enterprise", items: ["Accès API (Enterprise 5+)", "Domaine personnalisé (Enterprise 5+)", "Support prioritaire (Enterprise 5+)", "Support dédié (Enterprise 10+)", "SLA 99,9% (Enterprise 25)"] },
+        title: "Article 8 – Fonctionnalités et limitations",
+        included: {
+          title: "Inclus dans tous les forfaits",
+          items: [
+            "Check-in numérique – les chauffeurs scannent un code QR ou utilisent l'application QRGO Driver",
+            "Gestion des quais – attribution et optimisation du flux de camions",
+            "Chat et notifications en temps réel entre l'opérateur et le chauffeur",
+            "Catégorisation par départements et types de camions",
+            "Rapports et analyses – tableaux de bord interactifs avec KPI",
+            "Application QRGO Driver (Web, Android, iOS)",
+            "Multilingue – interface en 12 langues européennes",
+            "Cloud – sans équipement ni installation locale",
+            "Instructions et guidage des chauffeurs dans l'application",
+            "Check-in anticipé et planification de l'heure d'arrivée",
+            "Détection automatique de la localisation (application mobile)",
+            "Check-ins, départements et quais illimités",
+            "Support par e-mail",
+          ],
+        },
+        enterprise: {
+          title: "Fonctionnalités Enterprise",
+          items: [
+            "White-label sur un domaine propre (Enterprise 5+)",
+            "Accès API pour les intégrations (Enterprise 5+)",
+            "Support prioritaire (Enterprise 5+)",
+            "Support dédié (Enterprise 10+)",
+            "SLA de 99,9 % (Enterprise 25)",
+          ],
+        },
       },
       article9: {
-        title: "Article 9 - Disponibilité du Service",
-        content: "Le Prestataire s'engage à maintenir une disponibilité minimale de 99,9% par an.",
-        exclusions: { title: "Exclusions", items: ["Maintenance planifiée (annoncée 24h à l'avance)", "Force majeure", "Cyberattaques", "Problèmes chez les fournisseurs tiers"] },
+        title: "Article 9 – Disponibilité du service",
+        content: "Le Prestataire s'engage à maintenir une disponibilité minimale de 99,9 % par an.",
+        exclusions: {
+          title: "Exclusions",
+          items: [
+            "Maintenance planifiée (annoncée 24 heures à l'avance)",
+            "Force majeure",
+            "Cyberattaques",
+            "Problèmes chez des fournisseurs tiers",
+          ],
+        },
       },
       article10: {
-        title: "Article 10 - Obligations du Client",
-        items: ["Paiement anticipé de l'abonnement", "Données de facturation correctes", "Utilisation légale de la Plateforme", "Conformité RGPD pour les données des chauffeurs", "Interdiction de revente du service"],
+        title: "Article 10 – Obligations du Client",
+        items: [
+          "Paiement anticipé de l'abonnement",
+          "Données de facturation exactes",
+          "Utilisation licite de la Plateforme",
+          "Respect du RGPD pour les données des chauffeurs",
+          "Interdiction de revente du service",
+        ],
       },
       article11: {
-        title: "Article 11 - Obligations du Prestataire",
-        items: ["Fourniture d'accès selon le plan", "Support technique correspondant", "Mesures de sécurité adéquates", "Sauvegardes régulières", "Notification des modifications importantes"],
+        title: "Article 11 – Obligations du Prestataire",
+        items: [
+          "Fourniture de l'accès conformément au forfait d'abonnement",
+          "Support technique approprié",
+          "Mesures de sécurité adéquates",
+          "Sauvegardes régulières",
+          "Notification des modifications importantes",
+        ],
       },
       article12: {
-        title: "Article 12 - Propriété Intellectuelle",
-        platform: { title: "Plateforme", content: "Tous les droits de propriété intellectuelle sur la Plateforme appartiennent au Prestataire." },
-        clientData: { title: "Données du Client", content: "Le Client conserve tous les droits sur ses données." },
-        license: { title: "Licence", content: "Le Client reçoit une licence non exclusive d'utilisation pendant la durée de l'abonnement." },
+        title: "Article 12 – Propriété intellectuelle",
+        platform: {
+          title: "Plateforme",
+          content:
+            "Tous les droits de propriété intellectuelle sur la Plateforme appartiennent au Prestataire.",
+        },
+        clientData: {
+          title: "Données du Client",
+          content: "Le Client conserve tous les droits sur ses données.",
+        },
+        license: {
+          title: "Licence",
+          content:
+            "Le Client se voit concéder une licence d'utilisation non exclusive pour la durée de l'abonnement.",
+        },
       },
       article13: {
-        title: "Article 13 - Limitation de Responsabilité",
-        items: ["Le service est fourni « en l'état »", "Aucune responsabilité pour les pertes indirectes", "Responsabilité maximale : valeur des 3 derniers mois d'abonnement", "Les données supprimées ne peuvent pas être récupérées"],
+        title: "Article 13 – Limitation de responsabilité",
+        items: [
+          "Le service est fourni « en l'état »",
+          "Aucune responsabilité pour les pertes indirectes",
+          "Responsabilité maximale : valeur des 3 derniers mois d'abonnement",
+          "Les données supprimées ne peuvent pas être récupérées",
+        ],
       },
       article14: {
-        title: "Article 14 - Résiliation du Contrat",
-        byClient: { title: "Annulation par le Client", content: "Le Client peut annuler à tout moment. Accès actif jusqu'à la fin de la période." },
-        byProvider: { title: "Résiliation par le Prestataire", content: "Pour non-paiement, abus ou violation des conditions." },
-        effects: { title: "Effets", content: "30 jours pour l'export des données, puis suppression définitive." },
+        title: "Article 14 – Fin du contrat",
+        byClient: {
+          title: "Annulation par le Client",
+          content:
+            "Le Client peut annuler à tout moment. L'accès reste actif jusqu'à la fin de la période.",
+        },
+        byProvider: {
+          title: "Résiliation par le Prestataire",
+          content: "En cas de non-paiement, d'abus ou de violation des conditions.",
+        },
+        effects: {
+          title: "Effets",
+          content: "30 jours pour l'export des données, puis suppression définitive.",
+        },
       },
       article15: {
-        title: "Article 15 - Dispositions Finales",
+        title: "Article 15 – Dispositions finales",
         items: [
-          { title: "Droit applicable", content: "Législation roumaine" },
-          { title: "Juridiction", content: "Tribunaux de Bucarest" },
-          { title: "Modifications", content: "Avec notification 30 jours à l'avance" },
+          {
+            title: "Droit applicable",
+            content: "Le droit roumain",
+          },
+          {
+            title: "Juridiction",
+            content: "Les tribunaux de Bucarest",
+          },
+          {
+            title: "Modifications",
+            content: "Avec un préavis de 30 jours",
+          },
         ],
-        contact: { title: "Contact", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie" },
+        contact: {
+          title: "Contact",
+          email: "contact@logistiq.ro",
+          address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
+        },
       },
     },
     cookies: {
-      title: "Politique d'utilisation des Cookies",
+      title: "Politique d'utilisation des cookies",
       lastUpdated: "Dernière mise à jour",
-      intro: { title: "1. Introduction", p1: "Cette politique explique comment la plateforme Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) utilise les cookies et technologies similaires pour vous offrir une expérience sécurisée et personnalisée.", p2: "En continuant à naviguer sur nos sites, vous acceptez l'utilisation des cookies conformément à cette politique." },
-      whatAreCookies: { title: "2. Que sont les Cookies ?", content: "Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez un site web. Ils permettent au site de reconnaître votre appareil et de mémoriser certaines informations sur vos préférences.", types: { title: "Types de cookies :", session: { name: "Cookies de session", desc: "Supprimés automatiquement à la fermeture du navigateur" }, persistent: { name: "Cookies persistants", desc: "Restent jusqu'à expiration ou suppression manuelle" }, firstParty: { name: "Cookies propriétaires", desc: "Placés par le site que vous visitez" }, thirdParty: { name: "Cookies tiers", desc: "Placés par d'autres services intégrés" } } },
-      cookiesWeUse: { title: "3. Cookies que nous utilisons", essential: { title: "Cookies essentiels", desc: "Nécessaires au fonctionnement de la plateforme. Ne peuvent pas être désactivés.", cookies: [{ name: "sb-access-token", duration: "1 heure", purpose: "Authentification Supabase - jeton d'accès" }, { name: "sb-refresh-token", duration: "7 jours", purpose: "Authentification Supabase - actualisation de session" }, { name: "NEXT_LOCALE", duration: "1 an", purpose: "Mémorisation de la langue préférée" }] }, functional: { title: "Cookies fonctionnels", desc: "Améliorent l'expérience utilisateur.", cookies: [{ name: "theme", duration: "1 an", purpose: "Mémorisation de la préférence de thème" }, { name: "sidebar_collapsed", duration: "30 jours", purpose: "État de la barre latérale dans le Dashboard" }] }, analytics: { title: "Cookies analytiques", desc: "Nous aident à comprendre comment vous utilisez la plateforme.", cookies: [{ name: "_ga", duration: "2 ans", purpose: "Google Analytics - identification visiteur" }, { name: "_gid", duration: "24 heures", purpose: "Google Analytics - identification session" }] } },
-      thirdParty: { title: "4. Cookies tiers", intro: "La plateforme Logistiq utilise les services tiers suivants :", services: [{ name: "Supabase", purpose: "Authentification et base de données", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Traitement des paiements", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Hébergement et analytique", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Statistiques de trafic", url: "policies.google.com/privacy" }], note: "Nous vous recommandons de consulter les politiques de confidentialité de ces services." },
-      manageCookies: { title: "5. Gestion des Cookies", intro: "Vous pouvez contrôler et/ou supprimer les cookies selon vos préférences :", browsers: [{ name: "Google Chrome", steps: "Paramètres → Confidentialité et sécurité → Cookies" }, { name: "Mozilla Firefox", steps: "Paramètres → Vie privée → Cookies" }, { name: "Safari", steps: "Préférences → Confidentialité → Gérer les données des sites web" }, { name: "Microsoft Edge", steps: "Paramètres → Cookies et autorisations de sites" }], warning: "Attention : La désactivation des cookies essentiels peut affecter le fonctionnement de la plateforme." },
-      changes: { title: "6. Modifications de la Politique", content: "Nous nous réservons le droit de mettre à jour cette politique. Les modifications importantes seront annoncées par notification sur la plateforme ou par e-mail." },
-      contact: { title: "7. Contact", intro: "Pour toute question sur l'utilisation des cookies ou pour exercer vos droits RGPD :", operator: "Responsable", operatorName: "HOSTLIFE DIGITAL SRL", cui: "TVA : 52638053", regNo: "N° Reg. : J20/7592/5001", address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie", email: "E-mail", emailAddress: "contact@logistiq.ro" },
+      intro: {
+        title: "1. Introduction",
+        p1:
+          "La présente politique explique la manière dont la plateforme Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) utilise des cookies et des technologies similaires afin de vous offrir une expérience sûre et personnalisée.",
+        p2:
+          "En poursuivant votre navigation sur nos sites, vous acceptez l'utilisation des cookies conformément à la présente politique.",
+      },
+      whatAreCookies: {
+        title: "2. Que sont les cookies ?",
+        content:
+          "Les cookies sont de petits fichiers texte qui sont stockés sur votre appareil (ordinateur, téléphone mobile, tablette) lorsque vous visitez un site web. Ils permettent au site de reconnaître votre appareil et de mémoriser certaines informations sur votre visite ou vos préférences.",
+        types: {
+          title: "Types de cookies :",
+          session: {
+            name: "Cookies de session",
+            desc: "Supprimés automatiquement lorsque vous fermez le navigateur",
+          },
+          persistent: {
+            name: "Cookies persistants",
+            desc: "Restent sur l'appareil jusqu'à leur expiration ou leur suppression manuelle",
+          },
+          firstParty: {
+            name: "Cookies propriétaires",
+            desc: "Déposés par le site que vous visitez",
+          },
+          thirdParty: {
+            name: "Cookies tiers",
+            desc: "Déposés par d'autres sites ou services intégrés",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Cookies que nous utilisons",
+        essential: {
+          title: "Cookies essentiels",
+          desc:
+            "Nécessaires au fonctionnement de la plateforme. Ils ne peuvent pas être désactivés.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 heure",
+              purpose: "Authentification Supabase – jeton d'accès",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 jours",
+              purpose: "Authentification Supabase – actualisation de la session",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 an",
+              purpose: "Mémorisation de la langue préférée",
+            },
+          ],
+        },
+        functional: {
+          title: "Cookies fonctionnels",
+          desc: "Ils améliorent l'expérience d'utilisation de la plateforme.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 an",
+              purpose: "Mémorisation de la préférence pour le thème sombre/clair",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 jours",
+              purpose: "État du menu latéral dans le Dashboard",
+            },
+          ],
+        },
+        analytics: {
+          title: "Cookies analytiques",
+          desc:
+            "Ils nous aident à comprendre comment vous utilisez la plateforme, afin de l'améliorer.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 ans",
+              purpose: "Google Analytics – identification du visiteur",
+            },
+            {
+              name: "_gid",
+              duration: "24 heures",
+              purpose: "Google Analytics – identification de la session",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Cookies tiers",
+        intro:
+          "La plateforme Logistiq utilise les services tiers suivants, qui peuvent déposer des cookies :",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Authentification et base de données",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Traitement des paiements",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hébergement et mesure d'audience",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Statistiques de trafic",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "Nous vous recommandons de consulter les politiques de confidentialité de ces services pour plus de détails.",
+      },
+      manageCookies: {
+        title: "5. Comment gérer les cookies",
+        intro:
+          "Vous pouvez contrôler et/ou supprimer les cookies selon vos préférences. Voici comment procéder dans les principaux navigateurs :",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Paramètres → Confidentialité et sécurité → Cookies et autres données des sites",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Paramètres → Vie privée et sécurité → Cookies et données de sites",
+          },
+          {
+            name: "Safari",
+            steps: "Préférences → Confidentialité → Gérer les données de sites web",
+          },
+          {
+            name: "Microsoft Edge",
+            steps: "Paramètres → Cookies et autorisations de site → Gérer et supprimer les cookies",
+          },
+        ],
+        warning:
+          "Attention : la désactivation des cookies essentiels peut affecter le fonctionnement de la plateforme. Il est possible que vous ne puissiez pas vous connecter ou que vous perdiez l'accès à certaines fonctionnalités.",
+      },
+      changes: {
+        title: "6. Modifications de la politique",
+        content:
+          "Nous nous réservons le droit de mettre à jour périodiquement la présente politique. Les modifications importantes seront annoncées par une notification sur la plateforme ou par e-mail.",
+      },
+      contact: {
+        title: "7. Contact",
+        intro:
+          "Pour toute question concernant l'utilisation des cookies ou pour exercer vos droits au titre du RGPD :",
+        operator: "Responsable du traitement",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI : 52638053",
+        regNo: "N° d'immatriculation : J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26 janvier 2026",
+      backHome: "Retour à l’accueil",
+      retentionHeaders: {
+        type: "Type de données",
+        period: "Durée de conservation",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Durée",
+        purpose: "Finalité",
+      },
+      meta: {
+        privacy: "Politique de confidentialité de Logistiq – comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD.",
+        terms: "Conditions générales de Logistiq – plateforme de gestion d’entrepôt et de check-in des chauffeurs.",
+        cookies: "Politique relative aux cookies de Logistiq – comment nous utilisons les cookies pour vous offrir une expérience optimale.",
+      },
     },
   },
   nl: {
@@ -13812,200 +16497,674 @@ export const translations = {
       lastUpdated: "Laatst bijgewerkt",
       intro: {
         title: "1. Inleiding",
-        p1: "HOSTLIFE DIGITAL SRL (\"Verwerkingsverantwoordelijke\"), gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, BTW-nummer 52638053, respecteert de privacy van uw persoonsgegevens.",
-        p2: "Dit beleid beschrijft hoe wij persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG - EU-Verordening 2016/679).",
+        p1:
+          "HOSTLIFE DIGITAL SRL (\"Verwerkingsverantwoordelijke\"), gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, fiscaal identificatienummer (CUI) 52638053, respecteert de vertrouwelijkheid van uw persoonsgegevens.",
+        p2:
+          "Dit beleid beschrijft hoe wij persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG - Verordening (EU) 2016/679).",
       },
       dataCollected: {
         title: "2. Welke persoonsgegevens wij verzamelen",
-        identification: { title: "Identificatiegegevens", items: ["Volledige naam", "E-mailadres", "Systeemrol", "Profielfoto (optioneel)"] },
-        contact: { title: "Contactgegevens", items: ["Telefoonnummer", "E-mailadres"] },
-        billing: { title: "Facturatiegegevens", items: ["Bedrijfsnaam", "BTW-nummer", "Registratienummer", "Factuuradres", "Betalingsgeschiedenis"] },
-        technical: { title: "Technische gegevens", items: ["IP-adres", "User Agent", "GPS-coördinaten (met uw toestemming)"] },
-        activity: { title: "Activiteitsgegevens", items: ["Check-in geschiedenis", "Berichten met operators", "Bijlagen (CMR, foto's)", "Tijd in elke fase"] },
+        identification: {
+          title: "Identificatiegegevens",
+          items: [
+            "Volledige naam",
+            "E-mailadres",
+            "Rol in het systeem (operator, beheerder)",
+            "Profielfoto (optioneel)",
+          ],
+        },
+        contact: {
+          title: "Contactgegevens",
+          items: [
+            "Telefoonnummer",
+            "E-mailadres",
+          ],
+        },
+        billing: {
+          title: "Facturatiegegevens",
+          items: [
+            "Bedrijfsnaam",
+            "Fiscaal identificatienummer (CUI/CIF)",
+            "Registratienummer",
+            "Factuuradres",
+            "Betalingsgeschiedenis",
+          ],
+        },
+        technical: {
+          title: "Technische gegevens",
+          items: [
+            "IP-adres",
+            "User Agent (browser/apparaat)",
+            "GPS-coördinaten (met uw toestemming, voor automatische locatiedetectie)",
+          ],
+        },
+        activity: {
+          title: "Activiteitsgegevens",
+          items: [
+            "Check-ingeschiedenis",
+            "Berichten uitgewisseld met de operators",
+            "Bijlagen (CMR, foto's van documenten)",
+            "Tijd doorgebracht in elke fase van de operatie",
+          ],
+        },
       },
       purposes: {
         title: "3. Verwerkingsdoeleinden",
-        list: ["Levering van digitale check-in dienst", "Accountbeheer en authenticatie", "Betalingsverwerking en facturatie", "Realtime communicatie", "Rapporten en analyses", "Technische ondersteuning", "Serviceverbetering", "Naleving van wettelijke verplichtingen"],
+        list: [
+          "Levering van de digitale check-indienst voor magazijnen",
+          "Accountbeheer en authenticatie van gebruikers",
+          "Verwerking van betalingen en uitreiking van fiscale facturen",
+          "Realtime communicatie tussen chauffeurs en magazijnoperators",
+          "Genereren van rapporten en analyses voor de optimalisatie van de operaties",
+          "Bieden van technische ondersteuning en klantenservice",
+          "Continue verbetering van onze diensten",
+          "Naleving van wettelijke verplichtingen (bewaring van facturen overeenkomstig het Roemeense Belastingwetboek)",
+        ],
       },
       legalBasis: {
-        title: "4. Rechtsgrond voor verwerking",
-        contract: { title: "Uitvoering van contract (Art. 6.1.b AVG)", desc: "Wij verwerken gegevens die nodig zijn voor het leveren van gecontracteerde diensten." },
-        legal: { title: "Wettelijke verplichting (Art. 6.1.c AVG)", desc: "Wij bewaren facturatiegegevens conform de belastingwetgeving (10 jaar)." },
-        legitimate: { title: "Gerechtvaardigde belangen (Art. 6.1.f AVG)", desc: "Wij verzamelen technische gegevens voor systeembeveiliging en serviceverbetering." },
-        consent: { title: "Toestemming (Art. 6.1.a AVG)", desc: "Voor GPS-coördinaten en marketingcommunicatie vragen wij uw uitdrukkelijke toestemming." },
+        title: "4. Rechtsgronden voor de verwerking",
+        contract: {
+          title: "Uitvoering van de overeenkomst (art. 6, lid 1, onder b, AVG)",
+          desc:
+            "Wij verwerken de gegevens die nodig zijn om u de overeengekomen diensten te leveren: digitale check-in, realtime communicatie, dockbeheer.",
+        },
+        legal: {
+          title: "Wettelijke verplichting (art. 6, lid 1, onder c, AVG)",
+          desc:
+            "Wij bewaren de facturatiegegevens overeenkomstig de Roemeense fiscale wetgeving (Belastingwetboek - 10 jaar).",
+        },
+        legitimate: {
+          title: "Gerechtvaardigde belangen (art. 6, lid 1, onder f, AVG)",
+          desc:
+            "Wij verzamelen technische gegevens voor de beveiliging van het systeem, het voorkomen van fraude en de verbetering van de diensten.",
+        },
+        consent: {
+          title: "Toestemming (art. 6, lid 1, onder a, AVG)",
+          desc:
+            "Voor GPS-coördinaten en marketingcommunicatie vragen wij uw uitdrukkelijke toestemming, die u te allen tijde kunt intrekken.",
+        },
       },
       thirdParties: {
         title: "5. Delen van gegevens met derden",
-        intro: "Wij werken samen met de volgende betrouwbare partners:",
+        intro:
+          "Voor het leveren van de diensten werken wij samen met de volgende betrouwbare partners:",
         partners: [
-          { name: "Supabase", purpose: "Database en authenticatie (EU-servers - Frankfurt)" },
-          { name: "Stripe", purpose: "Veilige betalingsverwerking (PCI DSS gecertificeerd)" },
-          { name: "SmartBill", purpose: "Facturatie (Roemenië)" },
-          { name: "Vercel", purpose: "Hosting en wereldwijde distributie (CDN)" },
+          {
+            name: "Supabase",
+            purpose: "Database en authenticatie (servers in de EU - Frankfurt, Duitsland)",
+          },
+          {
+            name: "Stripe",
+            purpose: "Veilige verwerking van betalingen (PCI DSS-gecertificeerd)",
+          },
+          {
+            name: "SmartBill",
+            purpose: "Uitreiking van conforme fiscale facturen (Roemenië)",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting en wereldwijde distributie (CDN)",
+          },
         ],
-        note: "Wij verkopen of delen uw gegevens niet met derden voor marketingdoeleinden.",
+        note:
+          "Wij verkopen uw persoonsgegevens niet en delen ze niet met derden voor marketingdoeleinden.",
       },
-      internationalTransfers: { title: "6. Internationale gegevensoverdrachten", content: "Sommige gegevens kunnen buiten de EER worden overgedragen. In dergelijke gevallen passen wij standaardcontractbepalingen toe die door de Europese Commissie zijn goedgekeurd." },
+      internationalTransfers: {
+        title: "6. Internationale doorgifte van gegevens",
+        content:
+          "Sommige gegevens kunnen buiten de Europese Economische Ruimte (EER) aan onze partners worden doorgegeven. In die gevallen hanteren wij passende waarborgen, waaronder door de Europese Commissie goedgekeurde standaardcontractbepalingen, om een gelijkwaardig niveau van gegevensbescherming te verzekeren.",
+      },
       retention: {
-        title: "7. Bewaartermijn van gegevens",
+        title: "7. Bewaartermijn van de gegevens",
         periods: [
-          { type: "Accountgegevens", duration: "Duur van actief account + 30 dagen" },
-          { type: "Facturatiegegevens", duration: "10 jaar" },
-          { type: "Check-in gegevens", duration: "2 jaar" },
-          { type: "Technische gegevens", duration: "6 maanden" },
-          { type: "Bijlagen", duration: "1 jaar na voltooiing" },
+          {
+            type: "Gegevens van het gebruikersaccount",
+            duration: "Zolang het account actief is + 30 dagen na verwijdering",
+          },
+          {
+            type: "Facturatiegegevens",
+            duration: "10 jaar (overeenkomstig het Roemeense Belastingwetboek)",
+          },
+          {
+            type: "Gegevens over check-ins en operaties",
+            duration: "2 jaar of volgens de contractuele voorwaarden",
+          },
+          {
+            type: "Technische gegevens (IP, logs)",
+            duration: "6 maanden",
+          },
+          {
+            type: "Bijlagen (CMR, foto's)",
+            duration: "1 jaar na afronding van de operatie",
+          },
         ],
-        note: "Na afloop van de bewaartermijnen worden gegevens automatisch verwijderd of geanonimiseerd.",
+        note:
+          "Na het verstrijken van de bewaartermijnen worden de gegevens automatisch verwijderd of geanonimiseerd.",
       },
       rights: {
         title: "8. Uw rechten",
-        intro: "Onder de AVG heeft u de volgende rechten:",
+        intro:
+          "Op grond van de AVG hebt u de volgende rechten met betrekking tot uw persoonsgegevens:",
         list: [
-          { name: "Recht op inzage", desc: "U kunt een kopie van uw gegevens opvragen." },
-          { name: "Recht op rectificatie", desc: "U kunt onjuiste gegevens corrigeren." },
-          { name: "Recht op wissing", desc: "U kunt verwijdering van uw gegevens verzoeken." },
-          { name: "Recht op beperking", desc: "U kunt de verwerking beperken." },
-          { name: "Recht op overdraagbaarheid", desc: "U kunt uw gegevens in een gangbaar formaat ontvangen." },
-          { name: "Recht op bezwaar", desc: "U kunt bezwaar maken tegen de verwerking." },
-          { name: "Recht op intrekking", desc: "U kunt uw toestemming op elk moment intrekken." },
+          {
+            name: "Recht van inzage",
+            desc:
+              "U kunt een kopie opvragen van alle persoonsgegevens die wij over u in ons bezit hebben.",
+          },
+          {
+            name: "Recht op rectificatie",
+            desc: "U kunt onjuiste of onvolledige gegevens in uw account corrigeren.",
+          },
+          {
+            name: "Recht op gegevenswissing",
+            desc:
+              "U kunt verzoeken om wissing van uw gegevens (\"recht op vergetelheid\"), met uitzondering van de gegevens die op grond van wettelijke verplichtingen worden bewaard.",
+          },
+          {
+            name: "Recht op beperking van de verwerking",
+            desc:
+              "U kunt in bepaalde omstandigheden de wijze waarop wij uw gegevens verwerken, beperken.",
+          },
+          {
+            name: "Recht op overdraagbaarheid van gegevens",
+            desc:
+              "U kunt uw gegevens ontvangen in een gestructureerde, gangbare en interoperabele vorm.",
+          },
+          {
+            name: "Recht van bezwaar",
+            desc:
+              "U kunt bezwaar maken tegen verwerking die gebaseerd is op gerechtvaardigde belangen.",
+          },
+          {
+            name: "Recht op intrekking van de toestemming",
+            desc:
+              "U kunt de door u gegeven toestemming te allen tijde intrekken, zonder dat dit afbreuk doet aan de rechtmatigheid van de verwerking vóór de intrekking.",
+          },
         ],
-        complaint: "Bij klachten kunt u zich wenden tot de bevoegde gegevensbeschermingsautoriteit.",
+        complaint:
+          "Als u van mening bent dat uw rechten niet worden gerespecteerd, kunt u een klacht indienen bij de Roemeense nationale toezichthoudende autoriteit voor de verwerking van persoonsgegevens (ANSPDCP) - www.dataprotection.ro",
       },
       security: {
         title: "9. Gegevensbeveiliging",
-        intro: "Wij implementeren technische en organisatorische maatregelen:",
-        measures: ["Versleuteling (TLS/SSL)", "Row Level Security (RLS)", "Veilige authenticatie", "Continue monitoring", "Automatische back-ups", "Beperkte toegang"],
+        intro:
+          "Wij treffen technische en organisatorische maatregelen ter bescherming van de gegevens:",
+        measures: [
+          "Versleuteling tijdens de overdracht (TLS/SSL) voor alle communicatie",
+          "Row Level Security (RLS) voor de isolatie van gegevens tussen organisaties",
+          "Beveiligde authenticatie met bcrypt-hashing van wachtwoorden",
+          "Continue monitoring en auditing van de toegang tot gegevens",
+          "Automatische back-ups en herstelprocedures bij calamiteiten",
+          "Beperkte toegang op basis van het \"need-to-know\"-principe",
+        ],
       },
-      cookies: { title: "10. Cookies", content: "Wij gebruiken alleen essentiële cookies voor platformwerking. Geen advertentie- of trackingcookies." },
-      children: { title: "11. Gegevens van kinderen", content: "Logistiq-diensten zijn bedoeld voor personen van 16 jaar of ouder. Wij verzamelen niet bewust gegevens van minderjarigen." },
-      changes: { title: "12. Beleidswijzigingen", content: "Wij kunnen dit beleid periodiek bijwerken. Over belangrijke wijzigingen informeren wij u per e-mail of banner." },
+      cookies: {
+        title: "10. Cookies en vergelijkbare technologieën",
+        content:
+          "Wij gebruiken essentiële cookies voor de werking van het platform (authenticatie, gebruikerssessie, taalvoorkeuren). Wij gebruiken geen trackingcookies voor advertentiedoeleinden en geen cookies van derden voor profilering.",
+      },
+      children: {
+        title: "11. Gegevens van kinderen",
+        content:
+          "De diensten van Logistiq zijn uitsluitend bestemd voor gebruikers van ten minste 16 jaar. Wij verzamelen niet bewust persoonsgegevens van personen onder deze leeftijd. Als u ontdekt dat een minderjarige persoonsgegevens heeft verstrekt, verzoeken wij u contact met ons op te nemen om deze gegevens te laten verwijderen.",
+      },
+      changes: {
+        title: "12. Beleidswijzigingen",
+        content:
+          "Wij kunnen dit beleid periodiek bijwerken om wijzigingen in onze praktijken of in de wettelijke vereisten te weerspiegelen. Over belangrijke wijzigingen brengen wij u op de hoogte per e-mail of door een banner op het platform weer te geven. De datum waarop dit beleid het laatst is bijgewerkt, wordt bovenaan deze pagina vermeld.",
+      },
       contact: {
         title: "13. Contact",
-        intro: "Voor vragen over uw gegevens of om uw AVG-rechten uit te oefenen, neem contact op:",
-        operator: "Verwerkingsverantwoordelijke", operatorName: "HOSTLIFE DIGITAL SRL", cui: "BTW: 52638053", regNo: "Reg. nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië", email: "E-mail", emailAddress: "contact@logistiq.ro",
-        responseTime: "Wij reageren binnen 30 kalenderdagen.",
+        intro:
+          "Voor alle vragen over uw persoonsgegevens of om uw rechten op grond van de AVG uit te oefenen, kunt u contact met ons opnemen:",
+        operator: "Verwerkingsverantwoordelijke",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Reg. nr.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+        responseTime: "Wij beantwoorden verzoeken binnen 30 kalenderdagen.",
       },
     },
     terms: {
-      title: "Algemene Voorwaarden",
+      title: "Algemene voorwaarden",
       lastUpdated: "Laatst bijgewerkt",
-      intro: "Deze algemene voorwaarden regelen het gebruik van het Logistiq-platform. Door toegang te krijgen tot of gebruik te maken van onze diensten, accepteert u deze voorwaarden volledig.",
+      intro:
+        "Deze algemene voorwaarden regelen het gebruik van het Logistiq-platform. Door u toegang te verschaffen tot onze diensten of deze te gebruiken, aanvaardt u deze voorwaarden in hun geheel.",
       article1: {
         title: "Artikel 1 - Definities",
-        content: "In dit contract hebben de onderstaande termen de volgende betekenissen:",
+        content:
+          "Voor de toepassing van deze overeenkomst hebben de onderstaande termen de volgende betekenis:",
         definitions: [
-          { term: "Dienstverlener", def: "HOSTLIFE DIGITAL SRL, gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, BTW 52638053" },
-          { term: "Platform", def: "Het geheel van diensten beschikbaar via logistiq.ro, logistiq.cloud en qrgo.ro" },
-          { term: "Klant", def: "Rechtspersoon of geautoriseerde natuurlijke persoon die een abonnement aanschaft voor het gebruik van het Platform" },
-          { term: "Gebruiker", def: "Elke persoon die toegang heeft tot of gebruik maakt van het Platform, inclusief de Klant en door hem aangewezen personen" },
-          { term: "Abonnement", def: "Dienstverleningsovereenkomst gesloten tussen de Dienstverlener en de Klant voor toegang tot het Platform" },
-          { term: "Dashboard", def: "Beheerinterface beschikbaar op logistiq.cloud voor magazijnbeheer" },
-          { term: "Driver App / QRGO Driver", def: "Web- of mobiele check-in applicatie voor chauffeurs beschikbaar op qrgo.ro (web) of via Google Play / App Store" },
+          {
+            term: "Dienstverlener",
+            def:
+              "HOSTLIFE DIGITAL SRL, gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, fiscaal identificatienummer (CUI) 52638053",
+          },
+          {
+            term: "Platform",
+            def:
+              "Het geheel van de diensten die beschikbaar zijn via de websites logistiq.ro, logistiq.cloud en qrgo.ro",
+          },
+          {
+            term: "Klant",
+            def:
+              "De rechtspersoon of de als ondernemer geregistreerde natuurlijke persoon die een abonnement aanschaft om het Platform te gebruiken",
+          },
+          {
+            term: "Gebruiker",
+            def:
+              "Iedere persoon die zich toegang verschaft tot het Platform of het Platform gebruikt, met inbegrip van de Klant en de door hem aangewezen personen",
+          },
+          {
+            term: "Abonnement",
+            def:
+              "De dienstverleningsovereenkomst die tussen de Dienstverlener en de Klant is gesloten voor de toegang tot het Platform",
+          },
+          {
+            term: "Dashboard",
+            def:
+              "De beheerinterface die op logistiq.cloud beschikbaar is voor het beheer van magazijnen",
+          },
+          {
+            term: "Driver App / QRGO Driver",
+            def:
+              "De web- of mobiele applicatie waarmee chauffeurs inchecken, beschikbaar op qrgo.ro (web) of via Google Play / App Store",
+          },
         ],
       },
       article2: {
-        title: "Artikel 2 - Voorwerp van het Contract",
-        content: "De Dienstverlener verbindt zich ertoe de Klant toegang te verlenen tot het Logistiq Platform voor:",
+        title: "Artikel 2 - Voorwerp van de overeenkomst",
+        content:
+          "De Dienstverlener verbindt zich ertoe de Klant toegang te verlenen tot het Platform Logistiq voor:",
         items: [
-          "Het beheer van check-in operaties in logistieke magazijnen",
+          "Het beheer van de check-inoperaties in logistieke magazijnen",
           "Toegang tot de Dashboard-interface (logistiq.cloud) voor managers en operators",
-          "Toegang tot QRGO Driver (qrgo.ro) voor chauffeurs die inchecken",
-          "De functionaliteiten inbegrepen in het gekozen abonnementsplan",
+          "Toegang tot de QRGO Driver-app (qrgo.ro) voor de chauffeurs die inchecken",
+          "De functionaliteiten die in het gekozen abonnementsplan zijn inbegrepen",
           "Technische ondersteuning volgens het abonnementsniveau",
         ],
       },
       article3: {
-        title: "Artikel 3 - Acceptatie van de Voorwaarden",
-        content: "Door een van de volgende acties bevestigt de Klant dat hij deze voorwaarden heeft gelezen, begrepen en geaccepteerd:",
-        items: ["Aanmaken van een account op het Platform", "Betaling van een abonnement", "Gebruik van enige functionaliteit van het Platform"],
-        note: "De bijgewerkte versie van de voorwaarden is altijd beschikbaar op logistiq.ro.",
+        title: "Artikel 3 - Aanvaarding van de voorwaarden",
+        content:
+          "Door een van de volgende handelingen bevestigt de Klant dat hij deze voorwaarden heeft gelezen, begrepen en aanvaard:",
+        items: [
+          "Het aanmaken van een account op het Platform",
+          "De betaling van een abonnement",
+          "Het gebruik van enige functionaliteit van het Platform",
+        ],
+        note:
+          "De bijgewerkte versie van de voorwaarden is altijd beschikbaar op de website logistiq.ro.",
       },
       article4: {
-        title: "Artikel 4 - Registratie en Account",
+        title: "Artikel 4 - Registratie en account",
         items: [
-          "De Klant garandeert dat de bij registratie verstrekte informatie correct, volledig en actueel is",
-          "De beveiliging van het wachtwoord en de toegang tot het account is uitsluitend de verantwoordelijkheid van de Klant",
-          "De Dienstverlener behoudt zich het recht voor om registratie te weigeren of het account op te schorten bij schending van de voorwaarden",
-          "De Klant mag het account niet overdragen aan derden zonder voorafgaande toestemming van de Dienstverlener",
+          "De Klant garandeert dat de bij de registratie verstrekte informatie juist, volledig en actueel is",
+          "De beveiliging van het wachtwoord en van de toegang tot het account is uitsluitend de verantwoordelijkheid van de Klant",
+          "De Dienstverlener behoudt zich het recht voor de registratie te weigeren of het account op te schorten bij schending van de voorwaarden",
+          "De Klant mag het account niet aan derden overdragen zonder voorafgaande toestemming van de Dienstverlener",
         ],
       },
       article5: {
-        title: "Artikel 5 - Duur van het Contract",
-        trial: { title: "Proefperiode", content: "Het Platform biedt een gratis proefperiode van 10 dagen. Na afloop is toegang afhankelijk van de aanschaf van een abonnement." },
-        subscription: { title: "Abonnement", content: "Het abonnement wordt maandelijks afgesloten en wordt automatisch verlengd, tenzij de Klant annuleert." },
-        cancellation: { title: "Annulering", content: "De Klant kan op elk moment annuleren. Toegang blijft actief tot het einde van de betaalde periode." },
+        title: "Artikel 5 - Duur van de overeenkomst",
+        trial: {
+          title: "Proefperiode",
+          content:
+            "Het Platform biedt een gratis proefperiode van 10 dagen. Na afloop daarvan is de toegang afhankelijk van de aanschaf van een abonnement.",
+        },
+        subscription: {
+          title: "Abonnement",
+          content:
+            "Het abonnement wordt per maand afgesloten en wordt automatisch verlengd, tenzij de Klant het opzegt.",
+        },
+        cancellation: {
+          title: "Opzegging",
+          content:
+            "De Klant kan op elk moment opzeggen. De toegang blijft actief tot het einde van de betaalde periode.",
+        },
       },
       article6: {
-        title: "Artikel 6 - Prijzen en Betalingen",
+        title: "Artikel 6 - Prijzen en betalingen",
         items: [
-          "Prijzen zijn in EUR en zijn de prijzen die op de site worden weergegeven op het moment van bestelling",
-          "Facturering is maandelijks, vooraf",
-          "Betaling kan worden gedaan per kaart (Stripe) of bankoverschrijving",
-          "Voor Roemenië worden fiscale facturen uitgegeven via SmartBill",
-          "Prijswijzigingen met 30 dagen kennisgeving",
+          "De prijzen zijn uitgedrukt in EUR en zijn de prijzen die op het moment van de bestelling op de website worden weergegeven",
+          "De facturatie vindt maandelijks en vooraf plaats",
+          "De betaling kan worden verricht per kaart (Stripe) of per bankoverschrijving",
+          "Voor Roemenië worden fiscale facturen uitgereikt via SmartBill",
+          "Prijswijzigingen met een kennisgeving van 30 dagen vooraf",
         ],
-        plans: { title: "Beschikbare plannen", professional: "Professional: 139 EUR/maand - 1 magazijn", enterprise5: "Enterprise 5: 500 EUR/maand - tot 5 magazijnen", enterprise10: "Enterprise 10: 800 EUR/maand - tot 10 magazijnen", enterprise25: "Enterprise 25: 1.590 EUR/maand - tot 25 magazijnen" },
+        plans: {
+          title: "Beschikbare plannen",
+          professional: "Professional: 139 EUR/maand - 1 magazijn",
+          enterprise5: "Enterprise 5: 500 EUR/maand - maximaal 5 magazijnen",
+          enterprise10: "Enterprise 10: 800 EUR/maand - maximaal 10 magazijnen",
+          enterprise25: "Enterprise 25: 1.590 EUR/maand - maximaal 25 magazijnen",
+        },
       },
       article7: {
-        title: "Artikel 7 - Upgrade en Downgrade",
-        upgrade: { title: "Upgrade", content: "Overstap naar een hoger plan wordt onmiddellijk van kracht met betaling van het evenredige verschil." },
-        downgrade: { title: "Downgrade", content: "Overstap naar een lager plan kan op elk moment, met proportionele terugbetaling voor de resterende periode. Downgrade onder het huidige aantal actieve magazijnen is niet mogelijk." },
+        title: "Artikel 7 - Upgrade en downgrade",
+        upgrade: {
+          title: "Upgrade",
+          content:
+            "De overstap naar een hoger plan wordt onmiddellijk van kracht, tegen betaling van het verschil naar rato.",
+        },
+        downgrade: {
+          title: "Downgrade",
+          content:
+            "De overstap naar een lager plan kan op elk moment plaatsvinden, met terugbetaling naar rato van het verschil voor de resterende periode. Een downgrade tot onder het huidige aantal actieve magazijnen is niet mogelijk.",
+        },
       },
       article8: {
-        title: "Artikel 8 - Functionaliteiten en Beperkingen",
-        included: { title: "Inbegrepen in alle plannen", items: ["Onbeperkte check-ins", "Onbeperkte afdelingen en dokken", "Aangepaste velden", "Volledige rapporten", "Check-in via QR-code", "Chauffeur-app", "E-mail ondersteuning"] },
-        enterprise: { title: "Enterprise Functionaliteiten", items: ["API-toegang (Enterprise 5+)", "Aangepast domein (Enterprise 5+)", "Prioritaire ondersteuning (Enterprise 5+)", "Toegewijde ondersteuning (Enterprise 10+)", "SLA 99,9% (Enterprise 25)"] },
+        title: "Artikel 8 - Functionaliteiten en beperkingen",
+        included: {
+          title: "Inbegrepen in alle plannen",
+          items: [
+            "Digitale check-in - chauffeurs scannen een QR-code of gebruiken de QRGO Driver-app",
+            "Dockbeheer - toewijzing en optimalisatie van de vrachtwagenstroom",
+            "Realtime chat en meldingen tussen operator en chauffeur",
+            "Categorisering naar afdelingen en vrachtwagentypes",
+            "Rapporten en analyses - interactieve dashboards met KPI's",
+            "QRGO Driver-app (web, Android, iOS)",
+            "Meertalig - interface in 12 Europese talen",
+            "Cloud - zonder apparatuur of lokale installaties",
+            "Instructies en begeleiding voor chauffeurs in de app",
+            "Vroege check-in en planning van het aankomsttijdstip",
+            "Automatische locatiedetectie (mobiele app)",
+            "Onbeperkt aantal check-ins, afdelingen en docks",
+            "Ondersteuning per e-mail",
+          ],
+        },
+        enterprise: {
+          title: "Enterprise-functionaliteiten",
+          items: [
+            "White-label op een eigen domein (Enterprise 5+)",
+            "API-toegang voor integraties (Enterprise 5+)",
+            "Prioritaire ondersteuning (Enterprise 5+)",
+            "Toegewijde ondersteuning (Enterprise 10+)",
+            "SLA van 99,9% (Enterprise 25)",
+          ],
+        },
       },
       article9: {
-        title: "Artikel 9 - Beschikbaarheid van de Dienst",
-        content: "De Dienstverlener verbindt zich tot een minimale beschikbaarheid van 99,9% per jaar.",
-        exclusions: { title: "Uitsluitingen", items: ["Gepland onderhoud (24 uur van tevoren aangekondigd)", "Overmacht", "Cyberaanvallen", "Problemen bij externe leveranciers"] },
+        title: "Artikel 9 - Beschikbaarheid van de dienst",
+        content:
+          "De Dienstverlener verbindt zich ertoe een beschikbaarheid van minimaal 99,9% per jaar te handhaven.",
+        exclusions: {
+          title: "Uitsluitingen",
+          items: [
+            "Gepland onderhoud (24 uur vooraf aangekondigd)",
+            "Overmacht",
+            "Cyberaanvallen",
+            "Problemen bij externe leveranciers",
+          ],
+        },
       },
       article10: {
         title: "Artikel 10 - Verplichtingen van de Klant",
-        items: ["Vooruitbetaling van het abonnement", "Correcte factureringsgegevens", "Wettig gebruik van het Platform", "AVG-naleving voor chauffeurgegevens", "Verbod op wederverkoop van de dienst"],
+        items: [
+          "Vooruitbetaling van het abonnement",
+          "Juiste facturatiegegevens",
+          "Wettig gebruik van het Platform",
+          "Naleving van de AVG voor de gegevens van chauffeurs",
+          "Verbod op wederverkoop van de dienst",
+        ],
       },
       article11: {
         title: "Artikel 11 - Verplichtingen van de Dienstverlener",
-        items: ["Toegangsverlening volgens het plan", "Bijbehorende technische ondersteuning", "Adequate beveiligingsmaatregelen", "Regelmatige back-ups", "Melding van belangrijke wijzigingen"],
+        items: [
+          "Verlening van toegang overeenkomstig het abonnementsplan",
+          "Passende technische ondersteuning",
+          "Adequate beveiligingsmaatregelen",
+          "Regelmatige back-ups",
+          "Kennisgeving van belangrijke wijzigingen",
+        ],
       },
       article12: {
-        title: "Artikel 12 - Intellectuele Eigendom",
-        platform: { title: "Platform", content: "Alle intellectuele eigendomsrechten op het Platform behoren toe aan de Dienstverlener." },
-        clientData: { title: "Klantgegevens", content: "De Klant behoudt alle rechten op zijn gegevens." },
-        license: { title: "Licentie", content: "De Klant ontvangt een niet-exclusieve gebruikslicentie voor de duur van het abonnement." },
+        title: "Artikel 12 - Intellectuele eigendom",
+        platform: {
+          title: "Platform",
+          content:
+            "Alle rechten van intellectuele eigendom op het Platform komen toe aan de Dienstverlener.",
+        },
+        clientData: {
+          title: "Gegevens van de Klant",
+          content: "De Klant behoudt alle rechten op zijn gegevens.",
+        },
+        license: {
+          title: "Licentie",
+          content:
+            "De Klant ontvangt een niet-exclusieve gebruikslicentie voor de duur van het abonnement.",
+        },
       },
       article13: {
-        title: "Artikel 13 - Beperking van Aansprakelijkheid",
-        items: ["De dienst wordt geleverd 'as is'", "Geen aansprakelijkheid voor indirecte verliezen", "Maximale aansprakelijkheid: waarde van de laatste 3 maanden abonnement", "Verwijderde gegevens kunnen niet worden hersteld"],
+        title: "Artikel 13 - Beperking van aansprakelijkheid",
+        items: [
+          "De dienst wordt geleverd 'as is'",
+          "Geen aansprakelijkheid voor indirecte schade",
+          "Maximale aansprakelijkheid: de waarde van de laatste 3 maanden abonnement",
+          "Verwijderde gegevens kunnen niet worden hersteld",
+        ],
       },
       article14: {
-        title: "Artikel 14 - Beëindiging van het Contract",
-        byClient: { title: "Annulering door Klant", content: "De Klant kan op elk moment annuleren. Toegang actief tot einde periode." },
-        byProvider: { title: "Opzegging door Dienstverlener", content: "Wegens wanbetaling, misbruik of schending van voorwaarden." },
-        effects: { title: "Effecten", content: "30 dagen voor data-export, daarna definitieve verwijdering." },
+        title: "Artikel 14 - Beëindiging van de overeenkomst",
+        byClient: {
+          title: "Opzegging door de Klant",
+          content:
+            "De Klant kan op elk moment opzeggen. De toegang blijft actief tot het einde van de periode.",
+        },
+        byProvider: {
+          title: "Ontbinding door de Dienstverlener",
+          content: "Wegens wanbetaling, misbruik of schending van de voorwaarden.",
+        },
+        effects: {
+          title: "Gevolgen",
+          content: "30 dagen voor de export van gegevens, daarna definitieve verwijdering.",
+        },
       },
       article15: {
         title: "Artikel 15 - Slotbepalingen",
         items: [
-          { title: "Toepasselijk recht", content: "Roemeens recht" },
-          { title: "Rechtsmacht", content: "Rechtbanken van Boekarest" },
-          { title: "Wijzigingen", content: "Met 30 dagen voorafgaande kennisgeving" },
+          {
+            title: "Toepasselijk recht",
+            content: "Roemeens recht",
+          },
+          {
+            title: "Bevoegde rechtbank",
+            content: "De rechtbanken van Boekarest",
+          },
+          {
+            title: "Wijzigingen",
+            content: "Met een kennisgeving van 30 dagen vooraf",
+          },
         ],
-        contact: { title: "Contact", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië" },
+        contact: {
+          title: "Contact",
+          email: "contact@logistiq.ro",
+          address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
+        },
       },
     },
     cookies: {
       title: "Cookiebeleid",
       lastUpdated: "Laatst bijgewerkt",
-      intro: { title: "1. Inleiding", p1: "Dit beleid legt uit hoe het Logistiq-platform (logistiq.ro, logistiq.cloud, qrgo.ro) cookies en vergelijkbare technologieën gebruikt om u een veilige en gepersonaliseerde ervaring te bieden.", p2: "Door verder te bladeren op onze websites, accepteert u het gebruik van cookies in overeenstemming met dit beleid." },
-      whatAreCookies: { title: "2. Wat zijn Cookies?", content: "Cookies zijn kleine tekstbestanden die op uw apparaat worden opgeslagen wanneer u een website bezoekt. Ze stellen de site in staat om uw apparaat te herkennen en bepaalde informatie over uw voorkeuren te onthouden.", types: { title: "Soorten cookies:", session: { name: "Sessiecookies", desc: "Worden automatisch verwijderd wanneer u de browser sluit" }, persistent: { name: "Persistente cookies", desc: "Blijven tot vervaldatum of handmatige verwijdering" }, firstParty: { name: "Eigen cookies", desc: "Geplaatst door de website die u bezoekt" }, thirdParty: { name: "Cookies van derden", desc: "Geplaatst door andere geïntegreerde services" } } },
-      cookiesWeUse: { title: "3. Cookies die wij gebruiken", essential: { title: "Essentiële Cookies", desc: "Vereist voor platformwerking. Kunnen niet worden uitgeschakeld.", cookies: [{ name: "sb-access-token", duration: "1 uur", purpose: "Supabase-authenticatie - toegangstoken" }, { name: "sb-refresh-token", duration: "7 dagen", purpose: "Supabase-authenticatie - sessie vernieuwen" }, { name: "NEXT_LOCALE", duration: "1 jaar", purpose: "Onthouden van voorkeursheid" }] }, functional: { title: "Functionele Cookies", desc: "Verbeteren de gebruikerservaring.", cookies: [{ name: "theme", duration: "1 jaar", purpose: "Onthouden van themavoorkeur" }, { name: "sidebar_collapsed", duration: "30 dagen", purpose: "Zijbalkstatus in Dashboard" }] }, analytics: { title: "Analytische Cookies", desc: "Helpen ons begrijpen hoe u het platform gebruikt.", cookies: [{ name: "_ga", duration: "2 jaar", purpose: "Google Analytics - bezoekersidentificatie" }, { name: "_gid", duration: "24 uur", purpose: "Google Analytics - sessie-identificatie" }] } },
-      thirdParty: { title: "4. Cookies van derden", intro: "Het Logistiq-platform maakt gebruik van de volgende services van derden:", services: [{ name: "Supabase", purpose: "Authenticatie en database", url: "supabase.com/privacy" }, { name: "Stripe", purpose: "Betalingsverwerking", url: "stripe.com/privacy" }, { name: "Vercel", purpose: "Hosting en analytics", url: "vercel.com/legal/privacy-policy" }, { name: "Google Analytics", purpose: "Verkeersstatistieken", url: "policies.google.com/privacy" }], note: "Wij raden aan het privacybeleid van deze services te raadplegen." },
-      manageCookies: { title: "5. Cookies beheren", intro: "U kunt cookies beheren en/of verwijderen volgens uw voorkeuren:", browsers: [{ name: "Google Chrome", steps: "Instellingen → Privacy en beveiliging → Cookies" }, { name: "Mozilla Firefox", steps: "Instellingen → Privacy → Cookies" }, { name: "Safari", steps: "Voorkeuren → Privacy → Websitegegevens beheren" }, { name: "Microsoft Edge", steps: "Instellingen → Cookies en sitemachtigingen" }], warning: "Waarschuwing: Het uitschakelen van essentiële cookies kan de platformfunctionaliteit beïnvloeden." },
-      changes: { title: "6. Beleidswijzigingen", content: "Wij behouden ons het recht voor om dit beleid bij te werken. Belangrijke wijzigingen worden aangekondigd via platformmelding of e-mail." },
-      contact: { title: "7. Contact", intro: "Voor vragen over cookiegebruik of om uw AVG-rechten uit te oefenen:", operator: "Operator", operatorName: "HOSTLIFE DIGITAL SRL", cui: "BTW: 52638053", regNo: "Reg. nr.: J20/7592/5001", address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië", email: "E-mail", emailAddress: "contact@logistiq.ro" },
+      intro: {
+        title: "1. Inleiding",
+        p1:
+          "Dit beleid legt uit hoe het Logistiq-platform (logistiq.ro, logistiq.cloud, qrgo.ro) cookies en vergelijkbare technologieën gebruikt om u een veilige en gepersonaliseerde ervaring te bieden.",
+        p2:
+          "Door verder te surfen op onze websites, aanvaardt u het gebruik van cookies overeenkomstig dit beleid.",
+      },
+      whatAreCookies: {
+        title: "2. Wat zijn cookies?",
+        content:
+          "Cookies zijn kleine tekstbestanden die op uw apparaat (computer, mobiele telefoon, tablet) worden opgeslagen wanneer u een website bezoekt. Ze stellen de website in staat uw apparaat te herkennen en bepaalde informatie over uw bezoek of uw voorkeuren te onthouden.",
+        types: {
+          title: "Soorten cookies:",
+          session: {
+            name: "Sessiecookies",
+            desc: "Worden automatisch verwijderd wanneer u de browser sluit",
+          },
+          persistent: {
+            name: "Persistente cookies",
+            desc: "Blijven op het apparaat tot ze verlopen of handmatig worden verwijderd",
+          },
+          firstParty: {
+            name: "Eigen cookies",
+            desc: "Geplaatst door de website die u bezoekt",
+          },
+          thirdParty: {
+            name: "Cookies van derden",
+            desc: "Geplaatst door andere geïntegreerde websites/diensten",
+          },
+        },
+      },
+      cookiesWeUse: {
+        title: "3. Cookies die wij gebruiken",
+        essential: {
+          title: "Essentiële cookies",
+          desc:
+            "Noodzakelijk voor de werking van het platform. Ze kunnen niet worden uitgeschakeld.",
+          cookies: [
+            {
+              name: "sb-access-token",
+              duration: "1 uur",
+              purpose: "Supabase-authenticatie - toegangstoken",
+            },
+            {
+              name: "sb-refresh-token",
+              duration: "7 dagen",
+              purpose: "Supabase-authenticatie - vernieuwing van de sessie",
+            },
+            {
+              name: "NEXT_LOCALE",
+              duration: "1 jaar",
+              purpose: "Onthouden van de voorkeurstaal",
+            },
+          ],
+        },
+        functional: {
+          title: "Functionele cookies",
+          desc: "Verbeteren de gebruikerservaring van het platform.",
+          cookies: [
+            {
+              name: "theme",
+              duration: "1 jaar",
+              purpose: "Onthouden van de voorkeur voor het donkere/lichte thema",
+            },
+            {
+              name: "sidebar_collapsed",
+              duration: "30 dagen",
+              purpose: "Status van het zijmenu in het Dashboard",
+            },
+          ],
+        },
+        analytics: {
+          title: "Analytische cookies",
+          desc:
+            "Helpen ons te begrijpen hoe u het platform gebruikt, zodat wij het kunnen verbeteren.",
+          cookies: [
+            {
+              name: "_ga",
+              duration: "2 jaar",
+              purpose: "Google Analytics - bezoekersidentificatie",
+            },
+            {
+              name: "_gid",
+              duration: "24 uur",
+              purpose: "Google Analytics - sessie-identificatie",
+            },
+          ],
+        },
+      },
+      thirdParty: {
+        title: "4. Cookies van derden",
+        intro:
+          "Het Logistiq-platform maakt gebruik van de volgende diensten van derden die cookies kunnen plaatsen:",
+        services: [
+          {
+            name: "Supabase",
+            purpose: "Authenticatie en database",
+            url: "supabase.com/privacy",
+          },
+          {
+            name: "Stripe",
+            purpose: "Betalingsverwerking",
+            url: "stripe.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Hosting en analyses",
+            url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google Analytics",
+            purpose: "Verkeersstatistieken",
+            url: "policies.google.com/privacy",
+          },
+        ],
+        note:
+          "Wij raden u aan het privacybeleid van deze diensten te raadplegen voor meer details.",
+      },
+      manageCookies: {
+        title: "5. Hoe u cookies kunt beheren",
+        intro:
+          "U kunt cookies beheren en/of verwijderen volgens uw voorkeuren. Zo doet u dat in de belangrijkste browsers:",
+        browsers: [
+          {
+            name: "Google Chrome",
+            steps: "Instellingen → Privacy en beveiliging → Cookies en andere sitegegevens",
+          },
+          {
+            name: "Mozilla Firefox",
+            steps: "Instellingen → Privacy & Beveiliging → Cookies en websitegegevens",
+          },
+          {
+            name: "Safari",
+            steps: "Voorkeuren → Privacy → Beheer websitegegevens",
+          },
+          {
+            name: "Microsoft Edge",
+            steps: "Instellingen → Cookies en sitemachtigingen → Cookies beheren en verwijderen",
+          },
+        ],
+        warning:
+          "Let op: het uitschakelen van essentiële cookies kan de werking van het platform beïnvloeden. Mogelijk kunt u dan niet inloggen of verliest u de toegang tot bepaalde functionaliteiten.",
+      },
+      changes: {
+        title: "6. Beleidswijzigingen",
+        content:
+          "Wij behouden ons het recht voor dit beleid periodiek bij te werken. Belangrijke wijzigingen worden aangekondigd via een melding op het platform of per e-mail.",
+      },
+      contact: {
+        title: "7. Contact",
+        intro:
+          "Voor vragen over het gebruik van cookies of om uw rechten op grond van de AVG uit te oefenen:",
+        operator: "Verwerkingsverantwoordelijke",
+        operatorName: "HOSTLIFE DIGITAL SRL",
+        cui: "CUI: 52638053",
+        regNo: "Reg. nr.: J20/7592/5001",
+        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
+        email: "E-mail",
+        emailAddress: "contact@logistiq.ro",
+      },
+    },
+    legal: {
+      updatedOn: "26 januari 2026",
+      backHome: "Terug naar de homepage",
+      retentionHeaders: {
+        type: "Soort gegevens",
+        period: "Bewaartermijn",
+      },
+      cookieHeaders: {
+        name: "Cookie",
+        duration: "Bewaartermijn",
+        purpose: "Doel",
+      },
+      meta: {
+        privacy: "Privacybeleid van Logistiq – hoe wij uw persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de AVG.",
+        terms: "Algemene voorwaarden van Logistiq – platform voor magazijnbeheer en check-in van chauffeurs.",
+        cookies: "Cookiebeleid van Logistiq – hoe wij cookies gebruiken om u een optimale ervaring te bieden.",
+      },
     },
   },
 };

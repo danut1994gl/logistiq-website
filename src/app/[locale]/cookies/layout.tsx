@@ -19,10 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = SITE_URL;
 
   const title = t.cookies.title;
-  const description =
-    locale === "ro"
-      ? "Politica de utilizare cookie-uri Logistiq - Cum utilizăm cookie-urile pentru a vă oferi o experiență optimă."
-      : "Logistiq Cookie Policy - How we use cookies to provide you with an optimal experience.";
+  const description = t.legal.meta.cookies;
 
   return {
     title,

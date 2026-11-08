@@ -108,6 +108,7 @@ export default function TermsPage({
   const { locale: localeParam } = use(params);
   const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale].terms;
+  const legal = translations[locale].legal;
 
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950">
@@ -134,7 +135,9 @@ export default function TermsPage({
             {t.title}
           </h1>
           <p className="text-slate-500 dark:text-slate-400">
-            {t.lastUpdated}: 26 Ianuarie 2026
+            {t.lastUpdated}
+            {locale === "fr" ? "\u00a0: " : ": "}
+            {legal.updatedOn}
           </p>
           <p className="text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
             {t.intro}
@@ -325,15 +328,13 @@ export default function TermsPage({
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm">
             &copy; 2026 Logistiq.{" "}
-            {locale === "ro"
-              ? "Toate drepturile rezervate."
-              : "All rights reserved."}
+            {translations[locale].footer.allRights}
           </p>
           <Link
             href={`/${locale}`}
             className="text-blue-600 dark:text-blue-400 hover:underline text-sm mt-2 inline-block"
           >
-            {locale === "ro" ? "Înapoi la pagina principală" : "Back to home"}
+            {legal.backHome}
           </Link>
         </div>
       </footer>

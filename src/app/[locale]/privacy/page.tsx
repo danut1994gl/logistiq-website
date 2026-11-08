@@ -98,8 +98,10 @@ function PartnerCard({ name, purpose }: { name: string; purpose: string }) {
 
 function RetentionTable({
   periods,
+  headers,
 }: {
   periods: { type: string; duration: string }[];
+  headers: { type: string; period: string };
 }) {
   return (
     <div className="overflow-x-auto">
@@ -107,10 +109,10 @@ function RetentionTable({
         <thead>
           <tr className="border-b border-slate-200 dark:border-slate-700">
             <th className="text-left py-2 pr-4 font-medium text-slate-900 dark:text-white">
-              Tip date
+              {headers.type}
             </th>
             <th className="text-left py-2 font-medium text-slate-900 dark:text-white">
-              Durată
+              {headers.period}
             </th>
           </tr>
         </thead>
@@ -151,6 +153,7 @@ export default function PrivacyPage({
   const { locale: localeParam } = use(params);
   const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = translations[locale].privacy;
+  const legal = translations[locale].legal;
 
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950">
@@ -177,7 +180,9 @@ export default function PrivacyPage({
             {t.title}
           </h1>
           <p className="text-slate-500 dark:text-slate-400">
-            {t.lastUpdated}: 26 Ianuarie 2026
+            {t.lastUpdated}
+            {locale === "fr" ? "\u00a0: " : ": "}
+            {legal.updatedOn}
           </p>
         </header>
 
@@ -262,7 +267,7 @@ export default function PrivacyPage({
         {/* Section 7: Retention */}
         <Section delay={7}>
           <SectionTitle>{t.retention.title}</SectionTitle>
-          <RetentionTable periods={t.retention.periods} />
+          <RetentionTable periods={t.retention.periods} headers={legal.retentionHeaders} />
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 italic">
             {t.retention.note}
           </p>
@@ -354,15 +359,13 @@ export default function PrivacyPage({
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm">
             &copy; 2026 Logistiq.{" "}
-            {locale === "ro"
-              ? "Toate drepturile rezervate."
-              : "All rights reserved."}
+            {translations[locale].footer.allRights}
           </p>
           <Link
             href={`/${locale}`}
             className="text-blue-600 dark:text-blue-400 hover:underline text-sm mt-2 inline-block"
           >
-            {locale === "ro" ? "Înapoi la pagina principală" : "Back to home"}
+            {legal.backHome}
           </Link>
         </div>
       </footer>

@@ -19,10 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = SITE_URL;
 
   const title = t.terms.title;
-  const description =
-    locale === "ro"
-      ? "Termenii și condițiile de utilizare a platformei Logistiq - management depozite și check-in șoferi."
-      : "Logistiq Terms and Conditions - warehouse management platform and driver check-in service.";
+  const description = t.legal.meta.terms;
 
   return {
     title,
