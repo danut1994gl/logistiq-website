@@ -23,7 +23,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           <div className="md:col-span-2 lg:col-span-4 xl:col-span-1">
             <Link href={`/${locale}`} className="flex items-center gap-2 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/banner-white.svg" alt="Logistiq" className="h-10 w-auto opacity-70" />
+              <img src="/banner-white.svg" alt="Logistiq" className="h-10 w-auto" />
             </Link>
             <p className="text-slate-400 mb-6 max-w-sm">{t.footer.description}</p>
             {socials.length > 0 && (

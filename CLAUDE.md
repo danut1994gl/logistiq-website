@@ -112,10 +112,10 @@ src/lib/
   `scripts/og/qrgo-logo.svg`. The wordmark's typeface is not available, so the r, b and e
   of `.ro`/`.be` are rebuilt from the export's own letters; prefer official Canva exports
   once they exist. Regenerating changes the widths in `groupSites` (a test compares them).
-- `globals.css` keeps `img[loading="lazy"]` at opacity 0 until a `loaded` class is added,
-  and nothing adds it: a loaded `<img loading="lazy">` stays invisible (checked
-  2026-11-08). `next/image` renders `loading="lazy"` by default, so the blog index's
-  cover thumbnails will hit this once a post has a cover image.
+- Plain rules in `globals.css` are unlayered, so they beat every Tailwind utility
+  (v4 keeps utilities in `@layer utilities`). Don't style bare elements there with a
+  property utilities also set: until 2026-11-08 an `img` opacity rule hid every lazy
+  image and silently cancelled `opacity-*` on images (`globals-css.test.ts`).
 
 ## Security
 
