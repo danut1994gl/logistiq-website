@@ -72,12 +72,17 @@ const CYRILLIC: Record<string, string> = {
   ъ: "a", ь: "", ю: "yu", я: "ya",
 };
 
+// Latin letters that NFD does not split into a base letter + mark, so the diacritic
+// strip below would drop them and break the word ("Pełna" -> "pe-na").
+const LATIN_LETTERS: Record<string, string> = { ł: "l", ß: "ss", đ: "d", ø: "o", æ: "ae", œ: "oe" };
+
 export function slugify(input: string): string {
   return input
     .toLowerCase()
     .replace(/[а-я]/g, (c) => CYRILLIC[c] ?? "")
+    .replace(/[łßđøæœ]/g, (c) => LATIN_LETTERS[c])
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "") // strip Latin diacritics (ș ț ł ő é …)
+    .replace(/[̀-ͯ]/g, "") // strip Latin diacritics (ș ț ő é ç …)
     .replace(/&/g, " ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");

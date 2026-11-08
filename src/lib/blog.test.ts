@@ -33,6 +33,12 @@ describe("slugify re-export", () => {
     expect(slugify("Șase Camioane!")).toBe("sase-camioane");
     expect(slugify("Логистика")).toBe("logistika");
   });
+
+  it("keeps letters that NFD cannot split (ł, ß, œ) inside the word", () => {
+    expect(slugify("Pełna kontrola działów")).toBe("pelna-kontrola-dzialow");
+    expect(slugify("Straße & Größe")).toBe("strasse-grosse");
+    expect(slugify("Sœur")).toBe("soeur");
+  });
 });
 
 describe("sanitizeArticleHtml", () => {
