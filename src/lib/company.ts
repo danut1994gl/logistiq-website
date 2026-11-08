@@ -14,11 +14,8 @@ export const company = {
   },
   email: "contact@logistiq.ro",
   phone: "+40771570577",
-  // Pricing (EUR / month): Professional 139, Enterprise 500 / 800 / 1590.
-  priceLow: "139",
-  priceHigh: "1590",
-  priceCurrency: "EUR",
-  offerCount: 4,
+  // No prices here: Logistiq publishes none (owner, 2026-11-08). The price is set
+  // by the offer or contract, so the site, the JSON-LD and llms.txt state none.
   // Real social profile URLs. Leave a value empty to omit that network entirely —
   // we never render dead links.
   socials: {

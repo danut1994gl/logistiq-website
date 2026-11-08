@@ -1,7 +1,6 @@
 import { type Locale, localeToHreflang } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { company } from "@/lib/company";
-import { isSelfServeEnabled } from "@/lib/self-serve";
 
 type Json = Record<string, unknown>;
 
@@ -69,21 +68,9 @@ export function softwareApplicationSchema(description: string, featureList: stri
     operatingSystem: "Web, iOS, Android",
     description,
     featureList,
-    // ADR-005: public prices hidden while self-serve is off (reversible — see
-    // isSelfServeEnabled). Crawlers/rich-snippets must not see prices we don't
-    // publish on the page itself.
-    ...(isSelfServeEnabled()
-      ? {
-          offers: {
-            "@type": "AggregateOffer",
-            priceCurrency: company.priceCurrency,
-            lowPrice: company.priceLow,
-            highPrice: company.priceHigh,
-            offerCount: company.offerCount,
-            availability: "https://schema.org/InStock",
-          },
-        }
-      : {}),
+    // No `offers`: Logistiq publishes no prices (owner, 2026-11-08; the price is
+    // set by offer or contract), and structured data must not state what the pages
+    // don't. Until then an AggregateOffer was emitted while self-serve was on.
   };
 }
 

@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { articleSchema, softwareApplicationSchema } from "@/lib/seo/jsonld";
+import { articleSchema, siteGraph, softwareApplicationSchema } from "@/lib/seo/jsonld";
 import { SITE_URL } from "@/lib/seo/metadata";
 
 describe("articleSchema", () => {
@@ -42,22 +42,27 @@ describe("softwareApplicationSchema", () => {
     process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED = orig;
   });
 
-  // ADR-005: prices must not leak into crawler-visible JSON-LD while self-serve is off.
-  it("omits offers/AggregateOffer when self-serve is OFF", () => {
+  const PRICE = /offers|Offer|price|Price|EUR|139|500|800|1590/;
+
+  // Logistiq publishes no prices (2026-11-08): the price is set by offer or contract.
+  it("is a SoftwareApplication with no offers or prices, self-serve off", () => {
     delete process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED;
     const s = softwareApplicationSchema("desc", ["feature"]);
     expect(s["@type"]).toBe("SoftwareApplication");
+    expect(s.name).toBe("Logistiq");
     expect(s.offers).toBeUndefined();
-    expect(JSON.stringify(s)).not.toMatch(/AggregateOffer|priceCurrency|139|1590/);
+    expect(JSON.stringify(s)).not.toMatch(PRICE);
   });
 
-  it("restores offers/AggregateOffer when self-serve is ON", () => {
+  it("states no prices with self-serve on either", () => {
     process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED = "true";
     const s = softwareApplicationSchema("desc", ["feature"]);
-    const offers = s.offers as Record<string, unknown>;
-    expect(offers["@type"]).toBe("AggregateOffer");
-    expect(offers.priceCurrency).toBe("EUR");
-    expect(offers.lowPrice).toBe("139");
-    expect(offers.highPrice).toBe("1590");
+    expect(s.offers).toBeUndefined();
+    expect(JSON.stringify(s)).not.toMatch(PRICE);
+  });
+
+  it("the whole site graph carries no price", () => {
+    process.env.NEXT_PUBLIC_SELF_SERVE_ENABLED = "true";
+    expect(JSON.stringify(siteGraph("desc", ["feature"]))).not.toMatch(/Offer|price|EUR|1590/);
   });
 });

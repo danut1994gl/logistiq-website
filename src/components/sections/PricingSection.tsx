@@ -5,6 +5,11 @@ import Link from "next/link";
 import { type Translations } from "@/lib/i18n/translations";
 import { CheckIcon } from "@/components/icons";
 
+// The plans, without a public price (owner, 2026-11-08): each plan shows what it
+// includes and "price on request"; the main action asks for a quote through the
+// contact form on the same page (#contact, like the hero and CTA buttons).
+// Shown only while self-serve is on (ADR-005, page.tsx); its secondary "choose
+// plan" links lead to that self-serve signup on logistiq.cloud and are unchanged.
 export function PricingSection({ t }: { t: Translations }) {
   const [selectedWarehouses, setSelectedWarehouses] = useState<'5' | '10' | '25'>('5');
 
@@ -25,12 +30,6 @@ export function PricingSection({ t }: { t: Translations }) {
     t.pricing.enterpriseFeature1,
     t.pricing.enterpriseFeature2,
   ];
-
-  const enterprisePrices = {
-    '5': t.pricing.price5,
-    '10': t.pricing.price10,
-    '25': t.pricing.price25,
-  };
 
   const warehouseLabels = {
     '5': t.pricing.warehouses5,
@@ -69,14 +68,9 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <div className="mb-6">
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">
-                  {t.pricing.professionalPrice}€
-                </span>
-                <span className="text-slate-500 dark:text-slate-400">
-                  {t.pricing.perMonth}
-                </span>
-              </div>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                {t.pricing.priceOnRequest}
+              </p>
             </div>
 
             <div className="mb-8">
@@ -98,8 +92,14 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <Link
-              href="https://logistiq.cloud/signup?plan=professional"
+              href="#contact"
               className="block w-full py-4 rounded-xl font-semibold text-center btn-primary text-white"
+            >
+              {t.cta.button}
+            </Link>
+            <Link
+              href="https://logistiq.cloud/signup?plan=professional"
+              className="mt-4 block text-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
             >
               {t.pricing.choosePlan}
             </Link>
@@ -142,21 +142,20 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <div className="mb-6">
-              {/* Price display */}
-              <div className="flex items-baseline justify-center gap-1 mb-4">
-                <span className="text-4xl font-bold text-slate-900 dark:text-white">
-                  {enterprisePrices[selectedWarehouses]}€
-                </span>
-                <span className="text-slate-500 dark:text-slate-400">
-                  {t.pricing.perMonth}
-                </span>
-              </div>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-4">
+                {t.pricing.priceOnRequest}
+              </p>
 
-              {/* Warehouse selector buttons */}
+              {/* Warehouse tiers (the self-serve link below follows the choice) */}
+              <p className="text-sm text-slate-500 dark:text-slate-400 text-center mb-2">
+                {t.pricing.selectWarehouses}
+              </p>
               <div className="grid grid-cols-3 gap-2">
                 {(['5', '10', '25'] as const).map((count) => (
                   <button
                     key={count}
+                    type="button"
+                    aria-pressed={selectedWarehouses === count}
                     onClick={() => setSelectedWarehouses(count)}
                     className={`py-3 px-4 rounded-xl font-semibold text-sm transition-all ${
                       selectedWarehouses === count
@@ -189,8 +188,14 @@ export function PricingSection({ t }: { t: Translations }) {
             </div>
 
             <Link
-              href={`https://logistiq.cloud/signup?plan=enterprise-${selectedWarehouses}`}
+              href="#contact"
               className="block w-full py-4 rounded-xl font-semibold text-center bg-purple-600 hover:bg-purple-700 text-white transition-colors"
+            >
+              {t.cta.button}
+            </Link>
+            <Link
+              href={`https://logistiq.cloud/signup?plan=enterprise-${selectedWarehouses}`}
+              className="mt-4 block text-center text-sm font-medium text-purple-600 dark:text-purple-300 hover:underline"
             >
               {t.pricing.choosePlan}
             </Link>

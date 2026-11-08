@@ -20,10 +20,17 @@ export function GET() {
     "The manager dashboard is at logistiq.cloud; the public driver check-in is at qrgo.ro.",
     "",
     "## Pages",
-    `- [Home](${SITE_URL}/en): product overview, features, pricing, contact`,
+    `- [Home](${SITE_URL}/en): product overview, features, contact`,
+    `- [Contact](${SITE_URL}/en/contact): request a quote or a demo`,
     `- [Privacy Policy](${SITE_URL}/en/privacy)`,
     `- [Terms & Conditions](${SITE_URL}/en/terms)`,
     `- [Cookie Policy](${SITE_URL}/en/cookies)`,
+    "",
+    // No prices, anywhere on the site (owner, 2026-11-08).
+    "## Pricing",
+    "There is no public price list: the price is set by a quote or contract for each customer.",
+    "Plans are sized by the number of warehouses: Professional (one warehouse) and Enterprise",
+    `(up to 5, 10 or 25 warehouses). Request a quote: ${SITE_URL}/en/contact`,
     "",
     "## Frequently asked questions",
   ];
