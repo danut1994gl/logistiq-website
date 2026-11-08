@@ -106,6 +106,16 @@ src/lib/
 - Reuse existing keyframes. Entrance animations use `both` fill + ease-out-expo (so
   no flash during stagger). Always respect `prefers-reduced-motion` (global block in
   `globals.css`). Accordions/menus need proper ARIA + focus states.
+- **Group logos** (footer "Logistiq Group" column, `groupSites` in `navigation.ts`):
+  `public/logistiq-{ro,be,cloud}.svg` + `public/qrgo.svg`, all one frame height, built by
+  `scripts/group-logos.py` from `public/logistiq-banner-dark.svg` and
+  `scripts/og/qrgo-logo.svg`. The wordmark's typeface is not available, so the r, b and e
+  of `.ro`/`.be` are rebuilt from the export's own letters; prefer official Canva exports
+  once they exist. Regenerating changes the widths in `groupSites` (a test compares them).
+- `globals.css` keeps `img[loading="lazy"]` at opacity 0 until a `loaded` class is added,
+  and nothing adds it: a loaded `<img loading="lazy">` stays invisible (checked
+  2026-11-08). `next/image` renders `loading="lazy"` by default, so the blog index's
+  cover thumbnails will hit this once a post has a cover image.
 
 ## Security
 

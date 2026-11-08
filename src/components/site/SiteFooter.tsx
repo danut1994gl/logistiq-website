@@ -2,11 +2,14 @@ import Link from "next/link";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { type Locale } from "@/lib/i18n/config";
 import { CookiePreferencesButton } from "@/components/CookieConsent";
-import { footerColumns } from "@/lib/navigation";
+import { footerColumns, groupSites } from "@/lib/navigation";
 import { company } from "@/lib/company";
 
 // Shared site footer — data-driven from lib/navigation.ts + lib/company.ts and
 // mounted once in the marketing layout. Server Component (no client state).
+// Layout: one column on phones; from md the brand takes its own row above the
+// group/company/product/legal columns (2x2, then 4 across at lg); from xl all five
+// share one row.
 export default function SiteFooter({ locale }: { locale: Locale }) {
   const t: Translations = translations[locale];
   const year = new Date().getFullYear();
@@ -15,9 +18,9 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="bg-slate-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid gap-12 mb-12 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-[minmax(0,1.25fr)_repeat(4,minmax(0,1fr))] xl:gap-x-10">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2 lg:col-span-4 xl:col-span-1">
             <Link href={`/${locale}`} className="flex items-center gap-2 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/banner-white.svg" alt="Logistiq" className="h-10 w-auto opacity-70" />
@@ -39,6 +42,27 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Logistiq Group: the group's sites, each by its logo */}
+          <div>
+            <h3 className="font-semibold mb-4">{t.footer.group}</h3>
+            <ul className="space-y-3">
+              {groupSites.map((site) => (
+                <li key={site.key}>
+                  <a href={site.href(locale)} className="inline-flex rounded-sm transition-opacity hover:opacity-80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={site.logo.src}
+                      alt={site.name}
+                      width={site.logo.width}
+                      height={site.logo.height}
+                      className="h-6 w-auto"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Company Info */}

@@ -1,4 +1,5 @@
 import { type Locale } from "@/lib/i18n/config";
+import { siteForHost } from "@/lib/i18n/sites";
 import { type Translations } from "@/lib/i18n/translations";
 import { anchorHref, routeHref } from "@/lib/href";
 import { isSelfServeEnabled } from "@/lib/self-serve";
@@ -51,6 +52,47 @@ const pricingFooterLink: NavItem = {
   label: (t) => t.footer.pricing,
   href: (l) => anchorHref(l, "pricing"),
 };
+
+// Footer "Logistiq Group" column: the group's sites, each shown by its logo.
+// The logos come from scripts/group-logos.py and share one frame height, so at h-6
+// they render at `width` x 24 px. The marketing domains keep the visitor's language
+// when the target serves it; logistiq.be serves only nl/fr/en (see i18n/sites.ts),
+// so other languages land on its default page.
+export type GroupSite = {
+  key: string;
+  name: string; // the logo's alt text, which is also the link's accessible name
+  href: (locale: Locale) => string;
+  logo: { src: string; width: number; height: number };
+};
+
+const belgium = siteForHost("logistiq.be");
+
+export const groupSites: GroupSite[] = [
+  {
+    key: "logistiq-ro",
+    name: "Logistiq.ro",
+    href: (l) => `https://logistiq.ro/${l}`,
+    logo: { src: "/logistiq-ro.svg", width: 125, height: 24 },
+  },
+  {
+    key: "logistiq-be",
+    name: "Logistiq.be",
+    href: (l) => (belgium.locales.includes(l) ? `https://logistiq.be/${l}` : "https://logistiq.be/"),
+    logo: { src: "/logistiq-be.svg", width: 129, height: 24 },
+  },
+  {
+    key: "logistiq-cloud",
+    name: "Logistiq.cloud",
+    href: () => "https://logistiq.cloud/",
+    logo: { src: "/logistiq-cloud.svg", width: 153, height: 24 },
+  },
+  {
+    key: "qrgo",
+    name: "QRGo",
+    href: () => "https://qrgo.ro/",
+    logo: { src: "/qrgo.svg", width: 84, height: 24 },
+  },
+];
 
 export const footerColumns: FooterColumn[] = [
   {
