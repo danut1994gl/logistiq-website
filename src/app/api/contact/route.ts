@@ -1,6 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { checkBotId } from 'botid/server'
+import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
+import { contactEmail } from '@/lib/contact/email'
+import { verifyRecaptcha } from '@/lib/contact/recaptcha'
+import {
+  ELAPSED_FIELD,
+  FIELD_MAX,
+  HONEYPOT_FIELD,
+  MAX_FILL_MS,
+  MIN_FILL_MS,
+  RECAPTCHA_FIELD,
+  type ContactErrorCode,
+} from '@/lib/contact/protocol'
 
 // SMTP configuration from environment variables
 const SMTP_CONFIG = {
@@ -16,92 +29,140 @@ const SMTP_CONFIG = {
   },
 }
 
+// The Vercel WAF rule this route asks: Firewall → custom rule whose condition is
+// "@vercel/firewall" with this Rate limit ID. Until the rule exists the check
+// answers "not-found" and messages go through.
+const RATE_LIMIT_ID = 'contact'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+// Anti-spam on this anonymous write path, cheapest layer first:
+//   1. honeypot: a hidden field people never fill;
+//   2. fill time: sent under MIN_FILL_MS, or more than MAX_FILL_MS, after the form opened;
+//   3. Vercel BotID, basic level: the invisible challenge instrumentation-client.ts attaches;
+//   4. Vercel WAF rate limit per IP, answered 429 (people behind one IP can reach it too);
+//   5. reCAPTCHA v3, only once its keys are set (lib/contact/recaptcha.ts).
+// A request layers 1, 2, 3 or 5 recognise as a bot gets the same 200 as a delivered
+// message, and nothing is sent or stored, so the answer teaches a bot nothing.
+// Then the email, every field escaped (lib/contact/email.ts), and the lead row.
+
+function silentlyDropped(layer: string) {
+  console.warn(`contact: dropped by the ${layer} check`)
+  return NextResponse.json({ success: true })
+}
+
+function failure(status: number, code: ContactErrorCode, error: string) {
+  return NextResponse.json({ error, code }, { status })
+}
+
+// BotID needs Vercel (the request context and the project's OIDC token). If it
+// can't answer, the other layers still hold, so the message goes on.
+async function isBot(): Promise<boolean> {
+  try {
+    const verification = await checkBotId({ advancedOptions: { checkLevel: 'basic' } })
+    return verification.isBot
+  } catch (error) {
+    console.error('contact: BotID check unavailable, not applied', error)
+    return false
+  }
+}
+
+// Fails open, like BotID: a missing rule, a timeout or running off Vercel must
+// not take the contact form down.
+async function isRateLimited(request: NextRequest): Promise<boolean> {
+  try {
+    const { rateLimited, error } = await checkRateLimit(RATE_LIMIT_ID, { request, timeout: 1500 })
+    if (error === 'not-found') return false // rule not created yet; the library warns
+    return rateLimited
+  } catch (error) {
+    console.error('contact: rate-limit check unavailable, not applied', error)
+    return false
+  }
+}
+
+// A field as typed (trimmed): "" when absent, null when not text or too long.
+function textField(body: Record<string, unknown>, key: keyof typeof FIELD_MAX): string | null {
+  const value = body[key]
+  if (value === undefined || value === null) return ''
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  return trimmed.length <= FIELD_MAX[key] ? trimmed : null
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, company, phone, message } = await request.json()
+    let body: unknown
+    try {
+      body = await request.json()
+    } catch {
+      return failure(400, 'invalid', 'Cererea nu este validă')
+    }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return failure(400, 'invalid', 'Cererea nu este validă')
+    }
+    const fields = body as Record<string, unknown>
+
+    const name = textField(fields, 'name')
+    const email = textField(fields, 'email')
+    const company = textField(fields, 'company')
+    const phone = textField(fields, 'phone')
+    const message = textField(fields, 'message')
+    if (name === null || email === null || company === null || phone === null || message === null) {
+      return failure(400, 'invalid', 'Un câmp este prea lung sau nu este valid')
+    }
 
     // Validate required fields
     if (!name || !email || !phone || !message) {
-      return NextResponse.json(
-        { error: 'Toate câmpurile obligatorii trebuie completate' },
-        { status: 400 }
-      )
+      return failure(400, 'invalid', 'Toate câmpurile obligatorii trebuie completate')
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Adresa de email nu este validă' },
-        { status: 400 }
-      )
+    if (!EMAIL_RE.test(email)) {
+      return failure(400, 'invalid', 'Adresa de email nu este validă')
+    }
+
+    // 1. Honeypot: any value at all means a bot filled the hidden field.
+    const trap = fields[HONEYPOT_FIELD]
+    if (trap !== undefined && trap !== null && trap !== '') return silentlyDropped('honeypot')
+
+    // 2. Fill time, measured by the form itself (immune to a wrong device clock).
+    const elapsed = fields[ELAPSED_FIELD]
+    if (
+      typeof elapsed !== 'number' ||
+      !Number.isFinite(elapsed) ||
+      elapsed < MIN_FILL_MS ||
+      elapsed > MAX_FILL_MS
+    ) {
+      return silentlyDropped('fill-time')
+    }
+
+    // 3. Vercel BotID.
+    if (await isBot()) return silentlyDropped('BotID')
+
+    // 4. Rate limit per IP, before anything is sent or stored.
+    if (await isRateLimited(request)) {
+      return failure(429, 'rate_limited', 'Prea multe mesaje într-un timp scurt. Încearcă din nou peste câteva minute.')
+    }
+
+    // 5. reCAPTCHA v3 (skipped while its keys are not set).
+    const recaptcha = await verifyRecaptcha(fields[RECAPTCHA_FIELD])
+    if (recaptcha === 'fail') return silentlyDropped('reCAPTCHA')
+    if (recaptcha === 'unavailable') {
+      return failure(503, 'verify_failed', 'Nu am putut verifica mesajul. Încearcă din nou peste câteva minute.')
     }
 
     // Create transporter
     const transporter = nodemailer.createTransport(SMTP_CONFIG)
-
-    // Email HTML template
-    const emailHtml = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-  <div style="background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    <div style="text-align: center; margin-bottom: 30px;">
-      <h1 style="color: #2563eb; margin: 0; font-size: 28px;">Logistiq</h1>
-      <p style="color: #64748b; margin: 5px 0 0 0;">Mesaj nou din formularul de contact</p>
-    </div>
-
-    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-      <tr>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600; width: 120px; color: #374151;">Nume:</td>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; color: #1f2937;">${name}</td>
-      </tr>
-      <tr>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #374151;">Email:</td>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">
-          <a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #374151;">Telefon:</td>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">
-          <a href="tel:${phone}" style="color: #2563eb; text-decoration: none;">${phone}</a>
-        </td>
-      </tr>
-      ${company ? `
-      <tr>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #374151;">Companie:</td>
-        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; color: #1f2937;">${company}</td>
-      </tr>
-      ` : ''}
-    </table>
-
-    <div style="margin-top: 24px; padding: 20px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #2563eb;">
-      <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Mesaj:</h3>
-      <p style="margin: 0; white-space: pre-wrap; color: #4b5563; font-size: 15px; line-height: 1.7;">${message}</p>
-    </div>
-
-    <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-
-    <p style="color: #94a3b8; font-size: 12px; text-align: center; margin: 0;">
-      Acest mesaj a fost trimis prin formularul de contact de pe logistiq.ro
-    </p>
-  </div>
-</body>
-</html>
-    `
+    const { subject, html, text } = contactEmail({ name, email, company, phone, message })
 
     // Send email
     await transporter.sendMail({
       from: '"Logistiq Contact" <noreply@logistiq.ro>',
       to: 'contact@logistiq.ro',
       replyTo: email,
-      subject: `[Contact] Mesaj nou de la ${name}`,
-      html: emailHtml,
+      subject,
+      html,
+      text,
     })
 
     // Persist a lead row in addition to the email notification (ADR-005). The email is the
@@ -127,9 +188,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Contact form error:', error)
-    return NextResponse.json(
-      { error: 'A apărut o eroare. Te rugăm să încerci din nou.' },
-      { status: 500 }
-    )
+    return failure(500, 'server', 'A apărut o eroare. Te rugăm să încerci din nou.')
   }
 }

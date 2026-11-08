@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withBotId } from "botid/next/config";
 
 // The features route folder is "features" (the English/default segment). Public
 // URLs use a LOCALIZED segment per locale; rewrites map them to the folder, and
@@ -135,4 +136,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Vercel BotID (contact form, see src/instrumentation-client.ts). On Vercel the
+// platform routes BotID's challenge paths itself; the wrapper's rewrites proxy them
+// to Vercel so the challenge also works under `next dev` / `next start`, and give
+// them frame headers. middleware.ts skips those paths.
+export default withBotId(nextConfig);

@@ -1421,6 +1421,9 @@ export const translations = {
       sending: "Se trimite...",
       sent: "Mesaj trimis cu succes!",
       error: "Eroare la trimitere. Încearcă din nou.",
+      honeypot: "Lasă acest câmp necompletat",
+      rateLimited: "Prea multe mesaje într-un timp scurt. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
+      verifyFailed: "Nu am putut verifica mesajul. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
       info: "Program de lucru",
       schedule: {
         monday: "Luni: 08:00 - 16:30",
@@ -3347,6 +3350,9 @@ export const translations = {
       sending: "Sending...",
       sent: "Message sent successfully!",
       error: "Error sending. Please try again.",
+      honeypot: "Leave this field empty",
+      rateLimited: "Too many messages in a short time. Please try again in a few minutes, or email us at contact@logistiq.ro.",
+      verifyFailed: "We couldn't verify your message. Please try again in a few minutes, or email us at contact@logistiq.ro.",
       info: "Working hours",
       schedule: {
         monday: "Monday: 08:00 - 16:30",
@@ -5256,6 +5262,9 @@ export const translations = {
       sending: "Wird gesendet...",
       sent: "Nachricht erfolgreich gesendet!",
       error: "Fehler beim Senden. Bitte versuchen Sie es erneut.",
+      honeypot: "Dieses Feld bitte leer lassen",
+      rateLimited: "Zu viele Nachrichten in kurzer Zeit. Bitte versuchen Sie es in ein paar Minuten erneut oder schreiben Sie uns an contact@logistiq.ro.",
+      verifyFailed: "Wir konnten Ihre Nachricht nicht überprüfen. Bitte versuchen Sie es in ein paar Minuten erneut oder schreiben Sie uns an contact@logistiq.ro.",
       info: "Geschäftszeiten",
       schedule: {
         monday: "Montag: 08:00–16:30",
@@ -7480,6 +7489,9 @@ export const translations = {
       sending: "Wysyłanie...",
       sent: "Wiadomość została wysłana!",
       error: "Błąd wysyłania. Spróbuj ponownie.",
+      honeypot: "Pozostaw to pole puste",
+      rateLimited: "Zbyt wiele wiadomości w krótkim czasie. Spróbuj ponownie za kilka minut albo napisz do nas na adres contact@logistiq.ro.",
+      verifyFailed: "Nie udało się zweryfikować wiadomości. Spróbuj ponownie za kilka minut albo napisz do nas na adres contact@logistiq.ro.",
       info: "Godziny pracy",
       schedule: {
         monday: "Poniedziałek: 08:00 - 16:30",
@@ -9700,6 +9712,9 @@ export const translations = {
       sending: "Küldés...",
       sent: "Üzenet sikeresen elküldve!",
       error: "Hiba a küldésnél. Kérjük, próbálja újra.",
+      honeypot: "Ezt a mezőt hagyja üresen",
+      rateLimited: "Túl sok üzenet érkezett rövid idő alatt. Kérjük, próbálja újra néhány perc múlva, vagy írjon nekünk a contact@logistiq.ro címre.",
+      verifyFailed: "Nem sikerült ellenőrizni az üzenetét. Kérjük, próbálja újra néhány perc múlva, vagy írjon nekünk a contact@logistiq.ro címre.",
       info: "Nyitvatartás",
       schedule: {
         monday: "Hétfő: 08:00 - 16:30",
@@ -11918,6 +11933,9 @@ export const translations = {
       sending: "Изпраща се...",
       sent: "Съобщението е изпратено успешно!",
       error: "Грешка при изпращане. Моля, опитайте отново.",
+      honeypot: "Оставете това поле празно",
+      rateLimited: "Твърде много съобщения за кратко време. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
+      verifyFailed: "Не успяхме да проверим съобщението ви. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
       info: "Работно време",
       schedule: {
         monday: "Понеделник: 08:00 - 16:30",
@@ -14135,6 +14153,9 @@ export const translations = {
       sending: "Envoi en cours...",
       sent: "Message envoyé avec succès !",
       error: "Erreur lors de l'envoi. Veuillez réessayer.",
+      honeypot: "Laissez ce champ vide",
+      rateLimited: "Trop de messages en peu de temps. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
+      verifyFailed: "Nous n'avons pas pu vérifier votre message. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
       info: "Horaires d'ouverture",
       schedule: {
         monday: "Lundi : 08:00 - 16:30",
@@ -16362,6 +16383,9 @@ export const translations = {
       sending: "Verzenden...",
       sent: "Bericht succesvol verzonden!",
       error: "Fout bij verzenden. Probeer het opnieuw.",
+      honeypot: "Laat dit veld leeg",
+      rateLimited: "Te veel berichten in korte tijd. Probeer het over een paar minuten opnieuw of mail ons op contact@logistiq.ro.",
+      verifyFailed: "We konden uw bericht niet verifiëren. Probeer het over een paar minuten opnieuw of mail ons op contact@logistiq.ro.",
       info: "Openingstijden",
       schedule: {
         monday: "Maandag: 08:00 - 16:30",

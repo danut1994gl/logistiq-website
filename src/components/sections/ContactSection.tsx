@@ -1,8 +1,28 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { type Translations } from "@/lib/i18n/translations";
 import { ArrowRightIcon } from "@/components/icons";
+import {
+  ELAPSED_FIELD,
+  FIELD_MAX,
+  HONEYPOT_FIELD,
+  IDLE_RESTART_MS,
+  RECAPTCHA_FIELD,
+  type ContactErrorCode,
+} from "@/lib/contact/protocol";
+import { loadRecaptcha, recaptchaToken } from "@/lib/contact/recaptcha-client";
+
+// Off-screen with inline styles (hidden even without the stylesheet), out of the
+// tab order and the accessibility tree: people never reach it, form bots fill it.
+const HONEYPOT_STYLE: React.CSSProperties = {
+  position: "absolute",
+  left: "-10000px",
+  top: "auto",
+  width: 1,
+  height: 1,
+  overflow: "hidden",
+};
 
 export function ContactSection({ t, compact = false }: { t: Translations; compact?: boolean }) {
   const [formState, setFormState] = useState({
@@ -16,30 +36,82 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // When the form opened, on the monotonic clock (a wrong device clock can't
+  // skew it); the route drops messages sent too fast or a day later. Read only
+  // after hydration (golden rule 6).
+  const openedAt = useRef(0);
+  const used = useRef(false);
+  useEffect(() => {
+    openedAt.current = performance.now();
+  }, []);
+
+  const onFirstUse = () => {
+    if (used.current) return;
+    used.current = true;
+    // A tab left open and untouched: the form really opens now.
+    if (performance.now() - openedAt.current > IDLE_RESTART_MS) openedAt.current = performance.now();
+    // Warm reCAPTCHA (when configured) while the visitor types.
+    loadRecaptcha()?.catch(() => {});
+  };
+
+  const errorFor = (data: { code?: unknown; error?: unknown }): string => {
+    const byCode: Partial<Record<ContactErrorCode, string>> = {
+      rate_limited: t.contact.rateLimited,
+      verify_failed: t.contact.verifyFailed,
+    };
+    return (
+      byCode[data.code as ContactErrorCode] ??
+      (typeof data.error === "string" && data.error ? data.error : t.contact.error)
+    );
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
 
     try {
+      let token: string | null;
+      try {
+        token = await recaptchaToken();
+      } catch {
+        // reCAPTCHA is on but blocked or offline: say so rather than send a
+        // message the route would have to drop.
+        setSubmitStatus('error');
+        setErrorMessage(t.contact.verifyFailed);
+        return;
+      }
+
+      const trap = form.elements.namedItem(HONEYPOT_FIELD);
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          ...formState,
+          [HONEYPOT_FIELD]: trap instanceof HTMLInputElement ? trap.value : "",
+          [ELAPSED_FIELD]: Math.round(performance.now() - openedAt.current),
+          ...(token ? { [RECAPTCHA_FIELD]: token } : {}),
+        }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || 'A apărut o eroare');
+        setSubmitStatus('error');
+        setErrorMessage(errorFor(data));
+        return;
       }
 
       setSubmitStatus('success');
       setFormState({ name: '', email: '', company: '', phone: '', message: '' });
-    } catch (error) {
+      // The next message gets its own fill time.
+      openedAt.current = performance.now();
+      used.current = false;
+    } catch {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'A apărut o eroare');
+      setErrorMessage(t.contact.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -137,7 +209,19 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
 
           {/* Right - Form */}
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-slate-200 dark:border-slate-700">
-            <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
+            <form onSubmit={handleSubmit} onFocus={onFirstUse} className="space-y-6" aria-label="Contact form">
+              <div aria-hidden="true" style={HONEYPOT_STYLE}>
+                <label htmlFor="contact-reference">{t.contact.honeypot}</label>
+                <input
+                  id="contact-reference"
+                  type="text"
+                  name={HONEYPOT_FIELD}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -151,6 +235,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                     placeholder={t.contact.namePlaceholder}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
+                    maxLength={FIELD_MAX.name}
                     autoComplete="name"
                   />
                 </div>
@@ -166,6 +251,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                     placeholder={t.contact.emailPlaceholder}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
+                    maxLength={FIELD_MAX.email}
                     autoComplete="email"
                   />
                 </div>
@@ -183,6 +269,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                     onChange={(e) => setFormState({ ...formState, company: e.target.value })}
                     placeholder={t.contact.companyPlaceholder}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    maxLength={FIELD_MAX.company}
                     autoComplete="organization"
                   />
                 </div>
@@ -197,6 +284,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                     placeholder={t.contact.phonePlaceholder}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    maxLength={FIELD_MAX.phone}
                     autoComplete="tel"
                     required
                   />
@@ -215,6 +303,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                   placeholder={t.contact.messagePlaceholder}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700/50 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                   required
+                  maxLength={FIELD_MAX.message}
                 />
               </div>
 

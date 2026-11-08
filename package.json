@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.2",
+    "@vercel/firewall": "^1.2.6",
+    "botid": "^1.5.11",
     "next": "16.1.2",
     "nodemailer": "^6.9.0",
     "react": "19.2.3",
