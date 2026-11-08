@@ -1,8 +1,11 @@
 export const locales = ["ro", "en", "de", "pl", "hu", "bg", "fr", "nl"] as const;
 export type Locale = (typeof locales)[number];
 
-// English is the neutral international default (root redirect + hreflang x-default).
-// Geo/Accept-Language detection in middleware still routes RO visitors to /ro, etc.
+// English is the international fallback: hreflang x-default, the sitemap's
+// x-default, the RSS feed and the fallback for an unknown locale param. It is NOT
+// the language a first visit opens in: that is per domain, in lib/i18n/sites.ts
+// (Romanian on logistiq.ro and every host but logistiq.be, Dutch on logistiq.be).
+// Geo/Accept-Language detection is disabled (middleware.ts).
 export const defaultLocale: Locale = "en";
 
 export const localeNames: Record<Locale, string> = {

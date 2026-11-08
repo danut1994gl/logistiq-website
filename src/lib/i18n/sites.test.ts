@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { siteForHost, relocatePath } from "@/lib/i18n/sites";
-import { locales } from "@/lib/i18n/config";
+import { siteForHost, relocatePath, localeCookie } from "@/lib/i18n/sites";
+import { locales, defaultLocale } from "@/lib/i18n/config";
 
 describe("siteForHost", () => {
   it("logistiq.be serves Dutch first, then French and English — nothing else", () => {
@@ -15,16 +15,32 @@ describe("siteForHost", () => {
     }
   });
 
-  it("every other host keeps all locales with English first", () => {
+  it("every other host serves all locales and opens in Romanian", () => {
     for (const host of ["logistiq.ro", "www.logistiq.ro", "localhost:3000", "logistiq-website.vercel.app", "", null, undefined]) {
       const site = siteForHost(host);
       expect(site.locales, String(host)).toEqual(locales);
-      expect(site.defaultLocale, String(host)).toBe("en");
+      expect(site.defaultLocale, String(host)).toBe("ro");
     }
+  });
+
+  it("the first-visit language is not the international fallback, which stays English", () => {
+    // hreflang x-default, the sitemap and RSS use config's defaultLocale: a visitor
+    // whose language Logistiq doesn't offer reads English better than Romanian.
+    expect(defaultLocale).toBe("en");
+    expect(siteForHost("logistiq.ro").defaultLocale).not.toBe(defaultLocale);
   });
 
   it("logistiq.be remembers the language in its own cookie, not the one logistiq.be set before it had a language set", () => {
     expect(siteForHost("logistiq.be").cookie).not.toBe(siteForHost("logistiq.ro").cookie);
+  });
+});
+
+describe("localeCookie (the language switcher saves the pick itself)", () => {
+  it("writes the domain's cookie for a year, site-wide", () => {
+    expect(localeCookie(siteForHost("logistiq.ro"), "pl")).toBe(
+      "NEXT_LOCALE=pl; Path=/; Max-Age=31536000; SameSite=Lax"
+    );
+    expect(localeCookie(siteForHost("logistiq.be"), "fr")).toMatch(/^NEXT_LOCALE_BE=fr; /);
   });
 });
 

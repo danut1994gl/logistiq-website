@@ -1,11 +1,16 @@
-import { locales, defaultLocale, isValidLocale, type Locale } from "@/lib/i18n/config";
+import { locales, isValidLocale, type Locale } from "@/lib/i18n/config";
 import { featuresSegment } from "@/lib/i18n/segments";
 
-// The languages a domain offers. Every host (logistiq.ro, previews, localhost)
-// serves all locales with English first; a country domain serves only its
-// market's languages. middleware.ts enforces the set (redirects + default) and
-// SiteHeader's language switcher lists only it. Pages are prerendered once for
-// every host, so nothing rendered on the server may depend on this.
+// The languages a domain offers, and the one a first visit opens in. Every host
+// (logistiq.ro, previews, localhost) serves all locales and opens in Romanian; a
+// country domain serves only its market's languages. middleware.ts enforces the
+// set (redirects + default) and SiteHeader's language switcher lists only it.
+// Pages are prerendered once for every host, so nothing rendered on the server
+// may depend on this.
+//
+// `defaultLocale` here is only where a visitor with no saved language lands. The
+// international fallback (hreflang x-default, the sitemap, RSS) is config.ts's
+// `defaultLocale`, English, and stays English: see CLAUDE.md "i18n & URLs".
 export type Site = {
   locales: readonly Locale[];
   defaultLocale: Locale;
@@ -13,7 +18,9 @@ export type Site = {
   cookie: string;
 };
 
-const DEFAULT_SITE: Site = { locales, defaultLocale, cookie: "NEXT_LOCALE" };
+// Romanian since 2026-11-08 (owner's request: logistiq.ro opens in Romanian; a
+// language the visitor saved before still wins). Before, every host opened in English.
+const DEFAULT_SITE: Site = { locales, defaultLocale: "ro", cookie: "NEXT_LOCALE" };
 
 const COUNTRY_SITES: Record<string, Site> = {
   // Belgium: Dutch first, then French and English (2026-11-06). Its own cookie,
@@ -21,6 +28,16 @@ const COUNTRY_SITES: Record<string, Site> = {
   // that would keep returning visitors on English instead of the new default.
   "logistiq.be": { locales: ["nl", "fr", "en"], defaultLocale: "nl", cookie: "NEXT_LOCALE_BE" },
 };
+
+// The saved language lasts a year and is renewed on every visit.
+export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+// The language switcher saves the visitor's pick in the browser, with the same
+// attributes middleware.ts uses: a switch to a prefetched page is served from the
+// router's cache and never reaches the middleware, so the click itself must save it.
+export function localeCookie(site: Site, locale: Locale): string {
+  return `${site.cookie}=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
+}
 
 export function siteForHost(host: string | null | undefined): Site {
   const domain = (host ?? "")

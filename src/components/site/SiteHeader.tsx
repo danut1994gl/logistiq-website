@@ -6,7 +6,7 @@ import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { localeNames, isValidLocale, type Locale } from "@/lib/i18n/config";
 import { featuresSegment } from "@/lib/i18n/segments";
-import { siteForHost } from "@/lib/i18n/sites";
+import { siteForHost, localeCookie } from "@/lib/i18n/sites";
 import { MenuIcon, CloseIcon, ChevronDownIcon } from "@/components/icons";
 import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu, blogNavHref } from "@/lib/navigation";
@@ -52,7 +52,8 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSub, setMobileSub] = useState<Menu>(null);
   const isAuthenticated = useSyncExternalStore(noopSubscribe, readAuthCookie, authServerSnapshot);
-  const switcherLocales = siteForHost(useSyncExternalStore(noopSubscribe, readHost, hostServerSnapshot)).locales;
+  const site = siteForHost(useSyncExternalStore(noopSubscribe, readHost, hostServerSnapshot));
+  const switcherLocales = site.locales;
   const featuresRef = useRef<HTMLDivElement>(null);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
@@ -267,7 +268,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                         className={`flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors ${
                           loc === locale ? "bg-blue-50 dark:bg-blue-900/20" : ""
                         }`}
-                        onClick={() => setOpen(null)}
+                        onClick={() => {
+                          // The choice is saved here: a prefetched page opens from the
+                          // router's cache, without a request the middleware could answer.
+                          document.cookie = localeCookie(site, loc);
+                          setOpen(null);
+                        }}
                       >
                         <FlagComponent />
                         <span className="text-sm font-medium">{localeNames[loc]}</span>
