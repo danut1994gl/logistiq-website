@@ -25,18 +25,36 @@ const LOCALES = Object.keys(SEG);
 //   2026-11-08  bg 3/10/11 written in Cyrillic (were Latin transliteration);
 //               hu 10/12 accents restored, "Sofőrutasítások" joined, 12 renamed to
 //               "Helyfelismerés" (its page's own term; the old title was misspelled)
+//   2026-11-08  translation review: ro 5/7, de 10/14, pl 3, hu 2/14, bg 16 and nl
+//               2/4/10/14 retitled to read natively (e.g. "Multilingv", "Czat")
 // The `slug` route resolves by matching the CURRENT title, so a stale slug would
 // otherwise 404 rather than fall through.
 const RENAMED_FEATURE_SLUGS: Record<string, [string, string][]> = {
-  ro: [["multi-limba-12-limbi", "multi-limba"], ["white-label-api", "white-label"]],
+  ro: [
+    ["multi-limba-12-limbi", "multilingv"],
+    ["white-label-api", "white-label"],
+    ["rapoarte-analytics", "rapoarte-analize"],
+    ["multi-limba", "multilingv"],
+  ],
   en: [["multi-language-12-languages", "multi-language"], ["white-label-api", "white-label"]],
-  de: [["mehrsprachig-12-sprachen", "mehrsprachig"], ["white-label-api", "white-label"]],
-  pl: [["wielojezycznosc-12-jezykow", "wielojezycznosc"], ["white-label-api", "white-label"]],
+  de: [
+    ["mehrsprachig-12-sprachen", "mehrsprachig"],
+    ["white-label-api", "white-label"],
+    ["fahrer-anweisungen-fuhrung", "fahreranweisungen-wegfuhrung"],
+    ["fahrer-self-check", "self-check-in-fur-fahrer"],
+  ],
+  pl: [
+    ["wielojezycznosc-12-jezykow", "wielojezycznosc"],
+    ["white-label-api", "white-label"],
+    ["chat-i-powiadomienia-w-czasie-rzeczywistym", "czat-i-powiadomienia-w-czasie-rzeczywistym"],
+  ],
   hu: [
     ["tobbnyelvuseg-12-nyelv", "tobbnyelvuseg"],
     ["white-label-api", "white-label"],
     ["sofor-utasitasok-es-utmutatas", "soforutasitasok-es-utmutatas"],
     ["automatikus-helyzeterkenites", "automatikus-helyfelismeres"],
+    ["dokkkezeles", "dokk-kezeles"],
+    ["sofor-onkiszolgalo-check-in", "onkiszolgalo-check-in-soforoknek"],
   ],
   bg: [
     ["mnogoezinovost-12-ezika", "mnogoezichnost"],
@@ -44,9 +62,17 @@ const RENAMED_FEATURE_SLUGS: Record<string, [string, string][]> = {
     ["chat-i-uvedomlenija-v-realno-vreme", "chat-i-izvestiya-v-realno-vreme"],
     ["instrukcii-i-nasochvane-za-voditeli", "instruktsii-i-nasochvane-za-shofori"],
     ["ranna-registracija-i-planirane", "ranna-registratsiya-i-planirane"],
+    ["sistemni-integratsii-api", "sistemni-integratsii-i-api"],
   ],
   fr: [["multi-langue-12-langues", "multi-langue"], ["white-label-api", "white-label"]],
-  nl: [["meertalig-12-talen", "meertalig"], ["white-label-api", "white-label"]],
+  nl: [
+    ["meertalig-12-talen", "meertalig"],
+    ["white-label-api", "white-label"],
+    ["dokbeheer", "dockbeheer"],
+    ["afdeling-truck-categorieen", "afdelingen-vrachtwagentypes"],
+    ["chauffeur-instructies-begeleiding", "chauffeursinstructies-begeleiding"],
+    ["chauffeur-self-check-in", "zelf-inchecken-aan-de-balie"],
+  ],
 };
 
 const nextConfig: NextConfig = {
