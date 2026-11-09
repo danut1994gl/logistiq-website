@@ -29,7 +29,7 @@ import { DRIVER_POOLS } from "./driverPools";
 // picker, no hex field, no brand-tinted header here; the customer's colour only
 // ever reaches the page through artwork they uploaded themselves (logo + cover).
 // The browser tab is drawn on purpose and never changes either: it reads
-// "QRGO Driver" with our icon, on every custom domain.
+// "QRGo Driver" with our icon, on every custom domain.
 //
 // Nothing about QRGoBox, gates, barriers, device keys or any API appears here —
 // those are separate pages, and the integrations audit forbids dressing any of
@@ -353,7 +353,7 @@ export function WhiteLabelScene({ t, locale }: { t: Translations; locale: Locale
 
         <div className="relative isolate flex-1 min-h-0 rounded-[1.4cqw] border border-slate-700 bg-[#0f1720] overflow-hidden flex flex-col shadow-2xl">
           {/* Browser chrome — identical on every domain, for every brand. The tab
-              is drawn on purpose: it stays "QRGO Driver" with our icon even when
+              is drawn on purpose: it stays "QRGo Driver" with our icon even when
               the address bar carries the customer's own domain. */}
           <div className="flex items-center gap-[0.8cqw] px-[1cqw] pt-[0.8cqw] bg-[#1b2532] shrink-0">
             <span className="flex items-center gap-[0.5cqw] shrink-0">
@@ -364,7 +364,7 @@ export function WhiteLabelScene({ t, locale }: { t: Translations; locale: Locale
             <span className="flex items-center gap-[0.6cqw] rounded-t-[0.7cqw] border-t border-x border-slate-700 bg-[#243040] px-[1cqw] py-[0.5cqw] -mb-px">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/qrgo-icon.svg" alt="" className="w-[1.3cqw] h-[1.3cqw] rounded-[0.25cqw] bg-white p-[0.1cqw]" />
-              <span className="text-[1.15cqw] font-medium text-slate-300 whitespace-nowrap">QRGO Driver</span>
+              <span className="text-[1.15cqw] font-medium text-slate-300 whitespace-nowrap">QRGo Driver</span>
             </span>
           </div>
           <div className="flex items-center gap-[1cqw] px-[1cqw] py-[0.7cqw] bg-[#243040] border-b border-slate-700 shrink-0">

@@ -8,7 +8,7 @@ export const QrCodeIcon = () => (
   </svg>
 );
 
-// Driver Self Check (QRGO Self): a counter kiosk — tablet on a stand with a
+// Driver Self Check (QRGo Self): a counter kiosk — tablet on a stand with a
 // printed ticket coming out of it.
 export const KioskIcon = () => (
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

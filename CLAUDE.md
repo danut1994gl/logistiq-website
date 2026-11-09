@@ -147,6 +147,11 @@ src/lib/
   `scripts/og/qrgo-logo.svg`. The wordmark's typeface is not available, so the r, b and e
   of `.ro`/`.be` are rebuilt from the export's own letters; prefer official Canva exports
   once they exist. Regenerating changes the widths in `groupSites` (a test compares them).
+- **The driver brand is written QRGo** (QRGo Driver, QRGo Self, QRGoBox), never in capitals
+  (owner, 2026-11-09). `brand-casing.test.ts` guards the copy and every file under `src/`.
+  The artwork still draws capitals until a new Canva export exists: the QRGo logo
+  (`scripts/og/qrgo-logo.svg` → `public/qrgo.svg`) and the social image `public/og-image.png`
+  (its source `scripts/og/og-image.html` still says it too).
 - Plain rules in `globals.css` are unlayered, so they beat every Tailwind utility
   (v4 keeps utilities in `@layer utilities`). Don't style bare elements there with a
   property utilities also set: until 2026-11-08 an `img` opacity rule hid every lazy

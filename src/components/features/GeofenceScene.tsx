@@ -14,7 +14,7 @@ import { DRIVER_POOLS } from "./driverPools";
 // colours are the modal's own polygonOptions (fill #10b981, stroke #059669,
 // weight 3), with only the fill opacity dialled back off the real 0.3 — see the
 // note at the <polygon>. The button is the real bg-emerald-600, dimmed while drawing.
-// RIGHT: the QRGO Driver app (dark theme — the app is ThemeMode.system) showing
+// RIGHT: the QRGo Driver app (dark theme — the app is ThemeMode.system) showing
 // the real AutoCheckinBanner 1:1 with auto_checkin_banner.dart: #10B981 -> #059669
 // topLeft->bottomRight, 16px radius, two white 2px rings scaling 0.5->1.5 over
 // 1500ms with the second delayed 750ms, white button with #059669 text, and the
@@ -345,7 +345,7 @@ export function GeofenceScene({ t, locale }: { t: Translations; locale: Locale }
       <div className="flex items-center gap-[2.56cqw] px-[3.4cqw] py-[2.6cqw] shrink-0 border-b border-[#2D2D2D] bg-[#1E1E1E]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/qrgo-icon.svg" alt="" className="w-[8cqw] h-[8cqw] rounded-[1.8cqw] bg-white p-[0.7cqw] shrink-0" />
-        <span className="text-[#F1F5F9] font-bold text-[3.8cqw]">QRGO Driver</span>
+        <span className="text-[#F1F5F9] font-bold text-[3.8cqw]">QRGo Driver</span>
       </div>
       <div className="flex-1 min-h-0 p-[3.4cqw] flex flex-col overflow-hidden">
         {showBanner ? banner : null}
@@ -543,7 +543,7 @@ export function GeofenceScene({ t, locale }: { t: Translations; locale: Locale }
         </svg>
       </div>
 
-      {/* ---- RIGHT: the QRGO Driver app. 05:40 — the hour in the copy. ---- */}
+      {/* ---- RIGHT: the QRGo Driver app. 05:40 — the hour in the copy. ---- */}
       <div className="h-[97%] shrink-0">
         <PhoneFrame16 time="05:40" screenClassName="bg-[#121212]">
           <div className="flex-1 min-h-0 relative overflow-hidden">

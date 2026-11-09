@@ -7,7 +7,7 @@ import { DRIVER_POOLS } from "./driverPools";
 import { TruckArt, TruckDefs } from "./TruckArt";
 import { FlagRO, FlagGB, FlagDE, FlagPL, FlagHU, FlagBG, FlagFR, FlagNL } from "@/components/icons/flags";
 
-// QRGO Self (feature 14) — an ANNOUNCED, not-yet-built counter kiosk. The scene
+// QRGo Self (feature 14) — an ANNOUNCED, not-yet-built counter kiosk. The scene
 // stages the whole flow the page argues for, left to right on one office
 // counter: a tablet on a stand runs the same check-in form the driver app uses,
 // a receipt printer beside it prints his ticket, and a plain feature phone —
@@ -89,7 +89,7 @@ function QRBlock() {
   );
 }
 
-// the official QRGO mark on a white tile — same treatment as the other scenes
+// the official QRGo mark on a white tile — same treatment as the other scenes
 function QLogo({ s }: { s: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -230,7 +230,7 @@ export function SelfCheckScene({ t, locale }: { t: Translations; locale: Locale 
 
   return (
     <div ref={rootRef} className="@container absolute inset-0 isolate p-[2cqw] flex flex-col gap-[2cqw] text-slate-200 select-none" aria-hidden="true">
-      {/* ---- office wall: the QRGO Self lockup + the window onto the yard ---- */}
+      {/* ---- office wall: the QRGo Self lockup + the window onto the yard ---- */}
       <div className="flex items-stretch gap-[2cqw] h-[13cqw] shrink-0">
         <div className="w-[22cqw] shrink-0 rounded-[1.2cqw] border border-slate-700/70 bg-slate-800/60 flex items-center gap-[1.4cqw] px-[1.6cqw]">
           <QLogo s="5cqw" />
@@ -292,7 +292,7 @@ export function SelfCheckScene({ t, locale }: { t: Translations; locale: Locale 
             {/* front camera, on the long edge — this tablet lives in landscape */}
             <span className="absolute left-[1.1cqw] top-1/2 -translate-y-1/2 w-[0.45cqw] h-[0.45cqw] rounded-full bg-slate-800" />
             <div className="absolute inset-[1.9cqw] rounded-[1.1cqw] overflow-hidden bg-[#0f1720]">
-              {/* ---- home: the branded QRGO Self attract screen ---- */}
+              {/* ---- home: the branded QRGo Self attract screen ---- */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-[1.6cqw] transition-opacity duration-500" style={{ opacity: screen === "home" ? 1 : 0 }}>
                 <QLogo s="7cqw" />
                 <span className="text-white font-bold text-[3.2cqw]">{f.uiKiosk}</span>

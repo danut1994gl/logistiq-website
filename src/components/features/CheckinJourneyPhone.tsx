@@ -24,13 +24,13 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
         <div className="absolute top-[2.6%] left-1/2 -translate-x-1/2 w-[36%] h-[3%] bg-slate-900 rounded-full z-10" />
         {/* screen */}
         <div className="absolute inset-x-[4.5%] top-[6.5%] bottom-[4.5%] bg-slate-900 rounded-[9cqw] overflow-hidden">
-          {/* app header — QRGO Driver branding */}
+          {/* app header — QRGo Driver branding */}
           <div className="absolute inset-x-0 top-0 h-[16%] bg-blue-600 flex items-center justify-center gap-[2.5cqw] px-[5cqw] z-10">
             {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative SVG logo, next/image adds nothing here */}
             <img src="/qrgo-icon.svg" alt="" className="shrink-0 w-[9.5cqw] h-[9.5cqw] rounded-[2.2cqw] bg-white p-[0.8cqw]" />
             <span className="flex flex-col items-start leading-none min-w-0">
               <span className="text-white font-extrabold text-[5.8cqw] leading-none tracking-tight">
-                QRGO <span className="font-medium">Driver</span>
+                QRGo <span className="font-medium">Driver</span>
               </span>
               <span className="text-blue-200 text-[4.2cqw] leading-none mt-[1.4cqw] truncate max-w-full">{q.warehouseName}</span>
             </span>
@@ -54,7 +54,7 @@ export function CheckinJourneyPhone({ t }: { t: Translations }) {
             </div>
           </div>
 
-          {/* 2 — the QRGO fill-form page: fields type themselves in */}
+          {/* 2 — the QRGo fill-form page: fields type themselves in */}
           <div className="cj2-ph2 absolute inset-0 top-[16%] px-[6cqw] py-[4cqw] flex flex-col gap-[2.8cqw]">
             <div className="cj2-row-1 bg-slate-800 rounded-[3cqw] px-[4.5cqw] py-[2.2cqw]">
               <div className="text-slate-400 uppercase tracking-wide text-[3.6cqw] leading-tight">{q.driverNameLabel}</div>

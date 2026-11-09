@@ -10,7 +10,7 @@ const APPLE_D = "M17.05 12.7c-.03-2.5 2.04-3.7 2.13-3.76-1.16-1.7-2.97-1.93-3.61
 const ANDROID_D = "M6 18c0 .55.45 1 1 1h1v3.5a1.5 1.5 0 0 0 3 0V19h2v3.5a1.5 1.5 0 0 0 3 0V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8A1.5 1.5 0 0 0 2 9.5v7a1.5 1.5 0 0 0 3 0v-7A1.5 1.5 0 0 0 3.5 8zm17 0a1.5 1.5 0 0 0-1.5 1.5v7a1.5 1.5 0 0 0 3 0v-7A1.5 1.5 0 0 0 20.5 8zM15.53 2.16l1.3-1.3a.25.25 0 0 0-.35-.35l-1.32 1.32A5.9 5.9 0 0 0 12 1.25c-.98 0-1.9.24-2.71.66L7.96.51a.25.25 0 1 0-.35.35l1.3 1.3A5.75 5.75 0 0 0 6 7h12a5.75 5.75 0 0 0-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z";
 
 // Android & iOS App (feature 6): the shared iPhone 16 Pro Max frame running a
-// product tour through faithful re-creations of the real QRGO Driver screens —
+// product tour through faithful re-creations of the real QRGo Driver screens —
 // dark, blue-gradient (theme-600→700) card headers, exactly like the live driver
 // web: language picker (all 12) → check-in form → live status → chat.
 // Status colours/icons mirror the real app: waiting = yellow hourglass (spins),
@@ -112,7 +112,7 @@ function KV({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-// the official QRGO mark on a white tile — same treatment as the other scenes
+// the official QRGo mark on a white tile — same treatment as the other scenes
 function QLogo({ s }: { s: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -495,7 +495,7 @@ export function AppTourScene({ t }: { t: Translations }) {
       <div className="hidden sm:flex flex-col gap-[2.2cqw] w-[38%] max-w-[54cqw]">
         <div className="flex items-center justify-center gap-[2cqw]">
           <QLogo s="7cqw" />
-          <span className="text-white font-bold text-[3cqw]">QRGO Driver</span>
+          <span className="text-white font-bold text-[3cqw]">QRGo Driver</span>
         </div>
         <div className="flex flex-col gap-[1.3cqw]">
           {feats.map((ft, i) => (

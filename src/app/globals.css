@@ -1047,7 +1047,7 @@ select:focus {
   .f10-pkt { animation: none !important; opacity: 0 !important; }
 }
 
-/* ---- QRGO Self (feature 14): the counter kiosk ----
+/* ---- QRGo Self (feature 14): the counter kiosk ----
    Mount-triggered, one-shot animations. The scene's client player steps the
    story and mounts each element when its stage arrives, so every animation
    here uses `both` fill and runs exactly once per loop — no shared timeline,

@@ -8,7 +8,7 @@ import { FeatureProblemSection } from "./FeatureProblemSection";
 import { FeatureBenefitsSection } from "./FeatureBenefitsSection";
 import { FeatureFAQSection } from "./FeatureFAQSection";
 
-// Driver Self Check / QRGO Self (feature 14) rich showcase: the counter kiosk
+// Driver Self Check / QRGo Self (feature 14) rich showcase: the counter kiosk
 // journey — form, SMS-confirmed number, printed ticket, SMS guidance, ramp 12.
 // Server Component.
 export function SelfCheckShowcase({ t, locale }: { t: Translations; locale: Locale }) {

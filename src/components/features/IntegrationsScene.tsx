@@ -3,7 +3,7 @@ import { LogistiqCloud } from "./LogistiqCloud";
 
 // Systems Integrations & API (feature 16): one clean interconnection map.
 // logistiq.cloud sits in the middle as the hub; the surfaces that feed it — the
-// QRGoBox gate device API, the warehouse self-service portal, and the QRGO Driver
+// QRGoBox gate device API, the warehouse self-service portal, and the QRGo Driver
 // apps — hang off the left, and the warehouse's own systems (TMS / WMS / ERP)
 // connect through the cloud over the API on the right. Every edge is a live,
 // packet-carrying connection: the picture is about how the pieces talk to each
@@ -77,7 +77,7 @@ function PortalNode({ y }: { y: number }) {
   );
 }
 
-// The QRGO Driver apps: three phones, each a driver's check-in on their own screen.
+// The QRGo Driver apps: three phones, each a driver's check-in on their own screen.
 function DriversNode({ y }: { y: number }) {
   const cols = ["#38bdf8", "#22c55e", "#f59e0b"];
   return (

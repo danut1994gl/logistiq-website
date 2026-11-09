@@ -5,7 +5,7 @@ import type { Translations } from "@/lib/i18n/translations";
 import { PhoneFrame16 } from "./PhoneFrame16";
 
 // Driver-notifications scene: an iPhone 16 Pro Max lock screen where every
-// dispatcher action arrives as a QRGO push notification, revealed one-by-one on
+// dispatcher action arrives as a QRGo push notification, revealed one-by-one on
 // a loop, with a 2×3 trigger grid on the left lighting up in sync. Client
 // player (reveals in JS; reduced-motion shows all six). aria-hidden.
 const ICONS: ReactNode[] = [

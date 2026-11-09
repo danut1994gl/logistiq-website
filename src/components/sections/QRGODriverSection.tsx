@@ -21,7 +21,7 @@ export function QRGODriverSection({ t }: { t: Translations }) {
             {t.qrgoDriver?.badge || "Mobile App"}
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {t.qrgoDriver?.title || "QRGO Driver"}
+            {t.qrgoDriver?.title || "QRGo Driver"}
           </h2>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             {t.qrgoDriver?.subtitle || "Aplicația mobilă pentru șoferi - check-in rapid, notificări în timp real și instrucțiuni clare pentru fiecare operațiune."}
