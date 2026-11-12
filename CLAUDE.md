@@ -62,7 +62,7 @@ src/lib/
   navigation.ts  company.ts  href.ts  features.ts  faq.ts
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
-  contact/{protocol,email,recaptcha,recaptcha-client}.ts  # contact form anti-spam + email
+  contact/{protocol,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + email + mail TLS
 ```
 
 ## i18n & URLs (international SEO — critical)
@@ -186,9 +186,23 @@ src/lib/
   limit fail open (logged), so an outage can't take the form down.
 - **Escape user input in emails.** The notification email escapes every field
   (`lib/contact/email.ts`, tested); until 2026-11-08 they were interpolated raw.
+- **The mail server's TLS certificate is always verified** (`lib/contact/smtp.ts`,
+  tested). Until 2026-11-12 the route set `rejectUnauthorized: false`, so any certificate
+  passed and whoever sat on the network path could read every message and the mailbox
+  password. The transport reads `SMTP_HOST` (default `cloud342.c-f.ro`), `SMTP_PORT`
+  (465, TLS from the first byte), `SMTP_USER`, `SMTP_PASS`. A server that doesn't verify
+  as it is gets the setting it needs, never verification turned off:
+  - `SMTP_TLS_SERVERNAME`: the name its certificate carries, when `SMTP_HOST` is an IP or
+    an alias the certificate doesn't list;
+  - `SMTP_TLS_CA`: the PEM of its private CA (or its self-signed certificate). Set, it
+    replaces the public CAs for this connection; line breaks may be written `\n`.
+
+  No switch turns verification off: not the dashboard's `SMTP_REJECT_UNAUTHORIZED`, not
+  even `NODE_TLS_REJECT_UNAUTHORIZED=0` (`rejectUnauthorized: true` is explicit).
 - **Never send a real email or insert a real lead when testing**: the route test mocks
   SMTP, Supabase, BotID, the firewall and Google; a local `npm start` points `SMTP_HOST`
-  at 127.0.0.1.
+  at a test server on 127.0.0.1, whose certificate `SMTP_TLS_CA` and
+  `SMTP_TLS_SERVERNAME` must then trust.
 
 ## Deploy / git
 

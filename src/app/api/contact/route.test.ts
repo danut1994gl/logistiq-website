@@ -4,8 +4,14 @@ import { NextRequest } from "next/server";
 // Nothing real is ever reached: SMTP, Supabase, BotID, the Vercel firewall and
 // Google are all mocked.
 const sendMail = vi.fn();
+const createTransport = vi.fn();
 vi.mock("nodemailer", () => ({
-  default: { createTransport: () => ({ sendMail: (...a: unknown[]) => sendMail(...a) }) },
+  default: {
+    createTransport: (...a: unknown[]) => {
+      createTransport(...a);
+      return { sendMail: (...b: unknown[]) => sendMail(...b) };
+    },
+  },
 }));
 const insert = vi.fn();
 vi.mock("@/lib/supabase", () => ({
@@ -61,6 +67,7 @@ const without = (key: string): Record<string, unknown> => {
 };
 
 beforeEach(() => {
+  createTransport.mockReset();
   sendMail.mockReset().mockResolvedValue({ messageId: "test" });
   insert.mockReset().mockResolvedValue({ error: null });
   checkBotId.mockReset().mockResolvedValue({ isBot: false, isHuman: true, isVerifiedBot: false, bypassed: false });
@@ -127,6 +134,12 @@ describe("POST /api/contact — a person", () => {
     expect(res.status).toBe(500);
     expect((await res.json()).code).toBe("server");
     expect(insert).not.toHaveBeenCalled();
+  });
+
+  it("sends through a transport that verifies the mail server's TLS certificate", async () => {
+    await post(human);
+    expect(createTransport).toHaveBeenCalledTimes(1);
+    expect(createTransport.mock.calls[0][0]).toMatchObject({ secure: true, tls: { rejectUnauthorized: true } });
   });
 });
 

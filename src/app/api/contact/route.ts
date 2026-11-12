@@ -5,6 +5,7 @@ import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
+import { smtpTlsOptions } from '@/lib/contact/smtp'
 import {
   ELAPSED_FIELD,
   FIELD_MAX,
@@ -24,9 +25,9 @@ const SMTP_CONFIG = {
     user: process.env.SMTP_USER || 'noreply@logistiq.ro',
     pass: process.env.SMTP_PASS || '',
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
+  // The server's certificate is always verified (SMTP_TLS_SERVERNAME / SMTP_TLS_CA when
+  // it needs them): lib/contact/smtp.ts.
+  tls: smtpTlsOptions(),
 }
 
 // The Vercel WAF rule this route asks: Firewall → custom rule whose condition is
