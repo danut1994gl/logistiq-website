@@ -107,6 +107,11 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     const rules: { source: string; destination: string; permanent: boolean }[] = [];
+    // The owner's e-mail signature page (built by scripts/email-signature/build.py). It is a
+    // static file: its dotted path skips the language middleware, which would otherwise send
+    // /email/signature to /ro/email/signature (404). Config redirects run before the
+    // middleware, and Next's trailing-slash redirect brings /email/signature/ here too.
+    rules.push({ source: "/email/signature", destination: "/email/signature/index.html", permanent: false });
     for (const loc of LOCALES) {
       const s = SEG[loc];
       // NOTE: we intentionally do NOT redirect the raw folder segment (/de/features)

@@ -12,8 +12,9 @@ Writes:
 - public/email/signature/divider.png      a vertical capsule in the site's .gradient-text
   colours (blue, cyan, blue)
 - scripts/email-signature/signature.html  the signature itself, for HTML signature editors
-- scripts/email-signature/preview.html    light and dark previews with copy buttons and the
-  set-up steps per mail app
+- public/email/signature/index.html       the owner's page at https://logistiq.ro/email/signature
+  (next.config.ts redirects there; the dotted path skips the language middleware): light and
+  dark previews, copy buttons, the set-up steps per mail app. noindex, linked from nowhere.
 
 E-mails already sent load the images from https://logistiq.ro/email/signature/. Never move,
 rename or delete them; to change one, give the new image a new name and rebuild.
@@ -201,9 +202,9 @@ STEPS = [
     ("Webmail (Roundcube și altele)",
      "Setări → Identități → Semnătură → treci editorul pe HTML / sursă (<>) → lipește codul HTML."),
     ("iPhone (Mail)",
-     "Trimite-ți un e-mail cu semnătura de pe calculator și copiaz-o din mesaj. Apoi "
-     "Configurări → Apps → Mail → Semnătură → lipește. Dacă formatarea dispare, scutură "
-     "telefonul și alege Anulează (Undo)."),
+     "Deschide pagina asta în Safari pe iPhone (logistiq.ro/email/signature) → „Copiază "
+     "semnătura” → Configurări → Apps → Mail → Semnătură → lipește. Dacă formatarea dispare, "
+     "scutură telefonul și alege Anulează (Undo)."),
 ]
 
 PANELS = [("Mod luminos", "#ffffff", "#222222"), ("Mod întunecat", "#1e1e1e", "#f2f2f2")]
@@ -222,6 +223,7 @@ def preview(sig: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Semnătură e-mail Logistiq</title>
 <style>
   body {{ margin: 0; background: #e5e7eb; color: #111827; font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }}
@@ -297,12 +299,12 @@ def main() -> None:
 
     sig = signature(IMG_BASE, logo_w, logo_h)
     (HERE / "signature.html").write_text(sig + "\n")
-    (HERE / "preview.html").write_text(preview(sig))
+    (IMAGES / "index.html").write_text(preview(sig))
     print(f"logo {logo_w}x{logo_h}px, signature {len(sig)} characters (Gmail allows 10,000)")
 
     if args.local_preview:
         args.local_preview.mkdir(parents=True, exist_ok=True)
-        for f in IMAGES.iterdir():
+        for f in IMAGES.glob("*.png"):
             shutil.copy(f, args.local_preview / f.name)
         (args.local_preview / "preview.html").write_text(preview(signature(".", logo_w, logo_h)))
         print(f"local preview: {args.local_preview / 'preview.html'}")
