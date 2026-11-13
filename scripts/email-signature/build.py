@@ -53,7 +53,7 @@ FONT = "Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial
 
 NAME = "Dănuț Cătălin Bălan"
 EMAIL = "danut.balan@logistiq.ro"
-ROLE = "Logistiq · QRGo Driver"
+ROLE = "Founder & CEO · Logistiq"   # owner, 2026-11-13; QRGo Driver keeps its own block
 TAGLINE = "Dock booking · Driver check-in · Yard management"
 FOOTER = "Digital warehouse flow · Real-time driver coordination"
 SITES = [("logistiq.ro", "https://logistiq.ro/en"),
@@ -266,7 +266,7 @@ def preview(sig: str, sig_apple: str) -> str:
 <body>
 <main>
   <h1>Semnătura de e-mail</h1>
-  <p class="lead">{esc(NAME)} · Logistiq · QRGo Driver. Arată la fel în modul luminos și în cel întunecat.</p>
+  <p class="lead">{esc(NAME)} · {esc(ROLE)}. Arată la fel în modul luminos și în cel întunecat.</p>
   <div class="bar">
     <button class="primary" onclick="copySig('rich')">Copiază semnătura</button>
     <button class="ghost" onclick="copySig('apple')">Copiază pentru Apple Mail</button>
