@@ -57,7 +57,7 @@ ROLE = "Founder & CEO · Logistiq"   # owner, 2026-11-13; QRGo Driver keeps its 
 TAGLINE = "Dock booking · Driver check-in · Yard management"
 FOOTER = "Digital warehouse flow · Real-time driver coordination"
 SITES = [("logistiq.ro", "https://logistiq.ro/en"),
-         ("logistiq.be", "https://logistiq.be/en"),
+         ("logistiq.be", "https://logistiq.be/nl"),   # Dutch: the .be site's own default (owner, 2026-11-13)
          ("qrgo.ro", "https://qrgo.ro/")]
 # The app is listed in the European stores but not in the US one, and a link without a
 # country opens the US page in a desktop browser: 404. The RO page answers (in English);
