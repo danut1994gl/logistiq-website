@@ -149,8 +149,8 @@ def signature(base: str, logo_w: int, logo_h: int) -> str:
                 link("https://qrgo.ro/", img(f"{base}/qrgo-driver.png", ICON, ICON, "QRGo Driver")), True)
            + td("vertical-align:middle;",
                 TABLE
-                + "<tr>" + td("font-size:13px;line-height:16px;font-weight:700;", esc("QRGo Driver")) + "</tr>"
-                + "<tr>" + td("font-size:11px;line-height:15px;font-weight:600;",
+                + "<tr>" + td("font-size:13px;line-height:16px;font-weight:700;white-space:nowrap;", esc("QRGo Driver")) + "</tr>"
+                + "<tr>" + td("font-size:11px;line-height:15px;font-weight:600;white-space:nowrap;",
                               link(APP_STORE, "App Store") + DOT + link(GOOGLE_PLAY, "Google Play")) + "</tr>"
                 + "</table>", True)
            + "</tr></table>")
@@ -280,6 +280,16 @@ def preview(sig: str) -> str:
       ? (kind === "rich" ? "Copiată. Lipește-o (⌘V / Ctrl+V) în setările de semnătură." : "Codul HTML e copiat.")
       : "Nu s-a putut copia: deschide „Codul HTML” de mai jos și copiază-l de mână.";
   }}
+  // Phone mail apps shrink a signature wider than the screen; the preview does the same.
+  function fit() {{
+    document.querySelectorAll(".mail").forEach((m) => {{
+      m.style.zoom = 1;
+      const w = m.querySelector("table").getBoundingClientRect().width;
+      m.style.zoom = w > m.clientWidth ? (m.clientWidth / w).toFixed(3) : 1;
+    }});
+  }}
+  addEventListener("load", fit);
+  addEventListener("resize", fit);
 </script>
 </body>
 </html>
