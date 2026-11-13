@@ -147,6 +147,13 @@ src/lib/
   `scripts/og/qrgo-logo.svg`. The wordmark's typeface is not available, so the r, b and e
   of `.ro`/`.be` are rebuilt from the export's own letters; prefer official Canva exports
   once they exist. Regenerating changes the widths in `groupSites` (a test compares them).
+- **E-mail signature** (the owner's, 2026-11-13): `scripts/email-signature/build.py` writes
+  `public/email/signature/{logistiq,qrgo-driver,divider}.png` plus the paste-ready
+  `signature.html` and `preview.html` (copy buttons, set-up steps per mail app) next to
+  itself. Sent e-mails load those images from `https://logistiq.ro/email/signature/` for
+  good: **never move, rename or delete them**; a changed image gets a new file name. The
+  signature reads in light and dark mail apps: no background, the name in the reader's own
+  text colour, everything else in mid-tones (~4:1 on white and on near-black) or images.
 - **The driver brand is written QRGo** (QRGo Driver, QRGo Self, QRGoBox), never in capitals
   (owner, 2026-11-09). `brand-casing.test.ts` guards the copy and every file under `src/`.
   The artwork still draws capitals until a new Canva export exists: the QRGo logo
