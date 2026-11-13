@@ -155,7 +155,8 @@ src/lib/
   `https://logistiq.ro/email/signature` reaches that page through a redirect in
   `next.config.ts`; its dotted path skips the language middleware. Sent e-mails load the
   images from `https://logistiq.ro/email/signature/` for good: **never move, rename or
-  delete them**; a changed image gets a new file name. The
+  delete them**; a changed image gets a new file name (`email-signature.test.ts` pins the
+  three files, their pixel sizes, the redirect and the page's noindex). The
   signature reads in light and dark mail apps: no background, the name in the reader's own
   text colour, everything else in mid-tones (~4:1 on white and on near-black) or images.
 - **The driver brand is written QRGo** (QRGo Driver, QRGo Self, QRGoBox), never in capitals

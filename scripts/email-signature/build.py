@@ -179,6 +179,11 @@ def signature(base: str, logo_w: int, logo_h: int) -> str:
             + "</tr><tr>" + footer + "</tr></table>")
 
 
+def js(value, **kwargs) -> str:
+    """JSON for an inline <script>, with `<` escaped: no text can end the script element."""
+    return json.dumps(value, **kwargs).replace("<", "\\u003c")
+
+
 def plain_text() -> str:
     return "\n".join([NAME, ROLE, TAGLINE, EMAIL, " · ".join(label for label, _ in SITES)])
 
@@ -263,8 +268,8 @@ def preview(sig: str) -> str:
   e-mailurile deja trimise le încarcă de acolo.</p>
 </main>
 <script>
-  const SIG = {json.dumps(sig)};
-  const PLAIN = {json.dumps(plain_text(), ensure_ascii=False)};
+  const SIG = {js(sig)};
+  const PLAIN = {js(plain_text(), ensure_ascii=False)};
   function copySig(kind) {{
     const status = document.getElementById("status");
     const onCopy = (e) => {{
