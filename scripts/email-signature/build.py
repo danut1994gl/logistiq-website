@@ -57,7 +57,10 @@ FOOTER = "Digital warehouse flow · Real-time driver coordination"
 SITES = [("logistiq.ro", "https://logistiq.ro/en"),
          ("logistiq.be", "https://logistiq.be/en"),
          ("qrgo.ro", "https://qrgo.ro/")]
-APP_STORE = "https://apps.apple.com/app/qrgo-driver/id6756977629"
+# The app is listed in the European stores but not in the US one, and a link without a
+# country opens the US page in a desktop browser: 404. The RO page answers (in English);
+# on a phone the App Store app opens the reader's own store whatever the link says.
+APP_STORE = "https://apps.apple.com/ro/app/qrgo-driver/id6756977629"
 GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=ro.qrgo.driver"
 
 
