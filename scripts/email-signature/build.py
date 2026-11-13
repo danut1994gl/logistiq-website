@@ -26,6 +26,7 @@ either background.
 """
 
 import argparse
+import base64
 import json
 import shutil
 import subprocess
@@ -160,9 +161,9 @@ def signature(base: str, logo_w: int, logo_h: int) -> str:
             + "<tr>" + td("padding:16px 0 0;", app) + "</tr>"
             + "</table>")
     right = (TABLE
-             + "<tr>" + td("font-size:19px;line-height:24px;font-weight:700;letter-spacing:-0.2px;padding:0 0 2px;",
+             + "<tr>" + td("font-size:19px;line-height:24px;font-weight:700;letter-spacing:-0.2px;white-space:nowrap;padding:0 0 2px;",
                            esc(NAME)) + "</tr>"
-             + "<tr>" + td(f"font-size:13px;line-height:19px;font-weight:600;color:{BLUE};", esc(ROLE)) + "</tr>"
+             + "<tr>" + td(f"font-size:13px;line-height:19px;font-weight:600;color:{BLUE};white-space:nowrap;", esc(ROLE)) + "</tr>"
              + "<tr>" + td(f"font-size:12px;line-height:18px;color:{MUTED};padding:0 0 10px;", esc(TAGLINE)) + "</tr>"
              + "<tr>" + td("font-size:13px;line-height:20px;", link(f"mailto:{EMAIL}", EMAIL)) + "</tr>"
              + "<tr>" + td("font-size:13px;line-height:20px;font-weight:600;",
@@ -184,6 +185,16 @@ def js(value, **kwargs) -> str:
     return json.dumps(value, **kwargs).replace("<", "\\u003c")
 
 
+def embedded(sig: str) -> str:
+    """The signature with its images inline (data: URIs), for Apple Mail: its signature editor
+    loads nothing from the internet, so linked images stay empty boxes there. Mail stores the
+    inline images with the signature and sends them as attachments of each message."""
+    for name in ("logistiq.png", "qrgo-driver.png", "divider.png"):
+        data = base64.b64encode((IMAGES / name).read_bytes()).decode()
+        sig = sig.replace(f"{IMG_BASE}/{name}", f"data:image/png;base64,{data}")
+    return sig
+
+
 def plain_text() -> str:
     return "\n".join([NAME, ROLE, TAGLINE, EMAIL, " · ".join(label for label, _ in SITES)])
 
@@ -192,8 +203,10 @@ def plain_text() -> str:
 
 STEPS = [
     ("Apple Mail (Mac)",
-     "Mail → Configurări → Semnături → alege contul → + → lipește (⌘V) în câmpul din dreapta. "
-     "Debifează „Always match my default message font”, altfel Mail schimbă fontul."),
+     "Apasă „Copiază pentru Apple Mail” → Mail → Configurări → Semnături → alege contul → + → "
+     "lipește (⌘V) în câmpul din dreapta. Debifează opțiunea de sub el care potrivește mereu "
+     "fontul implicit al mesajului (Always match my default message font), altfel Mail schimbă "
+     "fontul. Câmpul e îngust, așa că semnătura pare tăiată în dreapta; în mesaj apare întreagă."),
     ("Gmail",
      "⚙ → Vezi toate setările → General → Semnătură → Creează → lipește → "
      "„Salvează modificările”, jos de tot."),
@@ -215,7 +228,7 @@ STEPS = [
 PANELS = [("Mod luminos", "#ffffff", "#222222"), ("Mod întunecat", "#1e1e1e", "#f2f2f2")]
 
 
-def preview(sig: str) -> str:
+def preview(sig: str, sig_apple: str) -> str:
     panels = "".join(
         f'<section class="panel" style="background:{bg};color:{fg};"><p class="tag">{title}</p>'
         f'<div class="mail"><p>Cu stimă,</p>{sig}</div></section>'
@@ -256,12 +269,13 @@ def preview(sig: str) -> str:
   <p class="lead">{esc(NAME)} · Logistiq · QRGo Driver. Arată la fel în modul luminos și în cel întunecat.</p>
   <div class="bar">
     <button class="primary" onclick="copySig('rich')">Copiază semnătura</button>
+    <button class="ghost" onclick="copySig('apple')">Copiază pentru Apple Mail</button>
     <button class="ghost" onclick="copySig('code')">Copiază codul HTML</button>
     <span id="status" role="status"></span>
   </div>
   {panels}
   <h2>Cum o pui în programul de mail</h2>
-  <p class="note">„Copiază semnătura” pentru programele în care lipești text formatat; „Copiază codul HTML” pentru cele cu editor HTML.</p>
+  <p class="note">„Copiază semnătura” pentru Gmail și Outlook; „Copiază pentru Apple Mail” pentru Mail pe Mac (imaginile vin în semnătură); „Copiază codul HTML” pentru programele cu editor HTML.</p>
   <ol>{steps}</ol>
   <details><summary>Codul HTML</summary><textarea readonly>{code}</textarea></details>
   <p class="note">Imaginile vin de pe logistiq.ro/email/signature/. Nu le muta și nu le redenumi:
@@ -269,12 +283,16 @@ def preview(sig: str) -> str:
 </main>
 <script>
   const SIG = {js(sig)};
+  const SIG_APPLE = {js(sig_apple)};
   const PLAIN = {js(plain_text(), ensure_ascii=False)};
   function copySig(kind) {{
     const status = document.getElementById("status");
     const onCopy = (e) => {{
       e.preventDefault();
-      if (kind === "rich") {{ e.clipboardData.setData("text/html", SIG); e.clipboardData.setData("text/plain", PLAIN); }}
+      if (kind === "rich" || kind === "apple") {{
+        e.clipboardData.setData("text/html", kind === "apple" ? SIG_APPLE : SIG);
+        e.clipboardData.setData("text/plain", PLAIN);
+      }}
       else {{ e.clipboardData.setData("text/plain", SIG); }}
     }};
     document.addEventListener("copy", onCopy);
@@ -282,7 +300,7 @@ def preview(sig: str) -> str:
     try {{ ok = document.execCommand("copy"); }} catch (_) {{}}
     document.removeEventListener("copy", onCopy);
     status.textContent = ok
-      ? (kind === "rich" ? "Copiată. Lipește-o (⌘V / Ctrl+V) în setările de semnătură." : "Codul HTML e copiat.")
+      ? (kind === "code" ? "Codul HTML e copiat." : "Copiată. Lipește-o (⌘V / Ctrl+V) în setările de semnătură.")
       : "Nu s-a putut copia: deschide „Codul HTML” de mai jos și copiază-l de mână.";
   }}
   // Phone mail apps shrink a signature wider than the screen; the preview does the same.
@@ -314,14 +332,14 @@ def main() -> None:
 
     sig = signature(IMG_BASE, logo_w, logo_h)
     (HERE / "signature.html").write_text(sig + "\n")
-    (IMAGES / "index.html").write_text(preview(sig))
+    (IMAGES / "index.html").write_text(preview(sig, embedded(sig)))
     print(f"logo {logo_w}x{logo_h}px, signature {len(sig)} characters (Gmail allows 10,000)")
 
     if args.local_preview:
         args.local_preview.mkdir(parents=True, exist_ok=True)
         for f in IMAGES.glob("*.png"):
             shutil.copy(f, args.local_preview / f.name)
-        (args.local_preview / "preview.html").write_text(preview(signature(".", logo_w, logo_h)))
+        (args.local_preview / "preview.html").write_text(preview(signature(".", logo_w, logo_h), embedded(sig)))
         print(f"local preview: {args.local_preview / 'preview.html'}")
 
 

@@ -39,4 +39,10 @@ describe("e-mail signature", () => {
     expect(html.match(/<\/script/gi)).toHaveLength(1);
     expect(html).not.toContain("<!--");
   });
+
+  it("the Apple Mail copy carries its three images inline", () => {
+    // Mail's signature editor loads nothing from the internet: linked images stay empty boxes.
+    const html = readFileSync(new URL("index.html", DIR), "utf8");
+    expect(html.match(/data:image\/png;base64,/g)).toHaveLength(3);
+  });
 });
