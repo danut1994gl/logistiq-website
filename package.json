@@ -14,7 +14,7 @@
     "@supabase/supabase-js": "^2.110.2",
     "@vercel/firewall": "^1.2.6",
     "botid": "^1.5.11",
-    "next": "16.1.2",
+    "next": "16.4.6",
     "nodemailer": "^6.9.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -28,7 +28,7 @@
     "@types/react-dom": "^19",
     "@types/sanitize-html": "^2.16.1",
     "eslint": "^9",
-    "eslint-config-next": "16.1.2",
+    "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"
