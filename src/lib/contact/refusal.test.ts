@@ -142,9 +142,14 @@ describe("the route's refusals, as the form shows them", () => {
   });
 
   it("the form shows only these sentences: it never displays the route's error text", () => {
-    const form = readFileSync(fileURLToPath(new URL("../../components/sections/ContactSection.tsx", import.meta.url)), "utf8");
-    expect(form).toContain("setErrorMessage(refusalMessage(t, data))");
-    // The only `.error` it reads is its own generic sentence.
-    expect(new Set(form.match(/[\w$.]*\.error\b/g))).toEqual(new Set(["t.contact.error"]));
+    const read = (path: string) => readFileSync(fileURLToPath(new URL(path, import.meta.url)), "utf8");
+    const form = read("../../components/sections/ContactSection.tsx");
+    const submit = read("./submit.ts");
+    // The form shows what lib/contact/submit.ts says, which answers a refusal with refusalMessage.
+    expect(form).toContain("setErrorMessage(outcome.message)");
+    expect(submit).toContain("refusalMessage(t, result.data)");
+    // The only `.error` either of them reads is the form's own generic sentence.
+    const errorsRead = [...(form.match(/[\w$.]*\.error\b/g) ?? []), ...(submit.match(/[\w$.]*\.error\b/g) ?? [])];
+    expect(new Set(errorsRead)).toEqual(new Set(["t.contact.error"]));
   });
 });

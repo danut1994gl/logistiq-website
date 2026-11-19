@@ -210,7 +210,11 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
 - **The form answers a refusal in the visitor's language** (`lib/contact/refusal.ts`,
   since 2026-11-19): it shows its own sentence for each `code` the route returns
   (`invalid`, `rate_limited`, `verify_failed`, `server`; anything else gets the generic
-  error). The route's `error` text is Romanian, for the logs, and is never shown.
+  error). The route's `error` text is Romanian, for the logs, and is never shown. When
+  nothing comes back (no network, or BotID's client not sending the request because its
+  challenge script was blocked or never answered), the form stops waiting after 30 s and
+  names contact@logistiq.ro (`lib/contact/submit.ts`, `contact.unreachable`); BotID
+  still decides whether the POST leaves, and a request it starts later starts aborted.
 - **The mail server's TLS certificate is always verified** (`lib/contact/smtp.ts`,
   tested). Until 2026-11-12 the route set `rejectUnauthorized: false`, so any certificate
   passed and whoever sat on the network path could read every message and the mailbox

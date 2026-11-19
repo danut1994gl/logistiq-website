@@ -1421,6 +1421,7 @@ export const translations = {
       rateLimited: "Prea multe mesaje într-un timp scurt. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
       verifyFailed: "Nu am putut verifica mesajul. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
       invalid: "Verifică datele introduse: completează câmpurile obligatorii, folosește o adresă de e-mail simplă, de forma email@companie.ro, și scrie numele, compania și telefonul pe un singur rând. Ne poți scrie și la contact@logistiq.ro.",
+      unreachable: "Nu am putut trimite mesajul din acest browser. Scrie-ne la contact@logistiq.ro.",
       info: "Program de lucru",
       schedule: {
         monday: "Luni: 08:00 - 16:30",
@@ -3347,6 +3348,7 @@ export const translations = {
       rateLimited: "Too many messages in a short time. Please try again in a few minutes, or email us at contact@logistiq.ro.",
       verifyFailed: "We couldn't verify your message. Please try again in a few minutes, or email us at contact@logistiq.ro.",
       invalid: "Please check your details: fill in the required fields, use a simple email address such as email@company.com, and keep the name, company and phone on one line. You can also email us at contact@logistiq.ro.",
+      unreachable: "We couldn't send your message from this browser. Please email us at contact@logistiq.ro.",
       info: "Working hours",
       schedule: {
         monday: "Monday: 08:00 - 16:30",
@@ -5256,6 +5258,7 @@ export const translations = {
       rateLimited: "Zu viele Nachrichten in kurzer Zeit. Bitte versuchen Sie es in ein paar Minuten erneut oder schreiben Sie uns an contact@logistiq.ro.",
       verifyFailed: "Wir konnten Ihre Nachricht nicht überprüfen. Bitte versuchen Sie es in ein paar Minuten erneut oder schreiben Sie uns an contact@logistiq.ro.",
       invalid: "Bitte prüfen Sie Ihre Angaben: Füllen Sie die Pflichtfelder aus, verwenden Sie eine einfache E-Mail-Adresse wie email@firma.de und schreiben Sie Name, Firma und Telefon jeweils in eine Zeile. Sie können uns auch an contact@logistiq.ro schreiben.",
+      unreachable: "Wir konnten Ihre Nachricht von diesem Browser aus nicht senden. Bitte schreiben Sie uns an contact@logistiq.ro.",
       info: "Geschäftszeiten",
       schedule: {
         monday: "Montag: 08:00–16:30",
@@ -7480,6 +7483,7 @@ export const translations = {
       rateLimited: "Zbyt wiele wiadomości w krótkim czasie. Spróbuj ponownie za kilka minut albo napisz do nas na adres contact@logistiq.ro.",
       verifyFailed: "Nie udało się zweryfikować wiadomości. Spróbuj ponownie za kilka minut albo napisz do nas na adres contact@logistiq.ro.",
       invalid: "Sprawdź wprowadzone dane: wypełnij wymagane pola, podaj prosty adres e-mail, np. email@firma.pl, i wpisz imię i nazwisko, firmę oraz telefon bez podziału na wiersze. Możesz też napisać do nas na adres contact@logistiq.ro.",
+      unreachable: "Nie udało się wysłać wiadomości z tej przeglądarki. Napisz do nas na adres contact@logistiq.ro.",
       info: "Godziny pracy",
       schedule: {
         monday: "Poniedziałek: 08:00 - 16:30",
@@ -9700,6 +9704,7 @@ export const translations = {
       rateLimited: "Túl sok üzenet érkezett rövid idő alatt. Kérjük, próbálja újra néhány perc múlva, vagy írjon nekünk a contact@logistiq.ro címre.",
       verifyFailed: "Nem sikerült ellenőrizni az üzenetét. Kérjük, próbálja újra néhány perc múlva, vagy írjon nekünk a contact@logistiq.ro címre.",
       invalid: "Kérjük, ellenőrizze az adatait: töltse ki a kötelező mezőket, adjon meg egy egyszerű e-mail-címet, például email@ceg.hu, és a nevet, a cégnevet és a telefonszámot sortörés nélkül írja be. Írhat nekünk a contact@logistiq.ro címre is.",
+      unreachable: "Ebből a böngészőből nem sikerült elküldeni az üzenetét. Kérjük, írjon nekünk a contact@logistiq.ro címre.",
       info: "Nyitvatartás",
       schedule: {
         monday: "Hétfő: 08:00 - 16:30",
@@ -11918,6 +11923,7 @@ export const translations = {
       rateLimited: "Твърде много съобщения за кратко време. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
       verifyFailed: "Не успяхме да проверим съобщението ви. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
       invalid: "Моля, проверете данните си: попълнете задължителните полета, използвайте обикновен имейл адрес, например email@kompania.bg, и напишете името, компанията и телефона на един ред. Можете да ни пишете и на contact@logistiq.ro.",
+      unreachable: "Не успяхме да изпратим съобщението ви от този браузър. Моля, пишете ни на contact@logistiq.ro.",
       info: "Работно време",
       schedule: {
         monday: "Понеделник: 08:00 - 16:30",
@@ -14135,6 +14141,7 @@ export const translations = {
       rateLimited: "Trop de messages en peu de temps. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
       verifyFailed: "Nous n'avons pas pu vérifier votre message. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
       invalid: "Veuillez vérifier vos informations : remplissez les champs obligatoires, utilisez une adresse e-mail simple, par exemple email@entreprise.fr, et écrivez le nom, l'entreprise et le téléphone sur une seule ligne. Vous pouvez aussi nous écrire à contact@logistiq.ro.",
+      unreachable: "Nous n'avons pas pu envoyer votre message depuis ce navigateur. Veuillez nous écrire à contact@logistiq.ro.",
       info: "Horaires d'ouverture",
       schedule: {
         monday: "Lundi : 08:00 - 16:30",
@@ -16362,6 +16369,7 @@ export const translations = {
       rateLimited: "Te veel berichten in korte tijd. Probeer het over een paar minuten opnieuw of mail ons op contact@logistiq.ro.",
       verifyFailed: "We konden uw bericht niet verifiëren. Probeer het over een paar minuten opnieuw of mail ons op contact@logistiq.ro.",
       invalid: "Controleer uw gegevens: vul de verplichte velden in, gebruik een eenvoudig e-mailadres zoals email@bedrijf.nl en zet naam, bedrijf en telefoon elk op één regel. U kunt ons ook mailen op contact@logistiq.ro.",
+      unreachable: "We konden uw bericht niet vanuit deze browser versturen. Mail ons op contact@logistiq.ro.",
       info: "Openingstijden",
       schedule: {
         monday: "Maandag: 08:00 - 16:30",

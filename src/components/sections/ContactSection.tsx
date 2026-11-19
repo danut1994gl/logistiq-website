@@ -11,7 +11,7 @@ import {
   RECAPTCHA_FIELD,
 } from "@/lib/contact/protocol";
 import { loadRecaptcha, recaptchaToken } from "@/lib/contact/recaptcha-client";
-import { refusalMessage } from "@/lib/contact/refusal";
+import { submitContactForm } from "@/lib/contact/submit";
 
 // Off-screen with inline styles (hidden even without the stylesheet), out of the
 // tab order and the accessibility tree: people never reach it, form bots fill it.
@@ -74,24 +74,21 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
       }
 
       const trap = form.elements.namedItem(HONEYPOT_FIELD);
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      // Through BotID's fetch, bounded: a refusal reads the form's own sentence for its
+      // code, no answer at all names contact@logistiq.ro (lib/contact/submit.ts).
+      const outcome = await submitContactForm(
+        {
           ...formState,
           [HONEYPOT_FIELD]: trap instanceof HTMLInputElement ? trap.value : "",
           [ELAPSED_FIELD]: Math.round(performance.now() - openedAt.current),
           ...(token ? { [RECAPTCHA_FIELD]: token } : {}),
-        }),
-      });
+        },
+        t,
+      );
 
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        // The form's own sentence for the route's code, in the visitor's language: the
-        // route's `error` text is Romanian (lib/contact/refusal.ts).
+      if (!outcome.ok) {
         setSubmitStatus('error');
-        setErrorMessage(refusalMessage(t, data));
+        setErrorMessage(outcome.message);
         return;
       }
 
@@ -102,7 +99,7 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
       used.current = false;
     } catch {
       setSubmitStatus('error');
-      setErrorMessage(t.contact.error);
+      setErrorMessage(t.contact.unreachable);
     } finally {
       setIsSubmitting(false);
     }
