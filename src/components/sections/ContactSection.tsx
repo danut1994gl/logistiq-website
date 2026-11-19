@@ -9,9 +9,9 @@ import {
   HONEYPOT_FIELD,
   IDLE_RESTART_MS,
   RECAPTCHA_FIELD,
-  type ContactErrorCode,
 } from "@/lib/contact/protocol";
 import { loadRecaptcha, recaptchaToken } from "@/lib/contact/recaptcha-client";
+import { refusalMessage } from "@/lib/contact/refusal";
 
 // Off-screen with inline styles (hidden even without the stylesheet), out of the
 // tab order and the accessibility tree: people never reach it, form bots fill it.
@@ -54,17 +54,6 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
     loadRecaptcha()?.catch(() => {});
   };
 
-  const errorFor = (data: { code?: unknown; error?: unknown }): string => {
-    const byCode: Partial<Record<ContactErrorCode, string>> = {
-      rate_limited: t.contact.rateLimited,
-      verify_failed: t.contact.verifyFailed,
-    };
-    return (
-      byCode[data.code as ContactErrorCode] ??
-      (typeof data.error === "string" && data.error ? data.error : t.contact.error)
-    );
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -99,8 +88,10 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
+        // The form's own sentence for the route's code, in the visitor's language: the
+        // route's `error` text is Romanian (lib/contact/refusal.ts).
         setSubmitStatus('error');
-        setErrorMessage(errorFor(data));
+        setErrorMessage(refusalMessage(t, data));
         return;
       }
 

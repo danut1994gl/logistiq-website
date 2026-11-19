@@ -62,7 +62,7 @@ src/lib/
   navigation.ts  company.ts  href.ts  features.ts  faq.ts
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
-  contact/{protocol,input,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + email + mail TLS
+  contact/{protocol,input,refusal,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + answers + email + mail TLS
   contact/testing/{mail-view,smtp-server}.ts  # test-only: e-mail reader, local test SMTP server
 scripts/contact-smoke.mjs    # the production bundle's contact form against the local test SMTP server
 ```
@@ -207,6 +207,10 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   comment to read a second recipient out of; name, company and phone are one line (no
   C0 or C1 control, line or paragraph separator, or bidi control); the message keeps its
   line breaks and tabs and refuses the rest. A refusal is the form's own 400.
+- **The form answers a refusal in the visitor's language** (`lib/contact/refusal.ts`,
+  since 2026-11-19): it shows its own sentence for each `code` the route returns
+  (`invalid`, `rate_limited`, `verify_failed`, `server`; anything else gets the generic
+  error). The route's `error` text is Romanian, for the logs, and is never shown.
 - **The mail server's TLS certificate is always verified** (`lib/contact/smtp.ts`,
   tested). Until 2026-11-12 the route set `rejectUnauthorized: false`, so any certificate
   passed and whoever sat on the network path could read every message and the mailbox
