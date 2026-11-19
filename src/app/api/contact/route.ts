@@ -4,7 +4,7 @@ import { checkBotId } from 'botid/server'
 import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
-import { isOneLine, isPlainMailbox, isText } from '@/lib/contact/input'
+import { isOneLine, isPlainMailbox, isText, trimPhone } from '@/lib/contact/input'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
 import { SMTP_SEND_DEADLINE_MS, smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
@@ -100,13 +100,14 @@ async function isRateLimited(request: NextRequest): Promise<boolean> {
   }
 }
 
-// A field as typed (trimmed): "" when absent, null when not text, too long, or holding
-// what the field may not.
+// A field as typed (trimmed; the phone also without the direction marks a copied number
+// carries at its ends): "" when absent, null when not text, too long, or holding what the
+// field may not.
 function textField(body: Record<string, unknown>, key: keyof typeof FIELD_MAX): string | null {
   const value = body[key]
   if (value === undefined || value === null) return ''
   if (typeof value !== 'string') return null
-  const trimmed = value.trim()
+  const trimmed = key === 'phone' ? trimPhone(value) : value.trim()
   return trimmed.length <= FIELD_MAX[key] && FIELD_RULE[key](trimmed) ? trimmed : null
 }
 

@@ -210,7 +210,7 @@ describe("the input is closed", () => {
     ["company", "an escape sequence", "Transport \u001b[31mSRL"],
     ["company", "a bidi override (U+202E)", "Transport \u202eLRS"],
     ["phone", "a NUL", "+40 771\u0000570 577"],
-    ["phone", "a bidi isolate (U+2066)", "\u2066+40 771 570 577"],
+    ["phone", "a bidi isolate inside it (U+2066)", "+40 771\u2066570 577"],
   ];
   for (const [field, form, value] of oneLine) {
     it(`refuses a ${field} with ${form}`, async () => {
@@ -228,6 +228,38 @@ describe("the input is closed", () => {
       await refused({ ...human, message }, BAD_FIELD);
     });
   }
+
+  // Chat apps and contact cards wrap a copied phone number in invisible direction marks (U+202A to U+202E, U+2066 to
+  // U+2069). Built from char codes here, so no mark sits in this file.
+  const mark = (code: number) => String.fromCharCode(code);
+  const isMark = (char: string) => {
+    const code = char.charCodeAt(0);
+    return (code >= 0x202a && code <= 0x202e) || (code >= 0x2066 && code <= 0x2069);
+  };
+
+  it("takes a phone number copied with direction marks around it, and sends and stores it without them", async () => {
+    const number = "+40 771 570 577";
+    for (const phone of [
+      `${mark(0x202a)}${number}${mark(0x202c)}`,
+      `${mark(0x2066)}${number}${mark(0x2069)}`,
+      ` ${mark(0x202d)} ${mark(0x2068)}${number}${mark(0x2069)} ${mark(0x202e)} `,
+    ]) {
+      sendMail.mockClear();
+      insert.mockClear();
+      const res = await post({ ...human, phone });
+      expect(res.status, JSON.stringify(phone)).toBe(200);
+      const mail = sendMail.mock.calls[0][0];
+      expect(mail.text).toContain(`Telefon: ${number}\n`);
+      expect(insert.mock.calls[0][0].phone).toBe(number);
+      expect([...`${mail.text}${mail.html}${mail.subject}`].some(isMark)).toBe(false);
+    }
+  });
+
+  it("still refuses a direction mark inside the phone number", async () => {
+    for (const phone of [`+40 771${mark(0x202a)}570 577`, `+40${mark(0x2066)} 771 570 577${mark(0x2069)}`]) {
+      await refused({ ...human, phone }, BAD_FIELD);
+    }
+  });
 
   it("keeps the message's line breaks and tabs", async () => {
     const message = "Rândul 1\r\nRândul 2\n\nRândul 4\tcu tab\rși CR";

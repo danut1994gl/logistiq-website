@@ -20,6 +20,22 @@ const NOT_ONE_LINE = /[\u0000-\u001f\u007f-\u009f\u2028\u2029\u202a-\u202e\u2066
 // The message is the form's textarea: it keeps tabs and line breaks, and refuses the rest.
 const NOT_TEXT = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/;
 
+// A phone number copied from a chat app or a contact card arrives wrapped in invisible direction marks (WhatsApp uses
+// U+202A to U+202C or U+2066 to U+2069). The visitor can't see them, so a refusal could not tell them why: the phone
+// loses them at both ends, with the whitespace around them, before its check. One inside the number is still refused,
+// and the value sent and stored holds none. A loop, not a regular expression, so a long value costs linear time.
+const isDirectionMark = (code: number): boolean => (code >= 0x202a && code <= 0x202e) || (code >= 0x2066 && code <= 0x2069);
+
+/** The phone as typed, without whitespace or direction marks at either end. */
+export function trimPhone(value: string): string {
+  const edge = (i: number) => isDirectionMark(value.charCodeAt(i)) || value[i].trim() === "";
+  let start = 0;
+  let end = value.length;
+  while (start < end && edge(start)) start++;
+  while (end > start && edge(end - 1)) end--;
+  return value.slice(start, end);
+}
+
 /** The address may be the e-mail's Reply-To. */
 export const isPlainMailbox = (value: string): boolean => PLAIN_MAILBOX.test(value);
 
