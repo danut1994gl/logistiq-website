@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import { checkBotId } from 'botid/server'
 import { checkRateLimit } from '@vercel/firewall'
-import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
 import { CONTACT_MAX_BODY_CHARS, isOneLine, isPlainMailbox, isText, trimPhone } from '@/lib/contact/input'
+import { storeLead } from '@/lib/contact/lead'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
 import { SMTP_SEND_DEADLINE_MS, smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
@@ -64,7 +64,8 @@ const FIELD_RULE: Record<keyof typeof FIELD_MAX, (value: string) => boolean> = {
 //   5. reCAPTCHA v3, only once its keys are set (lib/contact/recaptcha.ts).
 // A request layers 1, 2, 3 or 5 recognise as a bot gets the same 200 as a delivered
 // message, and nothing is sent or stored, so the answer teaches a bot nothing.
-// Then the email, every field escaped (lib/contact/email.ts), and the lead row.
+// Then the email, every field escaped (lib/contact/email.ts), and the lead row, written through
+// submit_website_lead with the key only this server holds (lib/contact/lead.ts).
 
 function silentlyDropped(layer: string) {
   console.warn(`contact: dropped by the ${layer} check`)
@@ -192,19 +193,12 @@ export async function POST(request: NextRequest) {
       signal: AbortSignal.timeout(SMTP_SEND_DEADLINE_MS),
     })
 
-    // Persist a lead row in addition to the email notification (ADR-005). The email is the
-    // source of truth for the human reply — a DB failure here must never turn an already-sent
-    // email into a 500, so this is best-effort and only logged on failure.
+    // Persist a lead row in addition to the email notification (ADR-005), through submit_website_lead
+    // with CONTACT_LEAD_KEY (lib/contact/lead.ts). The email is the source of truth for the human
+    // reply — a DB failure here must never turn an already-sent email into a 500, so this is
+    // best-effort and only logged on failure.
     try {
-      const supabase = createReadClient()
-      const { error: leadError } = await supabase.from('leads').insert({
-        name,
-        email,
-        phone,
-        company: company || null,
-        message,
-        source: 'website_contact',
-      })
+      const { error: leadError } = await storeLead({ name, email, phone, company, message })
       if (leadError) {
         console.error('lead persist failed (email already sent):', leadError)
       }

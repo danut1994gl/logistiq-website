@@ -54,10 +54,16 @@ vi.mock("nodemailer", async (importOriginal) => {
     },
   };
 });
-const insert = vi.fn();
+// The lead goes through submit_website_lead (lib/contact/lead.ts); from() throws and is watched.
+const rpc = vi.fn();
+const from = vi.fn((..._args: unknown[]): never => {
+  throw new Error("a lead is written through submit_website_lead, never from()");
+});
 vi.mock("@/lib/supabase", () => ({
-  createReadClient: () => ({ from: () => ({ insert: (...a: unknown[]) => insert(...a) }) }),
+  createReadClient: () => ({ rpc: (...a: unknown[]) => rpc(...a), from: (...a: unknown[]) => from(...a) }),
 }));
+// A made-up key for these tests; the real one exists only on the site's Vercel project.
+const LEAD_KEY = "tls-test-lead-key-0123456789abcdef0123456789";
 vi.mock("botid/server", () => ({ checkBotId: async () => ({ isBot: false, isHuman: true, isVerifiedBot: false, bypassed: false }) }));
 vi.mock("@vercel/firewall", () => ({ checkRateLimit: async () => ({ rateLimited: false }) }));
 
@@ -92,6 +98,7 @@ async function send(env: Record<string, string>) {
   vi.stubEnv("SMTP_PASS", PASS);
   vi.stubEnv("SMTP_TLS_CA", "");
   vi.stubEnv("SMTP_TLS_SERVERNAME", "");
+  vi.stubEnv("CONTACT_LEAD_KEY", LEAD_KEY);
   for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
   vi.resetModules(); // the route reads its SMTP settings when it loads
   vi.mocked(console.error).mockClear();
@@ -130,7 +137,8 @@ async function refused(
   if (server === implicit) expect(server.sessions).toBe(sessions);
   expect(server.auths).toEqual([]);
   expect(server.deliveries).toEqual([]);
-  expect(insert).not.toHaveBeenCalled();
+  expect(rpc).not.toHaveBeenCalled();
+  expect(from).not.toHaveBeenCalled();
 }
 
 /** Delivered over TLS, signed in with SMTP_USER, to contact@logistiq.ro alone, as the route composed it. */
@@ -148,7 +156,12 @@ function delivered(server: TestSmtpServer, result: Awaited<ReturnType<typeof sen
     Subject: "[Contact] Mesaj nou de la Ion Popescu",
   });
   expect(mail.parts?.[0].body).toContain("Avem 3 depozite și vrem o ofertă.");
-  expect(insert).toHaveBeenCalledTimes(1);
+  expect(rpc).toHaveBeenCalledTimes(1);
+  expect(rpc.mock.calls[0]).toEqual([
+    "submit_website_lead",
+    expect.objectContaining({ p_key: LEAD_KEY, p_name: "Ion Popescu", p_email: "ion@firma.ro" }),
+  ]);
+  expect(from).not.toHaveBeenCalled();
 }
 
 const UNKNOWN_CA = /unable to verify the first certificate/;
@@ -177,7 +190,8 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
       server.auths.length = 0;
       server.deliveries.length = 0;
     }
-    insert.mockReset().mockResolvedValue({ error: null });
+    rpc.mockReset().mockResolvedValue({ data: null, error: null });
+    from.mockClear();
     vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
@@ -242,7 +256,8 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
         expect(elapsed).toBeLessThan(12_000);
         expect(silent.sessions).toBe(1);
         expect(silent.auths).toEqual([]);
-        expect(insert).not.toHaveBeenCalled();
+        expect(rpc).not.toHaveBeenCalled();
+        expect(from).not.toHaveBeenCalled();
       } finally {
         ports.set(465, implicit.port);
         await silent.close();
@@ -268,7 +283,8 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
         expect(trickling.trickles[0].ended).toBe("the client hung up");
         expect(trickling.auths).toEqual([]);
         expect(trickling.deliveries).toEqual([]);
-        expect(insert).not.toHaveBeenCalled();
+        expect(rpc).not.toHaveBeenCalled();
+        expect(from).not.toHaveBeenCalled();
       } finally {
         deadline.ms = 25_000;
         ports.set(465, implicit.port);

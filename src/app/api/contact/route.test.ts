@@ -13,10 +13,14 @@ vi.mock("nodemailer", () => ({
     },
   },
 }));
-const insert = vi.fn();
-vi.mock("@/lib/supabase", () => ({
-  createReadClient: () => ({ from: () => ({ insert: (...a: unknown[]) => insert(...a) }) }),
-}));
+// The lead goes through submit_website_lead (lib/contact/lead.ts). from() throws and is watched: a lead written any
+// other way would be logged and answered 200 like a failed one, so delivered() asserts the one rpc and no from().
+const rpc = vi.fn();
+const from = vi.fn((..._args: unknown[]): never => {
+  throw new Error("a lead is written through submit_website_lead, never from()");
+});
+const readClient = vi.fn(() => ({ rpc: (...a: unknown[]) => rpc(...a), from: (...a: unknown[]) => from(...a) }));
+vi.mock("@/lib/supabase", () => ({ createReadClient: () => readClient() }));
 const checkBotId = vi.fn();
 vi.mock("botid/server", () => ({ checkBotId: (...a: unknown[]) => checkBotId(...a) }));
 const checkRateLimit = vi.fn();
@@ -27,6 +31,9 @@ import { CONTACT_MAX_BODY_CHARS } from "@/lib/contact/input";
 import { FIELD_MAX } from "@/lib/contact/protocol";
 
 const fetchMock = vi.fn();
+
+// A made-up key for these tests; the real one exists only on the site's Vercel project.
+const LEAD_KEY = "route-test-lead-key-0123456789abcdef0123456789";
 
 const human = {
   name: "Ion Popescu",
@@ -50,12 +57,15 @@ function post(body: unknown) {
 
 const nothingSentOrStored = () => {
   expect(sendMail).not.toHaveBeenCalled();
-  expect(insert).not.toHaveBeenCalled();
+  expect(rpc).not.toHaveBeenCalled();
+  expect(from).not.toHaveBeenCalled();
 };
 
 const delivered = () => {
   expect(sendMail).toHaveBeenCalledTimes(1);
-  expect(insert).toHaveBeenCalledTimes(1);
+  expect(rpc).toHaveBeenCalledTimes(1);
+  expect(rpc.mock.calls[0][0]).toBe("submit_website_lead");
+  expect(from).not.toHaveBeenCalled();
 };
 
 // A fresh Response per call: a body can be read only once.
@@ -71,7 +81,10 @@ const without = (key: string): Record<string, unknown> => {
 beforeEach(() => {
   createTransport.mockReset();
   sendMail.mockReset().mockResolvedValue({ messageId: "test" });
-  insert.mockReset().mockResolvedValue({ error: null });
+  rpc.mockReset().mockResolvedValue({ data: null, error: null });
+  from.mockClear();
+  readClient.mockClear();
+  vi.stubEnv("CONTACT_LEAD_KEY", LEAD_KEY);
   checkBotId.mockReset().mockResolvedValue({ isBot: false, isHuman: true, isVerifiedBot: false, bypassed: false });
   checkRateLimit.mockReset().mockResolvedValue({ rateLimited: false });
   fetchMock.mockReset();
@@ -98,7 +111,14 @@ describe("POST /api/contact — a person", () => {
     expect(mail.to).toBe("contact@logistiq.ro");
     expect(mail.replyTo).toBe("ion@firma.ro");
     expect(mail.text).toContain(human.message);
-    expect(insert.mock.calls[0][0]).toMatchObject({ name: "Ion Popescu", email: "ion@firma.ro", source: "website_contact" });
+    expect(rpc).toHaveBeenCalledWith("submit_website_lead", {
+      p_key: LEAD_KEY,
+      p_name: "Ion Popescu",
+      p_email: "ion@firma.ro",
+      p_phone: "+40 771 570 577",
+      p_company: "Transport SRL",
+      p_message: human.message,
+    });
   });
 
   it("escapes every field in the notification email", async () => {
@@ -135,7 +155,8 @@ describe("POST /api/contact — a person", () => {
     const res = await post(human);
     expect(res.status).toBe(500);
     expect((await res.json()).code).toBe("server");
-    expect(insert).not.toHaveBeenCalled();
+    expect(rpc).not.toHaveBeenCalled();
+    expect(from).not.toHaveBeenCalled();
   });
 
   it("sends through a transport that verifies the mail server's TLS certificate", async () => {
@@ -158,6 +179,94 @@ describe("POST /api/contact — a person", () => {
       greetingTimeout: 10_000,
       socketTimeout: 20_000,
     });
+  });
+});
+
+// The lead row is written through submit_website_lead with CONTACT_LEAD_KEY (lib/contact/lead.ts; monorepo migration
+// 330): the database refuses a lead without that key, which only this server holds. The e-mail is sent first and is
+// what the team answers, so the lead step stays best-effort: whatever fails there is logged and the person gets 200.
+describe("the lead row", () => {
+  const LOGGED = "lead persist failed (email already sent):";
+  const loggedLeadFailures = () =>
+    vi.mocked(console.error).mock.calls.filter(([label]) => label === LOGGED);
+
+  it("goes through submit_website_lead once, with the key, and never through from()", async () => {
+    await post(human);
+    delivered();
+    expect(rpc.mock.calls[0][1].p_key).toBe(LEAD_KEY);
+    expect(Object.keys(rpc.mock.calls[0][1]).sort()).toEqual(
+      ["p_company", "p_email", "p_key", "p_message", "p_name", "p_phone"],
+    );
+    expect(loggedLeadFailures()).toEqual([]);
+  });
+
+  it("sends an empty or absent company as null", async () => {
+    for (const body of [{ ...human, company: "" }, without("company"), { ...human, company: "   " }]) {
+      rpc.mockClear();
+      expect((await post(body)).status).toBe(200);
+      expect(rpc.mock.calls[0][1].p_company, JSON.stringify(body.company)).toBeNull();
+    }
+  });
+
+  const failures: Array<[string, () => void, RegExp | Record<string, unknown>]> = [
+    ["CONTACT_LEAD_KEY is unset", () => vi.stubEnv("CONTACT_LEAD_KEY", undefined), /Missing CONTACT_LEAD_KEY/],
+    ["CONTACT_LEAD_KEY is empty", () => vi.stubEnv("CONTACT_LEAD_KEY", ""), /Missing CONTACT_LEAD_KEY/],
+    [
+      "the function refuses (a wrong key)",
+      () => rpc.mockResolvedValue({
+        data: null,
+        error: { code: "42501", message: "submit_website_lead: the key is missing or not valid", details: null, hint: null },
+      }),
+      { code: "42501" },
+    ],
+    [
+      "the function is past its hourly limit",
+      () => rpc.mockResolvedValue({
+        data: null,
+        error: { code: "P0001", message: "submit_website_lead: the limit of 30 leads an hour is reached", details: null, hint: null },
+      }),
+      { code: "P0001" },
+    ],
+    ["the call throws", () => rpc.mockRejectedValue(new TypeError("fetch failed")), /fetch failed/],
+    [
+      "the Supabase URL is missing",
+      () => readClient.mockImplementationOnce(() => {
+        throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY");
+      }),
+      /Missing NEXT_PUBLIC_SUPABASE_URL/,
+    ],
+  ];
+  for (const [when, arrange, logged] of failures) {
+    it(`when ${when}: logged as "lead persist failed (email already sent)", the e-mail sent once, 200`, async () => {
+      arrange();
+      const res = await post(human);
+      expect(res.status).toBe(200);
+      expect(await res.json()).toEqual({ success: true });
+      expect(sendMail).toHaveBeenCalledTimes(1);
+      expect(from).not.toHaveBeenCalled();
+      const lines = loggedLeadFailures();
+      expect(lines).toHaveLength(1);
+      const [, error] = lines[0];
+      if (logged instanceof RegExp) expect(String((error as Error)?.message ?? error)).toMatch(logged);
+      else expect(error).toMatchObject(logged);
+      expect(vi.mocked(console.error).mock.calls.some(([label]) => label === "Contact form error:")).toBe(false);
+    });
+  }
+
+  it("never writes the key into a log line, whatever fails", async () => {
+    for (const [, arrange] of failures) {
+      vi.mocked(console.error).mockClear();
+      vi.mocked(console.warn).mockClear();
+      rpc.mockReset().mockResolvedValue({ data: null, error: null });
+      vi.stubEnv("CONTACT_LEAD_KEY", LEAD_KEY);
+      arrange();
+      await post(human);
+      const written = [...vi.mocked(console.error).mock.calls, ...vi.mocked(console.warn).mock.calls]
+        .flat()
+        .map((part) => (part instanceof Error ? `${part.message} ${part.stack}` : JSON.stringify(part) ?? String(part)))
+        .join("\n");
+      expect(written).not.toContain(LEAD_KEY);
+    }
   });
 });
 
@@ -247,12 +356,12 @@ describe("the input is closed", () => {
       ` ${mark(0x202d)} ${mark(0x2068)}${number}${mark(0x2069)} ${mark(0x202e)} `,
     ]) {
       sendMail.mockClear();
-      insert.mockClear();
+      rpc.mockClear();
       const res = await post({ ...human, phone });
       expect(res.status, JSON.stringify(phone)).toBe(200);
       const mail = sendMail.mock.calls[0][0];
       expect(mail.text).toContain(`Telefon: ${number}\n`);
-      expect(insert.mock.calls[0][0].phone).toBe(number);
+      expect(rpc.mock.calls[0][1].p_phone).toBe(number);
       expect([...`${mail.text}${mail.html}${mail.subject}`].some(isMark)).toBe(false);
     }
   });
@@ -278,7 +387,7 @@ describe("the input is closed", () => {
       expect(atCap.status).toBe(200);
       delivered();
       sendMail.mockClear();
-      insert.mockClear();
+      rpc.mockClear();
       const over = await post(padded(CONTACT_MAX_BODY_CHARS + 1));
       expect(over.status).toBe(400);
       expect(await over.json()).toEqual({ error: "Cererea nu este validă", code: "invalid" });

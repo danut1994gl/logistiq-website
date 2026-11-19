@@ -63,9 +63,15 @@ vi.mock("nodemailer", async (importOriginal) => {
     },
   };
 });
-// Nothing else is reached either: Supabase, BotID and the Vercel firewall are mocked; reCAPTCHA is off (no keys).
+// Nothing else is reached either: Supabase, BotID and the Vercel firewall are mocked; reCAPTCHA is off (no keys). The
+// lead goes through submit_website_lead (lib/contact/lead.ts), so the client's from() throws.
 vi.mock("@/lib/supabase", () => ({
-  createReadClient: () => ({ from: () => ({ insert: async () => ({ error: null }) }) }),
+  createReadClient: () => ({
+    rpc: async () => ({ data: null, error: null }),
+    from: () => {
+      throw new Error("a lead is written through submit_website_lead, never from()");
+    },
+  }),
 }));
 vi.mock("botid/server", () => ({ checkBotId: async () => ({ isBot: false, isHuman: true, isVerifiedBot: false, bypassed: false }) }));
 vi.mock("@vercel/firewall", () => ({ checkRateLimit: async () => ({ rateLimited: false }) }));
@@ -185,6 +191,7 @@ const headerBlock = (raw: string): string => raw.slice(0, raw.search(/\r?\n\r?\n
 beforeAll(async () => {
   vi.stubEnv("RECAPTCHA_SECRET_KEY", "");
   vi.stubEnv("NEXT_PUBLIC_RECAPTCHA_SITE_KEY", "");
+  vi.stubEnv("CONTACT_LEAD_KEY", "mail-test-lead-key-0123456789abcdef0123456789");
   vi.spyOn(console, "warn").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
   const jsonTransport = nodemailerOf(await vi.importActual("nodemailer")).createTransport({ jsonTransport: true });

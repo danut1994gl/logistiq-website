@@ -15,7 +15,14 @@ import type { ContactErrorCode } from "@/lib/contact/protocol";
 
 const sendMail = vi.fn();
 vi.mock("nodemailer", () => ({ default: { createTransport: () => ({ sendMail: (...a: unknown[]) => sendMail(...a) }) } }));
-vi.mock("@/lib/supabase", () => ({ createReadClient: () => ({ from: () => ({ insert: async () => ({ error: null }) }) }) }));
+vi.mock("@/lib/supabase", () => ({
+  createReadClient: () => ({
+    rpc: async () => ({ data: null, error: null }),
+    from: () => {
+      throw new Error("a lead is written through submit_website_lead, never from()");
+    },
+  }),
+}));
 vi.mock("botid/server", () => ({ checkBotId: async () => ({ isBot: false, isHuman: true, isVerifiedBot: false, bypassed: false }) }));
 const checkRateLimit = vi.fn();
 vi.mock("@vercel/firewall", () => ({ checkRateLimit: (...a: unknown[]) => checkRateLimit(...a) }));
