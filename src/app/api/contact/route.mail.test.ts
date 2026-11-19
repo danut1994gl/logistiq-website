@@ -7,7 +7,7 @@ import { contactEmail } from "@/lib/contact/email";
 import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 
 // The contact form's notification e-mail as the real route composes it with the real nodemailer, compared with what
-// nodemailer 6.10.1 composed for the same input (2026-11-19, nodemailer 6 to 10; the design critic's I3).
+// nodemailer 6.10.1 composed for the same input (2026-11-19, nodemailer 6 to 10).
 //
 // Nothing is sent: the route gets nodemailer's own transporter, built with
 // `{ streamTransport: true, buffer: true, newline: "unix" }` in place of the SMTP options it passes (recorded below),
@@ -21,7 +21,7 @@ import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 // Message-ID, the Date and the MIME boundary. Header values are compared decoded, not as folded.
 //
 // Six more inputs were composed by 6.10.1 and compared on 10.5.0 (84c31ad to a1bc8c6): HTML in the address, a name
-// that adds headers, and the four Reply-To forms of critic I3. Since the form's input is closed (lib/contact/input.ts),
+// that adds headers, and four Reply-To forms the old address check let through. Since the input is closed (c1d6c1b),
 // the route refuses them before nodemailer is called, so they left the golden file; how 10.5.0 read three of them
 // otherwise than 6.10.1 is recorded in commit a4df56d.
 
@@ -118,8 +118,8 @@ const REFUSED: Record<string, Record<string, unknown>> = {
 
 type Path = Array<string | number>;
 
-// How the installed nodemailer composes these inputs otherwise than 6.10.1 did, one by one: listed, never normalised
-// (critic I3); a release that differs fails the test until its differences are listed here. 10.5.0 composes all three
+// How the installed nodemailer composes these inputs otherwise than 6.10.1 did, one by one: listed, never normalised;
+// a release that differs fails the test until its differences are listed here. 10.5.0 composes all three
 // exactly as 6.10.1 did. (The six differences it showed were all Reply-To parsing of three address forms that the route
 // refuses since its input is closed; they are recorded in commit a4df56d.)
 const SINCE_6_10_1: Record<string, Array<{ path: Path; was: unknown; now: unknown }>> = {};

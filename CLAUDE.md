@@ -202,11 +202,12 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   (`lib/contact/email.ts`, tested); until 2026-11-08 they were interpolated raw.
 - **The form's input is closed before anything is sent** (`lib/contact/input.ts`, since
   2026-11-19, as qrgo.ro's delete-data form): the address, the e-mail's Reply-To, must be
-  a plain mailbox (letters, digits and `_ ' + - .` before the @, dot-separated labels
-  after it), so the address parser gets no quote, bracket, comma, semicolon, colon or
-  comment to read a second recipient out of; name, company and phone are one line (no
-  C0 or C1 control, line or paragraph separator, or bidi control); the message keeps its
-  line breaks and tabs and refuses the rest. A refusal is the form's own 400.
+  a plain mailbox (ASCII letters, digits and `_ ' + - .` before the @, dot-separated
+  ASCII labels after it), so the address parser gets no quote, bracket, comma,
+  semicolon, colon or comment to read a second recipient out of; name, company and
+  phone are one line (no C0 or C1 control, line or paragraph separator, or bidi
+  control); the message keeps its line breaks and tabs and refuses the rest. A refusal
+  is the form's own 400.
 - **The form answers a refusal in the visitor's language** (`lib/contact/refusal.ts`,
   since 2026-11-19): it shows its own sentence for each `code` the route returns
   (`invalid`, `rate_limited`, `verify_failed`, `server`; anything else gets the generic
@@ -224,8 +225,8 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   (`requireTLS`), so nothing, the password least of all, is sent to a server that doesn't
   offer it or fails it; every other port, 465 (the default) included, speaks TLS from the
   first byte, as it always did. Until 2026-11-19 587 and 25 failed the handshake; no other
-  setting changed meaning (ruling P331: production's `SMTP_PORT` is set and was not read,
-  so only the ports that could not work were changed). A hanging mail server costs the
+  setting changed meaning (88e63d2: production's `SMTP_PORT` is set and was not read, so
+  only the ports that could not work were changed). A hanging mail server costs the
   request at most 10 s to connect, finish TLS and greet, then 20 s of silence, and the
   whole send is cut at 25 s (`SMTP_SEND_DEADLINE_MS`, nodemailer's per-send AbortSignal),
   so a server that trickles bytes can't hold it longer either (all since 2026-11-19). A

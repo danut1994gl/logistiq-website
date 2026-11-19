@@ -17,9 +17,9 @@ import type { ConnectionOptions } from "node:tls";
 // start in plain text, failed the handshake:
 // - 587 and 25: plain text upgraded with STARTTLS, and `requireTLS` makes a server that does not offer it, or fails it,
 //   an error: nothing, the password least of all, is sent before the upgrade;
-// - every other port, 465 (the default) included: TLS from the first byte (implicit TLS), exactly as before. Ruling
-//   P331: production's SMTP_PORT is set and is not read here, so only the ports that could not work change, and no
-//   setting that works today can break (a provider's implicit-TLS port such as 2465 keeps working).
+// - every other port, 465 (the default) included: TLS from the first byte (implicit TLS), exactly as before. Since
+//   88e63d2: production's SMTP_PORT is set and is not read here, so only the ports that could not work change, and
+//   no setting that works today can break (a provider's implicit-TLS port such as 2465 keeps working).
 // Either way the certificate is verified with the options below.
 const STARTTLS_PORTS: ReadonlySet<number> = new Set([587, 25]);
 

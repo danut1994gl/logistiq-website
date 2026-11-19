@@ -1,15 +1,16 @@
-// What the contact form's fields may hold (2026-11-19, design critic I4), closed as qrgo.ro's delete-data form is
-// (the monorepo's apps/driver/lib/delete-data-request.ts, 58dee946). Server-only (the route imports it).
+// What the contact form's fields may hold (2026-11-19), closed as qrgo.ro's delete-data form is (the monorepo's
+// apps/driver/lib/delete-data-request.ts, 58dee946). Server-only (the route imports it).
 //
 // The route e-mails contact@logistiq.ro with the visitor's address as Reply-To. Until 2026-11-19 the address only had
 // to match /^[^\s@]+@[^\s@]+\.[^\s@]+$/, which lets quotes, angle brackets, commas, semicolons, colons and parentheses
 // through: what nodemailer's address-parsing advisories need (a second recipient smuggled out of a display name, a
-// group or a comment), and forms that nodemailer 6.10.1 and 10.5.0 read in different ways (route.mail.test.ts).
+// group or a comment), and forms that nodemailer 6.10.1 and 10.5.0 read in different ways (commit a4df56d).
 
 /**
- * A plain mailbox: letters, digits and _ ' + - . before the @ (no dot first, never two in a row), dot-separated
- * labels of letters, digits and hyphens after it, ending in a top-level domain of letters. It is zod 3.25's e-mail
- * pattern, the one qrgo.ro's delete-data form applies, copied rather than adding zod to the site.
+ * A plain mailbox: ASCII letters, digits and _ ' + - . before the @ (no dot first, never two in a row),
+ * dot-separated labels of ASCII letters, digits and hyphens after it, ending in a top-level domain of ASCII letters.
+ * It is zod 3.25's e-mail pattern, the one qrgo.ro's delete-data form applies, copied rather than adding zod to the
+ * site.
  */
 const PLAIN_MAILBOX = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i;
 

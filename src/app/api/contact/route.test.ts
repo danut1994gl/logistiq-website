@@ -159,11 +159,11 @@ describe("POST /api/contact — a person", () => {
   });
 });
 
-// The form's input is closed as qrgo.ro's delete-data form is (design critic I4, monorepo 58dee946). The visitor's
-// address becomes the e-mail's Reply-To, so it must be a plain mailbox: the old check (/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
-// let through the forms nodemailer's address-parser advisories need, which 6.10.1 and 10.5.0 even read differently
-// (route.mail.test.ts). Name, company and phone are one line; the message keeps its line breaks. The answers are the
-// form's own: it shows `error` as it comes.
+// The form's input is closed as qrgo.ro's delete-data form is (c1d6c1b; monorepo 58dee946). The visitor's address
+// becomes the e-mail's Reply-To, so it must be a plain mailbox: the old check (/^[^\s@]+@[^\s@]+\.[^\s@]+$/) let
+// through the forms nodemailer's address-parser advisories need, which 6.10.1 and 10.5.0 even read differently
+// (commit a4df56d). Name, company and phone are one line; the message keeps its line breaks. The answers are the
+// route's own 400s; the form shows its own sentence for their code (lib/contact/refusal.ts).
 describe("the input is closed", () => {
   const BAD_ADDRESS = "Adresa de email nu este validă";
   const BAD_FIELD = "Un câmp este prea lung sau nu este valid";

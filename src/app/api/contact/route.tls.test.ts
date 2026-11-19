@@ -11,12 +11,12 @@ import {
 } from "@/lib/contact/testing/smtp-server";
 
 // The route's own SMTP options, run with the real nodemailer and Node's TLS against local SMTP servers
-// (2026-11-19, nodemailer 6 to 10; design critic I2 and M5): one that speaks TLS from the first byte, as the mail
+// (2026-11-19, nodemailer 6 to 10; 4605378, a1bc8c6, 88e63d2): one that speaks TLS from the first byte, as the mail
 // server does on port 465, one that starts in plain text and offers STARTTLS, as on 587, and one that offers no
 // STARTTLS at all. Through both kinds of TLS it re-proves 2760f94's matrix: the server's certificate (for mail.test,
 // from a throwaway CA) is refused by default, by the CA alone (127.0.0.1 is not its name), with a wrong name, and even
 // under NODE_TLS_REJECT_UNAUTHORIZED=0; with the CA and the name the message is delivered, signed in with SMTP_USER
-// over TLS. On any port but 465 the password is never sent before STARTTLS succeeded.
+// over TLS. On 587 and 25 the password is never sent before STARTTLS succeeded.
 //
 // A test server can't listen on 465 or 587, so the route's port is pointed at the one the system gave the matching
 // server: that is the only option changed between the route and nodemailer. Skipped without openssl.
@@ -226,7 +226,7 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
     });
 
     // nodemailer's defaults would wait 2 min to connect, 30 s for the greeting and 10 min of silence, holding the
-    // request until the platform stops it (design critic M3). Since nodemailer 10.1, connectionTimeout also bounds the
+    // request until the platform stops it (6f72982). Since nodemailer 10.1, connectionTimeout also bounds the
     // TLS handshake and the greeting.
     it("answers its error within 10 s when the server completes TLS but never greets", { timeout: 45_000 }, async () => {
       const silent = await startTestSmtpServer({ mode: "implicit-tls", certs, greet: false });
@@ -283,7 +283,7 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
     });
   });
 
-  // Ruling P331 (2026-11-19): production's SMTP_PORT is set and not read here, so only the ports that can't work with
+  // Since 88e63d2 (2026-11-19): production's SMTP_PORT is set and not read here, so only the ports that can't work with
   // TLS from the first byte change; any other port keeps today's mode.
   describe("any other port (2525 here): TLS from the first byte, as before", () => {
     it("passes nodemailer TLS from the first byte and delivers, signed in over TLS", async () => {

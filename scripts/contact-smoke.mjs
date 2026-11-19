@@ -97,7 +97,7 @@ async function main() {
   const leaked = Object.keys(process.env).filter((k) => /^(NEXT_PUBLIC_SUPABASE_|SUPABASE_|RECAPTCHA_|NEXT_PUBLIC_RECAPTCHA_|SMTP_|VERCEL)/.test(k));
   if (leaked.length) throw new Error(`run it under env -i: ${leaked.join(", ")} set`);
 
-  // The route's rule (ruling P331), restated here rather than imported, so the smoke checks the route against it.
+  // The route's rule (88e63d2), restated here rather than imported, so the smoke checks the route against it.
   const STARTTLS_PORTS = new Set([587, 25]);
   const requested = process.env.SMOKE_SMTP_PORT ? Number(process.env.SMOKE_SMTP_PORT) : 0;
   if (!Number.isInteger(requested) || requested < 0 || requested > 65535) throw new Error("SMOKE_SMTP_PORT takes a port number");
