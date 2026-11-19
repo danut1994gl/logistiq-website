@@ -71,6 +71,8 @@ export interface TestSmtpOptions {
   certs?: TestCertificates;
   /** false: the server takes the connection (and the TLS handshake) but never sends its 220 greeting. */
   greet?: boolean;
+  /** The port on 127.0.0.1; 0 (the default) lets the system pick a free one. */
+  port?: number;
 }
 
 export interface TestSmtpAuth {
@@ -93,16 +95,16 @@ export interface TestSmtpServer {
   port: number;
   /** Connections accepted (TCP; for implicit TLS, handshakes completed). */
   sessions: number;
-  /** TLS handshakes that failed, by the error Node gave the server. */
+  /** TLS handshakes that failed, by the error Node gave the server (or how a STARTTLS upgrade ended). */
   tlsFailures: string[];
   auths: TestSmtpAuth[];
   deliveries: TestSmtpDelivery[];
   close(): Promise<void>;
 }
 
-/** Starts a test SMTP server on 127.0.0.1 at a port the system picks. */
+/** Starts a test SMTP server on 127.0.0.1, by default at a port the system picks. */
 export async function startTestSmtpServer(options: TestSmtpOptions): Promise<TestSmtpServer> {
-  const { mode, certs, greet = true } = options;
+  const { mode, certs, greet = true, port = 0 } = options;
   if (mode !== "plain" && !certs) throw new Error(`a ${mode} test server needs certificates`);
   const secureContext = certs ? tls.createSecureContext({ key: certs.keyPem, cert: certs.certPem }) : undefined;
   const sockets = new Set<net.Socket>();
@@ -208,11 +210,23 @@ export async function startTestSmtpServer(options: TestSmtpOptions): Promise<Tes
     socket.on("data", onData);
   };
 
+  // A client that refuses the certificate after STARTTLS just drops the connection: the server's side then closes
+  // without an error, so a close before the handshake completed counts as a failed handshake too.
   const upgrade = (plain: net.Socket) => {
     const secure = new tls.TLSSocket(plain, { isServer: true, secureContext });
     track(secure);
-    secure.on("error", (error: NodeJS.ErrnoException) => state.tlsFailures.push(error.code ?? error.message));
-    secure.once("secure", () => session(secure, true, false));
+    let settled = false;
+    const failed = (reason: string) => {
+      if (settled) return;
+      settled = true;
+      state.tlsFailures.push(reason);
+    };
+    secure.on("error", (error: NodeJS.ErrnoException) => failed(error.code ?? error.message));
+    secure.once("close", () => failed("closed before the TLS handshake completed"));
+    secure.once("secure", () => {
+      settled = true;
+      session(secure, true, false);
+    });
   };
 
   const server =
@@ -231,7 +245,7 @@ export async function startTestSmtpServer(options: TestSmtpOptions): Promise<Tes
 
   await new Promise<void>((resolve, reject) => {
     server.once("error", reject);
-    server.listen(0, "127.0.0.1", () => resolve());
+    server.listen(port, "127.0.0.1", () => resolve());
   });
 
   const result = state as TestSmtpServer;

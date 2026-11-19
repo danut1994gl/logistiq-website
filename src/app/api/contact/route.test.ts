@@ -152,6 +152,45 @@ describe("POST /api/contact — a person", () => {
   });
 });
 
+describe("SMTP_PORT sets how the connection to the mail server is secured", () => {
+  // The route reads its SMTP settings when it loads.
+  async function transportFor(port: string) {
+    vi.stubEnv("SMTP_PORT", port);
+    vi.resetModules();
+    const route = await import("@/app/api/contact/route");
+    createTransport.mockClear();
+    await route.POST(
+      new NextRequest("https://logistiq.ro/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-real-ip": "203.0.113.7" },
+        body: JSON.stringify(human),
+      })
+    );
+    expect(createTransport).toHaveBeenCalledTimes(1);
+    return createTransport.mock.calls[0][0] as Record<string, unknown>;
+  }
+
+  it("465, the default: TLS from the first byte", async () => {
+    for (const port of ["", "465"]) {
+      const options = await transportFor(port);
+      expect(options, port).toMatchObject({ port: 465, secure: true, tls: { rejectUnauthorized: true } });
+      expect(options, port).not.toHaveProperty("requireTLS");
+    }
+  });
+
+  it("587 or any other port: plain text upgraded with STARTTLS, which must succeed before the password is sent", async () => {
+    for (const port of ["587", "25", "2525"]) {
+      const options = await transportFor(port);
+      expect(options, port).toMatchObject({
+        port: Number(port),
+        secure: false,
+        requireTLS: true,
+        tls: { rejectUnauthorized: true },
+      });
+    }
+  });
+});
+
 describe("layer 1: honeypot", () => {
   it("drops a message whose hidden field is filled, with the same 200 a person gets", async () => {
     for (const reference of ["https://spam.example", " ", 0, false]) {

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { smtpTlsOptions } from "@/lib/contact/smtp";
+import { smtpTlsMode, smtpTlsOptions } from "@/lib/contact/smtp";
 
 // A PEM-shaped value: these tests check what reaches the TLS options, not the certificate.
 const PEM = "-----BEGIN CERTIFICATE-----\nMIIBszCCAVmgAwIBAgIUQ1Q0\n-----END CERTIFICATE-----";
@@ -48,5 +48,17 @@ describe("smtpTlsOptions: the contact form's mail server is always verified", ()
     vi.stubEnv("SMTP_TLS_SERVERNAME", "mail.example.net");
     vi.stubEnv("SMTP_TLS_CA", "");
     expect(smtpTlsOptions()).toEqual({ rejectUnauthorized: true, servername: "mail.example.net" });
+  });
+});
+
+describe("smtpTlsMode: how the connection is secured follows SMTP_PORT", () => {
+  it("465: TLS from the first byte, as before", () => {
+    expect(smtpTlsMode(465)).toEqual({ secure: true });
+  });
+
+  it("any other port: plain text upgraded with STARTTLS, which must succeed before anything is sent", () => {
+    for (const port of [587, 25, 2525, 2465, Number.NaN]) {
+      expect(smtpTlsMode(port), String(port)).toEqual({ secure: false, requireTLS: true });
+    }
   });
 });

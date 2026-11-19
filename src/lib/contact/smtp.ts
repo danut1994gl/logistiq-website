@@ -13,6 +13,16 @@ import type { ConnectionOptions } from "node:tls";
 //   self-signed certificate). Once set, only these are trusted for this connection, in
 //   place of the public CAs. A value pasted on one line may write its line breaks as \n.
 
+// How the connection is secured follows SMTP_PORT. Until 2026-11-19 `secure: true` was fixed, so any port but 465
+// failed the handshake (587 starts in plain text):
+// - 465: TLS from the first byte (implicit TLS), as before;
+// - any other port (587, 25, 2525…): plain text upgraded with STARTTLS, and `requireTLS` makes a server that does not
+//   offer it, or fails it, an error: nothing, the password least of all, is sent before the upgrade.
+// Either way the certificate is verified with the options below.
+export function smtpTlsMode(port: number): { secure: true } | { secure: false; requireTLS: true } {
+  return port === 465 ? { secure: true } : { secure: false, requireTLS: true };
+}
+
 export function smtpTlsOptions(env: Record<string, string | undefined> = process.env): ConnectionOptions {
   const servername = env.SMTP_TLS_SERVERNAME?.trim();
   const ca = env.SMTP_TLS_CA?.replace(/\\n/g, "\n").trim();

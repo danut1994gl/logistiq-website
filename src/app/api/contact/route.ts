@@ -5,7 +5,7 @@ import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
-import { smtpTlsOptions } from '@/lib/contact/smtp'
+import { smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
   ELAPSED_FIELD,
   FIELD_MAX,
@@ -17,10 +17,12 @@ import {
 } from '@/lib/contact/protocol'
 
 // SMTP configuration from environment variables
+const SMTP_PORT = parseInt(process.env.SMTP_PORT || '465')
 const SMTP_CONFIG = {
   host: process.env.SMTP_HOST || 'cloud342.c-f.ro',
-  port: parseInt(process.env.SMTP_PORT || '465'),
-  secure: true,
+  port: SMTP_PORT,
+  // 465: TLS from the first byte; any other port: STARTTLS, required (lib/contact/smtp.ts).
+  ...smtpTlsMode(SMTP_PORT),
   auth: {
     user: process.env.SMTP_USER || 'noreply@logistiq.ro',
     pass: process.env.SMTP_PASS || '',

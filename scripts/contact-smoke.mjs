@@ -6,8 +6,12 @@
 //   env -i PATH="$PATH" HOME="$HOME" NEXT_TELEMETRY_DISABLED=1 node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/contact-smoke.mjs
 //
 // It starts the test SMTP server of src/lib/contact/testing/smtp-server.ts on 127.0.0.1 (a throwaway CA, a certificate
-// for mail.test), then `next start` on 127.0.0.1 with SMTP_HOST=127.0.0.1, that server's port, test credentials and
-// SMTP_TLS_CA / SMTP_TLS_SERVERNAME to trust it, and nothing else. It checks that:
+// for mail.test), then `next start` on 127.0.0.1 with SMTP_HOST=127.0.0.1, test credentials and SMTP_TLS_CA /
+// SMTP_TLS_SERVERNAME to trust it, and nothing else. The route secures the connection by its port, so:
+// - by default the test server takes STARTTLS on a free port, and SMTP_PORT names it;
+// - with SMOKE_SMTP_PORT=465 (which needs the right to listen on 465) it speaks TLS from the first byte on
+//   127.0.0.1:465, and SMTP_PORT stays unset: the production default.
+// It checks that:
 // - every language's home and contact page answers 200 in its language, and / redirects to /ro;
 // - one person's message to /api/contact answers 200 and reaches the test server, signed in with SMTP_USER over TLS,
 //   for contact@logistiq.ro alone, composed exactly as route.mail.golden.json's "human" case (nodemailer 6.10.1);
@@ -90,8 +94,10 @@ async function main() {
   const leaked = Object.keys(process.env).filter((k) => /^(NEXT_PUBLIC_SUPABASE_|SUPABASE_|RECAPTCHA_|NEXT_PUBLIC_RECAPTCHA_|SMTP_|VERCEL)/.test(k));
   if (leaked.length) throw new Error(`run it under env -i: ${leaked.join(", ")} set`);
 
+  const on465 = process.env.SMOKE_SMTP_PORT === "465";
+  if (process.env.SMOKE_SMTP_PORT && !on465) throw new Error("SMOKE_SMTP_PORT takes 465 or nothing");
   const certs = makeTestCertificates();
-  const smtp = await startTestSmtpServer({ mode: "implicit-tls", certs });
+  const smtp = await startTestSmtpServer(on465 ? { mode: "implicit-tls", certs, port: 465 } : { mode: "starttls", certs });
   const port = await freePort();
   const base = `http://127.0.0.1:${port}`;
   let log = "";
@@ -102,7 +108,7 @@ async function main() {
       HOME: process.env.HOME ?? "",
       NEXT_TELEMETRY_DISABLED: "1",
       SMTP_HOST: "127.0.0.1",
-      SMTP_PORT: String(smtp.port),
+      ...(on465 ? {} : { SMTP_PORT: String(smtp.port) }),
       SMTP_USER,
       SMTP_PASS,
       SMTP_TLS_CA: certs.caPem,
@@ -116,7 +122,8 @@ async function main() {
   next.on("exit", () => (exited = true));
 
   try {
-    console.log(`build ${readFileSync(join(ROOT, ".next/BUILD_ID"), "utf8").trim()}; next start on ${base}; test SMTP server (TLS from the first byte) on 127.0.0.1:${smtp.port}`);
+    const kind = on465 ? "TLS from the first byte, SMTP_PORT unset" : `STARTTLS, SMTP_PORT=${smtp.port}`;
+    console.log(`build ${readFileSync(join(ROOT, ".next/BUILD_ID"), "utf8").trim()}; next start on ${base}; test SMTP server on 127.0.0.1:${smtp.port} (${kind})`);
     await waitFor("next start", async () => {
       if (exited) throw new Error(`next start exited:\n${log}`);
       return fetch(`${base}/en`, { redirect: "manual" }).then((r) => r.status === 200, () => false);

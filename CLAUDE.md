@@ -203,9 +203,15 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
 - **The mail server's TLS certificate is always verified** (`lib/contact/smtp.ts`,
   tested). Until 2026-11-12 the route set `rejectUnauthorized: false`, so any certificate
   passed and whoever sat on the network path could read every message and the mailbox
-  password. The transport reads `SMTP_HOST` (default `cloud342.c-f.ro`), `SMTP_PORT`
-  (465, TLS from the first byte), `SMTP_USER`, `SMTP_PASS`. A server that doesn't verify
-  as it is gets the setting it needs, never verification turned off:
+  password. The transport reads `SMTP_HOST` (default `cloud342.c-f.ro`), `SMTP_PORT`,
+  `SMTP_USER`, `SMTP_PASS`. **The port sets how the connection is secured**
+  (`smtpTlsMode`): 465, the default, speaks TLS from the first byte; any other port (587,
+  25, 2525) starts in plain text and must upgrade with STARTTLS (`requireTLS`), so nothing,
+  the password least of all, is sent to a server that doesn't offer it or fails it. Until
+  2026-11-19 every port but 465 failed the handshake. A hanging mail server costs the
+  request at most 10 s to connect, finish TLS and greet, then 20 s of silence (since
+  2026-11-19). A server that doesn't verify as it is gets the setting it needs, never
+  verification turned off:
   - `SMTP_TLS_SERVERNAME`: the name its certificate carries, when `SMTP_HOST` is an IP or
     an alias the certificate doesn't list;
   - `SMTP_TLS_CA`: the PEM of its private CA (or its self-signed certificate). Set, it
