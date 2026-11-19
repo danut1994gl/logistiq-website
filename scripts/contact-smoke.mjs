@@ -18,11 +18,13 @@
 // - one person's message to /api/contact answers 200 and reaches the test server, signed in with SMTP_USER over TLS,
 //   for contact@logistiq.ro alone, composed exactly as route.mail.golden.json's "human" case (nodemailer 6.10.1);
 // - an address the parser could read a second recipient out of gets the form's own 400, and nothing more is sent;
-// - the lead step then fails, as it must without Supabase, and says so in the log;
+// - the lead step then fails, as it must without Supabase, and says so in the log: it names the missing Supabase URL,
+//   not the missing CONTACT_LEAD_KEY, because lib/contact/lead.ts builds the client before it reads the key;
 // - the contact route's server bundle carries the nodemailer release that package.json names.
 // Nothing leaves 127.0.0.1: BotID's check throws without Vercel's OIDC token and the rate-limit check throws without
-// the client-IP header (the route lets both through), reCAPTCHA is off without its keys, and the lead insert stops
-// at the missing Supabase URL. Exit code 0 when every check passed.
+// the client-IP header (the route lets both through), reCAPTCHA is off without its keys, and the lead's call to
+// submit_website_lead stops at the missing Supabase URL. No CONTACT_LEAD_KEY is set, and none may be in the
+// environment that runs this. Exit code 0 when every check passed.
 
 import { spawn } from "node:child_process";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -94,7 +96,7 @@ async function main() {
   if (!existsSync(join(ROOT, ".next/BUILD_ID"))) throw new Error("no production build: run `npm run build` first (see this file's header)");
   if (!hasOpenssl()) throw new Error("openssl is needed for the test certificates");
   for (const name of readdirSync(ROOT)) if (name.startsWith(".env")) throw new Error(`${name} exists: the smoke runs without .env files`);
-  const leaked = Object.keys(process.env).filter((k) => /^(NEXT_PUBLIC_SUPABASE_|SUPABASE_|RECAPTCHA_|NEXT_PUBLIC_RECAPTCHA_|SMTP_|VERCEL)/.test(k));
+  const leaked = Object.keys(process.env).filter((k) => /^(NEXT_PUBLIC_SUPABASE_|SUPABASE_|RECAPTCHA_|NEXT_PUBLIC_RECAPTCHA_|SMTP_|VERCEL|CONTACT_LEAD_KEY)/.test(k));
   if (leaked.length) throw new Error(`run it under env -i: ${leaked.join(", ")} set`);
 
   // The route's rule (88e63d2), restated here rather than imported, so the smoke checks the route against it.
@@ -188,7 +190,10 @@ async function main() {
     );
 
     await waitFor("the lead step's log line", async () => log.includes("lead persist failed (email already sent)"), 5_000).catch(() => {});
-    check("the lead step failed after the e-mail, as it must without Supabase", log.includes("lead persist failed (email already sent)") && log.includes("Missing NEXT_PUBLIC_SUPABASE_URL"));
+    check(
+      "the lead step failed after the e-mail, as it must without Supabase, at the client before the key",
+      log.includes("lead persist failed (email already sent)") && log.includes("Missing NEXT_PUBLIC_SUPABASE_URL") && !log.includes("Missing CONTACT_LEAD_KEY"),
+    );
     check("no 'Contact form error' in the log", !log.includes("Contact form error"));
 
     const expected = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")).dependencies.nodemailer;
