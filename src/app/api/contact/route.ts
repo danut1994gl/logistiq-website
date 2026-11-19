@@ -25,6 +25,13 @@ const SMTP_CONFIG = {
     user: process.env.SMTP_USER || 'noreply@logistiq.ro',
     pass: process.env.SMTP_PASS || '',
   },
+  // A mail server that hangs must not hold the request until the platform stops it:
+  // nodemailer's defaults wait 2 min to connect, 30 s for the greeting and 10 min of
+  // silence. Since nodemailer 10.1 connectionTimeout bounds the whole setup (connecting,
+  // TLS, the greeting); socketTimeout is the silence allowed once the session runs.
+  connectionTimeout: 10_000,
+  greetingTimeout: 10_000,
+  socketTimeout: 20_000,
   // The server's certificate is always verified (SMTP_TLS_SERVERNAME / SMTP_TLS_CA when
   // it needs them): lib/contact/smtp.ts.
   tls: smtpTlsOptions(),

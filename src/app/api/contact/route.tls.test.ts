@@ -172,6 +172,30 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against a TLS mail se
     await refusedAtTheHandshake({ NODE_TLS_REJECT_UNAUTHORIZED: "0", SMTP_TLS_CA: certs.caPem }, WRONG_NAME);
   });
 
+  // nodemailer's defaults would wait 2 min to connect, 30 s for the greeting and 10 min of silence, holding the
+  // request until the platform stops it (design critic M3). Since nodemailer 10.1, connectionTimeout also bounds the
+  // TLS handshake and the greeting.
+  it("answers its error within 10 s when the server completes TLS but never greets", { timeout: 45_000 }, async () => {
+    const silent = await startTestSmtpServer({ mode: "implicit-tls", certs, greet: false });
+    ports.set(465, silent.port);
+    try {
+      const started = Date.now();
+      const result = await send({ SMTP_TLS_CA: certs.caPem, SMTP_TLS_SERVERNAME: TEST_SMTP_NAME });
+      const elapsed = Date.now() - started;
+      expect(result).toMatchObject({ status: 500, body: { code: "server" } });
+      expect(result.error?.code).toBe("ETIMEDOUT");
+      expect(result.error?.message).toMatch(/Greeting never received/);
+      expect(elapsed).toBeGreaterThanOrEqual(9_000);
+      expect(elapsed).toBeLessThan(12_000);
+      expect(silent.sessions).toBe(1);
+      expect(silent.auths).toEqual([]);
+      expect(insert).not.toHaveBeenCalled();
+    } finally {
+      ports.set(465, server.port);
+      await silent.close();
+    }
+  });
+
   it("delivers with the right CA and name, signed in with SMTP_USER over TLS, to contact@logistiq.ro alone", async () => {
     const sessions = server.sessions;
     const result = await send({ SMTP_TLS_CA: certs.caPem, SMTP_TLS_SERVERNAME: TEST_SMTP_NAME });

@@ -141,6 +141,15 @@ describe("POST /api/contact — a person", () => {
     expect(createTransport).toHaveBeenCalledTimes(1);
     expect(createTransport.mock.calls[0][0]).toMatchObject({ secure: true, tls: { rejectUnauthorized: true } });
   });
+
+  it("gives up on a mail server that hangs: 10 s to connect and greet, 20 s of silence", async () => {
+    await post(human);
+    expect(createTransport.mock.calls[0][0]).toMatchObject({
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 20_000,
+    });
+  });
 });
 
 describe("layer 1: honeypot", () => {
