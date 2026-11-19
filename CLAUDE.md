@@ -62,7 +62,7 @@ src/lib/
   navigation.ts  company.ts  href.ts  features.ts  faq.ts
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
-  contact/{protocol,input,refusal,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + answers + email + mail TLS
+  contact/{protocol,input,refusal,email,lead,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + answers + email + lead + mail TLS
   contact/testing/{mail-view,smtp-server}.ts  # test-only: e-mail reader, local test SMTP server
 scripts/contact-smoke.mjs    # the production bundle's contact form against the local test SMTP server
 ```
@@ -177,6 +177,16 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   blog/rich content. The `<JsonLd>` helper already escapes `<`.
 - The website is **anon-only** to Supabase: it may hold `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   and read via `SECURITY DEFINER` RPCs. **Never** ship the service-role key here.
+- **A lead is written only through `submit_website_lead` with `CONTACT_LEAD_KEY`**
+  (`lib/contact/lead.ts`, imported by the contact route alone; since 2026-11-19, Logistiq
+  monorepo migrations 330 and 331). The key is server-only (never `NEXT_PUBLIC_`), Sensitive,
+  set by the owner on the Vercel project for Production only; the database keeps only its
+  SHA-256 and refuses a lead without it, so whoever holds the public anon key cannot write one
+  past the layers below (331 closes the `leads` table to every client role). The function also
+  stores at most 30 leads a clock hour and holds `FIELD_MAX`'s caps: raise those together.
+  Previews and local builds have no key, so their lead step is logged as failed (the e-mail
+  still goes out). A build carries no copy of the key: built with a throwaway
+  `CONTACT_LEAD_KEY`, `.next/` holds none of its value and `.next/static` not even its name.
 - **Every anonymous write path keeps its anti-spam layers.** The contact form's
   (`app/api/contact/route.ts`, shared protocol in `lib/contact/protocol.ts`), cheapest
   first, all in place since 2026-11-08:
@@ -241,8 +251,9 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
 
   No switch turns verification off: not the dashboard's `SMTP_REJECT_UNAUTHORIZED`, not
   even `NODE_TLS_REJECT_UNAUTHORIZED=0` (`rejectUnauthorized: true` is explicit).
-- **Never send a real email or insert a real lead when testing**: the route test mocks
-  SMTP, Supabase, BotID, the firewall and Google; a local `npm start` points `SMTP_HOST`
+- **Never send a real email or write a real lead when testing**: the route test mocks
+  SMTP, Supabase (its `rpc`; its `from` throws and is watched, so a lead written any other way
+  fails the tests), BotID, the firewall and Google; a local `npm start` points `SMTP_HOST`
   at a test server on 127.0.0.1, whose certificate `SMTP_TLS_CA` and
   `SMTP_TLS_SERVERNAME` must then trust. The real mail path is tested without a real
   e-mail (since 2026-11-19, nodemailer 6 → 10.5.0):

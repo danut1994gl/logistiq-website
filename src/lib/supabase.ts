@@ -3,6 +3,8 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 // Anon-only read client for the marketing website. RLS on the blog tables returns
 // PUBLISHED rows only, so this key is safe to hold — but it is still read server-side.
 // NEVER put the service-role key here (the website must not be able to bypass RLS).
+// Its one write is the contact form's lead, only through submit_website_lead with
+// CONTACT_LEAD_KEY (lib/contact/lead.ts), never into a table.
 let cached: SupabaseClient | null = null;
 
 export function createReadClient(): SupabaseClient {

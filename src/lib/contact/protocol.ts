@@ -26,7 +26,11 @@ export const IDLE_RESTART_MS = 30 * 60 * 1000;
 export const RECAPTCHA_ACTION = "contact";
 export const RECAPTCHA_MIN_SCORE = 0.5;
 
-/** The longest value accepted per field; the inputs carry the same maxLength. */
+/**
+ * The longest value accepted per field; the inputs carry the same maxLength. The database holds the same caps, in
+ * characters: submit_website_lead refuses a longer field (Logistiq monorepo, migration 330) and the leads table's
+ * CHECKs a longer row (migration 331). Raise them together.
+ */
 export const FIELD_MAX = {
   name: 120,
   email: 254,
