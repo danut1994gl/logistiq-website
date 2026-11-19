@@ -251,7 +251,9 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   - `scripts/contact-smoke.mjs`, after `npm run build`, drives `next start` against that
     server: the localized pages, one message end to end, the bundled nodemailer (the
     command is in its header; run both outside the agent environment, with `env -i`);
-  - `lib/patched-dependencies.test.ts` keeps nodemailer at 10.1.4 or later.
+  - `lib/patched-dependencies.test.ts` keeps nodemailer at 10.5.0 or later (10.1.4 closes
+    the advisories; 10.5.0 brings the per-send AbortSignal), and checks that a send whose
+    signal has aborted fails with `EABORT`.
 
 ## Deploy / git
 

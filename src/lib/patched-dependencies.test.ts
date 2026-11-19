@@ -50,11 +50,21 @@ describe("atLeast", () => {
 // stranger typed. 10.1.4 is the first release `npm audit` reports clean: it closes the address-parser series that
 // smuggles a recipient out of quotes, comments and groups (GHSA-8c8m-p3m8-cjg8, GHSA-m943-m63m-w62w,
 // GHSA-85x2-q946-cp5h, GHSA-g73g-hqqh-jr95, GHSA-cc9r-2j5m-2m83); the last high, the quadratic free-text fallback
-// (GHSA-v53p-9fqp-m79j), is fixed from 10.0.6, and no 9.x fixes it. 10.x ships its own declarations, so
-// @types/nodemailer (written for 6 and 7) must not come back and shadow them.
+// (GHSA-v53p-9fqp-m79j), is fixed from 10.0.6, and no 9.x fixes it. The floor is 10.5.0 all the same: the route bounds
+// each send with nodemailer's per-send AbortSignal (SMTP_SEND_DEADLINE_MS, lib/contact/smtp.ts), which arrived in
+// 10.5.0, and 10.1.4 to 10.4.1 ignore `signal` without a word while the audit reports them clean. 10.x ships its own
+// declarations, so @types/nodemailer (written for 6 and 7) must not come back and shadow them.
 describe("nodemailer", () => {
-  it("sends with 10.1.4 or later", () => {
-    expect(atLeast(installed("nodemailer"), "10.1.4"), installed("nodemailer")).toBe(true);
+  it("sends with 10.5.0 or later: 10.1.4 closes the advisories, 10.5.0 brings the per-send AbortSignal", () => {
+    expect(atLeast(installed("nodemailer"), "10.5.0"), installed("nodemailer")).toBe(true);
+  });
+
+  it("cancels a send whose signal has aborted, with EABORT, as the route's deadline needs (no network: jsonTransport)", async () => {
+    const { default: nodemailer } = await import("nodemailer");
+    const transport = nodemailer.createTransport({ jsonTransport: true });
+    await expect(
+      transport.sendMail({ from: "a@b.ro", to: "c@d.ro", text: "x", signal: AbortSignal.abort() }),
+    ).rejects.toMatchObject({ code: "EABORT" });
   });
 
   it("is typed by nodemailer itself: @types/nodemailer is no dependency", () => {
