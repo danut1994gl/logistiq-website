@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { NextRequest } from "next/server";
+import { contactEmail } from "@/lib/contact/email";
 import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 
 // The contact form's notification e-mail as the real route composes it with the real nodemailer, compared with what
@@ -165,13 +166,21 @@ async function compose(jsonTransport: Transport, input: Record<string, unknown>)
   const { mail, info } = sent[0];
   const asJson = await jsonTransport.sendMail({ ...mail });
   const json = JSON.parse(String(asJson.message)) as Record<string, unknown>;
+  const raw = info.message.toString("utf8");
+  // The view decodes headers, so it can't see raw 8-bit bytes in them: the header block itself must be 7-bit.
+  expect(headerBlock(raw), "the raw header block is 7-bit").toMatch(SEVEN_BIT);
   return {
     answer,
     envelope: info.envelope,
-    mail: readMail(info.message.toString("utf8")),
+    mail: readMail(raw),
     parsed: { from: json.from, to: json.to, replyTo: json.replyTo, envelope: asJson.envelope },
   };
 }
+
+const SEVEN_BIT = /^[\x00-\x7f]*$/;
+
+/** The raw message up to its first blank line. */
+const headerBlock = (raw: string): string => raw.slice(0, raw.search(/\r?\n\r?\n/));
 
 beforeAll(async () => {
   vi.stubEnv("RECAPTCHA_SECRET_KEY", "");
@@ -219,6 +228,30 @@ describe("the notification e-mail, composed by the route and nodemailer", () => 
     expect(html).toContain("&lt;img src=x onerror=&quot;alert(1)&quot;&gt;");
     expect(html).toContain("&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;");
     expect(html).toContain("&lt;a href=&quot;https://evil.example&quot;&gt;click&lt;/a&gt;<br>rândul 2 &amp; &lt;i&gt;3&lt;/i&gt;");
+  });
+
+  // The route refuses such a name before nodemailer is called; the composer's own guard stays tested here, with the
+  // route's from, to and Reply-To, through nodemailer's real stream transport.
+  it("a name that tries to add headers, composed outside the route, adds none: the subject holds it on one line", async () => {
+    const m = contactEmail({ ...human, name: "Ion\r\nBcc: all@corp.example\nX-Injected: yes" });
+    const real = nodemailerOf(await vi.importActual("nodemailer"));
+    const info = await real.createTransport({ streamTransport: true, buffer: true, newline: "unix" }).sendMail({
+      from: '"Logistiq Contact" <noreply@logistiq.ro>',
+      to: "contact@logistiq.ro",
+      replyTo: human.email,
+      subject: m.subject,
+      html: m.html,
+      text: m.text,
+    });
+    const raw = info.message.toString("utf8");
+    expect(headerBlock(raw)).toMatch(SEVEN_BIT);
+    const mail = readMail(raw);
+    const names = mail.headerNames.map((h) => h.toLowerCase());
+    expect(names).not.toContain("bcc");
+    expect(names).not.toContain("x-injected");
+    expect(mail.headers.Subject).toBe(m.subject);
+    expect(mail.headers.Subject).toBe("[Contact] Mesaj nou de la Ion Bcc: all@corp.example X-Injected: yes");
+    expect(info.envelope).toEqual({ from: "noreply@logistiq.ro", to: ["contact@logistiq.ro"] });
   });
 
   for (const [name, input] of Object.entries(REFUSED)) {
