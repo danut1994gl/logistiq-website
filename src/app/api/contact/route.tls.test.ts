@@ -247,7 +247,19 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
     });
   });
 
-  describe("port 587 (or any other): STARTTLS, required", () => {
+  // Ruling P331 (2026-11-19): production's SMTP_PORT is set and not read here, so only the ports that can't work with
+  // TLS from the first byte change; any other port keeps today's mode.
+  describe("any other port (2525 here): TLS from the first byte, as before", () => {
+    it("passes nodemailer TLS from the first byte and delivers, signed in over TLS", async () => {
+      ports.set(2525, implicit.port);
+      const result = await send({ ...TRUSTED, SMTP_PORT: "2525" });
+      expect(configs[0]).toMatchObject({ host: "127.0.0.1", port: 2525, secure: true, tls: { rejectUnauthorized: true } });
+      expect(configs[0]).not.toHaveProperty("requireTLS");
+      delivered(implicit, result);
+    });
+  });
+
+  describe("ports 587 and 25: STARTTLS, required", () => {
     it("passes nodemailer the route's own options: plain text first, STARTTLS required, the certificate always verified", async () => {
       await send({ ...TRUSTED, SMTP_PORT: "587" });
       expect(configs).toHaveLength(1);

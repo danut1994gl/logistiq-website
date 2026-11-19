@@ -212,10 +212,12 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   passed and whoever sat on the network path could read every message and the mailbox
   password. The transport reads `SMTP_HOST` (default `cloud342.c-f.ro`), `SMTP_PORT`,
   `SMTP_USER`, `SMTP_PASS`. **The port sets how the connection is secured**
-  (`smtpTlsMode`): 465, the default, speaks TLS from the first byte; any other port (587,
-  25, 2525) starts in plain text and must upgrade with STARTTLS (`requireTLS`), so nothing,
-  the password least of all, is sent to a server that doesn't offer it or fails it. Until
-  2026-11-19 every port but 465 failed the handshake. A hanging mail server costs the
+  (`smtpTlsMode`): 587 and 25 start in plain text and must upgrade with STARTTLS
+  (`requireTLS`), so nothing, the password least of all, is sent to a server that doesn't
+  offer it or fails it; every other port, 465 (the default) included, speaks TLS from the
+  first byte, as it always did. Until 2026-11-19 587 and 25 failed the handshake; no other
+  setting changed meaning (ruling P331: production's `SMTP_PORT` is set and was not read,
+  so only the ports that could not work were changed). A hanging mail server costs the
   request at most 10 s to connect, finish TLS and greet, then 20 s of silence (since
   2026-11-19). A server that doesn't verify as it is gets the setting it needs, never
   verification turned off:

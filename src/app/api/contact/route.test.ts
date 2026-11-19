@@ -269,16 +269,16 @@ describe("SMTP_PORT sets how the connection to the mail server is secured", () =
     return createTransport.mock.calls[0][0] as Record<string, unknown>;
   }
 
-  it("465, the default: TLS from the first byte", async () => {
-    for (const port of ["", "465"]) {
+  it("465 (the default) and every port but 587 and 25: TLS from the first byte, as before", async () => {
+    for (const [port, number] of [["", 465], ["465", 465], ["2525", 2525], ["8465", 8465]] as const) {
       const options = await transportFor(port);
-      expect(options, port).toMatchObject({ port: 465, secure: true, tls: { rejectUnauthorized: true } });
+      expect(options, port).toMatchObject({ port: number, secure: true, tls: { rejectUnauthorized: true } });
       expect(options, port).not.toHaveProperty("requireTLS");
     }
   });
 
-  it("587 or any other port: plain text upgraded with STARTTLS, which must succeed before the password is sent", async () => {
-    for (const port of ["587", "25", "2525"]) {
+  it("587 and 25: plain text upgraded with STARTTLS, which must succeed before the password is sent", async () => {
+    for (const port of ["587", "25"]) {
       const options = await transportFor(port);
       expect(options, port).toMatchObject({
         port: Number(port),

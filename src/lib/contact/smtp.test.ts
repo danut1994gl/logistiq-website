@@ -52,13 +52,15 @@ describe("smtpTlsOptions: the contact form's mail server is always verified", ()
 });
 
 describe("smtpTlsMode: how the connection is secured follows SMTP_PORT", () => {
-  it("465: TLS from the first byte, as before", () => {
-    expect(smtpTlsMode(465)).toEqual({ secure: true });
+  it("587 and 25, which start in plain text: STARTTLS, which must succeed before anything is sent", () => {
+    for (const port of [587, 25]) {
+      expect(smtpTlsMode(port), String(port)).toEqual({ secure: false, requireTLS: true });
+    }
   });
 
-  it("any other port: plain text upgraded with STARTTLS, which must succeed before anything is sent", () => {
-    for (const port of [587, 25, 2525, 2465, Number.NaN]) {
-      expect(smtpTlsMode(port), String(port)).toEqual({ secure: false, requireTLS: true });
+  it("every other port, 465 (the default) included: TLS from the first byte, as before", () => {
+    for (const port of [465, 2525, 2465, 8465, 26, 588, 0, Number.NaN]) {
+      expect(smtpTlsMode(port), String(port)).toEqual({ secure: true });
     }
   });
 });

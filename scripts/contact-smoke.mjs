@@ -7,10 +7,12 @@
 //
 // It starts the test SMTP server of src/lib/contact/testing/smtp-server.ts on 127.0.0.1 (a throwaway CA, a certificate
 // for mail.test), then `next start` on 127.0.0.1 with SMTP_HOST=127.0.0.1, test credentials and SMTP_TLS_CA /
-// SMTP_TLS_SERVERNAME to trust it, and nothing else. The route secures the connection by its port, so:
-// - by default the test server takes STARTTLS on a free port, and SMTP_PORT names it;
-// - with SMOKE_SMTP_PORT=465 (which needs the right to listen on 465) it speaks TLS from the first byte on
-//   127.0.0.1:465, and SMTP_PORT stays unset: the production default.
+// SMTP_TLS_SERVERNAME to trust it, and nothing else. The route secures the connection by its port (587 and 25:
+// STARTTLS; any other port: TLS from the first byte), and the test server speaks what that port must speak:
+// - by default it speaks TLS from the first byte on a free port, and SMTP_PORT names it;
+// - SMOKE_SMTP_PORT=<port> puts it on that port instead: 465 leaves SMTP_PORT unset (the production default),
+//   587 or 25 speak STARTTLS, any other port (2525) TLS from the first byte. Ports below 1024 need the right to
+//   listen on them.
 // It checks that:
 // - every language's home and contact page answers 200 in its language, and / redirects to /ro;
 // - one person's message to /api/contact answers 200 and reaches the test server, signed in with SMTP_USER over TLS,
@@ -95,10 +97,14 @@ async function main() {
   const leaked = Object.keys(process.env).filter((k) => /^(NEXT_PUBLIC_SUPABASE_|SUPABASE_|RECAPTCHA_|NEXT_PUBLIC_RECAPTCHA_|SMTP_|VERCEL)/.test(k));
   if (leaked.length) throw new Error(`run it under env -i: ${leaked.join(", ")} set`);
 
-  const on465 = process.env.SMOKE_SMTP_PORT === "465";
-  if (process.env.SMOKE_SMTP_PORT && !on465) throw new Error("SMOKE_SMTP_PORT takes 465 or nothing");
+  // The route's rule (ruling P331), restated here rather than imported, so the smoke checks the route against it.
+  const STARTTLS_PORTS = new Set([587, 25]);
+  const requested = process.env.SMOKE_SMTP_PORT ? Number(process.env.SMOKE_SMTP_PORT) : 0;
+  if (!Number.isInteger(requested) || requested < 0 || requested > 65535) throw new Error("SMOKE_SMTP_PORT takes a port number");
+  const on465 = requested === 465;
+  const mode = STARTTLS_PORTS.has(requested) ? "starttls" : "implicit-tls";
   const certs = makeTestCertificates();
-  const smtp = await startTestSmtpServer(on465 ? { mode: "implicit-tls", certs, port: 465 } : { mode: "starttls", certs });
+  const smtp = await startTestSmtpServer({ mode, certs, port: requested });
   const port = await freePort();
   const base = `http://127.0.0.1:${port}`;
   let log = "";
@@ -123,7 +129,7 @@ async function main() {
   next.on("exit", () => (exited = true));
 
   try {
-    const kind = on465 ? "TLS from the first byte, SMTP_PORT unset" : `STARTTLS, SMTP_PORT=${smtp.port}`;
+    const kind = `${mode === "starttls" ? "STARTTLS" : "TLS from the first byte"}, ${on465 ? "SMTP_PORT unset" : `SMTP_PORT=${smtp.port}`}`;
     console.log(`build ${readFileSync(join(ROOT, ".next/BUILD_ID"), "utf8").trim()}; next start on ${base}; test SMTP server on 127.0.0.1:${smtp.port} (${kind})`);
     await waitFor("next start", async () => {
       if (exited) throw new Error(`next start exited:\n${log}`);

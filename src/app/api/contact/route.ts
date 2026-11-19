@@ -22,7 +22,7 @@ const SMTP_PORT = parseInt(process.env.SMTP_PORT || '465')
 const SMTP_CONFIG = {
   host: process.env.SMTP_HOST || 'cloud342.c-f.ro',
   port: SMTP_PORT,
-  // 465: TLS from the first byte; any other port: STARTTLS, required (lib/contact/smtp.ts).
+  // 587 and 25: STARTTLS, required; any other port, 465 included: TLS from the first byte (lib/contact/smtp.ts).
   ...smtpTlsMode(SMTP_PORT),
   auth: {
     user: process.env.SMTP_USER || 'noreply@logistiq.ro',
