@@ -4,6 +4,7 @@ import { checkBotId } from 'botid/server'
 import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
+import { isOneLine, isPlainMailbox, isText } from '@/lib/contact/input'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
 import { smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
@@ -44,7 +45,16 @@ const SMTP_CONFIG = {
 // answers "not-found" and messages go through.
 const RATE_LIMIT_ID = 'contact'
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+// What each field may hold besides its length (lib/contact/input.ts): name, company and
+// phone are one line, the message keeps its line breaks, and the address, the e-mail's
+// Reply-To, must be a plain mailbox (checked after the required fields, for its own answer).
+const FIELD_RULE: Record<keyof typeof FIELD_MAX, (value: string) => boolean> = {
+  name: isOneLine,
+  email: () => true,
+  company: isOneLine,
+  phone: isOneLine,
+  message: isText,
+}
 
 // Anti-spam on this anonymous write path, cheapest layer first:
 //   1. honeypot: a hidden field people never fill;
@@ -90,13 +100,14 @@ async function isRateLimited(request: NextRequest): Promise<boolean> {
   }
 }
 
-// A field as typed (trimmed): "" when absent, null when not text or too long.
+// A field as typed (trimmed): "" when absent, null when not text, too long, or holding
+// what the field may not.
 function textField(body: Record<string, unknown>, key: keyof typeof FIELD_MAX): string | null {
   const value = body[key]
   if (value === undefined || value === null) return ''
   if (typeof value !== 'string') return null
   const trimmed = value.trim()
-  return trimmed.length <= FIELD_MAX[key] ? trimmed : null
+  return trimmed.length <= FIELD_MAX[key] && FIELD_RULE[key](trimmed) ? trimmed : null
 }
 
 export async function POST(request: NextRequest) {
@@ -126,8 +137,8 @@ export async function POST(request: NextRequest) {
       return failure(400, 'invalid', 'Toate câmpurile obligatorii trebuie completate')
     }
 
-    // Validate email format
-    if (!EMAIL_RE.test(email)) {
+    // A plain mailbox, nothing the address parser could read a second recipient out of.
+    if (!isPlainMailbox(email)) {
       return failure(400, 'invalid', 'Adresa de email nu este validă')
     }
 

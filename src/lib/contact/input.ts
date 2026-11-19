@@ -1,0 +1,29 @@
+// What the contact form's fields may hold (2026-11-19, design critic I4), closed as qrgo.ro's delete-data form is
+// (the monorepo's apps/driver/lib/delete-data-request.ts, 58dee946). Server-only (the route imports it).
+//
+// The route e-mails contact@logistiq.ro with the visitor's address as Reply-To. Until 2026-11-19 the address only had
+// to match /^[^\s@]+@[^\s@]+\.[^\s@]+$/, which lets quotes, angle brackets, commas, semicolons, colons and parentheses
+// through: what nodemailer's address-parsing advisories need (a second recipient smuggled out of a display name, a
+// group or a comment), and forms that nodemailer 6.10.1 and 10.5.0 read in different ways (route.mail.test.ts).
+
+/**
+ * A plain mailbox: letters, digits and _ ' + - . before the @ (no dot first, never two in a row), dot-separated
+ * labels of letters, digits and hyphens after it, ending in a top-level domain of letters. It is zod 3.25's e-mail
+ * pattern, the one qrgo.ro's delete-data form applies, copied rather than adding zod to the site.
+ */
+const PLAIN_MAILBOX = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i;
+
+// C0 and C1 controls, DEL, the Unicode line and paragraph separators, and the bidi embeddings, overrides and isolates
+// (U+202A-U+202E, U+2066-U+2069), which can reorder what the reader sees. A one-line field holds none of them.
+const NOT_ONE_LINE = /[\u0000-\u001f\u007f-\u009f\u2028\u2029\u202a-\u202e\u2066-\u2069]/;
+// The message is the form's textarea: it keeps tabs and line breaks, and refuses the rest.
+const NOT_TEXT = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/;
+
+/** The address may be the e-mail's Reply-To. */
+export const isPlainMailbox = (value: string): boolean => PLAIN_MAILBOX.test(value);
+
+/** A name, company or phone: one line, with nothing that adds a line or reorders the text. */
+export const isOneLine = (value: string): boolean => !NOT_ONE_LINE.test(value);
+
+/** The message: any text with its tabs and line breaks, but no other control and no bidi control. */
+export const isText = (value: string): boolean => !NOT_TEXT.test(value);

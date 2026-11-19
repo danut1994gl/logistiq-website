@@ -152,6 +152,105 @@ describe("POST /api/contact — a person", () => {
   });
 });
 
+// The form's input is closed as qrgo.ro's delete-data form is (design critic I4, monorepo 58dee946). The visitor's
+// address becomes the e-mail's Reply-To, so it must be a plain mailbox: the old check (/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+// let through the forms nodemailer's address-parser advisories need, which 6.10.1 and 10.5.0 even read differently
+// (route.mail.test.ts). Name, company and phone are one line; the message keeps its line breaks. The answers are the
+// form's own: it shows `error` as it comes.
+describe("the input is closed", () => {
+  const BAD_ADDRESS = "Adresa de email nu este validă";
+  const BAD_FIELD = "Un câmp este prea lung sau nu este valid";
+
+  async function refused(body: Record<string, unknown>, error: string) {
+    const res = await post(body);
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error, code: "invalid" });
+    nothingSentOrStored();
+  }
+
+  const addresses: Array<[string, string]> = [
+    ["a list", "a,b@c.ro"],
+    ["a list with a semicolon", "a;b@c.ro"],
+    ["a group", "team:a@c.ro;"],
+    ["a quoted local part", `"x;y"@d.ro`],
+    ["an angle address", "a<b@evil.example>"],
+    ["a stray quote", `q"@x.ro`],
+    ["a comment", "ion(evil.example)@firma.ro"],
+    ["markup", `"><svg/onload=alert(1)>@evil.ro`],
+    ["a domain literal", "ion@[127.0.0.1]"],
+    ["a backslash", "ion\\@firma.ro"],
+    ["a leading dot", ".ion@firma.ro"],
+    ["two dots in a row", "ion..popescu@firma.ro"],
+    ["a NUL", "ion\u0000@firma.ro"],
+    ["a bidi override", "ion\u202e@firma.ro"],
+    ["a numeric top-level domain", "ion@firma.123"],
+  ];
+  for (const [form, email] of addresses) {
+    it(`refuses an address with ${form}: ${JSON.stringify(email)}`, async () => {
+      await refused({ ...human, email }, BAD_ADDRESS);
+    });
+  }
+
+  const oneLine: Array<[string, string, string]> = [
+    ["name", "CR/LF and a Bcc: header", "Ion\r\nBcc: all@corp.example"],
+    ["name", "a lone LF", "Ion\nX-Injected: yes"],
+    ["name", "a lone CR", "Ion\rX-Injected: yes"],
+    ["name", "a C1 next line (U+0085)", "Ion\u0085Bcc: all@corp.example"],
+    ["name", "DEL", "Ion\u007f"],
+    ["name", "a paragraph separator (U+2029)", "Ion\u2029Popescu"],
+    ["company", "a line separator (U+2028)", "Transport\u2028SRL"],
+    ["company", "a tab", "Transport\tSRL"],
+    ["company", "an escape sequence", "Transport \u001b[31mSRL"],
+    ["company", "a bidi override (U+202E)", "Transport \u202eLRS"],
+    ["phone", "a NUL", "+40 771\u0000570 577"],
+    ["phone", "a bidi isolate (U+2066)", "\u2066+40 771 570 577"],
+  ];
+  for (const [field, form, value] of oneLine) {
+    it(`refuses a ${field} with ${form}`, async () => {
+      await refused({ ...human, [field]: value }, BAD_FIELD);
+    });
+  }
+
+  for (const [form, message] of [
+    ["a NUL", "Bună ziua\u0000"],
+    ["an escape sequence", "Bună \u001b[2Jziua"],
+    ["a bidi override (U+202E)", "Bună ziua \u202eeroare"],
+    ["a C1 control (U+009B)", "Bună \u009b31mziua"],
+  ]) {
+    it(`refuses a message with ${form}`, async () => {
+      await refused({ ...human, message }, BAD_FIELD);
+    });
+  }
+
+  it("keeps the message's line breaks and tabs", async () => {
+    const message = "Rândul 1\r\nRândul 2\n\nRândul 4\tcu tab\rși CR";
+    const res = await post({ ...human, message });
+    expect(res.status).toBe(200);
+    delivered();
+    expect(sendMail.mock.calls[0][0].text).toContain(message);
+  });
+
+  it("takes the plain mailboxes people have", async () => {
+    for (const email of ["ion.popescu+oferte@firma-mea.ro", "o'brien@example.ie", "ION_P@Sub.Firma.CO.UK", "a-b@x.de"]) {
+      sendMail.mockClear();
+      const res = await post({ ...human, email });
+      expect(res.status, email).toBe(200);
+      expect(sendMail.mock.calls[0][0].replyTo).toBe(email);
+    }
+  });
+
+  it("takes every language's letters in the name, company and phone", async () => {
+    const res = await post({
+      ...human,
+      name: "Ștefan Țăranu Îngheț Иван Pałka Øre Straße Ádám Zoë",
+      company: "Întreprinderea „Nord” SRL — Șoseaua 7",
+      phone: "+40 (771) 570-577 int. 12",
+    });
+    expect(res.status).toBe(200);
+    delivered();
+  });
+});
+
 describe("SMTP_PORT sets how the connection to the mail server is secured", () => {
   // The route reads its SMTP settings when it loads.
   async function transportFor(port: string) {

@@ -62,7 +62,7 @@ src/lib/
   navigation.ts  company.ts  href.ts  features.ts  faq.ts
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
-  contact/{protocol,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + email + mail TLS
+  contact/{protocol,input,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + email + mail TLS
   contact/testing/{mail-view,smtp-server}.ts  # test-only: e-mail reader, local test SMTP server
 scripts/contact-smoke.mjs    # the production bundle's contact form against the local test SMTP server
 ```
@@ -200,6 +200,13 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   limit fail open (logged), so an outage can't take the form down.
 - **Escape user input in emails.** The notification email escapes every field
   (`lib/contact/email.ts`, tested); until 2026-11-08 they were interpolated raw.
+- **The form's input is closed before anything is sent** (`lib/contact/input.ts`, since
+  2026-11-19, as qrgo.ro's delete-data form): the address, the e-mail's Reply-To, must be
+  a plain mailbox (letters, digits and `_ ' + - .` before the @, dot-separated labels
+  after it), so the address parser gets no quote, bracket, comma, semicolon, colon or
+  comment to read a second recipient out of; name, company and phone are one line (no
+  C0 or C1 control, line or paragraph separator, or bidi control); the message keeps its
+  line breaks and tabs and refuses the rest. A refusal is the form's own 400.
 - **The mail server's TLS certificate is always verified** (`lib/contact/smtp.ts`,
   tested). Until 2026-11-12 the route set `rejectUnauthorized: false`, so any certificate
   passed and whoever sat on the network path could read every message and the mailbox

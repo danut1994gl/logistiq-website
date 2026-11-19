@@ -3,7 +3,6 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { NextRequest } from "next/server";
-import { contactEmail } from "@/lib/contact/email";
 import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 
 // The contact form's notification e-mail as the real route composes it with the real nodemailer, compared with what
@@ -19,6 +18,11 @@ import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 // and kept as the "before": the installed nodemailer must compose the same, but for the differences listed in
 // SINCE_6_10_1. Only what changes on every run is normalised (lib/contact/testing/mail-view.ts): the random half of
 // Message-ID, the Date and the MIME boundary. Header values are compared decoded, not as folded.
+//
+// Six more inputs were composed by 6.10.1 and compared on 10.5.0 (84c31ad to a1bc8c6): HTML in the address, a name
+// that adds headers, and the four Reply-To forms of critic I3. Since the form's input is closed (lib/contact/input.ts),
+// the route refuses them before nodemailer is called, so they left the golden file; how 10.5.0 read three of them
+// otherwise than 6.10.1 is recorded in commit a4df56d.
 
 type Mail = Record<string, unknown>;
 interface StreamInfo {
@@ -82,11 +86,8 @@ const human = {
   reference: "",
   elapsedMs: 42_000,
 };
-const ADDS_HEADERS = "Ion\r\nBcc: all@corp.example\nX-Injected: yes";
-
-// The inputs: a person; HTML in every field but the address, and HTML in the address; diacritics and other alphabets
-// long enough to fold the subject; a name that tries to add headers; and the four Reply-To forms the route's address
-// check lets through, which the address parser reads otherwise than typed (critic I3).
+// The inputs: a person; HTML in every field but the address; diacritics and other alphabets, long enough to fold
+// the subject, with line breaks in the message.
 const CASES: Record<string, Record<string, unknown>> = {
   human,
   "html in every field": {
@@ -96,14 +97,18 @@ const CASES: Record<string, Record<string, unknown>> = {
     phone: `"><script>alert(1)</script>`,
     message: `<a href="https://evil.example">click</a>\nrândul 2 & <i>3</i>`,
   },
-  "html in the address": { ...human, email: `"><svg/onload=alert(1)>@evil.ro` },
   diacritics: {
     ...human,
     name: "Ștefan-Țăranu Îngheț Ăăâîșț Ионов Pałka Øre Straße",
     company: "Întreprinderea Țărănească de Transport Șoseaua Nordului SRL",
     message: "Bună ziua,\r\nAvem nevoie de o ofertă pentru șase rampe.\r\n\r\nMulțumesc — Ștefan",
   },
-  "a name that adds headers": { ...human, name: ADDS_HEADERS },
+};
+
+// What 6.10.1 composed too, and the route now refuses before nodemailer is called (see this file's header).
+const REFUSED: Record<string, Record<string, unknown>> = {
+  "html in the address": { ...human, email: `"><svg/onload=alert(1)>@evil.ro` },
+  "a name that adds headers": { ...human, name: "Ion\r\nBcc: all@corp.example\nX-Injected: yes" },
   "reply-to: a list": { ...human, email: "a,b@c.ro" },
   "reply-to: a quoted local part": { ...human, email: `"x;y"@d.ro` },
   "reply-to: an angle address": { ...human, email: "a<b@evil.example>" },
@@ -112,25 +117,11 @@ const CASES: Record<string, Record<string, unknown>> = {
 
 type Path = Array<string | number>;
 
-// How nodemailer 10.5.0 composes these inputs otherwise than 6.10.1 did, one by one: listed, never normalised
-// (critic I3). Only three address forms that the route's address check lets through differ, in the Reply-To header
-// and in the address as parsed; everything else (every other header, both parts, both envelopes) is the same, and the
-// envelope stays contact@logistiq.ro alone. 10.x's address parser (the fixes of 10.0.6 to 10.4.1) keeps a quoted local
-// part quoted and no longer reads markup or a stray quote into the address the way 6.10.1 did.
-const SINCE_6_10_1: Record<string, Array<{ path: Path; was: unknown; now: unknown }>> = {
-  "html in the address": [
-    { path: ["mail", "headers", "Reply-To"], was: `<"svg/onload=alert(1) "@evil.ro>`, now: `<" svg/onload=alert(1) "@evil.ro>` },
-    { path: ["parsed", "replyTo", 0, "address"], was: "><svg/onload=alert(1)>@evil.ro", now: `" svg/onload=alert(1) "@evil.ro` },
-  ],
-  "reply-to: a quoted local part": [
-    { path: ["mail", "headers", "Reply-To"], was: "x;y@d.ro", now: `<"x;y"@d.ro>` },
-    { path: ["parsed", "replyTo", 0, "address"], was: "x;y@d.ro", now: `"x;y"@d.ro` },
-  ],
-  "reply-to: a stray quote": [
-    { path: ["mail", "headers", "Reply-To"], was: `<"q "@x.ro>`, now: "q@x.ro" },
-    { path: ["parsed", "replyTo", 0, "address"], was: "q @x.ro", now: "q@x.ro" },
-  ],
-};
+// How the installed nodemailer composes these inputs otherwise than 6.10.1 did, one by one: listed, never normalised
+// (critic I3); a release that differs fails the test until its differences are listed here. 10.5.0 composes all three
+// exactly as 6.10.1 did. (The six differences it showed were all Reply-To parsing of three address forms that the route
+// refuses since its input is closed; they are recorded in commit a4df56d.)
+const SINCE_6_10_1: Record<string, Array<{ path: Path; was: unknown; now: unknown }>> = {};
 
 /** The golden case with the listed differences applied; each one must still find 6.10.1's value where it says. */
 function expectedFor(name: string, golden: Composed): Composed {
@@ -221,15 +212,6 @@ describe("the notification e-mail, composed by the route and nodemailer", () => 
     });
   }
 
-  it("a name with line breaks adds no header: the subject holds it on one line", () => {
-    const { mail } = composed["a name that adds headers"];
-    const names = mail.headerNames.map((h) => h.toLowerCase());
-    expect(names).not.toContain("bcc");
-    expect(names).not.toContain("x-injected");
-    expect(mail.headers.Subject).toBe(contactEmail({ ...human, name: ADDS_HEADERS }).subject);
-    expect(mail.headers.Subject).toBe("[Contact] Mesaj nou de la Ion Bcc: all@corp.example X-Injected: yes");
-  });
-
   it("HTML typed in any field arrives escaped in the HTML part", () => {
     const html = htmlPart(composed["html in every field"].mail);
     expect(html).not.toMatch(/<b>Ion|<img|<script|<a href="https:\/\/evil|<i>3/);
@@ -237,10 +219,24 @@ describe("the notification e-mail, composed by the route and nodemailer", () => 
     expect(html).toContain("&lt;img src=x onerror=&quot;alert(1)&quot;&gt;");
     expect(html).toContain("&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;");
     expect(html).toContain("&lt;a href=&quot;https://evil.example&quot;&gt;click&lt;/a&gt;<br>rândul 2 &amp; &lt;i&gt;3&lt;/i&gt;");
-    const address = htmlPart(composed["html in the address"].mail);
-    expect(address).not.toContain("<svg");
-    expect(address).toContain("&quot;&gt;&lt;svg/onload=alert(1)&gt;@evil.ro");
   });
+
+  for (const [name, input] of Object.entries(REFUSED)) {
+    it(`${name}: refused before nodemailer is called`, async () => {
+      configs.length = 0;
+      sent.length = 0;
+      const res = await POST(
+        new NextRequest("https://logistiq.ro/api/contact", {
+          method: "POST",
+          headers: { "content-type": "application/json", "x-real-ip": "203.0.113.7" },
+          body: JSON.stringify(input),
+        }),
+      );
+      expect(res.status).toBe(400);
+      expect(configs).toEqual([]);
+      expect(sent).toEqual([]);
+    });
+  }
 
   it(WRITE ? "writes the golden file" : "is what nodemailer 6.10.1 composed for the same input, but for the listed differences", () => {
     if (WRITE) {

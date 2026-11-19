@@ -15,6 +15,7 @@
 // - every language's home and contact page answers 200 in its language, and / redirects to /ro;
 // - one person's message to /api/contact answers 200 and reaches the test server, signed in with SMTP_USER over TLS,
 //   for contact@logistiq.ro alone, composed exactly as route.mail.golden.json's "human" case (nodemailer 6.10.1);
+// - an address the parser could read a second recipient out of gets the form's own 400, and nothing more is sent;
 // - the lead step then fails, as it must without Supabase, and says so in the log;
 // - the contact route's server bundle carries the nodemailer release that package.json names.
 // Nothing leaves 127.0.0.1: BotID's check throws without Vercel's OIDC token and the rate-limit check throws without
@@ -165,6 +166,19 @@ async function main() {
       `the message is what nodemailer ${golden.nodemailer} composed for the same person (route.mail.golden.json)`,
       isDeepStrictEqual(received, golden.cases.human.mail),
       received ? `Subject: ${received.headers.Subject}; parts: ${received.parts?.map((p) => p.headers["Content-Type"]).join(", ")}` : "nothing received",
+    );
+
+    // An address the parser could read a second recipient out of is the form's own 400, and nothing more is sent.
+    const smuggled = await fetch(`${base}/api/contact`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ...HUMAN, email: "a,b@c.ro" }),
+    });
+    const refusal = await smuggled.json().catch(() => null);
+    check(
+      "a smuggled address is refused with the form's 400, nothing sent",
+      smuggled.status === 400 && isDeepStrictEqual(refusal, { error: "Adresa de email nu este validă", code: "invalid" }) && smtp.deliveries.length === 1,
+      `${smuggled.status} ${JSON.stringify(refusal)}`,
     );
 
     await waitFor("the lead step's log line", async () => log.includes("lead persist failed (email already sent)"), 5_000).catch(() => {});
