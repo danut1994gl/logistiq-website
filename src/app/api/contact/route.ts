@@ -113,7 +113,7 @@ function textField(body: Record<string, unknown>, key: keyof typeof FIELD_MAX): 
 
 export async function POST(request: NextRequest) {
   try {
-    // Read as text and bounded before it is parsed: nothing the form sends comes near the cap.
+    // Read as text and bounded before it is parsed: the cap is above the largest body the form can send.
     let body: unknown
     try {
       const text = await request.text()

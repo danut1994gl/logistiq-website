@@ -21,9 +21,9 @@ const NOT_ONE_LINE = /[\u0000-\u001f\u007f-\u009f\u2028\u2029\u202a-\u202e\u2066
 const NOT_TEXT = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/;
 
 /**
- * The longest request body the route reads, in characters, as on qrgo.ro's delete-data form: far above what the
- * form's fields can make at their limits (protocol.ts's FIELD_MAX, every character JSON-escaped, a reCAPTCHA token),
- * far below the platform's 4.5 MB. A longer body is refused before it is parsed.
+ * The longest request body the route reads, in characters, as on qrgo.ro's delete-data form: above what the form's
+ * fields can make at their limits (protocol.ts's FIELD_MAX, every character JSON-escaped, the longest reCAPTCHA token
+ * recaptcha.ts accepts), far below the platform's 4.5 MB. A longer body is refused before it is parsed.
  */
 export const CONTACT_MAX_BODY_CHARS = 16_384;
 

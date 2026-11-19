@@ -24,6 +24,7 @@ vi.mock("@vercel/firewall", () => ({ checkRateLimit: (...a: unknown[]) => checkR
 
 import { POST } from "@/app/api/contact/route";
 import { CONTACT_MAX_BODY_CHARS } from "@/lib/contact/input";
+import { FIELD_MAX } from "@/lib/contact/protocol";
 
 const fetchMock = vi.fn();
 
@@ -300,16 +301,19 @@ describe("the input is closed", () => {
       nothingSentOrStored();
     });
 
-    it("is far above the largest body the form can make: every field full, every character escaped, a reCAPTCHA token", () => {
+    it("is above the largest body the form can make: every field at its limit, every character escaped, the longest token", () => {
+      const email = `${"a".repeat(64)}@${"b".repeat(FIELD_MAX.email - 64 - 1 - ".ro".length)}.ro`;
+      expect(email).toHaveLength(FIELD_MAX.email);
       const fullest = JSON.stringify({
-        name: '"'.repeat(120),
-        email: `${"a".repeat(64)}@${"b".repeat(185)}.ro`,
-        company: '"'.repeat(160),
-        phone: '"'.repeat(40),
-        message: '"'.repeat(5000),
+        name: '"'.repeat(FIELD_MAX.name),
+        email,
+        company: '"'.repeat(FIELD_MAX.company),
+        phone: '"'.repeat(FIELD_MAX.phone),
+        message: '"'.repeat(FIELD_MAX.message),
         reference: "",
         elapsedMs: 86_400_000,
-        recaptchaToken: "t".repeat(4000),
+        // The longest reCAPTCHA token lib/contact/recaptcha.ts accepts.
+        recaptchaToken: "t".repeat(4096),
       });
       expect(fullest.length).toBeLessThan(CONTACT_MAX_BODY_CHARS);
     });
