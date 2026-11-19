@@ -14,10 +14,11 @@ import { readMail, type MailNode } from "@/lib/contact/testing/mail-view";
 // so the message is written to memory. The same message also goes through nodemailer's jsonTransport, for the addresses
 // as nodemailer parsed them and the envelope.
 //
-// route.mail.golden.json is 6.10.1's output, written by this test on 6.10.1 with
+// route.mail.golden.json is 6.10.1's output, written by this test on 6.10.1 (84c31ad) with
 //   CONTACT_MAIL_GOLDEN=write npx vitest run src/app/api/contact/route.mail.test.ts
-// Only what changes on every run is normalised (lib/contact/testing/mail-view.ts): the random half of Message-ID, the
-// Date and the MIME boundary. Header values are compared decoded, not as folded.
+// and kept as the "before": the installed nodemailer must compose the same, but for the differences listed in
+// SINCE_6_10_1. Only what changes on every run is normalised (lib/contact/testing/mail-view.ts): the random half of
+// Message-ID, the Date and the MIME boundary. Header values are compared decoded, not as folded.
 
 type Mail = Record<string, unknown>;
 interface StreamInfo {
@@ -108,6 +109,43 @@ const CASES: Record<string, Record<string, unknown>> = {
   "reply-to: an angle address": { ...human, email: "a<b@evil.example>" },
   "reply-to: a stray quote": { ...human, email: `q"@x.ro` },
 };
+
+type Path = Array<string | number>;
+
+// How nodemailer 10.5.0 composes these inputs otherwise than 6.10.1 did, one by one: listed, never normalised
+// (critic I3). Only three address forms that the route's address check lets through differ, in the Reply-To header
+// and in the address as parsed; everything else (every other header, both parts, both envelopes) is the same, and the
+// envelope stays contact@logistiq.ro alone. 10.x's address parser (the fixes of 10.0.6 to 10.4.1) keeps a quoted local
+// part quoted and no longer reads markup or a stray quote into the address the way 6.10.1 did.
+const SINCE_6_10_1: Record<string, Array<{ path: Path; was: unknown; now: unknown }>> = {
+  "html in the address": [
+    { path: ["mail", "headers", "Reply-To"], was: `<"svg/onload=alert(1) "@evil.ro>`, now: `<" svg/onload=alert(1) "@evil.ro>` },
+    { path: ["parsed", "replyTo", 0, "address"], was: "><svg/onload=alert(1)>@evil.ro", now: `" svg/onload=alert(1) "@evil.ro` },
+  ],
+  "reply-to: a quoted local part": [
+    { path: ["mail", "headers", "Reply-To"], was: "x;y@d.ro", now: `<"x;y"@d.ro>` },
+    { path: ["parsed", "replyTo", 0, "address"], was: "x;y@d.ro", now: `"x;y"@d.ro` },
+  ],
+  "reply-to: a stray quote": [
+    { path: ["mail", "headers", "Reply-To"], was: `<"q "@x.ro>`, now: "q@x.ro" },
+    { path: ["parsed", "replyTo", 0, "address"], was: "q @x.ro", now: "q@x.ro" },
+  ],
+};
+
+/** The golden case with the listed differences applied; each one must still find 6.10.1's value where it says. */
+function expectedFor(name: string, golden: Composed): Composed {
+  const expected = structuredClone(golden);
+  for (const { path, was, now } of SINCE_6_10_1[name] ?? []) {
+    const parent = path.slice(0, -1).reduce<Record<string | number, unknown>>(
+      (node, key) => node[key] as Record<string | number, unknown>,
+      expected as unknown as Record<string | number, unknown>,
+    );
+    const key = path[path.length - 1];
+    expect(parent[key], `${name} ${path.join(".")}: the golden value this difference starts from`).toEqual(was);
+    parent[key] = now;
+  }
+  return expected;
+}
 
 interface Composed {
   answer: { status: number; body: unknown };
@@ -204,17 +242,19 @@ describe("the notification e-mail, composed by the route and nodemailer", () => 
     expect(address).toContain("&quot;&gt;&lt;svg/onload=alert(1)&gt;@evil.ro");
   });
 
-  it(WRITE ? "writes the golden file" : "is what nodemailer 6.10.1 composed for the same input", () => {
+  it(WRITE ? "writes the golden file" : "is what nodemailer 6.10.1 composed for the same input, but for the listed differences", () => {
     if (WRITE) {
       writeFileSync(GOLDEN, `${JSON.stringify({ nodemailer: installedVersion(), cases: composed }, null, 2)}\n`);
       return;
     }
     expect(existsSync(GOLDEN), "route.mail.golden.json is missing: write it on 6.10.1 (see this file's header)").toBe(true);
     const golden = JSON.parse(readFileSync(GOLDEN, "utf8")) as { nodemailer: string; cases: Record<string, Composed> };
+    // The golden file is the "before": rewriting it with a newer release would hide what changed.
     expect(golden.nodemailer).toBe("6.10.1");
     expect(Object.keys(golden.cases).sort()).toEqual(Object.keys(CASES).sort());
+    expect(Object.keys(SINCE_6_10_1).filter((name) => !(name in CASES))).toEqual([]);
     for (const name of Object.keys(CASES)) {
-      expect(composed[name], name).toEqual(golden.cases[name]);
+      expect(composed[name], name).toEqual(expectedFor(name, golden.cases[name]));
     }
   });
 });
