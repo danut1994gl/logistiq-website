@@ -63,6 +63,8 @@ src/lib/
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
   contact/{protocol,email,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + email + mail TLS
+  contact/testing/{mail-view,smtp-server}.ts  # test-only: e-mail reader, local test SMTP server
+scripts/contact-smoke.mjs    # the production bundle's contact form against the local test SMTP server
 ```
 
 ## i18n & URLs (international SEO — critical)
@@ -214,7 +216,17 @@ src/lib/
 - **Never send a real email or insert a real lead when testing**: the route test mocks
   SMTP, Supabase, BotID, the firewall and Google; a local `npm start` points `SMTP_HOST`
   at a test server on 127.0.0.1, whose certificate `SMTP_TLS_CA` and
-  `SMTP_TLS_SERVERNAME` must then trust.
+  `SMTP_TLS_SERVERNAME` must then trust. The real mail path is tested without a real
+  e-mail (since 2026-11-19, nodemailer 6 → 10.5.0):
+  - `route.mail.test.ts` composes the e-mail with the real route and nodemailer's
+    stream transport and compares it with `route.mail.golden.json`, nodemailer 6.10.1's
+    output; a difference a later release brings is listed in the test, never normalised;
+  - `route.tls.test.ts` runs the route's own SMTP options against the local test SMTP
+    server of `lib/contact/testing/` (a throwaway CA, a certificate for `mail.test`);
+  - `scripts/contact-smoke.mjs`, after `npm run build`, drives `next start` against that
+    server: the localized pages, one message end to end, the bundled nodemailer (the
+    command is in its header; run both outside the agent environment, with `env -i`);
+  - `lib/patched-dependencies.test.ts` keeps nodemailer at 10.1.4 or later.
 
 ## Deploy / git
 
