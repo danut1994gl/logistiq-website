@@ -132,6 +132,13 @@ describe("the route's refusals, as the form shows them", () => {
     expect(translations.bg.contact.invalid).toMatch(/[А-Яа-я]/);
   });
 
+  it("contact.invalid asks for name, company and phone each on its own line, not all three on one", () => {
+    expect(translations.ro.contact.invalid).toContain("și scrie numele, compania și telefonul, fiecare pe un singur rând.");
+    expect(translations.en.contact.invalid).toContain("and write the name, company and phone number each on a single line.");
+    expect(translations.fr.contact.invalid).toContain("et écrivez le nom, l'entreprise et le téléphone, chacun sur une seule ligne.");
+    expect(translations.bg.contact.invalid).toContain("и напишете името, компанията и телефона, всяко поле на един ред.");
+  });
+
   it("an unknown code, no code or no JSON object gets the generic error", () => {
     for (const locale of ["ro", "en", "de"] as const) {
       const t = translations[locale];

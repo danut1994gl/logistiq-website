@@ -1420,7 +1420,7 @@ export const translations = {
       honeypot: "Lasă acest câmp necompletat",
       rateLimited: "Prea multe mesaje într-un timp scurt. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
       verifyFailed: "Nu am putut verifica mesajul. Încearcă din nou peste câteva minute sau scrie-ne la contact@logistiq.ro.",
-      invalid: "Verifică datele introduse: completează câmpurile obligatorii, folosește o adresă de e-mail simplă, de forma email@companie.ro, și scrie numele, compania și telefonul pe un singur rând. Ne poți scrie și la contact@logistiq.ro.",
+      invalid: "Verifică datele introduse: completează câmpurile obligatorii, folosește o adresă de e-mail simplă, de forma email@companie.ro, și scrie numele, compania și telefonul, fiecare pe un singur rând. Ne poți scrie și la contact@logistiq.ro.",
       unreachable: "Nu am putut trimite mesajul din acest browser. Scrie-ne la contact@logistiq.ro.",
       info: "Program de lucru",
       schedule: {
@@ -3347,7 +3347,7 @@ export const translations = {
       honeypot: "Leave this field empty",
       rateLimited: "Too many messages in a short time. Please try again in a few minutes, or email us at contact@logistiq.ro.",
       verifyFailed: "We couldn't verify your message. Please try again in a few minutes, or email us at contact@logistiq.ro.",
-      invalid: "Please check your details: fill in the required fields, use a simple email address such as email@company.com, and keep the name, company and phone on one line. You can also email us at contact@logistiq.ro.",
+      invalid: "Please check your details: fill in the required fields, use a simple email address such as email@company.com, and write the name, company and phone number each on a single line. You can also email us at contact@logistiq.ro.",
       unreachable: "We couldn't send your message from this browser. Please email us at contact@logistiq.ro.",
       info: "Working hours",
       schedule: {
@@ -11922,7 +11922,7 @@ export const translations = {
       honeypot: "Оставете това поле празно",
       rateLimited: "Твърде много съобщения за кратко време. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
       verifyFailed: "Не успяхме да проверим съобщението ви. Моля, опитайте отново след няколко минути или ни пишете на contact@logistiq.ro.",
-      invalid: "Моля, проверете данните си: попълнете задължителните полета, използвайте обикновен имейл адрес, например email@kompania.bg, и напишете името, компанията и телефона на един ред. Можете да ни пишете и на contact@logistiq.ro.",
+      invalid: "Моля, проверете данните си: попълнете задължителните полета, използвайте обикновен имейл адрес, например email@kompania.bg, и напишете името, компанията и телефона, всяко поле на един ред. Можете да ни пишете и на contact@logistiq.ro.",
       unreachable: "Не успяхме да изпратим съобщението ви от този браузър. Моля, пишете ни на contact@logistiq.ro.",
       info: "Работно време",
       schedule: {
@@ -14140,7 +14140,7 @@ export const translations = {
       honeypot: "Laissez ce champ vide",
       rateLimited: "Trop de messages en peu de temps. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
       verifyFailed: "Nous n'avons pas pu vérifier votre message. Veuillez réessayer dans quelques minutes ou nous écrire à contact@logistiq.ro.",
-      invalid: "Veuillez vérifier vos informations : remplissez les champs obligatoires, utilisez une adresse e-mail simple, par exemple email@entreprise.fr, et écrivez le nom, l'entreprise et le téléphone sur une seule ligne. Vous pouvez aussi nous écrire à contact@logistiq.ro.",
+      invalid: "Veuillez vérifier vos informations : remplissez les champs obligatoires, utilisez une adresse e-mail simple, par exemple email@entreprise.fr, et écrivez le nom, l'entreprise et le téléphone, chacun sur une seule ligne. Vous pouvez aussi nous écrire à contact@logistiq.ro.",
       unreachable: "Nous n'avons pas pu envoyer votre message depuis ce navigateur. Veuillez nous écrire à contact@logistiq.ro.",
       info: "Horaires d'ouverture",
       schedule: {
