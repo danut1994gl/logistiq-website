@@ -20,6 +20,13 @@ const NOT_ONE_LINE = /[\u0000-\u001f\u007f-\u009f\u2028\u2029\u202a-\u202e\u2066
 // The message is the form's textarea: it keeps tabs and line breaks, and refuses the rest.
 const NOT_TEXT = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/;
 
+/**
+ * The longest request body the route reads, in characters, as on qrgo.ro's delete-data form: far above what the
+ * form's fields can make at their limits (protocol.ts's FIELD_MAX, every character JSON-escaped, a reCAPTCHA token),
+ * far below the platform's 4.5 MB. A longer body is refused before it is parsed.
+ */
+export const CONTACT_MAX_BODY_CHARS = 16_384;
+
 // A phone number copied from a chat app or a contact card arrives wrapped in invisible direction marks (WhatsApp uses
 // U+202A to U+202C or U+2066 to U+2069). The visitor can't see them, so a refusal could not tell them why: the phone
 // loses them at both ends, with the whitespace around them, before its check. One inside the number is still refused,

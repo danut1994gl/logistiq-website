@@ -4,7 +4,7 @@ import { checkBotId } from 'botid/server'
 import { checkRateLimit } from '@vercel/firewall'
 import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
-import { isOneLine, isPlainMailbox, isText, trimPhone } from '@/lib/contact/input'
+import { CONTACT_MAX_BODY_CHARS, isOneLine, isPlainMailbox, isText, trimPhone } from '@/lib/contact/input'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
 import { SMTP_SEND_DEADLINE_MS, smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
@@ -113,9 +113,12 @@ function textField(body: Record<string, unknown>, key: keyof typeof FIELD_MAX): 
 
 export async function POST(request: NextRequest) {
   try {
+    // Read as text and bounded before it is parsed: nothing the form sends comes near the cap.
     let body: unknown
     try {
-      body = await request.json()
+      const text = await request.text()
+      if (text.length > CONTACT_MAX_BODY_CHARS) return failure(400, 'invalid', 'Cererea nu este validă')
+      body = JSON.parse(text)
     } catch {
       return failure(400, 'invalid', 'Cererea nu este validă')
     }

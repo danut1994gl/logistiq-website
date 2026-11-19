@@ -23,6 +23,7 @@ const checkRateLimit = vi.fn();
 vi.mock("@vercel/firewall", () => ({ checkRateLimit: (...a: unknown[]) => checkRateLimit(...a) }));
 
 import { POST } from "@/app/api/contact/route";
+import { CONTACT_MAX_BODY_CHARS } from "@/lib/contact/input";
 
 const fetchMock = vi.fn();
 
@@ -259,6 +260,59 @@ describe("the input is closed", () => {
     for (const phone of [`+40 771${mark(0x202a)}570 577`, `+40${mark(0x2066)} 771 570 577${mark(0x2069)}`]) {
       await refused({ ...human, phone }, BAD_FIELD);
     }
+  });
+
+  // The body is read as text and refused above CONTACT_MAX_BODY_CHARS before it is parsed, as on qrgo.ro's
+  // delete-data form; until 2026-11-19 any body up to the platform's 4.5 MB was parsed whole.
+  describe("the body's size", () => {
+    /** The person's message, padded with a field the route ignores to exactly `length` characters of JSON. */
+    const padded = (length: number) => {
+      const base = JSON.stringify({ ...human, padding: "" });
+      return JSON.stringify({ ...human, padding: "x".repeat(length - base.length) });
+    };
+
+    it("takes a body of exactly the cap, and refuses one character more before parsing it", async () => {
+      expect(padded(CONTACT_MAX_BODY_CHARS)).toHaveLength(CONTACT_MAX_BODY_CHARS);
+      const atCap = await post(padded(CONTACT_MAX_BODY_CHARS));
+      expect(atCap.status).toBe(200);
+      delivered();
+      sendMail.mockClear();
+      insert.mockClear();
+      const over = await post(padded(CONTACT_MAX_BODY_CHARS + 1));
+      expect(over.status).toBe(400);
+      expect(await over.json()).toEqual({ error: "Cererea nu este validă", code: "invalid" });
+      nothingSentOrStored();
+    });
+
+    it("refuses a large body with the same 400, nothing sent or stored", async () => {
+      const res = await post(padded(1_000_000));
+      expect(res.status).toBe(400);
+      expect(await res.json()).toEqual({ error: "Cererea nu este validă", code: "invalid" });
+      nothingSentOrStored();
+    });
+
+    it("answers malformed JSON with the 400 it always had", async () => {
+      for (const body of ['{"name": "Ion"', "", "{", "nul"]) {
+        const res = await post(body);
+        expect(res.status, body).toBe(400);
+        expect(await res.json()).toEqual({ error: "Cererea nu este validă", code: "invalid" });
+      }
+      nothingSentOrStored();
+    });
+
+    it("is far above the largest body the form can make: every field full, every character escaped, a reCAPTCHA token", () => {
+      const fullest = JSON.stringify({
+        name: '"'.repeat(120),
+        email: `${"a".repeat(64)}@${"b".repeat(185)}.ro`,
+        company: '"'.repeat(160),
+        phone: '"'.repeat(40),
+        message: '"'.repeat(5000),
+        reference: "",
+        elapsedMs: 86_400_000,
+        recaptchaToken: "t".repeat(4000),
+      });
+      expect(fullest.length).toBeLessThan(CONTACT_MAX_BODY_CHARS);
+    });
   });
 
   it("keeps the message's line breaks and tabs", async () => {

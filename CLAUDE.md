@@ -208,7 +208,8 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   phone are one line (no C0 or C1 control, line or paragraph separator, or bidi
   control; a phone number copied with invisible direction marks around it, as chat apps
   copy one, loses them at its ends first); the message keeps its line breaks and tabs
-  and refuses the rest. A refusal is the form's own 400.
+  and refuses the rest. The body is read as text and refused above 16 384 characters
+  (`CONTACT_MAX_BODY_CHARS`) before it is parsed. A refusal is the form's own 400.
 - **The form answers a refusal in the visitor's language** (`lib/contact/refusal.ts`,
   since 2026-11-19): it shows its own sentence for each `code` the route returns
   (`invalid`, `rate_limited`, `verify_failed`, `server`; anything else gets the generic
