@@ -222,9 +222,11 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   first byte, as it always did. Until 2026-11-19 587 and 25 failed the handshake; no other
   setting changed meaning (ruling P331: production's `SMTP_PORT` is set and was not read,
   so only the ports that could not work were changed). A hanging mail server costs the
-  request at most 10 s to connect, finish TLS and greet, then 20 s of silence (since
-  2026-11-19). A server that doesn't verify as it is gets the setting it needs, never
-  verification turned off:
+  request at most 10 s to connect, finish TLS and greet, then 20 s of silence, and the
+  whole send is cut at 25 s (`SMTP_SEND_DEADLINE_MS`, nodemailer's per-send AbortSignal),
+  so a server that trickles bytes can't hold it longer either (all since 2026-11-19). A
+  server that doesn't verify as it is gets the setting it needs, never verification
+  turned off:
   - `SMTP_TLS_SERVERNAME`: the name its certificate carries, when `SMTP_HOST` is an IP or
     an alias the certificate doesn't list;
   - `SMTP_TLS_CA`: the PEM of its private CA (or its self-signed certificate). Set, it

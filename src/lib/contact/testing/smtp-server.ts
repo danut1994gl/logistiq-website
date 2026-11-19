@@ -73,6 +73,11 @@ export interface TestSmtpOptions {
   greet?: boolean;
   /** The port on 127.0.0.1; 0 (the default) lets the system pick a free one. */
   port?: number;
+  /**
+   * After EHLO, answer one byte every `everyMs` and never finish the line, so no silence timer fires; hang up after
+   * `forMs`. How each such connection ended is recorded in `trickles`.
+   */
+  trickleEhlo?: { everyMs: number; forMs: number };
 }
 
 export interface TestSmtpAuth {
@@ -99,16 +104,38 @@ export interface TestSmtpServer {
   tlsFailures: string[];
   auths: TestSmtpAuth[];
   deliveries: TestSmtpDelivery[];
+  /** With `trickleEhlo`: how each trickled connection ended, and after how many ms of trickling. */
+  trickles: Array<{ ended: "the client hung up" | "the server gave up"; afterMs: number }>;
   close(): Promise<void>;
 }
 
 /** Starts a test SMTP server on 127.0.0.1, by default at a port the system picks. */
 export async function startTestSmtpServer(options: TestSmtpOptions): Promise<TestSmtpServer> {
-  const { mode, certs, greet = true, port = 0 } = options;
+  const { mode, certs, greet = true, port = 0, trickleEhlo } = options;
   if (mode !== "plain" && !certs) throw new Error(`a ${mode} test server needs certificates`);
   const secureContext = certs ? tls.createSecureContext({ key: certs.keyPem, cert: certs.certPem }) : undefined;
   const sockets = new Set<net.Socket>();
-  const state: Omit<TestSmtpServer, "port" | "close"> = { sessions: 0, tlsFailures: [], auths: [], deliveries: [] };
+  const state: Omit<TestSmtpServer, "port" | "close"> = { sessions: 0, tlsFailures: [], auths: [], deliveries: [], trickles: [] };
+
+  const trickle = (socket: net.Socket, { everyMs, forMs }: { everyMs: number; forMs: number }) => {
+    const started = Date.now();
+    let ended = false;
+    const end = (how: "the client hung up" | "the server gave up") => {
+      if (ended) return;
+      ended = true;
+      clearInterval(drip);
+      clearTimeout(giveUp);
+      state.trickles.push({ ended: how, afterMs: Date.now() - started });
+    };
+    socket.write(`250-${TEST_SMTP_NAME} `);
+    const drip = setInterval(() => socket.write("."), everyMs);
+    const giveUp = setTimeout(() => {
+      end("the server gave up");
+      socket.destroy();
+    }, forMs);
+    socket.once("end", () => end("the client hung up"));
+    socket.once("close", () => end("the client hung up"));
+  };
 
   const track = (socket: net.Socket) => {
     sockets.add(socket);
@@ -155,6 +182,11 @@ export async function startTestSmtpServer(options: TestSmtpOptions): Promise<Tes
         const [verb = "", ...rest] = line.split(" ");
         switch (verb.toUpperCase()) {
           case "EHLO":
+            if (trickleEhlo) {
+              socket.removeListener("data", onData);
+              trickle(socket, trickleEhlo);
+              return;
+            }
             reply(
               [`250-${TEST_SMTP_NAME}`, ...(mode === "starttls" && !overTls ? ["250-STARTTLS"] : []), "250-AUTH PLAIN", "250 8BITMIME"].join("\r\n"),
             );

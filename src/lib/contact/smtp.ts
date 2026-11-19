@@ -23,6 +23,13 @@ import type { ConnectionOptions } from "node:tls";
 // Either way the certificate is verified with the options below.
 const STARTTLS_PORTS: ReadonlySet<number> = new Set([587, 25]);
 
+// The whole send's bound (2026-11-19). The transport's timeouts bound connecting, TLS and the greeting (10 s) and
+// each silence (20 s), but a server that sends a byte now and then trips none of them; the route aborts the send
+// through nodemailer's per-send AbortSignal (10.5.0) once this much time has passed, and answers its error. Past
+// the 10 s the setup may take, so a slow but working server still delivers. An abort does not prove the server had
+// not already accepted the message.
+export const SMTP_SEND_DEADLINE_MS = 25_000;
+
 export function smtpTlsMode(port: number): { secure: true } | { secure: false; requireTLS: true } {
   return STARTTLS_PORTS.has(port) ? { secure: false, requireTLS: true } : { secure: true };
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { smtpTlsMode, smtpTlsOptions } from "@/lib/contact/smtp";
+import { SMTP_SEND_DEADLINE_MS, smtpTlsMode, smtpTlsOptions } from "@/lib/contact/smtp";
 
 // A PEM-shaped value: these tests check what reaches the TLS options, not the certificate.
 const PEM = "-----BEGIN CERTIFICATE-----\nMIIBszCCAVmgAwIBAgIUQ1Q0\n-----END CERTIFICATE-----";
@@ -62,5 +62,11 @@ describe("smtpTlsMode: how the connection is secured follows SMTP_PORT", () => {
     for (const port of [465, 2525, 2465, 8465, 26, 588, 0, Number.NaN]) {
       expect(smtpTlsMode(port), String(port)).toEqual({ secure: true });
     }
+  });
+});
+
+describe("SMTP_SEND_DEADLINE_MS: the whole send's bound", () => {
+  it("is 25 s: past the 10 s the setup may take, short of what holds a request for good", () => {
+    expect(SMTP_SEND_DEADLINE_MS).toBe(25_000);
   });
 });

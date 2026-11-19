@@ -6,7 +6,7 @@ import { createReadClient } from '@/lib/supabase'
 import { contactEmail } from '@/lib/contact/email'
 import { isOneLine, isPlainMailbox, isText } from '@/lib/contact/input'
 import { verifyRecaptcha } from '@/lib/contact/recaptcha'
-import { smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
+import { SMTP_SEND_DEADLINE_MS, smtpTlsMode, smtpTlsOptions } from '@/lib/contact/smtp'
 import {
   ELAPSED_FIELD,
   FIELD_MAX,
@@ -184,6 +184,8 @@ export async function POST(request: NextRequest) {
       subject,
       html,
       text,
+      // The whole send's bound: a server that trickles its answers can't hold the request.
+      signal: AbortSignal.timeout(SMTP_SEND_DEADLINE_MS),
     })
 
     // Persist a lead row in addition to the email notification (ADR-005). The email is the

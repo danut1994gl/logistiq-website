@@ -21,12 +21,21 @@ import {
 // A test server can't listen on 465 or 587, so the route's port is pointed at the one the system gave the matching
 // server: that is the only option changed between the route and nodemailer. Skipped without openssl.
 
-const { nodemailerOf, ports, configs } = vi.hoisted(() => ({
+const { nodemailerOf, ports, configs, deadline } = vi.hoisted(() => ({
   nodemailerOf: (loaded: unknown) =>
     ((loaded as { default?: unknown }).default ?? loaded) as { createTransport(options: object): unknown },
   /** The route's port → the test server's. */
   ports: new Map<number, number>(),
   configs: [] as Array<Record<string, unknown>>,
+  /** The send's deadline the route reads (lib/contact/smtp.ts): production's, but where a test shortens it. */
+  deadline: { ms: 25_000 },
+}));
+
+vi.mock("@/lib/contact/smtp", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/contact/smtp")>()),
+  get SMTP_SEND_DEADLINE_MS() {
+    return deadline.ms;
+  },
 }));
 
 vi.mock("nodemailer", async (importOriginal) => {
@@ -237,6 +246,33 @@ describe.skipIf(!hasOpenssl())("the route's SMTP transport against local mail se
       } finally {
         ports.set(465, implicit.port);
         await silent.close();
+      }
+    });
+
+    // A server that sends a byte now and then never trips the silence timer, and once it has greeted, the setup bound
+    // no longer applies: only a deadline on the whole send stops it (25 s in production, shortened here).
+    it("answers its error at the send's deadline when the server trickles its answer", { timeout: 30_000 }, async () => {
+      const trickling = await startTestSmtpServer({ mode: "implicit-tls", certs, trickleEhlo: { everyMs: 200, forMs: 8_000 } });
+      ports.set(465, trickling.port);
+      deadline.ms = 1_500;
+      try {
+        const started = Date.now();
+        const result = await send(TRUSTED);
+        const elapsed = Date.now() - started;
+        expect(result).toMatchObject({ status: 500, body: { code: "server" } });
+        expect(result.error?.code).toBe("EABORT");
+        expect(result.error?.name).toBe("AbortError");
+        expect(elapsed).toBeGreaterThanOrEqual(1_400);
+        expect(elapsed).toBeLessThan(4_000);
+        await vi.waitFor(() => expect(trickling.trickles).toHaveLength(1), { timeout: 7_000 });
+        expect(trickling.trickles[0].ended).toBe("the client hung up");
+        expect(trickling.auths).toEqual([]);
+        expect(trickling.deliveries).toEqual([]);
+        expect(insert).not.toHaveBeenCalled();
+      } finally {
+        deadline.ms = 25_000;
+        ports.set(465, implicit.port);
+        await trickling.close();
       }
     });
 

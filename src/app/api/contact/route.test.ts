@@ -142,6 +142,13 @@ describe("POST /api/contact — a person", () => {
     expect(createTransport.mock.calls[0][0]).toMatchObject({ secure: true, tls: { rejectUnauthorized: true } });
   });
 
+  it("gives the send a deadline of its own: a signal that aborts it (lib/contact/smtp.ts)", async () => {
+    await post(human);
+    const { signal } = sendMail.mock.calls[0][0];
+    expect(signal).toBeInstanceOf(AbortSignal);
+    expect(signal.aborted).toBe(false);
+  });
+
   it("gives up on a mail server that hangs: 10 s to connect and greet, 20 s of silence", async () => {
     await post(human);
     expect(createTransport.mock.calls[0][0]).toMatchObject({
