@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { DRIVER_POOLS } from "./driverPools";
 
 // Department & Truck Categories (feature 4) — "Cargo Routing". Each check-in
@@ -34,6 +35,18 @@ const SNOW = (
 const LEAF = <path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-10-1 10-4 16-9 17zM4 21c1.5-4 4-6.5 8-8.5" />;
 const BOX = <path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3zM3 7.5 12 12l9-4.5M12 12v9" />;
 
+// Hoisted (react-hooks/static-components): a component declared inside the scene was a
+// new type on every render, so React remounted each badge each time. `chip` is the
+// department's chip colours.
+function CargoBadge({ c, chip, big }: { c: Cargo; chip: string; big?: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-[0.5cqw] rounded-full border px-[1cqw] py-[0.3cqw] font-semibold ${chip} ${big ? "text-[1.5cqw]" : "text-[1.15cqw]"}`}>
+      <svg viewBox="0 0 24 24" className={big ? "w-[1.7cqw] h-[1.7cqw]" : "w-[1.3cqw] h-[1.3cqw]"} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{c.icon}</svg>
+      {c.label}
+    </span>
+  );
+}
+
 export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: Locale }) {
   const f = t.f4Page;
   const plates = DRIVER_POOLS[locale].map((d) => d.plate);
@@ -63,32 +76,32 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
     fresh: ["refrigerated", "tarp", "trailer"],
     dry: ["tarp", "trailer", "tanker"],
   };
-  const ttFor = (dept: DeptKey, i?: number) => {
+  // the i-th trailer allowed for a department (the player, in the effect, picks i at random)
+  const ttAt = (dept: DeptKey, i: number) => {
     const keys = TT_BY_DEPT[dept];
-    const k = keys[i === undefined ? Math.floor(Math.random() * keys.length) : i % keys.length];
+    const k = keys[i % keys.length];
     return TTS.find((tt) => tt.key === k)!;
   };
 
-  const [cols, setCols] = useState<Record<DeptKey, Card[]>>({ cold: [], fresh: [], dry: [] });
+  const [colsState, setCols] = useState<Record<DeptKey, Card[]>>({ cold: [], fresh: [], dry: [] });
   const [incoming, setIncoming] = useState<Card | null>(null);
   const [activeDept, setActiveDept] = useState<DeptKey | null>(null);
+  const reduced = usePrefersReducedMotion();
+  // Reduced motion: a static populated board, the same on every visit, and no player.
+  const mk = (dept: DeptKey, cargoKey: string, i: number): Card => ({ id: i, plate: plates[i % plates.length], cargo: CARGOS.find((c) => c.key === cargoKey)!, tt: ttAt(dept, i), state: "in" });
+  const cols: Record<DeptKey, Card[]> = reduced
+    ? { cold: [mk("cold", "frozen", 1), mk("cold", "frozen", 2)], fresh: [mk("fresh", "vegetables", 3), mk("fresh", "fruits", 4)], dry: [mk("dry", "dry", 5)] }
+    : colsState;
   const rootRef = useRef<HTMLDivElement>(null);
-  const colsRef = useRef(cols);
-  colsRef.current = cols;
   const idRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // static populated board
-      const mk = (dept: DeptKey, cargoKey: string, i: number): Card => ({ id: i, plate: plates[i % plates.length], cargo: CARGOS.find((c) => c.key === cargoKey)!, tt: ttFor(dept, i), state: "in" });
-      setCols({ cold: [mk("cold", "frozen", 1), mk("cold", "frozen", 2)], fresh: [mk("fresh", "vegetables", 3), mk("fresh", "fruits", 4)], dry: [mk("dry", "dry", 5)] });
-      return;
-    }
+    if (reduced) return;
+    const ttFor = (dept: DeptKey) => ttAt(dept, Math.floor(Math.random() * TT_BY_DEPT[dept].length));
     let cancelled = false, visible = true;
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.15 });
     if (rootRef.current) io.observe(rootRef.current);
     const sleep = (ms: number) => new Promise<void>((res) => { const s = Date.now(); const tick = () => { if (cancelled) return res(); if (visible && Date.now() - s >= ms) return res(); setTimeout(tick, visible ? 90 : 150); }; setTimeout(tick, 90); });
-    const setColsBoth = (fn: (c: Record<DeptKey, Card[]>) => Record<DeptKey, Card[]>) => { colsRef.current = fn(colsRef.current); setCols(colsRef.current); };
     let pi = 0;
     (async () => {
       await sleep(700);
@@ -103,7 +116,7 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
         if (cancelled) break;
         // 2) routed into the matching department column
         setIncoming(null);
-        setColsBoth((c) => {
+        setCols((c) => {
           const col = [...c[cargo.dept], card];
           if (col.length > 3) { col[0] = { ...col[0], state: "leaving" }; } // release the oldest
           return { ...c, [cargo.dept]: col };
@@ -111,23 +124,13 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
         await sleep(650);
         setActiveDept(null);
         // drop the released card
-        setColsBoth((c) => ({ ...c, [cargo.dept]: c[cargo.dept].filter((x) => x.state !== "leaving") }));
+        setCols((c) => ({ ...c, [cargo.dept]: c[cargo.dept].filter((x) => x.state !== "leaving") }));
         await sleep(900);
       }
     })();
     return () => { cancelled = true; io.disconnect(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const CargoBadge = ({ c, big }: { c: Cargo; big?: boolean }) => {
-    const m = deptMeta(c.dept);
-    return (
-      <span className={`inline-flex items-center gap-[0.5cqw] rounded-full border px-[1cqw] py-[0.3cqw] font-semibold ${m.chip} ${big ? "text-[1.5cqw]" : "text-[1.15cqw]"}`}>
-        <svg viewBox="0 0 24 24" className={big ? "w-[1.7cqw] h-[1.7cqw]" : "w-[1.3cqw] h-[1.3cqw]"} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{c.icon}</svg>
-        {c.label}
-      </span>
-    );
-  };
+  }, [reduced]);
 
   return (
     <div ref={rootRef} className="@container absolute inset-0 p-[2cqw] text-slate-200 select-none" aria-hidden="true">
@@ -143,7 +146,7 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
               const m = deptMeta(c.dept);
               return (
                 <span key={c.key} className={`inline-flex items-center gap-[0.6cqw] text-[1.15cqw] ${activeDept === c.dept ? "opacity-100" : "opacity-70"}`}>
-                  <CargoBadge c={c} />
+                  <CargoBadge c={c} chip={m.chip} />
                   <svg viewBox="0 0 24 24" className="w-[1.3cqw] h-[1.3cqw] text-slate-500" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   <span className={`${m.dot} font-semibold`}>{m.name}</span>
                 </span>
@@ -164,7 +167,7 @@ export function CategoryRoutingScene({ t, locale }: { t: Translations; locale: L
                   <span className="text-white font-bold text-[1.7cqw]">{incoming.plate}</span>
                   <span className="text-slate-400 text-[1.2cqw]">{incoming.tt.label}</span>
                 </span>
-                <CargoBadge c={incoming.cargo} big />
+                <CargoBadge c={incoming.cargo} chip={deptMeta(incoming.cargo.dept).chip} big />
                 <svg viewBox="0 0 24 24" className={`w-[2cqw] h-[2cqw] ${activeDept ? deptMeta(incoming.cargo.dept).dot : "text-slate-500"} transition-colors`} fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M12 5v14M6 13l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </div>
             ) : (
