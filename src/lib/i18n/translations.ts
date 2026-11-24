@@ -1744,7 +1744,7 @@ export const translations = {
         title: "Articolul 6 - Prețuri și Plăți",
         items: [
           "Prețul fiecărui plan se stabilește prin oferta comercială acceptată de Client sau prin contractul încheiat între Prestator și Client",
-          "Facturarea se face lunar, în avans",
+          "Facturarea se face în avans, pentru perioada de facturare stabilită în contract: lunar, trimestrial, semestrial, anual sau o altă perioadă convenită",
           "Plata se efectuează prin transfer bancar, pe baza facturii emise conform contractului",
           "Pentru România, se emit facturi fiscale prin SmartBill",
           "Modificarea prețurilor cu notificare prealabilă de 30 de zile",
@@ -3656,7 +3656,7 @@ export const translations = {
       },
       article6: {
         title: "Article 6 - Pricing and Payments",
-        items: ["The price of each plan is set by the commercial offer accepted by the Client or by the contract concluded between the Provider and the Client", "Billing is monthly, in advance", "Payment via bank transfer, against the invoice issued under the contract", "Fiscal invoices issued via SmartBill for Romania", "Price changes with 30 days notice"],
+        items: ["The price of each plan is set by the commercial offer accepted by the Client or by the contract concluded between the Provider and the Client", "Billing is in advance, for the billing period set in the contract: monthly, quarterly, semiannual, annual or another agreed period", "Payment via bank transfer, against the invoice issued under the contract", "Fiscal invoices issued via SmartBill for Romania", "Price changes with 30 days notice"],
         plans: { title: "Available Plans", professional: "Professional: 1 warehouse", enterprise5: "Enterprise 5: up to 5 warehouses", enterprise10: "Enterprise 10: up to 10 warehouses", enterprise25: "Enterprise 25: up to 25 warehouses" },
       },
       article7: {
@@ -5715,7 +5715,7 @@ export const translations = {
         title: "Artikel 6 - Preise und Zahlungen",
         items: [
           "Der Preis jedes Plans wird durch das vom Kunden angenommene Angebot oder durch den zwischen dem Anbieter und dem Kunden geschlossenen Vertrag festgelegt",
-          "Die Rechnungsstellung erfolgt monatlich im Voraus",
+          "Die Rechnungsstellung erfolgt im Voraus, für den im Vertrag festgelegten Abrechnungszeitraum: monatlich, vierteljährlich, halbjährlich, jährlich oder einen anderen vereinbarten Zeitraum",
           "Die Zahlung erfolgt per Banküberweisung gegen die gemäß dem Vertrag ausgestellte Rechnung",
           "Für Rumänien werden steuerlich gültige Rechnungen über SmartBill ausgestellt",
           "Preisänderungen mit einer Vorankündigung von 30 Tagen",
@@ -7927,7 +7927,7 @@ export const translations = {
         title: "Artykuł 6 - Ceny i płatności",
         items: [
           "Cenę każdego planu określa oferta handlowa zaakceptowana przez Klienta lub umowa zawarta między Usługodawcą a Klientem",
-          "Fakturowanie odbywa się co miesiąc, z góry",
+          "Fakturowanie odbywa się z góry, za okres rozliczeniowy określony w umowie: miesięczny, kwartalny, półroczny, roczny lub inny uzgodniony okres",
           "Płatności dokonuje się przelewem bankowym na podstawie faktury wystawionej zgodnie z umową",
           "W przypadku Rumunii faktury są wystawiane za pośrednictwem SmartBill",
           "Zmiana cen wymaga powiadomienia z 30-dniowym wyprzedzeniem",
@@ -10138,7 +10138,7 @@ export const translations = {
         title: "6. cikk – Árak és fizetés",
         items: [
           "Az egyes csomagok árát az Ügyfél által elfogadott árajánlat vagy a Szolgáltató és az Ügyfél között létrejött szerződés határozza meg",
-          "A számlázás havonta, előre történik",
+          "A számlázás előre történik, a szerződésben rögzített számlázási időszakra: havonta, negyedévente, félévente, évente vagy más, megállapodás szerinti időszakra",
           "A fizetés banki átutalással történik, a szerződés szerint kiállított számla alapján",
           "Románia esetében a számlák kiállítása a SmartBill rendszeren keresztül történik",
           "Az árak módosítása 30 napos előzetes értesítéssel",
@@ -12348,7 +12348,7 @@ export const translations = {
         title: "Член 6 - Цени и плащания",
         items: [
           "Цената на всеки план се определя от търговската оферта, приета от Клиента, или от договора, сключен между Доставчика и Клиента",
-          "Фактурирането се извършва ежемесечно, авансово",
+          "Фактурирането се извършва авансово, за периода на фактуриране, определен в договора: месечно, тримесечно, на всеки шест месеца, годишно или за друг договорен период",
           "Плащането се извършва с банков превод въз основа на фактурата, издадена съгласно договора",
           "За Румъния данъчните фактури се издават чрез SmartBill",
           "Промяна на цените с 30-дневно предизвестие",
@@ -14565,7 +14565,7 @@ export const translations = {
         title: "Article 6 – Prix et paiements",
         items: [
           "Le prix de chaque forfait est fixé par l'offre commerciale acceptée par le Client ou par le contrat conclu entre le Prestataire et le Client",
-          "La facturation est effectuée mensuellement, à l'avance",
+          "La facturation est effectuée à l'avance, pour la période de facturation fixée dans le contrat : mensuelle, trimestrielle, semestrielle, annuelle ou une autre période convenue",
           "Le paiement est effectué par virement bancaire, sur la base de la facture émise conformément au contrat",
           "Pour la Roumanie, des factures fiscales sont émises via SmartBill",
           "Modification des prix avec un préavis de 30 jours",
@@ -16783,7 +16783,7 @@ export const translations = {
         title: "Artikel 6 - Prijzen en betalingen",
         items: [
           "De prijs van elk plan wordt vastgesteld in de door de Klant aanvaarde commerciële offerte of in de tussen de Dienstverlener en de Klant gesloten overeenkomst",
-          "De facturatie vindt maandelijks en vooraf plaats",
+          "De facturatie vindt vooraf plaats, voor de factureringsperiode die in de overeenkomst is vastgelegd: maandelijks, per kwartaal, per halfjaar, jaarlijks of een andere overeengekomen periode",
           "De betaling wordt verricht per bankoverschrijving, op basis van de factuur die krachtens de overeenkomst wordt uitgereikt",
           "Voor Roemenië worden fiscale facturen uitgereikt via SmartBill",
           "Prijswijzigingen met een kennisgeving van 30 dagen vooraf",

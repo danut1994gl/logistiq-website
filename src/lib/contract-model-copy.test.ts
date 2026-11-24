@@ -7,7 +7,8 @@ import { translations } from "@/lib/i18n/translations";
 // the contract's cycle: monthly, quarterly, semiannual, annual or a custom number of days.
 // Its pro forma is issued when the period starts and paid by bank transfer. The fiscal
 // invoice is issued through SmartBill once the payment is recorded. Until 2026-11-24, in
-// all 8 languages, the FAQ said billing was monthly and paid against "the invoice".
+// all 8 languages, the FAQ and the terms said billing was monthly and paid against "the
+// invoice".
 
 // "quarterly" and "pro forma" in each language: words the billing copy had none of while it
 // said billing was monthly.
@@ -43,6 +44,12 @@ describe("contract model copy", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.faq.a7, locale).toMatch(QUARTERLY[locale]);
       expect(copy.faq.a7, locale).toMatch(PRO_FORMA[locale]);
+    }
+  });
+
+  it("the terms bill in advance for the billing period set in the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(copy.terms.article6.items[1], locale).toMatch(QUARTERLY[locale]);
     }
   });
 });
