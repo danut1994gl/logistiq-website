@@ -1552,6 +1552,7 @@ export const translations = {
           { name: "WhatsApp (WAHA)", purpose: "Mesaje către șoferi pe WhatsApp, trimise printr-o instanță WAHA" },
           { name: "Twilio / Vonage", purpose: "SMS-uri către șoferi, prin contul SMS configurat de fiecare depozit" },
           { name: "cloud342.c-f.ro", purpose: "Server de e-mail: e-mailurile contului și ale serviciului și mesajele din formularul de contact" },
+          { name: "Google reCAPTCHA", purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor" },
         ],
         note: "Nu vindem și nu partajăm datele dvs. personale cu terți în scopuri de marketing.",
       },
@@ -1801,6 +1802,7 @@ export const translations = {
         services: [
           { name: "Supabase", purpose: "Autentificare și bază de date", url: "supabase.com/privacy" },
           { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
+          { name: "Google reCAPTCHA", purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor", url: "policies.google.com/privacy" },
         ],
         note: "Vă recomandăm să consultați politicile de confidențialitate ale acestor servicii pentru detalii.",
       },
@@ -3398,6 +3400,7 @@ export const translations = {
           { name: "WhatsApp (WAHA)", purpose: "Messages to drivers on WhatsApp, sent through a WAHA instance" },
           { name: "Twilio / Vonage", purpose: "SMS to drivers, through the SMS account each warehouse configures" },
           { name: "cloud342.c-f.ro", purpose: "Mail server: account and service emails, and the contact form's messages" },
+          { name: "Google reCAPTCHA", purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots" },
         ],
         note: "We do not sell or share your personal data with third parties for marketing purposes.",
       },
@@ -3630,6 +3633,7 @@ export const translations = {
         services: [
           { name: "Supabase", purpose: "Authentication and database", url: "supabase.com/privacy" },
           { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
+          { name: "Google reCAPTCHA", purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots", url: "policies.google.com/privacy" },
         ],
         note: "We recommend consulting the privacy policies of these services for details.",
       },
@@ -5281,6 +5285,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Mailserver: Konto- und Service-E-Mails sowie die Nachrichten aus dem Kontaktformular",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Schützt die Formulare von logistiq.cloud für die Anmeldung, das Zurücksetzen des Passworts und die Registrierung von Transportunternehmen vor Bots",
+          },
         ],
         note:
           "Wir verkaufen oder teilen Ihre personenbezogenen Daten nicht zu Marketingzwecken mit Dritten.",
@@ -5744,6 +5752,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Schützt die Formulare von logistiq.cloud für die Anmeldung, das Zurücksetzen des Passworts und die Registrierung von Transportunternehmen vor Bots",
+            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -7418,6 +7431,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Serwer poczty: e-maile dotyczące konta i usługi oraz wiadomości z formularza kontaktowego",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Chroni przed botami formularze logistiq.cloud do logowania, resetowania hasła i rejestracji przewoźników",
+          },
         ],
         note:
           "Nie sprzedajemy Twoich danych osobowych ani nie udostępniamy ich podmiotom trzecim w celach marketingowych.",
@@ -7878,6 +7895,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Chroni przed botami formularze logistiq.cloud do logowania, resetowania hasła i rejestracji przewoźników",
+            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -9553,6 +9575,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Levelezőszerver: fiók- és szolgáltatási e-mailek, valamint a kapcsolatfelvételi űrlap üzenetei",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Megvédi a botoktól a logistiq.cloud bejelentkezési, jelszó-visszaállítási és fuvarozói regisztrációs űrlapjait",
+          },
         ],
         note:
           "Személyes adatait nem értékesítjük és nem osztjuk meg harmadik felekkel marketingcélokra.",
@@ -10012,6 +10038,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Tárhelyszolgáltatás",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Megvédi a botoktól a logistiq.cloud bejelentkezési, jelszó-visszaállítási és fuvarozói regisztrációs űrlapjait",
+            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -11685,6 +11716,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Пощенски сървър: имейли за акаунта и услугата и съобщенията от формата за контакт",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Защитава от ботове формулярите на logistiq.cloud за вход, възстановяване на паролата и регистрация на превозвачи",
+          },
         ],
         note: "Не продаваме и не споделяме вашите лични данни с трети страни за маркетингови цели.",
       },
@@ -12143,6 +12178,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Хостинг",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Защитава от ботове формулярите на logistiq.cloud за вход, възстановяване на паролата и регистрация на превозвачи",
+            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -13819,6 +13859,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Serveur de messagerie : e-mails du compte et du service, et messages du formulaire de contact",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Protège contre les robots les formulaires de logistiq.cloud pour la connexion, la réinitialisation du mot de passe et l'inscription des transporteurs",
+          },
         ],
         note:
           "Nous ne vendons ni ne partageons vos données à caractère personnel avec des tiers à des fins de marketing.",
@@ -14285,6 +14329,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Hébergement",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Protège contre les robots les formulaires de logistiq.cloud pour la connexion, la réinitialisation du mot de passe et l'inscription des transporteurs",
+            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -15959,6 +16008,10 @@ export const translations = {
             name: "cloud342.c-f.ro",
             purpose: "Mailserver: account- en service-e-mails en de berichten van het contactformulier",
           },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Beschermt de formulieren van logistiq.cloud voor inloggen, wachtwoordherstel en registratie van vervoerders tegen bots",
+          },
         ],
         note:
           "Wij verkopen uw persoonsgegevens niet en delen ze niet met derden voor marketingdoeleinden.",
@@ -16426,6 +16479,11 @@ export const translations = {
             name: "Vercel",
             purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
+          },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Beschermt de formulieren van logistiq.cloud voor inloggen, wachtwoordherstel en registratie van vervoerders tegen bots",
+            url: "policies.google.com/privacy",
           },
         ],
         note:

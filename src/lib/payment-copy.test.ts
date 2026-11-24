@@ -110,7 +110,8 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
       const services = copy.cookies.thirdParty.services.map((s) => s.name);
       // Google Analytics left the list on 2026-11-24 too: no page of logistiq.ro,
       // logistiq.cloud or qrgo.ro loads it (legal-copy.test.ts).
-      expect(services, locale).toEqual(["Supabase", "Vercel"]);
+      // Google reCAPTCHA joined it on 2026-11-24 (legal-copy.test.ts).
+      expect(services, locale).toEqual(["Supabase", "Vercel", "Google reCAPTCHA"]);
     }
   });
 

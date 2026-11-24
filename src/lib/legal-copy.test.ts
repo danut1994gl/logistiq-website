@@ -77,6 +77,7 @@ const PROCESSORS = [
   "WhatsApp (WAHA)",
   "Twilio / Vonage",
   "cloud342.c-f.ro",
+  "Google reCAPTCHA",
 ];
 
 describe("privacy policy, section 5", () => {
@@ -85,6 +86,24 @@ describe("privacy policy, section 5", () => {
       const partners = copy.privacy.thirdParties.partners;
       expect(partners.map((p) => p.name), locale).toEqual(PROCESSORS);
       for (const p of partners) expect(p.purpose.trim(), `${locale} ${p.name}`).not.toBe("");
+    }
+  });
+});
+
+// Google reCAPTCHA guards logistiq.cloud's sign-in and password-reset forms and the carrier
+// registration (Logistiq apps/dashboard/components/landing/LoginCard.tsx,
+// app/carrier-register/page.tsx, components/ui/ReCaptcha.tsx, lib/recaptcha.ts); its script
+// is Google's and may set cookies. The self-registration wizard has it too, but /signup
+// redirects to logistiq.ro/contact while self-serve and card payments are off (ADR-057).
+// Until 2026-11-24 neither legal list named it.
+describe("Google reCAPTCHA", () => {
+  it("is named by the privacy policy and by the cookie policy, with Google's privacy policy", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const partner = copy.privacy.thirdParties.partners.find((p) => p.name === "Google reCAPTCHA");
+      const service = copy.cookies.thirdParty.services.find((s) => s.name === "Google reCAPTCHA");
+      expect(partner?.purpose, locale).toMatch(/logistiq\.cloud/);
+      expect(service?.purpose, locale).toBe(partner?.purpose);
+      expect(service?.url, locale).toBe("policies.google.com/privacy");
     }
   });
 });
