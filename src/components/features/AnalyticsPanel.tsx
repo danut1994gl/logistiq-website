@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Translations } from "@/lib/i18n/translations";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 // Faithful live analytics panel (feature 5). Mirrors the real dashboard: KPI
 // tiles (check-ins, avg wait, avg completion, dock utilisation with the
@@ -32,11 +33,14 @@ export function AnalyticsPanel({ t }: { t: Translations }) {
     { key: a.p30d, checkins: 1284, wait: 13, completion: 39, util: 76, bars: [42, 55, 61, 48, 66, 72, 58, 63, 70, 51, 44, 68, 74, 59, 62], types: [560, 498, 226], funnel: [100, 95, 83, 12, 79] },
   ];
   const [pi, setPi] = useState(0);
-  const [anim, setAnim] = useState(0); // 0..1 progress for count-up + chart grow
+  const [animState, setAnim] = useState(0); // 0..1 progress for count-up + chart grow
+  const reduced = usePrefersReducedMotion();
+  // Reduced motion: the first period, fully drawn, and no player.
+  const anim = reduced ? 1 : animState;
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setAnim(1); return; }
+    if (reduced) return;
     let cancelled = false, visible = true;
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.2 });
     if (rootRef.current) io.observe(rootRef.current);
@@ -53,7 +57,7 @@ export function AnalyticsPanel({ t }: { t: Translations }) {
     })();
     return () => { cancelled = true; io.disconnect(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reduced]);
 
   const p = PERIODS[pi];
   const val = (n: number) => Math.round(n * anim);
