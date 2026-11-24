@@ -27,3 +27,22 @@ describe("legal pages", () => {
     }
   });
 });
+
+// No page of logistiq.ro, logistiq.cloud or qrgo.ro loads Google Analytics or Vercel's
+// analytics: none of the three apps depends on @vercel/analytics or
+// @vercel/speed-insights, and none loads gtag or googletagmanager (checked in this
+// repository and in Logistiq's apps/dashboard, apps/driver and packages on 2026-11-24).
+// Until then the cookie policy listed analytics cookies (_ga, _gid) and Google Analytics
+// among the third parties, and gave Vercel the purpose "Hosting and analytics", in every
+// language.
+describe("cookie policy", () => {
+  it("lists no analytics cookie and no analytics service", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(Object.keys(copy.cookies.cookiesWeUse).sort(), locale).toEqual(["essential", "functional", "title"]);
+      const text = JSON.stringify(copy.cookies);
+      expect(text.match(/Google Analytics|"_ga"|"_gid"/)?.[0], locale).toBeUndefined();
+      const vercel = copy.cookies.thirdParty.services.find((s) => s.name === "Vercel");
+      expect(vercel?.purpose.match(/analy|anali[tz]|анализ|audience/i)?.[0], locale).toBeUndefined();
+    }
+  });
+});

@@ -258,12 +258,6 @@ export default function CookiesPage({
             cookies={t.cookiesWeUse.functional.cookies}
             headers={legal.cookieHeaders}
           />
-          <CookieCategoryCard
-            title={t.cookiesWeUse.analytics.title}
-            desc={t.cookiesWeUse.analytics.desc}
-            cookies={t.cookiesWeUse.analytics.cookies}
-            headers={legal.cookieHeaders}
-          />
         </Section>
 
         {/* Section 4: Third Party */}

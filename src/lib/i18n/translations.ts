@@ -1791,22 +1791,13 @@ export const translations = {
             { name: "sidebar_collapsed", duration: "30 de zile", purpose: "Starea meniului lateral în Dashboard" },
           ],
         },
-        analytics: {
-          title: "Cookie-uri Analitice",
-          desc: "Ne ajută să înțelegem cum utilizați platforma pentru a o îmbunătăți.",
-          cookies: [
-            { name: "_ga", duration: "2 ani", purpose: "Google Analytics - identificare vizitator" },
-            { name: "_gid", duration: "24 de ore", purpose: "Google Analytics - identificare sesiune" },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Cookie-uri de la Terțe Părți",
         intro: "Platforma Logistiq utilizează următoarele servicii terțe care pot plasa cookie-uri:",
         services: [
           { name: "Supabase", purpose: "Autentificare și bază de date", url: "supabase.com/privacy" },
-          { name: "Vercel", purpose: "Hosting și analize", url: "vercel.com/legal/privacy-policy" },
-          { name: "Google Analytics", purpose: "Statistici de trafic", url: "policies.google.com/privacy" },
+          { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
         ],
         note: "Vă recomandăm să consultați politicile de confidențialitate ale acestor servicii pentru detalii.",
       },
@@ -3626,22 +3617,13 @@ export const translations = {
             { name: "sidebar_collapsed", duration: "30 days", purpose: "Sidebar state in Dashboard" },
           ],
         },
-        analytics: {
-          title: "Analytics Cookies",
-          desc: "Help us understand how you use the platform to improve it.",
-          cookies: [
-            { name: "_ga", duration: "2 years", purpose: "Google Analytics - visitor identification" },
-            { name: "_gid", duration: "24 hours", purpose: "Google Analytics - session identification" },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Third-Party Cookies",
         intro: "The Logistiq platform uses the following third-party services that may place cookies:",
         services: [
           { name: "Supabase", purpose: "Authentication and database", url: "supabase.com/privacy" },
-          { name: "Vercel", purpose: "Hosting and analytics", url: "vercel.com/legal/privacy-policy" },
-          { name: "Google Analytics", purpose: "Traffic statistics", url: "policies.google.com/privacy" },
+          { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
         ],
         note: "We recommend consulting the privacy policies of these services for details.",
       },
@@ -5723,23 +5705,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Analyse-Cookies",
-          desc:
-            "Helfen uns zu verstehen, wie Sie die Plattform nutzen, damit wir sie verbessern können.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 Jahre",
-              purpose: "Google Analytics - Besucheridentifikation",
-            },
-            {
-              name: "_gid",
-              duration: "24 Stunden",
-              purpose: "Google Analytics - Sitzungsidentifikation",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Drittanbieter-Cookies",
@@ -5753,13 +5718,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting und Analysen",
+            purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Zugriffsstatistiken",
-            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -7861,23 +7821,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Analityczne pliki cookie",
-          desc:
-            "Pomagają nam zrozumieć, w jaki sposób korzystasz z platformy, abyśmy mogli ją ulepszać.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 lata",
-              purpose: "Google Analytics - identyfikacja odwiedzającego",
-            },
-            {
-              name: "_gid",
-              duration: "24 godziny",
-              purpose: "Google Analytics - identyfikacja sesji",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Pliki cookie podmiotów trzecich",
@@ -7891,13 +7834,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting i analityka",
+            purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Statystyki ruchu",
-            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -9999,22 +9937,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Elemző cookie-k",
-          desc: "Segítenek megérteni, hogyan használja a platformot, hogy továbbfejleszthessük.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 év",
-              purpose: "Google Analytics – a látogató azonosítása",
-            },
-            {
-              name: "_gid",
-              duration: "24 óra",
-              purpose: "Google Analytics – a munkamenet azonosítása",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Harmadik féltől származó cookie-k",
@@ -10028,13 +9950,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Tárhelyszolgáltatás és analitika",
+            purpose: "Tárhelyszolgáltatás",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Forgalmi statisztikák",
-            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -12133,22 +12050,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Аналитични бисквитки",
-          desc: "Помагат ни да разберем как използвате платформата, за да я подобряваме.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 години",
-              purpose: "Google Analytics - идентифициране на посетителя",
-            },
-            {
-              name: "_gid",
-              duration: "24 часа",
-              purpose: "Google Analytics - идентифициране на сесията",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Бисквитки на трети страни",
@@ -12162,13 +12063,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Хостинг и анализи",
+            purpose: "Хостинг",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Статистика за трафика",
-            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -14278,23 +14174,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Cookies analytiques",
-          desc:
-            "Ils nous aident à comprendre comment vous utilisez la plateforme, afin de l'améliorer.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 ans",
-              purpose: "Google Analytics – identification du visiteur",
-            },
-            {
-              name: "_gid",
-              duration: "24 heures",
-              purpose: "Google Analytics – identification de la session",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Cookies tiers",
@@ -14308,13 +14187,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hébergement et mesure d'audience",
+            purpose: "Hébergement",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Statistiques de trafic",
-            url: "policies.google.com/privacy",
           },
         ],
         note:
@@ -16423,23 +16297,6 @@ export const translations = {
             },
           ],
         },
-        analytics: {
-          title: "Analytische cookies",
-          desc:
-            "Helpen ons te begrijpen hoe u het platform gebruikt, zodat wij het kunnen verbeteren.",
-          cookies: [
-            {
-              name: "_ga",
-              duration: "2 jaar",
-              purpose: "Google Analytics - bezoekersidentificatie",
-            },
-            {
-              name: "_gid",
-              duration: "24 uur",
-              purpose: "Google Analytics - sessie-identificatie",
-            },
-          ],
-        },
       },
       thirdParty: {
         title: "4. Cookies van derden",
@@ -16453,13 +16310,8 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting en analyses",
+            purpose: "Hosting",
             url: "vercel.com/legal/privacy-policy",
-          },
-          {
-            name: "Google Analytics",
-            purpose: "Verkeersstatistieken",
-            url: "policies.google.com/privacy",
           },
         ],
         note:

@@ -107,7 +107,9 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
   it("the cookie policy names no Stripe among the services that may set cookies", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       const services = copy.cookies.thirdParty.services.map((s) => s.name);
-      expect(services, locale).toEqual(["Supabase", "Vercel", "Google Analytics"]);
+      // Google Analytics left the list on 2026-11-24 too: no page of logistiq.ro,
+      // logistiq.cloud or qrgo.ro loads it (legal-copy.test.ts).
+      expect(services, locale).toEqual(["Supabase", "Vercel"]);
     }
   });
 
