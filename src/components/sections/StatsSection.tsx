@@ -6,6 +6,10 @@ import { QrCodeIcon, TruckIcon, UsersIcon, ChartIcon } from "@/components/icons"
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 
+// Not rendered since 2026-11-24: these figures (active drivers, connected warehouses,
+// check-ins a month, waiting-time reduction) are generated from the date below, not
+// counted, and Logistiq has no customers to count yet. Render it again only with real
+// numbers. StatsSection.test.tsx keeps its server render the same on every day.
 export function StatsSection({ t }: { t: Translations }) {
   const { ref, isInView } = useInView(0.3);
 

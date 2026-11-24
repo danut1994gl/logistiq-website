@@ -43,4 +43,10 @@ describe("social proof", () => {
     expect(existsSync(TESTIMONIALS_SECTION)).toBe(false);
     expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/Testimonial/);
   });
+
+  // StatsSection draws its figures from a seeded random number of the date (1,800 drivers
+  // and 25,000 check-ins a month, growing by the day), shown as the platform's own.
+  it("the home page renders no generated usage figures", () => {
+    expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/<StatsSection|import \{ StatsSection \}/);
+  });
 });

@@ -3,7 +3,6 @@ import { isValidLocale } from "@/lib/i18n/config";
 import { isSelfServeEnabled } from "@/lib/self-serve";
 import { JsonLd, webPageSchema } from "@/lib/seo/jsonld";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { StatsSection } from "@/components/sections/StatsSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
@@ -30,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         })}
       />
       <HeroSection t={t} />
-      <StatsSection t={t} />
+      {/* No usage figures: StatsSection's are generated, not counted (2026-11-24). */}
       <HowItWorksSection t={t} />
       <FeaturesSection t={t} />
       <BenefitsSection t={t} />
