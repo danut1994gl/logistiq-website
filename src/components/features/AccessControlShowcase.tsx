@@ -13,7 +13,8 @@ import { FeatureMatrixSection, FeatureFlowSection, FeatureSplitSection, FeatureC
 // Section order is deliberate and specific to this page:
 // the matrix first — this is the one page where a role x capability grid earns its
 // place and it is the core proof. Then the admin's real path, then the two
-// department flags, then the honesty callout (fixed roles, warehouse-wide reads).
+// department flags, then the honesty callout (fixed roles, dispatchers bound to
+// their departments).
 // Server Component.
 export function AccessControlShowcase({ t, locale }: { t: Translations; locale: Locale }) {
   const f = t.f17Page;

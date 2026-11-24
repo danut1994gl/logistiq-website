@@ -5,18 +5,19 @@ import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
 import { DRIVER_POOLS } from "./driverPools";
 
-// Access Control (feature 17): the real dashboard mechanic — an admin ticks a
-// dispatcher's departments and the capabilities that ACTUALLY depend on them
-// light up. Grounded in the access audit, including the part that is easy to get
-// wrong: department assignment does NOT narrow what a dispatcher SEES. The RLS
-// policy is warehouse-scoped with no department condition, so the check-in list
-// on the right deliberately never changes — only the three capabilities do.
+// Access Control (feature 17): the dashboard mechanic — an admin ticks a
+// dispatcher's departments and what depends on them lights up. Departments are a
+// dispatcher's hard boundary (Logistiq ADR-013, migration 138; per-department,
+// per-verb grants since ADR-014, migrations 147–152 and 249): a dispatcher sees and
+// works only inside them, and with none sees nothing, which the red "Insufficient
+// permissions" frame shows. Until 2026-11-24 this comment said the opposite, that
+// department assignment never narrows what a dispatcher sees.
 // Client player; static frame on reduced-motion. aria-hidden decorative.
 
 const DEPTS = ["Reception", "Warehouse", "Shipping"];
 
-// Which capability each department unlocks — the three that are genuinely
-// department-gated in the product (operator check-in, bookings, gate quick-access).
+// Three of the things a department unlocks (operator check-in, bookings, gate
+// quick-access); what the dispatcher sees follows the departments too.
 const CAPS: { key: string; need: number[] }[] = [
   { key: "checkin", need: [0] },      // operator check-in — the Reception desk
   { key: "bookings", need: [0, 2] },  // bookings — office-side departments
@@ -121,7 +122,7 @@ export function AccessControlScene({ t, locale }: { t: Translations; locale: Loc
         {CAPS.map((c) => (
           <Row key={c.key} label={c.key === "checkin" ? f.uiManager : c.key === "bookings" ? f.uiOffice : f.uiScope} on={capOn(c.need)} />
         ))}
-        {/* the honest part: reads never narrow — only the capabilities above do */}
+        {/* with no department ticked, the dispatcher has no access at all */}
         <span className={`mt-[0.6cqw] rounded-[1.2cqw] border px-[1.8cqw] py-[1.4cqw] text-[1.5cqw] leading-snug transition-colors duration-500 ${
           none ? "border-red-500/40 bg-red-500/10 text-red-300" : "border-slate-700 bg-slate-800/40 text-slate-400"
         }`}>
