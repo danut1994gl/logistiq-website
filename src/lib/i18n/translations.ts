@@ -1620,7 +1620,6 @@ export const translations = {
         intro: "Colaborăm cu următorii parteneri de încredere pentru furnizarea serviciilor:",
         partners: [
           { name: "Supabase", purpose: "Bază de date și autentificare (servere în UE - Frankfurt, Germania)" },
-          { name: "Stripe", purpose: "Procesare plăți securizate (certificat PCI DSS)" },
           { name: "SmartBill", purpose: "Emitere facturi fiscale conforme (România)" },
           { name: "Vercel", purpose: "Hosting și distribuție globală (CDN)" },
         ],
@@ -3547,7 +3546,6 @@ export const translations = {
         intro: "We work with the following trusted partners to provide our services:",
         partners: [
           { name: "Supabase", purpose: "Database and authentication (EU servers - Frankfurt, Germany)" },
-          { name: "Stripe", purpose: "Secure payment processing (PCI DSS certified)" },
           { name: "SmartBill", purpose: "Compliant fiscal invoice generation (Romania)" },
           { name: "Vercel", purpose: "Hosting and global distribution (CDN)" },
         ],
@@ -5489,10 +5487,6 @@ export const translations = {
           {
             name: "Supabase",
             purpose: "Datenbank und Authentifizierung (Server in der EU - Frankfurt, Deutschland)",
-          },
-          {
-            name: "Stripe",
-            purpose: "Sichere Zahlungsabwicklung (PCI-DSS-zertifiziert)",
           },
           {
             name: "SmartBill",
@@ -7715,10 +7709,6 @@ export const translations = {
             purpose: "Baza danych i uwierzytelnianie (serwery w UE - Frankfurt, Niemcy)",
           },
           {
-            name: "Stripe",
-            purpose: "Bezpieczne przetwarzanie płatności (certyfikat PCI DSS)",
-          },
-          {
             name: "SmartBill",
             purpose: "Wystawianie faktur zgodnych z przepisami (Rumunia)",
           },
@@ -9937,10 +9927,6 @@ export const translations = {
             purpose: "Adatbázis és hitelesítés (EU-beli szerverek – Frankfurt, Németország)",
           },
           {
-            name: "Stripe",
-            purpose: "Biztonságos fizetésfeldolgozás (PCI DSS-tanúsítvánnyal)",
-          },
-          {
             name: "SmartBill",
             purpose: "Szabályszerű számlák kiállítása (Románia)",
           },
@@ -12153,10 +12139,6 @@ export const translations = {
           {
             name: "Supabase",
             purpose: "База данни и удостоверяване (сървъри в ЕС - Франкфурт, Германия)",
-          },
-          {
-            name: "Stripe",
-            purpose: "Сигурна обработка на плащания (сертификат PCI DSS)",
           },
           {
             name: "SmartBill",
@@ -14373,10 +14355,6 @@ export const translations = {
             name: "Supabase",
             purpose:
               "Base de données et authentification (serveurs dans l'UE – Francfort, Allemagne)",
-          },
-          {
-            name: "Stripe",
-            purpose: "Traitement sécurisé des paiements (certifié PCI DSS)",
           },
           {
             name: "SmartBill",
@@ -16600,10 +16578,6 @@ export const translations = {
           {
             name: "Supabase",
             purpose: "Database en authenticatie (servers in de EU - Frankfurt, Duitsland)",
-          },
-          {
-            name: "Stripe",
-            purpose: "Veilige verwerking van betalingen (PCI DSS-gecertificeerd)",
           },
           {
             name: "SmartBill",

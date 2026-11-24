@@ -10,8 +10,9 @@ import { translations } from "@/lib/i18n/translations";
 // the FAQ said card payments were accepted, the terms said payment could be made by card
 // (Stripe), the integrations page said Stripe ran the subscription, and the cloud page
 // said the visitor signs up on logistiq.cloud. If card payment or self-registration
-// comes back, the copy and these tests change together. The privacy and cookie policies
-// still name Stripe among the platform's processors: that is for the legal review.
+// comes back, the copy and these tests change together. Until 2026-11-24 the privacy
+// policy also listed Stripe among the partners that process data, although no data goes
+// to it: its checkout and portal routes refuse first, and no page loads Stripe.js.
 
 // "card" and "Stripe" in each language. A status card on the driver's phone (f10Page)
 // is not a payment, so only the billing strings are checked.
@@ -92,6 +93,13 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
       const { items } = copy.terms.article6;
       expect(items.filter((item) => CARD.test(item)), locale).toEqual([]);
       expect(items.some((item) => BANK_TRANSFER[locale].test(item)), locale).toBe(true);
+    }
+  });
+
+  it("the privacy policy names no Stripe among the partners that process data", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const partners = copy.privacy.thirdParties.partners.map((p) => p.name);
+      expect(partners, locale).toEqual(["Supabase", "SmartBill", "Vercel"]);
     }
   });
 
