@@ -105,8 +105,10 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           <p className="text-slate-400 text-sm">
             {year} Logistiq. {t.footer.allRights}
           </p>
+          {/* "Made with ❤", and no place: the site states no company location unless the
+              owner gives one (until 2026-11-24 it ended "in Romania") */}
           <p className="text-slate-400 text-sm flex items-center gap-1">
-            {t.footer.madeWith} <span className="text-red-500">&#10084;</span> {t.footer.inRomania}
+            {t.footer.madeWith} <span className="text-red-500">&#10084;</span>
           </p>
         </div>
       </div>

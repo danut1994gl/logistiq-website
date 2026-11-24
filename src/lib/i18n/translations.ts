@@ -1388,7 +1388,6 @@ export const translations = {
       contactSupport: "Contact suport",
       allRights: "Toate drepturile rezervate.",
       madeWith: "Făcut cu",
-      inRomania: "în România",
     },
     qrgoDriver: {
       badge: "Aplicație Mobilă",
@@ -3235,7 +3234,6 @@ export const translations = {
       contactSupport: "Contact Support",
       allRights: "All rights reserved.",
       madeWith: "Made with",
-      inRomania: "in Romania",
     },
     qrgoDriver: {
       badge: "Mobile App",
@@ -5065,7 +5063,6 @@ export const translations = {
       contactSupport: "Support kontaktieren",
       allRights: "Alle Rechte vorbehalten.",
       madeWith: "Entwickelt mit",
-      inRomania: "in Rumänien",
     },
     qrgoDriver: {
       badge: "Mobile App",
@@ -7204,7 +7201,6 @@ export const translations = {
       contactSupport: "Kontakt z pomocą techniczną",
       allRights: "Wszelkie prawa zastrzeżone.",
       madeWith: "Stworzone z",
-      inRomania: "w Rumunii",
     },
     qrgoDriver: {
       badge: "Aplikacja mobilna",
@@ -9338,8 +9334,7 @@ export const translations = {
       status: "Rendszerállapot",
       contactSupport: "Kapcsolat az ügyfélszolgálattal",
       allRights: "Minden jog fenntartva.",
-      madeWith: "Készült",
-      inRomania: "Romániában",
+      madeWith: "Szeretettel készült",
     },
     qrgoDriver: {
       badge: "Mobilalkalmazás",
@@ -11473,7 +11468,6 @@ export const translations = {
       contactSupport: "Свържете се с поддръжката",
       allRights: "Всички права запазени.",
       madeWith: "Направено с",
-      inRomania: "в Румъния",
     },
     qrgoDriver: {
       badge: "Мобилно приложение",
@@ -13606,7 +13600,6 @@ export const translations = {
       contactSupport: "Contacter le support",
       allRights: "Tous droits réservés.",
       madeWith: "Fait avec",
-      inRomania: "en Roumanie",
     },
     qrgoDriver: {
       badge: "Application mobile",
@@ -15748,7 +15741,6 @@ export const translations = {
       contactSupport: "Contact support",
       allRights: "Alle rechten voorbehouden.",
       madeWith: "Gemaakt met",
-      inRomania: "in Roemenië",
     },
     qrgoDriver: {
       badge: "Mobiele app",
