@@ -1783,8 +1783,7 @@ export const translations = {
           title: "Cookie-uri Esențiale",
           desc: "Necesare pentru funcționarea platformei. Nu pot fi dezactivate.",
           cookies: [
-            { name: "sb-access-token", duration: "1 oră", purpose: "Autentificare Supabase - token de acces" },
-            { name: "sb-refresh-token", duration: "7 zile", purpose: "Autentificare Supabase - reîmprospătare sesiune" },
+            { name: "sb-bhpiugfpkqwxcqbolisb-auth-token", duration: "Până la deconectare", purpose: "Autentificare Supabase - sesiunea conectată (token de acces și de reîmprospătare), împărțită în părți numerotate (.0, .1) când e mare" },
             { name: "NEXT_LOCALE", duration: "1 an", purpose: "Reținerea limbii preferate" },
           ],
         },
@@ -3615,8 +3614,7 @@ export const translations = {
           title: "Essential Cookies",
           desc: "Required for platform operation. Cannot be disabled.",
           cookies: [
-            { name: "sb-access-token", duration: "1 hour", purpose: "Supabase authentication - access token" },
-            { name: "sb-refresh-token", duration: "7 days", purpose: "Supabase authentication - session refresh" },
+            { name: "sb-bhpiugfpkqwxcqbolisb-auth-token", duration: "Until sign-out", purpose: "Supabase authentication - your signed-in session (access and refresh tokens), split into numbered parts (.0, .1) when large" },
             { name: "NEXT_LOCALE", duration: "1 year", purpose: "Retaining preferred language" },
           ],
         },
@@ -5708,14 +5706,10 @@ export const translations = {
           desc: "Für den Betrieb der Plattform erforderlich. Sie können nicht deaktiviert werden.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 Stunde",
-              purpose: "Supabase-Authentifizierung - Zugriffstoken",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 Tage",
-              purpose: "Supabase-Authentifizierung - Sitzungsaktualisierung",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "Bis zur Abmeldung",
+              purpose:
+                "Supabase-Authentifizierung - Ihre angemeldete Sitzung (Zugriffs- und Aktualisierungstoken), bei großer Länge in nummerierte Teile (.0, .1) aufgeteilt",
             },
             {
               name: "NEXT_LOCALE",
@@ -7852,14 +7846,10 @@ export const translations = {
           desc: "Wymagane do działania platformy. Nie można ich wyłączyć.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 godzina",
-              purpose: "Uwierzytelnianie Supabase - token dostępu",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 dni",
-              purpose: "Uwierzytelnianie Supabase - odświeżanie sesji",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "Do wylogowania",
+              purpose:
+                "Uwierzytelnianie Supabase - Twoja sesja zalogowana (token dostępu i odświeżania), dzielona na numerowane części (.0, .1), gdy jest duża",
             },
             {
               name: "NEXT_LOCALE",
@@ -9996,14 +9986,10 @@ export const translations = {
           desc: "A platform működéséhez szükségesek. Nem kapcsolhatók ki.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 óra",
-              purpose: "Supabase-hitelesítés – hozzáférési token",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 nap",
-              purpose: "Supabase-hitelesítés – a munkamenet frissítése",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "Kijelentkezésig",
+              purpose:
+                "Supabase-hitelesítés – a bejelentkezett munkamenet (hozzáférési és frissítési token), nagy méret esetén számozott részekre (.0, .1) bontva",
             },
             {
               name: "NEXT_LOCALE",
@@ -12137,14 +12123,10 @@ export const translations = {
           desc: "Необходими са за функционирането на платформата. Не могат да бъдат деактивирани.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 час",
-              purpose: "Удостоверяване чрез Supabase - токен за достъп",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 дни",
-              purpose: "Удостоверяване чрез Supabase - опресняване на сесията",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "До излизане от профила",
+              purpose:
+                "Удостоверяване чрез Supabase - вашата сесия при вход (токени за достъп и опресняване), разделена на номерирани части (.0, .1), когато е голяма",
             },
             {
               name: "NEXT_LOCALE",
@@ -14289,14 +14271,10 @@ export const translations = {
             "Nécessaires au fonctionnement de la plateforme. Ils ne peuvent pas être désactivés.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 heure",
-              purpose: "Authentification Supabase – jeton d'accès",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 jours",
-              purpose: "Authentification Supabase – actualisation de la session",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "Jusqu'à la déconnexion",
+              purpose:
+                "Authentification Supabase – votre session connectée (jetons d'accès et d'actualisation), découpée en parties numérotées (.0, .1) lorsqu'elle est longue",
             },
             {
               name: "NEXT_LOCALE",
@@ -16440,14 +16418,10 @@ export const translations = {
             "Noodzakelijk voor de werking van het platform. Ze kunnen niet worden uitgeschakeld.",
           cookies: [
             {
-              name: "sb-access-token",
-              duration: "1 uur",
-              purpose: "Supabase-authenticatie - toegangstoken",
-            },
-            {
-              name: "sb-refresh-token",
-              duration: "7 dagen",
-              purpose: "Supabase-authenticatie - vernieuwing van de sessie",
+              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+              duration: "Tot het uitloggen",
+              purpose:
+                "Supabase-authenticatie - uw ingelogde sessie (toegangs- en vernieuwingstoken), opgesplitst in genummerde delen (.0, .1) als die groot is",
             },
             {
               name: "NEXT_LOCALE",

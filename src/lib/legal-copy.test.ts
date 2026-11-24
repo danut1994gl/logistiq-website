@@ -145,3 +145,20 @@ describe("Google reCAPTCHA", () => {
     }
   });
 });
+
+// The essential cookies the platform sets. logistiq.cloud's session is one Supabase cookie,
+// sb-<project-ref>-auth-token, split into .0, .1… when large and removed at sign-out
+// (@supabase/ssr 0.1.0, used without cookie options in Logistiq's packages/shared
+// lib/supabase/server.ts and apps/dashboard/middleware.ts; the project is
+// bhpiugfpkqwxcqbolisb). NEXT_LOCALE keeps the chosen language for a year (the dashboard's
+// LanguageSwitcher, the driver web's middleware). Until 2026-11-24 the policy named
+// sb-access-token (1 hour) and sb-refresh-token (7 days), which nothing sets.
+describe("cookie policy, essential cookies", () => {
+  it("names the session cookie the platform sets, and not the two it never set", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const names = copy.cookies.cookiesWeUse.essential.cookies.map((c) => c.name);
+      expect(names, locale).toEqual(["sb-bhpiugfpkqwxcqbolisb-auth-token", "NEXT_LOCALE"]);
+      expect(JSON.stringify(copy).match(/sb-access-token|sb-refresh-token/)?.[0], locale).toBeUndefined();
+    }
+  });
+});
