@@ -96,4 +96,14 @@ describe("contract model copy", () => {
       expect(items[0], locale).toMatch(CONTRACT[locale]);
     }
   });
+
+  // Every plan has trialDays: 0 ("Trial disabled - using demo accounts instead", Logistiq
+  // apps/dashboard/lib/stripe.ts), while the terms promised a free 10-day trial.
+  it("the terms promise no trial: any trial period is set in the offer or the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const { content } = copy.terms.article5.trial;
+      expect(content, locale).not.toMatch(/\d/);
+      expect(content, locale).toMatch(CONTRACT[locale]);
+    }
+  });
 });

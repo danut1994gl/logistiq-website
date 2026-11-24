@@ -1736,7 +1736,7 @@ export const translations = {
       },
       article5: {
         title: "Articolul 5 - Durata Contractului",
-        trial: { title: "Perioada de probă", content: "Platforma oferă o perioadă de probă gratuită de 10 zile. La expirare, accesul este condiționat de achiziționarea unui abonament." },
+        trial: { title: "Perioada de probă", content: "O eventuală perioadă de probă se stabilește prin oferta comercială sau prin contract." },
         subscription: { title: "Abonamentul", content: "Abonamentul se încheie lunar și se reînnoiește automat, cu excepția cazului în care Clientul anulează." },
         cancellation: { title: "Anularea", content: "Clientul poate anula oricând. Accesul rămâne activ până la sfârșitul perioadei plătite." },
       },
@@ -3650,7 +3650,7 @@ export const translations = {
       },
       article5: {
         title: "Article 5 - Agreement Duration",
-        trial: { title: "Trial Period", content: "The Platform offers a 10-day free trial. After expiration, access requires a subscription." },
+        trial: { title: "Trial Period", content: "Any trial period is set out in the commercial offer or in the contract." },
         subscription: { title: "Subscription", content: "Subscription is monthly and auto-renews unless Client cancels." },
         cancellation: { title: "Cancellation", content: "Client can cancel anytime. Access remains until end of paid period." },
       },
@@ -5697,7 +5697,7 @@ export const translations = {
         trial: {
           title: "Testphase",
           content:
-            "Die Plattform bietet eine kostenlose Testphase von 10 Tagen. Nach deren Ablauf setzt der Zugang den Erwerb eines Abonnements voraus.",
+            "Eine etwaige Testphase wird im Angebot oder im Vertrag festgelegt.",
         },
         subscription: {
           title: "Abonnement",
@@ -7908,7 +7908,7 @@ export const translations = {
         trial: {
           title: "Okres próbny",
           content:
-            "Platforma oferuje bezpłatny 10-dniowy okres próbny. Po jego upływie dostęp jest uzależniony od wykupienia subskrypcji.",
+            "Ewentualny okres próbny określa oferta handlowa lub umowa.",
         },
         subscription: {
           title: "Subskrypcja",
@@ -10118,7 +10118,7 @@ export const translations = {
         trial: {
           title: "Próbaidőszak",
           content:
-            "A Platform 10 napos ingyenes próbaidőszakot kínál. A próbaidőszak lejártát követően a hozzáférés előfizetés vásárlásához kötött.",
+            "Az esetleges próbaidőszakot az árajánlat vagy a szerződés határozza meg.",
         },
         subscription: {
           title: "Előfizetés",
@@ -12327,7 +12327,7 @@ export const translations = {
         trial: {
           title: "Пробен период",
           content:
-            "Платформата предлага безплатен пробен период от 10 дни. След изтичането му достъпът е обусловен от закупуването на абонамент.",
+            "Евентуален пробен период се определя в търговската оферта или в договора.",
         },
         subscription: {
           title: "Абонамент",
@@ -14543,7 +14543,7 @@ export const translations = {
         trial: {
           title: "Période d'essai",
           content:
-            "La Plateforme offre une période d'essai gratuite de 10 jours. À son expiration, l'accès est subordonné à la souscription d'un abonnement.",
+            "Une éventuelle période d'essai est fixée par l'offre commerciale ou par le contrat.",
         },
         subscription: {
           title: "Abonnement",
@@ -16760,7 +16760,7 @@ export const translations = {
         trial: {
           title: "Proefperiode",
           content:
-            "Het Platform biedt een gratis proefperiode van 10 dagen. Na afloop daarvan is de toegang afhankelijk van de aanschaf van een abonnement.",
+            "Een eventuele proefperiode wordt vastgelegd in de commerciële offerte of in de overeenkomst.",
         },
         subscription: {
           title: "Abonnement",
