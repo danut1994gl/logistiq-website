@@ -70,9 +70,21 @@ const MONTHLY: Record<string, RegExp> = {
   nl: /per maand|maandelijks/,
 };
 
+// "anytime" in each language, as the self-service subscription could be cancelled.
+const ANYTIME: Record<string, RegExp> = {
+  ro: /oricând/,
+  en: /any ?time/,
+  de: /jederzeit/,
+  pl: /w dowolnym momencie|w każdej chwili/,
+  hu: /bármikor/,
+  bg: /по всяко време/,
+  fr: /à tout moment/,
+  nl: /op elk moment/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -124,6 +136,15 @@ describe("contract model copy", () => {
       const { content } = copy.terms.article5.subscription;
       expect(content, locale).toMatch(CONTRACT[locale]);
       expect(content, locale).not.toMatch(MONTHLY[locale]);
+    }
+  });
+
+  it("the terms leave termination by the client to the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      for (const content of [copy.terms.article5.cancellation.content, copy.terms.article14.byClient.content]) {
+        expect(content, locale).toMatch(CONTRACT[locale]);
+        expect(content, locale).not.toMatch(ANYTIME[locale]);
+      }
     }
   });
 });

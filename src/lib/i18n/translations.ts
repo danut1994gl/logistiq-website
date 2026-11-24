@@ -1738,7 +1738,7 @@ export const translations = {
         title: "Articolul 5 - Durata Contractului",
         trial: { title: "Perioada de probă", content: "O eventuală perioadă de probă se stabilește prin oferta comercială sau prin contract." },
         subscription: { title: "Abonamentul", content: "Durata abonamentului și reînnoirea lui sunt cele stabilite în contract." },
-        cancellation: { title: "Anularea", content: "Clientul poate anula oricând. Accesul rămâne activ până la sfârșitul perioadei plătite." },
+        cancellation: { title: "Anularea", content: "Clientul poate înceta abonamentul în condițiile stabilite în contract." },
       },
       article6: {
         title: "Articolul 6 - Prețuri și Plăți",
@@ -1812,7 +1812,7 @@ export const translations = {
       },
       article14: {
         title: "Articolul 14 - Încetarea Contractului",
-        byClient: { title: "Anulare de către Client", content: "Clientul poate anula oricând. Accesul rămâne activ până la finalul perioadei." },
+        byClient: { title: "Anulare de către Client", content: "Clientul poate înceta contractul în condițiile stabilite în acesta." },
         byProvider: { title: "Reziliere de către Prestator", content: "Pentru neplată, abuz sau încălcarea termenilor." },
         effects: { title: "Efecte", content: "30 de zile pentru exportul datelor, apoi ștergere definitivă." },
       },
@@ -3652,7 +3652,7 @@ export const translations = {
         title: "Article 5 - Agreement Duration",
         trial: { title: "Trial Period", content: "Any trial period is set out in the commercial offer or in the contract." },
         subscription: { title: "Subscription", content: "The duration of the subscription and its renewal are those set out in the contract." },
-        cancellation: { title: "Cancellation", content: "Client can cancel anytime. Access remains until end of paid period." },
+        cancellation: { title: "Cancellation", content: "The Client may end the subscription as set out in the contract." },
       },
       article6: {
         title: "Article 6 - Pricing and Payments",
@@ -3720,7 +3720,7 @@ export const translations = {
       },
       article14: {
         title: "Article 14 - Contract Termination",
-        byClient: { title: "Cancellation by Client", content: "Client can cancel anytime. Access active until end of period." },
+        byClient: { title: "Cancellation by Client", content: "The Client may terminate the contract as set out in it." },
         byProvider: { title: "Termination by Provider", content: "For non-payment, abuse or terms violation." },
         effects: { title: "Effects", content: "30 days for data export, then permanent deletion." },
       },
@@ -5707,7 +5707,7 @@ export const translations = {
         cancellation: {
           title: "Kündigung",
           content:
-            "Der Kunde kann jederzeit kündigen. Der Zugang bleibt bis zum Ende des bezahlten Zeitraums aktiv.",
+            "Der Kunde kann das Abonnement zu den im Vertrag festgelegten Bedingungen kündigen.",
         },
       },
       article6: {
@@ -5835,7 +5835,7 @@ export const translations = {
         byClient: {
           title: "Kündigung durch den Kunden",
           content:
-            "Der Kunde kann jederzeit kündigen. Der Zugang bleibt bis zum Ende des Zeitraums aktiv.",
+            "Der Kunde kann den Vertrag zu den darin festgelegten Bedingungen kündigen.",
         },
         byProvider: {
           title: "Kündigung durch den Anbieter",
@@ -7918,7 +7918,7 @@ export const translations = {
         cancellation: {
           title: "Anulowanie",
           content:
-            "Klient może anulować subskrypcję w dowolnym momencie. Dostęp pozostaje aktywny do końca opłaconego okresu.",
+            "Klient może zakończyć subskrypcję na warunkach określonych w umowie.",
         },
       },
       article6: {
@@ -8046,7 +8046,7 @@ export const translations = {
         byClient: {
           title: "Anulowanie przez Klienta",
           content:
-            "Klient może anulować subskrypcję w dowolnym momencie. Dostęp pozostaje aktywny do końca okresu.",
+            "Klient może rozwiązać umowę na warunkach w niej określonych.",
         },
         byProvider: {
           title: "Rozwiązanie przez Usługodawcę",
@@ -10128,7 +10128,7 @@ export const translations = {
         cancellation: {
           title: "Lemondás",
           content:
-            "Az Ügyfél bármikor lemondhatja az előfizetést. A hozzáférés a kifizetett időszak végéig aktív marad.",
+            "Az Ügyfél a szerződésben meghatározott feltételekkel mondhatja le az előfizetést.",
         },
       },
       article6: {
@@ -10257,7 +10257,7 @@ export const translations = {
         byClient: {
           title: "Lemondás az Ügyfél részéről",
           content:
-            "Az Ügyfél bármikor lemondhatja az előfizetést. A hozzáférés az időszak végéig aktív.",
+            "Az Ügyfél a szerződést az abban meghatározott feltételekkel mondhatja fel.",
         },
         byProvider: {
           title: "Felmondás a Szolgáltató részéről",
@@ -12337,7 +12337,7 @@ export const translations = {
         cancellation: {
           title: "Анулиране",
           content:
-            "Клиентът може да анулира абонамента по всяко време. Достъпът остава активен до края на платения период.",
+            "Клиентът може да прекрати абонамента при условията, определени в договора.",
         },
       },
       article6: {
@@ -12464,7 +12464,7 @@ export const translations = {
         byClient: {
           title: "Анулиране от Клиента",
           content:
-            "Клиентът може да анулира абонамента по всяко време. Достъпът остава активен до края на периода.",
+            "Клиентът може да прекрати договора при условията, определени в него.",
         },
         byProvider: {
           title: "Прекратяване от Доставчика",
@@ -14553,7 +14553,7 @@ export const translations = {
         cancellation: {
           title: "Annulation",
           content:
-            "Le Client peut annuler à tout moment. L'accès reste actif jusqu'à la fin de la période payée.",
+            "Le Client peut mettre fin à l'abonnement dans les conditions prévues par le contrat.",
         },
       },
       article6: {
@@ -14681,7 +14681,7 @@ export const translations = {
         byClient: {
           title: "Annulation par le Client",
           content:
-            "Le Client peut annuler à tout moment. L'accès reste actif jusqu'à la fin de la période.",
+            "Le Client peut résilier le contrat dans les conditions qu'il prévoit.",
         },
         byProvider: {
           title: "Résiliation par le Prestataire",
@@ -16770,7 +16770,7 @@ export const translations = {
         cancellation: {
           title: "Opzegging",
           content:
-            "De Klant kan op elk moment opzeggen. De toegang blijft actief tot het einde van de betaalde periode.",
+            "De Klant kan het abonnement opzeggen onder de voorwaarden van de overeenkomst.",
         },
       },
       article6: {
@@ -16899,7 +16899,7 @@ export const translations = {
         byClient: {
           title: "Opzegging door de Klant",
           content:
-            "De Klant kan op elk moment opzeggen. De toegang blijft actief tot het einde van de periode.",
+            "De Klant kan de overeenkomst opzeggen onder de voorwaarden die erin zijn vastgelegd.",
         },
         byProvider: {
           title: "Ontbinding door de Dienstverlener",
