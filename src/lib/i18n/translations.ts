@@ -1833,7 +1833,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 ianuarie 2026",
+      updatedOn: "24 noiembrie 2026",
       backHome: "Înapoi la pagina principală",
       retentionHeaders: {
         type: "Tip date",
@@ -3668,7 +3668,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 January 2026",
+      updatedOn: "24 November 2026",
       backHome: "Back to home",
       retentionHeaders: {
         type: "Data type",
@@ -5810,7 +5810,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26. Januar 2026",
+      updatedOn: "24. November 2026",
       backHome: "Zurück zur Startseite",
       retentionHeaders: {
         type: "Datenart",
@@ -7948,7 +7948,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 stycznia 2026",
+      updatedOn: "24 listopada 2026",
       backHome: "Powrót do strony głównej",
       retentionHeaders: {
         type: "Rodzaj danych",
@@ -10084,7 +10084,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "2026. január 26.",
+      updatedOn: "2026. november 24.",
       backHome: "Vissza a főoldalra",
       retentionHeaders: {
         type: "Adattípus",
@@ -12219,7 +12219,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 януари 2026 г.",
+      updatedOn: "24 ноември 2026 г.",
       backHome: "Обратно към началната страница",
       retentionHeaders: {
         type: "Вид данни",
@@ -14364,7 +14364,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 janvier 2026",
+      updatedOn: "24 novembre 2026",
       backHome: "Retour à l’accueil",
       retentionHeaders: {
         type: "Type de données",
@@ -16509,7 +16509,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 januari 2026",
+      updatedOn: "24 november 2026",
       backHome: "Terug naar de homepage",
       retentionHeaders: {
         type: "Soort gegevens",
