@@ -117,11 +117,6 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
     }
   });
 
-  it("the integrations page bills through SmartBill alone, paid by bank transfer", () => {
-    for (const [locale, copy] of Object.entries(translations)) {
-      const { q4, a4 } = copy.f16Page;
-      expect(`${q4} ${a4}`.match(CARD)?.[0], locale).toBeUndefined();
-      expect(a4, locale).toMatch(BANK_TRANSFER[locale]);
-    }
-  });
+  // The integrations page's billing Q&A (f16Page.q4 and a4) was rendered nowhere and was
+  // deleted on 2026-11-24 with the rest of the page's unrendered copy (api-copy.test.ts).
 });

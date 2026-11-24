@@ -77,8 +77,6 @@ describe("QRGoBox copy: in progress", () => {
         copy.checkinJourney.step3Desc,
         copy.f9Page.b3c,
         copy.f9Page.a1,
-        copy.f16Page.new3,
-        copy.f16Page.probP2,
         copy.f17Page.s4d,
       ]) {
         expect(text, locale).toMatch(IN_PROGRESS[locale]);
