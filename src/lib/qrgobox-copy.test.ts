@@ -84,6 +84,20 @@ describe("QRGoBox copy: in progress", () => {
     }
   });
 
+  // Until 2026-11-24 the cloud page (f9Page.b3c, a1) called opening the barrier "the one
+  // option that will need equipment" and "the one exception" to nothing being installed,
+  // in every language. The gate scanner and the QRGo Self tablet are equipment in use today.
+  it("the cloud page does not make QRGoBox the only equipment, and names the equipment in use", () => {
+    const ONLY =
+      /singura opțiune|singura excepție|the one option|the one exception|einzige Option|einzige Ausnahme|jedyna opcja|jedynym wyjątkiem|egyetlen lehetőség|egyetlen kivétel|единствената опция|единственото изключение|seule option|seule exception|enige optie|enige uitzondering/i;
+    for (const [locale, copy] of Object.entries(translations)) {
+      for (const text of [copy.f9Page.b3c, copy.f9Page.a1]) {
+        expect(text.match(ONLY)?.[0], locale).toBeUndefined();
+        expect(text, locale).toMatch(/QRGo Self/);
+      }
+    }
+  });
+
   it("the digital check-in journey no longer ends in a barrier lift", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.checkinJourney.subtitle, locale).not.toMatch(BARRIER[locale]);
