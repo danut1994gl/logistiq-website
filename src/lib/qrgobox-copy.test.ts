@@ -112,6 +112,24 @@ describe("QRGoBox copy: in progress", () => {
     expect(translations.en.f15Page.a4).toMatch(/has gone out to the barrier/);
   });
 
+  // On the QRGoBox page, "in progress" (en) and "în lucru" (ro) say that QRGoBox is under
+  // development. Until 2026-11-24 the same words named the check-in status that lets a truck
+  // in (in_progress); it is now "under way" and "în desfășurare", the dashboard's
+  // Romanian label.
+  it("the QRGoBox page names the in-progress check-in status apart from under development", () => {
+    const STATUS: Record<string, [RegExp, RegExp]> = {
+      en: [/assigned or in progress/, /confirmed, assigned or under way/],
+      ro: [/alocat sau în lucru/, /confirmat, alocat sau în desfășurare/],
+    };
+    for (const [locale, [old, now]] of Object.entries(STATUS)) {
+      const f = translations[locale as "en" | "ro"].f15Page;
+      for (const text of [f.s3d, f.a3]) {
+        expect(text, locale).not.toMatch(old);
+        expect(text, locale).toMatch(now);
+      }
+    }
+  });
+
   it("the digital check-in journey no longer ends in a barrier lift", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.checkinJourney.subtitle, locale).not.toMatch(BARRIER[locale]);
