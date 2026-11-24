@@ -200,19 +200,23 @@ export function FeatureMatrixSection({
 }
 
 /* ── callout ─────────────────────────────────────────────────────────────────
-   One emphasised statement. Its real job is honesty: saying "this is on the
-   roadmap" / "this is pilot hardware" out loud, in a box the reader cannot miss,
-   is what keeps the rest of the page credible. */
+   One emphasised statement. Its real job is honesty: saying "this is in
+   progress" / "this is pilot hardware" out loud, in a box the reader cannot miss,
+   is what keeps the rest of the page credible. Its label is the kind in the
+   page's language (t.features.callout); until 2026-11-24 it printed the raw
+   English kind ("roadmap", "pilot", "note") in every language. */
 export function FeatureCalloutSection({
   idPrefix,
   title,
   body,
   kind = "note",
+  labels,
 }: {
   idPrefix: string;
   title: string;
   body: string;
   kind?: "roadmap" | "pilot" | "note";
+  labels: { roadmap: string; pilot: string; note: string };
 }) {
   const hid = `${idPrefix}-callout-title`;
   const tone =
@@ -225,7 +229,7 @@ export function FeatureCalloutSection({
         <div className={`rounded-2xl ring-1 ${tone.ring} ${tone.bg} p-6 sm:p-8`}>
           <p className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-3 ${tone.label}`}>
             <span className={`w-2 h-2 rounded-full ${tone.dot}`} />
-            {kind}
+            {labels[kind]}
           </p>
           <h2 id={hid} className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3">{title}</h2>
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{body}</p>

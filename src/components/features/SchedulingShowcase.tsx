@@ -72,6 +72,7 @@ export function SchedulingShowcase({ t, locale }: { t: Translations; locale: Loc
         title={f.coTitle}
         body={f.coBody}
         kind="note"
+        labels={t.features.callout}
       />
       <FeatureFAQSection
         idPrefix="sc11"

@@ -65,6 +65,7 @@ export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Loc
         title={f.coTitle}
         body={f.coBody}
         kind={f.coKind === "roadmap" ? "roadmap" : f.coKind === "pilot" ? "pilot" : "note"}
+        labels={t.features.callout}
       />
 
       <FeatureFAQSection

@@ -73,6 +73,7 @@ export function AccessControlShowcase({ t, locale }: { t: Translations; locale: 
         title={f.coTitle}
         body={f.coBody}
         kind={f.coKind === "roadmap" ? "roadmap" : f.coKind === "pilot" ? "pilot" : "note"}
+        labels={t.features.callout}
       />
 
       <FeatureFAQSection

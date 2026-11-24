@@ -1295,6 +1295,12 @@ export const translations = {
       feature16Desc: "Logistiq este hub-ul dintre poarta voastră, portalul vostru de depozit și șoferii voștri — și se conectează la sistemele TMS, WMS și ERP pe care le folosiți deja printr-un API cu cheie și limită de rată. O singură platformă, care vorbește cu sistemele din jurul ei.",
       feature17Title: "Control Acces Personal",
       feature17Desc: "Un manager de depozit creează dispeceri în propriul depozit și îi repartizează pe departamente — iar departamentele decid cine poate face check-in ca operator, cine poate crea rezervări și ce porți ajung în accesul rapid al fiecăruia.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "În lucru",
+        pilot: "Pilot",
+        note: "Notă",
+      },
     },
     benefits: {
       title: "Beneficii pentru întreaga echipă",
@@ -3177,6 +3183,12 @@ export const translations = {
       feature16Desc: "Logistiq is the hub between your gate, your warehouse portal and your drivers — and it connects to the TMS, WMS and ERP systems you already run over a keyed, rate-limited API. One platform, talking to the systems around it.",
       feature17Title: "Access Control",
       feature17Desc: "A warehouse manager creates dispatchers in their own warehouse and assigns each one to departments — and those departments decide who can run operator check-in, who can create bookings, and which gates reach their quick-access.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "In progress",
+        pilot: "Pilot",
+        note: "Note",
+      },
     },
     benefits: {
       title: "Benefits for the entire team",
@@ -5042,6 +5054,12 @@ export const translations = {
       feature16Desc: "Logistiq ist die Drehscheibe zwischen Ihrem Tor, Ihrem Lager-Portal und Ihren Fahrern — und verbindet sich über eine schlüsselgeschützte, ratenbegrenzte API mit den TMS-, WMS- und ERP-Systemen, die Sie ohnehin schon betreiben. Eine Plattform, die mit den Systemen um sie herum spricht.",
       feature17Title: "Zugriffsverwaltung",
       feature17Desc: "Ein Lagerleiter legt Disponenten in seinem eigenen Lager an und weist jedem Abteilungen zu — und diese Abteilungen entscheiden, wer den Operator-Check-in nutzen darf, wer Buchungen anlegen kann und welche Tore im Schnellzugriff erscheinen.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "In Arbeit",
+        pilot: "Pilot",
+        note: "Hinweis",
+      },
     },
     benefits: {
       title: "Vorteile für das gesamte Team",
@@ -7214,6 +7232,12 @@ export const translations = {
       feature16Desc: "Logistiq jest węzłem między Twoją bramą, Twoim portalem magazynu a Twoimi kierowcami — i łączy się z systemami TMS, WMS i ERP, których już używasz, przez zabezpieczone kluczem API z limitem zapytań. Jedna platforma, która komunikuje się z otaczającymi ją systemami.",
       feature17Title: "Kontrola dostępu",
       feature17Desc: "Kierownik magazynu tworzy dyspozytorów w swoim magazynie i przypisuje każdego do działów — a to właśnie działy decydują, kto może prowadzić check-in operatorski, kto może tworzyć rezerwacje i które bramy trafiają do jego szybkiego dostępu.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "W przygotowaniu",
+        pilot: "Pilotaż",
+        note: "Uwaga",
+      },
     },
     benefits: {
       title: "Korzyści dla całego zespołu",
@@ -9382,6 +9406,12 @@ export const translations = {
       feature16Desc: "A Logistiq az Ön kapuja, raktári portálja és sofőrjei közötti csomópont — és a már használt TMS-, WMS- és ERP-rendszereihez egy kulcsos, kéréskorlátozott API-n keresztül kapcsolódik. Egyetlen platform, amely a körülötte lévő rendszerekkel kommunikál.",
       feature17Title: "Hozzáférés-kezelés",
       feature17Desc: "A raktárvezető a saját raktárában hoz létre diszpécsereket, és mindegyiküket részlegekhez rendeli — ezek a részlegek határozzák meg, ki indíthat operátori check-int, ki hozhat létre foglalásokat, és mely kapuk kerülnek be a gyorselérésébe.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "Fejlesztés alatt",
+        pilot: "Kísérleti",
+        note: "Megjegyzés",
+      },
     },
     benefits: {
       title: "Előnyök az egész csapat számára",
@@ -11548,6 +11578,12 @@ export const translations = {
       feature16Desc: "Logistiq е центърът между вашата порта, вашия портал на склада и вашите шофьори — и се свързва със системите TMS, WMS и ERP, които вече използвате, чрез API с ключ и ограничение на заявките. Една платформа, която говори със системите около нея.",
       feature17Title: "Контрол на достъпа",
       feature17Desc: "Складовият мениджър създава диспечери в собствения си склад и назначава всеки от тях към отдели — и точно тези отдели определят кой може да ползва check-in от оператор, кой може да създава резервации и кои порти се появяват в бързия му достъп.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "В процес на разработка",
+        pilot: "Пилотен проект",
+        note: "Бележка",
+      },
     },
     benefits: {
       title: "Предимства за целия екип",
@@ -13713,6 +13749,12 @@ export const translations = {
       feature16Desc: "Logistiq fait le lien entre votre barrière, votre portail web d'entrepôt et vos chauffeurs — et se connecte aux systèmes TMS, WMS et ERP que vous utilisez déjà, via une API sécurisée par clé et à débit limité. Une seule plateforme, qui dialogue avec les systèmes qui l'entourent.",
       feature17Title: "Contrôle d'accès",
       feature17Desc: "Un responsable d'entrepôt crée les répartiteurs de son propre entrepôt et affecte chacun à des départements — et ce sont ces départements qui déterminent qui peut lancer un check-in opérateur, qui peut créer des réservations et quels portails apparaissent dans son accès rapide.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "En cours de développement",
+        pilot: "Pilote",
+        note: "Remarque",
+      },
     },
     benefits: {
       title: "Avantages pour toute l'équipe",
@@ -15888,6 +15930,12 @@ export const translations = {
       feature16Desc: "Logistiq is de hub tussen uw poort, uw magazijnportaal en uw chauffeurs — en koppelt via een API met sleutel en rate limit met de TMS-, WMS- en ERP-systemen die u al gebruikt. Eén platform dat praat met de systemen eromheen.",
       feature17Title: "Toegangsbeheer",
       feature17Desc: "Een magazijnbeheerder maakt dispatchers aan binnen het eigen magazijn en koppelt elk van hen aan afdelingen — en die afdelingen bepalen wie de check-in als operator mag uitvoeren, wie boekingen mag aanmaken en welke poorten in hun snelkoppelingen verschijnen.",
+      // The label of a feature page callout (FeatureCalloutSection), by its kind.
+      callout: {
+        roadmap: "In ontwikkeling",
+        pilot: "Pilot",
+        note: "Opmerking",
+      },
     },
     benefits: {
       title: "Voordelen voor het hele team",
