@@ -46,9 +46,21 @@ const ROMANIA: Record<string, RegExp> = {
   nl: /Roemeni/,
 };
 
+// "contract" in each language, as the terms name the contract the client signs.
+const CONTRACT: Record<string, RegExp> = {
+  ro: /contract/,
+  en: /contract/,
+  de: /Vertrag/,
+  pl: /umow/,
+  hu: /szerződés/,
+  bg: /договор/,
+  fr: /contrat/,
+  nl: /overeenkomst/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -72,6 +84,16 @@ describe("contract model copy", () => {
       expect(items[2], locale).toMatch(PRO_FORMA[locale]);
       expect(items[3], locale).toMatch(/SmartBill/);
       expect(items[3], locale).not.toMatch(ROMANIA[locale]);
+    }
+  });
+
+  // Until 2026-11-24 the client accepted the terms by "creating an account" or "paying a
+  // subscription": self-registration and card payment, both closed.
+  it("the terms are accepted by signing the contract, or by using the Platform", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const { items } = copy.terms.article3;
+      expect(items.length, locale).toBe(2);
+      expect(items[0], locale).toMatch(CONTRACT[locale]);
     }
   });
 });

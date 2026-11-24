@@ -1722,7 +1722,7 @@ export const translations = {
       article3: {
         title: "Articolul 3 - Acceptarea Termenilor",
         content: "Prin oricare dintre următoarele acțiuni, Clientul confirmă că a citit, înțeles și acceptat acești termeni:",
-        items: ["Crearea unui cont pe Platformă", "Achitarea unui abonament", "Utilizarea oricărei funcționalități a Platformei"],
+        items: ["Semnarea contractului încheiat cu Prestatorul", "Utilizarea oricărei funcționalități a Platformei"],
         note: "Versiunea actualizată a termenilor este întotdeauna disponibilă pe site-ul logistiq.ro.",
       },
       article4: {
@@ -3641,7 +3641,7 @@ export const translations = {
       article3: {
         title: "Article 3 - Acceptance of Terms",
         content: "By any of the following actions, the Client confirms they have read, understood and accepted these terms:",
-        items: ["Creating an account on the Platform", "Paying for a subscription", "Using any Platform functionality"],
+        items: ["Signing the contract with the Provider", "Using any Platform functionality"],
         note: "The updated version of terms is always available on logistiq.ro.",
       },
       article4: {
@@ -5677,8 +5677,7 @@ export const translations = {
         content:
           "Durch jede der folgenden Handlungen bestätigt der Kunde, dass er diese Bedingungen gelesen, verstanden und akzeptiert hat:",
         items: [
-          "Erstellung eines Kontos auf der Plattform",
-          "Bezahlung eines Abonnements",
+          "Unterzeichnung des Vertrags mit dem Anbieter",
           "Nutzung einer beliebigen Funktion der Plattform",
         ],
         note:
@@ -7890,8 +7889,7 @@ export const translations = {
         content:
           "Dokonując którejkolwiek z poniższych czynności, Klient potwierdza, że zapoznał się z niniejszym regulaminem, zrozumiał go i zaakceptował:",
         items: [
-          "Utworzenie konta na Platformie",
-          "Opłacenie subskrypcji",
+          "Podpisanie umowy z Usługodawcą",
           "Korzystanie z dowolnej funkcji Platformy",
         ],
         note: "Aktualna wersja regulaminu jest zawsze dostępna na stronie logistiq.ro.",
@@ -10101,8 +10099,7 @@ export const translations = {
         content:
           "Az alábbi cselekmények bármelyikével az Ügyfél megerősíti, hogy ezeket a feltételeket elolvasta, megértette és elfogadta:",
         items: [
-          "Fiók létrehozása a Platformon",
-          "Előfizetés kifizetése",
+          "A Szolgáltatóval kötött szerződés aláírása",
           "A Platform bármely funkciójának használata",
         ],
         note: "A feltételek naprakész változata mindig elérhető a logistiq.ro webhelyen.",
@@ -12311,8 +12308,7 @@ export const translations = {
         content:
           "С всяко от следните действия Клиентът потвърждава, че е прочел, разбрал и приел тези условия:",
         items: [
-          "Създаване на акаунт в Платформата",
-          "Заплащане на абонамент",
+          "Подписване на договора с Доставчика",
           "Използване на която и да е функционалност на Платформата",
         ],
         note: "Актуалната версия на условията е винаги достъпна на уебсайта logistiq.ro.",
@@ -14527,8 +14523,7 @@ export const translations = {
         content:
           "Par l'une quelconque des actions suivantes, le Client confirme avoir lu, compris et accepté les présentes conditions :",
         items: [
-          "La création d'un compte sur la Plateforme",
-          "Le paiement d'un abonnement",
+          "La signature du contrat avec le Prestataire",
           "L'utilisation de toute fonctionnalité de la Plateforme",
         ],
         note:
@@ -16745,8 +16740,7 @@ export const translations = {
         content:
           "Door een van de volgende handelingen bevestigt de Klant dat hij deze voorwaarden heeft gelezen, begrepen en aanvaard:",
         items: [
-          "Het aanmaken van een account op het Platform",
-          "De betaling van een abonnement",
+          "De ondertekening van de overeenkomst met de Dienstverlener",
           "Het gebruik van enige functionaliteit van het Platform",
         ],
         note:
