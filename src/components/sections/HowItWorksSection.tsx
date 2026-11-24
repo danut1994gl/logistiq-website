@@ -1,5 +1,21 @@
+import type { ReactNode } from "react";
 import { type Translations } from "@/lib/i18n/translations";
 import { QrCodeIcon, TruckIcon, ChatIcon, ChartIcon } from "@/components/icons";
+
+// The copy marks a product name with <b>…</b> (howItWorks.step1Desc, "QRGo Driver"). It is
+// drawn bold here, from the text, never injected as HTML. Until 2026-11-24 the tags were
+// printed as text, in every language.
+function withBold(text: string): ReactNode[] {
+  return text.split(/<b>(.*?)<\/b>/g).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-slate-900 dark:text-white">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
 
 export function HowItWorksSection({ t }: { t: Translations }) {
   const steps = [
@@ -69,7 +85,7 @@ export function HowItWorksSection({ t }: { t: Translations }) {
                   {step.title}
                 </h3>
                 <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                  {step.description}
+                  {withBold(step.description)}
                 </p>
               </div>
             </div>
