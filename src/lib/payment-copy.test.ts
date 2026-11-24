@@ -7,9 +7,11 @@ import { translations } from "@/lib/i18n/translations";
 // Clients sign a contract and pay by bank transfer (owner, 2026-11-22). Card payment
 // (Stripe) and self-registration are closed on logistiq.cloud (Logistiq ADR-057), whose
 // /signup sends visitors to logistiq.ro/contact. Until 2026-11-24, in all 8 languages,
-// the FAQ said card payments were accepted, the integrations page said Stripe ran the
-// subscription, and the cloud page said the visitor signs up on logistiq.cloud. If card
-// payment or self-registration comes back, the copy and these tests change together.
+// the FAQ said card payments were accepted, the terms said payment could be made by card
+// (Stripe), the integrations page said Stripe ran the subscription, and the cloud page
+// said the visitor signs up on logistiq.cloud. If card payment or self-registration
+// comes back, the copy and these tests change together. The privacy and cookie policies
+// still name Stripe among the platform's processors: that is for the legal review.
 
 // "card" and "Stripe" in each language. A status card on the driver's phone (f10Page)
 // is not a payment, so only the billing strings are checked.
@@ -82,6 +84,14 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.faq.a7, locale).toMatch(BANK_TRANSFER[locale]);
       expect(copy.faq.a7.match(CARD)?.[0], locale).toBeUndefined();
+    }
+  });
+
+  it("the terms' payment clause says bank transfer and names no card or Stripe", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const { items } = copy.terms.article6;
+      expect(items.filter((item) => CARD.test(item)), locale).toEqual([]);
+      expect(items.some((item) => BANK_TRANSFER[locale].test(item)), locale).toBe(true);
     }
   });
 

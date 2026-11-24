@@ -1746,7 +1746,7 @@ export const translations = {
         items: [
           "Prețul fiecărui plan se stabilește prin oferta comercială acceptată de Client sau prin contractul încheiat între Prestator și Client",
           "Facturarea se face lunar, în avans",
-          "Plata se poate efectua prin card (Stripe) sau transfer bancar",
+          "Plata se efectuează prin transfer bancar, pe baza facturii emise conform contractului",
           "Pentru România, se emit facturi fiscale prin SmartBill",
           "Modificarea prețurilor cu notificare prealabilă de 30 de zile",
         ],
@@ -3659,7 +3659,7 @@ export const translations = {
       },
       article6: {
         title: "Article 6 - Pricing and Payments",
-        items: ["The price of each plan is set by the commercial offer accepted by the Client or by the contract concluded between the Provider and the Client", "Billing is monthly, in advance", "Payment via card (Stripe) or bank transfer", "Fiscal invoices issued via SmartBill for Romania", "Price changes with 30 days notice"],
+        items: ["The price of each plan is set by the commercial offer accepted by the Client or by the contract concluded between the Provider and the Client", "Billing is monthly, in advance", "Payment via bank transfer, against the invoice issued under the contract", "Fiscal invoices issued via SmartBill for Romania", "Price changes with 30 days notice"],
         plans: { title: "Available Plans", professional: "Professional: 1 warehouse", enterprise5: "Enterprise 5: up to 5 warehouses", enterprise10: "Enterprise 10: up to 10 warehouses", enterprise25: "Enterprise 25: up to 25 warehouses" },
       },
       article7: {
@@ -5724,7 +5724,7 @@ export const translations = {
         items: [
           "Der Preis jedes Plans wird durch das vom Kunden angenommene Angebot oder durch den zwischen dem Anbieter und dem Kunden geschlossenen Vertrag festgelegt",
           "Die Rechnungsstellung erfolgt monatlich im Voraus",
-          "Die Zahlung kann per Karte (Stripe) oder per Banküberweisung erfolgen",
+          "Die Zahlung erfolgt per Banküberweisung gegen die gemäß dem Vertrag ausgestellte Rechnung",
           "Für Rumänien werden steuerlich gültige Rechnungen über SmartBill ausgestellt",
           "Preisänderungen mit einer Vorankündigung von 30 Tagen",
         ],
@@ -7945,7 +7945,7 @@ export const translations = {
         items: [
           "Cenę każdego planu określa oferta handlowa zaakceptowana przez Klienta lub umowa zawarta między Usługodawcą a Klientem",
           "Fakturowanie odbywa się co miesiąc, z góry",
-          "Płatności można dokonać kartą (Stripe) lub przelewem bankowym",
+          "Płatności dokonuje się przelewem bankowym na podstawie faktury wystawionej zgodnie z umową",
           "W przypadku Rumunii faktury są wystawiane za pośrednictwem SmartBill",
           "Zmiana cen wymaga powiadomienia z 30-dniowym wyprzedzeniem",
         ],
@@ -10165,7 +10165,7 @@ export const translations = {
         items: [
           "Az egyes csomagok árát az Ügyfél által elfogadott árajánlat vagy a Szolgáltató és az Ügyfél között létrejött szerződés határozza meg",
           "A számlázás havonta, előre történik",
-          "A fizetés bankkártyával (Stripe) vagy banki átutalással teljesíthető",
+          "A fizetés banki átutalással történik, a szerződés szerint kiállított számla alapján",
           "Románia esetében a számlák kiállítása a SmartBill rendszeren keresztül történik",
           "Az árak módosítása 30 napos előzetes értesítéssel",
         ],
@@ -12384,7 +12384,7 @@ export const translations = {
         items: [
           "Цената на всеки план се определя от търговската оферта, приета от Клиента, или от договора, сключен между Доставчика и Клиента",
           "Фактурирането се извършва ежемесечно, авансово",
-          "Плащането може да се извърши с карта (Stripe) или с банков превод",
+          "Плащането се извършва с банков превод въз основа на фактурата, издадена съгласно договора",
           "За Румъния данъчните фактури се издават чрез SmartBill",
           "Промяна на цените с 30-дневно предизвестие",
         ],
@@ -14610,7 +14610,7 @@ export const translations = {
         items: [
           "Le prix de chaque forfait est fixé par l'offre commerciale acceptée par le Client ou par le contrat conclu entre le Prestataire et le Client",
           "La facturation est effectuée mensuellement, à l'avance",
-          "Le paiement peut être effectué par carte (Stripe) ou par virement bancaire",
+          "Le paiement est effectué par virement bancaire, sur la base de la facture émise conformément au contrat",
           "Pour la Roumanie, des factures fiscales sont émises via SmartBill",
           "Modification des prix avec un préavis de 30 jours",
         ],
@@ -16837,7 +16837,7 @@ export const translations = {
         items: [
           "De prijs van elk plan wordt vastgesteld in de door de Klant aanvaarde commerciële offerte of in de tussen de Dienstverlener en de Klant gesloten overeenkomst",
           "De facturatie vindt maandelijks en vooraf plaats",
-          "De betaling kan worden verricht per kaart (Stripe) of per bankoverschrijving",
+          "De betaling wordt verricht per bankoverschrijving, op basis van de factuur die krachtens de overeenkomst wordt uitgereikt",
           "Voor Roemenië worden fiscale facturen uitgereikt via SmartBill",
           "Prijswijzigingen met een kennisgeving van 30 dagen vooraf",
         ],
