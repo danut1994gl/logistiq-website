@@ -48,12 +48,13 @@ describe("cookie policy", () => {
 });
 
 // The terms' article 14, termination by the Client. In French, "dans les conditions qu'il
-// prévoit" (until 2026-11-24) could be read as the conditions the Client sets; the
-// conditions are the contract's, as the other languages say ("as set out in it").
+// prévoit" (until 2026-11-24) could be read as the conditions the Client sets, and "prévues
+// par celui-ci" (the same day) still left "celui-ci" to point back; the conditions are the
+// contract's, as the other languages say ("as set out in it").
 describe("terms, article 14", () => {
-  it("in French, the Client terminates under the contract's conditions", () => {
+  it("in French, the Client terminates under the conditions the contract sets", () => {
     expect(translations.fr.terms.article14.byClient.content).toBe(
-      "Le Client peut résilier le contrat dans les conditions prévues par celui-ci.",
+      "Le Client peut résilier le contrat dans les conditions prévues au contrat.",
     );
   });
 });
