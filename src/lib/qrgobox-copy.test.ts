@@ -90,12 +90,17 @@ describe("QRGoBox copy: in progress", () => {
   it("the cloud page does not make QRGoBox the only equipment, and names the equipment in use", () => {
     const ONLY =
       /singura opțiune|singura excepție|the one option|the one exception|einzige Option|einzige Ausnahme|jedyna opcja|jedynym wyjątkiem|egyetlen lehetőség|egyetlen kivétel|единствената опция|единственото изключение|seule option|seule exception|enige optie|enige uitzondering/i;
+    // "in use today" (until the evening of 2026-11-24) said customers use them; they are
+    // available today.
+    const IN_USE = /folosite deja|in use today|im Einsatz|w użyciu|már ma működnek|вече се използват|en service|in gebruik/i;
     for (const [locale, copy] of Object.entries(translations)) {
       for (const text of [copy.f9Page.b3c, copy.f9Page.a1]) {
         expect(text.match(ONLY)?.[0], locale).toBeUndefined();
+        expect(text.match(IN_USE)?.[0], locale).toBeUndefined();
         expect(text, locale).toMatch(/QRGo Self/);
       }
     }
+    expect(translations.en.f9Page.b3c).toMatch(/QRGo Self tablet, available today/);
   });
 
   // The validate route records a passage once the open command is handed to the broker,
