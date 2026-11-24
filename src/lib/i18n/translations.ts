@@ -1737,7 +1737,7 @@ export const translations = {
       article5: {
         title: "Articolul 5 - Durata Contractului",
         trial: { title: "Perioada de probă", content: "O eventuală perioadă de probă se stabilește prin oferta comercială sau prin contract." },
-        subscription: { title: "Abonamentul", content: "Abonamentul se încheie lunar și se reînnoiește automat, cu excepția cazului în care Clientul anulează." },
+        subscription: { title: "Abonamentul", content: "Durata abonamentului și reînnoirea lui sunt cele stabilite în contract." },
         cancellation: { title: "Anularea", content: "Clientul poate anula oricând. Accesul rămâne activ până la sfârșitul perioadei plătite." },
       },
       article6: {
@@ -3651,7 +3651,7 @@ export const translations = {
       article5: {
         title: "Article 5 - Agreement Duration",
         trial: { title: "Trial Period", content: "Any trial period is set out in the commercial offer or in the contract." },
-        subscription: { title: "Subscription", content: "Subscription is monthly and auto-renews unless Client cancels." },
+        subscription: { title: "Subscription", content: "The duration of the subscription and its renewal are those set out in the contract." },
         cancellation: { title: "Cancellation", content: "Client can cancel anytime. Access remains until end of paid period." },
       },
       article6: {
@@ -5702,7 +5702,7 @@ export const translations = {
         subscription: {
           title: "Abonnement",
           content:
-            "Das Abonnement wird monatlich abgeschlossen und verlängert sich automatisch, sofern der Kunde es nicht kündigt.",
+            "Laufzeit und Verlängerung des Abonnements richten sich nach dem Vertrag.",
         },
         cancellation: {
           title: "Kündigung",
@@ -7913,7 +7913,7 @@ export const translations = {
         subscription: {
           title: "Subskrypcja",
           content:
-            "Subskrypcja jest zawierana na okres miesięczny i odnawia się automatycznie, chyba że Klient ją anuluje.",
+            "Czas trwania subskrypcji i jej odnowienie określa umowa.",
         },
         cancellation: {
           title: "Anulowanie",
@@ -10123,7 +10123,7 @@ export const translations = {
         subscription: {
           title: "Előfizetés",
           content:
-            "Az előfizetés havi időtartamra jön létre, és automatikusan megújul, kivéve, ha az Ügyfél lemondja.",
+            "Az előfizetés időtartamát és megújítását a szerződés határozza meg.",
         },
         cancellation: {
           title: "Lemondás",
@@ -12332,7 +12332,7 @@ export const translations = {
         subscription: {
           title: "Абонамент",
           content:
-            "Абонаментът се сключва за месечен период и се подновява автоматично, освен ако Клиентът не го анулира.",
+            "Срокът на абонамента и неговото подновяване се определят в договора.",
         },
         cancellation: {
           title: "Анулиране",
@@ -14548,7 +14548,7 @@ export const translations = {
         subscription: {
           title: "Abonnement",
           content:
-            "L'abonnement est conclu sur une base mensuelle et se renouvelle automatiquement, sauf si le Client l'annule.",
+            "La durée de l'abonnement et son renouvellement sont ceux prévus par le contrat.",
         },
         cancellation: {
           title: "Annulation",
@@ -16765,7 +16765,7 @@ export const translations = {
         subscription: {
           title: "Abonnement",
           content:
-            "Het abonnement wordt per maand afgesloten en wordt automatisch verlengd, tenzij de Klant het opzegt.",
+            "De looptijd van het abonnement en de verlenging ervan worden in de overeenkomst vastgelegd.",
         },
         cancellation: {
           title: "Opzegging",

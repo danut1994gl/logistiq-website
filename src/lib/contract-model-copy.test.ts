@@ -58,9 +58,21 @@ const CONTRACT: Record<string, RegExp> = {
   nl: /overeenkomst/,
 };
 
+// "monthly" in each language, as the self-service subscription was.
+const MONTHLY: Record<string, RegExp> = {
+  ro: /lunar/,
+  en: /monthly/,
+  de: /monatlich/,
+  pl: /miesięczn/,
+  hu: /havi/,
+  bg: /месечен/,
+  fr: /mensuel/,
+  nl: /per maand|maandelijks/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -104,6 +116,14 @@ describe("contract model copy", () => {
       const { content } = copy.terms.article5.trial;
       expect(content, locale).not.toMatch(/\d/);
       expect(content, locale).toMatch(CONTRACT[locale]);
+    }
+  });
+
+  it("the terms leave the subscription's duration and renewal to the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const { content } = copy.terms.article5.subscription;
+      expect(content, locale).toMatch(CONTRACT[locale]);
+      expect(content, locale).not.toMatch(MONTHLY[locale]);
     }
   });
 });
