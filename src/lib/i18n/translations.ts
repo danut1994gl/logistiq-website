@@ -1548,6 +1548,11 @@ export const translations = {
           { name: "Supabase", purpose: "Bază de date și autentificare (servere în UE - Frankfurt, Germania)" },
           { name: "SmartBill", purpose: "Emitere facturi fiscale conforme (România)" },
           { name: "Vercel", purpose: "Hosting și distribuție globală (CDN)" },
+          { name: "Firebase Cloud Messaging (Google)", purpose: "Notificări push către aplicația QRGo Driver" },
+          { name: "LiveKit", purpose: "Apeluri vocale de la tableta QRGo Self către operatorii depozitului" },
+          { name: "WhatsApp (WAHA)", purpose: "Mesaje către șoferi pe WhatsApp, trimise printr-o instanță WAHA" },
+          { name: "Twilio / Vonage", purpose: "SMS-uri către șoferi, prin contul SMS configurat de fiecare depozit" },
+          { name: "cloud342.c-f.ro", purpose: "Server de e-mail: e-mailurile contului și ale serviciului și mesajele din formularul de contact" },
         ],
         note: "Nu vindem și nu partajăm datele dvs. personale cu terți în scopuri de marketing.",
       },
@@ -3390,6 +3395,11 @@ export const translations = {
           { name: "Supabase", purpose: "Database and authentication (EU servers - Frankfurt, Germany)" },
           { name: "SmartBill", purpose: "Compliant fiscal invoice generation (Romania)" },
           { name: "Vercel", purpose: "Hosting and global distribution (CDN)" },
+          { name: "Firebase Cloud Messaging (Google)", purpose: "Push notifications to the QRGo Driver app" },
+          { name: "LiveKit", purpose: "Voice calls from the QRGo Self tablet to the warehouse's operators" },
+          { name: "WhatsApp (WAHA)", purpose: "Messages to drivers on WhatsApp, sent through a WAHA instance" },
+          { name: "Twilio / Vonage", purpose: "SMS to drivers, through the SMS account each warehouse configures" },
+          { name: "cloud342.c-f.ro", purpose: "Mail server: account and service emails, and the contact form's messages" },
         ],
         note: "We do not sell or share your personal data with third parties for marketing purposes.",
       },
@@ -5253,6 +5263,26 @@ export const translations = {
           {
             name: "Vercel",
             purpose: "Hosting und globale Verteilung (CDN)",
+          },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Push-Benachrichtigungen an die QRGo Driver App",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Sprachanrufe vom Tablet von QRGo Self an die Operatoren des Lagers",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Nachrichten an Fahrer über WhatsApp, gesendet über eine WAHA-Instanz",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "SMS an Fahrer über das SMS-Konto, das jedes Lager selbst einrichtet",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Mailserver: Konto- und Service-E-Mails sowie die Nachrichten aus dem Kontaktformular",
           },
         ],
         note:
@@ -7372,6 +7402,26 @@ export const translations = {
             name: "Vercel",
             purpose: "Hosting i globalna dystrybucja (CDN)",
           },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Powiadomienia push do aplikacji QRGo Driver",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Połączenia głosowe z tabletu QRGo Self do operatorów magazynu",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Wiadomości do kierowców przez WhatsApp, wysyłane przez instancję WAHA",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "SMS-y do kierowców przez konto SMS skonfigurowane przez każdy magazyn",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Serwer poczty: e-maile dotyczące konta i usługi oraz wiadomości z formularza kontaktowego",
+          },
         ],
         note:
           "Nie sprzedajemy Twoich danych osobowych ani nie udostępniamy ich podmiotom trzecim w celach marketingowych.",
@@ -9488,6 +9538,26 @@ export const translations = {
             name: "Vercel",
             purpose: "Tárhelyszolgáltatás és globális terjesztés (CDN)",
           },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Push-értesítések a QRGo Driver alkalmazásba",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Hanghívások a QRGo Self táblagépről a raktár operátoraihoz",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Üzenetek a sofőröknek WhatsAppon, egy WAHA-példányon keresztül küldve",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "SMS-ek a sofőröknek az egyes raktárak által beállított SMS-fiókon keresztül",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Levelezőszerver: fiók- és szolgáltatási e-mailek, valamint a kapcsolatfelvételi űrlap üzenetei",
+          },
         ],
         note:
           "Személyes adatait nem értékesítjük és nem osztjuk meg harmadik felekkel marketingcélokra.",
@@ -11600,6 +11670,26 @@ export const translations = {
           {
             name: "Vercel",
             purpose: "Хостинг и глобално разпространение (CDN)",
+          },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Push известия към приложението QRGo Driver",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Гласови обаждания от таблета на QRGo Self към операторите на склада",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Съобщения до шофьорите в WhatsApp, изпращани чрез инстанция на WAHA",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "SMS съобщения до шофьорите чрез SMS акаунта, който всеки склад настройва",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Пощенски сървър: имейли за акаунта и услугата и съобщенията от формата за контакт",
           },
         ],
         note: "Не продаваме и не споделяме вашите лични данни с трети страни за маркетингови цели.",
@@ -13715,6 +13805,26 @@ export const translations = {
           {
             name: "Vercel",
             purpose: "Hébergement et distribution mondiale (CDN)",
+          },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Notifications push vers l'application QRGo Driver",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Appels vocaux de la tablette QRGo Self vers les opérateurs de l'entrepôt",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Messages aux chauffeurs sur WhatsApp, envoyés via une instance WAHA",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "SMS aux chauffeurs, via le compte SMS que chaque entrepôt configure",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Serveur de messagerie : e-mails du compte et du service, et messages du formulaire de contact",
           },
         ],
         note:
@@ -15836,6 +15946,26 @@ export const translations = {
           {
             name: "Vercel",
             purpose: "Hosting en wereldwijde distributie (CDN)",
+          },
+          {
+            name: "Firebase Cloud Messaging (Google)",
+            purpose: "Pushmeldingen naar de QRGo Driver-app",
+          },
+          {
+            name: "LiveKit",
+            purpose: "Spraakoproepen van de tablet van QRGo Self naar de operators van het magazijn",
+          },
+          {
+            name: "WhatsApp (WAHA)",
+            purpose: "Berichten aan chauffeurs via WhatsApp, verstuurd via een WAHA-instantie",
+          },
+          {
+            name: "Twilio / Vonage",
+            purpose: "Sms'jes aan chauffeurs via het sms-account dat elk magazijn instelt",
+          },
+          {
+            name: "cloud342.c-f.ro",
+            purpose: "Mailserver: account- en service-e-mails en de berichten van het contactformulier",
           },
         ],
         note:

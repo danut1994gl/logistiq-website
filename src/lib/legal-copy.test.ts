@@ -57,3 +57,34 @@ describe("terms, article 14", () => {
     );
   });
 });
+
+// Privacy policy §5, the partners that process data for the platform. Until 2026-11-24 it
+// named only Supabase, SmartBill and Vercel. Each one added since is in Logistiq's code
+// (origin/main, read on 2026-11-24): Firebase Cloud Messaging sends the driver app's push
+// (supabase/functions/send-driver-notification/fcm.ts, ADR-031); LiveKit carries the voice
+// calls from a QRGo Self tablet to the operators (apps/dashboard/lib/calls/livekit-token.ts,
+// microphone only); WhatsApp messages to drivers go through a WAHA instance
+// (apps/dashboard/lib/waha.ts); SMS to drivers go through each warehouse's own Twilio or
+// Vonage account (apps/dashboard/lib/sms/providers); and mail goes through the SMTP server
+// cloud342.c-f.ro (SMTP_HOST's default in apps/dashboard/lib/smtp.ts, the driver web's
+// delete-data route and this site's contact form).
+const PROCESSORS = [
+  "Supabase",
+  "SmartBill",
+  "Vercel",
+  "Firebase Cloud Messaging (Google)",
+  "LiveKit",
+  "WhatsApp (WAHA)",
+  "Twilio / Vonage",
+  "cloud342.c-f.ro",
+];
+
+describe("privacy policy, section 5", () => {
+  it("names every processor the platform uses, each with a purpose", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const partners = copy.privacy.thirdParties.partners;
+      expect(partners.map((p) => p.name), locale).toEqual(PROCESSORS);
+      for (const p of partners) expect(p.purpose.trim(), `${locale} ${p.name}`).not.toBe("");
+    }
+  });
+});

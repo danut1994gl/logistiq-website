@@ -100,7 +100,8 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
   it("the privacy policy names no Stripe among the partners that process data", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       const partners = copy.privacy.thirdParties.partners.map((p) => p.name);
-      expect(partners, locale).toEqual(["Supabase", "SmartBill", "Vercel"]);
+      expect(partners, locale).not.toContain("Stripe");
+      expect(partners.slice(0, 3), locale).toEqual(["Supabase", "SmartBill", "Vercel"]);
     }
   });
 
