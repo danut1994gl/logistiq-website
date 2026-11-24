@@ -94,9 +94,21 @@ const PRORATED: Record<string, RegExp> = {
   nl: /naar rato|terugbetal/,
 };
 
+// "discount" in each language: the FAQ offered annual payment "with a discount".
+const DISCOUNT: Record<string, RegExp> = {
+  ro: /discount|reducere/,
+  en: /discount/,
+  de: /Rabatt/,
+  pl: /zniżk|rabat/,
+  hu: /kedvezmény/i,
+  bg: /отстъпк/,
+  fr: /remise|réduction/,
+  nl: /korting/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME, PRORATED]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME, PRORATED, DISCOUNT]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -166,6 +178,17 @@ describe("contract model copy", () => {
         expect(content, locale).toMatch(CONTRACT[locale]);
         expect(content, locale).not.toMatch(ANYTIME[locale]);
         expect(content, locale).not.toMatch(PRORATED[locale]);
+      }
+    }
+  });
+
+  it("the FAQ changes plans on request and leaves duration, renewal and ending to the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      for (const answer of [copy.faq.a6, copy.faq.a8]) {
+        expect(answer, locale).toMatch(CONTRACT[locale]);
+        expect(answer, locale).not.toMatch(ANYTIME[locale]);
+        expect(answer, locale).not.toMatch(PRORATED[locale]);
+        expect(answer, locale).not.toMatch(DISCOUNT[locale]);
       }
     }
   });
