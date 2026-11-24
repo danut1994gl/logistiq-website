@@ -4,8 +4,9 @@ import { translations } from "@/lib/i18n/translations";
 // Clients sign a contract and pay by bank transfer (owner, 2026-11-22). Card payment
 // (Stripe) and self-registration are closed on logistiq.cloud (Logistiq ADR-057), whose
 // /signup sends visitors to logistiq.ro/contact. Until 2026-11-24, in all 8 languages,
-// the FAQ said card payments were accepted and the integrations page said Stripe ran
-// the subscription. If card payment comes back, the copy and these tests change together.
+// the FAQ said card payments were accepted, the integrations page said Stripe ran the
+// subscription, and the cloud page said the visitor signs up on logistiq.cloud. If card
+// payment or self-registration comes back, the copy and these tests change together.
 
 // "card" and "Stripe" in each language. A status card on the driver's phone (f10Page)
 // is not a payment, so only the billing strings are checked.
@@ -23,9 +24,37 @@ const BANK_TRANSFER: Record<string, RegExp> = {
   nl: /bankoverschrijving/,
 };
 
+// "you sign up" and its kin in each language, followed closely by logistiq.cloud: Logistiq
+// opens a client's account, nobody signs up there. Carriers registering in their own
+// portal, by invitation, is true and names no logistiq.cloud.
+const SIGN_UP: Record<string, RegExp> = {
+  ro: /te înregistrezi|înregistrează-te|te înscrii|înscrie-te|îți (creezi|faci) (un )?cont/,
+  en: /sign(s|ing)? up|signup|register|create (an |your )?account/,
+  de: /registrier|anmeld|Konto (erstellen|anlegen)/,
+  pl: /rejestrujesz się|zarejestruj się|załóż konto|zakładasz konto/,
+  hu: /regisztrál|fiókot (hoz létre|nyit)/,
+  bg: /регистрирате се|регистрирайте се|създайте акаунт|създавате акаунт/,
+  fr: /créez votre compte|créer (votre|un) compte|inscri/,
+  nl: /meldt zich aan|meld u aan|aanmelden|registreer|account aanmaken/,
+};
+
+function strings(value: unknown): string[] {
+  if (typeof value === "string") return [value];
+  if (value && typeof value === "object") return Object.values(value).flatMap(strings);
+  return [];
+}
+
 describe("payment copy: a contract and a bank transfer, no card", () => {
-  it("knows the words for bank transfer in every language", () => {
+  it("knows the words for bank transfer and for signing up in every language", () => {
     expect(Object.keys(BANK_TRANSFER).sort()).toEqual(Object.keys(translations).sort());
+    expect(Object.keys(SIGN_UP).sort()).toEqual(Object.keys(translations).sort());
+  });
+
+  it("no language tells the visitor to sign up on logistiq.cloud", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const signUpThere = new RegExp(`(${SIGN_UP[locale].source})[^.]{0,40}logistiq\\.cloud`, "i");
+      expect(strings(copy).filter((s) => signUpThere.test(s)), locale).toEqual([]);
+    }
   });
 
   it("the FAQ's billing answer says bank transfer and names no card", () => {
