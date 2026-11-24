@@ -29,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         })}
       />
       <HeroSection t={t} />
-      {/* No usage figures: StatsSection's are generated, not counted (2026-11-24). */}
+      {/* No usage figures: Logistiq has none to show yet, and StatsSection draws only real ones (2026-11-24). */}
       <HowItWorksSection t={t} />
       <FeaturesSection t={t} />
       <BenefitsSection t={t} />

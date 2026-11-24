@@ -6,88 +6,28 @@ import { QrCodeIcon, TruckIcon, UsersIcon, ChartIcon } from "@/components/icons"
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 
-// Not rendered since 2026-11-24: these figures (active drivers, connected warehouses,
-// check-ins a month, waiting-time reduction) are generated from the date below, not
-// counted, and Logistiq has no customers to count yet. Render it again only with real
-// numbers. StatsSection.test.tsx keeps its server render the same on every day.
-export function StatsSection({ t }: { t: Translations }) {
+// The platform's real figures, for a stats band under the home hero. Logistiq has none to
+// show yet, so no page renders StatsSection (since 2026-11-24). Until then it generated its
+// figures from the date, with a seeded random number (about 1,800 drivers and 25,000
+// check-ins a month, growing by the day since June 2024), and showed them as the platform's
+// own. It now draws only the figures it is given; render it again only with real ones.
+export type StatsFigures = {
+  drivers: number;
+  warehouses: number;
+  checkinsPerMonth: number;
+  waitReductionPercent: number;
+};
+
+export function StatsSection({ t, figures }: { t: Translations; figures: StatsFigures }) {
   const { ref, isInView } = useInView(0.3);
 
-  // Deterministic seeded random (mulberry32-based, single iteration)
-  function seededRandom(seed: number): number {
-    let t = (seed + 0x6d2b79f5) | 0;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= (t + Math.imul(t ^ (t >>> 7), t | 61)) | 0;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  }
-
-  // Shared algorithm — must be identical in website and dashboard
-  function getPlatformStats() {
-    const today = new Date();
-    const baseDate = new Date(2024, 5, 1); // June 1, 2024 — platform reference
-    const daysSinceBase = Math.floor(
-      (today.getTime() - baseDate.getTime()) / 86400000
-    );
-    const dayOfWeek = today.getDay(); // 0=Sun, 6=Sat
-    const month = today.getMonth(); // 0-11
-
-    // Knuth multiplicative hash for better distribution across days
-    const hash = Math.imul(daysSinceBase, 2654435761);
-    const r1 = seededRandom(hash);
-    const r2 = seededRandom(hash + 7919);
-    const r3 = seededRandom(hash + 104729);
-    const r4 = seededRandom(hash + 224737);
-    const r5 = seededRandom(hash + 350377);
-
-    // Seasonality: logistics busier in Q1/Q4, slower in summer
-    const seasonFactor = [1.06, 1.03, 1.0, 0.97, 0.94, 0.89, 0.87, 0.91, 0.96, 1.02, 1.07, 1.1][month];
-
-    // Weekday factor (Mon-Fri more active, weekends quieter)
-    const weekdayFactor = [0.91, 1.04, 1.06, 1.05, 1.03, 1.0, 0.88][dayOfWeek];
-
-    // ~7% of days get a notable spike (busy day, new client onboarding, etc.)
-    const spikeFactor = r5 > 0.93 ? 1.12 + r1 * 0.18 : 1.0;
-
-    // === ACTIVE DRIVERS ===
-    const driversBase = 1800 + daysSinceBase * 1.0;
-    const driversNoise = (r1 - 0.5) * 160;
-    const drivers = Math.max(
-      1500,
-      Math.round((driversBase + driversNoise) * weekdayFactor * spikeFactor)
-    );
-
-    // === CONNECTED WAREHOUSES ===
-    const whGrowth = Math.floor(daysSinceBase / 50);
-    const whNoise = Math.floor(r2 * 3);
-    const warehouses = Math.max(30, 35 + whGrowth + whNoise);
-
-    // === CHECK-INS PER MONTH ===
-    const checkinsBase = 25000 + daysSinceBase * 18;
-    const checkinsNoise = (r3 - 0.5) * 5000;
-    const checkins = Math.max(
-      20000,
-      Math.round((checkinsBase + checkinsNoise) * seasonFactor * spikeFactor)
-    );
-
-    // === WAIT TIME REDUCTION ===
-    const reductionBase = 8 + daysSinceBase * 0.005;
-    const reductionNoise = (r4 - 0.5) * 2.5;
-    const reduction = Math.round(
-      Math.min(20, Math.max(5, reductionBase + reductionNoise))
-    );
-
-    return { drivers, warehouses, checkins, reduction };
-  }
-
-  // Every stat is counted up from 0, never rendered straight: the home page is
-  // prerendered at build time, so a date-seeded number in the server HTML would
-  // disagree with the visitor's day, and React would throw the whole page away
-  // and paint it again (hydration error #418).
-  const dailyStats = getPlatformStats();
-  const drivers = useCountUp(dailyStats.drivers, 2000, false);
-  const warehouses = useCountUp(dailyStats.warehouses, 2000, false);
-  const checkins = useCountUp(dailyStats.checkins, 2500, false);
-  const reduction = useCountUp(dailyStats.reduction, 2000, false);
+  // Every figure is counted up from 0 once the band scrolls into view, so the server HTML
+  // and the first client render are the same on every day (StatsSection.test.tsx): a
+  // mismatch makes React throw the server-rendered page away and paint it again (#418).
+  const drivers = useCountUp(figures.drivers, 2000, false);
+  const warehouses = useCountUp(figures.warehouses, 2000, false);
+  const checkins = useCountUp(figures.checkinsPerMonth, 2500, false);
+  const reduction = useCountUp(figures.waitReductionPercent, 2000, false);
 
   const { startCounting: startDrivers } = drivers;
   const { startCounting: startWarehouses } = warehouses;

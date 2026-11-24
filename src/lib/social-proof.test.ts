@@ -57,9 +57,11 @@ describe("social proof", () => {
     expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/Testimonial/);
   });
 
-  // StatsSection draws its figures from a seeded random number of the date (1,800 drivers
-  // and 25,000 check-ins a month, growing by the day), shown as the platform's own.
-  it("the home page renders no generated usage figures", () => {
+  // Until 2026-11-24 StatsSection drew its figures from a seeded random number of the date
+  // (1,800 drivers and 25,000 check-ins a month, growing by the day), shown as the
+  // platform's own. It now draws only the figures it is given (StatsSection.test.tsx), and
+  // the home page renders none while Logistiq has none to show.
+  it("the home page renders no usage figures", () => {
     expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/<StatsSection|import \{ StatsSection \}/);
   });
 });
