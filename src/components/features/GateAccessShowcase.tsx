@@ -4,16 +4,17 @@ import { featureRel } from "@/lib/features";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { GateAccessScene } from "./GateAccessScene";
 import { FeatureFAQSection } from "./FeatureFAQSection";
-import { GateNetworkArt } from "./splitArt";
-import { FeatureFlowSection, FeatureSpecSection, FeatureSplitSection, FeatureCalloutSection } from "./sections";
+import { FeatureFlowSection, FeatureSpecSection, FeatureCalloutSection } from "./sections";
 
-// Yard Access Control / QRGoBox (feature 15): the real chain — the driver's QR,
-// a gate terminal, eight checks, an MQTT open command, a one-second relay pulse.
+// Yard Access Control / QRGoBox (feature 15): in progress (owner, 2026-11-24; the client deck
+// says „În lucru” / "In progress"). Built today: the driver's QR, the gate scanner device and
+// the platform's check of the check-in, with every scan in the gate log. In progress: the
+// command to the barrier, which will go out only over a secure (TLS) connection, and QRGoBox
+// itself, whose hardware and software are in beta. Until then every valid scan answers 503.
 //
-// Section order is deliberate and specific to this page:
-// flow first (the chain IS the story), then the hardware spec (the boring table
-// is the differentiator here), then the IT objection, then a pilot callout. No
-// problem/benefits: there is no adoption to quote and the hard material is strong.
+// Section order: the flow first (built steps, then the two in progress), what QRGoBox will
+// be, the in-progress callout, the FAQ. The network diagram of the old box design (outbound
+// MQTT, a 30 s heartbeat, a LAN admin page as fallback) is gone with that design.
 // Server Component.
 export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Locale }) {
   const f = t.f15Page;
@@ -57,15 +58,6 @@ export function GateAccessShowcase({ t, locale }: { t: Translations; locale: Loc
           { k: f.k4, v: f.v4 },
         ]}
         tinted
-      />
-
-      <FeatureSplitSection
-        idPrefix="ga15"
-        title={f.spTitle}
-        body={f.spBody}
-        side={f.spSide === "left" ? "left" : "right"}
-        visual={<GateNetworkArt t={t} />}
-        
       />
 
       <FeatureCalloutSection

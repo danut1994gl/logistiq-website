@@ -1,100 +1,11 @@
 import type { Translations } from "@/lib/i18n/translations";
-import { LogistiqCloud } from "./LogistiqCloud";
 
-// Second illustrations for the mid-page `split` sections on f15/f16/f17. Small,
+// Second illustrations for the mid-page `split` sections on f16/f17. Small,
 // static, presentational diagrams — they sit beside prose, so they explain one
 // idea each rather than animate a flow. Server Components. aria-hidden.
 //
 // Each fills the split section's dark 4:3 panel (which is `isolate` + bordered),
 // so the root is the usual @container absolute-inset pattern.
-
-// ── f15: "It never phones in. It only phones out." ──────────────────────────
-// The box sits behind the customer's firewall; every connection is OUTBOUND
-// (MQTT session + a 30s HTTPS heartbeat), and the inbound direction is blocked —
-// the whole IT-objection argument in one picture.
-export function GateNetworkArt({ t }: { t: Translations }) {
-  const f = t.f15Page;
-  return (
-    <div className="@container absolute inset-0 p-[3cqw] select-none" aria-hidden="true">
-      <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-        {/* the yard, left of the firewall: the QRGoBox device wired to the gate */}
-        <rect x="14" y="90" width="168" height="124" rx="10" fill="#1b2532" stroke="#334155" strokeWidth="1.5" />
-        <text x="98" y="110" textAnchor="middle" fill="#94a3b8" style={{ fontSize: 11, fontWeight: 600 }}>{f.uiGate}</text>
-
-        {/* the wire from the box to the barrier's motor */}
-        <path d="M80 152 C100 152 110 168 122 168" fill="none" stroke="#3f4a5a" strokeWidth="2" />
-
-        {/* the QRGoBox device */}
-        <rect x="28" y="128" width="52" height="42" rx="6" fill="#0f1720" stroke="#475569" strokeWidth="1.5" />
-        <rect x="36" y="136" width="36" height="7" rx="2" fill="#243040" />
-        <circle cx="41" cy="158" r="3" fill="#22c55e" />
-        <rect x="48" y="155" width="26" height="6" rx="3" fill="#334155" />
-        <text x="54" y="184" textAnchor="middle" fill="#7dd3fc" style={{ fontSize: 10, fontWeight: 700 }}>QRGoBox</text>
-
-        {/* the barrier it controls: motor housing, post, raised boom */}
-        <rect x="118" y="160" width="16" height="16" rx="2" fill="#334155" stroke="#475569" strokeWidth="1" />
-        <rect x="124" y="136" width="4" height="24" rx="1" fill="#475569" />
-        <g transform="translate(126 138) rotate(-32)">
-          <rect x="0" y="-3" width="46" height="6" rx="3" fill="#e2e8f0" />
-          <rect x="1" y="-2" width="40" height="1.6" rx="0.8" fill="#3b82f6" />
-          <rect x="34" y="-3" width="12" height="6" rx="3" fill="#3b82f6" />
-        </g>
-
-        {/* the firewall wall */}
-        <g>
-          {[0, 1, 2, 3, 4, 5, 6].map((r) => (
-            <g key={r}>
-              {[0, 1].map((c) => (
-                <rect key={c} x={196 + ((r % 2) ? c * 16 - 8 : c * 16)} y={70 + r * 22} width="14" height="18" rx="2"
-                  fill="#7f1d1d" stroke="#b91c1c" strokeWidth="1" opacity="0.8" />
-              ))}
-            </g>
-          ))}
-          <text x="204" y="290" textAnchor="middle" fill="#f87171" style={{ fontSize: 11, fontWeight: 700 }}>{f.uiFirewall}</text>
-        </g>
-
-        {/* the cloud/broker, right of the firewall — the shared logistiq.cloud mark */}
-        <g transform="translate(336 150) scale(0.36)">
-          <LogistiqCloud id="gnet" />
-        </g>
-
-        {/* OUTBOUND: two arrows leaving the yard, crossing the wall unimpeded */}
-        <defs>
-          <marker id="s15-out" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-            <path d="M0 1L6 4L0 7Z" fill="#38bdf8" />
-          </marker>
-        </defs>
-        <g stroke="#38bdf8" strokeWidth="2.4" fill="none" markerEnd="url(#s15-out)">
-          <path d="M128 148 C 210 118, 236 128, 288 140" />
-          <path d="M128 168 C 210 196, 236 182, 292 162" />
-        </g>
-        <g>
-          <rect x="150" y="106" width="86" height="20" rx="10" fill="#0f1720" stroke="#334155" />
-          <circle cx="164" cy="116" r="3.4" fill="#38bdf8" />
-          <text x="175" y="120" fill="#7dd3fc" style={{ fontSize: 9, fontWeight: 600 }}>MQTT ↗</text>
-          <rect x="150" y="200" width="120" height="20" rx="10" fill="#0f1720" stroke="#334155" />
-          <circle cx="164" cy="210" r="3.4" fill="#38bdf8" />
-          <text x="175" y="214" fill="#7dd3fc" style={{ fontSize: 9, fontWeight: 600 }}>HTTPS · {f.uiHeartbeat}</text>
-        </g>
-
-        {/* INBOUND: blocked */}
-        <g>
-          <line x1="288" y1="240" x2="150" y2="240" stroke="#475569" strokeWidth="2" strokeDasharray="5 5" />
-          <g stroke="#ef4444" strokeWidth="2.6" strokeLinecap="round">
-            <line x1="212" y1="232" x2="226" y2="248" /><line x1="226" y1="232" x2="212" y2="248" />
-          </g>
-          <text x="336" y="244" textAnchor="middle" fill="#94a3b8" style={{ fontSize: 9, fontWeight: 600 }}>{f.uiNoInbound}</text>
-        </g>
-
-        {/* the headline claim */}
-        <g>
-          <rect x="14" y="16" width="150" height="30" rx="15" fill="#22c55e" fillOpacity="0.12" stroke="#22c55e" strokeOpacity="0.5" />
-          <text x="89" y="35" textAnchor="middle" fill="#4ade80" style={{ fontSize: 12, fontWeight: 700 }}>{f.uiOutbound}</text>
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 // ── f16: "The objects your systems would exchange already exist" ─────────────
 // Two real record shapes (booking + check-in) with actual column names, and the
