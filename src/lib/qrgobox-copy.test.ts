@@ -98,6 +98,20 @@ describe("QRGoBox copy: in progress", () => {
     }
   });
 
+  // The validate route records a passage once the open command is handed to the broker,
+  // acknowledged or not; it cannot know whether the barrier got it (the box sends nothing
+  // back). Until 2026-11-24 the QRGoBox FAQ (f15Page.a4) said "once the open command
+  // reaches the barrier" in every language.
+  it("a passage is recorded once the open command has gone out, not once it reaches the barrier", () => {
+    const REACHES =
+      /ajunge la barieră|reaches the barrier|die Schranke erreicht|dotrze do szlabanu|eléri a sorompót|стигне до бариерата|arrivée à la barrière|de slagboom bereikt/i;
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(copy.f15Page.a4.match(REACHES)?.[0], locale).toBeUndefined();
+      expect(copy.f15Page.a4, locale).toMatch(/broker|брокер|brókernek/i);
+    }
+    expect(translations.en.f15Page.a4).toMatch(/has gone out to the barrier/);
+  });
+
   it("the digital check-in journey no longer ends in a barrier lift", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.checkinJourney.subtitle, locale).not.toMatch(BARRIER[locale]);
