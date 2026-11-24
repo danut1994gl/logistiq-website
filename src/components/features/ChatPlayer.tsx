@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Translations } from "@/lib/i18n/translations";
 import type { Locale } from "@/lib/i18n/config";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { DRIVER_POOLS } from "./driverPools";
 import { PhoneFrame16 } from "./PhoneFrame16";
 
@@ -20,6 +21,9 @@ const SCENARIOS: Step[][] = [
   [{ f: "disp", k: "s4m1" }, { f: "driver", k: "s4m2" }, { f: "disp", k: "s4m3" }],
   [{ f: "driver", k: "s5m1" }, { f: "disp", k: "s5m2" }, { f: "driver", img: true }, { f: "disp", k: "s5m4" }, { f: "driver", k: "s5m5" }],
 ];
+
+// The reduced-motion frame: the first conversation, every message on both devices and read.
+const STATIC_MSGS: Msg[] = SCENARIOS[0].map((s, i) => ({ mid: i, from: s.f, k: s.k, img: s.img, time: `14:3${1 + i}`, onDash: true, onPhone: true, tick: "read" }));
 
 function DocThumb() {
   return (
@@ -72,7 +76,9 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const dispatcher = pool[4]; // the warehouse dispatcher the driver is chatting with
   const dispInit = dispatcher.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
   const txt = (k?: string) => (k ? (c as unknown as Record<string, string>)[k] : "");
-  const [msgs, setMsgs] = useState<Msg[]>([]);
+  const [msgsState, setMsgs] = useState<Msg[]>([]);
+  const reduced = usePrefersReducedMotion();
+  const msgs = reduced ? STATIC_MSGS : msgsState;
   const [dashTyping, setDashTyping] = useState(false); // driver typing, dots on the dashboard
   const [phoneTyping, setPhoneTyping] = useState(false); // dispatcher typing, dots on the phone
   const [dashInput, setDashInput] = useState(""); // dispatcher's live compose text (dashboard input)
@@ -87,10 +93,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
   const msgsRef = useRef<Msg[]>([]);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setMsgs(SCENARIOS[0].map((s, i) => ({ mid: i, from: s.f, k: s.k, img: s.img, time: `14:3${1 + i}`, onDash: true, onPhone: true, tick: "read" as Tick })));
-      return;
-    }
+    if (reduced) return;
     let cancelled = false;
     let visible = true;
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.15 });
@@ -178,7 +181,7 @@ export function ChatPlayer({ t, locale }: { t: Translations; locale: Locale }) {
     run();
     return () => { cancelled = true; io.disconnect(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reduced]);
 
   useEffect(() => {
     for (const r of [dashRef.current, phoneRef.current]) if (r) r.scrollTop = r.scrollHeight;
