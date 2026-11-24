@@ -16,9 +16,12 @@ import {
 // Grounded in the reality audit:
 //  * exactly 12 locales, in the product's own order (apps/driver/i18n.ts:5)
 //  * language is PICKED from a 12-flag picker — there is NO Accept-Language and no
-//    geo-IP in apps/driver (middleware.ts:45 hard-defaults to 'ro'), hence uiPickerNote
-//  * the dashboard is RO/EN only (apps/dashboard/i18n.ts:29) — hence the 2-state
-//    RO/EN toggle on the panel, and hence the panel being in Romanian
+//    geo-IP in apps/driver (its middleware falls back to English, lib/locales.ts
+//    defaultLocale, until a language is chosen), hence uiPickerNote
+//  * the dashboard has the same 12 locales (apps/dashboard/lib/locales.ts); this
+//    dispatcher works in Romanian, hence the panel in Romanian and its language chip
+//    "RO +11". Until 2026-11-24 the chip was a 2-state RO/EN toggle, drawn when the
+//    dashboard had only those two
 //  * SMS/push are TEMPLATE tables sent outbound from the warehouse, so their chips
 //    sit on the warehouse side — deliberately NOT wired to the driver's picked flag
 //    (the driver web never persists driver_language, so claiming that would be false)
@@ -186,7 +189,7 @@ export function MultiLanguageScene({ t }: { t: Translations }) {
           </div>
         </div>
 
-        {/* ---------------- one warehouse, one dispatcher, RO/EN only ---------------- */}
+        {/* ---------------- one warehouse, one dispatcher, working in Romanian ---------------- */}
         <div className="flex-1 flex flex-col gap-[1cqw] min-h-0">
           <span className="font-bold text-white text-[1.9cqw] shrink-0">{f.uiDispatcher}</span>
 
@@ -196,15 +199,14 @@ export function MultiLanguageScene({ t }: { t: Translations }) {
                 <path d="M3 21V9l9-6 9 6v12" /><path d="M9 21v-6h6v6" />
               </svg>
               <span className="font-semibold text-white text-[1.4cqw] truncate">{f.uiOneWarehouse}</span>
-              {/* the dashboard has exactly two locales — not twelve */}
+              {/* the dashboard's language: Romanian here, one of the same twelve */}
               <span className="ml-auto flex items-center gap-[0.3cqw] rounded-[0.5cqw] border border-slate-600 bg-slate-900/70 p-[0.25cqw] shrink-0">
                 <span className="flex items-center gap-[0.35cqw] rounded-[0.35cqw] bg-blue-600 px-[0.5cqw] py-[0.2cqw]">
                   <FlagRO className="w-[1.3cqw] h-[0.95cqw] rounded-[0.15cqw] block" />
                   <span className="text-[0.95cqw] font-bold text-white leading-none">RO</span>
                 </span>
-                <span className="flex items-center gap-[0.35cqw] px-[0.5cqw] py-[0.2cqw] opacity-45">
-                  <FlagGB className="w-[1.3cqw] h-[0.95cqw] rounded-[0.15cqw] block" />
-                  <span className="text-[0.95cqw] font-bold text-slate-300 leading-none">EN</span>
+                <span className="flex items-center px-[0.5cqw] py-[0.2cqw] opacity-60">
+                  <span className="text-[0.95cqw] font-bold text-slate-300 leading-none">+11</span>
                 </span>
               </span>
             </div>

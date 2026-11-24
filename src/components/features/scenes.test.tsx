@@ -5,6 +5,7 @@ import { renderToString } from "react-dom/server";
 import { IntegrationsScene } from "@/components/features/IntegrationsScene";
 import { GateAccessScene } from "@/components/features/GateAccessScene";
 import { CheckinJourneyScene } from "@/components/features/CheckinJourneyScene";
+import { MultiLanguageScene } from "@/components/features/MultiLanguageScene";
 import { translations } from "@/lib/i18n/translations";
 import { locales } from "@/lib/i18n/config";
 
@@ -65,5 +66,16 @@ describe("digital check-in journey scene", () => {
     expect(arm).toBeGreaterThan(-1);
     expect(arm).toBeLessThan(html.indexOf('class="cj2-truck3"'));
     expect(html).not.toMatch(/rotate\(/);
+  });
+});
+
+describe("multi-language scene (f7)", () => {
+  // The dashboard has the same twelve languages as the driver web. Until 2026-11-24 the
+  // dispatcher panel drew a two-state RO/EN toggle, from when it had only those two.
+  it.each(locales)("gives the dispatcher panel a Romanian chip among twelve, not an RO/EN toggle, in %s", (locale) => {
+    const html = renderToString(<MultiLanguageScene t={translations[locale]} />);
+    expect(html).toContain(">RO</span>");
+    expect(html).toContain(">+11</span>");
+    expect(html).not.toContain(">EN</span>");
   });
 });
