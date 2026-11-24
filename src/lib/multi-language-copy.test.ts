@@ -5,11 +5,12 @@ import { translations } from "@/lib/i18n/translations";
 // - the dashboard has the same 12 languages as the driver web (apps/dashboard/lib/locales.ts,
 //   12 catalogs in apps/dashboard/messages); until then the page said, in all 8 languages,
 //   that it was Romanian and English only;
-// - every driver-web catalog (apps/driver/messages/*.json) holds the same 613 strings, none
-//   missing or extra; the page said 476, the count of an older version;
+// - every driver-web catalog (apps/driver/messages/*.json) holds the same strings, none
+//   missing or extra; the page counted them, 476 (an older version's count) until the
+//   morning of 2026-11-24 and 613 until its evening ("613 de texte" was not Romanian
+//   grammar), and now gives no number, which would go stale with every new string;
 // - the driver web is English until a language is chosen (apps/driver/lib/locales.ts,
 //   defaultLocale, since 2026-11-06); the page said Romanian.
-const DRIVER_WEB_STRINGS = "613";
 
 // "Romanian and English (only)" / "Romanian or English", as each language said it.
 const TWO_LANGUAGES =
@@ -29,12 +30,11 @@ describe("multi-language page (f7)", () => {
     }
   });
 
-  it("counts the driver web's strings as its catalogs hold them", () => {
+  it("gives no string count, which would go stale", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       const f = copy.f7Page;
-      expect(JSON.stringify(f), locale).not.toMatch(/476/);
       for (const text of [f.probP2, f.new2, f.a2, f.v2]) {
-        expect(text, locale).toContain(DRIVER_WEB_STRINGS);
+        expect(text.match(/\d{3,}/)?.[0], locale).toBeUndefined();
       }
     }
   });
