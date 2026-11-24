@@ -1392,7 +1392,7 @@ export const translations = {
     cta: {
       title: "Gata să transformi operațiunile din depozit?",
       subtitle:
-        "Alătură-te sutelor de depozite care au ales eficiența. Demo gratuit, configurare rapidă, fără obligații.",
+        "Află cum lucrează Logistiq în depozitul tău. Demo gratuit, configurare rapidă, fără obligații.",
       button: "Cere o ofertă",
       or: "sau",
       callUs: "Sună-ne direct",
@@ -3317,7 +3317,7 @@ export const translations = {
     cta: {
       title: "Ready to transform warehouse operations?",
       subtitle:
-        "Join hundreds of warehouses that chose efficiency. Free demo, quick setup, no obligations.",
+        "See how Logistiq works in your warehouse. Free demo, quick setup, no obligations.",
       button: "Request a quote",
       or: "or",
       callUs: "Call us directly",
@@ -5225,7 +5225,7 @@ export const translations = {
     cta: {
       title: "Bereit, Ihre Lagerabläufe grundlegend zu verändern?",
       subtitle:
-        "Schließen Sie sich Hunderten von Lagern an, die sich für Effizienz entschieden haben. Kostenlose Demo, schnelle Einrichtung, unverbindlich.",
+        "Erleben Sie, wie Logistiq in Ihrem Lager arbeitet. Kostenlose Demo, schnelle Einrichtung, unverbindlich.",
       button: "Angebot anfordern",
       or: "oder",
       callUs: "Rufen Sie uns direkt an",
@@ -7440,7 +7440,7 @@ export const translations = {
     cta: {
       title: "Gotowy, by odmienić operacje magazynowe?",
       subtitle:
-        "Dołącz do setek magazynów, które wybrały wydajność. Darmowe demo, szybka konfiguracja, bez zobowiązań.",
+        "Zobacz, jak Logistiq działa w Twoim magazynie. Darmowe demo, szybka konfiguracja, bez zobowiązań.",
       button: "Poproś o wycenę",
       or: "lub",
       callUs: "Zadzwoń bezpośrednio",
@@ -9651,7 +9651,7 @@ export const translations = {
     cta: {
       title: "Készen áll a raktári műveletek átalakítására?",
       subtitle:
-        "Csatlakozzon a hatékonyságot választó raktárak százaihoz. Ingyenes demó, gyors beállítás, kötelezettségek nélkül.",
+        "Nézze meg, hogyan működik a Logistiq az Ön raktárában. Ingyenes demó, gyors beállítás, kötelezettségek nélkül.",
       button: "Kérjen ajánlatot",
       or: "vagy",
       callUs: "Hívjon közvetlenül",
@@ -11860,7 +11860,7 @@ export const translations = {
     cta: {
       title: "Готови ли сте да преобразите работата в склада?",
       subtitle:
-        "Присъединете се към стотици складове, които избраха ефективността. Безплатно демо, бърза настройка, без задължения.",
+        "Вижте как Logistiq работи във вашия склад. Безплатно демо, бърза настройка, без задължения.",
       button: "Поискайте оферта",
       or: "или",
       callUs: "Обадете ни се директно",
@@ -14068,7 +14068,7 @@ export const translations = {
     cta: {
       title: "Prêt à transformer vos opérations d'entrepôt ?",
       subtitle:
-        "Rejoignez des centaines d'entrepôts qui ont déjà digitalisé leurs processus avec Logistiq.",
+        "Découvrez comment Logistiq fonctionne dans votre entrepôt. Démo gratuite, mise en place rapide, sans engagement.",
       button: "Demander un devis",
       or: "ou",
       callUs: "Appelez-nous",
@@ -16286,7 +16286,7 @@ export const translations = {
     cta: {
       title: "Klaar om uw operaties te transformeren?",
       subtitle:
-        "Sluit u aan bij honderden magazijnen die hun processen al hebben gedigitaliseerd met Logistiq.",
+        "Ontdek hoe Logistiq in uw magazijn werkt. Gratis demo, snelle installatie, vrijblijvend.",
       button: "Vraag een offerte aan",
       or: "of",
       callUs: "Bel ons",
