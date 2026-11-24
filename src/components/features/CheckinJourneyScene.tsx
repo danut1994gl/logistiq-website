@@ -144,6 +144,17 @@ export function CheckinJourneyScene({
         <rect x="613" y="270" width="20" height="3" rx="1.5" className="fill-cyan-400" opacity="0.8" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="fill-cyan-500" opacity="0.18" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="stroke-cyan-400" fill="none" strokeWidth="1.5" />
+        {/* barrier (post + arm): down, and nothing lifts it. Opening it on the
+            scan, with QRGoBox, is in progress (step3Desc). Drawn BEFORE the hero
+            truck, which passes in front of it on its way to its dock. */}
+        <rect x="714" y="294" width="11" height="50" rx="2" className="fill-slate-600" />
+        <g transform="translate(720 300)">
+          <rect x="4" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
+          {[24, 64, 104, 144].map((x) => (
+            <rect key={x} x={x} y="-6" width="20" height="12" className="fill-blue-600" />
+          ))}
+          <circle cx="166" cy="0" r="4" className="fill-red-400" />
+        </g>
         {/* hero truck: stops short of the scanner, then docks at ramp 12 */}
         <g className="cj2-truck3"><TruckArt idPrefix="cj2" brakeClass="cj2-brake" /></g>
         {/* driver's phone tapping the scanner + confirmation pulse */}
@@ -153,17 +164,6 @@ export function CheckinJourneyScene({
           <line x1="604" y1="293" x2="609" y2="293" className="stroke-cyan-400" strokeWidth="2" strokeDasharray="2 2" />
         </g>
         <circle cx="623" cy="293" r="12" className="cj2-gatepulse stroke-cyan-400" fill="none" strokeWidth="2" />
-        {/* barrier (post + arm, base = up) */}
-        <rect x="714" y="294" width="11" height="50" rx="2" className="fill-slate-600" />
-        <g transform="translate(720 300)">
-          <g className="cj2-barrier">
-            <rect x="4" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
-            {[24, 64, 104, 144].map((x) => (
-              <rect key={x} x={x} y="-6" width="20" height="12" className="fill-blue-600" />
-            ))}
-            <circle cx="166" cy="0" r="4" className="fill-emerald-400" />
-          </g>
-        </g>
         {/* assigned badge — floats above the building, pointing at dock 12 */}
         <g className="cj2-badge">
           <line x1="1105" y1="118" x2="1105" y2="218" className="stroke-blue-500" strokeWidth="2" strokeDasharray="4 4" opacity="0.8" />

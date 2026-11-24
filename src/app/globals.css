@@ -399,19 +399,9 @@ body {
   100%      { transform: scale(2.2); opacity: 0; }
 }
 
-/* transform-box: fill-box needs Safari 11+; older WebKit mis-pivots only while animating (static base state unaffected) */
-.cj2-barrier {
-  transform: rotate(-55deg);
-  transform-box: fill-box;
-  transform-origin: 0% 50%;
-  animation: cj2-barrier 32s linear infinite;
-}
-@keyframes cj2-barrier {
-  0%, 85% { transform: rotate(0deg); }
-  87.5%   { transform: rotate(-55deg); }
-  96.88%  { transform: rotate(-55deg); }
-  100%    { transform: rotate(0deg); }
-}
+/* The scene-3 barrier has no rule: it stays down. Opening it on the scan, with QRGoBox,
+   is in progress (checkinJourney.step3Desc). Until 2026-11-24 it lifted at 87.5% of the
+   timeline, and its base state, the reduced-motion frame, was lifted. */
 
 .cj2-dockglow { animation: cj2-dockglow 32s linear infinite; }
 @keyframes cj2-dockglow {
@@ -607,7 +597,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .cj2-s1, .cj2-s2, .cj2-s3, .cj2-truck1, .cj2-truck3, .cj2-brake,
-  .cj2-gatepulse, .cj2-barrier, .cj2-dockglow, .cj2-badge,
+  .cj2-gatepulse, .cj2-dockglow, .cj2-badge,
   .cj2-glow-1, .cj2-glow-2, .cj2-glow-3,
   .cj2-phone, .cj2-ph1, .cj2-ph2, .cj2-ph3, .cj2-ph4, .cj2-ph5,
   .cj2-scanline, .cj2-row-1, .cj2-row-2, .cj2-row-3, .cj2-btn,

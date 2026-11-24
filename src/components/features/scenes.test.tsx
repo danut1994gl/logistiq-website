@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { renderToString } from "react-dom/server";
 import { IntegrationsScene } from "@/components/features/IntegrationsScene";
 import { GateAccessScene } from "@/components/features/GateAccessScene";
+import { CheckinJourneyScene } from "@/components/features/CheckinJourneyScene";
 import { translations } from "@/lib/i18n/translations";
 import { locales } from "@/lib/i18n/config";
 
@@ -43,5 +46,24 @@ describe("QRGoBox scene (f15)", () => {
     const marks = html.split(escape(f.uiRelay)).join("").split(escape(f.uiInProgress)).length - 1;
     expect(marks).toBeGreaterThanOrEqual(2); // the timeline row and the barrier, besides the box
     expect(html).toContain(escape(f.uiTimeline));
+  });
+});
+
+describe("digital check-in journey scene", () => {
+  // Step 3 says the scanner validates the check-in and opening the barrier on that scan is
+  // in progress (checkinJourney.step3Desc). Until 2026-11-24 the scene's barrier lifted as
+  // the truck left the scanner, and its base state, the reduced-motion frame, was lifted.
+  const CSS = readFileSync(fileURLToPath(new URL("../../app/globals.css", import.meta.url)), "utf8");
+
+  it("has no rule or animation that lifts the barrier", () => {
+    expect(CSS).not.toMatch(/cj2-barrier/);
+  });
+
+  it("draws the barrier down, behind the hero truck", () => {
+    const html = renderToString(<CheckinJourneyScene dockLabel="DOCK 12" scanLine1="Scan" scanLine2="to check in" />);
+    const arm = html.indexOf('<g transform="translate(720 300)">');
+    expect(arm).toBeGreaterThan(-1);
+    expect(arm).toBeLessThan(html.indexOf('class="cj2-truck3"'));
+    expect(html).not.toMatch(/rotate\(/);
   });
 });
