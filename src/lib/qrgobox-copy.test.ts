@@ -130,6 +130,14 @@ describe("QRGoBox copy: in progress", () => {
     }
   });
 
+  // German says a product is "in der Betaphase"; until 2026-11-24 the QRGoBox page said
+  // "in der Beta" three times.
+  it("German says QRGoBox is in der Betaphase", () => {
+    const text = JSON.stringify(translations.de.f15Page);
+    expect(text).not.toMatch(/in der Beta\b(?!phase)/);
+    expect(text.match(/in der Betaphase/g)?.length).toBe(3);
+  });
+
   it("the digital check-in journey no longer ends in a barrier lift", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.checkinJourney.subtitle, locale).not.toMatch(BARRIER[locale]);
