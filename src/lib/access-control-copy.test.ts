@@ -22,7 +22,55 @@ const EVERY_CHECKIN =
 // department, only a waiting check-in at the entry point, where the per-user switch allows it.
 const MATRIX = "YYYY" + "YYYY" + "PNNP" + "NNNP";
 
+// The dashboard's own labels (Logistiq apps/dashboard/messages/<locale>.json): the four
+// rights of the dispatcher matrix (users.modal.matrix read, manage, new, delete) and the
+// warehouse's operator check-in settings (settings.warehouse.operatorCheckin,
+// operatorCheckinDepartments). Until 2026-11-24 the English page said "create" where the
+// dashboard says "New".
+const RIGHTS: Record<string, string[]> = {
+  ro: ["Vizualizare", "Gestionare", "Adăugare", "Ștergere"],
+  en: ["Read", "Manage", "New", "Delete"],
+  de: ["Anzeigen", "Verwalten", "Hinzufügen", "Löschen"],
+  pl: ["Podgląd", "Zarządzanie", "Dodawanie", "Usuwanie"],
+  hu: ["Megtekintés", "Kezelés", "Hozzáadás", "Törlés"],
+  bg: ["Преглед", "Управление", "Добавяне", "Изтриване"],
+  fr: ["Voir", "Gérer", "Ajouter", "Supprimer"],
+  nl: ["Bekijken", "Beheren", "Toevoegen", "Verwijderen"],
+};
+const SETTINGS: Record<string, [string, string]> = {
+  ro: ["Check-in Operator", "Departamente Permise"],
+  en: ["Operator Check-in", "Allowed Departments"],
+  de: ["Operator-Check-in", "Zulässige Abteilungen"],
+  pl: ["Odprawa przez operatora", "Dozwolone działy"],
+  hu: ["Operátori bejelentkezés", "Engedélyezett részlegek"],
+  bg: ["Чекиране от оператор", "Разрешени отдели"],
+  fr: ["Enregistrement par l'opérateur", "Départements autorisés"],
+  nl: ["Operator-check-in", "Toegestane afdelingen"],
+};
+
 describe("access-control page (f17)", () => {
+  it("names the dispatcher's rights by the dashboard's labels", () => {
+    expect(Object.keys(RIGHTS).sort()).toEqual(Object.keys(translations).sort());
+    for (const [locale, copy] of Object.entries(translations)) {
+      const f = copy.f17Page;
+      for (const [key, text] of Object.entries({ s2d: f.s2d, a1: f.a1, a2: f.a2, coBody: f.coBody })) {
+        for (const right of RIGHTS[locale]) expect(text, `${locale}.${key}`).toContain(right);
+      }
+    }
+    expect(translations.en.f17Page.s2d).not.toMatch(/read, manage, create/i);
+  });
+
+  // A dispatcher with no department can at most create a waiting check-in at the entry
+  // point: with the per-user switch, while the warehouse's Operator Check-in is on, and with
+  // the entry department listed when Allowed Departments is set
+  // (lib/checkins/manual-checkin-gate.ts waitingSwitchApplies, operatorCheckinEnabled).
+  it("names every condition of a waiting check-in by a dispatcher without departments", () => {
+    expect(Object.keys(SETTINGS).sort()).toEqual(Object.keys(translations).sort());
+    for (const [locale, copy] of Object.entries(translations)) {
+      for (const label of SETTINGS[locale]) expect(copy.f17Page.a1, locale).toContain(label);
+    }
+  });
+
   it("draws dispatchers bound to their departments in the matrix", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.f17Page.mxCell, locale).toBe(MATRIX);
