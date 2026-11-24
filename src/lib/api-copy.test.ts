@@ -31,6 +31,17 @@ describe("Integration API copy", () => {
     }
   });
 
+  // The plans are Professional (one warehouse) and Enterprise 5, 10 and 25 (Logistiq
+  // apps/dashboard/lib/stripe.ts, the terms' article 6). Until 2026-11-24 the cloud page's
+  // FAQ named a "Warehouse Manager" plan, which is a role, not a plan.
+  it("the cloud page names the real plans", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(copy.f9Page.a4, locale).toMatch(/Professional/);
+      expect(copy.f9Page.a4, locale).toMatch(/Enterprise 5/);
+      expect(copy.f9Page.a4, locale).not.toMatch(/Warehouse Manager|Складов мениджър/);
+    }
+  });
+
   it("the integrations page lists no gate device endpoint", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(JSON.stringify(copy.f16Page), locale).not.toMatch(/\/api\/device|\/api\/gate/);
