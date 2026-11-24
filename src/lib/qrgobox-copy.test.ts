@@ -138,6 +138,25 @@ describe("QRGoBox copy: in progress", () => {
     expect(text.match(/in der Betaphase/g)?.length).toBe(3);
   });
 
+  // The scene's refused pill shows the gate route's own title in the page's language
+  // (Logistiq apps/dashboard/lib/gate-messages.ts statusTitleDenied); until 2026-11-24 pl, hu,
+  // fr and nl showed the English one. And the box's label says "in progress" in the same
+  // words as the rest of the scene: bg and fr used shorter ones ("в разработка",
+  // "en développement").
+  it("the QRGoBox scene's labels use the route's refusal title and one in-progress phrase", () => {
+    const DENIED: Record<string, string> = {
+      ro: "ACCES INTERZIS", en: "ACCESS DENIED", de: "ZUGANG VERWEIGERT", pl: "DOSTĘP ZABRONIONY",
+      hu: "HOZZÁFÉRÉS MEGTAGADVA", bg: "ДОСТЪП ОТКАЗАН", fr: "ACCÈS REFUSÉ", nl: "TOEGANG GEWEIGERD",
+    };
+    expect(Object.keys(DENIED).sort()).toEqual(Object.keys(translations).sort());
+    for (const [locale, copy] of Object.entries(translations)) {
+      const f = copy.f15Page;
+      expect(f.uiDenied, locale).toBe(DENIED[locale]);
+      expect(f.uiRelay, locale).toBe(`QRGoBox · ${f.uiInProgress}`);
+      expect(f.uiInProgress, locale).toMatch(IN_PROGRESS[locale]);
+    }
+  });
+
   it("the digital check-in journey no longer ends in a barrier lift", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.checkinJourney.subtitle, locale).not.toMatch(BARRIER[locale]);
