@@ -8,7 +8,8 @@ import { FeatureFlowSection, FeatureSpecSection, FeatureCalloutSection } from ".
 
 // Yard Access Control / QRGoBox (feature 15): in progress (owner, 2026-11-24; the client deck
 // says „În lucru” / "In progress"). Built today: the driver's QR, the gate scanner device and
-// the platform's check of the check-in, with every scan in the gate log. In progress: the
+// the platform's check of the check-in, with every scan by a registered gate device in the
+// gate log (an unknown gate or a wrong key writes no row). In progress: the
 // command to the barrier, which will go out only over a secure (TLS) connection, and QRGoBox
 // itself, whose hardware and software are in beta. Until then every valid scan answers 503.
 //

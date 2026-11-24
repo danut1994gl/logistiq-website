@@ -7,7 +7,8 @@ import { translations } from "@/lib/i18n/translations";
 // says „În lucru” / "In progress"). The command to the barrier will go out only over a secure
 // (TLS) connection, which is being prepared, and until then every valid scan answers 503
 // (Logistiq apps/dashboard/app/api/gate/validate/route.ts). Built today: the gate scanner device
-// validates the check-in, and the gate log keeps every scan with its outcome. Until 2026-11-24,
+// validates the check-in, and the gate log keeps every scan by a registered gate device with its
+// outcome (an unknown gate or a wrong gate key writes no row). Until 2026-11-24,
 // in all 8 languages, the site described QRGoBox as working: a relay pulsing the barrier open,
 // an HTTPS heartbeat every 30 s, a LAN admin page as the fallback, and in the digital check-in
 // page's journey "a scan opens the barrier". The box's design is being redone, so no detail of
@@ -159,6 +160,25 @@ describe("QRGoBox copy: in progress", () => {
       expect(f.uiDenied, locale).toBe(DENIED[locale]);
       expect(f.uiRelay, locale).toBe(`QRGoBox · ${f.uiInProgress}`);
       expect(f.uiInProgress, locale).toMatch(IN_PROGRESS[locale]);
+    }
+  });
+
+  // The validate route authenticates the gate and its warehouse's key before it reads the
+  // scanned code, and a refusal there writes no row (validate/route.ts, step 1). Until
+  // 2026-11-24 the page said "every scan" is logged; it is every scan by a registered gate
+  // device.
+  it("says the gate log keeps every scan by a registered gate device", () => {
+    const REGISTERED: Record<string, string> = {
+      ro: "dispozitiv de poartă înregistrat", en: "registered gate device", de: "registrierten Torgeräts",
+      pl: "zarejestrowanego urządzenia bramy", hu: "regisztrált kapueszköz", bg: "регистрирано устройство на портала",
+      fr: "appareil de portail enregistré", nl: "geregistreerd poortapparaat",
+    };
+    expect(Object.keys(REGISTERED).sort()).toEqual(Object.keys(translations).sort());
+    for (const [locale, copy] of Object.entries(translations)) {
+      const f = copy.f15Page;
+      for (const [key, text] of Object.entries({ s3d: f.s3d, coBody: f.coBody, a2: f.a2, a4: f.a4 })) {
+        expect(text, `${locale}.${key}`).toContain(REGISTERED[locale]);
+      }
     }
   });
 
