@@ -6,6 +6,7 @@ import { IntegrationsScene } from "@/components/features/IntegrationsScene";
 import { GateAccessScene } from "@/components/features/GateAccessScene";
 import { CheckinJourneyScene } from "@/components/features/CheckinJourneyScene";
 import { MultiLanguageScene } from "@/components/features/MultiLanguageScene";
+import { AccessControlScene } from "@/components/features/AccessControlScene";
 import { translations } from "@/lib/i18n/translations";
 import { locales } from "@/lib/i18n/config";
 
@@ -80,5 +81,19 @@ describe("multi-language scene (f7)", () => {
     expect(html).toContain(">RO</span>");
     expect(html).toContain(">+11</span>");
     expect(html).not.toContain(">EN</span>");
+  });
+});
+
+describe("access-control scene (f17)", () => {
+  // The scene's three capability rows light up with the departments ticked. Until
+  // 2026-11-24 they were labelled with unrelated strings: "Warehouse manager", "Office ·
+  // department flag" and "One warehouse".
+  it.each(locales)("labels its capability rows by what they unlock in %s", (locale) => {
+    const f = translations[locale].f17Page;
+    const html = renderToString(<AccessControlScene t={translations[locale]} locale={locale} />);
+    for (const label of [f.mxCap4, f.uiBookings, f.uiGates]) {
+      expect(html).toContain(`>${escape(label)}</span>`);
+    }
+    expect(html).not.toContain(`>${escape(f.mxRole1)}</span>`);
   });
 });

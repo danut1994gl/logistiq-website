@@ -17,7 +17,9 @@ import { DRIVER_POOLS } from "./driverPools";
 const DEPTS = ["Reception", "Warehouse", "Shipping"];
 
 // Three of the things a department unlocks (operator check-in, bookings, gate
-// quick-access); what the dispatcher sees follows the departments too.
+// quick-access), each row labelled as such; what the dispatcher sees follows the
+// departments too. Until 2026-11-24 the rows were labelled "Warehouse manager", "Office ·
+// department flag" and "One warehouse".
 const CAPS: { key: string; need: number[] }[] = [
   { key: "checkin", need: [0] },      // operator check-in — the Reception desk
   { key: "bookings", need: [0, 2] },  // bookings — office-side departments
@@ -120,7 +122,7 @@ export function AccessControlScene({ t, locale }: { t: Translations; locale: Loc
         <span className="text-[1.5cqw] uppercase tracking-wide text-slate-500 font-semibold">{f.uiRoles}</span>
         <Row label={f.uiInvite} on={false} dim />
         {CAPS.map((c) => (
-          <Row key={c.key} label={c.key === "checkin" ? f.uiManager : c.key === "bookings" ? f.uiOffice : f.uiScope} on={capOn(c.need)} />
+          <Row key={c.key} label={c.key === "checkin" ? f.mxCap4 : c.key === "bookings" ? f.uiBookings : f.uiGates} on={capOn(c.need)} />
         ))}
         {/* with no department ticked, the dispatcher has no access at all */}
         <span className={`mt-[0.6cqw] rounded-[1.2cqw] border px-[1.8cqw] py-[1.4cqw] text-[1.5cqw] leading-snug transition-colors duration-500 ${
