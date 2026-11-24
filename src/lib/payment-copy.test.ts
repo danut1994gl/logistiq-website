@@ -11,8 +11,9 @@ import { translations } from "@/lib/i18n/translations";
 // (Stripe), the integrations page said Stripe ran the subscription, and the cloud page
 // said the visitor signs up on logistiq.cloud. If card payment or self-registration
 // comes back, the copy and these tests change together. Until 2026-11-24 the privacy
-// policy also listed Stripe among the partners that process data, although no data goes
-// to it: its checkout and portal routes refuse first, and no page loads Stripe.js.
+// policy also listed Stripe among the partners that process data, and the cookie policy
+// among the services that may set cookies, although no data goes to it and it sets none:
+// its checkout and portal routes refuse first, and no page loads Stripe.js.
 
 // "card" and "Stripe" in each language. A status card on the driver's phone (f10Page)
 // is not a payment, so only the billing strings are checked.
@@ -100,6 +101,19 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       const partners = copy.privacy.thirdParties.partners.map((p) => p.name);
       expect(partners, locale).toEqual(["Supabase", "SmartBill", "Vercel"]);
+    }
+  });
+
+  it("the cookie policy names no Stripe among the services that may set cookies", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const services = copy.cookies.thirdParty.services.map((s) => s.name);
+      expect(services, locale).toEqual(["Supabase", "Vercel", "Google Analytics"]);
+    }
+  });
+
+  it("no language's copy names Stripe anywhere", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(JSON.stringify(copy).match(/stripe/i)?.[0], locale).toBeUndefined();
     }
   });
 

@@ -1878,7 +1878,6 @@ export const translations = {
         intro: "Platforma Logistiq utilizează următoarele servicii terțe care pot plasa cookie-uri:",
         services: [
           { name: "Supabase", purpose: "Autentificare și bază de date", url: "supabase.com/privacy" },
-          { name: "Stripe", purpose: "Procesare plăți", url: "stripe.com/privacy" },
           { name: "Vercel", purpose: "Hosting și analize", url: "vercel.com/legal/privacy-policy" },
           { name: "Google Analytics", purpose: "Statistici de trafic", url: "policies.google.com/privacy" },
         ],
@@ -3787,7 +3786,6 @@ export const translations = {
         intro: "The Logistiq platform uses the following third-party services that may place cookies:",
         services: [
           { name: "Supabase", purpose: "Authentication and database", url: "supabase.com/privacy" },
-          { name: "Stripe", purpose: "Payment processing", url: "stripe.com/privacy" },
           { name: "Vercel", purpose: "Hosting and analytics", url: "vercel.com/legal/privacy-policy" },
           { name: "Google Analytics", purpose: "Traffic statistics", url: "policies.google.com/privacy" },
         ],
@@ -5972,11 +5970,6 @@ export const translations = {
             name: "Supabase",
             purpose: "Authentifizierung und Datenbank",
             url: "supabase.com/privacy",
-          },
-          {
-            name: "Stripe",
-            purpose: "Zahlungsabwicklung",
-            url: "stripe.com/privacy",
           },
           {
             name: "Vercel",
@@ -8191,11 +8184,6 @@ export const translations = {
             url: "supabase.com/privacy",
           },
           {
-            name: "Stripe",
-            purpose: "Przetwarzanie płatności",
-            url: "stripe.com/privacy",
-          },
-          {
             name: "Vercel",
             purpose: "Hosting i analityka",
             url: "vercel.com/legal/privacy-policy",
@@ -10407,11 +10395,6 @@ export const translations = {
             url: "supabase.com/privacy",
           },
           {
-            name: "Stripe",
-            purpose: "Fizetésfeldolgozás",
-            url: "stripe.com/privacy",
-          },
-          {
             name: "Vercel",
             purpose: "Tárhelyszolgáltatás és analitika",
             url: "vercel.com/legal/privacy-policy",
@@ -12618,11 +12601,6 @@ export const translations = {
             name: "Supabase",
             purpose: "Удостоверяване и база данни",
             url: "supabase.com/privacy",
-          },
-          {
-            name: "Stripe",
-            purpose: "Обработка на плащания",
-            url: "stripe.com/privacy",
           },
           {
             name: "Vercel",
@@ -14845,11 +14823,6 @@ export const translations = {
             url: "supabase.com/privacy",
           },
           {
-            name: "Stripe",
-            purpose: "Traitement des paiements",
-            url: "stripe.com/privacy",
-          },
-          {
             name: "Vercel",
             purpose: "Hébergement et mesure d'audience",
             url: "vercel.com/legal/privacy-policy",
@@ -17067,11 +17040,6 @@ export const translations = {
             name: "Supabase",
             purpose: "Authenticatie en database",
             url: "supabase.com/privacy",
-          },
-          {
-            name: "Stripe",
-            purpose: "Betalingsverwerking",
-            url: "stripe.com/privacy",
           },
           {
             name: "Vercel",
