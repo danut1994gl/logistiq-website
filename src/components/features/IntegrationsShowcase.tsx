@@ -4,9 +4,9 @@ import { ShowcaseStage } from "./ShowcaseStage";
 import { IntegrationsScene } from "./IntegrationsScene";
 import { FeatureSpecSection } from "./sections";
 
-// Systems Integrations & API (feature 16): kept lean and forward-looking. The hero
-// carries the intro, the interconnection map does the explaining, and a single
-// concise spec grounds it in the real keyed device API. No problem/schema/roadmap
+// Systems Integrations & API (feature 16): kept lean. The interconnection map does the
+// explaining, and a single concise spec grounds it in the Integration API (/api/v1):
+// its address, its keys, what it covers and its events. No problem/schema/roadmap
 // detail — the page is about the API + interconnection, nothing more.
 // The `locale` prop is retained for the page contract even though no per-section
 // JSON-LD is emitted here.

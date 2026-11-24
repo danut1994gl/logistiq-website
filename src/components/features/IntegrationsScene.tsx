@@ -2,13 +2,15 @@ import type { Translations } from "@/lib/i18n/translations";
 import { LogistiqCloud } from "./LogistiqCloud";
 
 // Systems Integrations & API (feature 16): one clean interconnection map.
-// logistiq.cloud sits in the middle as the hub; the surfaces that feed it — the
-// QRGoBox gate device API, the warehouse self-service portal, and the QRGo Driver
-// apps — hang off the left, and the warehouse's own systems (TMS / WMS / ERP)
-// connect through the cloud over the API on the right. Every edge is a live,
-// packet-carrying connection: the picture is about how the pieces talk to each
-// other, not about what is or isn't shipped. Pure CSS (ix16-*), no client JS.
-// Presentational Server Component. aria-hidden.
+// logistiq.cloud sits in the middle as the hub. On the left hang the surfaces that
+// talk to it today: the gate scanner (the device at the gate that validates the
+// driver's check-in against the cloud), the warehouse self-service portal and the
+// QRGo Driver apps. On the right, the warehouse's own systems (TMS / WMS / ERP)
+// reach it through the Integration API (/api/v1), the one edge the API tag marks.
+// Each edge is a connection that works today. The barrier beside the gate scanner
+// is drawn down: opening it on a valid scan, with QRGoBox, is in progress (until
+// 2026-11-24 this node was labelled "Integration API" and its barrier was lifted).
+// Pure CSS (ix16-*), no client JS. Presentational Server Component. aria-hidden.
 
 const CORE = { x: 600, y: 350 };
 const LIVE_X = 205; // centre of the left (logistiq surfaces) node cards
@@ -24,14 +26,16 @@ const Pkt = ({ x, y, dx, dy, delay, fill }: { x: number; y: number; dx: number; 
     style={{ ["--dx" as string]: `${dx}px`, ["--dy" as string]: `${dy}px`, animationDelay: `${delay}s` }} />
 );
 
-// The QRGoBox gate device: a barrier lifting next to the reader box, with the
-// org-scoped key that authenticates it. `org_` + 32 hex is the real key format.
+// The gate scanner: the reader on its post, with the organisation's key it
+// authenticates with (`org_` + 32 hex is the real key format), and the barrier
+// beside it, down, because opening it with QRGoBox is in progress.
 function DeviceNode({ y }: { y: number }) {
   return (
     <g transform={`translate(${LIVE_X} ${y})`}>
       <rect x={-100} y={-52} width={200} height={104} rx={10} fill="#1b2532" stroke="#334155" strokeWidth="1.5" />
       <rect x={-72} y={-34} width={10} height={44} rx={2} fill="#475569" />
-      <g transform="rotate(-22 -62 -28)">
+      {/* the barrier arm, down */}
+      <g>
         <rect x={-62} y={-32} width={56} height={8} rx={4} fill="#e2e8f0" />
         <rect x={-60} y={-31} width={44} height={2} rx={1} fill="#3b82f6" />
         {[-40, -22].map((bx) => (
@@ -177,7 +181,7 @@ export function IntegrationsScene({ t }: { t: Translations }) {
         <DeviceNode y={ROWS[0]} />
         <PortalNode y={ROWS[1]} />
         <DriversNode y={ROWS[2]} />
-        {[f.uiDeviceApi, f.uiCarrier, f.uiRealtime].map((label, i) => (
+        {[f.uiGateScanner, f.uiCarrier, f.uiRealtime].map((label, i) => (
           <text key={i} x={LIVE_X} y={ROWS[i] + 78} textAnchor="middle" fill="#cbd5e1" style={{ fontSize: 16, fontWeight: 600 }}>
             {label}
           </text>

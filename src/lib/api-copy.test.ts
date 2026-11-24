@@ -15,7 +15,7 @@ const ADDRESS = "api.logistiq.cloud/v1";
 // text, callout and FAQ were rendered nowhere, yet shipped in every page's RSC payload.
 const F16_RENDERED = [
   "stepLabel", "specTitle", "specSub", "k1", "v1", "k2", "v2", "k3", "v3", "k4", "v4",
-  "uiDeviceApi", "uiCarrier", "uiRealtime", "uiTms", "uiWms", "uiErp",
+  "uiGateScanner", "uiCarrier", "uiRealtime", "uiTms", "uiWms", "uiErp",
 ];
 
 describe("Integration API copy", () => {
