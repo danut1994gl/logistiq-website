@@ -6,34 +6,39 @@ import type { Locale } from "@/lib/i18n/config";
 import { DRIVER_POOLS } from "./driverPools";
 import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 
-// Yard access control (feature 15) — the real gate chain as a loop, left to right:
-// the driver's phone DISPLAYS the check-in QR -> a mounted gate TERMINAL reads it
-// (the terminal scans; the box never does) -> the cloud runs the 8-check ladder of
-// POST /api/gate/validate -> on a pass it publishes an open command -> the ESP32
-// relay controller pulses a contact for exactly 1000 ms -> the barrier lifts.
+// Yard access control (feature 15) — the gate chain as a loop, left to right: the
+// driver's phone DISPLAYS the check-in QR -> the gate scanner (a terminal mounted at
+// the gate; it scans, the box never does) reads it -> the cloud runs the checks of
+// POST /api/gate/validate. That much works today, and the loop stops there: the
+// check-in is validated, or refused (one truck in four, whose status does not let
+// it in).
 //
-// Grounded in the qrgobox + qr_scannerapp audits, which also fix what is NOT drawn:
-//  * the box has no camera and makes no decision — it reacts to an MQTT message;
-//  * nothing reads back from the relay, so there is NO return arrow to the terminal
-//    and no "confirmed open" beat: the chain is strictly one-way, left to right;
-//  * the terminal never shows driver name / plate / company — the response carries
-//    only status / message / ramp — so those live on the DRIVER's phone instead;
-//  * no beep, no sound waves, no haptics: feedback is purely visual;
-//  * the paired credential is the org-wide key (org_…), never the dead gk_… key.
-// The terminal UI is 1:1 with the app: 50/50 split, camera + 200x200 target frame,
-// grey[900] InfoPanel, status pill (icon:text = 36:24, letterSpacing 2), message
-// box, and — entry gates only — the purple ramp box. Real states cycle with their
-// real colours: READY (blue) -> PROCESSING (orange) -> ACCESS GRANTED (green) +
-// ramp, and every third truck ACCESS DENIED (red) when check 8 (status) refuses.
-// Client player; pauses off-screen; static granted frame on reduced-motion.
+// What comes after is in progress (owner, 2026-11-24): the open command will go to
+// the barrier only over a secure (TLS) connection, which is being prepared, and
+// QRGoBox, the box that will open it, is being redesigned. Until then a valid scan
+// is answered 503 and kept in the gate log as refused, "Gate did not respond"
+// (Logistiq apps/dashboard/app/api/gate/validate/route.ts). So the box, the cable,
+// the barrier and the timeline row a passage would write ("Entry: <gate>") are drawn
+// greyed and dashed, each marked in progress, and the barrier stays down: nothing in
+// the scene opens it. Until 2026-11-24 the loop sent the command on, pulsed a relay,
+// lifted the barrier, drove the truck through and showed the ramp box of a granted
+// answer, as if all of it were live.
+//
+// Also not drawn, by design: the terminal never shows the driver's name, plate or
+// company (they live on the driver's phone), and there is no beep or haptic. The
+// terminal UI follows the app: 50/50 split, camera + 200x200 target frame, grey[900]
+// InfoPanel, status pill, message box. States cycle with their colours: READY (blue)
+// -> PROCESSING (orange) -> CHECK-IN VALIDATED (green), or ACCESS DENIED (red).
+// Client player; pauses off-screen; the server-rendered and reduced-motion frame is
+// the validated check-in at the closed barrier.
 
-type Status = "ready" | "processing" | "granted" | "denied";
+type Status = "ready" | "processing" | "validated" | "denied";
 
 // the app's real state colours (blue / orange / green / red)
 const C: Record<Status, string> = {
   ready: "#3b82f6",
   processing: "#f59e0b",
-  granted: "#22c55e",
+  validated: "#22c55e",
   denied: "#ef4444",
 };
 
@@ -54,7 +59,7 @@ const ICON: Record<Status, ReactNode> = {
       <path d="M8 3v3.4c0 1.3.6 2.5 1.7 3.2L12 12l-2.3 2.4A4 4 0 0 0 8 17.6V21M16 3v3.4a4 4 0 0 1-1.7 3.2L12 12l2.3 2.4a4 4 0 0 1 1.7 3.2V21" />
     </>
   ),
-  granted: (
+  validated: (
     <>
       <circle cx="12" cy="12" r="9" />
       <path d="m7.8 12.4 2.8 2.8L16.2 9.6" />
@@ -68,7 +73,6 @@ const ICON: Record<Status, ReactNode> = {
   ),
 };
 
-const WAREHOUSE = <path d="M3 21V9.2L12 4l9 5.2V21M2 21h20M8.5 21v-5.5h7V21M8.5 12.5h7" />;
 const CLOUD_ICON = <path d="M7 19a4.5 4.5 0 0 1-.6-8.96 5.5 5.5 0 0 1 10.5-1.3A4 4 0 0 1 17.5 19z" />;
 const GATE_ICON = (
   <>
@@ -86,16 +90,16 @@ const KEY_ICON = (
 // the ladder's skeleton bars — deterministic widths (no Math.random at module
 // scope / during render: it would break SSR hydration)
 const CHECK_W = [64, 79, 55, 71, 47, 67, 59, 75];
-// every third truck is refused, so the DENIED frame is guaranteed on one watch
+// one truck in four is refused, so the DENIED frame is guaranteed on one watch
 const SEQ = [true, true, false, true];
 
 // road-band geometry (viewBox user units)
 const TX_AWAY = -320;
 const TX_GATE = 713; // nose (local x 247) lands just short of the barrier post
-const TX_THROUGH = 1290;
 
-// the control cable, from the relay card's output (top edge, x≈1112 — directly
-// under the relay controller card) down into the barrier's motor housing (≈980,146).
+// the control cable QRGoBox will drive, from the box card's output (top edge, x≈1112 —
+// directly under the box card) down into the barrier's motor housing (≈980,146). Drawn
+// dashed and grey: nothing runs down it today.
 const CABLE = "M1112 4 C1112 74 1046 106 980 146";
 
 // European articulated semi, side view — same drawing as the Digital Check-in
@@ -149,13 +153,17 @@ function Glyph({ children, cls, w = "2" }: { children: ReactNode; cls: string; w
   );
 }
 
-// one hop of the chain. Every hop points RIGHT and only right — the relay is
-// fire-and-forget, nothing in this chain ever answers back.
-function Hop({ active }: { active: boolean }) {
+// one hop of the chain. Every hop points RIGHT. The last one, from the cloud to the
+// box, is in progress: drawn dashed, and no packet ever runs along it.
+function Hop({ active, muted = false }: { active: boolean; muted?: boolean }) {
   return (
     <div className="relative w-[3cqw] shrink-0 self-center h-[0.7cqw]">
-      <div className="absolute inset-x-0 top-[0.28cqw] h-[0.14cqw] rounded-full bg-slate-700" />
-      {active ? (
+      {muted ? (
+        <div className="absolute inset-x-0 top-[0.28cqw] h-0 border-t-[0.14cqw] border-dashed border-slate-600" />
+      ) : (
+        <div className="absolute inset-x-0 top-[0.28cqw] h-[0.14cqw] rounded-full bg-slate-700" />
+      )}
+      {active && !muted ? (
         <span className="ga15-packet absolute left-0 top-0 w-[0.7cqw] h-[0.7cqw] rounded-full bg-cyan-400 shadow-[0_0_0.8cqw_rgba(34,211,238,0.9)]" />
       ) : null}
     </div>
@@ -166,15 +174,15 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
   const f = t.f15Page;
   const pool = DRIVER_POOLS[locale];
 
-  const [status, setStatus] = useState<Status>("granted");
+  // The first frame, also the server-rendered and reduced-motion one: a validated
+  // check-in, the truck waiting at the closed barrier.
+  const [status, setStatus] = useState<Status>("validated");
   const [checks, setChecks] = useState(8); // rows of the ladder resolved so far
   const [fail, setFail] = useState(false); // the 8th (status) check refused
-  const [hop, setHop] = useState(0); // 1 phone->terminal, 2 terminal->cloud, 3 cloud->box
+  const [hop, setHop] = useState(0); // 1 phone->terminal, 2 terminal->cloud
   const [scanning, setScanning] = useState(false);
-  const [pulse, setPulse] = useState(false);
-  const [barrier, setBarrier] = useState(true);
-  const [timeline, setTimeline] = useState(true);
-  const [tx, setTx] = useState(TX_THROUGH - 340);
+  const [shown, setShown] = useState(true); // the truck fades out between two runs
+  const [tx, setTx] = useState(TX_GATE);
   const [ms, setMs] = useState(2200);
   const [driver, setDriver] = useState(pool[0]);
   const [clock, setClock] = useState(27735); // 07:42:15 — a literal seed, never Date.now()
@@ -188,8 +196,8 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
   }, []);
 
   useEffect(() => {
-    // reduced motion keeps the granted end state above: barrier up, ladder 8/8,
-    // ramp box on the terminal, timeline row on the phone.
+    // reduced motion keeps the first frame above: the check-in validated, ladder 8/8,
+    // the barrier down.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let cancelled = false;
@@ -212,17 +220,18 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
       await sleep(400);
       while (!cancelled) {
         const grant = SEQ[i % SEQ.length];
-        // reset
+        // reset: the truck fades out where it stands, then rolls in again from the left
+        setShown(false);
+        await sleep(600);
+        if (cancelled) break;
         setStatus("ready");
         setChecks(0);
         setFail(false);
-        setBarrier(false);
-        setPulse(false);
-        setTimeline(false);
         setHop(0);
         setDriver(pool[i % pool.length]);
         setMs(0);
         setTx(TX_AWAY);
+        setShown(true);
         await sleep(500);
 
         // 1) the truck rolls up to the barrier
@@ -256,26 +265,12 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
         if (cancelled) break;
 
         if (grant) {
-          // 5) the open command goes out over MQTT…
-          setHop(3);
-          await sleep(520);
-          setHop(0);
-          setStatus("granted");
-          // …and the ESP32 drives its open pin high for exactly 1000 ms
-          setPulse(true);
-          await sleep(260);
-          setBarrier(true);
-          setTimeline(true); // the driver's own timeline gains the row, live
-          await sleep(740);
-          setPulse(false);
-          await sleep(520);
-          setMs(2100);
-          setTx(TX_THROUGH);
-          await sleep(2400);
-          setBarrier(false);
-          await sleep(1300);
+          // 5) the check-in is validated. The chain stops here today: no command goes
+          // on to the box, the barrier stays down and the truck waits at it.
+          setStatus("validated");
+          await sleep(3200);
         } else {
-          // no command is published, no relay fires, the arm never moves
+          // refused: the truck backs away from the barrier
           setStatus("denied");
           await sleep(2600);
           setMs(1600);
@@ -291,7 +286,7 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
   }, []);
 
   const col = C[status];
-  const label = status === "ready" ? f.uiScan : status === "processing" ? f.uiValidating : status === "granted" ? f.uiGranted : f.uiDenied;
+  const label = status === "ready" ? f.uiScan : status === "processing" ? f.uiValidating : status === "validated" ? f.uiValidated : f.uiDenied;
   const hh = String(Math.floor(clock / 3600)).padStart(2, "0");
   const mm = String(Math.floor((clock % 3600) / 60)).padStart(2, "0");
   const ss = String(clock % 60).padStart(2, "0");
@@ -299,8 +294,8 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
   return (
     <div ref={rootRef} className="@container absolute inset-0 p-[1.6cqw] text-slate-200 select-none" aria-hidden="true">
       <div className="w-full h-full rounded-[1.4cqw] bg-slate-900/70 border border-slate-700/70 flex flex-col overflow-hidden">
-        {/* header — which gate this is, and the one org-wide key every box and
-            terminal in the organisation shares */}
+        {/* header — which gate this is, and the organisation's key the gate
+            scanner authenticates with */}
         <div className="flex items-center gap-[1.2cqw] px-[2cqw] py-[1.1cqw] border-b border-slate-700/70 bg-slate-800/60 shrink-0">
           <span className="w-[2.8cqw] h-[2.8cqw] rounded-[0.7cqw] bg-blue-500/15 text-blue-300 flex items-center justify-center shrink-0">
             <Glyph cls="w-[1.7cqw] h-[1.7cqw]" w="1.8">{GATE_ICON}</Glyph>
@@ -337,18 +332,22 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                 ))}
               </span>
               <span className="flex-1" />
-              {/* the timeline row the validate route writes for the driver, live */}
-              {timeline ? (
-                <span className="ga15-tlrow w-full flex items-start gap-[0.5cqw] rounded-[0.5cqw] border border-emerald-500/30 bg-emerald-500/10 px-[0.5cqw] py-[0.45cqw] shrink-0">
-                  <Glyph cls="w-[1.1cqw] h-[1.1cqw] text-emerald-400 shrink-0 mt-[0.1cqw]" w="2.4">
+              {/* the timeline row a passage writes for the driver ("Entry: <gate>").
+                  A passage is recorded once the open command has gone out to the
+                  barrier, which is in progress: the row is drawn greyed, dashed and
+                  marked so, and never appears as if live. */}
+              <span className="w-full flex flex-col gap-[0.3cqw] rounded-[0.5cqw] border border-dashed border-slate-600 bg-slate-800/40 px-[0.5cqw] py-[0.45cqw] shrink-0">
+                <span className="flex items-start gap-[0.5cqw]">
+                  <Glyph cls="w-[1.1cqw] h-[1.1cqw] text-slate-500 shrink-0 mt-[0.1cqw]" w="2.4">
                     <>
                       <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
                       <path d="M10 17l5-5-5-5M15 12H3" />
                     </>
                   </Glyph>
-                  <span className="text-emerald-300 text-[0.9cqw] leading-tight">{f.uiTimeline}</span>
+                  <span className="text-slate-400 text-[0.9cqw] leading-tight">{f.uiTimeline}</span>
                 </span>
-              ) : null}
+                <span className="self-start rounded-[0.35cqw] bg-amber-500/15 text-amber-300 text-[0.75cqw] font-semibold leading-tight px-[0.5cqw] py-[0.1cqw]">{f.uiInProgress}</span>
+              </span>
             </div>
           </div>
 
@@ -401,7 +400,7 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                   style={{ background: `${col}26`, border: "0.1cqw solid", borderColor: col }}
                 >
                   <Glyph cls="w-[2.1cqw] h-[2.1cqw] shrink-0" w="2">{ICON[status]}</Glyph>
-                  <span className="font-bold text-[1.4cqw] leading-none whitespace-nowrap" style={{ color: col, letterSpacing: "0.08em" }}>
+                  <span className="font-bold text-[1.4cqw] leading-tight text-center" style={{ color: col, letterSpacing: "0.08em" }}>
                     {label}
                   </span>
                 </div>
@@ -409,22 +408,8 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                     driver's own language, so it is drawn, not invented. */}
                 <div className="flex-1 min-h-0 rounded-[0.5cqw] bg-[#303030] flex flex-col items-center justify-center gap-[0.4cqw] px-[0.8cqw] shrink-0">
                   <span className="h-[0.5cqw] rounded-full transition-all duration-300" style={{ width: status === "processing" ? "42%" : "62%", background: `${col}80` }} />
-                  <span className="h-[0.5cqw] rounded-full bg-white/15" style={{ width: status === "granted" ? "38%" : "30%" }} />
+                  <span className="h-[0.5cqw] rounded-full bg-white/15" style={{ width: status === "validated" ? "38%" : "30%" }} />
                 </div>
-                {/* ramp box — ENTRY GATES ONLY, purple.700 -> purple.900 */}
-                {status === "granted" ? (
-                  <div
-                    className="ga15-ramp flex items-center justify-center gap-[0.55cqw] rounded-[0.6cqw] px-[0.7cqw] py-[0.6cqw] shrink-0"
-                    style={{
-                      background: "linear-gradient(135deg,#7B1FA2,#4A148C)",
-                      border: "0.1cqw solid #AB47BC",
-                      boxShadow: "0 0 1.6cqw rgba(171,71,188,0.5)",
-                    }}
-                  >
-                    <Glyph cls="w-[1.5cqw] h-[1.5cqw] text-white shrink-0" w="1.9">{WAREHOUSE}</Glyph>
-                    <span className="font-bold text-white text-[1.2cqw] leading-none whitespace-nowrap">{f.uiRamp}</span>
-                  </div>
-                ) : null}
                 {/* the terminal's big ticking clock */}
                 <span className="text-center font-mono font-bold text-white/90 text-[2cqw] leading-none shrink-0 tabular-nums" style={{ letterSpacing: "0.1em" }}>
                   {hh}:{mm}:{ss}
@@ -473,32 +458,30 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
             </div>
           </div>
 
-          <Hop active={hop === 3} />
+          <Hop active={false} muted />
 
-          {/* ---- 4. the ESP32 relay controller: no camera, no decision. Sits low
-                in the row (self-end) so it is right above the gate, and its output
-                terminal lines up with the cable that runs down to the barrier. ---- */}
-          <div className="w-[15cqw] shrink-0 self-end rounded-[1cqw] border border-slate-700 bg-slate-800/40 p-[0.9cqw] flex flex-col gap-[0.7cqw]">
-            <svg viewBox="0 0 140 96" className="w-full block">
-              {/* wifi arcs: the box holds an outbound session — it is told, it never asks */}
-              <g fill="none" stroke={pulse ? "#22c55e" : "#64748b"} strokeWidth="2.6" strokeLinecap="round" className="transition-colors duration-200">
+          {/* ---- 4. QRGoBox, in progress: greyed and dashed, its label says so. It
+                sits low in the row (self-end) so it is right above the gate, and
+                its output terminal lines up with the cable down to the barrier. ---- */}
+          <div className="w-[15cqw] shrink-0 self-end rounded-[1cqw] border border-dashed border-slate-600 bg-slate-800/30 p-[0.9cqw] flex flex-col gap-[0.7cqw]">
+            <svg viewBox="0 0 140 96" className="w-full block opacity-60">
+              <g fill="none" stroke="#64748b" strokeWidth="2.6" strokeLinecap="round">
                 <path d="M24 12a14 14 0 0 1 20 0" />
                 <path d="M30 18a6.5 6.5 0 0 1 8 0" />
               </g>
               <rect x="6" y="24" width="128" height="66" rx="4" fill="#1b2532" stroke="#334155" strokeWidth="1.6" />
-              {/* the ESP32 module + its antenna trace */}
+              {/* the controller + its antenna trace */}
               <rect x="14" y="32" width="46" height="34" rx="2" fill="#243040" stroke="#475569" strokeWidth="1.4" />
               <path d="M34 32V22h4v-6h-8v-4" fill="none" stroke="#64748b" strokeWidth="1.6" />
               {[0, 1, 2, 3, 4].map((n) => (
                 <line key={n} x1="18" y1={38 + n * 6} x2="56" y2={38 + n * 6} stroke="#334155" strokeWidth="1.2" />
               ))}
-              {/* the relay + its coil, and the LED that lights for the pulse */}
+              {/* the relay + its coil, and its LED, dark */}
               <rect x="72" y="32" width="50" height="34" rx="2" fill="#243040" stroke="#475569" strokeWidth="1.4" />
               {[0, 1, 2, 3].map((n) => (
                 <line key={n} x1={80 + n * 5} y1="38" x2={80 + n * 5} y2="60" stroke="#334155" strokeWidth="1.6" />
               ))}
-              <circle cx="112" cy="42" r="9" fill={pulse ? "#22c55e33" : "transparent"} className="transition-colors duration-150" />
-              <circle cx="112" cy="42" r="4" fill={pulse ? "#22c55e" : "#334155"} className="transition-colors duration-150" />
+              <circle cx="112" cy="42" r="4" fill="#334155" />
               {/* screw terminals — the dry contact that goes to the barrier */}
               {[16, 42, 68, 94, 120].map((x) => (
                 <g key={x}>
@@ -507,20 +490,13 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                 </g>
               ))}
             </svg>
-            {/* the pulse is a timed bar, not a held state: 1000 ms exactly */}
-            <div className="flex flex-col gap-[0.4cqw]">
-              <span className="text-[1cqw] leading-tight transition-colors duration-200" style={{ color: pulse ? "#22c55e" : "#94a3b8" }}>
-                {f.uiRelay}
-              </span>
-              <span className="h-[0.5cqw] w-full rounded-full bg-slate-700 overflow-hidden">
-                {pulse ? <span className="ga15-pulsebar block h-full rounded-full bg-emerald-400" /> : null}
-              </span>
-            </div>
-            {/* output terminal — the dry contact, wired down to the barrier motor.
-                It pokes out the card's bottom edge and lines up with the cable. */}
-            <span className="self-center -mb-[1.5cqw] flex flex-col items-center">
+            {/* "QRGoBox · in progress" */}
+            <span className="text-[1cqw] leading-tight text-amber-300">{f.uiRelay}</span>
+            {/* output terminal, wired down to the barrier motor. It pokes out the
+                card's bottom edge and lines up with the cable. */}
+            <span className="self-center -mb-[1.5cqw] flex flex-col items-center opacity-60">
               <span className="w-[2.2cqw] h-[0.5cqw] rounded-full bg-slate-600" />
-              <span className={`w-[0.6cqw] h-[1.2cqw] rounded-b-[0.3cqw] transition-colors duration-200 ${pulse ? "bg-emerald-400" : "bg-slate-600"}`} />
+              <span className="w-[0.6cqw] h-[1.2cqw] rounded-b-[0.3cqw] bg-slate-600" />
             </span>
           </div>
         </div>
@@ -539,15 +515,11 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
               </linearGradient>
             </defs>
 
-            {/* the control cable: it leaves the relay controller card (directly
-                above, at x≈1112) and runs down into the barrier's motor housing —
-                the pulse runs down it and nothing comes back up. Same path for the
-                grey run and the green pulse overlay, so they stay registered. */}
-            <path d={CABLE} fill="none" stroke="#334155" strokeWidth="3.5" strokeLinecap="round" />
-            {pulse ? (
-              <path d={CABLE} fill="none" stroke="#22c55e" strokeWidth="3.5" strokeLinecap="round" className="ga15-wire" />
-            ) : null}
-            {/* the plug where the cable leaves the relay card above */}
+            {/* the control cable: it leaves the box card (directly above, at
+                x≈1112) and runs down into the barrier's motor housing. Dashed:
+                in progress, nothing runs down it. */}
+            <path d={CABLE} fill="none" stroke="#334155" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="9 9" />
+            {/* the plug where the cable leaves the box card above */}
             <rect x="1104" y="-2" width="16" height="8" rx="2" fill="#475569" stroke="#334155" strokeWidth="1" />
 
             {/* ground */}
@@ -556,28 +528,35 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
 
             {/* the truck (drawn before the barrier so the arm reads in front) */}
             <g transform="translate(0 -168)">
-              <g className="ga15-truck" style={{ transform: `translateX(${tx}px)`, transitionDuration: `${ms}ms` }}>
-                <TruckArt />
+              <g style={{ opacity: shown ? 1 : 0, transition: "opacity 600ms" }}>
+                <g style={{ transform: `translateX(${tx}px)`, transitionDuration: `${ms}ms` }}>
+                  <TruckArt />
+                </g>
               </g>
             </g>
 
             {/* the barrier — a compact motor housing at the post base that the
-                cable plugs into, the post, then the boom. */}
-            <rect x="966" y="150" width="28" height="26" rx="3" className="fill-slate-700" stroke="#475569" strokeWidth="1.5" />
-            <circle cx="973" cy="156" r="2.2" className={pulse ? "fill-emerald-400" : "fill-slate-500"} />
-            <rect x="975" y="122" width="10" height="30" rx="2" className="fill-slate-600" />
-            <g transform="translate(980 126)">
-              <g className="ga15-barrier" style={{ transform: `rotate(${barrier ? -58 : 0}deg)` }}>
+                cable plugs into, the post, then the boom: down, and greyed, since
+                opening it is in progress. Nothing in the scene moves it. */}
+            <g opacity="0.75">
+              <rect x="966" y="150" width="28" height="26" rx="3" className="fill-slate-700" stroke="#475569" strokeWidth="1.5" />
+              <circle cx="973" cy="156" r="2.2" className="fill-slate-500" />
+              <rect x="975" y="122" width="10" height="30" rx="2" className="fill-slate-600" />
+              <g transform="translate(980 126)">
                 {/* one continuous boom — a white bar with a full-length blue stripe
-                    and a solid tip, so it reads as a single arm, not chopped into
-                    sections. */}
+                    and a solid tip, so it reads as a single arm. */}
                 <rect x="-3" y="-7" width="15" height="14" rx="3" className="fill-slate-500" />
                 <rect x="6" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
                 <rect x="10" y="-4.4" width="150" height="3" rx="1.5" className="fill-blue-500" />
                 <rect x="150" y="-6" width="24" height="12" rx="6" className="fill-blue-600" />
-                <circle cx="170" cy="0" r="3" className={barrier ? "fill-emerald-300" : "fill-slate-300"} />
+                <circle cx="170" cy="0" r="3" className="fill-slate-300" />
               </g>
             </g>
+            {/* in progress, under the boom's free end: right-aligned, so the longest
+                languages stay clear of the motor housing and the waiting truck */}
+            <text x="1188" y="162" textAnchor="end" className="fill-amber-300" style={{ fontSize: 13, fontWeight: 600 }}>
+              {f.uiInProgress}
+            </text>
           </svg>
         </div>
       </div>
