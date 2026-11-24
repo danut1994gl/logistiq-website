@@ -1753,8 +1753,8 @@ export const translations = {
       },
       article7: {
         title: "Articolul 7 - Upgrade și Downgrade",
-        upgrade: { title: "Upgrade", content: "Trecerea la un plan superior este efectivă imediat cu plata diferenței proporționale." },
-        downgrade: { title: "Downgrade", content: "Trecerea la un plan inferior poate fi făcută oricând, cu rambursarea proporțională a diferenței pentru perioada rămasă. Nu se poate face downgrade sub numărul actual de depozite active." },
+        upgrade: { title: "Upgrade", content: "Trecerea la un plan superior se face la cererea Clientului, în condițiile stabilite în contract." },
+        downgrade: { title: "Downgrade", content: "Trecerea la un plan inferior se face la cererea Clientului, în condițiile stabilite în contract. Nu se poate face downgrade sub numărul actual de depozite active." },
       },
       article8: {
         title: "Articolul 8 - Funcționalități și Limitări",
@@ -3661,8 +3661,8 @@ export const translations = {
       },
       article7: {
         title: "Article 7 - Upgrade and Downgrade",
-        upgrade: { title: "Upgrade", content: "Upgrade to higher plan is effective immediately with prorated payment." },
-        downgrade: { title: "Downgrade", content: "Downgrade can be made anytime, with a proportional refund for the remaining period. Cannot downgrade below current active warehouse count." },
+        upgrade: { title: "Upgrade", content: "A move to a higher plan is made at the Client's request, as set out in the contract." },
+        downgrade: { title: "Downgrade", content: "A move to a lower plan is made at the Client's request, as set out in the contract. Cannot downgrade below current active warehouse count." },
       },
       article8: {
         title: "Article 8 - Features and Limitations",
@@ -5732,12 +5732,12 @@ export const translations = {
         upgrade: {
           title: "Upgrade",
           content:
-            "Der Wechsel zu einem höheren Plan wird sofort gegen Zahlung der anteiligen Differenz wirksam.",
+            "Der Wechsel zu einem höheren Plan erfolgt auf Wunsch des Kunden, zu den im Vertrag festgelegten Bedingungen.",
         },
         downgrade: {
           title: "Downgrade",
           content:
-            "Der Wechsel zu einem niedrigeren Plan ist jederzeit möglich, mit anteiliger Erstattung der Differenz für den verbleibenden Zeitraum. Ein Downgrade unter die aktuelle Anzahl aktiver Lager ist nicht möglich.",
+            "Der Wechsel zu einem niedrigeren Plan erfolgt auf Wunsch des Kunden, zu den im Vertrag festgelegten Bedingungen. Ein Downgrade unter die aktuelle Anzahl aktiver Lager ist nicht möglich.",
         },
       },
       article8: {
@@ -7943,12 +7943,12 @@ export const translations = {
         upgrade: {
           title: "Upgrade",
           content:
-            "Przejście na wyższy plan następuje ze skutkiem natychmiastowym, z dopłatą proporcjonalnej różnicy.",
+            "Przejście na wyższy plan następuje na wniosek Klienta, na warunkach określonych w umowie.",
         },
         downgrade: {
           title: "Downgrade",
           content:
-            "Przejście na niższy plan jest możliwe w dowolnym momencie, z proporcjonalnym zwrotem różnicy za pozostały okres. Downgrade nie jest możliwy poniżej aktualnej liczby aktywnych magazynów.",
+            "Przejście na niższy plan następuje na wniosek Klienta, na warunkach określonych w umowie. Downgrade nie jest możliwy poniżej aktualnej liczby aktywnych magazynów.",
         },
       },
       article8: {
@@ -10153,12 +10153,12 @@ export const translations = {
         upgrade: {
           title: "Upgrade",
           content:
-            "A magasabb csomagra való áttérés azonnal hatályos, a különbözet időarányos megfizetésével.",
+            "A magasabb csomagra való áttérés az Ügyfél kérésére, a szerződésben meghatározott feltételekkel történik.",
         },
         downgrade: {
           title: "Downgrade",
           content:
-            "Az alacsonyabb csomagra való áttérés bármikor lehetséges, a fennmaradó időszakra eső különbözet időarányos visszatérítésével. A downgrade az aktív raktárak jelenlegi száma alá nem lehetséges.",
+            "Az alacsonyabb csomagra való áttérés az Ügyfél kérésére, a szerződésben meghatározott feltételekkel történik. A downgrade az aktív raktárak jelenlegi száma alá nem lehetséges.",
         },
       },
       article8: {
@@ -12362,12 +12362,12 @@ export const translations = {
         upgrade: {
           title: "Надграждане",
           content:
-            "Преминаването към по-висок план влиза в сила незабавно срещу заплащане на пропорционалната разлика.",
+            "Преминаването към по-висок план става по искане на Клиента, при условията, определени в договора.",
         },
         downgrade: {
           title: "Понижаване",
           content:
-            "Преминаването към по-нисък план може да се извърши по всяко време, като разликата за оставащия период се възстановява пропорционално. Не може да се извърши понижаване под текущия брой активни складове.",
+            "Преминаването към по-нисък план става по искане на Клиента, при условията, определени в договора. Не може да се извърши понижаване под текущия брой активни складове.",
         },
       },
       article8: {
@@ -14578,12 +14578,12 @@ export const translations = {
         upgrade: {
           title: "Mise à niveau",
           content:
-            "Le passage à un forfait supérieur prend effet immédiatement, avec paiement de la différence au prorata.",
+            "Le passage à un forfait supérieur se fait à la demande du Client, dans les conditions prévues par le contrat.",
         },
         downgrade: {
           title: "Rétrogradation",
           content:
-            "Le passage à un forfait inférieur peut être effectué à tout moment, avec un remboursement proportionnel de la différence pour la période restante. Il n'est pas possible de rétrograder en deçà du nombre actuel d'entrepôts actifs.",
+            "Le passage à un forfait inférieur se fait à la demande du Client, dans les conditions prévues par le contrat. Il n'est pas possible de rétrograder en deçà du nombre actuel d'entrepôts actifs.",
         },
       },
       article8: {
@@ -16795,12 +16795,12 @@ export const translations = {
         upgrade: {
           title: "Upgrade",
           content:
-            "De overstap naar een hoger plan wordt onmiddellijk van kracht, tegen betaling van het verschil naar rato.",
+            "De overstap naar een hoger plan gebeurt op verzoek van de Klant, onder de voorwaarden van de overeenkomst.",
         },
         downgrade: {
           title: "Downgrade",
           content:
-            "De overstap naar een lager plan kan op elk moment plaatsvinden, met terugbetaling naar rato van het verschil voor de resterende periode. Een downgrade tot onder het huidige aantal actieve magazijnen is niet mogelijk.",
+            "De overstap naar een lager plan gebeurt op verzoek van de Klant, onder de voorwaarden van de overeenkomst. Een downgrade tot onder het huidige aantal actieve magazijnen is niet mogelijk.",
         },
       },
       article8: {

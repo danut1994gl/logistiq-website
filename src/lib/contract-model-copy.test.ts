@@ -82,9 +82,21 @@ const ANYTIME: Record<string, RegExp> = {
   nl: /op elk moment/,
 };
 
+// "prorated" and "refund" in each language, as self-service plan changes were charged.
+const PRORATED: Record<string, RegExp> = {
+  ro: /proporțional|rambursa/,
+  en: /prorat|proportional|refund/,
+  de: /anteilig|Erstattung/,
+  pl: /proporcjonal|zwrot/,
+  hu: /időarányos|visszatérít/,
+  bg: /пропорционал|възстановява/,
+  fr: /prorata|rembours|proportionnel/,
+  nl: /naar rato|terugbetal/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME, PRORATED]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -144,6 +156,16 @@ describe("contract model copy", () => {
       for (const content of [copy.terms.article5.cancellation.content, copy.terms.article14.byClient.content]) {
         expect(content, locale).toMatch(CONTRACT[locale]);
         expect(content, locale).not.toMatch(ANYTIME[locale]);
+      }
+    }
+  });
+
+  it("the terms make plan changes on request, as set out in the contract, with no proration or refund", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      for (const content of [copy.terms.article7.upgrade.content, copy.terms.article7.downgrade.content]) {
+        expect(content, locale).toMatch(CONTRACT[locale]);
+        expect(content, locale).not.toMatch(ANYTIME[locale]);
+        expect(content, locale).not.toMatch(PRORATED[locale]);
       }
     }
   });
