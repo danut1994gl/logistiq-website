@@ -1,9 +1,15 @@
 import { describe, it, expect } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { translations } from "@/lib/i18n/translations";
 
 // Logistiq has no customers to quote yet (owner, 2026-11-24: correct every claim the site
 // cannot back). Until then, in all 8 languages, the closing call to action invited the
-// visitor to "join hundreds of warehouses".
+// visitor to "join hundreds of warehouses", and the home page showed six anonymous
+// "What our customers say" testimonials.
+
+const HOME_PAGE = fileURLToPath(new URL("../app/[locale]/(marketing)/page.tsx", import.meta.url));
+const TESTIMONIALS_SECTION = fileURLToPath(new URL("../components/sections/TestimonialsSection.tsx", import.meta.url));
 
 // "hundreds" in each language, as the call to action counted its warehouses.
 const HUNDREDS: Record<string, RegExp> = {
@@ -26,5 +32,15 @@ describe("social proof", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(JSON.stringify(copy).match(HUNDREDS[locale])?.[0], locale).toBeUndefined();
     }
+  });
+
+  // Every client component receives a whole locale's translations, so testimonials kept in
+  // translations.ts would still ship in every page's RSC payload, rendered or not.
+  it("no language carries testimonials, and the home page renders none", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(Object.keys(copy), locale).not.toContain("testimonials");
+    }
+    expect(existsSync(TESTIMONIALS_SECTION)).toBe(false);
+    expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/Testimonial/);
   });
 });

@@ -1329,34 +1329,6 @@ export const translations = {
       drivers5: "Ghidare pas cu pas pentru depozite noi",
       drivers6: "Disponibil în limba lor maternă",
     },
-    testimonials: {
-      title: "Ce spun clienții noștri",
-      subtitle: "Feedback de la echipele care folosesc Logistiq zilnic.",
-      testimonial1:
-        "Am implementat sistemul pentru că pierdeam mult timp cu hârtiile și cozile la poartă. Acum șoferii fac check-in singuri, iar noi vedem totul pe dashboard. E mult mai simplu.",
-      testimonial1Author: "Manager Operațiuni",
-      testimonial1Role: "Depozit Logistic, România",
-      testimonial2:
-        "La început am fost sceptic, dar după o săptămână de utilizare nu mai vreau să mă întorc la vechiul sistem. Văd instant cine așteaptă și pot aloca rampele rapid.",
-      testimonial2Author: "Operator Depozit",
-      testimonial2Role: "Centru de Distribuție, România",
-      testimonial3:
-        "Cel mai mult apreciez că pot genera rapoarte automat. Înainte făceam totul manual în Excel și dura ore întregi.",
-      testimonial3Author: "Coordonator Logistică",
-      testimonial3Role: "Hub Regional, România",
-      testimonial4:
-        "Ne-a ajutat să avem o imagine clară asupra întregului flux. Știm exact câți șoferi sunt în curte, la ce rampe și cât durează fiecare operațiune.",
-      testimonial4Author: "Director Logistică",
-      testimonial4Role: "Companie de Distribuție, România",
-      testimonial5:
-        "Acum nu mai trebuie să-i sun pe operatori pentru fiecare camion care intră. Șoferul face check-in, eu validez la barieră și gata.",
-      testimonial5Author: "Operator Poartă",
-      testimonial5Role: "Depozit Alimentar, România",
-      testimonial6:
-        "Am eliminat complet foile de pontaj pentru camioane. Totul se înregistrează automat cu ora exactă de intrare și ieșire.",
-      testimonial6Author: "Administrator Depozit",
-      testimonial6Role: "Terminal Logistic, România",
-    },
     pricing: {
       title: "Alege planul potrivit",
       subtitle: "Două opțiuni simple pentru orice tip de operațiune. Fără costuri ascunse.",
@@ -3254,34 +3226,6 @@ export const translations = {
       drivers5: "Step-by-step guidance for new warehouses",
       drivers6: "Available in their native language",
     },
-    testimonials: {
-      title: "What our customers say",
-      subtitle: "Feedback from teams using Logistiq daily.",
-      testimonial1:
-        "We implemented the system because we were losing too much time with paperwork and queues at the gate. Now drivers check-in themselves and we see everything on the dashboard. Much simpler.",
-      testimonial1Author: "Operations Manager",
-      testimonial1Role: "Logistics Warehouse, Europe",
-      testimonial2:
-        "I was skeptical at first, but after a week of use I don't want to go back to the old system. I instantly see who's waiting and can allocate docks quickly.",
-      testimonial2Author: "Warehouse Operator",
-      testimonial2Role: "Distribution Center, Europe",
-      testimonial3:
-        "What I appreciate most is being able to generate reports automatically. Before, I did everything manually in Excel and it took hours.",
-      testimonial3Author: "Logistics Coordinator",
-      testimonial3Role: "Regional Hub, Europe",
-      testimonial4:
-        "It helped us get a clear picture of the entire flow. We know exactly how many drivers are in the yard, at which docks, and how long each operation takes.",
-      testimonial4Author: "Logistics Director",
-      testimonial4Role: "Distribution Company, Europe",
-      testimonial5:
-        "Now I don't have to call the operators for every truck that enters. The driver checks in, I validate at the gate, and that's it.",
-      testimonial5Author: "Gate Operator",
-      testimonial5Role: "Food Warehouse, Europe",
-      testimonial6:
-        "We completely eliminated truck timesheets. Everything is recorded automatically with the exact entry and exit time.",
-      testimonial6Author: "Warehouse Administrator",
-      testimonial6Role: "Logistics Terminal, Europe",
-    },
     pricing: {
       title: "Choose the right plan",
       subtitle: "Two simple options for any type of operation. No hidden costs.",
@@ -5161,34 +5105,6 @@ export const translations = {
       drivers4: "Automatische Benachrichtigung bei Ankunft – keine Suche nach dem Büro",
       drivers5: "Schritt-für-Schritt-Anleitung für unbekannte Lager",
       drivers6: "Verfügbar in ihrer Muttersprache",
-    },
-    testimonials: {
-      title: "Was unsere Kunden sagen",
-      subtitle: "Feedback von Teams, die Logistiq täglich nutzen.",
-      testimonial1:
-        "Wir haben das System eingeführt, weil wir zu viel Zeit mit Papierkram und Warteschlangen am Tor verloren haben. Jetzt checken Fahrer selbst ein und wir sehen alles auf dem Dashboard. Viel einfacher.",
-      testimonial1Author: "Betriebsleiter",
-      testimonial1Role: "Logistiklager, Europa",
-      testimonial2:
-        "Anfangs war ich skeptisch, aber nach einer Woche Nutzung möchte ich nicht mehr zum alten System zurück. Ich sehe sofort, wer wartet, und kann Rampen schnell zuweisen.",
-      testimonial2Author: "Lagermitarbeiter",
-      testimonial2Role: "Verteilzentrum, Europa",
-      testimonial3:
-        "Am meisten schätze ich, dass ich Berichte automatisch erstellen kann. Früher habe ich alles von Hand in Excel gemacht, und das hat Stunden gedauert.",
-      testimonial3Author: "Logistikkoordinator",
-      testimonial3Role: "Regionaler Hub, Europa",
-      testimonial4:
-        "Es hat uns geholfen, einen klaren Überblick über den gesamten Ablauf zu bekommen. Wir wissen genau, wie viele Fahrer auf dem Hof sind, an welchen Rampen und wie lange jeder Vorgang dauert.",
-      testimonial4Author: "Logistikdirektor",
-      testimonial4Role: "Distributionsunternehmen, Europa",
-      testimonial5:
-        "Jetzt muss ich nicht mehr für jeden LKW, der einfährt, die Disponenten anrufen. Der Fahrer checkt ein, ich prüfe am Tor – und fertig.",
-      testimonial5Author: "Pförtner",
-      testimonial5Role: "Lebensmittellager, Europa",
-      testimonial6:
-        "Wir haben die Stundenzettel für LKW komplett abgeschafft. Alles wird automatisch mit der genauen Ein- und Ausfahrtszeit erfasst.",
-      testimonial6Author: "Lagerverwalter",
-      testimonial6Role: "Logistikterminal, Europa",
     },
     pricing: {
       title: "Wählen Sie den richtigen Plan",
@@ -7377,34 +7293,6 @@ export const translations = {
       drivers5: "Wskazówki krok po kroku w nieznanych magazynach",
       drivers6: "Dostępne w ich języku ojczystym",
     },
-    testimonials: {
-      title: "Co mówią nasi klienci",
-      subtitle: "Opinie zespołów korzystających z Logistiq na co dzień.",
-      testimonial1:
-        "Wdrożyliśmy system, bo traciliśmy zbyt dużo czasu na papierkową robotę i kolejki przy bramie. Teraz kierowcy sami się meldują, a my widzimy wszystko na dashboardzie. O wiele prościej.",
-      testimonial1Author: "Kierownik operacyjny",
-      testimonial1Role: "Magazyn logistyczny, Europa",
-      testimonial2:
-        "Na początku byłem sceptyczny, ale po tygodniu używania nie chcę wracać do starego systemu. Od razu widzę, kto czeka, i mogę szybko przydzielać doki.",
-      testimonial2Author: "Operator magazynu",
-      testimonial2Role: "Centrum dystrybucyjne, Europa",
-      testimonial3:
-        "Najbardziej cenię możliwość automatycznego generowania raportów. Wcześniej robiłem wszystko ręcznie w Excelu i trwało to godzinami.",
-      testimonial3Author: "Koordynator logistyki",
-      testimonial3Role: "Hub regionalny, Europa",
-      testimonial4:
-        "Pomogło nam uzyskać jasny obraz całego przepływu. Wiemy dokładnie, ilu kierowców jest na placu, przy których rampach i jak długo trwa każda operacja.",
-      testimonial4Author: "Dyrektor logistyki",
-      testimonial4Role: "Firma dystrybucyjna, Europa",
-      testimonial5:
-        "Teraz nie muszę dzwonić do dyspozytorów przy każdej ciężarówce, która wjeżdża. Kierowca się melduje, ja weryfikuję go przy bramie i gotowe.",
-      testimonial5Author: "Operator bramy",
-      testimonial5Role: "Magazyn spożywczy, Europa",
-      testimonial6:
-        "Całkowicie wyeliminowaliśmy karty ewidencji czasu ciężarówek. Wszystko jest rejestrowane automatycznie z dokładnym czasem wjazdu i wyjazdu.",
-      testimonial6Author: "Administrator magazynu",
-      testimonial6Role: "Terminal logistyczny, Europa",
-    },
     pricing: {
       title: "Wybierz odpowiedni plan",
       subtitle: "Dwie proste opcje dla każdego rodzaju operacji. Bez ukrytych kosztów.",
@@ -9588,34 +9476,6 @@ export const translations = {
       drivers5: "Lépésről lépésre útmutatás új raktárakhoz",
       drivers6: "Elérhető az anyanyelvükön",
     },
-    testimonials: {
-      title: "Mit mondanak ügyfeleink",
-      subtitle: "Visszajelzések a Logistiq-ot naponta használó csapatoktól.",
-      testimonial1:
-        "Azért vezettük be a rendszert, mert túl sok időt vesztettünk papírmunkával és sorban állással a kapunál. Most a sofőrök maguk jelentkeznek be, mi pedig mindent látunk a dashboardon. Sokkal egyszerűbb.",
-      testimonial1Author: "Üzemeltetési vezető",
-      testimonial1Role: "Logisztikai raktár, Európa",
-      testimonial2:
-        "Eleinte szkeptikus voltam, de egy hét használat után nem akarok visszatérni a régi rendszerhez. Azonnal látom, ki várakozik, és gyorsan ki tudom osztani a dokkokat.",
-      testimonial2Author: "Raktári operátor",
-      testimonial2Role: "Elosztóközpont, Európa",
-      testimonial3:
-        "A legjobban azt értékelem, hogy automatikusan tudok jelentéseket készíteni. Korábban mindent kézzel csináltam Excelben, és órákig tartott.",
-      testimonial3Author: "Logisztikai koordinátor",
-      testimonial3Role: "Regionális csomópont, Európa",
-      testimonial4:
-        "Segített, hogy tiszta képet kapjunk az egész folyamatról. Pontosan tudjuk, hány sofőr van az udvaron, melyik dokknál és mennyi ideig tart minden művelet.",
-      testimonial4Author: "Logisztikai igazgató",
-      testimonial4Role: "Disztribúciós vállalat, Európa",
-      testimonial5:
-        "Most nem kell felhívnom a diszpécsereket minden behajtó teherautónál. A sofőr bejelentkezik, én validálom a kapunál, és kész.",
-      testimonial5Author: "Kapuügyintéző",
-      testimonial5Role: "Élelmiszerraktár, Európa",
-      testimonial6:
-        "Teljesen megszüntettük a kamionok kézi időnyilvántartását. Minden automatikusan rögzül, a pontos be- és kilépési idővel.",
-      testimonial6Author: "Raktári adminisztrátor",
-      testimonial6Role: "Logisztikai terminál, Európa",
-    },
     pricing: {
       title: "Válassza ki a megfelelő csomagot",
       subtitle: "Két egyszerű lehetőség bármilyen típusú működéshez. Nincsenek rejtett költségek.",
@@ -11797,34 +11657,6 @@ export const translations = {
       drivers5: "Насочване стъпка по стъпка в непознати складове",
       drivers6: "Налично на родния им език",
     },
-    testimonials: {
-      title: "Какво казват нашите клиенти",
-      subtitle: "Отзиви от екипи, които използват Logistiq ежедневно.",
-      testimonial1:
-        "Внедрихме системата, защото губехме твърде много време с документи и опашки на портала. Сега шофьорите се регистрират сами, а ние виждаме всичко на таблото. Много по-просто.",
-      testimonial1Author: "Оперативен мениджър",
-      testimonial1Role: "Логистичен склад, Европа",
-      testimonial2:
-        "В началото бях скептичен, но след седмица използване не искам да се връщам към старата система. Веднага виждам кой чака и мога бързо да разпределям рампите.",
-      testimonial2Author: "Складов оператор",
-      testimonial2Role: "Дистрибуционен център, Европа",
-      testimonial3:
-        "Най-много ценя възможността да генерирам отчети автоматично. Преди правех всичко ръчно в Excel и отнемаше часове.",
-      testimonial3Author: "Логистичен координатор",
-      testimonial3Role: "Регионален хъб, Европа",
-      testimonial4:
-        "Помогна ни да получим ясна картина на целия поток. Знаем точно колко шофьори са в двора, на кои рампи и колко време отнема всяка операция.",
-      testimonial4Author: "Директор логистика",
-      testimonial4Role: "Дистрибуторска компания, Европа",
-      testimonial5:
-        "Сега не е нужно да се обаждам на операторите за всеки камион, който влиза. Шофьорът се регистрира, аз валидирам на портата и готово.",
-      testimonial5Author: "Оператор на портала",
-      testimonial5Role: "Хранителен склад, Европа",
-      testimonial6:
-        "Напълно премахнахме ръчните листове за отчитане на камионите. Всичко се записва автоматично с точния час на влизане и излизане.",
-      testimonial6Author: "Администратор на склад",
-      testimonial6Role: "Логистичен терминал, Европа",
-    },
     pricing: {
       title: "Изберете правилния план",
       subtitle: "Две прости опции за всеки тип операция. Без скрити разходи.",
@@ -14004,34 +13836,6 @@ export const translations = {
       drivers4: "Notification automatique à l'arrivée — plus besoin de chercher le bureau",
       drivers5: "Guidage pas à pas dans les entrepôts qu'ils ne connaissent pas encore",
       drivers6: "Disponible dans leur langue maternelle",
-    },
-    testimonials: {
-      title: "Ce que disent nos clients",
-      subtitle: "Retours d'équipes utilisant Logistiq au quotidien.",
-      testimonial1:
-        "Nous avons mis en place le système car nous perdions trop de temps avec la paperasse et les files d'attente au portail. Maintenant les chauffeurs s'enregistrent eux-mêmes et nous voyons tout sur le tableau de bord. Beaucoup plus simple.",
-      testimonial1Author: "Responsable des opérations",
-      testimonial1Role: "Entrepôt logistique, Europe",
-      testimonial2:
-        "J'étais sceptique au début, mais après une semaine d'utilisation je ne veux plus revenir à l'ancien système. Je vois instantanément qui attend et je peux attribuer les quais rapidement.",
-      testimonial2Author: "Opérateur d'entrepôt",
-      testimonial2Role: "Centre de distribution, Europe",
-      testimonial3:
-        "Ce que j'apprécie le plus, c'est de pouvoir générer des rapports automatiquement. Avant, je faisais tout manuellement dans Excel et ça prenait des heures.",
-      testimonial3Author: "Coordinateur logistique",
-      testimonial3Role: "Plateforme régionale, Europe",
-      testimonial4:
-        "Cela nous a aidés à avoir une vision claire de l'ensemble du flux. Nous savons exactement combien de chauffeurs sont dans la cour, à quels quais et combien de temps dure chaque opération.",
-      testimonial4Author: "Directeur logistique",
-      testimonial4Role: "Société de distribution, Europe",
-      testimonial5:
-        "Maintenant, je n'ai plus besoin d'appeler les opérateurs pour chaque camion qui entre. Le chauffeur s'enregistre, je valide au portail, et c'est fait.",
-      testimonial5Author: "Agent du poste de garde",
-      testimonial5Role: "Entrepôt alimentaire, Europe",
-      testimonial6:
-        "Nous avons complètement éliminé les feuilles de pointage des camions. Tout est enregistré automatiquement avec l'heure exacte d'entrée et de sortie.",
-      testimonial6Author: "Administrateur d'entrepôt",
-      testimonial6Role: "Terminal logistique, Europe",
     },
     pricing: {
       title: "Choisissez le forfait adapté",
@@ -16222,34 +16026,6 @@ export const translations = {
       drivers4: "Automatische melding bij aankomst — geen kantoor zoeken",
       drivers5: "Stapsgewijze begeleiding in onbekende magazijnen",
       drivers6: "Beschikbaar in hun moedertaal",
-    },
-    testimonials: {
-      title: "Wat onze klanten zeggen",
-      subtitle: "Feedback van teams die Logistiq dagelijks gebruiken.",
-      testimonial1:
-        "We hebben het systeem geïmplementeerd omdat we te veel tijd verloren met papierwerk en wachtrijen bij de poort. Nu checken chauffeurs zelf in en zien we alles op het dashboard. Veel eenvoudiger.",
-      testimonial1Author: "Operations Manager",
-      testimonial1Role: "Logistiek magazijn, Europa",
-      testimonial2:
-        "Ik was eerst sceptisch, maar na een week gebruik wil ik niet meer terug naar het oude systeem. Ik zie direct wie er wacht en kan snel docks toewijzen.",
-      testimonial2Author: "Magazijnoperator",
-      testimonial2Role: "Distributiecentrum, Europa",
-      testimonial3:
-        "Wat ik het meest waardeer is dat ik automatisch rapporten kan genereren. Vroeger deed ik alles handmatig in Excel en dat duurde uren.",
-      testimonial3Author: "Logistiek coördinator",
-      testimonial3Role: "Regionale hub, Europa",
-      testimonial4:
-        "Het heeft ons geholpen een duidelijk beeld te krijgen van de volledige stroom. We weten precies hoeveel chauffeurs er op het terrein zijn, bij welke docks en hoe lang elke operatie duurt.",
-      testimonial4Author: "Logistiek directeur",
-      testimonial4Role: "Distributiebedrijf, Europa",
-      testimonial5:
-        "Nu hoef ik de operators niet meer te bellen voor elke vrachtwagen die binnenrijdt. De chauffeur checkt in, ik valideer bij de poort, en klaar.",
-      testimonial5Author: "Poortoperator",
-      testimonial5Role: "Voedselmagazijn, Europa",
-      testimonial6:
-        "We zijn volledig af van de papieren tijdregistratie voor vrachtwagens. Alles wordt automatisch geregistreerd met de exacte in- en uitrijtijd.",
-      testimonial6Author: "Magazijnbeheerder",
-      testimonial6Role: "Logistieke terminal, Europa",
     },
     pricing: {
       title: "Kies het juiste plan",

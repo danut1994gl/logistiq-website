@@ -8,7 +8,6 @@ import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { QRGODriverSection } from "@/components/sections/QRGODriverSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -36,7 +35,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <FeaturesSection t={t} />
       <BenefitsSection t={t} />
       <QRGODriverSection t={t} />
-      <TestimonialsSection t={t} />
+      {/* No testimonials: Logistiq has no customers to quote yet (2026-11-24). */}
       {isSelfServeEnabled() && <PricingSection t={t} locale={locale} />}
       {/* <FAQSection t={t} /> */}
       <CTASection t={t} />
