@@ -33,9 +33,22 @@ const PRO_FORMA: Record<string, RegExp> = {
   nl: /pro-forma/,
 };
 
+// "Romania" in each language: the terms issued fiscal invoices "for Romania", while
+// mark-paid issues one through SmartBill for every client.
+const ROMANIA: Record<string, RegExp> = {
+  ro: /Români/,
+  en: /Romania/,
+  de: /Rumänien/,
+  pl: /Rumuni/,
+  hu: /Románi/,
+  bg: /Румъни/,
+  fr: /Roumanie/,
+  nl: /Roemeni/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -50,6 +63,15 @@ describe("contract model copy", () => {
   it("the terms bill in advance for the billing period set in the contract", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.terms.article6.items[1], locale).toMatch(QUARTERLY[locale]);
+    }
+  });
+
+  it("the terms have each period's pro forma paid, and the fiscal invoice issued for every client", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      const { items } = copy.terms.article6;
+      expect(items[2], locale).toMatch(PRO_FORMA[locale]);
+      expect(items[3], locale).toMatch(/SmartBill/);
+      expect(items[3], locale).not.toMatch(ROMANIA[locale]);
     }
   });
 });
