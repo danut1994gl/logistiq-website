@@ -9,6 +9,12 @@ import { translations } from "@/lib/i18n/translations";
 // "What our customers say" testimonials.
 
 const HOME_PAGE = fileURLToPath(new URL("../app/[locale]/(marketing)/page.tsx", import.meta.url));
+const ROOT_LAYOUT = fileURLToPath(new URL("../app/layout.tsx", import.meta.url));
+
+// "Number one" in each language's way of writing it: #1, Nr. 1, nr 1, №1, n° 1. Until
+// 2026-11-24 every language's SEO title (page title, Open Graph, Twitter and the home
+// page's JSON-LD) and the root layout's title called Logistiq the number one platform.
+const NUMBER_ONE = /#1\b|\bnr\.? ?1\b|№ ?1|n° ?1/i;
 const TESTIMONIALS_SECTION = fileURLToPath(new URL("../components/sections/TestimonialsSection.tsx", import.meta.url));
 
 // "hundreds" in each language, as the call to action counted its warehouses.
@@ -26,6 +32,13 @@ const HUNDREDS: Record<string, RegExp> = {
 describe("social proof", () => {
   it("knows the word for hundreds in every language", () => {
     expect(Object.keys(HUNDREDS).sort()).toEqual(Object.keys(translations).sort());
+  });
+
+  it("no language's copy and no page title calls Logistiq the number one", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(JSON.stringify(copy).match(NUMBER_ONE)?.[0], locale).toBeUndefined();
+    }
+    expect(readFileSync(ROOT_LAYOUT, "utf8").match(NUMBER_ONE)?.[0]).toBeUndefined();
   });
 
   it("no language's copy counts warehouses in the hundreds", () => {

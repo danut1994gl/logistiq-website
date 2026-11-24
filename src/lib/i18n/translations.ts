@@ -1469,7 +1469,7 @@ export const translations = {
       checkinCreated: "Check-in creat",
     },
     seo: {
-      title: "Logistiq - Platforma #1 pentru Managementul Depozitelor | Check-in Digital pentru Șoferi",
+      title: "Logistiq - Platforma pentru Managementul Depozitelor | Check-in Digital pentru Șoferi",
       description:
         "Logistiq digitalizează operațiunile din depozit. Check-in QR pentru șoferi, gestionarea rampelor în timp real, comunicare instantanee. Timp de așteptare redus. Demo gratuit!",
       keywords:
@@ -3351,7 +3351,7 @@ export const translations = {
       checkinCreated: "Check-in created",
     },
     seo: {
-      title: "Logistiq - #1 Warehouse Management Platform | Digital Driver Check-in",
+      title: "Logistiq - Warehouse Management Platform | Digital Driver Check-in",
       description:
         "Logistiq digitizes warehouse operations. QR check-in for drivers, real-time dock management, instant communication. Reduced waiting time. Free demo!",
       keywords:
@@ -5216,7 +5216,7 @@ export const translations = {
       checkinCreated: "Check-in erstellt",
     },
     seo: {
-      title: "Logistiq – Lagerverwaltungsplattform Nr. 1 | Digitaler Fahrer-Check-in",
+      title: "Logistiq – Lagerverwaltungsplattform | Digitaler Fahrer-Check-in",
       description:
         "Logistiq digitalisiert Lagerabläufe. QR-Check-in für Fahrer, Echtzeit-Rampenverwaltung, sofortige Kommunikation. Kürzere Wartezeiten. Kostenlose Demo!",
       keywords:
@@ -7388,7 +7388,7 @@ export const translations = {
       checkinCreated: "Check-in utworzony",
     },
     seo: {
-      title: "Logistiq - Platforma nr 1 do zarządzania magazynem | Cyfrowa rejestracja kierowców",
+      title: "Logistiq - Platforma do zarządzania magazynem | Cyfrowa rejestracja kierowców",
       description:
         "Logistiq digitalizuje operacje magazynowe. Rejestracja QR dla kierowców, zarządzanie dokami w czasie rzeczywistym, natychmiastowa komunikacja. Skrócony czas oczekiwania. Darmowe demo!",
       keywords:
@@ -9556,7 +9556,7 @@ export const translations = {
       checkinCreated: "Check-in létrehozva",
     },
     seo: {
-      title: "Logistiq – #1 raktárkezelő platform | Digitális sofőrbejelentkezés",
+      title: "Logistiq – Raktárkezelő platform | Digitális sofőrbejelentkezés",
       description:
         "A Logistiq digitalizálja a raktári műveleteket. QR-bejelentkezés sofőröknek, valós idejű dokk-kezelés, azonnali kommunikáció. Rövidebb várakozási idő. Ingyenes demó!",
       keywords:
@@ -11722,7 +11722,7 @@ export const translations = {
       checkinCreated: "Check-in създаден",
     },
     seo: {
-      title: "Logistiq — платформа №1 за управление на складове | Дигитална регистрация на шофьори",
+      title: "Logistiq — платформа за управление на складове | Дигитална регистрация на шофьори",
       description:
         "Logistiq дигитализира операциите в склада. QR регистрация за шофьори, управление на докове в реално време, мигновена комуникация. Намалено време за чакане. Безплатно демо!",
       keywords:
@@ -13887,7 +13887,7 @@ export const translations = {
       checkinCreated: "Check-in créé",
     },
     seo: {
-      title: "Logistiq - Plateforme n° 1 de gestion d'entrepôt | Check-in numérique des chauffeurs",
+      title: "Logistiq - Plateforme de gestion d'entrepôt | Check-in numérique des chauffeurs",
       description:
         "Logistiq numérise les opérations d'entrepôt. Check-in par code QR pour les chauffeurs, gestion des quais en temps réel, communication instantanée. Temps d'attente réduit. Démo gratuite !",
       keywords:
@@ -16062,7 +16062,7 @@ export const translations = {
       checkinCreated: "Check-in aangemaakt",
     },
     seo: {
-      title: "Logistiq - #1 platform voor magazijnbeheer | Digitale check-in voor chauffeurs",
+      title: "Logistiq - Platform voor magazijnbeheer | Digitale check-in voor chauffeurs",
       description:
         "Logistiq digitaliseert magazijnoperaties. QR-check-in voor chauffeurs, realtime dockbeheer, directe communicatie. Kortere wachttijden. Gratis demo!",
       keywords:
