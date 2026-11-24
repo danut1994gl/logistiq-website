@@ -106,9 +106,34 @@ const DISCOUNT: Record<string, RegExp> = {
   nl: /korting/,
 };
 
+// "No" opening an answer, in each language: until 2026-11-24 the FAQ answered "Is there a
+// free trial period?" with "Yes!", while every plan has trialDays: 0 (a demo instead).
+const NO: Record<string, RegExp> = {
+  ro: /^Nu,/,
+  en: /^No,/,
+  de: /^Nein,/,
+  pl: /^Nie,/,
+  hu: /^Nem,/,
+  bg: /^Не,/,
+  fr: /^Non,/,
+  nl: /^Nee,/,
+};
+
+// "demo" in each language.
+const DEMO: Record<string, RegExp> = {
+  ro: /demonstrație|demo/,
+  en: /demo/,
+  de: /Demo/,
+  pl: /demo/,
+  hu: /demó/,
+  bg: /демо/,
+  fr: /démo/,
+  nl: /demo/,
+};
+
 describe("contract model copy", () => {
   it("knows its words in every language", () => {
-    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME, PRORATED, DISCOUNT]) {
+    for (const words of [QUARTERLY, PRO_FORMA, ROMANIA, CONTRACT, MONTHLY, ANYTIME, PRORATED, DISCOUNT, NO, DEMO]) {
       expect(Object.keys(words).sort()).toEqual(Object.keys(translations).sort());
     }
   });
@@ -179,6 +204,14 @@ describe("contract model copy", () => {
         expect(content, locale).not.toMatch(ANYTIME[locale]);
         expect(content, locale).not.toMatch(PRORATED[locale]);
       }
+    }
+  });
+
+  it("the FAQ promises no free trial, offers a demo and leaves any trial to the offer or the contract", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(copy.faq.a5, locale).toMatch(NO[locale]);
+      expect(copy.faq.a5, locale).toMatch(DEMO[locale]);
+      expect(copy.faq.a5, locale).toMatch(CONTRACT[locale]);
     }
   });
 
