@@ -63,11 +63,16 @@ describe("terms, article 14", () => {
 // (origin/main, read on 2026-11-24): Firebase Cloud Messaging sends the driver app's push
 // (supabase/functions/send-driver-notification/fcm.ts, ADR-031); LiveKit carries the voice
 // calls from a QRGo Self tablet to the operators (apps/dashboard/lib/calls/livekit-token.ts,
-// microphone only); WhatsApp messages to drivers go through a WAHA instance
-// (apps/dashboard/lib/waha.ts); SMS to drivers go through each warehouse's own Twilio or
-// Vonage account (apps/dashboard/lib/sms/providers); and mail goes through the SMTP server
-// cloud342.c-f.ro (SMTP_HOST's default in apps/dashboard/lib/smtp.ts, the driver web's
-// delete-data route and this site's contact form).
+// microphone only); WhatsApp messages go through a WAHA instance to drivers and to the
+// warehouse's staff contacts (apps/dashboard/lib/waha.ts, lib/staff-notifications.ts); SMS to
+// drivers go through each warehouse's own Twilio or Vonage account (lib/sms/providers), and
+// the platform's own Twilio account sends the verification codes of phone verification and
+// SMS two-step sign-in (lib/twilio.ts, app/api/account/phone/send, lib/sms-2fa.ts); mail
+// goes through an e-mail hosting provider (SMTP_HOST in lib/smtp.ts, the driver web's
+// delete-data route and this site's contact form), named as a category until the owner gives
+// the company's legal name; Google reCAPTCHA is described below. Upstash Redis is not
+// listed: the code uses it only when its keys are set, and Logistiq's documentation records
+// that production has none (documentation/changelog/integration-api.md, 2026-11-19).
 const PROCESSORS = [
   "Supabase",
   "SmartBill",
@@ -76,16 +81,48 @@ const PROCESSORS = [
   "LiveKit",
   "WhatsApp (WAHA)",
   "Twilio / Vonage",
-  "cloud342.c-f.ro",
+  "<e-mail hosting provider>",
   "Google reCAPTCHA",
 ];
 
+// The e-mail hosting provider, as each language names the category.
+const MAIL_PROVIDER: Record<string, string> = {
+  ro: "Furnizorul nostru de găzduire e-mail",
+  en: "Our e-mail hosting provider",
+  de: "Unser E-Mail-Hosting-Anbieter",
+  pl: "Nasz dostawca hostingu poczty e-mail",
+  hu: "E-mail-tárhelyszolgáltatónk",
+  bg: "Нашият доставчик на имейл хостинг",
+  fr: "Notre hébergeur de messagerie",
+  nl: "Onze e-mailhostingprovider",
+};
+
 describe("privacy policy, section 5", () => {
   it("names every processor the platform uses, each with a purpose", () => {
+    expect(Object.keys(MAIL_PROVIDER).sort()).toEqual(Object.keys(translations).sort());
     for (const [locale, copy] of Object.entries(translations)) {
       const partners = copy.privacy.thirdParties.partners;
-      expect(partners.map((p) => p.name), locale).toEqual(PROCESSORS);
+      const want = PROCESSORS.map((name) => (name === "<e-mail hosting provider>" ? MAIL_PROVIDER[locale] : name));
+      expect(partners.map((p) => p.name), locale).toEqual(want);
       for (const p of partners) expect(p.purpose.trim(), `${locale} ${p.name}`).not.toBe("");
+    }
+  });
+
+  // Until 2026-11-24 (the same day's earlier version) the mail server was named by the host
+  // the code defaults to; the policy names the category, and the owner will give the name.
+  it("names the mail server by its category, not by a host name", () => {
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(JSON.stringify(copy.privacy).match(/cloud342|c-f\.ro/)?.[0], locale).toBeUndefined();
+    }
+  });
+
+  it("says Twilio also sends logistiq.cloud's verification codes, and WhatsApp reaches staff contacts", () => {
+    const en = translations.en.privacy.thirdParties.partners;
+    expect(en.find((p) => p.name === "Twilio / Vonage")?.purpose).toMatch(/Twilio also sends logistiq\.cloud's verification codes/);
+    expect(en.find((p) => p.name === "WhatsApp (WAHA)")?.purpose).toMatch(/to drivers and to the warehouse's staff contacts/);
+    for (const [locale, copy] of Object.entries(translations)) {
+      const twilio = copy.privacy.thirdParties.partners.find((p) => p.name === "Twilio / Vonage");
+      expect(twilio?.purpose, locale).toMatch(/Twilio.*logistiq\.cloud/);
     }
   });
 });

@@ -1549,9 +1549,9 @@ export const translations = {
           { name: "Vercel", purpose: "Hosting și distribuție globală (CDN)" },
           { name: "Firebase Cloud Messaging (Google)", purpose: "Notificări push către aplicația QRGo Driver" },
           { name: "LiveKit", purpose: "Apeluri vocale de la tableta QRGo Self către operatorii depozitului" },
-          { name: "WhatsApp (WAHA)", purpose: "Mesaje către șoferi pe WhatsApp, trimise printr-o instanță WAHA" },
-          { name: "Twilio / Vonage", purpose: "SMS-uri către șoferi, prin contul SMS configurat de fiecare depozit" },
-          { name: "cloud342.c-f.ro", purpose: "Server de e-mail: e-mailurile contului și ale serviciului și mesajele din formularul de contact" },
+          { name: "WhatsApp (WAHA)", purpose: "Mesaje pe WhatsApp către șoferi și către persoanele de contact ale depozitului, trimise printr-o instanță WAHA" },
+          { name: "Twilio / Vonage", purpose: "SMS-uri către șoferi, prin contul SMS configurat de fiecare depozit; Twilio trimite și codurile de verificare ale logistiq.cloud (verificarea telefonului și autentificarea în doi pași)" },
+          { name: "Furnizorul nostru de găzduire e-mail", purpose: "E-mailurile contului și ale serviciului și mesajele din formularul de contact" },
           { name: "Google reCAPTCHA", purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor" },
         ],
         note: "Nu vindem și nu partajăm datele dvs. personale cu terți în scopuri de marketing.",
@@ -3397,9 +3397,9 @@ export const translations = {
           { name: "Vercel", purpose: "Hosting and global distribution (CDN)" },
           { name: "Firebase Cloud Messaging (Google)", purpose: "Push notifications to the QRGo Driver app" },
           { name: "LiveKit", purpose: "Voice calls from the QRGo Self tablet to the warehouse's operators" },
-          { name: "WhatsApp (WAHA)", purpose: "Messages to drivers on WhatsApp, sent through a WAHA instance" },
-          { name: "Twilio / Vonage", purpose: "SMS to drivers, through the SMS account each warehouse configures" },
-          { name: "cloud342.c-f.ro", purpose: "Mail server: account and service emails, and the contact form's messages" },
+          { name: "WhatsApp (WAHA)", purpose: "Messages on WhatsApp to drivers and to the warehouse's staff contacts, sent through a WAHA instance" },
+          { name: "Twilio / Vonage", purpose: "SMS to drivers, through the SMS account each warehouse configures; Twilio also sends logistiq.cloud's verification codes (phone verification and two-step sign-in)" },
+          { name: "Our e-mail hosting provider", purpose: "Account and service e-mails, and the contact form's messages" },
           { name: "Google reCAPTCHA", purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots" },
         ],
         note: "We do not sell or share your personal data with third parties for marketing purposes.",
@@ -5275,15 +5275,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Nachrichten an Fahrer über WhatsApp, gesendet über eine WAHA-Instanz",
+            purpose: "Nachrichten über WhatsApp an Fahrer und an die Kontaktpersonen des Lagers, gesendet über eine WAHA-Instanz",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "SMS an Fahrer über das SMS-Konto, das jedes Lager selbst einrichtet",
+            purpose: "SMS an Fahrer über das SMS-Konto, das jedes Lager selbst einrichtet; Twilio sendet außerdem die Bestätigungscodes von logistiq.cloud (Telefonverifizierung und Anmeldung in zwei Schritten)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Mailserver: Konto- und Service-E-Mails sowie die Nachrichten aus dem Kontaktformular",
+            name: "Unser E-Mail-Hosting-Anbieter",
+            purpose: "Konto- und Service-E-Mails sowie die Nachrichten aus dem Kontaktformular",
           },
           {
             name: "Google reCAPTCHA",
@@ -7421,15 +7421,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Wiadomości do kierowców przez WhatsApp, wysyłane przez instancję WAHA",
+            purpose: "Wiadomości przez WhatsApp do kierowców i do osób kontaktowych magazynu, wysyłane przez instancję WAHA",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "SMS-y do kierowców przez konto SMS skonfigurowane przez każdy magazyn",
+            purpose: "SMS-y do kierowców przez konto SMS skonfigurowane przez każdy magazyn; Twilio wysyła też kody weryfikacyjne logistiq.cloud (weryfikacja telefonu i logowanie dwuetapowe)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Serwer poczty: e-maile dotyczące konta i usługi oraz wiadomości z formularza kontaktowego",
+            name: "Nasz dostawca hostingu poczty e-mail",
+            purpose: "E-maile dotyczące konta i usługi oraz wiadomości z formularza kontaktowego",
           },
           {
             name: "Google reCAPTCHA",
@@ -9565,15 +9565,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Üzenetek a sofőröknek WhatsAppon, egy WAHA-példányon keresztül küldve",
+            purpose: "Üzenetek WhatsAppon a sofőröknek és a raktár kapcsolattartóinak, egy WAHA-példányon keresztül küldve",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "SMS-ek a sofőröknek az egyes raktárak által beállított SMS-fiókon keresztül",
+            purpose: "SMS-ek a sofőröknek az egyes raktárak által beállított SMS-fiókon keresztül; a Twilio küldi a logistiq.cloud ellenőrző kódjait is (telefonszám-ellenőrzés és kétlépéses bejelentkezés)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Levelezőszerver: fiók- és szolgáltatási e-mailek, valamint a kapcsolatfelvételi űrlap üzenetei",
+            name: "E-mail-tárhelyszolgáltatónk",
+            purpose: "Fiók- és szolgáltatási e-mailek, valamint a kapcsolatfelvételi űrlap üzenetei",
           },
           {
             name: "Google reCAPTCHA",
@@ -11706,15 +11706,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Съобщения до шофьорите в WhatsApp, изпращани чрез инстанция на WAHA",
+            purpose: "Съобщения в WhatsApp до шофьорите и до лицата за контакт на склада, изпращани чрез инстанция на WAHA",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "SMS съобщения до шофьорите чрез SMS акаунта, който всеки склад настройва",
+            purpose: "SMS съобщения до шофьорите чрез SMS акаунта, който всеки склад настройва; Twilio изпраща и кодовете за потвърждение на logistiq.cloud (потвърждаване на телефона и вход в две стъпки)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Пощенски сървър: имейли за акаунта и услугата и съобщенията от формата за контакт",
+            name: "Нашият доставчик на имейл хостинг",
+            purpose: "Имейли за акаунта и услугата и съобщенията от формата за контакт",
           },
           {
             name: "Google reCAPTCHA",
@@ -13849,15 +13849,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Messages aux chauffeurs sur WhatsApp, envoyés via une instance WAHA",
+            purpose: "Messages sur WhatsApp aux chauffeurs et aux contacts du personnel de l'entrepôt, envoyés via une instance WAHA",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "SMS aux chauffeurs, via le compte SMS que chaque entrepôt configure",
+            purpose: "SMS aux chauffeurs, via le compte SMS que chaque entrepôt configure ; Twilio envoie aussi les codes de vérification de logistiq.cloud (vérification du téléphone et connexion en deux étapes)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Serveur de messagerie : e-mails du compte et du service, et messages du formulaire de contact",
+            name: "Notre hébergeur de messagerie",
+            purpose: "E-mails du compte et du service, et messages du formulaire de contact",
           },
           {
             name: "Google reCAPTCHA",
@@ -15998,15 +15998,15 @@ export const translations = {
           },
           {
             name: "WhatsApp (WAHA)",
-            purpose: "Berichten aan chauffeurs via WhatsApp, verstuurd via een WAHA-instantie",
+            purpose: "Berichten via WhatsApp aan chauffeurs en aan de contactpersonen van het magazijn, verstuurd via een WAHA-instantie",
           },
           {
             name: "Twilio / Vonage",
-            purpose: "Sms'jes aan chauffeurs via het sms-account dat elk magazijn instelt",
+            purpose: "Sms'jes aan chauffeurs via het sms-account dat elk magazijn instelt; Twilio verstuurt ook de verificatiecodes van logistiq.cloud (telefoonverificatie en inloggen in twee stappen)",
           },
           {
-            name: "cloud342.c-f.ro",
-            purpose: "Mailserver: account- en service-e-mails en de berichten van het contactformulier",
+            name: "Onze e-mailhostingprovider",
+            purpose: "Account- en service-e-mails en de berichten van het contactformulier",
           },
           {
             name: "Google reCAPTCHA",
