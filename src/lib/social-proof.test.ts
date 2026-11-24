@@ -16,6 +16,7 @@ const ROOT_LAYOUT = fileURLToPath(new URL("../app/layout.tsx", import.meta.url))
 // page's JSON-LD) and the root layout's title called Logistiq the number one platform.
 const NUMBER_ONE = /#1\b|\bnr\.? ?1\b|№ ?1|n° ?1/i;
 const TESTIMONIALS_SECTION = fileURLToPath(new URL("../components/sections/TestimonialsSection.tsx", import.meta.url));
+const ICONS = fileURLToPath(new URL("../components/icons/index.tsx", import.meta.url));
 
 // "hundreds" in each language, as the call to action counted its warehouses.
 const HUNDREDS: Record<string, RegExp> = {
@@ -63,5 +64,10 @@ describe("social proof", () => {
   // the home page renders none while Logistiq has none to show.
   it("the home page renders no usage figures", () => {
     expect(readFileSync(HOME_PAGE, "utf8")).not.toMatch(/<StatsSection|import \{ StatsSection \}/);
+  });
+
+  // StarIcon drew the testimonials' star ratings; nothing has imported it since they went.
+  it("the icon set has no rating star left", () => {
+    expect(readFileSync(ICONS, "utf8")).not.toMatch(/StarIcon/);
   });
 });
