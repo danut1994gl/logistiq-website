@@ -14059,7 +14059,7 @@ export const translations = {
         byClient: {
           title: "Annulation par le Client",
           content:
-            "Le Client peut résilier le contrat dans les conditions qu'il prévoit.",
+            "Le Client peut résilier le contrat dans les conditions prévues par celui-ci.",
         },
         byProvider: {
           title: "Résiliation par le Prestataire",
