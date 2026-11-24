@@ -399,9 +399,10 @@ body {
   100%      { transform: scale(2.2); opacity: 0; }
 }
 
-/* The scene-3 barrier has no rule: it stays down. Opening it on the scan, with QRGoBox,
-   is in progress (checkinJourney.step3Desc). Until 2026-11-24 it lifted at 87.5% of the
-   timeline, and its base state, the reduced-motion frame, was lifted. */
+/* Scene 3 draws no barrier: opening one on the scan, with QRGoBox, is in progress
+   (checkinJourney.step3Desc). Until 2026-11-24 its arm lifted at 87.5% of the timeline
+   (its base state, the reduced-motion frame, lifted too); the same day it stayed down,
+   and the hero truck drove across it at about 29 s. */
 
 .cj2-dockglow { animation: cj2-dockglow 32s linear infinite; }
 @keyframes cj2-dockglow {

@@ -103,7 +103,7 @@ export function CheckinJourneyScene({
         </g>
       </g>
 
-      {/* ============ Scene 3 — gate, barrier, docks ============ */}
+      {/* ============ Scene 3 — gate (scanner and booth), docks ============ */}
       <g className="cj2-s3">
         <rect x="0" y="344" width="1200" height="24" className="fill-slate-800" />
         <line x1="0" y1="356" x2="1200" y2="356" className="stroke-slate-600" strokeWidth="3" strokeDasharray="24 18" />
@@ -144,17 +144,9 @@ export function CheckinJourneyScene({
         <rect x="613" y="270" width="20" height="3" rx="1.5" className="fill-cyan-400" opacity="0.8" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="fill-cyan-500" opacity="0.18" />
         <rect x="610" y="288" width="26" height="10" rx="3" className="stroke-cyan-400" fill="none" strokeWidth="1.5" />
-        {/* barrier (post + arm): down, and nothing lifts it. Opening it on the
-            scan, with QRGoBox, is in progress (step3Desc). Drawn BEFORE the hero
-            truck, which passes in front of it on its way to its dock. */}
-        <rect x="714" y="294" width="11" height="50" rx="2" className="fill-slate-600" />
-        <g transform="translate(720 300)">
-          <rect x="4" y="-6" width="168" height="12" rx="6" className="fill-slate-200" />
-          {[24, 64, 104, 144].map((x) => (
-            <rect key={x} x={x} y="-6" width="20" height="12" className="fill-blue-600" />
-          ))}
-          <circle cx="166" cy="0" r="4" className="fill-red-400" />
-        </g>
+        {/* No barrier at this gate: opening one on the scan, with QRGoBox, is in
+            progress (step3Desc), and a closed arm would have the truck drive through
+            it on its way to its dock. The scanner and the booth tell the story. */}
         {/* hero truck: stops short of the scanner, then docks at ramp 12 */}
         <g className="cj2-truck3"><TruckArt idPrefix="cj2" brakeClass="cj2-brake" /></g>
         {/* driver's phone tapping the scanner + confirmation pulse */}

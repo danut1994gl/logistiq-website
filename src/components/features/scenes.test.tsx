@@ -53,19 +53,22 @@ describe("QRGoBox scene (f15)", () => {
 describe("digital check-in journey scene", () => {
   // Step 3 says the scanner validates the check-in and opening the barrier on that scan is
   // in progress (checkinJourney.step3Desc). Until 2026-11-24 the scene's barrier lifted as
-  // the truck left the scanner, and its base state, the reduced-motion frame, was lifted.
+  // the truck left the scanner, and its base state, the reduced-motion frame, was lifted;
+  // later that day it stayed down and the hero truck drove across it on its way to dock 12.
+  // Scene 3 now draws no barrier: the scanner and the booth tell the story.
   const CSS = readFileSync(fileURLToPath(new URL("../../app/globals.css", import.meta.url)), "utf8");
 
-  it("has no rule or animation that lifts the barrier", () => {
-    expect(CSS).not.toMatch(/cj2-barrier/);
+  it("has no rule or animation for a barrier", () => {
+    expect(CSS).not.toMatch(/\.cj2-barrier|@keyframes cj2-barrier/);
   });
 
-  it("draws the barrier down, behind the hero truck", () => {
+  it("draws no barrier, post or arm, in scene 3", () => {
     const html = renderToString(<CheckinJourneyScene dockLabel="DOCK 12" scanLine1="Scan" scanLine2="to check in" />);
-    const arm = html.indexOf('<g transform="translate(720 300)">');
-    expect(arm).toBeGreaterThan(-1);
-    expect(arm).toBeLessThan(html.indexOf('class="cj2-truck3"'));
+    expect(html).not.toContain('<g transform="translate(720 300)">'); // the arm
+    expect(html).not.toContain('x="714"'); // its post
     expect(html).not.toMatch(/rotate\(/);
+    expect(html).toContain('class="cj2-truck3"');
+    expect(html).toContain('class="cj2-gatephone"'); // the scanner's tap stays
   });
 });
 
