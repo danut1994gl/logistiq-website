@@ -50,6 +50,17 @@ describe("Integration API copy", () => {
     }
   });
 
+  // A user may hold several keys (API → API Keys), each bound to its owner. Until
+  // 2026-11-24 the keys row said "one per user" in every language.
+  it("the keys row says each key belongs to one user, not one key per user", () => {
+    const ONE_PER_USER =
+      /one per user|una per utilizator|einer pro Benutzer|jeden na użytkownika|felhasználónként egy|по един на потребител|une par utilisateur|[eé]én per gebruiker/i;
+    for (const [locale, copy] of Object.entries(translations)) {
+      expect(copy.f16Page.v2.match(ONE_PER_USER)?.[0], locale).toBeUndefined();
+    }
+    expect(translations.en.f16Page.v2).toMatch(/^Each key belongs to one user/);
+  });
+
   it("the integrations page lists no gate device endpoint", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(JSON.stringify(copy.f16Page), locale).not.toMatch(/\/api\/device|\/api\/gate/);
