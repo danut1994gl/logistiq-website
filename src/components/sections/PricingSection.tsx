@@ -3,14 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import { type Translations } from "@/lib/i18n/translations";
+import { type Locale } from "@/lib/i18n/config";
+import { contactHref } from "@/lib/navigation";
 import { CheckIcon } from "@/components/icons";
 
 // The plans, without a public price (owner, 2026-11-08): each plan shows what it
 // includes and "price on request"; the main action asks for a quote through the
 // contact form on the same page (#contact, like the hero and CTA buttons).
-// Shown only while self-serve is on (ADR-005, page.tsx); its secondary "choose
-// plan" links lead to that self-serve signup on logistiq.cloud and are unchanged.
-export function PricingSection({ t }: { t: Translations }) {
+// Shown only while self-serve is on (ADR-005, page.tsx). Its secondary "choose
+// plan" links lead to the contact page: clients sign a contract and pay by bank
+// transfer, and logistiq.cloud's signup is closed (owner, 2026-11-22; Logistiq
+// ADR-057). Until 2026-11-24 they led to that signup, which redirects to the
+// contact page anyway.
+export function PricingSection({ t, locale }: { t: Translations; locale: Locale }) {
   const [selectedWarehouses, setSelectedWarehouses] = useState<'5' | '10' | '25'>('5');
 
   const professionalFeatures = [
@@ -98,7 +103,7 @@ export function PricingSection({ t }: { t: Translations }) {
               {t.cta.button}
             </Link>
             <Link
-              href="https://logistiq.cloud/signup?plan=professional"
+              href={contactHref(locale)}
               className="mt-4 block text-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
             >
               {t.pricing.choosePlan}
@@ -146,7 +151,8 @@ export function PricingSection({ t }: { t: Translations }) {
                 {t.pricing.priceOnRequest}
               </p>
 
-              {/* Warehouse tiers (the self-serve link below follows the choice) */}
+              {/* Warehouse tiers. The choice only marks a tier: no link carries it
+                  since the signup closed, and the quote is asked on the contact page. */}
               <p className="text-sm text-slate-500 dark:text-slate-400 text-center mb-2">
                 {t.pricing.selectWarehouses}
               </p>
@@ -194,7 +200,7 @@ export function PricingSection({ t }: { t: Translations }) {
               {t.cta.button}
             </Link>
             <Link
-              href={`https://logistiq.cloud/signup?plan=enterprise-${selectedWarehouses}`}
+              href={contactHref(locale)}
               className="mt-4 block text-center text-sm font-medium text-purple-600 dark:text-purple-300 hover:underline"
             >
               {t.pricing.choosePlan}

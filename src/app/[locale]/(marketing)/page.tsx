@@ -37,7 +37,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <BenefitsSection t={t} />
       <QRGODriverSection t={t} />
       <TestimonialsSection t={t} />
-      {isSelfServeEnabled() && <PricingSection t={t} />}
+      {isSelfServeEnabled() && <PricingSection t={t} locale={locale} />}
       {/* <FAQSection t={t} /> */}
       <CTASection t={t} />
       <ContactSection t={t} />

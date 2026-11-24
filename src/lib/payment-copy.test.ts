@@ -1,4 +1,7 @@
 import { describe, it, expect } from "vitest";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { translations } from "@/lib/i18n/translations";
 
 // Clients sign a contract and pay by bank transfer (owner, 2026-11-22). Card payment
@@ -44,10 +47,28 @@ function strings(value: unknown): string[] {
   return [];
 }
 
+// Until 2026-11-24 the plans' "choose plan" links went to logistiq.cloud's signup.
+const SIGNUP_LINK = /logistiq\.cloud\/signup/;
+
+const SRC = fileURLToPath(new URL("..", import.meta.url));
+
+function sourceFiles(dir: string): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return sourceFiles(path);
+    return /\.tsx?$/.test(entry.name) && !/\.test\.tsx?$/.test(entry.name) ? [path] : [];
+  });
+}
+
 describe("payment copy: a contract and a bank transfer, no card", () => {
   it("knows the words for bank transfer and for signing up in every language", () => {
     expect(Object.keys(BANK_TRANSFER).sort()).toEqual(Object.keys(translations).sort());
     expect(Object.keys(SIGN_UP).sort()).toEqual(Object.keys(translations).sort());
+  });
+
+  it("no source file under src/ links to logistiq.cloud's signup", () => {
+    const offenders = sourceFiles(SRC).filter((file) => SIGNUP_LINK.test(readFileSync(file, "utf8")));
+    expect(offenders).toEqual([]);
   });
 
   it("no language tells the visitor to sign up on logistiq.cloud", () => {
