@@ -25,16 +25,24 @@ import { QRCodeSVG } from "@/components/mockups/QRCodeSVG";
 // answer, as if all of it were live.
 //
 // Also not drawn, by design: the terminal never shows the driver's name, plate or
-// company (they live on the driver's phone), and there is no beep or haptic. The
-// terminal UI follows the app: 50/50 split, camera + 200x200 target frame, grey[900]
-// InfoPanel, status pill, message box. States cycle with their colours: READY (blue)
-// -> PROCESSING (orange) -> CHECK-IN VALIDATED (green), or ACCESS DENIED (red).
+// company (they live on the driver's phone), and there is no beep or haptic.
+//
+// The terminal borrows the gate scanner app's layout (Logistiq qr_scannerapp: camera
+// above with its target frame, the info panel below with a status pill, a message box
+// and a clock), but its states are the scene's, not the app's. The app knows READY,
+// PROCESSING, ACCESS GRANTED and ACCESS DENIED, and its pill shows the title the route
+// answers; it has no CHECK-IN VALIDATED. After a valid scan today it shows the route's
+// refusal, red: the gate did not respond. The scene's green pill names the step that
+// works, the passed checks, and stops there. States cycle: READY (blue) -> PROCESSING
+// (orange) -> CHECK-IN VALIDATED (green), or ACCESS DENIED (red, the route's title in
+// the page's language).
 // Client player; pauses off-screen; the server-rendered and reduced-motion frame is
 // the validated check-in at the closed barrier.
 
 type Status = "ready" | "processing" | "validated" | "denied";
 
-// the app's real state colours (blue / orange / green / red)
+// the app's state colours (blue / orange / green / red); the scene's validated state
+// borrows the green of the app's ACCESS GRANTED
 const C: Record<Status, string> = {
   ready: "#3b82f6",
   processing: "#f59e0b",
@@ -42,8 +50,8 @@ const C: Record<Status, string> = {
   denied: "#ef4444",
 };
 
-// Material icons the app actually uses: qr_code_scanner, hourglass_empty,
-// check_circle, error
+// the Material icons of the app's states: qr_code_scanner, hourglass_empty,
+// check_circle (here for the scene's validated state), error
 const ICON: Record<Status, ReactNode> = {
   ready: (
     <>
