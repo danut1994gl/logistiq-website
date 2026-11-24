@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+// Two categories. Until 2026-11-24 there was a third, "Analytics", that nothing read: the
+// site, the dashboard and the driver web load no analytics script (legal-copy.test.ts).
+// A choice saved then may still carry `analytics`; it is ignored.
 type CookiePreferences = {
   essential: boolean;
   functional: boolean;
-  analytics: boolean;
 };
 
 type CookieConsentTranslations = {
@@ -19,7 +21,6 @@ type CookieConsentTranslations = {
   categories: {
     essential: { name: string; desc: string };
     functional: { name: string; desc: string };
-    analytics: { name: string; desc: string };
   };
   required: string;
   learnMore: string;
@@ -31,7 +32,6 @@ const COOKIE_CONSENT_KEY = "logistiq_cookie_consent";
 const DEFAULT_PREFERENCES: CookiePreferences = {
   essential: true,
   functional: true,
-  analytics: true,
 };
 
 // Read the saved choice (null when unset or corrupted). Used lazily for the
@@ -127,16 +127,16 @@ export default function CookieConsent({
     setIsVisible(false);
     setShowModal(false);
 
-    // Dispatch event for analytics scripts to listen to
+    // Announce the choice to any script that honours it (none listens today)
     window.dispatchEvent(new CustomEvent("cookieConsentUpdate", { detail: prefs }));
   };
 
   const acceptAll = () => {
-    savePreferences({ essential: true, functional: true, analytics: true });
+    savePreferences({ essential: true, functional: true });
   };
 
   const rejectOptional = () => {
-    savePreferences({ essential: true, functional: false, analytics: false });
+    savePreferences({ essential: true, functional: false });
   };
 
   const saveCustom = () => {
@@ -264,22 +264,6 @@ export default function CookieConsent({
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   {t.categories.functional.desc}
-                </p>
-              </div>
-
-              {/* Analytics */}
-              <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium text-slate-900 dark:text-white">
-                    {t.categories.analytics.name}
-                  </h3>
-                  <Toggle
-                    checked={preferences.analytics}
-                    onChange={(checked) => setPreferences({ ...preferences, analytics: checked })}
-                  />
-                </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  {t.categories.analytics.desc}
                 </p>
               </div>
             </div>

@@ -30,7 +30,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Utilizăm cookie-uri",
-      description: "Folosim cookie-uri pentru a îmbunătăți experiența pe site. Unele sunt esențiale pentru funcționare, altele ne ajută să înțelegem cum folosiți platforma.",
+      description: "Folosim cookie-uri pentru a îmbunătăți experiența pe site. Unele sunt esențiale pentru funcționare, altele vă rețin preferințele.",
       acceptAll: "Acceptă toate",
       rejectOptional: "Doar esențiale",
       customize: "Personalizează",
@@ -38,7 +38,6 @@ export const translations = {
       categories: {
         essential: { name: "Esențiale", desc: "Necesare pentru autentificare și funcționalități de bază. Nu pot fi dezactivate." },
         functional: { name: "Funcționale", desc: "Rețin preferințele (temă, limbă, stare meniu) pentru o experiență personalizată." },
-        analytics: { name: "Analitice", desc: "Ne ajută să înțelegem cum utilizați platforma pentru a o îmbunătăți." },
       },
       required: "Obligatorii",
       learnMore: "Află mai multe",
@@ -1873,7 +1872,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "We use cookies",
-      description: "We use cookies to improve your experience. Some are essential for functionality, others help us understand how you use the platform.",
+      description: "We use cookies to improve your experience. Some are essential for functionality, others remember your preferences.",
       acceptAll: "Accept all",
       rejectOptional: "Essential only",
       customize: "Customize",
@@ -1881,7 +1880,6 @@ export const translations = {
       categories: {
         essential: { name: "Essential", desc: "Required for authentication and basic functionality. Cannot be disabled." },
         functional: { name: "Functional", desc: "Remember your preferences (theme, language, menu state) for a personalized experience." },
-        analytics: { name: "Analytics", desc: "Help us understand how you use the platform to improve it." },
       },
       required: "Required",
       learnMore: "Learn more",
@@ -3699,7 +3697,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Wir verwenden Cookies",
-      description: "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Einige sind für die Funktionalität unerlässlich, andere helfen uns zu verstehen, wie Sie die Plattform nutzen.",
+      description: "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Einige sind für die Funktionalität unerlässlich, andere speichern Ihre Einstellungen.",
       acceptAll: "Alle akzeptieren",
       rejectOptional: "Nur essenzielle",
       customize: "Anpassen",
@@ -3707,7 +3705,6 @@ export const translations = {
       categories: {
         essential: { name: "Essenziell", desc: "Erforderlich für Authentifizierung und Grundfunktionen. Kann nicht deaktiviert werden." },
         functional: { name: "Funktional", desc: "Speichern Ihre Einstellungen (Design, Sprache, Menüstatus) für ein personalisiertes Erlebnis." },
-        analytics: { name: "Analytisch", desc: "Helfen uns zu verstehen, wie Sie die Plattform nutzen, um sie zu verbessern." },
       },
       required: "Erforderlich",
       learnMore: "Mehr erfahren",
@@ -5819,7 +5816,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Używamy plików cookie",
-      description: "Używamy plików cookie, aby ułatwić Ci korzystanie z platformy. Niektóre są niezbędne do jej działania, inne pomagają nam zrozumieć, jak z niej korzystasz.",
+      description: "Używamy plików cookie, aby ułatwić Ci korzystanie z platformy. Niektóre są niezbędne do jej działania, inne zapamiętują Twoje preferencje.",
       acceptAll: "Akceptuj wszystkie",
       rejectOptional: "Tylko niezbędne",
       customize: "Dostosuj",
@@ -5827,7 +5824,6 @@ export const translations = {
       categories: {
         essential: { name: "Niezbędne", desc: "Wymagane do uwierzytelniania i działania podstawowych funkcji. Nie można ich wyłączyć." },
         functional: { name: "Funkcjonalne", desc: "Zapamiętują Twoje preferencje (motyw, język, stan menu), aby dopasować platformę do Ciebie." },
-        analytics: { name: "Analityczne", desc: "Pomagają nam zrozumieć, jak korzystasz z platformy, aby ją ulepszyć." },
       },
       required: "Wymagane",
       learnMore: "Dowiedz się więcej",
@@ -7935,7 +7931,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Cookie-kat használunk",
-      description: "Cookie-kat használunk az élmény javítására. Néhány elengedhetetlen a működéshez, mások segítenek megérteni, hogyan használja a platformot.",
+      description: "Cookie-kat használunk az élmény javítására. Néhány elengedhetetlen a működéshez, mások megjegyzik a beállításait.",
       acceptAll: "Összes elfogadása",
       rejectOptional: "Csak az alapvetők",
       customize: "Testreszabás",
@@ -7943,7 +7939,6 @@ export const translations = {
       categories: {
         essential: { name: "Alapvető", desc: "Szükséges a hitelesítéshez és az alapvető funkciókhoz. Nem kapcsolható ki." },
         functional: { name: "Funkcionális", desc: "Megjegyzik a beállításokat (téma, nyelv, menüállapot) a személyre szabott élményért." },
-        analytics: { name: "Elemző", desc: "Segítenek megérteni, hogyan használja a platformot, hogy fejleszthessük." },
       },
       required: "Kötelező",
       learnMore: "Tudjon meg többet",
@@ -10050,7 +10045,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Използваме бисквитки",
-      description: "Използваме бисквитки, за да подобрим вашето изживяване. Някои са необходими за функционирането, други ни помагат да разберем как използвате платформата.",
+      description: "Използваме бисквитки, за да подобрим вашето изживяване. Някои са необходими за функционирането, други запомнят предпочитанията ви.",
       acceptAll: "Приеми всички",
       rejectOptional: "Само необходими",
       customize: "Персонализирай",
@@ -10058,7 +10053,6 @@ export const translations = {
       categories: {
         essential: { name: "Основни", desc: "Необходими за удостоверяване и основни функции. Не могат да бъдат изключени." },
         functional: { name: "Функционални", desc: "Запомнят предпочитанията ви (тема, език, състояние на менюто) за персонализирано изживяване." },
-        analytics: { name: "Аналитични", desc: "Помагат ни да разберем как използвате платформата, за да я подобрим." },
       },
       required: "Задължителни",
       learnMore: "Научете повече",
@@ -12164,7 +12158,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Nous utilisons des cookies",
-      description: "Nous utilisons des cookies pour améliorer votre expérience. Certains sont essentiels au fonctionnement, d'autres nous aident à comprendre comment vous utilisez la plateforme.",
+      description: "Nous utilisons des cookies pour améliorer votre expérience. Certains sont essentiels au fonctionnement, d'autres mémorisent vos préférences.",
       acceptAll: "Tout accepter",
       rejectOptional: "Essentiels uniquement",
       customize: "Personnaliser",
@@ -12172,7 +12166,6 @@ export const translations = {
       categories: {
         essential: { name: "Essentiels", desc: "Nécessaires à l'authentification et aux fonctionnalités de base. Ne peuvent pas être désactivés." },
         functional: { name: "Fonctionnels", desc: "Mémorisent vos préférences (thème, langue, état du menu) pour une expérience personnalisée." },
-        analytics: { name: "Analytiques", desc: "Nous aident à comprendre comment vous utilisez la plateforme pour l'améliorer." },
       },
       required: "Requis",
       learnMore: "En savoir plus",
@@ -14287,7 +14280,7 @@ export const translations = {
     },
     cookieConsent: {
       title: "Wij gebruiken cookies",
-      description: "Wij gebruiken cookies om uw ervaring te verbeteren. Sommige zijn essentieel voor de werking, andere helpen ons te begrijpen hoe u het platform gebruikt.",
+      description: "Wij gebruiken cookies om uw ervaring te verbeteren. Sommige zijn essentieel voor de werking, andere onthouden uw voorkeuren.",
       acceptAll: "Alles accepteren",
       rejectOptional: "Alleen essentiële",
       customize: "Aanpassen",
@@ -14295,7 +14288,6 @@ export const translations = {
       categories: {
         essential: { name: "Essentieel", desc: "Vereist voor authenticatie en basisfunctionaliteit. Kan niet worden uitgeschakeld." },
         functional: { name: "Functioneel", desc: "Onthouden uw voorkeuren (thema, taal, menustatus) voor een gepersonaliseerde ervaring." },
-        analytics: { name: "Analytisch", desc: "Helpen ons te begrijpen hoe u het platform gebruikt om het te verbeteren." },
       },
       required: "Vereist",
       learnMore: "Meer informatie",
