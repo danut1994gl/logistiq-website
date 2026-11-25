@@ -85,6 +85,23 @@ describe("access-control page (f17)", () => {
     }
   });
 
+  // The access-control card (features.feature17Desc: the features index, related-feature
+  // cards and the page's meta description) kept the page's old subtitle until 2026-11-25,
+  // "those departments decide who can run operator check-in, who can create bookings, and
+  // which gates reach their quick-access", silent on what a dispatcher sees.
+  it("the feature card says roles are fixed and departments bound what a dispatcher sees", () => {
+    const OLD_CARD =
+      /decid cine poate|decide who can|entscheiden, wer|decydują, kto|határozzák meg, ki|определят кой|déterminent qui|bepalen wie/i;
+    for (const [locale, copy] of Object.entries(translations)) {
+      const card = copy.features.feature17Desc;
+      expect(card.match(OLD_CARD)?.[0], locale).toBeUndefined();
+      expect(card.match(WAREHOUSE_WIDE)?.[0], locale).toBeUndefined();
+      expect(card.match(EVERY_CHECKIN)?.[0], locale).toBeUndefined();
+    }
+    expect(translations.en.features.feature17Desc).toMatch(/^Fixed roles/);
+    expect(translations.en.features.feature17Desc).toMatch(/The departments bound what a dispatcher sees and does; without one, a dispatcher sees nothing\./);
+  });
+
   it("answers yes to limiting a dispatcher to their departments", () => {
     const YES: Record<string, RegExp> = {
       ro: /^Da\s/, en: /^Yes\s/, de: /^Ja\s/, pl: /^Tak\s/, hu: /^Igen\s/, bg: /^Да\s/, fr: /^Oui\s/, nl: /^Ja\s/,
