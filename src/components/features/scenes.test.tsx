@@ -97,3 +97,15 @@ describe("access-control scene (f17)", () => {
     expect(html).not.toContain(`>${escape(f.mxRole1)}</span>`);
   });
 });
+
+describe("scene CSS", () => {
+  // The white-label page's scene drew a QRGoBox gate call (a POST up the wire, the 200 down,
+  // then "the barrier lifts") and a controller LED that "heartbeats to
+  // /api/device/heartbeat", the old box design. The scene stopped drawing it, and until
+  // 2026-11-25 its rules (.wl8-up, .wl8-down, .wl8-led) stayed in globals.css.
+  const CSS = readFileSync(fileURLToPath(new URL("../../app/globals.css", import.meta.url)), "utf8");
+
+  it("keeps no rule of the white-label scene's old gate call", () => {
+    expect(CSS).not.toMatch(/\.wl8-|@keyframes wl8-|heartbeat/);
+  });
+});

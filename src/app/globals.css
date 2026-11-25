@@ -1092,39 +1092,6 @@ select:focus {
   .qs14-print, .qs14-led, .qs14-buzz { animation: none !important; }
 }
 
-/* ---- White-Label & API (feature 8): the QRGoBox gate call ----
-   The controller POSTs /api/gate/validate up the wire (blue) and the 200 comes
-   back down (green), after which the barrier lifts. Both dots mount only for
-   their phase, so the animation restarts naturally on each cycle — no delays to
-   keep in sync. transform-box: view-box makes the px translate resolve in SVG
-   user units: the wire spans y=4..126 of the `0 0 300 250` viewBox, so the
-   travel is 122 user units. Keep these in step with WhiteLabelScene's wire. */
-.wl8-up {
-  transform-box: view-box;
-  animation: wl8-up 0.75s ease-in both;
-}
-@keyframes wl8-up {
-  0%   { transform: translateY(0); opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: translateY(-122px); opacity: 0; }
-}
-.wl8-down {
-  transform-box: view-box;
-  animation: wl8-down 0.75s ease-out both;
-}
-@keyframes wl8-down {
-  0%   { transform: translateY(0); opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: translateY(122px); opacity: 0; }
-}
-/* the controller's power LED — it heartbeats to /api/device/heartbeat */
-.wl8-led { animation: wl8-led 2.4s ease-in-out infinite; }
-@keyframes wl8-led { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@media (prefers-reduced-motion: reduce) {
-  .wl8-up, .wl8-down { animation: none !important; opacity: 0 !important; }
-  .wl8-led { animation: none !important; }
-}
-
 /* ---- Automatic Location Detection (feature 12): geofence draw + on-device test ----
    Map side is driven by React state; these only carry the per-element motion.
    transform-box: view-box makes px transforms resolve in SVG user units, and
