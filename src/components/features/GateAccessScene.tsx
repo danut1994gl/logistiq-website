@@ -172,7 +172,7 @@ function Hop({ active, muted = false }: { active: boolean; muted?: boolean }) {
         <div className="absolute inset-x-0 top-[0.28cqw] h-[0.14cqw] rounded-full bg-slate-700" />
       )}
       {active && !muted ? (
-        <span className="ga15-packet absolute left-0 top-0 w-[0.7cqw] h-[0.7cqw] rounded-full bg-cyan-400 shadow-[0_0_0.8cqw_rgba(34,211,238,0.9)]" />
+        <span className="absolute left-0 top-0 w-[0.7cqw] h-[0.7cqw] rounded-full bg-cyan-400 shadow-[0_0_0.8cqw_rgba(34,211,238,0.9)]" />
       ) : null}
     </div>
   );
@@ -391,10 +391,10 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                 <div className="relative w-[11cqw] h-[11cqw] rounded-[0.9cqw] border-[0.12cqw] border-white/50 overflow-hidden">
                   {scanning ? (
                     <>
-                      <span className="ga15-qrpop absolute left-1/2 top-1/2 w-[6.4cqw] h-[6.4cqw] -ml-[3.2cqw] -mt-[3.2cqw] rounded-[0.3cqw] bg-white p-[0.25cqw]">
+                      <span className="absolute left-1/2 top-1/2 w-[6.4cqw] h-[6.4cqw] -ml-[3.2cqw] -mt-[3.2cqw] rounded-[0.3cqw] bg-white p-[0.25cqw]">
                         <QRCodeSVG />
                       </span>
-                      <span className="ga15-sweep absolute inset-x-[4%] h-[0.18cqw] rounded-full bg-cyan-300 shadow-[0_0_1cqw_rgba(103,232,249,0.9)]" />
+                      <span className="absolute inset-x-[4%] h-[0.18cqw] rounded-full bg-cyan-300 shadow-[0_0_1cqw_rgba(103,232,249,0.9)]" />
                     </>
                   ) : null}
                 </div>
@@ -449,7 +449,7 @@ export function GateAccessScene({ t, locale }: { t: Translations; locale: Locale
                       }
                     >
                       {done ? (
-                        <Glyph cls="ga15-tick w-[1cqw] h-[1cqw]" w="3.2">
+                        <Glyph cls="w-[1cqw] h-[1cqw]" w="3.2">
                           {bad ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="m5 12.5 4.5 4.5L19 7" />}
                         </Glyph>
                       ) : (

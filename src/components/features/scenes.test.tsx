@@ -108,4 +108,15 @@ describe("scene CSS", () => {
   it("keeps no rule of the white-label scene's old gate call", () => {
     expect(CSS).not.toMatch(/\.wl8-|@keyframes wl8-|heartbeat/);
   });
+
+  // The QRGoBox scene carried four class names no stylesheet ever defined (ga15-packet,
+  // -qrpop, -sweep, -tick); they went on 2026-11-25. Its ga15- ids are SVG gradients its
+  // truck uses through url(#…), and those must stay defined.
+  it("leaves the QRGoBox scene no class name without a rule, and every gradient it uses defined", () => {
+    const SCENE = readFileSync(fileURLToPath(new URL("./GateAccessScene.tsx", import.meta.url)), "utf8");
+    expect(SCENE).not.toMatch(/ga15-(packet|qrpop|sweep|tick)/);
+    for (const [, id] of SCENE.matchAll(/url\(#(ga15-[a-z]+)\)/g)) {
+      expect(SCENE).toContain(`id="${id}"`);
+    }
+  });
 });
