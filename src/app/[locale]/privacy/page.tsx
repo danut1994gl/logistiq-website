@@ -4,6 +4,8 @@ import Link from "next/link";
 import { use } from "react";
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
+import { company } from "@/lib/company";
+import { registeredOffice, withCompany } from "@/lib/legal-identity";
 
 function Section({
   children,
@@ -189,7 +191,7 @@ export default function PrivacyPage({
         {/* Section 1: Introduction */}
         <Section delay={1}>
           <SectionTitle>{t.intro.title}</SectionTitle>
-          <Paragraph>{t.intro.p1}</Paragraph>
+          <Paragraph>{withCompany(t.intro.p1, translations[locale])}</Paragraph>
           <Paragraph>{t.intro.p2}</Paragraph>
         </Section>
 
@@ -324,26 +326,26 @@ export default function PrivacyPage({
                 {t.contact.operator}
               </p>
               <p className="font-semibold text-slate-900 dark:text-white text-lg">
-                {t.contact.operatorName}
+                {company.legalName}
               </p>
               <p className="text-slate-600 dark:text-slate-300">
-                {t.contact.cui}
+                {legal.identity.taxId} {company.cui}
               </p>
               <p className="text-slate-600 dark:text-slate-300">
-                {t.contact.regNo}
+                {legal.identity.regNo} {company.regCom}
               </p>
               <p className="text-slate-600 dark:text-slate-300">
-                {t.contact.address}
+                {registeredOffice(translations[locale])}
               </p>
               <div className="pt-3 border-t border-slate-200 dark:border-slate-700 mt-3">
                 <p className="text-sm text-slate-500 dark:text-slate-400">
                   {t.contact.email}
                 </p>
                 <a
-                  href={`mailto:${t.contact.emailAddress}`}
+                  href={`mailto:${company.email}`}
                   className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
                 >
-                  {t.contact.emailAddress}
+                  {company.email}
                 </a>
               </div>
               <p className="text-sm text-slate-500 dark:text-slate-400 pt-2">

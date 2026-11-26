@@ -1483,7 +1483,7 @@ export const translations = {
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
-        p1: "HOSTLIFE DIGITAL SRL („Operatorul”), cu sediul în Str. Vidin 37, 805300 Tecuci, Galați, România, CUI 52638053, respectă confidențialitatea datelor dumneavoastră personale.",
+        p1: "{company} („Operatorul”), cu sediul în {office}, CUI {cui}, respectă confidențialitatea datelor dumneavoastră personale.",
         p2: "Această politică descrie modul în care colectăm, utilizăm și protejăm datele personale în conformitate cu Regulamentul General privind Protecția Datelor (GDPR - Regulamentul UE 2016/679).",
       },
       dataCollected: {
@@ -1614,12 +1614,7 @@ export const translations = {
         title: "13. Contact",
         intro: "Pentru orice întrebări privind datele dumneavoastră personale sau pentru exercitarea drepturilor GDPR, ne puteți contacta:",
         operator: "Operator de date",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Nr. Înreg.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, România",
         email: "Email",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Vom răspunde solicitărilor în termen de 30 de zile calendaristice.",
       },
     },
@@ -1631,7 +1626,7 @@ export const translations = {
         title: "Articolul 1 - Definiții",
         content: "În sensul prezentului contract, termenii de mai jos au următoarele semnificații:",
         definitions: [
-          { term: "Prestator", def: "HOSTLIFE DIGITAL SRL, cu sediul în Str. Vidin 37, 805300 Tecuci, Galați, România, CUI 52638053" },
+          { term: "Prestator", def: "{company}, cu sediul în {office}, CUI {cui}" },
           { term: "Platforma", def: "Ansamblul serviciilor disponibile prin intermediul site-urilor logistiq.ro, logistiq.cloud și qrgo.ro" },
           { term: "Client", def: "Persoana juridică sau fizică autorizată care achiziționează un abonament pentru utilizarea Platformei" },
           { term: "Utilizator", def: "Orice persoană care accesează sau utilizează Platforma, inclusiv Clientul și persoanele desemnate de acesta" },
@@ -1755,7 +1750,7 @@ export const translations = {
           { title: "Jurisdicție", content: "Instanțele din București" },
           { title: "Modificări", content: "Cu notificare prealabilă de 30 de zile" },
         ],
-        contact: { title: "Contact", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, România" },
+        contact: { title: "Contact" },
       },
     },
     cookies: {
@@ -1824,14 +1819,14 @@ export const translations = {
       contact: {
         title: "7. Contact",
         intro: "Pentru întrebări despre utilizarea cookie-urilor sau pentru a vă exercita drepturile conform GDPR:",
-        operator: "Operator", operatorName: "HOSTLIFE DIGITAL SRL", cui: "CUI: 52638053", regNo: "Nr. Înreg.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, România", email: "E-mail", emailAddress: "contact@logistiq.ro",
+        operator: "Operator",
+        email: "E-mail",
       },
     },
     legal: {
       updatedOn: "24 noiembrie 2026",
       backHome: "Înapoi la pagina principală",
-      identity: { taxId: "CUI:", regNo: "Nr. Reg. Com.:" },
+      identity: { taxId: "CUI:", regNo: "Nr. Reg. Com.:", country: "România" },
       retentionHeaders: {
         type: "Tip date",
         period: "Durată",
@@ -3332,7 +3327,7 @@ export const translations = {
       lastUpdated: "Last updated",
       intro: {
         title: "1. Introduction",
-        p1: "HOSTLIFE DIGITAL SRL (\"Data Controller\"), headquartered at Str. Vidin 37, 805300 Tecuci, Galați, Romania, VAT ID 52638053, respects the privacy of your personal data.",
+        p1: "{company} (\"Data Controller\"), with its registered office at {office}, tax ID (CUI) {cui}, respects the privacy of your personal data.",
         p2: "This policy describes how we collect, use, and protect personal data in accordance with the General Data Protection Regulation (GDPR - EU Regulation 2016/679).",
       },
       dataCollected: {
@@ -3347,7 +3342,7 @@ export const translations = {
         },
         billing: {
           title: "Billing data",
-          items: ["Company name", "VAT number (CUI/CIF)", "Registration number", "Billing address", "Payment history"],
+          items: ["Company name", "Tax identification number (CUI/CIF)", "Registration number", "Billing address", "Payment history"],
         },
         technical: {
           title: "Technical data",
@@ -3463,12 +3458,7 @@ export const translations = {
         title: "13. Contact",
         intro: "For any questions regarding your personal data or to exercise your GDPR rights, you can contact us:",
         operator: "Data Controller",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "VAT ID: 52638053",
-        regNo: "Reg. No.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Romania",
         email: "Email",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "We will respond to requests within 30 calendar days.",
       },
     },
@@ -3480,7 +3470,7 @@ export const translations = {
         title: "Article 1 - Definitions",
         content: "For the purposes of this agreement, the following terms have these meanings:",
         definitions: [
-          { term: "Provider", def: "HOSTLIFE DIGITAL SRL, headquartered at Str. Vidin 37, 805300 Tecuci, Galați, Romania, VAT ID 52638053" },
+          { term: "Provider", def: "{company}, with its registered office at {office}, tax ID (CUI) {cui}" },
           { term: "Platform", def: "The services available through logistiq.ro, logistiq.cloud and qrgo.ro" },
           { term: "Client", def: "Legal entity or authorized individual who purchases a subscription to use the Platform" },
           { term: "User", def: "Any person who accesses or uses the Platform, including the Client and designated persons" },
@@ -3587,7 +3577,7 @@ export const translations = {
           { title: "Jurisdiction", content: "Courts of Bucharest" },
           { title: "Modifications", content: "With 30 days notice" },
         ],
-        contact: { title: "Contact", email: "contact@logistiq.ro", address: "Str. Vidin 37, 805300 Tecuci, Galați, Romania" },
+        contact: { title: "Contact" },
       },
     },
     cookies: {
@@ -3656,14 +3646,14 @@ export const translations = {
       contact: {
         title: "7. Contact",
         intro: "For questions about cookie usage or to exercise your rights under GDPR:",
-        operator: "Operator", operatorName: "HOSTLIFE DIGITAL SRL", cui: "VAT: 52638053", regNo: "Reg. No.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Romania", email: "Email", emailAddress: "contact@logistiq.ro",
+        operator: "Operator",
+        email: "Email",
       },
     },
     legal: {
       updatedOn: "24 November 2026",
       backHome: "Back to home",
-      identity: { taxId: "Tax ID (CUI):", regNo: "Trade Register no.:" },
+      identity: { taxId: "Tax ID (CUI):", regNo: "Trade Register no.:", country: "Romania" },
       retentionHeaders: {
         type: "Data type",
         period: "Retention period",
@@ -5165,7 +5155,7 @@ export const translations = {
       intro: {
         title: "1. Einleitung",
         p1:
-          "Die HOSTLIFE DIGITAL SRL („Verantwortlicher“), mit Sitz in der Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, CUI 52638053, respektiert die Vertraulichkeit Ihrer personenbezogenen Daten.",
+          "Die {company} („Verantwortlicher“), mit Sitz in der {office}, CUI {cui}, respektiert die Vertraulichkeit Ihrer personenbezogenen Daten.",
         p2:
           "Diese Datenschutzerklärung beschreibt, wie wir personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO - Verordnung (EU) 2016/679) erheben, verwenden und schützen.",
       },
@@ -5403,12 +5393,7 @@ export const translations = {
         intro:
           "Bei allen Fragen zu Ihren personenbezogenen Daten oder zur Ausübung Ihrer Rechte nach der DSGVO können Sie sich an uns wenden:",
         operator: "Verantwortlicher",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Reg.-Nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
         email: "E-Mail",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Wir beantworten Anfragen innerhalb von 30 Kalendertagen.",
       },
     },
@@ -5424,7 +5409,7 @@ export const translations = {
           {
             term: "Anbieter",
             def:
-              "HOSTLIFE DIGITAL SRL, mit Sitz in der Str. Vidin 37, 805300 Tecuci, Galați, Rumänien, CUI 52638053",
+              "{company}, mit Sitz in der {office}, CUI {cui}",
           },
           {
             term: "Plattform",
@@ -5662,8 +5647,6 @@ export const translations = {
         ],
         contact: {
           title: "Kontakt",
-          email: "contact@logistiq.ro",
-          address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
         },
       },
     },
@@ -5797,18 +5780,13 @@ export const translations = {
         intro:
           "Bei Fragen zur Verwendung von Cookies oder zur Ausübung Ihrer Rechte nach der DSGVO:",
         operator: "Verantwortlicher",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Reg.-Nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumänien",
         email: "E-Mail",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "24. November 2026",
       backHome: "Zurück zur Startseite",
-      identity: { taxId: "Steuer-ID (CUI):", regNo: "Handelsregister-Nr.:" },
+      identity: { taxId: "Steuer-ID (CUI):", regNo: "Handelsregister-Nr.:", country: "Rumänien" },
       retentionHeaders: {
         type: "Datenart",
         period: "Speicherdauer",
@@ -7310,7 +7288,7 @@ export const translations = {
       intro: {
         title: "1. Wprowadzenie",
         p1:
-          "HOSTLIFE DIGITAL SRL („Administrator”), z siedzibą pod adresem Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, CUI 52638053, szanuje prywatność Twoich danych osobowych.",
+          "{company} („Administrator”), z siedzibą pod adresem {office}, CUI {cui}, szanuje prywatność Twoich danych osobowych.",
         p2:
           "Niniejsza polityka opisuje, w jaki sposób zbieramy, wykorzystujemy i chronimy dane osobowe zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO - rozporządzenie (UE) 2016/679).",
       },
@@ -7545,12 +7523,7 @@ export const translations = {
         intro:
           "W przypadku jakichkolwiek pytań dotyczących Twoich danych osobowych lub w celu skorzystania z praw przysługujących Ci na mocy RODO możesz się z nami skontaktować:",
         operator: "Administrator danych",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Nr rej.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Odpowiemy na zgłoszenia w terminie 30 dni kalendarzowych.",
       },
     },
@@ -7566,7 +7539,7 @@ export const translations = {
           {
             term: "Usługodawca",
             def:
-              "HOSTLIFE DIGITAL SRL z siedzibą pod adresem Str. Vidin 37, 805300 Tecuci, Galați, Rumunia, CUI 52638053",
+              "{company} z siedzibą pod adresem {office}, CUI {cui}",
           },
           {
             term: "Platforma",
@@ -7803,8 +7776,6 @@ export const translations = {
         ],
         contact: {
           title: "Kontakt",
-          email: "contact@logistiq.ro",
-          address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
         },
       },
     },
@@ -7938,18 +7909,13 @@ export const translations = {
         intro:
           "W przypadku pytań dotyczących wykorzystywania plików cookie lub w celu skorzystania z praw przysługujących Ci na mocy RODO:",
         operator: "Administrator",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Nr rej.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Rumunia",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "24 listopada 2026",
       backHome: "Powrót do strony głównej",
-      identity: { taxId: "Identyfikator podatkowy (CUI):", regNo: "Nr w rejestrze handlowym:" },
+      identity: { taxId: "Identyfikator podatkowy (CUI):", regNo: "Nr w rejestrze handlowym:", country: "Rumunia" },
       retentionHeaders: {
         type: "Rodzaj danych",
         period: "Okres przechowywania",
@@ -9451,7 +9417,7 @@ export const translations = {
       intro: {
         title: "1. Bevezetés",
         p1:
-          "A HOSTLIFE DIGITAL SRL („Adatkezelő”), székhelye: Str. Vidin 37, 805300 Tecuci, Galați, Románia, adószáma (CUI): 52638053, tiszteletben tartja az Ön személyes adatainak bizalmas jellegét.",
+          "A {company} („Adatkezelő”), székhelye: {office}, adószáma (CUI): {cui}, tiszteletben tartja az Ön személyes adatainak bizalmas jellegét.",
         p2:
           "Ez a szabályzat ismerteti, hogyan gyűjtjük, használjuk fel és védjük a személyes adatokat az általános adatvédelmi rendeletnek (GDPR – az (EU) 2016/679 rendelet) megfelelően.",
       },
@@ -9685,12 +9651,7 @@ export const translations = {
         intro:
           "Személyes adataival kapcsolatos bármely kérdés esetén, illetve a GDPR szerinti jogai gyakorlása érdekében kapcsolatba léphet velünk:",
         operator: "Adatkezelő",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "Adószám (CUI): 52638053",
-        regNo: "Cégjegyzékszám: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "A kérelmekre 30 naptári napon belül válaszolunk.",
       },
     },
@@ -9707,7 +9668,7 @@ export const translations = {
           {
             term: "Szolgáltató",
             def:
-              "HOSTLIFE DIGITAL SRL, székhelye: Str. Vidin 37, 805300 Tecuci, Galați, Románia, adószáma (CUI): 52638053",
+              "{company}, székhelye: {office}, adószáma (CUI): {cui}",
           },
           {
             term: "Platform",
@@ -9944,8 +9905,6 @@ export const translations = {
         ],
         contact: {
           title: "Kapcsolat",
-          email: "contact@logistiq.ro",
-          address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
         },
       },
     },
@@ -10078,18 +10037,13 @@ export const translations = {
         intro:
           "A cookie-k használatával kapcsolatos kérdések esetén, illetve a GDPR szerinti jogai gyakorlásához:",
         operator: "Adatkezelő",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "Adószám (CUI): 52638053",
-        regNo: "Cégjegyzékszám: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Románia",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "2026. november 24.",
       backHome: "Vissza a főoldalra",
-      identity: { taxId: "Adószám (CUI):", regNo: "Cégjegyzékszám:" },
+      identity: { taxId: "Adószám (CUI):", regNo: "Cégjegyzékszám:", country: "Románia" },
       retentionHeaders: {
         type: "Adattípus",
         period: "Megőrzési idő",
@@ -11591,7 +11545,7 @@ export const translations = {
       intro: {
         title: "1. Въведение",
         p1:
-          "HOSTLIFE DIGITAL SRL („Администраторът“), със седалище и адрес на управление ул. Видин 37, 805300 Текуч, Галац, Румъния, CUI 52638053, уважава поверителността на вашите лични данни.",
+          "{company} („Администраторът“), със седалище и адрес на управление {office}, CUI {cui}, уважава поверителността на вашите лични данни.",
         p2:
           "Тази политика описва как събираме, използваме и защитаваме личните данни в съответствие с Общия регламент относно защитата на данните (ОРЗД - Регламент (ЕС) 2016/679).",
       },
@@ -11824,12 +11778,7 @@ export const translations = {
         intro:
           "За всякакви въпроси относно вашите лични данни или за упражняване на правата ви по ОРЗД можете да се свържете с нас:",
         operator: "Администратор на лични данни",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Рег. №: J20/7592/5001",
-        address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
         email: "Имейл",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Ще отговаряме на исканията в срок до 30 календарни дни.",
       },
     },
@@ -11846,7 +11795,7 @@ export const translations = {
           {
             term: "Доставчик",
             def:
-              "HOSTLIFE DIGITAL SRL, със седалище и адрес на управление ул. Видин 37, 805300 Текуч, Галац, Румъния, CUI 52638053",
+              "{company}, със седалище и адрес на управление {office}, CUI {cui}",
           },
           {
             term: "Платформа",
@@ -12082,8 +12031,6 @@ export const translations = {
         ],
         contact: {
           title: "Контакт",
-          email: "contact@logistiq.ro",
-          address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
         },
       },
     },
@@ -12217,18 +12164,13 @@ export const translations = {
         intro:
           "За въпроси относно използването на бисквитки или за упражняване на правата ви съгласно ОРЗД:",
         operator: "Администратор",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Рег. №: J20/7592/5001",
-        address: "ул. Видин 37, 805300 Текуч, Галац, Румъния",
         email: "Имейл",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "24 ноември 2026 г.",
       backHome: "Обратно към началната страница",
-      identity: { taxId: "Данъчен номер (CUI):", regNo: "№ в Търговския регистър:" },
+      identity: { taxId: "Данъчен номер (CUI):", regNo: "№ в Търговския регистър:", country: "Румъния" },
       retentionHeaders: {
         type: "Вид данни",
         period: "Срок на съхранение",
@@ -13730,7 +13672,7 @@ export const translations = {
       intro: {
         title: "1. Introduction",
         p1:
-          "HOSTLIFE DIGITAL SRL (le « responsable du traitement »), dont le siège social est situé Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, numéro d'identification fiscale (CUI) 52638053, respecte la confidentialité de vos données à caractère personnel.",
+          "{company} (le « responsable du traitement »), dont le siège social est situé {office}, numéro d'identification fiscale (CUI) {cui}, respecte la confidentialité de vos données à caractère personnel.",
         p2:
           "La présente politique décrit la manière dont nous collectons, utilisons et protégeons les données à caractère personnel, conformément au règlement général sur la protection des données (RGPD – règlement (UE) 2016/679).",
       },
@@ -13970,12 +13912,7 @@ export const translations = {
         intro:
           "Pour toute question concernant vos données à caractère personnel ou pour exercer vos droits au titre du RGPD, vous pouvez nous contacter :",
         operator: "Responsable du traitement",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI : 52638053",
-        regNo: "N° d'immatriculation : J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Nous répondrons aux demandes dans un délai de 30 jours calendaires.",
       },
     },
@@ -13992,7 +13929,7 @@ export const translations = {
           {
             term: "Prestataire",
             def:
-              "HOSTLIFE DIGITAL SRL, dont le siège social est situé Str. Vidin 37, 805300 Tecuci, Galați, Roumanie, numéro d'identification fiscale (CUI) 52638053",
+              "{company}, dont le siège social est situé {office}, numéro d'identification fiscale (CUI) {cui}",
           },
           {
             term: "Plateforme",
@@ -14230,8 +14167,6 @@ export const translations = {
         ],
         contact: {
           title: "Contact",
-          email: "contact@logistiq.ro",
-          address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
         },
       },
     },
@@ -14365,18 +14300,13 @@ export const translations = {
         intro:
           "Pour toute question concernant l'utilisation des cookies ou pour exercer vos droits au titre du RGPD :",
         operator: "Responsable du traitement",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI : 52638053",
-        regNo: "N° d'immatriculation : J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roumanie",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "24 novembre 2026",
       backHome: "Retour à l’accueil",
-      identity: { taxId: "Identifiant fiscal (CUI) :", regNo: "N° au registre du commerce :" },
+      identity: { taxId: "Identifiant fiscal (CUI) :", regNo: "N° au registre du commerce :", country: "Roumanie" },
       retentionHeaders: {
         type: "Type de données",
         period: "Durée de conservation",
@@ -15878,7 +15808,7 @@ export const translations = {
       intro: {
         title: "1. Inleiding",
         p1:
-          "HOSTLIFE DIGITAL SRL (\"Verwerkingsverantwoordelijke\"), gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, fiscaal identificatienummer (CUI) 52638053, respecteert de vertrouwelijkheid van uw persoonsgegevens.",
+          "{company} (\"Verwerkingsverantwoordelijke\"), gevestigd te {office}, fiscaal identificatienummer (CUI) {cui}, respecteert de vertrouwelijkheid van uw persoonsgegevens.",
         p2:
           "Dit beleid beschrijft hoe wij persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG - Verordening (EU) 2016/679).",
       },
@@ -16117,12 +16047,7 @@ export const translations = {
         intro:
           "Voor alle vragen over uw persoonsgegevens of om uw rechten op grond van de AVG uit te oefenen, kunt u contact met ons opnemen:",
         operator: "Verwerkingsverantwoordelijke",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Reg. nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
         responseTime: "Wij beantwoorden verzoeken binnen 30 kalenderdagen.",
       },
     },
@@ -16139,7 +16064,7 @@ export const translations = {
           {
             term: "Dienstverlener",
             def:
-              "HOSTLIFE DIGITAL SRL, gevestigd te Str. Vidin 37, 805300 Tecuci, Galați, Roemenië, fiscaal identificatienummer (CUI) 52638053",
+              "{company}, gevestigd te {office}, fiscaal identificatienummer (CUI) {cui}",
           },
           {
             term: "Platform",
@@ -16378,8 +16303,6 @@ export const translations = {
         ],
         contact: {
           title: "Contact",
-          email: "contact@logistiq.ro",
-          address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
         },
       },
     },
@@ -16513,18 +16436,13 @@ export const translations = {
         intro:
           "Voor vragen over het gebruik van cookies of om uw rechten op grond van de AVG uit te oefenen:",
         operator: "Verwerkingsverantwoordelijke",
-        operatorName: "HOSTLIFE DIGITAL SRL",
-        cui: "CUI: 52638053",
-        regNo: "Reg. nr.: J20/7592/5001",
-        address: "Str. Vidin 37, 805300 Tecuci, Galați, Roemenië",
         email: "E-mail",
-        emailAddress: "contact@logistiq.ro",
       },
     },
     legal: {
       updatedOn: "24 november 2026",
       backHome: "Terug naar de homepage",
-      identity: { taxId: "Fiscaal nummer (CUI):", regNo: "Handelsregisternr.:" },
+      identity: { taxId: "Fiscaal nummer (CUI):", regNo: "Handelsregisternr.:", country: "Roemenië" },
       retentionHeaders: {
         type: "Soort gegevens",
         period: "Bewaartermijn",

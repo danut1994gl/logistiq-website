@@ -1,5 +1,6 @@
 import { translations } from "@/lib/i18n/translations";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { company } from "@/lib/company";
 
 // /llms-full.txt — the full plain-text corpus for LLM ingestion (description +
 // complete FAQ Q&A). English by convention.
@@ -20,7 +21,7 @@ export function GET() {
     "real-time dock/ramp management, driver communication, early check-in & scheduling,",
     "automatic location detection, analytics & reports, API integrations, and support for",
     "12 languages. The manager dashboard is at logistiq.cloud and the public driver",
-    "check-in experience is at qrgo.ro. Operated by HOSTLIFE DIGITAL SRL (Romania).",
+    `check-in experience is at qrgo.ro. Operated by ${company.legalName} (Romania).`,
     "",
     "## Pages",
     `- Home: ${SITE_URL}/en`,

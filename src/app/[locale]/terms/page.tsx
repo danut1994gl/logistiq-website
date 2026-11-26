@@ -4,6 +4,8 @@ import Link from "next/link";
 import { use } from "react";
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
+import { company } from "@/lib/company";
+import { registeredOffice, withCompany } from "@/lib/legal-identity";
 
 function Article({
   children,
@@ -150,7 +152,7 @@ export default function TermsPage({
           <Paragraph>{t.article1.content}</Paragraph>
           <div className="mt-4">
             {t.article1.definitions.map((def, i) => (
-              <DefinitionCard key={i} term={def.term} def={def.def} />
+              <DefinitionCard key={i} term={def.term} def={withCompany(def.def, translations[locale])} />
             ))}
           </div>
         </Article>
@@ -310,13 +312,13 @@ export default function TermsPage({
                 {t.article15.contact.title}
               </h4>
               <p className="text-slate-600 dark:text-slate-300">
-                {t.article15.contact.address}
+                {registeredOffice(translations[locale])}
               </p>
               <a
-                href={`mailto:${t.article15.contact.email}`}
+                href={`mailto:${company.email}`}
                 className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
               >
-                {t.article15.contact.email}
+                {company.email}
               </a>
             </div>
           </div>
