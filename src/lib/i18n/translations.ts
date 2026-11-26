@@ -1772,7 +1772,7 @@ export const translations = {
         title: "Articolul 14 - Încetarea Contractului",
         byClient: { title: "Anulare de către Client", content: "Clientul poate înceta contractul în condițiile stabilite în acesta." },
         byProvider: { title: "Reziliere de către Prestator", content: "Pentru neplată, abuz sau încălcarea termenilor." },
-        effects: { title: "Efecte", content: "30 de zile pentru exportul datelor, apoi ștergere definitivă." },
+        effects: { title: "Efecte", content: "În termen de 30 de zile de la încetarea contractului, Clientul poate solicita o copie a datelor sale. După acest termen, datele sunt șterse, cu excepția celor pe care legea îl obligă pe Prestator să le păstreze, cum sunt documentele contabile (10 ani)." },
       },
       article15: {
         title: "Articolul 15 - Dispoziții Finale",
@@ -3825,7 +3825,7 @@ export const translations = {
         title: "Article 14 - Contract Termination",
         byClient: { title: "Cancellation by Client", content: "The Client may terminate the contract as set out in it." },
         byProvider: { title: "Termination by Provider", content: "For non-payment, abuse or terms violation." },
-        effects: { title: "Effects", content: "30 days for data export, then permanent deletion." },
+        effects: { title: "Effects", content: "Within 30 days of the end of the contract, the Client may request a copy of its data. After that the data is deleted, except what the law requires the Provider to keep, such as accounting documents (10 years)." },
       },
       article15: {
         title: "Article 15 - Final Provisions",
@@ -6095,7 +6095,7 @@ export const translations = {
         },
         effects: {
           title: "Folgen",
-          content: "30 Tage für den Datenexport, danach endgültige Löschung.",
+          content: "Innerhalb von 30 Tagen nach Ende des Vertrags kann der Kunde eine Kopie seiner Daten anfordern. Danach werden die Daten gelöscht, mit Ausnahme dessen, was der Anbieter gesetzlich aufbewahren muss, etwa Buchhaltungsunterlagen (10 Jahre).",
         },
       },
       article15: {
@@ -8412,7 +8412,7 @@ export const translations = {
         },
         effects: {
           title: "Skutki",
-          content: "30 dni na eksport danych, a następnie trwałe usunięcie.",
+          content: "W ciągu 30 dni od zakończenia umowy Klient może zażądać kopii swoich danych. Po tym terminie dane są usuwane, z wyjątkiem tych, które Usługodawca musi przechowywać na mocy prawa, takich jak dokumenty księgowe (10 lat).",
         },
       },
       article15: {
@@ -10731,7 +10731,7 @@ export const translations = {
         },
         effects: {
           title: "Joghatások",
-          content: "30 nap az adatok exportálására, ezt követően végleges törlés.",
+          content: "A szerződés megszűnésétől számított 30 napon belül az Ügyfél kérheti adatai másolatát. Ezt követően az adatok törlésre kerülnek, kivéve azokat, amelyeket a Szolgáltatónak jogszabály alapján meg kell őriznie, például a számviteli bizonylatokat (10 év).",
         },
       },
       article15: {
@@ -13049,7 +13049,7 @@ export const translations = {
         },
         effects: {
           title: "Последици",
-          content: "30 дни за експорт на данните, след това окончателно изтриване.",
+          content: "В срок до 30 дни от прекратяването на договора Клиентът може да поиска копие от своите данни. След този срок данните се изтриват, с изключение на тези, които законът задължава Доставчика да пази, например счетоводните документи (10 години).",
         },
       },
       article15: {
@@ -15371,7 +15371,7 @@ export const translations = {
         },
         effects: {
           title: "Effets",
-          content: "30 jours pour l'export des données, puis suppression définitive.",
+          content: "Dans les 30 jours suivant la fin du contrat, le Client peut demander une copie de ses données. Passé ce délai, les données sont supprimées, à l'exception de celles que la loi oblige le Prestataire à conserver, comme les documents comptables (10 ans).",
         },
       },
       article15: {
@@ -17692,7 +17692,7 @@ export const translations = {
         },
         effects: {
           title: "Gevolgen",
-          content: "30 dagen voor de export van gegevens, daarna definitieve verwijdering.",
+          content: "Binnen 30 dagen na het einde van de overeenkomst kan de Klant om een kopie van zijn gegevens verzoeken. Daarna worden de gegevens verwijderd, met uitzondering van wat de Dienstverlener wettelijk moet bewaren, zoals boekhoudkundige documenten (10 jaar).",
         },
       },
       article15: {

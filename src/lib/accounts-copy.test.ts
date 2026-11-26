@@ -27,3 +27,16 @@ describe("terms, article 4", () => {
     expect(items.filter((i) => i.includes("logistiq.cloud"))).toEqual([]);
   });
 });
+
+// Article 14 said "30 days for data export, then permanent deletion", against privacy §7's
+// 10 years for billing data, with no export of an account in the product (2026-11-26, F9):
+// the client may request a copy within 30 days, then the data is deleted except what the
+// law requires the Provider to keep (accounting documents, 10 years).
+describe("terms, article 14", () => {
+  it.each(locales)("%s offers a copy on request and keeps what the law requires", (locale) => {
+    const text = translations[locale].terms.article14.effects.content;
+    expect(text).toMatch(/\b30\b/);
+    expect(text).toMatch(/\b10\b/);
+    expect(text).toMatch(CONTRACT[locale]);
+  });
+});
