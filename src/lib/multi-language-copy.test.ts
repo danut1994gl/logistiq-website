@@ -48,21 +48,21 @@ describe("multi-language page (f7)", () => {
 });
 
 // The mobile-app page's facts (f6Page.f2n, f2l) said "476 UI strings, complete in every
-// language" until 2026-11-25: a count that goes stale, and the app is not complete in every
-// language. Its chat role "Warehouse Manager" (chat.roleWarehouseManager) exists only in ro
-// and en, so the ten other languages show the Romanian word (Logistiq
-// packages/qrgo_core/lib/src/l10n/app_localizations.dart falls back to ro;
-// test/app_localizations_test.dart pins the ten maps that lack it). The check-in form and
-// the live status are complete in all twelve, and that is what the fact now says.
+// language" until 2026-11-25: a count that goes stale, and the app was not complete in every
+// language then. Its chat role "Warehouse Manager" (chat.roleWarehouseManager) existed only in
+// ro and en, so from 2026-11-25 the fact claimed only the check-in and the live status.
+// Logistiq 92501687d (2026-11-26) added the key to all twelve qrgo_core maps
+// (packages/qrgo_core/lib/src/l10n/translations/*.dart, with a test that every map holds every
+// key), shipped in QRGo Driver 2.15, so the fact now says the whole app is translated. It still
+// gives no string count, since a count goes stale.
 describe("mobile-app page (f6)", () => {
-  it("gives no string count and claims completeness only for the check-in and the live status", () => {
-    const EVERY_STRING = /complete|complète|vollständig|komplet|teljes|изцяло|compleet|every string|toate textele/i;
+  it("gives no string count and says the whole app is translated in every language", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       const f = copy.f6Page;
       expect(f.f2n.replace(/\s/g, ""), locale).toBe("100%");
       expect(f.f2l.match(/\d/)?.[0], locale).toBeUndefined();
-      expect(f.f2l.match(EVERY_STRING)?.[0], locale).toBeUndefined();
     }
-    expect(translations.en.f6Page.f2l).toBe("check-in and live status, translated in every language");
+    expect(translations.en.f6Page.f2l).toBe("the whole app, translated in every language");
+    expect(translations.ro.f6Page.f2l).toBe("toată aplicația, tradusă în fiecare limbă");
   });
 });
