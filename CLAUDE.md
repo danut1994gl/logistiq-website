@@ -48,7 +48,7 @@ src/app/
     layout.tsx               # <html>/<body>, fonts, site-wide JSON-LD, generateMetadata
     not-found.tsx            # localized 404 boundary (content only)
     (marketing)/
-      layout.tsx             # mounts SiteHeader + <main id="main"> + SiteFooter + CookieConsent
+      layout.tsx             # mounts SiteHeader + <main id="main"> + SiteFooter (no cookie banner)
       page.tsx               # home (composes sections/*)
       features/{page,[slug]/page}.tsx
       resurse/page.tsx  contact/page.tsx

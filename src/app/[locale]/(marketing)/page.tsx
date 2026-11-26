@@ -11,7 +11,7 @@ import { PricingSection } from "@/components/sections/PricingSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
-// Home page. Chrome (header/footer/cookie-consent) is provided by the marketing
+// Home page. Chrome (header/footer) is provided by the marketing
 // layout; this page only composes the landing sections.
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeParam } = await params;

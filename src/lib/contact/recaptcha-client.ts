@@ -5,10 +5,10 @@ import { RECAPTCHA_ACTION } from "@/lib/contact/protocol";
 // on). Google's script never loads on a page view: only when a visitor starts
 // using the contact form (ContactSection), and a fresh token is asked per message.
 //
-// The cookie banner (CookieConsent) gates no third-party script today, and this is
-// a security check for a message the visitor chose to send, so it does not wait
-// for the banner's optional categories. The privacy and cookie policies must name
-// reCAPTCHA (Google) before the keys are set.
+// It is a security check on a message the visitor chose to send. logistiq.ro has no
+// cookie banner because nothing on it stores data in the browser unasked (owner,
+// 2026-11-26): before these keys are set, the privacy and cookie policies must name
+// reCAPTCHA (Google) for logistiq.ro, and the owner must decide again about consent.
 
 type Grecaptcha = {
   ready(callback: () => void): void;

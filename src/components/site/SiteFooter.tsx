@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { translations, type Translations } from "@/lib/i18n/translations";
 import { type Locale } from "@/lib/i18n/config";
-import { CookiePreferencesButton } from "@/components/CookieConsent";
 import { footerColumns, groupSites } from "@/lib/navigation";
 import { company } from "@/lib/company";
 
@@ -94,11 +93,6 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                     </Link>
                   </li>
                 ))}
-                {col.key === "legal" && (
-                  <li>
-                    <CookiePreferencesButton label={t.cookieConsent.managePreferences} />
-                  </li>
-                )}
               </ul>
             </div>
           ))}
