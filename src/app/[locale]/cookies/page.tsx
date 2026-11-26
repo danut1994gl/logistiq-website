@@ -170,7 +170,7 @@ function ThirdPartyCard({
   return (
     <div className="flex items-start gap-3 py-2">
       <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-      <div>
+      <div className="min-w-0">
         <span className="font-medium text-slate-900 dark:text-white">
           {name}
         </span>
@@ -179,7 +179,7 @@ function ThirdPartyCard({
           href={`https://${url}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+          className="ml-2 text-sm text-blue-600 dark:text-blue-400 hover:underline break-all"
         >
           ({url})
         </a>
