@@ -1831,6 +1831,7 @@ export const translations = {
     legal: {
       updatedOn: "24 noiembrie 2026",
       backHome: "Înapoi la pagina principală",
+      identity: { taxId: "CUI:", regNo: "Nr. Reg. Com.:" },
       retentionHeaders: {
         type: "Tip date",
         period: "Durată",
@@ -3662,6 +3663,7 @@ export const translations = {
     legal: {
       updatedOn: "24 November 2026",
       backHome: "Back to home",
+      identity: { taxId: "Tax ID (CUI):", regNo: "Trade Register no.:" },
       retentionHeaders: {
         type: "Data type",
         period: "Retention period",
@@ -5806,6 +5808,7 @@ export const translations = {
     legal: {
       updatedOn: "24. November 2026",
       backHome: "Zurück zur Startseite",
+      identity: { taxId: "Steuer-ID (CUI):", regNo: "Handelsregister-Nr.:" },
       retentionHeaders: {
         type: "Datenart",
         period: "Speicherdauer",
@@ -7946,6 +7949,7 @@ export const translations = {
     legal: {
       updatedOn: "24 listopada 2026",
       backHome: "Powrót do strony głównej",
+      identity: { taxId: "Identyfikator podatkowy (CUI):", regNo: "Nr w rejestrze handlowym:" },
       retentionHeaders: {
         type: "Rodzaj danych",
         period: "Okres przechowywania",
@@ -10085,6 +10089,7 @@ export const translations = {
     legal: {
       updatedOn: "2026. november 24.",
       backHome: "Vissza a főoldalra",
+      identity: { taxId: "Adószám (CUI):", regNo: "Cégjegyzékszám:" },
       retentionHeaders: {
         type: "Adattípus",
         period: "Megőrzési idő",
@@ -12223,6 +12228,7 @@ export const translations = {
     legal: {
       updatedOn: "24 ноември 2026 г.",
       backHome: "Обратно към началната страница",
+      identity: { taxId: "Данъчен номер (CUI):", regNo: "№ в Търговския регистър:" },
       retentionHeaders: {
         type: "Вид данни",
         period: "Срок на съхранение",
@@ -14370,6 +14376,7 @@ export const translations = {
     legal: {
       updatedOn: "24 novembre 2026",
       backHome: "Retour à l’accueil",
+      identity: { taxId: "Identifiant fiscal (CUI) :", regNo: "N° au registre du commerce :" },
       retentionHeaders: {
         type: "Type de données",
         period: "Durée de conservation",
@@ -16517,6 +16524,7 @@ export const translations = {
     legal: {
       updatedOn: "24 november 2026",
       backHome: "Terug naar de homepage",
+      identity: { taxId: "Fiscaal nummer (CUI):", regNo: "Handelsregisternr.:" },
       retentionHeaders: {
         type: "Soort gegevens",
         period: "Bewaartermijn",

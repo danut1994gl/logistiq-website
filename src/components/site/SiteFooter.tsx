@@ -70,8 +70,12 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
             <h3 className="font-semibold mb-4">{t.footer.company}</h3>
             <ul className="space-y-2 text-slate-400 text-sm">
               <li className="font-medium text-slate-300">{company.legalName}</li>
-              <li>CUI: {company.cui}</li>
-              <li>Nr. Reg. Com.: {company.regCom}</li>
+              <li>
+                {t.legal.identity.taxId} {company.cui}
+              </li>
+              <li>
+                {t.legal.identity.regNo} {company.regCom}
+              </li>
               {company.addressLines.map((line) => (
                 <li key={line}>{line}</li>
               ))}

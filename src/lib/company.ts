@@ -3,7 +3,9 @@
 export const company = {
   legalName: "HOSTLIFE DIGITAL SRL",
   cui: "52638053",
-  regCom: "J25/759/2025",
+  // The owner's number (2026-11-26). Until then this file said another one, while the
+  // legal pages said this: the legal pages now read it from here (lib/legal-identity.ts).
+  regCom: "J20/7592/5001",
   addressLines: ["Str. Vidin 37, Tecuci", "Jud. Galați, 805300"],
   address: {
     street: "Str. Vidin 37",
