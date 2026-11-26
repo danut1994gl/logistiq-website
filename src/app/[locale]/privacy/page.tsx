@@ -302,6 +302,14 @@ export default function PrivacyPage({
         <Section delay={10}>
           <SectionTitle>{t.cookies.title}</SectionTitle>
           <Paragraph>{t.cookies.content}</Paragraph>
+          <p className="mt-2">
+            <Link
+              href={`/${locale}/cookies`}
+              className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            >
+              {translations[locale].footer.cookies}
+            </Link>
+          </p>
         </Section>
 
         {/* Section 11: Children */}

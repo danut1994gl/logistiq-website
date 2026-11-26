@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { translations } from "@/lib/i18n/translations";
+import { locales } from "@/lib/i18n/config";
+import { renderPage } from "@/lib/testing/render-page";
+import PrivacyPage from "@/app/[locale]/privacy/page";
 
 // The terms, the privacy policy and the cookie policy print legal.updatedOn under their
 // title. They changed on 24 November 2026 (payment by contract and bank transfer, no Stripe,
@@ -159,5 +162,17 @@ describe("cookie policy, the session cookie", () => {
       expect(cloud?.cookies[0].name, locale).toBe("sb-bhpiugfpkqwxcqbolisb-auth-token");
       expect(JSON.stringify(copy).match(/sb-access-token|sb-refresh-token/)?.[0], locale).toBeUndefined();
     }
+  });
+});
+
+// Privacy policy §10 says what the cookie policy says (2026-11-26, F3): cookies that are
+// strictly necessary or store a choice, none on a visit to logistiq.ro, a few third parties'
+// own; and it links to the cookie policy. Until then it spoke of "essential cookies" alone.
+describe("privacy policy, section 10", () => {
+  it.each(locales)("%s agrees with the cookie policy and links to it", async (locale) => {
+    const copy = translations[locale];
+    expect(copy.privacy.cookies.content).toContain("logistiq.ro");
+    const html = await renderPage(PrivacyPage, locale);
+    expect(html).toContain(`href="/${locale}/cookies"`);
   });
 });

@@ -1585,7 +1585,7 @@ export const translations = {
       },
       cookies: {
         title: "10. Cookie-uri și Tehnologii Similare",
-        content: "Folosim cookie-uri esențiale pentru funcționarea platformei (autentificare, sesiune utilizator, preferințe de limbă). Nu folosim cookie-uri de urmărire publicitară sau de terți pentru profilare.",
+        content: "Site-urile noastre plasează numai cookie-uri strict necesare (autentificare și securitate) sau care rețin o alegere făcută de dumneavoastră (limba, un filtru, tema luminoasă ori întunecată). Site-ul logistiq.ro nu plasează niciun cookie atunci când îl vizitați. Nu folosim cookie-uri de urmărire publicitară sau de terți pentru profilare. Câteva servicii ale terților, numite în Politica de utilizare a cookie-urilor, pot plasa propriile cookie-uri. Politica de utilizare a cookie-urilor prezintă fiecare cookie, pe fiecare site.",
       },
       children: {
         title: "11. Date privind Copiii",
@@ -3607,7 +3607,7 @@ export const translations = {
       },
       cookies: {
         title: "10. Cookies and Similar Technologies",
-        content: "We use essential cookies for platform operation (authentication, user session, language preferences). We do not use advertising tracking cookies or third-party profiling cookies.",
+        content: "Our sites set only cookies that are strictly necessary (signing in and security) or that remember a choice you made (a language, a filter, the light or dark theme). logistiq.ro sets no cookie when you visit it. We do not use advertising tracking cookies or third-party profiling cookies. A few third-party services, named in the Cookie Policy, may set their own cookies. The Cookie Policy lists every cookie, site by site.",
       },
       children: {
         title: "11. Children's Data",
@@ -5717,7 +5717,7 @@ export const translations = {
       cookies: {
         title: "10. Cookies und ähnliche Technologien",
         content:
-          "Wir verwenden essenzielle Cookies für den Betrieb der Plattform (Authentifizierung, Nutzersitzung, Spracheinstellungen). Wir verwenden weder Cookies für Werbe-Tracking noch Cookies von Drittanbietern zum Profiling.",
+          "Unsere Websites setzen nur Cookies, die unbedingt erforderlich sind (Anmeldung und Sicherheit) oder sich eine Wahl merken, die Sie getroffen haben (eine Sprache, einen Filter, das helle oder dunkle Design). logistiq.ro setzt bei Ihrem Besuch kein Cookie. Wir verwenden weder Cookies für Werbe-Tracking noch Cookies von Drittanbietern zum Profiling. Einige in der Cookie-Richtlinie genannte Dienste von Drittanbietern können eigene Cookies setzen. Die Cookie-Richtlinie führt jedes Cookie auf, Website für Website.",
       },
       children: {
         title: "11. Daten von Kindern",
@@ -8001,7 +8001,7 @@ export const translations = {
       cookies: {
         title: "10. Pliki cookie i podobne technologie",
         content:
-          "Używamy niezbędnych plików cookie na potrzeby działania platformy (uwierzytelnianie, sesja użytkownika, preferencje językowe). Nie używamy plików cookie śledzących w celach reklamowych ani plików cookie podmiotów trzecich służących profilowaniu.",
+          "Nasze witryny zapisują wyłącznie pliki cookie niezbędne (logowanie i bezpieczeństwo) lub zapamiętujące dokonany przez Ciebie wybór (język, filtr, jasny lub ciemny motyw). Witryna logistiq.ro nie zapisuje żadnego pliku cookie, gdy ją odwiedzasz. Nie używamy plików cookie śledzących w celach reklamowych ani plików cookie podmiotów trzecich służących profilowaniu. Kilka usług podmiotów trzecich wymienionych w Polityce cookies może zapisywać własne pliki cookie. Polityka cookies wymienia każdy plik cookie, witryna po witrynie.",
       },
       children: {
         title: "11. Dane dzieci",
@@ -10282,7 +10282,7 @@ export const translations = {
       cookies: {
         title: "10. Cookie-k és hasonló technológiák",
         content:
-          "Alapvető cookie-kat használunk a platform működéséhez (hitelesítés, felhasználói munkamenet, nyelvi beállítások). Nem használunk reklámcélú nyomkövető cookie-kat, sem harmadik féltől származó, profilalkotásra szolgáló cookie-kat.",
+          "Webhelyeink csak feltétlenül szükséges cookie-kat (bejelentkezés és biztonság) vagy az Ön által meghozott választást megjegyző cookie-kat (nyelv, szűrő, világos vagy sötét téma) helyeznek el. A logistiq.ro nem helyez el cookie-t, amikor Ön meglátogatja. Nem használunk reklámcélú nyomkövető cookie-kat, sem harmadik féltől származó, profilalkotásra szolgáló cookie-kat. A Cookie-szabályzatban megnevezett néhány harmadik féltől származó szolgáltatás saját cookie-kat helyezhet el. A Cookie-szabályzat webhelyenként felsorol minden cookie-t.",
       },
       children: {
         title: "11. Gyermekek adatai",
@@ -12567,7 +12567,7 @@ export const translations = {
       cookies: {
         title: "10. Бисквитки и подобни технологии",
         content:
-          "Използваме основни бисквитки за функционирането на платформата (удостоверяване, потребителска сесия, езикови предпочитания). Не използваме бисквитки за рекламно проследяване, нито бисквитки на трети страни за профилиране.",
+          "Нашите сайтове поставят само бисквитки, които са строго необходими (вход и сигурност) или които запомнят направен от вас избор (език, филтър, светла или тъмна тема). logistiq.ro не поставя бисквитка, когато го посещавате. Не използваме бисквитки за рекламно проследяване, нито бисквитки на трети страни за профилиране. Някои услуги на трети страни, посочени в Политиката за използване на бисквитки, могат да поставят собствени бисквитки. Политиката за използване на бисквитки описва всяка бисквитка, сайт по сайт.",
       },
       children: {
         title: "11. Данни за деца",
@@ -14850,7 +14850,7 @@ export const translations = {
       cookies: {
         title: "10. Cookies et technologies similaires",
         content:
-          "Nous utilisons des cookies essentiels au fonctionnement de la plateforme (authentification, session utilisateur, préférences de langue). Nous n'utilisons pas de cookies de suivi publicitaire ni de cookies tiers à des fins de profilage.",
+          "Nos sites ne déposent que des cookies strictement nécessaires (connexion et sécurité) ou qui retiennent un choix que vous avez fait (une langue, un filtre, le thème clair ou sombre). logistiq.ro ne dépose aucun cookie lorsque vous le visitez. Nous n'utilisons pas de cookies de suivi publicitaire ni de cookies tiers à des fins de profilage. Quelques services tiers, cités dans la Politique d'utilisation des cookies, peuvent déposer leurs propres cookies. La Politique d'utilisation des cookies présente chaque cookie, site par site.",
       },
       children: {
         title: "11. Données concernant les enfants",
@@ -17133,7 +17133,7 @@ export const translations = {
       cookies: {
         title: "10. Cookies en vergelijkbare technologieën",
         content:
-          "Wij gebruiken essentiële cookies voor de werking van het platform (authenticatie, gebruikerssessie, taalvoorkeuren). Wij gebruiken geen trackingcookies voor advertentiedoeleinden en geen cookies van derden voor profilering.",
+          "Onze websites plaatsen alleen cookies die strikt noodzakelijk zijn (inloggen en beveiliging) of die een keuze onthouden die u hebt gemaakt (een taal, een filter, het lichte of donkere thema). logistiq.ro plaatst geen cookie wanneer u de website bezoekt. Wij gebruiken geen trackingcookies voor advertentiedoeleinden en geen cookies van derden voor profilering. Enkele diensten van derden, genoemd in het Cookiebeleid, kunnen hun eigen cookies plaatsen. Het Cookiebeleid vermeldt elk cookie, website per website.",
       },
       children: {
         title: "11. Gegevens van kinderen",
