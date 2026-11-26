@@ -1468,11 +1468,23 @@ export const translations = {
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
-        p1: "{company} („Operatorul”), cu sediul în {office}, CUI {cui}, respectă confidențialitatea datelor dumneavoastră personale.",
+        p1: "{company}, cu sediul în {office}, CUI {cui} („noi”), furnizează platforma Logistiq și respectă confidențialitatea datelor dumneavoastră personale.",
         p2: "Această politică descrie modul în care colectăm, utilizăm și protejăm datele personale în conformitate cu Regulamentul General privind Protecția Datelor (GDPR - Regulamentul UE 2016/679).",
+        roles: {
+          title: "Rolul nostru",
+          controller: {
+            title: "Unde suntem operator de date",
+            desc: "Pentru conturile de utilizator din dashboard (logistiq.cloud), pentru facturare și pentru mesajele trimise prin formularul de contact de pe logistiq.ro, noi stabilim de ce și cum sunt prelucrate datele personale: suntem operatorul de date.",
+          },
+          processor: {
+            title: "Unde suntem persoană împuternicită",
+            desc: "Pentru datele șoferilor care fac check-in la un depozit (pe qrgo.ro, în aplicația QRGo Driver, pe o tabletă QRGo Self sau introduse de personalul depozitului), operatorul de date este depozitul la care se face check-in-ul, clientul nostru. Noi prelucrăm aceste date în numele depozitului, în calitate de persoană împuternicită de operator. Pentru a vă exercita drepturile privind aceste date, contactați depozitul la care ați făcut check-in-ul sau scrieți-ne.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Ce Date Personale Colectăm",
+        controllerIntro: "În calitate de operator de date: conturile de utilizator din dashboard, facturarea și formularul de contact al site-ului.",
         identification: {
           title: "Date de identificare",
           items: ["Nume complet", "Adresă email", "Rol în sistem (operator, administrator)", "Fotografie profil (opțional)"],
@@ -1487,12 +1499,25 @@ export const translations = {
         },
         technical: {
           title: "Date tehnice",
-          items: ["Adresă IP", "User Agent (browser/dispozitiv)", "Coordonate GPS (cu acordul dvs., pentru detectarea automată a locației)"],
+          items: [
+            "Adresă IP",
+            "User Agent (browser/dispozitiv)",
+            "La deschiderea unei prezentări trimise de noi prin link: ora, browserul și sistemul, pe scurt (de exemplu „Chrome · Windows”), și o amprentă cu cheie (hash) a adresei IP, niciodată adresa însăși; păstrate 12 luni",
+          ],
         },
+        processorIntro: "În calitate de persoană împuternicită, în numele depozitului la care se face check-in-ul: datele de check-in ale șoferilor.",
         activity: {
-          title: "Date de activitate",
-          items: ["Istoric check-in-uri", "Mesaje schimbate cu operatorii", "Atașamente (CMR, fotografii documente)", "Timp petrecut în fiecare etapă a operațiunii"],
+          title: "Datele de check-in ale șoferilor",
+          items: [
+            "Numele și numărul de telefon al șoferului",
+            "Numerele de înmatriculare ale camionului și remorcii, firma de transport",
+            "Detaliile check-in-ului: tipul operațiunii, referințe, observații, ora programată a sosirii, limba aleasă, data și ora",
+            "Documentele încărcate la check-in (CMR, fotografii ale documentelor)",
+            "Mesajele schimbate cu operatorii depozitului",
+            "Istoricul check-in-urilor și timpul petrecut în fiecare etapă",
+          ],
         },
+        locationNote: "Aplicația QRGo Driver citește locația telefonului atunci când este deschisă, pe telefon și cu permisiunea dumneavoastră, pentru a vă propune depozitul la care ați ajuns. Locația nu părăsește telefonul: nu o primim nici noi, nici depozitul.",
       },
       purposes: {
         title: "3. Scopurile Prelucrării",
@@ -1523,7 +1548,7 @@ export const translations = {
         },
         consent: {
           title: "Consimțământ (Art. 6.1.a GDPR)",
-          desc: "Pentru coordonate GPS și comunicări de marketing, solicităm acordul dvs. explicit, pe care îl puteți retrage oricând.",
+          desc: "Pentru citirea locației telefonului în aplicația QRGo Driver (locația rămâne pe telefon) și pentru comunicările de marketing, vă solicităm consimțământul explicit, pe care îl puteți retrage oricând.",
         },
       },
       thirdParties: {
@@ -1607,7 +1632,7 @@ export const translations = {
       contact: {
         title: "13. Contact",
         intro: "Pentru orice întrebări privind datele dumneavoastră personale sau pentru exercitarea drepturilor GDPR, ne puteți contacta:",
-        operator: "Operator de date",
+        operator: "Operator de date pentru conturile din dashboard, facturare și mesajele din formularul de contact; persoană împuternicită pentru datele de check-in ale șoferilor",
         email: "Email",
         responseTime: "Vom răspunde solicitărilor în termen de 30 de zile calendaristice.",
       },
@@ -1715,7 +1740,7 @@ export const translations = {
       },
       article10: {
         title: "Articolul 10 - Obligațiile Clientului",
-        items: ["Plata în avans a abonamentului", "Date de facturare corecte", "Utilizare legală a Platformei", "Respectare GDPR pentru datele șoferilor", "Interdicție de revânzare a serviciului"],
+        items: ["Plata în avans a abonamentului", "Date de facturare corecte", "Utilizare legală a Platformei", "Respectarea GDPR pentru datele șoferilor, pentru care Clientul este operator de date; Prestatorul le prelucrează în numele Clientului, în calitate de persoană împuternicită de operator", "Interdicție de revânzare a serviciului"],
       },
       article11: {
         title: "Articolul 11 - Obligațiile Prestatorului",
@@ -2010,7 +2035,7 @@ export const translations = {
       contact: {
         title: "7. Contact",
         intro: "Pentru întrebări despre utilizarea cookie-urilor sau pentru a vă exercita drepturile conform GDPR:",
-        operator: "Operator",
+        operator: "Societatea care administrează aceste site-uri",
         email: "E-mail",
       },
     },
@@ -3499,11 +3524,23 @@ export const translations = {
       lastUpdated: "Last updated",
       intro: {
         title: "1. Introduction",
-        p1: "{company} (\"Data Controller\"), with its registered office at {office}, tax ID (CUI) {cui}, respects the privacy of your personal data.",
+        p1: "{company}, with its registered office at {office}, tax ID (CUI) {cui} (“we”), provides the Logistiq platform and respects the privacy of your personal data.",
         p2: "This policy describes how we collect, use, and protect personal data in accordance with the General Data Protection Regulation (GDPR - EU Regulation 2016/679).",
+        roles: {
+          title: "Our role",
+          controller: {
+            title: "Where we are the controller",
+            desc: "For the user accounts of the dashboard (logistiq.cloud), for billing, and for the messages sent through the contact form on logistiq.ro, we decide why and how personal data is processed: we are the data controller.",
+          },
+          processor: {
+            title: "Where we are a processor",
+            desc: "For the data of drivers who check in at a warehouse (on qrgo.ro, in the QRGo Driver app, on a QRGo Self tablet, or entered by the warehouse's staff), the data controller is the warehouse where the check-in is made, which is our client. We process this data on the warehouse's behalf, as a data processor. To exercise your rights over this data, contact the warehouse where you checked in, or write to us.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Personal Data We Collect",
+        controllerIntro: "As controller: the dashboard's user accounts, billing and the website's contact form.",
         identification: {
           title: "Identification data",
           items: ["Full name", "Email address", "System role (operator, administrator)", "Profile photo (optional)"],
@@ -3518,12 +3555,25 @@ export const translations = {
         },
         technical: {
           title: "Technical data",
-          items: ["IP address", "User Agent (browser/device)", "GPS coordinates (with your consent, for automatic location detection)"],
+          items: [
+            "IP address",
+            "User Agent (browser/device)",
+            "When a presentation we sent by link is opened: the time, the browser and system in short (for example “Chrome · Windows”) and a keyed hash of the IP address, never the address itself; kept for 12 months",
+          ],
         },
+        processorIntro: "As processor, on behalf of the warehouse where the check-in is made: the drivers' check-in data.",
         activity: {
-          title: "Activity data",
-          items: ["Check-in history", "Messages exchanged with operators", "Attachments (CMR, document photos)", "Time spent in each operation stage"],
+          title: "Drivers' check-in data",
+          items: [
+            "Driver's name and phone number",
+            "Truck and trailer registration numbers, transport company",
+            "Check-in details: operation type, references, notes, scheduled arrival time, the language chosen, the date and time",
+            "Documents uploaded at check-in (CMR, document photos)",
+            "Messages exchanged with the warehouse's operators",
+            "Check-in history and the time spent in each stage",
+          ],
         },
+        locationNote: "The QRGo Driver app reads the phone's location when it is opened, on the phone and with your permission, to suggest the warehouse you have arrived at. The location never leaves the phone: neither we nor the warehouse receive it.",
       },
       purposes: {
         title: "3. Processing Purposes",
@@ -3554,7 +3604,7 @@ export const translations = {
         },
         consent: {
           title: "Consent (Art. 6.1.a GDPR)",
-          desc: "For GPS coordinates and marketing communications, we request your explicit consent, which you can withdraw at any time.",
+          desc: "For reading the phone's location in the QRGo Driver app (it stays on the phone) and for marketing communications, we request your explicit consent, which you can withdraw at any time.",
         },
       },
       thirdParties: {
@@ -3635,7 +3685,7 @@ export const translations = {
       contact: {
         title: "13. Contact",
         intro: "For any questions regarding your personal data or to exercise your GDPR rights, you can contact us:",
-        operator: "Data Controller",
+        operator: "Controller for dashboard accounts, billing and contact-form messages; processor for drivers' check-in data",
         email: "Email",
         responseTime: "We will respond to requests within 30 calendar days.",
       },
@@ -3726,7 +3776,7 @@ export const translations = {
       },
       article10: {
         title: "Article 10 - Client Obligations",
-        items: ["Upfront subscription payment", "Correct billing information", "Legal use of Platform", "GDPR compliance for driver data", "No resale of service"],
+        items: ["Upfront subscription payment", "Correct billing information", "Legal use of Platform", "GDPR compliance for the drivers' data, of which the Client is the controller; the Provider processes it on the Client's behalf, as processor", "No resale of service"],
       },
       article11: {
         title: "Article 11 - Provider Obligations",
@@ -4021,7 +4071,7 @@ export const translations = {
       contact: {
         title: "7. Contact",
         intro: "For questions about cookie usage or to exercise your rights under GDPR:",
-        operator: "Operator",
+        operator: "The company behind these sites",
         email: "Email",
       },
     },
@@ -5511,12 +5561,24 @@ export const translations = {
       intro: {
         title: "1. Einleitung",
         p1:
-          "Die {company} („Verantwortlicher“), mit Sitz in der {office}, CUI {cui}, respektiert die Vertraulichkeit Ihrer personenbezogenen Daten.",
+          "Die {company}, mit Sitz in der {office}, CUI {cui} („wir“), stellt die Logistiq-Plattform bereit und respektiert die Vertraulichkeit Ihrer personenbezogenen Daten.",
         p2:
           "Diese Datenschutzerklärung beschreibt, wie wir personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO - Verordnung (EU) 2016/679) erheben, verwenden und schützen.",
+        roles: {
+          title: "Unsere Rolle",
+          controller: {
+            title: "Wo wir Verantwortlicher sind",
+            desc: "Für die Nutzerkonten des Dashboards (logistiq.cloud), für die Abrechnung und für die Nachrichten, die über das Kontaktformular auf logistiq.ro gesendet werden, entscheiden wir, warum und wie personenbezogene Daten verarbeitet werden: Wir sind der Verantwortliche.",
+          },
+          processor: {
+            title: "Wo wir Auftragsverarbeiter sind",
+            desc: "Für die Daten von Fahrern, die bei einem Lager einchecken (auf qrgo.ro, in der App QRGo Driver, auf einem QRGo Self-Tablet oder vom Personal des Lagers eingegeben), ist der Verantwortliche das Lager, bei dem der Check-in erfolgt, also unser Kunde. Wir verarbeiten diese Daten im Auftrag des Lagers, als Auftragsverarbeiter. Um Ihre Rechte an diesen Daten auszuüben, wenden Sie sich an das Lager, bei dem Sie eingecheckt haben, oder schreiben Sie uns.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Welche personenbezogenen Daten wir erheben",
+        controllerIntro: "Als Verantwortlicher: die Nutzerkonten des Dashboards, die Abrechnung und das Kontaktformular der Website.",
         identification: {
           title: "Identifikationsdaten",
           items: [
@@ -5548,18 +5610,22 @@ export const translations = {
           items: [
             "IP-Adresse",
             "User Agent (Browser/Gerät)",
-            "GPS-Koordinaten (mit Ihrer Einwilligung, zur automatischen Standorterkennung)",
+            "Beim Öffnen einer Präsentation, die wir per Link gesendet haben: der Zeitpunkt, Browser und System in Kurzform (zum Beispiel „Chrome · Windows“) und ein mit einem Schlüssel gebildeter Hash der IP-Adresse, nie die Adresse selbst; 12 Monate aufbewahrt",
           ],
         },
+        processorIntro: "Als Auftragsverarbeiter, im Auftrag des Lagers, bei dem der Check-in erfolgt: die Check-in-Daten der Fahrer.",
         activity: {
-          title: "Aktivitätsdaten",
+          title: "Check-in-Daten der Fahrer",
           items: [
-            "Check-in-Verlauf",
-            "Mit den Operatoren ausgetauschte Nachrichten",
-            "Anhänge (CMR, Fotos von Dokumenten)",
-            "In jeder Phase des Vorgangs verbrachte Zeit",
+            "Name und Telefonnummer des Fahrers",
+            "Kennzeichen von Lkw und Anhänger, Transportunternehmen",
+            "Angaben zum Check-in: Vorgangsart, Referenzen, Anmerkungen, geplante Ankunftszeit, gewählte Sprache, Datum und Uhrzeit",
+            "Beim Check-in hochgeladene Dokumente (CMR, Fotos von Dokumenten)",
+            "Mit den Operatoren des Lagers ausgetauschte Nachrichten",
+            "Check-in-Verlauf und die in jeder Phase verbrachte Zeit",
           ],
         },
+        locationNote: "Die App QRGo Driver liest beim Öffnen den Standort des Telefons, auf dem Telefon und mit Ihrer Erlaubnis, um Ihnen das Lager vorzuschlagen, an dem Sie angekommen sind. Der Standort verlässt das Telefon nie: Weder wir noch das Lager erhalten ihn.",
       },
       purposes: {
         title: "3. Zwecke der Verarbeitung",
@@ -5594,7 +5660,7 @@ export const translations = {
         consent: {
           title: "Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)",
           desc:
-            "Für GPS-Koordinaten und Marketingmitteilungen bitten wir um Ihre ausdrückliche Einwilligung, die Sie jederzeit widerrufen können.",
+            "Für das Auslesen des Telefonstandorts in der App QRGo Driver (er bleibt auf dem Telefon) und für Marketingmitteilungen bitten wir um Ihre ausdrückliche Einwilligung, die Sie jederzeit widerrufen können.",
         },
       },
       thirdParties: {
@@ -5754,7 +5820,7 @@ export const translations = {
         title: "13. Kontakt",
         intro:
           "Bei allen Fragen zu Ihren personenbezogenen Daten oder zur Ausübung Ihrer Rechte nach der DSGVO können Sie sich an uns wenden:",
-        operator: "Verantwortlicher",
+        operator: "Verantwortlicher für die Dashboard-Konten, die Abrechnung und die Nachrichten des Kontaktformulars; Auftragsverarbeiter für die Check-in-Daten der Fahrer",
         email: "E-Mail",
         responseTime: "Wir beantworten Anfragen innerhalb von 30 Kalendertagen.",
       },
@@ -5936,7 +6002,7 @@ export const translations = {
           "Vorauszahlung des Abonnements",
           "Korrekte Rechnungsdaten",
           "Rechtmäßige Nutzung der Plattform",
-          "Einhaltung der DSGVO in Bezug auf die Daten der Fahrer",
+          "Einhaltung der DSGVO für die Daten der Fahrer, für die der Kunde der Verantwortliche ist; der Anbieter verarbeitet sie im Auftrag des Kunden, als Auftragsverarbeiter",
           "Verbot des Weiterverkaufs des Dienstes",
         ],
       },
@@ -6314,7 +6380,7 @@ export const translations = {
         title: "7. Kontakt",
         intro:
           "Bei Fragen zur Verwendung von Cookies oder zur Ausübung Ihrer Rechte nach der DSGVO:",
-        operator: "Verantwortlicher",
+        operator: "Das Unternehmen hinter diesen Websites",
         email: "E-Mail",
       },
     },
@@ -7804,12 +7870,24 @@ export const translations = {
       intro: {
         title: "1. Wprowadzenie",
         p1:
-          "{company} („Administrator”), z siedzibą pod adresem {office}, CUI {cui}, szanuje prywatność Twoich danych osobowych.",
+          "{company} z siedzibą pod adresem {office}, CUI {cui} („my”), udostępnia platformę Logistiq i szanuje prywatność Twoich danych osobowych.",
         p2:
           "Niniejsza polityka opisuje, w jaki sposób zbieramy, wykorzystujemy i chronimy dane osobowe zgodnie z ogólnym rozporządzeniem o ochronie danych (RODO - rozporządzenie (UE) 2016/679).",
+        roles: {
+          title: "Nasza rola",
+          controller: {
+            title: "Gdzie jesteśmy administratorem",
+            desc: "W przypadku kont użytkowników dashboardu (logistiq.cloud), rozliczeń oraz wiadomości wysyłanych przez formularz kontaktowy w logistiq.ro to my decydujemy, w jakim celu i w jaki sposób przetwarzane są dane osobowe: jesteśmy administratorem danych.",
+          },
+          processor: {
+            title: "Gdzie jesteśmy podmiotem przetwarzającym",
+            desc: "W przypadku danych kierowców, którzy dokonują check-inu w magazynie (w qrgo.ro, w aplikacji QRGo Driver, na tablecie QRGo Self lub wprowadzonych przez personel magazynu), administratorem danych jest magazyn, w którym dokonuje się check-inu, czyli nasz klient. Przetwarzamy te dane w imieniu magazynu, jako podmiot przetwarzający. Aby skorzystać ze swoich praw dotyczących tych danych, skontaktuj się z magazynem, w którym dokonałeś check-inu, lub napisz do nas.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Jakie dane osobowe zbieramy",
+        controllerIntro: "Jako administrator: konta użytkowników dashboardu, rozliczenia i formularz kontaktowy witryny.",
         identification: {
           title: "Dane identyfikacyjne",
           items: [
@@ -7841,18 +7919,22 @@ export const translations = {
           items: [
             "Adres IP",
             "User Agent (przeglądarka/urządzenie)",
-            "Współrzędne GPS (za Twoją zgodą, w celu automatycznego wykrywania lokalizacji)",
+            "Przy otwarciu prezentacji wysłanej przez nas linkiem: czas, przeglądarka i system w skrócie (na przykład „Chrome · Windows”) oraz skrót z kluczem (hash) adresu IP, nigdy sam adres; przechowywane 12 miesięcy",
           ],
         },
+        processorIntro: "Jako podmiot przetwarzający, w imieniu magazynu, w którym dokonuje się check-inu: dane check-inu kierowców.",
         activity: {
-          title: "Dane dotyczące aktywności",
+          title: "Dane check-inu kierowców",
           items: [
-            "Historia check-inów",
-            "Wiadomości wymieniane z operatorami",
-            "Załączniki (CMR, zdjęcia dokumentów)",
-            "Czas spędzony na każdym etapie operacji",
+            "Imię i nazwisko oraz numer telefonu kierowcy",
+            "Numery rejestracyjne ciężarówki i naczepy, firma transportowa",
+            "Szczegóły check-inu: rodzaj operacji, numery referencyjne, uwagi, planowana godzina przyjazdu, wybrany język, data i godzina",
+            "Dokumenty przesłane przy check-inie (CMR, zdjęcia dokumentów)",
+            "Wiadomości wymieniane z operatorami magazynu",
+            "Historia check-inów i czas spędzony na każdym etapie",
           ],
         },
+        locationNote: "Aplikacja QRGo Driver odczytuje lokalizację telefonu po otwarciu, na telefonie i za Twoją zgodą, aby zaproponować magazyn, do którego dotarłeś. Lokalizacja nigdy nie opuszcza telefonu: nie otrzymujemy jej ani my, ani magazyn.",
       },
       purposes: {
         title: "3. Cele przetwarzania",
@@ -7887,7 +7969,7 @@ export const translations = {
         consent: {
           title: "Zgoda (art. 6 ust. 1 lit. a RODO)",
           desc:
-            "W przypadku współrzędnych GPS i komunikacji marketingowej prosimy o Twoją wyraźną zgodę, którą możesz w dowolnym momencie wycofać.",
+            "W przypadku odczytu lokalizacji telefonu w aplikacji QRGo Driver (pozostaje ona na telefonie) i komunikacji marketingowej prosimy o Twoją wyraźną zgodę, którą możesz w dowolnym momencie wycofać.",
         },
       },
       thirdParties: {
@@ -8044,7 +8126,7 @@ export const translations = {
         title: "13. Kontakt",
         intro:
           "W przypadku jakichkolwiek pytań dotyczących Twoich danych osobowych lub w celu skorzystania z praw przysługujących Ci na mocy RODO możesz się z nami skontaktować:",
-        operator: "Administrator danych",
+        operator: "Administrator kont dashboardu, rozliczeń i wiadomości z formularza kontaktowego; podmiot przetwarzający dane check-inu kierowców",
         email: "E-mail",
         responseTime: "Odpowiemy na zgłoszenia w terminie 30 dni kalendarzowych.",
       },
@@ -8225,7 +8307,7 @@ export const translations = {
           "Płatność za subskrypcję z góry",
           "Prawidłowe dane rozliczeniowe",
           "Korzystanie z Platformy zgodnie z prawem",
-          "Przestrzeganie RODO w odniesieniu do danych kierowców",
+          "Przestrzeganie RODO w odniesieniu do danych kierowców, których administratorem jest Klient; Usługodawca przetwarza je w imieniu Klienta, jako podmiot przetwarzający",
           "Zakaz odsprzedaży usługi",
         ],
       },
@@ -8593,7 +8675,7 @@ export const translations = {
         title: "7. Kontakt",
         intro:
           "W przypadku pytań dotyczących wykorzystywania plików cookie lub w celu skorzystania z praw przysługujących Ci na mocy RODO:",
-        operator: "Administrator",
+        operator: "Spółka prowadząca te witryny",
         email: "E-mail",
       },
     },
@@ -10092,12 +10174,24 @@ export const translations = {
       intro: {
         title: "1. Bevezetés",
         p1:
-          "A {company} („Adatkezelő”), székhelye: {office}, adószáma (CUI): {cui}, tiszteletben tartja az Ön személyes adatainak bizalmas jellegét.",
+          "A {company}, székhelye: {office}, adószáma (CUI): {cui} („mi”), biztosítja a Logistiq platformot, és tiszteletben tartja az Ön személyes adatainak bizalmas jellegét.",
         p2:
           "Ez a szabályzat ismerteti, hogyan gyűjtjük, használjuk fel és védjük a személyes adatokat az általános adatvédelmi rendeletnek (GDPR – az (EU) 2016/679 rendelet) megfelelően.",
+        roles: {
+          title: "A szerepünk",
+          controller: {
+            title: "Ahol mi vagyunk az adatkezelő",
+            desc: "Az irányítópult (logistiq.cloud) felhasználói fiókjai, a számlázás és a logistiq.ro kapcsolatfelvételi űrlapján küldött üzenetek esetében mi döntjük el, miért és hogyan kezeljük a személyes adatokat: mi vagyunk az adatkezelő.",
+          },
+          processor: {
+            title: "Ahol mi vagyunk az adatfeldolgozó",
+            desc: "A raktárban check-int végző sofőrök adatai esetében (a qrgo.ro-n, a QRGo Driver alkalmazásban, egy QRGo Self táblagépen, vagy a raktár személyzete által rögzítve) az adatkezelő az a raktár, ahol a check-in történik, vagyis az ügyfelünk. Ezeket az adatokat a raktár nevében kezeljük, adatfeldolgozóként. Az ezen adatokkal kapcsolatos jogai gyakorlásához forduljon ahhoz a raktárhoz, ahol check-int végzett, vagy írjon nekünk.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Milyen személyes adatokat gyűjtünk",
+        controllerIntro: "Adatkezelőként: az irányítópult felhasználói fiókjai, a számlázás és a webhely kapcsolatfelvételi űrlapja.",
         identification: {
           title: "Azonosító adatok",
           items: [
@@ -10129,18 +10223,22 @@ export const translations = {
           items: [
             "IP-cím",
             "User Agent (böngésző/eszköz)",
-            "GPS-koordináták (az Ön hozzájárulásával, az automatikus helymeghatározáshoz)",
+            "Egy általunk linkkel küldött bemutató megnyitásakor: az időpont, a böngésző és a rendszer röviden (például „Chrome · Windows”), valamint az IP-cím kulccsal képzett hash-e, soha nem maga a cím; 12 hónapig őrizzük meg",
           ],
         },
+        processorIntro: "Adatfeldolgozóként, annak a raktárnak a nevében, ahol a check-in történik: a sofőrök check-in-adatai.",
         activity: {
-          title: "Tevékenységi adatok",
+          title: "A sofőrök check-in-adatai",
           items: [
-            "Check-in-előzmények",
-            "Az operátorokkal váltott üzenetek",
-            "Mellékletek (CMR, dokumentumfotók)",
-            "A művelet egyes szakaszaiban eltöltött idő",
+            "A sofőr neve és telefonszáma",
+            "A teherautó és a pótkocsi rendszáma, a fuvarozó cég",
+            "A check-in részletei: a művelet típusa, hivatkozások, megjegyzések, a tervezett érkezési idő, a választott nyelv, a dátum és az időpont",
+            "A check-inkor feltöltött dokumentumok (CMR, dokumentumfotók)",
+            "A raktár operátoraival váltott üzenetek",
+            "A check-in-előzmények és az egyes szakaszokban eltöltött idő",
           ],
         },
+        locationNote: "A QRGo Driver alkalmazás megnyitáskor a telefonon, az Ön engedélyével olvassa ki a telefon helyzetét, hogy felajánlja azt a raktárt, ahová megérkezett. A helyadat soha nem hagyja el a telefont: sem mi, sem a raktár nem kapja meg.",
       },
       purposes: {
         title: "3. Az adatkezelés céljai",
@@ -10175,7 +10273,7 @@ export const translations = {
         consent: {
           title: "Hozzájárulás (a GDPR 6. cikk (1) bekezdés a) pontja)",
           desc:
-            "A GPS-koordináták és a marketingkommunikáció esetében kifejezett hozzájárulását kérjük, amelyet bármikor visszavonhat.",
+            "A telefon helyzetének kiolvasásához a QRGo Driver alkalmazásban (a helyadat a telefonon marad) és a marketingkommunikációhoz kifejezett hozzájárulását kérjük, amelyet bármikor visszavonhat.",
         },
       },
       thirdParties: {
@@ -10334,7 +10432,7 @@ export const translations = {
         title: "13. Kapcsolat",
         intro:
           "Személyes adataival kapcsolatos bármely kérdés esetén, illetve a GDPR szerinti jogai gyakorlása érdekében kapcsolatba léphet velünk:",
-        operator: "Adatkezelő",
+        operator: "Adatkezelő az irányítópult fiókjai, a számlázás és a kapcsolatfelvételi űrlap üzenetei tekintetében; adatfeldolgozó a sofőrök check-in-adatai tekintetében",
         email: "E-mail",
         responseTime: "A kérelmekre 30 naptári napon belül válaszolunk.",
       },
@@ -10515,7 +10613,7 @@ export const translations = {
           "Az előfizetési díj előre történő megfizetése",
           "Helyes számlázási adatok",
           "A Platform jogszerű használata",
-          "A GDPR betartása a sofőrök adatai tekintetében",
+          "A GDPR betartása a sofőrök adatai tekintetében, amelyek adatkezelője az Ügyfél; a Szolgáltató az Ügyfél nevében, adatfeldolgozóként kezeli azokat",
           "A szolgáltatás továbbértékesítésének tilalma",
         ],
       },
@@ -10888,7 +10986,7 @@ export const translations = {
         title: "7. Kapcsolat",
         intro:
           "A cookie-k használatával kapcsolatos kérdések esetén, illetve a GDPR szerinti jogai gyakorlásához:",
-        operator: "Adatkezelő",
+        operator: "A webhelyeket üzemeltető társaság",
         email: "E-mail",
       },
     },
@@ -12387,12 +12485,24 @@ export const translations = {
       intro: {
         title: "1. Въведение",
         p1:
-          "{company} („Администраторът“), със седалище и адрес на управление {office}, CUI {cui}, уважава поверителността на вашите лични данни.",
+          "{company}, със седалище и адрес на управление {office}, CUI {cui} („ние“), предоставя платформата Logistiq и уважава поверителността на вашите лични данни.",
         p2:
           "Тази политика описва как събираме, използваме и защитаваме личните данни в съответствие с Общия регламент относно защитата на данните (ОРЗД - Регламент (ЕС) 2016/679).",
+        roles: {
+          title: "Нашата роля",
+          controller: {
+            title: "Когато сме администратор",
+            desc: "За потребителските профили в таблото (logistiq.cloud), за фактурирането и за съобщенията, изпратени чрез формуляра за контакт в logistiq.ro, ние решаваме защо и как се обработват личните данни: ние сме администраторът на лични данни.",
+          },
+          processor: {
+            title: "Когато сме обработващ лични данни",
+            desc: "За данните на шофьорите, които правят check-in в склад (в qrgo.ro, в приложението QRGo Driver, на таблет QRGo Self или въведени от персонала на склада), администратор на лични данни е складът, в който се прави check-in, т.е. нашият клиент. Ние обработваме тези данни от името на склада, като обработващ лични данни. За да упражните правата си по отношение на тези данни, свържете се със склада, в който сте направили check-in, или ни пишете.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Какви лични данни събираме",
+        controllerIntro: "Като администратор: потребителските профили в таблото, фактурирането и формуляра за контакт на сайта.",
         identification: {
           title: "Идентификационни данни",
           items: [
@@ -12424,18 +12534,22 @@ export const translations = {
           items: [
             "IP адрес",
             "User Agent (браузър/устройство)",
-            "GPS координати (с вашето съгласие, за автоматично засичане на местоположението)",
+            "При отваряне на презентация, изпратена от нас чрез линк: часът, браузърът и системата накратко (например „Chrome · Windows“) и хеш с ключ на IP адреса, никога самият адрес; пазят се 12 месеца",
           ],
         },
+        processorIntro: "Като обработващ лични данни, от името на склада, в който се прави check-in: данните от check-in на шофьорите.",
         activity: {
-          title: "Данни за активността",
+          title: "Данни от check-in на шофьорите",
           items: [
-            "История на check-in-ите",
-            "Съобщения, разменени с операторите",
-            "Прикачени файлове (CMR, снимки на документи)",
-            "Време, прекарано във всеки етап на операцията",
+            "Име и телефонен номер на шофьора",
+            "Регистрационни номера на камиона и ремаркето, транспортна фирма",
+            "Подробности за check-in: вид на операцията, референции, бележки, планиран час на пристигане, избраният език, датата и часът",
+            "Документи, качени при check-in (CMR, снимки на документи)",
+            "Съобщения, разменени с операторите на склада",
+            "История на check-in-ите и времето, прекарано във всеки етап",
           ],
         },
+        locationNote: "Приложението QRGo Driver прочита местоположението на телефона при отварянето си, на самия телефон и с ваше разрешение, за да ви предложи склада, до който сте пристигнали. Местоположението никога не напуска телефона: не го получаваме нито ние, нито складът.",
       },
       purposes: {
         title: "3. Цели на обработването",
@@ -12470,7 +12584,7 @@ export const translations = {
         consent: {
           title: "Съгласие (чл. 6, параграф 1, буква „а“ от ОРЗД)",
           desc:
-            "За GPS координатите и маркетинговите комуникации искаме вашето изрично съгласие, което можете да оттеглите по всяко време.",
+            "За прочитането на местоположението на телефона в приложението QRGo Driver (то остава на телефона) и за маркетинговите комуникации искаме вашето изрично съгласие, което можете да оттеглите по всяко време.",
         },
       },
       thirdParties: {
@@ -12625,7 +12739,7 @@ export const translations = {
         title: "13. Контакт",
         intro:
           "За всякакви въпроси относно вашите лични данни или за упражняване на правата ви по ОРЗД можете да се свържете с нас:",
-        operator: "Администратор на лични данни",
+        operator: "Администратор за профилите в таблото, фактурирането и съобщенията от формуляра за контакт; обработващ лични данни за данните от check-in на шофьорите",
         email: "Имейл",
         responseTime: "Ще отговаряме на исканията в срок до 30 календарни дни.",
       },
@@ -12806,7 +12920,7 @@ export const translations = {
           "Авансово заплащане на абонамента",
           "Верни данни за фактуриране",
           "Законосъобразно използване на Платформата",
-          "Спазване на ОРЗД по отношение на данните на шофьорите",
+          "Спазване на ОРЗД по отношение на данните на шофьорите, за които Клиентът е администратор; Доставчикът ги обработва от името на Клиента, като обработващ лични данни",
           "Забрана за препродажба на услугата",
         ],
       },
@@ -13179,7 +13293,7 @@ export const translations = {
         title: "7. Контакт",
         intro:
           "За въпроси относно използването на бисквитки или за упражняване на правата ви съгласно ОРЗД:",
-        operator: "Администратор",
+        operator: "Дружеството, което управлява тези сайтове",
         email: "Имейл",
       },
     },
@@ -14669,12 +14783,24 @@ export const translations = {
       intro: {
         title: "1. Introduction",
         p1:
-          "{company} (le « responsable du traitement »), dont le siège social est situé {office}, numéro d'identification fiscale (CUI) {cui}, respecte la confidentialité de vos données à caractère personnel.",
+          "{company}, dont le siège social est situé {office}, numéro d'identification fiscale (CUI) {cui} (« nous »), fournit la plateforme Logistiq et respecte la confidentialité de vos données à caractère personnel.",
         p2:
           "La présente politique décrit la manière dont nous collectons, utilisons et protégeons les données à caractère personnel, conformément au règlement général sur la protection des données (RGPD – règlement (UE) 2016/679).",
+        roles: {
+          title: "Notre rôle",
+          controller: {
+            title: "Lorsque nous sommes responsable du traitement",
+            desc: "Pour les comptes d'utilisateur du tableau de bord (logistiq.cloud), pour la facturation et pour les messages envoyés par le formulaire de contact de logistiq.ro, c'est nous qui déterminons pourquoi et comment les données à caractère personnel sont traitées : nous sommes le responsable du traitement.",
+          },
+          processor: {
+            title: "Lorsque nous sommes sous-traitant",
+            desc: "Pour les données des chauffeurs qui effectuent un check-in dans un entrepôt (sur qrgo.ro, dans l'application QRGo Driver, sur une tablette QRGo Self ou saisies par le personnel de l'entrepôt), le responsable du traitement est l'entrepôt où le check-in est effectué, qui est notre client. Nous traitons ces données pour le compte de l'entrepôt, en tant que sous-traitant. Pour exercer vos droits sur ces données, contactez l'entrepôt où vous avez effectué le check-in, ou écrivez-nous.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Données à caractère personnel que nous collectons",
+        controllerIntro: "En tant que responsable du traitement : les comptes d'utilisateur du tableau de bord, la facturation et le formulaire de contact du site.",
         identification: {
           title: "Données d'identification",
           items: [
@@ -14706,18 +14832,22 @@ export const translations = {
           items: [
             "Adresse IP",
             "User Agent (navigateur/appareil)",
-            "Coordonnées GPS (avec votre consentement, pour la détection automatique de la localisation)",
+            "À l'ouverture d'une présentation que nous avons envoyée par lien : l'heure, le navigateur et le système en bref (par exemple « Chrome · Windows ») et une empreinte à clé (hash) de l'adresse IP, jamais l'adresse elle-même ; conservés 12 mois",
           ],
         },
+        processorIntro: "En tant que sous-traitant, pour le compte de l'entrepôt où le check-in est effectué : les données de check-in des chauffeurs.",
         activity: {
-          title: "Données d'activité",
+          title: "Données de check-in des chauffeurs",
           items: [
-            "Historique des check-ins",
-            "Messages échangés avec les opérateurs",
-            "Pièces jointes (CMR, photos de documents)",
-            "Temps passé à chaque étape de l'opération",
+            "Nom et numéro de téléphone du chauffeur",
+            "Immatriculations du camion et de la remorque, société de transport",
+            "Détails du check-in : type d'opération, références, remarques, heure d'arrivée prévue, langue choisie, date et heure",
+            "Documents téléversés lors du check-in (CMR, photos de documents)",
+            "Messages échangés avec les opérateurs de l'entrepôt",
+            "Historique des check-ins et temps passé à chaque étape",
           ],
         },
+        locationNote: "L'application QRGo Driver lit la position du téléphone à son ouverture, sur le téléphone et avec votre autorisation, pour vous proposer l'entrepôt où vous êtes arrivé. La position ne quitte jamais le téléphone : ni nous ni l'entrepôt ne la recevons.",
       },
       purposes: {
         title: "3. Finalités du traitement",
@@ -14752,7 +14882,7 @@ export const translations = {
         consent: {
           title: "Consentement (article 6, paragraphe 1, point a), du RGPD)",
           desc:
-            "Pour les coordonnées GPS et les communications marketing, nous vous demandons votre consentement explicite, que vous pouvez retirer à tout moment.",
+            "Pour la lecture de la position du téléphone dans l'application QRGo Driver (elle reste sur le téléphone) et pour les communications marketing, nous vous demandons votre consentement explicite, que vous pouvez retirer à tout moment.",
         },
       },
       thirdParties: {
@@ -14917,7 +15047,7 @@ export const translations = {
         title: "13. Contact",
         intro:
           "Pour toute question concernant vos données à caractère personnel ou pour exercer vos droits au titre du RGPD, vous pouvez nous contacter :",
-        operator: "Responsable du traitement",
+        operator: "Responsable du traitement pour les comptes du tableau de bord, la facturation et les messages du formulaire de contact ; sous-traitant pour les données de check-in des chauffeurs",
         email: "E-mail",
         responseTime: "Nous répondrons aux demandes dans un délai de 30 jours calendaires.",
       },
@@ -15099,7 +15229,7 @@ export const translations = {
           "Paiement anticipé de l'abonnement",
           "Données de facturation exactes",
           "Utilisation licite de la Plateforme",
-          "Respect du RGPD pour les données des chauffeurs",
+          "Respect du RGPD pour les données des chauffeurs, dont le Client est le responsable du traitement ; le Prestataire les traite pour le compte du Client, en tant que sous-traitant",
           "Interdiction de revente du service",
         ],
       },
@@ -15472,7 +15602,7 @@ export const translations = {
         title: "7. Contact",
         intro:
           "Pour toute question concernant l'utilisation des cookies ou pour exercer vos droits au titre du RGPD :",
-        operator: "Responsable du traitement",
+        operator: "La société qui exploite ces sites",
         email: "E-mail",
       },
     },
@@ -16962,12 +17092,24 @@ export const translations = {
       intro: {
         title: "1. Inleiding",
         p1:
-          "{company} (\"Verwerkingsverantwoordelijke\"), gevestigd te {office}, fiscaal identificatienummer (CUI) {cui}, respecteert de vertrouwelijkheid van uw persoonsgegevens.",
+          "{company}, gevestigd te {office}, fiscaal identificatienummer (CUI) {cui} („wij”), levert het Logistiq-platform en respecteert de vertrouwelijkheid van uw persoonsgegevens.",
         p2:
           "Dit beleid beschrijft hoe wij persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de Algemene Verordening Gegevensbescherming (AVG - Verordening (EU) 2016/679).",
+        roles: {
+          title: "Onze rol",
+          controller: {
+            title: "Waar wij verwerkingsverantwoordelijke zijn",
+            desc: "Voor de gebruikersaccounts van het dashboard (logistiq.cloud), voor de facturatie en voor de berichten die via het contactformulier op logistiq.ro worden verstuurd, bepalen wij waarom en hoe persoonsgegevens worden verwerkt: wij zijn de verwerkingsverantwoordelijke.",
+          },
+          processor: {
+            title: "Waar wij verwerker zijn",
+            desc: "Voor de gegevens van chauffeurs die bij een magazijn inchecken (op qrgo.ro, in de app QRGo Driver, op een QRGo Self-tablet of ingevoerd door het personeel van het magazijn) is de verwerkingsverantwoordelijke het magazijn waar de check-in plaatsvindt, onze klant. Wij verwerken deze gegevens namens het magazijn, als verwerker. Om uw rechten op deze gegevens uit te oefenen, neemt u contact op met het magazijn waar u hebt ingecheckt, of schrijft u ons.",
+          },
+        },
       },
       dataCollected: {
         title: "2. Welke persoonsgegevens wij verzamelen",
+        controllerIntro: "Als verwerkingsverantwoordelijke: de gebruikersaccounts van het dashboard, de facturatie en het contactformulier van de website.",
         identification: {
           title: "Identificatiegegevens",
           items: [
@@ -16999,18 +17141,22 @@ export const translations = {
           items: [
             "IP-adres",
             "User Agent (browser/apparaat)",
-            "GPS-coördinaten (met uw toestemming, voor automatische locatiedetectie)",
+            "Bij het openen van een presentatie die wij via een link stuurden: het tijdstip, de browser en het systeem in het kort (bijvoorbeeld „Chrome · Windows”) en een met een sleutel berekende hash van het IP-adres, nooit het adres zelf; 12 maanden bewaard",
           ],
         },
+        processorIntro: "Als verwerker, namens het magazijn waar de check-in plaatsvindt: de check-ingegevens van chauffeurs.",
         activity: {
-          title: "Activiteitsgegevens",
+          title: "Check-ingegevens van chauffeurs",
           items: [
-            "Check-ingeschiedenis",
-            "Berichten uitgewisseld met de operators",
-            "Bijlagen (CMR, foto's van documenten)",
-            "Tijd doorgebracht in elke fase van de operatie",
+            "Naam en telefoonnummer van de chauffeur",
+            "Kentekens van vrachtwagen en aanhanger, transportbedrijf",
+            "Gegevens van de check-in: soort operatie, referenties, opmerkingen, geplande aankomsttijd, de gekozen taal, de datum en het tijdstip",
+            "Bij de check-in geüploade documenten (CMR, foto's van documenten)",
+            "Berichten uitgewisseld met de operators van het magazijn",
+            "Check-ingeschiedenis en de tijd in elke fase",
           ],
         },
+        locationNote: "De app QRGo Driver leest de locatie van de telefoon wanneer ze wordt geopend, op de telefoon en met uw toestemming, om u het magazijn voor te stellen waar u bent aangekomen. De locatie verlaat de telefoon nooit: noch wij noch het magazijn ontvangen ze.",
       },
       purposes: {
         title: "3. Verwerkingsdoeleinden",
@@ -17045,7 +17191,7 @@ export const translations = {
         consent: {
           title: "Toestemming (art. 6, lid 1, onder a, AVG)",
           desc:
-            "Voor GPS-coördinaten en marketingcommunicatie vragen wij uw uitdrukkelijke toestemming, die u te allen tijde kunt intrekken.",
+            "Voor het uitlezen van de locatie van de telefoon in de app QRGo Driver (die op de telefoon blijft) en voor marketingcommunicatie vragen wij uw uitdrukkelijke toestemming, die u te allen tijde kunt intrekken.",
         },
       },
       thirdParties: {
@@ -17209,7 +17355,7 @@ export const translations = {
         title: "13. Contact",
         intro:
           "Voor alle vragen over uw persoonsgegevens of om uw rechten op grond van de AVG uit te oefenen, kunt u contact met ons opnemen:",
-        operator: "Verwerkingsverantwoordelijke",
+        operator: "Verwerkingsverantwoordelijke voor de dashboardaccounts, de facturatie en de berichten van het contactformulier; verwerker voor de check-ingegevens van chauffeurs",
         email: "E-mail",
         responseTime: "Wij beantwoorden verzoeken binnen 30 kalenderdagen.",
       },
@@ -17392,7 +17538,7 @@ export const translations = {
           "Vooruitbetaling van het abonnement",
           "Juiste facturatiegegevens",
           "Wettig gebruik van het Platform",
-          "Naleving van de AVG voor de gegevens van chauffeurs",
+          "Naleving van de AVG voor de gegevens van chauffeurs, waarvan de Klant de verwerkingsverantwoordelijke is; de Dienstverlener verwerkt ze namens de Klant, als verwerker",
           "Verbod op wederverkoop van de dienst",
         ],
       },
@@ -17770,7 +17916,7 @@ export const translations = {
         title: "7. Contact",
         intro:
           "Voor vragen over het gebruik van cookies of om uw rechten op grond van de AVG uit te oefenen:",
-        operator: "Verwerkingsverantwoordelijke",
+        operator: "Het bedrijf achter deze websites",
         email: "E-mail",
       },
     },

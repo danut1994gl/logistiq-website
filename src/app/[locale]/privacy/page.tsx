@@ -193,11 +193,17 @@ export default function PrivacyPage({
           <SectionTitle>{t.intro.title}</SectionTitle>
           <Paragraph>{withCompany(t.intro.p1, translations[locale])}</Paragraph>
           <Paragraph>{t.intro.p2}</Paragraph>
+          {/* The two roles (owner, 2026-11-26, D4): controller for our own users, billing and
+              the contact form; processor, for the warehouse, of its drivers' check-in data. */}
+          <h3 className="font-medium text-slate-800 dark:text-slate-200 mt-6 mb-3">{t.intro.roles.title}</h3>
+          <LegalBasisCard title={t.intro.roles.controller.title} desc={t.intro.roles.controller.desc} />
+          <LegalBasisCard title={t.intro.roles.processor.title} desc={t.intro.roles.processor.desc} />
         </Section>
 
         {/* Section 2: Data Collected */}
         <Section delay={2}>
           <SectionTitle>{t.dataCollected.title}</SectionTitle>
+          <Paragraph>{t.dataCollected.controllerIntro}</Paragraph>
           <SubSection title={t.dataCollected.identification.title}>
             <List items={t.dataCollected.identification.items} />
           </SubSection>
@@ -210,9 +216,11 @@ export default function PrivacyPage({
           <SubSection title={t.dataCollected.technical.title}>
             <List items={t.dataCollected.technical.items} />
           </SubSection>
+          <Paragraph>{t.dataCollected.processorIntro}</Paragraph>
           <SubSection title={t.dataCollected.activity.title}>
             <List items={t.dataCollected.activity.items} />
           </SubSection>
+          <p className="text-sm text-slate-500 dark:text-slate-400 italic">{t.dataCollected.locationNote}</p>
         </Section>
 
         {/* Section 3: Purposes */}
