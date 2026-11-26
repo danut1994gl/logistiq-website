@@ -19,16 +19,30 @@ function sources(dir: string): string[] {
 }
 
 const rel = (f: string) => f.slice(SRC.length);
-const COOKIE_WRITE = /document\.cookie\s*=|cookies\(\)\.set|\.cookies\.set\(/;
+const COOKIE_WRITE = /\.cookie\s*=|cookies\(\)\.set|\.cookies\.set\(/;
 
 describe("browser writes", () => {
-  it("the language menu's click is the only cookie writer", () => {
+  it("the language menu's click is the only cookie writer; LegacyBrowserData only deletes", () => {
     const writes = sources(SRC).flatMap((f) =>
       readFileSync(f, "utf8")
         .split("\n")
         .filter((line) => COOKIE_WRITE.test(line))
         .map((line) => `${rel(f)}: ${line.trim()}`),
     );
-    expect(writes).toEqual(["components/site/SiteHeader.tsx: document.cookie = localeCookie(site, loc);"]);
+    expect(writes).toEqual([
+      "components/site/LegacyBrowserData.tsx: if (present.has(name)) jar.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;",
+      "components/site/SiteHeader.tsx: document.cookie = localeCookie(site, loc);",
+    ]);
+  });
+
+  // The cookie banner kept its answer in localStorage (logistiq_cookie_consent); since it
+  // went (2026-11-26) no first-party code stores anything in the browser, and
+  // LegacyBrowserData is the one file that touches localStorage, to remove that record.
+  it("nothing stores data in the browser, and only LegacyBrowserData touches localStorage", () => {
+    const files = sources(SRC);
+    const stores = files.filter((f) => /(local|session)Storage\.setItem|indexedDB|caches\.open/.test(readFileSync(f, "utf8")));
+    expect(stores.map(rel)).toEqual([]);
+    const local = files.filter((f) => /localStorage|sessionStorage/.test(readFileSync(f, "utf8")));
+    expect(local.map(rel)).toEqual(["components/site/LegacyBrowserData.tsx"]);
   });
 });

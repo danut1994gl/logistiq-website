@@ -5,6 +5,7 @@ import { translations } from "@/lib/i18n/translations";
 import { locales, localeToHreflang, isValidLocale } from "@/lib/i18n/config";
 import { buildAlternates, SITE_URL } from "@/lib/seo/metadata";
 import { JsonLd, siteGraph } from "@/lib/seo/jsonld";
+import LegacyBrowserData from "@/components/site/LegacyBrowserData";
 
 // Canonical Logistiq feature list — mirrored in the SoftwareApplication schema.
 const SOFTWARE_FEATURES = [
@@ -141,6 +142,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`${inter.variable} antialiased bg-white dark:bg-slate-950 text-slate-900 dark:text-white`}
       >
         {children}
+        <LegacyBrowserData />
       </body>
     </html>
   );
