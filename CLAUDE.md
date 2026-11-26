@@ -20,7 +20,8 @@ no `tailwind.config`). Deploys to Vercel project `logistiq-website` → logistiq
 3. **All user-facing text is translated in ALL 8 locales.** Add keys to every
    locale block in `src/lib/i18n/translations.ts` (`ro en de pl hu bg fr nl`).
    `type Translations = typeof translations.ro` is the load-bearing contract —
-   keep every locale structurally identical to `ro`.
+   keep every locale structurally identical to `ro`: a key removed from one locale is
+   removed from all eight, and lists keep one length (`structure.test.ts`).
 4. **Every page ships SEO metadata + JSON-LD.** Use the shared helpers (below).
    Never inline canonical/hreflang/JSON-LD by hand.
 5. **Verify before pushing:** `npm run build` must pass; drive the change (curl or
@@ -57,9 +58,9 @@ src/app/
   sitemap.ts  robots.ts  llms.txt/  llms-full.txt/
   api/contact/route.ts       # contact form → email + lead row, behind the anti-spam layers
 src/instrumentation-client.ts  # browser init before hydration: Vercel BotID for POST /api/contact
-src/components/{icons,mockups,sections,site}/   # site/ = SiteHeader, SiteFooter, PageHero, Breadcrumbs
+src/components/{icons,mockups,sections,site}/   # site/ = SiteHeader, SiteFooter, LegacyBrowserData, PageHero, Breadcrumbs
 src/lib/
-  navigation.ts  company.ts  href.ts  features.ts  faq.ts
+  navigation.ts  company.ts  legal-identity.ts  cookie-kinds.ts  href.ts  features.ts  faq.ts
   i18n/{config,translations,segments,sites}.ts
   seo/{metadata,jsonld}.ts(x)
   contact/{protocol,input,refusal,email,lead,recaptcha,recaptcha-client,smtp}.ts  # contact form anti-spam + input + answers + email + lead + mail TLS
@@ -267,6 +268,49 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   - `lib/patched-dependencies.test.ts` keeps nodemailer at 10.5.0 or later (10.1.4 closes
     the advisories; 10.5.0 brings the per-send AbortSignal), and checks that a send whose
     signal has aborted fails with `EABORT`.
+
+## Legal pages (privacy, terms, cookies)
+
+- **They say only what is true of the product today, and never promise more than before**
+  (owner, 2026-11-26). A change may promise less; a new legal position that only a lawyer
+  can settle goes to the owner, not into the copy.
+- **The company's identity comes from `lib/company.ts`** (name, CUI, trade register number,
+  office, e-mail), through `lib/legal-identity.ts` (`registeredOffice`, `withCompany` for the
+  `{company}`, `{office}`, `{cui}` placeholders). Never type it into a translation:
+  `legal-identity.test.tsx` and `company.test.ts` fail if a copy appears. English says "tax
+  ID (CUI)", never VAT: the company is not a VAT payer.
+- **The roles** (owner, D4): the warehouse, our client, is the controller of its drivers'
+  check-in data, which the company processes on its behalf; the company is the controller of
+  the dashboard's accounts, billing and the contact form. Each language uses the GDPR's own
+  words (`legal-roles.test.tsx`).
+- **No availability figure and no feature tied to a plan**: a guaranteed level, white-label
+  and priority or dedicated support exist as the offer or the contract states; plans differ
+  by the number of warehouses (`availability-copy.test.ts`, `plan-copy.test.ts`).
+- **The cookie policy's tables are facts about three codebases**: this site, and Logistiq's
+  `apps/dashboard`, `apps/driver`, `packages/shared` and `resources/presentation/src` (the
+  shared presentation at logistiq.cloud/p/…). Before a push that touches them, and whenever
+  the product adds or drops a cookie, a storage key or a third-party script, re-run these
+  searches against Logistiq `origin/main` and update the tables and `cookie-policy.test.tsx`
+  together (`lib/cookie-kinds.ts` says which cookies store a choice):
+
+  ```bash
+  P="git -C /root/logistiq"; R=origin/main
+  $P grep -nE "cookies\.set\(|Cookies\.set\(|document\.cookie\s*=|jar\.set\(|cookieStore\.set\(" $R -- apps/dashboard apps/driver packages/shared ':!graphify-out' | grep -v '\.test\.\|__tests__'
+  $P grep -nE "(localStorage|sessionStorage)\.setItem\(|window\.(local|session)Storage" $R -- apps/dashboard apps/driver packages/shared resources/presentation/src ':!graphify-out' | grep -v '\.test\.\|__tests__'
+  $P grep -nE "createElement\('script'\)|next/script|react-google-recaptcha|@react-google-maps/api|emoji-picker-react|challenges\.cloudflare\.com" $R -- apps/dashboard apps/driver resources/presentation/src ':!graphify-out' | grep -v '\.test\.\|__tests__\|package.json'
+  ```
+- **logistiq.ro stores nothing in a browser unasked** (no banner because of it; see "i18n &
+  URLs"). Anything that would change that reopens the consent question with the owner:
+  analytics, an embedded map or video, reCAPTCHA on the contact form (its keys are unset), and
+  a **blog article whose body loads an image from another host** (`lib/blog.ts` allows
+  http(s) images; none is published today, and the post-deploy live check opens an article
+  when one exists). **Vercel BotID** stores nothing at its basic level; a deeper check would
+  load a second script (`p.js`) whose storage is unknown, so the policy says "may" for it.
+  `LegacyBrowserData` removes what older versions left (the banner's record, the old
+  `NEXT_LOCALE` / `NEXT_LOCALE_BE`); `no-browser-writes.test.ts` keeps the writers to it and
+  the language menu.
+- **`legal.updatedOn` moves with every change of the legal text**, in all eight languages
+  (`legal-copy.test.ts`).
 
 ## Deploy / git
 
