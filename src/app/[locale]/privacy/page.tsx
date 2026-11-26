@@ -216,6 +216,9 @@ export default function PrivacyPage({
           <SubSection title={t.dataCollected.technical.title}>
             <List items={t.dataCollected.technical.items} />
           </SubSection>
+          <SubSection title={t.dataCollected.enquiries.title}>
+            <List items={t.dataCollected.enquiries.items} />
+          </SubSection>
           <Paragraph>{t.dataCollected.processorIntro}</Paragraph>
           <SubSection title={t.dataCollected.activity.title}>
             <List items={t.dataCollected.activity.items} />

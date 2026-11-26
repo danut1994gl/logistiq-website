@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {isSelfServeEnabled() && <PricingSection t={t} locale={locale} />}
       {/* <FAQSection t={t} /> */}
       <CTASection t={t} />
-      <ContactSection t={t} />
+      <ContactSection t={t} locale={locale} />
     </>
   );
 }

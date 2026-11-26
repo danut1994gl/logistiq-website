@@ -55,7 +55,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         />
       </div>
-      <ContactSection t={t} compact />
+      <ContactSection t={t} locale={locale} compact />
     </>
   );
 }

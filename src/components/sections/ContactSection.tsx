@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { type Translations } from "@/lib/i18n/translations";
+import { type Locale } from "@/lib/i18n/config";
+import { routeHref } from "@/lib/href";
 import { ArrowRightIcon } from "@/components/icons";
 import {
   ELAPSED_FIELD,
@@ -24,7 +27,7 @@ const HONEYPOT_STYLE: React.CSSProperties = {
   overflow: "hidden",
 };
 
-export function ContactSection({ t, compact = false }: { t: Translations; compact?: boolean }) {
+export function ContactSection({ t, locale, compact = false }: { t: Translations; locale: Locale; compact?: boolean }) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -339,6 +342,13 @@ export function ContactSection({ t, compact = false }: { t: Translations; compac
                   </>
                 )}
               </button>
+              {/* What a message is used for, and where the privacy policy says more (2026-11-26). */}
+              <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                {t.contact.privacyNotice}{" "}
+                <Link href={routeHref(locale, "/privacy")} className="underline underline-offset-2 hover:text-blue-600 dark:hover:text-blue-400">
+                  {t.footer.privacy}
+                </Link>
+              </p>
             </form>
           </div>
         </div>
