@@ -1532,13 +1532,22 @@ export const translations = {
         partners: [
           { name: "Supabase", purpose: "Bază de date și autentificare (servere în UE - Frankfurt, Germania)" },
           { name: "SmartBill", purpose: "Emitere facturi fiscale conforme (România)" },
-          { name: "Vercel", purpose: "Hosting și distribuție globală (CDN)" },
+          { name: "Vercel", purpose: "Hosting și distribuție globală (CDN); verificarea anti-robot a formularului de contact de pe logistiq.ro (BotID)" },
           { name: "Firebase Cloud Messaging (Google)", purpose: "Notificări push către aplicația QRGo Driver" },
           { name: "LiveKit", purpose: "Apeluri vocale de la tableta QRGo Self către operatorii depozitului" },
           { name: "WhatsApp (WAHA)", purpose: "Mesaje pe WhatsApp către șoferi și către persoanele de contact ale depozitului, trimise printr-o instanță WAHA" },
           { name: "Twilio / Vonage", purpose: "SMS-uri către șoferi, prin contul SMS configurat de fiecare depozit; Twilio trimite și codurile de verificare ale logistiq.cloud (verificarea telefonului și autentificarea în doi pași)" },
           { name: "Furnizorul nostru de găzduire e-mail", purpose: "E-mailurile contului și ale serviciului și mesajele din formularul de contact" },
           { name: "Google reCAPTCHA", purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor" },
+          {
+            name: "Cloudflare",
+            purpose: "Rețeaua prin care trece traficul qrgo.ro și logistiq.be; pe qrgo.ro limitează și rafalele de cereri, iar când căutările de programări sunt foarte multe, Cloudflare Turnstile confirmă că o persoană caută, citind semnale din browser și adresa IP a acestuia",
+          },
+          { name: "Google Maps", purpose: "Harta pe care se desenează geofence-ul unui depozit, în setările depozitului din logistiq.cloud" },
+          {
+            name: "jsDelivr",
+            purpose: "Livrează imaginile emoji din selectorul de emoji al chatului, pe logistiq.cloud și qrgo.ro, la deschiderea selectorului",
+          },
         ],
         note: "Nu vindem și nu partajăm datele dvs. personale cu terți în scopuri de marketing.",
       },
@@ -3554,13 +3563,19 @@ export const translations = {
         partners: [
           { name: "Supabase", purpose: "Database and authentication (EU servers - Frankfurt, Germany)" },
           { name: "SmartBill", purpose: "Compliant fiscal invoice generation (Romania)" },
-          { name: "Vercel", purpose: "Hosting and global distribution (CDN)" },
+          { name: "Vercel", purpose: "Hosting and global distribution (CDN); the bot check of logistiq.ro's contact form (BotID)" },
           { name: "Firebase Cloud Messaging (Google)", purpose: "Push notifications to the QRGo Driver app" },
           { name: "LiveKit", purpose: "Voice calls from the QRGo Self tablet to the warehouse's operators" },
           { name: "WhatsApp (WAHA)", purpose: "Messages on WhatsApp to drivers and to the warehouse's staff contacts, sent through a WAHA instance" },
           { name: "Twilio / Vonage", purpose: "SMS to drivers, through the SMS account each warehouse configures; Twilio also sends logistiq.cloud's verification codes (phone verification and two-step sign-in)" },
           { name: "Our e-mail hosting provider", purpose: "Account and service e-mails, and the contact form's messages" },
           { name: "Google reCAPTCHA", purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots" },
+          {
+            name: "Cloudflare",
+            purpose: "Carries the traffic of qrgo.ro and logistiq.be; on qrgo.ro it also limits bursts of requests and, when booking searches are under heavy load, Cloudflare Turnstile confirms that a person is searching, reading signals from the browser and its IP address",
+          },
+          { name: "Google Maps", purpose: "The map on which a warehouse's geofence is drawn, in logistiq.cloud's warehouse settings" },
+          { name: "jsDelivr", purpose: "Delivers the emoji pictures of the chat's emoji picker, on logistiq.cloud and qrgo.ro, when the picker is opened" },
         ],
         note: "We do not sell or share your personal data with third parties for marketing purposes.",
       },
@@ -5597,7 +5612,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting und globale Verteilung (CDN)",
+            purpose: "Hosting und globale Verteilung (CDN); die Bot-Prüfung des Kontaktformulars von logistiq.ro (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -5623,6 +5638,12 @@ export const translations = {
             name: "Google reCAPTCHA",
             purpose: "Schützt die Formulare von logistiq.cloud für die Anmeldung, das Zurücksetzen des Passworts und die Registrierung von Transportunternehmen vor Bots",
           },
+          {
+            name: "Cloudflare",
+            purpose: "Leitet den Datenverkehr von qrgo.ro und logistiq.be; auf qrgo.ro begrenzt es außerdem Spitzen von Anfragen, und wenn sehr viele Buchungssuchen eingehen, bestätigt Cloudflare Turnstile, dass ein Mensch sucht, und liest dazu Signale des Browsers und dessen IP-Adresse",
+          },
+          { name: "Google Maps", purpose: "Die Karte, auf der der Geofence eines Lagers gezeichnet wird, in den Lagereinstellungen von logistiq.cloud" },
+          { name: "jsDelivr", purpose: "Liefert die Emoji-Bilder der Emoji-Auswahl im Chat auf logistiq.cloud und qrgo.ro, wenn die Auswahl geöffnet wird" },
         ],
         note:
           "Wir verkaufen oder teilen Ihre personenbezogenen Daten nicht zu Marketingzwecken mit Dritten.",
@@ -7883,7 +7904,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting i globalna dystrybucja (CDN)",
+            purpose: "Hosting i globalna dystrybucja (CDN); weryfikacja antybotowa formularza kontaktowego w logistiq.ro (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -7909,6 +7930,12 @@ export const translations = {
             name: "Google reCAPTCHA",
             purpose: "Chroni przed botami formularze logistiq.cloud do logowania, resetowania hasła i rejestracji przewoźników",
           },
+          {
+            name: "Cloudflare",
+            purpose: "Przenosi ruch qrgo.ro i logistiq.be; w qrgo.ro ogranicza też nagłe serie żądań, a gdy wyszukiwań rezerwacji jest bardzo dużo, Cloudflare Turnstile potwierdza, że szuka człowiek, odczytując sygnały z przeglądarki i jej adres IP",
+          },
+          { name: "Google Maps", purpose: "Mapa, na której rysuje się geofence magazynu, w ustawieniach magazynu w logistiq.cloud" },
+          { name: "jsDelivr", purpose: "Dostarcza obrazki emoji z selektora emoji czatu w logistiq.cloud i qrgo.ro, gdy selektor zostanie otwarty" },
         ],
         note:
           "Nie sprzedajemy Twoich danych osobowych ani nie udostępniamy ich podmiotom trzecim w celach marketingowych.",
@@ -10166,7 +10193,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Tárhelyszolgáltatás és globális terjesztés (CDN)",
+            purpose: "Tárhelyszolgáltatás és globális terjesztés (CDN); a logistiq.ro kapcsolatfelvételi űrlapjának robotellenőrzése (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -10191,6 +10218,15 @@ export const translations = {
           {
             name: "Google reCAPTCHA",
             purpose: "Megvédi a botoktól a logistiq.cloud bejelentkezési, jelszó-visszaállítási és fuvarozói regisztrációs űrlapjait",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Ezen keresztül halad a qrgo.ro és a logistiq.be forgalma; a qrgo.ro-n a hirtelen kéréshullámokat is korlátozza, és ha nagyon sok a foglaláskeresés, a Cloudflare Turnstile megerősíti, hogy ember keres, a böngésző jeleit és IP-címét olvasva",
+          },
+          { name: "Google Maps", purpose: "A térkép, amelyen egy raktár geofence-ét megrajzolják, a logistiq.cloud raktárbeállításaiban" },
+          {
+            name: "jsDelivr",
+            purpose: "A csevegés emojiválasztójának emojiképeit szállítja a logistiq.cloud-on és a qrgo.ro-n, amikor a választót megnyitják",
           },
         ],
         note:
@@ -12451,7 +12487,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Хостинг и глобално разпространение (CDN)",
+            purpose: "Хостинг и глобално разпространение (CDN); проверката срещу ботове на формуляра за контакт в logistiq.ro (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -12477,6 +12513,12 @@ export const translations = {
             name: "Google reCAPTCHA",
             purpose: "Защитава от ботове формулярите на logistiq.cloud за вход, възстановяване на паролата и регистрация на превозвачи",
           },
+          {
+            name: "Cloudflare",
+            purpose: "През него минава трафикът на qrgo.ro и logistiq.be; в qrgo.ro освен това ограничава внезапните поредици от заявки, а когато търсенията на резервации са много, Cloudflare Turnstile потвърждава, че търси човек, като чете сигнали от браузъра и неговия IP адрес",
+          },
+          { name: "Google Maps", purpose: "Картата, на която се чертае геозоната на склад, в настройките на склада в logistiq.cloud" },
+          { name: "jsDelivr", purpose: "Доставя изображенията на емоджи от избора на емоджи в чата в logistiq.cloud и qrgo.ro, когато изборът бъде отворен" },
         ],
         note: "Не продаваме и не споделяме вашите лични данни с трети страни за маркетингови цели.",
       },
@@ -14729,7 +14771,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hébergement et distribution mondiale (CDN)",
+            purpose: "Hébergement et distribution mondiale (CDN) ; la vérification anti-robot du formulaire de contact de logistiq.ro (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -14755,6 +14797,15 @@ export const translations = {
             name: "Google reCAPTCHA",
             purpose: "Protège contre les robots les formulaires de logistiq.cloud pour la connexion, la réinitialisation du mot de passe et l'inscription des transporteurs",
           },
+          {
+            name: "Cloudflare",
+            purpose: "Achemine le trafic de qrgo.ro et de logistiq.be ; sur qrgo.ro, il limite aussi les rafales de requêtes et, lorsque les recherches de réservations sont très nombreuses, Cloudflare Turnstile confirme qu'une personne effectue la recherche, en lisant des signaux du navigateur et son adresse IP",
+          },
+          {
+            name: "Google Maps",
+            purpose: "La carte sur laquelle on dessine la zone (geofence) d'un entrepôt, dans les paramètres de l'entrepôt sur logistiq.cloud",
+          },
+          { name: "jsDelivr", purpose: "Fournit les images du sélecteur d'emoji du chat, sur logistiq.cloud et qrgo.ro, à l'ouverture du sélecteur" },
         ],
         note:
           "Nous ne vendons ni ne partageons vos données à caractère personnel avec des tiers à des fins de marketing.",
@@ -17012,7 +17063,7 @@ export const translations = {
           },
           {
             name: "Vercel",
-            purpose: "Hosting en wereldwijde distributie (CDN)",
+            purpose: "Hosting en wereldwijde distributie (CDN); de botcontrole van het contactformulier van logistiq.ro (BotID)",
           },
           {
             name: "Firebase Cloud Messaging (Google)",
@@ -17037,6 +17088,15 @@ export const translations = {
           {
             name: "Google reCAPTCHA",
             purpose: "Beschermt de formulieren van logistiq.cloud voor inloggen, wachtwoordherstel en registratie van vervoerders tegen bots",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Draagt het verkeer van qrgo.ro en logistiq.be; op qrgo.ro beperkt het ook pieken van verzoeken, en als er heel veel naar boekingen wordt gezocht, bevestigt Cloudflare Turnstile dat er een persoon zoekt, aan de hand van signalen uit de browser en het IP-adres ervan",
+          },
+          { name: "Google Maps", purpose: "De kaart waarop de geofence van een magazijn wordt getekend, in de magazijninstellingen van logistiq.cloud" },
+          {
+            name: "jsDelivr",
+            purpose: "Levert de emojiafbeeldingen van de emojikiezer in de chat op logistiq.cloud en qrgo.ro, wanneer de kiezer wordt geopend",
           },
         ],
         note:

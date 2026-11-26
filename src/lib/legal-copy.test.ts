@@ -87,6 +87,15 @@ const PROCESSORS = [
   "Twilio / Vonage",
   "<e-mail hosting provider>",
   "Google reCAPTCHA",
+  // Since 2026-11-26 (Logistiq origin/main 692b030b8): Cloudflare carries qrgo.ro and
+  // logistiq.be (live: server: cloudflare), limits qrgo.ro's bursts of requests and runs
+  // Turnstile on its booking search (documentation/devops/qrgo-rate-limit-and-turnstile.md,
+  // apps/driver/components/TurnstileWidget.tsx); Google Maps draws the geofence editor
+  // (apps/dashboard/components/settings/GeofenceConfigModal.tsx); jsDelivr serves the chat
+  // emoji picker's pictures (emoji-picker-react's default picture set).
+  "Cloudflare",
+  "Google Maps",
+  "jsDelivr",
 ];
 
 // The e-mail hosting provider, as each language names the category.
@@ -174,5 +183,20 @@ describe("privacy policy, section 10", () => {
     expect(copy.privacy.cookies.content).toContain("logistiq.ro");
     const html = await renderPage(PrivacyPage, locale);
     expect(html).toContain(`href="/${locale}/cookies"`);
+  });
+});
+
+// Each new partner says where it works, and the cookie policy's §4 says the same of Maps and
+// jsDelivr (2026-11-26). Vercel's purpose names the contact form's bot check (BotID).
+describe("privacy policy, section 5, the partners added on 2026-11-26", () => {
+  it.each(locales)("%s says where each one works", (locale) => {
+    const copy = translations[locale];
+    const purpose = (name: string) => copy.privacy.thirdParties.partners.find((p) => p.name === name)?.purpose ?? "";
+    const service = (name: string) => copy.cookies.thirdParty.services.find((s) => s.name === name)?.purpose;
+    expect(purpose("Vercel")).toContain("BotID");
+    for (const want of ["Turnstile", "qrgo.ro", "logistiq.be"]) expect(purpose("Cloudflare")).toContain(want);
+    expect(purpose("Google Maps")).toContain("logistiq.cloud");
+    expect(service("Google Maps")).toBe(purpose("Google Maps"));
+    expect(service("jsDelivr")).toBe(purpose("jsDelivr"));
   });
 });
