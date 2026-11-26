@@ -1742,8 +1742,8 @@ export const translations = {
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
-        p1: "Această politică explică modul în care platforma Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) utilizează cookie-uri și tehnologii similare pentru a vă oferi o experiență sigură și personalizată.",
-        p2: "Prin continuarea navigării pe site-urile noastre, acceptați utilizarea cookie-urilor în conformitate cu această politică.",
+        p1: "Această politică arată ce cookie-uri și tehnologii similare folosesc site-urile platformei Logistiq: logistiq.ro (și logistiq.be), site-ul de prezentare; logistiq.cloud, dashboardul; și qrgo.ro, check-in-ul șoferilor.",
+        p2: "Site-ul logistiq.ro nu plasează niciun cookie atunci când îl vizitați, de aceea nu afișează un banner de cookie-uri. Plasează unul singur numai dacă alegeți o limbă din meniul de limbi, pentru a reține această alegere. Site-urile logistiq.cloud și qrgo.ro plasează cookie-uri atunci când vă autentificați sau le folosiți: fiecare este prezentat mai jos, cu scopul lui, durata și momentul în care este plasat.",
       },
       whatAreCookies: {
         title: "2. Ce sunt Cookie-urile?",
@@ -1758,43 +1758,240 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Cookie-urile pe care le Utilizăm",
-        essential: {
-          title: "Cookie-uri Esențiale",
-          desc: "Necesare pentru funcționarea platformei. Nu pot fi dezactivate.",
-          cookies: [
-            { name: "sb-bhpiugfpkqwxcqbolisb-auth-token", duration: "Până la deconectare", purpose: "Autentificare Supabase - sesiunea conectată (token de acces și de reîmprospătare), împărțită în părți numerotate (.0, .1) când e mare" },
-            { name: "NEXT_LOCALE", duration: "1 an", purpose: "Reținerea limbii preferate" },
-          ],
-        },
-        functional: {
-          title: "Cookie-uri Funcționale",
-          desc: "Îmbunătățesc experiența de utilizare a platformei.",
-          cookies: [
-            { name: "theme", duration: "1 an", purpose: "Reținerea preferinței pentru tema întunecată/luminoasă" },
-            { name: "sidebar_collapsed", duration: "30 de zile", purpose: "Starea meniului lateral în Dashboard" },
+        intro: "Fiecare cookie de mai jos fie este strict necesar (vă menține autentificat, vă readuce la check-in-ul făcut ori vă protejează contul sau check-in-ul), fie păstrează o alegere pe care ați făcut-o chiar dumneavoastră (limba, un depozit sau un filtru, un mod de afișare, tema luminoasă ori întunecată). Niciunul nu este folosit pentru publicitate ori pentru statistici de trafic și nici pentru a vă urmări de la un site la altul. Duratele sunt cele cerute de site-uri; browserul dumneavoastră poate păstra un cookie mai puțin timp.",
+        kinds: { necessary: "Strict necesar", choice: "Păstrează alegerea dumneavoastră" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "Site-ul de prezentare, afișat și la adresa logistiq.be. La vizitare nu plasează niciun cookie; cookie-ul de mai jos este scris numai de meniul de limbi.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "Limba pe care ați ales-o, pentru ca adresa site-ului fără limbă să se deschidă în ea",
+                duration: "1 an de la alegere",
+                setWhen: "Numai când alegeți o limbă din meniul de limbi",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "Același lucru, pe logistiq.be",
+                duration: "1 an de la alegere",
+                setWhen: "Numai când alegeți o limbă din meniul de limbi de pe logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Dashboardul, pentru utilizatorii autentificați, și paginile de prezentare trimise prin link. Cookie-urile sunt plasate începând cu pagina de autentificare, pe măsură ce vă autentificați și lucrați; pagina de autentificare încarcă Google reCAPTCHA de îndată ce se deschide (secțiunea 4). Cele trei cookie-uri de acces pe dispozitiv (lq_…) există numai acolo unde organizația folosește coduri de acces pentru calculatoarele sale.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Sesiunea dumneavoastră autentificată (autentificare Supabase: token de acces și de reîmprospătare); împărțită în părți numerotate (.0, .1) când este mare",
+                duration: "Până la deconectare; dacă nu vă deconectați, cât timp o păstrează browserul (circa 400 de zile în browserele actuale)",
+                setWhen: "La autentificare; reînnoit cât timp folosiți dashboardul",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Marcaj semnat care arată că această sesiune a trecut de codul SMS al autentificării în doi pași",
+                duration: "Până la închiderea browserului; marcajul în sine este valabil 12 ore",
+                setWhen: "Când introduceți un cod SMS corect",
+              },
+              {
+                name: "lq_device",
+                purpose: "Dovada că acest browser este un calculator înregistrat pentru organizația dumneavoastră (acces pe dispozitiv)",
+                duration: "400 de zile, reluate la fiecare scriere",
+                setWhen: "Când browserul este înregistrat cu un cod de acces",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Marcaj semnat care arată că în acest browser a fost introdus, cu puțin timp înainte, un cod de acces personal",
+                duration: "30 de minute",
+                setWhen: "Când un cod de acces personal este acceptat",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Anunț afișat o singură dată: codul dumneavoastră de acces personal a fost înlocuit",
+                duration: "2 minute",
+                setWhen: "La autentificare, dacă între timp codul de acces a fost înlocuit",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Numai pe impersonate.logistiq.cloud, în browserul unui membru al personalului Logistiq: marchează o sesiune de suport deschisă în contul unui utilizator (cine acționează pentru cine și până când)",
+                duration: "8 ore",
+                setWhen: "Când un membru al personalului Logistiq deschide o sesiune de suport",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Depozitul al cărui panou l-a deschis în dashboard titularul contului",
+                duration: "Până la închiderea browserului",
+                setWhen: "Când titularul alege un depozit din comutatorul de depozite; șters la ieșirea din acesta",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Departamentul după care un dispecer a ales să filtreze dashboardul",
+                duration: "1 an",
+                setWhen: "Când dispecerul alege un departament; șters când filtrul este anulat",
+              },
+              {
+                name: "users_view",
+                purpose: "Modul de afișare, arbore sau tabel, ales pe pagina de utilizatori; în prezent dashboardul nu îl citește",
+                duration: "1 an",
+                setWhen: "Când schimbați modul de afișare pe pagina de utilizatori",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Limba pe care ați ales-o; este folosită cât timp nu sunteți autentificat (limba unui utilizator autentificat se păstrează în contul lui)",
+                duration: "1 an",
+                setWhen: "Când alegeți o limbă din meniul de limbi",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "Aplicația web de check-in pentru șoferi. Aceleași cookie-uri sunt plasate și atunci când un depozit afișează check-in-ul pe propriul domeniu.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Check-in-ul făcut din acest browser, pentru ca șoferul să fie dus înapoi la pagina lui de status",
+                duration: "48 de ore",
+                setWhen: "La trimiterea unui check-in; șters la „Fă un Check-in Nou” sau la sfârșitul vizitei",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Dovada că acest browser a făcut check-in-ul; permite butoanele „Descărcare finalizată” și „Încărcare finalizată”",
+                duration: "Șters la sfârșitul vizitei sau, cel târziu, după 72 de ore",
+                setWhen: "La trimiterea unui check-in; șters la „Fă un Check-in Nou” sau la sfârșitul vizitei",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Limba aleasă de șofer",
+                duration: "1 an",
+                setWhen: "La alegerea unei limbi sau la deschiderea unui link care indică o limbă (cum sunt linkurile din aplicația QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Marchează faptul că a fost aleasă o limbă, pentru ca ecranul de alegere a limbii să nu mai apară",
+                duration: "1 an",
+                setWhen: "La alegerea unei limbi pe primul ecran",
+              },
+              { name: "DARK_MODE", purpose: "Tema luminoasă sau întunecată aleasă de șofer", duration: "1 an", setWhen: "La schimbarea temei" },
+            ],
+          },
+        ],
+        storage: {
+          title: "Alte date păstrate în browser",
+          intro: "Tehnologii similare. Stocarea locală și stocarea de sesiune sunt date pe care un site le păstrează în browserul dumneavoastră; spre deosebire de un cookie, browserul nu le trimite singur către site. Site-urile logistiq.ro și logistiq.be nu păstrează niciuna. Site-urile logistiq.cloud și qrgo.ro păstrează elementele de mai jos: alegeri de afișare, date de lucru de scurtă durată și, dacă folosiți selectorul de emoji, emoji-urile alese.",
+          items: [
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Modul luminos sau întunecat și tema de culoare alese",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Dacă ați lăsat meniul lateral restrâns",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Filtrul de status folosit ultima dată pe pagina de check-in-uri",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Setări de afișare ale paginii curții",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Limbajul de programare ales pentru exemplele din documentația API",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "Limba și tema luminoasă ori întunecată alese pe o pagină de prezentare deschisă dintr-un link trimis de noi",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "Emoji-urile alese în chat și de câte ori, pentru ca selectorul de emoji să le arate primele pe cele mai folosite",
+              kept: "Până ștergeți datele site-ului",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Faptul că pagina sandbox a interfeței a fost deblocată în această filă",
+              kept: "Până la închiderea filei",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Numărul de reîncărcări automate ale unui panou al curții",
+              kept: "Până la închiderea filei",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "Programarea găsită de șofer pe prima pagină a qrgo.ro, dusă către formularul de check-in al depozitului; citită o singură dată, apoi ștearsă",
+              kept: "Până este citită sau până la închiderea filei",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "Emoji-urile alese în chat și de câte ori, pentru ca selectorul de emoji să le arate primele pe cele mai folosite",
+              kept: "Până ștergeți datele site-ului",
+            },
           ],
         },
       },
       thirdParty: {
-        title: "4. Cookie-uri de la Terțe Părți",
-        intro: "Platforma Logistiq utilizează următoarele servicii terțe care pot plasa cookie-uri:",
+        title: "4. Servicii ale terților",
+        intro: "Nicio pagină a celor trei site-uri nu încarcă un serviciu de publicitate sau de statistici de trafic. Unele pagini și funcții rulează în browserul dumneavoastră codul unei alte companii sau descarcă un fișier de la ea, atunci când pagina este deschisă ori funcția este folosită. Compania respectivă primește atunci adresa dumneavoastră IP și poate stoca sau citi propriile cookie-uri ori date similare:",
         services: [
-          { name: "Supabase", purpose: "Autentificare și bază de date", url: "supabase.com/privacy" },
-          { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
-          { name: "Google reCAPTCHA", purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor", url: "policies.google.com/privacy" },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Protejează împotriva roboților formularele logistiq.cloud de autentificare, de resetare a parolei și de înregistrare a transportatorilor",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile, pe qrgo.ro: când căutările de programări sunt foarte multe, confirmă că o persoană caută",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "Harta pe care se desenează geofence-ul unui depozit, în setările depozitului din logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID, pe logistiq.ro: o verificare care rulează în browserul dumneavoastră când trimiteți formularul de contact; scriptul ei este servit chiar de logistiq.ro",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Livrează imaginile emoji din selectorul de emoji al chatului, pe logistiq.cloud și qrgo.ro, la deschiderea selectorului",
+            url: "www.jsdelivr.com/terms/privacy-policy",
+          },
         ],
         note: "Vă recomandăm să consultați politicile de confidențialitate ale acestor servicii pentru detalii.",
       },
       manageCookies: {
         title: "5. Cum să Gestionați Cookie-urile",
-        intro: "Puteți controla și/sau șterge cookie-urile după preferințele dumneavoastră. Iată cum puteți face acest lucru în principalele browsere:",
+        intro: "Site-urile noastre nu au banner de cookie-uri și nici panou de setări pentru cookie-uri. Puteți șterge un cookie, sau celelalte date pe care un site le păstrează în browser, din setările browserului. Iată unde le găsiți în principalele browsere:",
         browsers: [
           { name: "Google Chrome", steps: "Setări → Confidențialitate și securitate → Cookie-uri și alte date ale site-urilor" },
           { name: "Mozilla Firefox", steps: "Setări → Confidențialitate și securitate → Cookie-uri și date ale site-urilor" },
           { name: "Safari", steps: "Preferințe → Confidențialitate → Gestionare date site-uri web" },
           { name: "Microsoft Edge", steps: "Setări → Cookie-uri și permisiuni site → Gestionare și ștergere cookie-uri" },
         ],
-        warning: "Atenție: Dezactivarea cookie-urilor esențiale poate afecta funcționarea platformei. Este posibil să nu vă puteți autentifica sau să pierdeți accesul la anumite funcționalități.",
+        warning: "Fără cookie-uri, logistiq.ro funcționează în continuare; adresa lui fără limbă se deschide în limba implicită a domeniului. Pe logistiq.cloud veți fi deconectat și nu vă veți putea autentifica atât timp cât cookie-urile sunt blocate. Pe qrgo.ro browserul nu mai regăsește check-in-ul făcut, iar butoanele „Descărcare finalizată” și „Încărcare finalizată” nu mai sunt oferite.",
       },
       changes: {
         title: "6. Modificări ale Politicii",
@@ -1815,11 +2012,7 @@ export const translations = {
         type: "Tip date",
         period: "Durată",
       },
-      cookieHeaders: {
-        name: "Cookie",
-        duration: "Durată",
-        purpose: "Scop",
-      },
+      cookieHeaders: { name: "Cookie", duration: "Durată", purpose: "Scop", kind: "Tip", setWhen: "Când este plasat", site: "Site", item: "Nume", kept: "Păstrat" },
       meta: {
         privacy: "Politica de confidențialitate Logistiq - Cum colectăm, utilizăm și protejăm datele dvs. personale conform GDPR.",
         terms: "Termenii și condițiile de utilizare a platformei Logistiq - management depozite și check-in șoferi.",
@@ -3553,8 +3746,8 @@ export const translations = {
       lastUpdated: "Last updated",
       intro: {
         title: "1. Introduction",
-        p1: "This policy explains how the Logistiq platform (logistiq.ro, logistiq.cloud, qrgo.ro) uses cookies and similar technologies to provide you with a safe and personalized experience.",
-        p2: "By continuing to browse our websites, you accept the use of cookies in accordance with this policy.",
+        p1: "This policy says which cookies and similar technologies the sites of the Logistiq platform use: logistiq.ro (and logistiq.be), the presentation site; logistiq.cloud, the dashboard; and qrgo.ro, the drivers' check-in.",
+        p2: "logistiq.ro sets no cookie when you visit it, so it shows no cookie banner. It stores one only if you choose a language from the language menu, to remember that choice. logistiq.cloud and qrgo.ro set cookies when you sign in or use them: each one is listed below, with what it is for, how long it lasts and when it is set.",
       },
       whatAreCookies: {
         title: "2. What are Cookies?",
@@ -3569,43 +3762,240 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Cookies We Use",
-        essential: {
-          title: "Essential Cookies",
-          desc: "Required for platform operation. Cannot be disabled.",
-          cookies: [
-            { name: "sb-bhpiugfpkqwxcqbolisb-auth-token", duration: "Until sign-out", purpose: "Supabase authentication - your signed-in session (access and refresh tokens), split into numbered parts (.0, .1) when large" },
-            { name: "NEXT_LOCALE", duration: "1 year", purpose: "Retaining preferred language" },
-          ],
-        },
-        functional: {
-          title: "Functional Cookies",
-          desc: "Improve the user experience of the platform.",
-          cookies: [
-            { name: "theme", duration: "1 year", purpose: "Retaining dark/light theme preference" },
-            { name: "sidebar_collapsed", duration: "30 days", purpose: "Sidebar state in Dashboard" },
+        intro: "Every cookie below is either strictly necessary (it keeps you signed in, brings you back to your check-in, or protects your account or your check-in) or stores a choice you made yourself (a language, a warehouse or a filter, a view, the light or dark theme). None is used for advertising or analytics, or to follow you from one site to another. The durations are the ones the sites ask for; your browser may keep a cookie for a shorter time.",
+        kinds: { necessary: "Strictly necessary", choice: "Stores your choice" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "The presentation site, also shown at logistiq.be. It sets no cookie on a visit; the cookie below is written only by the language menu.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "The language you chose, so that the site's address without a language opens in it",
+                duration: "1 year from the choice",
+                setWhen: "Only when you pick a language from the language menu",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "The same, on logistiq.be",
+                duration: "1 year from the choice",
+                setWhen: "Only when you pick a language from the language menu on logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "The dashboard, for signed-in users, and the presentation pages we share by link. Cookies are set from the sign-in page on, as you sign in and work; the sign-in page loads Google reCAPTCHA as soon as it opens (section 4). The three device-access cookies (lq_…) exist only where an organisation uses access codes for its computers.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Your signed-in session (Supabase authentication: access and refresh tokens); split into numbered parts (.0, .1) when large",
+                duration: "Until you sign out; if you never sign out, as long as your browser keeps it (about 400 days in current browsers)",
+                setWhen: "When you sign in; renewed while you use the dashboard",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Signed marker that this session passed the SMS code of two-step sign-in",
+                duration: "Until you close the browser; the marker itself is valid for 12 hours",
+                setWhen: "When you enter a correct SMS code",
+              },
+              {
+                name: "lq_device",
+                purpose: "Proof that this browser is a computer registered for your organisation (device access)",
+                duration: "400 days, restarted each time it is written",
+                setWhen: "When the browser is registered with an access code",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Signed marker that a personal access code was entered in this browser a moment ago",
+                duration: "30 minutes",
+                setWhen: "When a personal access code is accepted",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "One-time notice that your personal access code was replaced",
+                duration: "2 minutes",
+                setWhen: "At sign-in, if your access code was replaced in the meantime",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Only on impersonate.logistiq.cloud, in the browser of a member of Logistiq's staff: marks a support session opened in a user's account (who acts for whom, and until when)",
+                duration: "8 hours",
+                setWhen: "When a member of Logistiq's staff opens a support session",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "The warehouse whose panel an account owner opened in the dashboard",
+                duration: "Until you close the browser",
+                setWhen: "When an owner picks a warehouse in the warehouse switcher; removed when they leave it",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "The department a dispatcher chose to filter the dashboard by",
+                duration: "1 year",
+                setWhen: "When a dispatcher picks a department; removed when the filter is cleared",
+              },
+              {
+                name: "users_view",
+                purpose: "The view, tree or table, you picked on the users page; the dashboard does not read it back today",
+                duration: "1 year",
+                setWhen: "When you switch the view on the users page",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "The language you chose; it is used while you are signed out (a signed-in user's language is kept in their account)",
+                duration: "1 year",
+                setWhen: "When you pick a language from the language menu",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "The drivers' check-in web app. The same cookies are set when a warehouse shows the check-in on its own domain.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "The check-in this browser made, so that the driver is taken back to its status page",
+                duration: "48 hours",
+                setWhen: "When a check-in is submitted; removed by “Create New Check-in” or when the visit ends",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Proof that this browser made the check-in; it enables the “Unloading finished” and “Loading finished” buttons",
+                duration: "Deleted when the visit ends or, at the latest, after 72 hours",
+                setWhen: "When a check-in is submitted; removed by “Create New Check-in” or when the visit ends",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "The language the driver chose",
+                duration: "1 year",
+                setWhen: "When a language is picked, or when a link that names a language is opened (the QRGo Driver app's links do)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Marks that a language has been chosen, so the language screen is not shown again",
+                duration: "1 year",
+                setWhen: "When a language is picked on the first screen",
+              },
+              { name: "DARK_MODE", purpose: "The light or dark theme the driver chose", duration: "1 year", setWhen: "When the theme is switched" },
+            ],
+          },
+        ],
+        storage: {
+          title: "Other data kept in your browser",
+          intro: "Similar technologies. Local storage and session storage are data a site keeps in your browser; unlike a cookie, the browser never sends them to the site by itself. logistiq.ro and logistiq.be keep none. logistiq.cloud and qrgo.ro keep the items below: display choices, short-lived working data and, if you use the emoji picker, the emojis you picked.",
+          items: [
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "The light or dark mode and the colour theme you chose",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Whether you left the side menu collapsed",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "The status filter you last used on the check-ins page",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Display settings of the yard page",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "The programming language you chose for the examples in the API documentation",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "The language and the light or dark theme you chose on a presentation page opened from a link we sent",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "The emojis you have picked in a chat and how often, so that the emoji picker shows the ones you use most first",
+              kept: "Until you clear the site's data",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "That the dashboard's interface sandbox page was unlocked in this tab",
+              kept: "Until the tab is closed",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "A yard board's count of its own automatic reloads",
+              kept: "Until the tab is closed",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "The booking a driver found on qrgo.ro's home page, carried to the warehouse's check-in form; read once, then removed",
+              kept: "Until it is read, or the tab is closed",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "The emojis you have picked in a chat and how often, so that the emoji picker shows the ones you use most first",
+              kept: "Until you clear the site's data",
+            },
           ],
         },
       },
       thirdParty: {
-        title: "4. Third-Party Cookies",
-        intro: "The Logistiq platform uses the following third-party services that may place cookies:",
+        title: "4. Third-Party Services",
+        intro: "No page of the three sites loads an advertising or analytics service. Some pages and features run another company's code in your browser, or fetch a file from it, when that page is opened or that feature is used. That company then receives your IP address and may store or read its own cookies or similar data:",
         services: [
-          { name: "Supabase", purpose: "Authentication and database", url: "supabase.com/privacy" },
-          { name: "Vercel", purpose: "Hosting", url: "vercel.com/legal/privacy-policy" },
-          { name: "Google reCAPTCHA", purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots", url: "policies.google.com/privacy" },
+          {
+            name: "Google reCAPTCHA",
+            purpose: "Protects logistiq.cloud's sign-in, password-reset and carrier-registration forms against bots",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile, on qrgo.ro: when booking searches are under heavy load, it confirms that a person is searching",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "The map on which a warehouse's geofence is drawn, in logistiq.cloud's warehouse settings",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID, on logistiq.ro: a check that runs in your browser when you send the contact form; its script is served from logistiq.ro itself",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Delivers the emoji pictures of the chat's emoji picker, on logistiq.cloud and qrgo.ro, when the picker is opened",
+            url: "www.jsdelivr.com/terms/privacy-policy",
+          },
         ],
         note: "We recommend consulting the privacy policies of these services for details.",
       },
       manageCookies: {
         title: "5. How to Manage Cookies",
-        intro: "You can control and/or delete cookies according to your preferences. Here's how to do it in the main browsers:",
+        intro: "Our sites have no cookie banner and no cookie settings panel. You can delete a cookie, or the other data a site keeps in your browser, from the browser's own settings. Here is where to find them in the main browsers:",
         browsers: [
           { name: "Google Chrome", steps: "Settings → Privacy and security → Cookies and other site data" },
           { name: "Mozilla Firefox", steps: "Settings → Privacy & Security → Cookies and Site Data" },
           { name: "Safari", steps: "Preferences → Privacy → Manage Website Data" },
           { name: "Microsoft Edge", steps: "Settings → Cookies and site permissions → Manage and delete cookies" },
         ],
-        warning: "Warning: Disabling essential cookies may affect platform functionality. You may not be able to log in or lose access to certain features.",
+        warning: "Without cookies, logistiq.ro still works; its address without a language opens in the domain's default language. On logistiq.cloud you are signed out and cannot sign in while cookies are blocked. On qrgo.ro your browser no longer finds the check-in you made, and the “Unloading finished” and “Loading finished” buttons are not offered.",
       },
       changes: {
         title: "6. Policy Changes",
@@ -3626,11 +4016,7 @@ export const translations = {
         type: "Data type",
         period: "Retention period",
       },
-      cookieHeaders: {
-        name: "Cookie",
-        duration: "Duration",
-        purpose: "Purpose",
-      },
+      cookieHeaders: { name: "Cookie", duration: "Duration", purpose: "Purpose", kind: "Type", setWhen: "Set when", site: "Site", item: "Name", kept: "Kept" },
       meta: {
         privacy: "Logistiq Privacy Policy - How we collect, use and protect your personal data in compliance with GDPR.",
         terms: "Logistiq Terms and Conditions - warehouse management platform and driver check-in service.",
@@ -5608,9 +5994,9 @@ export const translations = {
       intro: {
         title: "1. Einleitung",
         p1:
-          "Diese Richtlinie erläutert, wie die Logistiq-Plattform (logistiq.ro, logistiq.cloud, qrgo.ro) Cookies und ähnliche Technologien verwendet, um Ihnen ein sicheres und personalisiertes Erlebnis zu bieten.",
+          "Diese Richtlinie erläutert, welche Cookies und ähnlichen Technologien die Websites der Logistiq-Plattform verwenden: logistiq.ro (und logistiq.be), die Präsentationswebsite; logistiq.cloud, das Dashboard; und qrgo.ro, den Check-in der Fahrer.",
         p2:
-          "Wenn Sie weiter auf unseren Websites navigieren, akzeptieren Sie die Verwendung von Cookies gemäß dieser Richtlinie.",
+          "logistiq.ro setzt bei Ihrem Besuch kein Cookie und zeigt deshalb kein Cookie-Banner. Es speichert nur dann eines, wenn Sie im Sprachmenü eine Sprache wählen, um sich diese Wahl zu merken. logistiq.cloud und qrgo.ro setzen Cookies, wenn Sie sich anmelden oder die Websites nutzen: Jedes ist unten aufgeführt, mit seinem Zweck, seiner Dauer und dem Zeitpunkt, zu dem es gesetzt wird.",
       },
       whatAreCookies: {
         title: "2. Was sind Cookies?",
@@ -5638,59 +6024,232 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Cookies, die wir verwenden",
-        essential: {
-          title: "Essenzielle Cookies",
-          desc: "Für den Betrieb der Plattform erforderlich. Sie können nicht deaktiviert werden.",
-          cookies: [
+        intro: "Jedes Cookie unten ist entweder unbedingt erforderlich (es hält Sie angemeldet, führt Sie zu Ihrem Check-in zurück oder schützt Ihr Konto oder Ihren Check-in) oder speichert eine Wahl, die Sie selbst getroffen haben (eine Sprache, ein Lager oder einen Filter, eine Ansicht, das helle oder dunkle Design). Keines wird für Werbung oder Analysen verwendet oder dazu, Sie von einer Website zur nächsten zu verfolgen. Die Dauern sind die, die die Websites anfordern; Ihr Browser kann ein Cookie auch kürzer aufbewahren.",
+        kinds: { necessary: "Unbedingt erforderlich", choice: "Speichert Ihre Wahl" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "Die Präsentationswebsite, auch unter logistiq.be erreichbar. Bei einem Besuch setzt sie kein Cookie; das Cookie unten schreibt nur das Sprachmenü.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "Die Sprache, die Sie gewählt haben, damit die Adresse der Website ohne Sprache in dieser Sprache öffnet",
+                duration: "1 Jahr ab der Wahl",
+                setWhen: "Nur wenn Sie im Sprachmenü eine Sprache wählen",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "Dasselbe, auf logistiq.be",
+                duration: "1 Jahr ab der Wahl",
+                setWhen: "Nur wenn Sie auf logistiq.be im Sprachmenü eine Sprache wählen",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Das Dashboard, für angemeldete Nutzer, und die Präsentationsseiten, die wir per Link teilen. Cookies werden ab der Anmeldeseite gesetzt, während Sie sich anmelden und arbeiten; die Anmeldeseite lädt Google reCAPTCHA, sobald sie sich öffnet (Abschnitt 4). Die drei Cookies des Gerätezugangs (lq_…) gibt es nur dort, wo eine Organisation Zugangscodes für ihre Computer verwendet.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Ihre angemeldete Sitzung (Supabase-Authentifizierung: Zugriffs- und Aktualisierungstoken); bei großer Länge in nummerierte Teile (.0, .1) aufgeteilt",
+                duration: "Bis Sie sich abmelden; wenn Sie sich nie abmelden, so lange Ihr Browser es aufbewahrt (in aktuellen Browsern etwa 400 Tage)",
+                setWhen: "Bei der Anmeldung; erneuert, solange Sie das Dashboard nutzen",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Signierte Markierung, dass diese Sitzung den SMS-Code der Zwei-Faktor-Anmeldung bestanden hat",
+                duration: "Bis Sie den Browser schließen; die Markierung selbst gilt 12 Stunden",
+                setWhen: "Wenn Sie einen richtigen SMS-Code eingeben",
+              },
+              {
+                name: "lq_device",
+                purpose: "Nachweis, dass dieser Browser ein für Ihre Organisation erfasster Computer ist (Gerätezugang)",
+                duration: "400 Tage, bei jedem Schreiben neu beginnend",
+                setWhen: "Wenn der Browser mit einem Zugangscode erfasst wird",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Signierte Markierung, dass in diesem Browser vor Kurzem ein persönlicher Zugangscode eingegeben wurde",
+                duration: "30 Minuten",
+                setWhen: "Wenn ein persönlicher Zugangscode angenommen wird",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Einmaliger Hinweis, dass Ihr persönlicher Zugangscode ersetzt wurde",
+                duration: "2 Minuten",
+                setWhen: "Bei der Anmeldung, wenn Ihr Zugangscode inzwischen ersetzt wurde",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Nur auf impersonate.logistiq.cloud, im Browser eines Mitarbeiters von Logistiq: kennzeichnet eine Support-Sitzung, die im Konto eines Nutzers geöffnet wurde (wer für wen handelt und bis wann)",
+                duration: "8 Stunden",
+                setWhen: "Wenn ein Mitarbeiter von Logistiq eine Support-Sitzung öffnet",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Das Lager, dessen Bereich ein Kontoinhaber im Dashboard geöffnet hat",
+                duration: "Bis Sie den Browser schließen",
+                setWhen: "Wenn ein Inhaber im Lagerwechsler ein Lager wählt; entfernt, wenn er es verlässt",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Die Abteilung, nach der ein Disponent das Dashboard filtert",
+                duration: "1 Jahr",
+                setWhen: "Wenn ein Disponent eine Abteilung wählt; entfernt, wenn der Filter aufgehoben wird",
+              },
+              {
+                name: "users_view",
+                purpose: "Die Ansicht, Baum oder Tabelle, die Sie auf der Nutzerseite gewählt haben; das Dashboard liest sie derzeit nicht wieder aus",
+                duration: "1 Jahr",
+                setWhen: "Wenn Sie auf der Nutzerseite die Ansicht wechseln",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Die Sprache, die Sie gewählt haben; sie gilt, solange Sie nicht angemeldet sind (die Sprache eines angemeldeten Nutzers wird in seinem Konto gespeichert)",
+                duration: "1 Jahr",
+                setWhen: "Wenn Sie im Sprachmenü eine Sprache wählen",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "Die Check-in-Web-App der Fahrer. Dieselben Cookies werden gesetzt, wenn ein Lager den Check-in auf seiner eigenen Domain zeigt.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Der Check-in, den dieser Browser durchgeführt hat, damit der Fahrer zu seiner Statusseite zurückgeführt wird",
+                duration: "48 Stunden",
+                setWhen: "Wenn ein Check-in gesendet wird; entfernt durch „Neuen Check-in erstellen“ oder am Ende des Besuchs",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Nachweis, dass dieser Browser den Check-in durchgeführt hat; er aktiviert die Schaltflächen „Entladung beendet“ und „Beladung beendet“",
+                duration: "Gelöscht am Ende des Besuchs oder spätestens nach 72 Stunden",
+                setWhen: "Wenn ein Check-in gesendet wird; entfernt durch „Neuen Check-in erstellen“ oder am Ende des Besuchs",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Die Sprache, die der Fahrer gewählt hat",
+                duration: "1 Jahr",
+                setWhen: "Wenn eine Sprache gewählt wird oder ein Link geöffnet wird, der eine Sprache angibt (wie die Links der App QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Kennzeichnet, dass eine Sprache gewählt wurde, damit der Bildschirm zur Sprachwahl nicht erneut erscheint",
+                duration: "1 Jahr",
+                setWhen: "Wenn auf dem ersten Bildschirm eine Sprache gewählt wird",
+              },
+              {
+                name: "DARK_MODE",
+                purpose: "Das helle oder dunkle Design, das der Fahrer gewählt hat",
+                duration: "1 Jahr",
+                setWhen: "Wenn das Design gewechselt wird",
+              },
+            ],
+          },
+        ],
+        storage: {
+          title: "Weitere im Browser gespeicherte Daten",
+          intro: "Ähnliche Technologien. Der lokale Speicher und der Sitzungsspeicher sind Daten, die eine Website in Ihrem Browser aufbewahrt; anders als ein Cookie sendet der Browser sie nie von sich aus an die Website. logistiq.ro und logistiq.be speichern keine. logistiq.cloud und qrgo.ro speichern die folgenden Einträge: Anzeigeeinstellungen, kurzlebige Arbeitsdaten und, wenn Sie die Emoji-Auswahl verwenden, die gewählten Emojis.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "Bis zur Abmeldung",
-              purpose:
-                "Supabase-Authentifizierung - Ihre angemeldete Sitzung (Zugriffs- und Aktualisierungstoken), bei großer Länge in nummerierte Teile (.0, .1) aufgeteilt",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Der helle oder dunkle Modus und das Farbschema, die Sie gewählt haben",
+              kept: "Bis Sie die Daten der Website löschen",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 Jahr",
-              purpose: "Speicherung der bevorzugten Sprache",
-            },
-          ],
-        },
-        functional: {
-          title: "Funktionale Cookies",
-          desc: "Verbessern die Nutzungserfahrung auf der Plattform.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 Jahr",
-              purpose: "Speicherung der Präferenz für das dunkle/helle Design",
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Ob Sie das Seitenmenü eingeklappt gelassen haben",
+              kept: "Bis Sie die Daten der Website löschen",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 Tage",
-              purpose: "Zustand des Seitenmenüs im Dashboard",
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Der Statusfilter, den Sie zuletzt auf der Check-in-Seite verwendet haben",
+              kept: "Bis Sie die Daten der Website löschen",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Anzeigeeinstellungen der Hofseite",
+              kept: "Bis Sie die Daten der Website löschen",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Die Programmiersprache, die Sie für die Beispiele der API-Dokumentation gewählt haben",
+              kept: "Bis Sie die Daten der Website löschen",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "Die Sprache und das helle oder dunkle Design, die Sie auf einer Präsentationsseite gewählt haben, die Sie über einen von uns gesendeten Link geöffnet haben",
+              kept: "Bis Sie die Daten der Website löschen",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "Die Emojis, die Sie in einem Chat gewählt haben, und wie oft, damit die Emoji-Auswahl die meistverwendeten zuerst zeigt",
+              kept: "Bis Sie die Daten der Website löschen",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Dass die Sandbox-Seite der Dashboard-Oberfläche in diesem Tab entsperrt wurde",
+              kept: "Bis der Tab geschlossen wird",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Wie oft sich eine Hoftafel selbst automatisch neu geladen hat",
+              kept: "Bis der Tab geschlossen wird",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "Die Buchung, die ein Fahrer auf der Startseite von qrgo.ro gefunden hat, weitergegeben an das Check-in-Formular des Lagers; einmal gelesen, dann entfernt",
+              kept: "Bis sie gelesen oder der Tab geschlossen wird",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "Die Emojis, die Sie in einem Chat gewählt haben, und wie oft, damit die Emoji-Auswahl die meistverwendeten zuerst zeigt",
+              kept: "Bis Sie die Daten der Website löschen",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Drittanbieter-Cookies",
+        title: "4. Dienste von Drittanbietern",
         intro:
-          "Die Logistiq-Plattform nutzt die folgenden Dienste von Drittanbietern, die Cookies setzen können:",
+          "Keine Seite der drei Websites lädt einen Werbe- oder Analysedienst. Einige Seiten und Funktionen führen in Ihrem Browser Code eines anderen Unternehmens aus oder laden eine Datei von ihm, wenn die Seite geöffnet oder die Funktion verwendet wird. Dieses Unternehmen erhält dann Ihre IP-Adresse und kann eigene Cookies oder ähnliche Daten speichern oder lesen:",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Authentifizierung und Datenbank",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Hosting",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Schützt die Formulare von logistiq.cloud für die Anmeldung, das Zurücksetzen des Passworts und die Registrierung von Transportunternehmen vor Bots",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile auf qrgo.ro: Wenn sehr viele Buchungssuchen eingehen, bestätigt es, dass ein Mensch sucht",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "Die Karte, auf der der Geofence eines Lagers gezeichnet wird, in den Lagereinstellungen von logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID auf logistiq.ro: eine Prüfung, die in Ihrem Browser läuft, wenn Sie das Kontaktformular senden; ihr Skript wird von logistiq.ro selbst ausgeliefert",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Liefert die Emoji-Bilder der Emoji-Auswahl im Chat auf logistiq.cloud und qrgo.ro, wenn die Auswahl geöffnet wird",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -5699,7 +6258,7 @@ export const translations = {
       manageCookies: {
         title: "5. So verwalten Sie Cookies",
         intro:
-          "Sie können Cookies nach Ihren Wünschen kontrollieren und/oder löschen. So gehen Sie dabei in den wichtigsten Browsern vor:",
+          "Unsere Websites haben weder ein Cookie-Banner noch ein Fenster für Cookie-Einstellungen. Ein Cookie oder die anderen Daten, die eine Website in Ihrem Browser aufbewahrt, können Sie in den Einstellungen des Browsers selbst löschen. So finden Sie sie in den wichtigsten Browsern:",
         browsers: [
           {
             name: "Google Chrome",
@@ -5720,7 +6279,7 @@ export const translations = {
           },
         ],
         warning:
-          "Achtung: Die Deaktivierung essenzieller Cookies kann die Funktionsfähigkeit der Plattform beeinträchtigen. Möglicherweise können Sie sich nicht anmelden oder verlieren den Zugang zu bestimmten Funktionen.",
+          "Ohne Cookies funktioniert logistiq.ro weiterhin; seine Adresse ohne Sprache öffnet in der Standardsprache der Domain. Auf logistiq.cloud werden Sie abgemeldet und können sich nicht anmelden, solange Cookies blockiert sind. Auf qrgo.ro findet Ihr Browser den durchgeführten Check-in nicht mehr, und die Schaltflächen „Entladung beendet“ und „Beladung beendet“ werden nicht angeboten.",
       },
       changes: {
         title: "6. Änderungen dieser Richtlinie",
@@ -5743,11 +6302,7 @@ export const translations = {
         type: "Datenart",
         period: "Speicherdauer",
       },
-      cookieHeaders: {
-        name: "Cookie",
-        duration: "Speicherdauer",
-        purpose: "Zweck",
-      },
+      cookieHeaders: { name: "Cookie", duration: "Speicherdauer", purpose: "Zweck", kind: "Art", setWhen: "Wann gesetzt", site: "Website", item: "Name", kept: "Aufbewahrt" },
       meta: {
         privacy: "Datenschutzerklärung von Logistiq – wie wir Ihre personenbezogenen Daten gemäß DSGVO erheben, verwenden und schützen.",
         terms: "Allgemeine Geschäftsbedingungen von Logistiq – Plattform für Lagerverwaltung und digitalen Fahrer-Check-in.",
@@ -7721,9 +8276,9 @@ export const translations = {
       intro: {
         title: "1. Wprowadzenie",
         p1:
-          "Niniejsza polityka wyjaśnia, w jaki sposób platforma Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) wykorzystuje pliki cookie i podobne technologie, aby zapewnić Ci bezpieczne i spersonalizowane doświadczenie.",
+          "Niniejsza polityka określa, z jakich plików cookie i podobnych technologii korzystają witryny platformy Logistiq: logistiq.ro (oraz logistiq.be), witryna prezentacyjna; logistiq.cloud, dashboard; oraz qrgo.ro, check-in kierowców.",
         p2:
-          "Kontynuując przeglądanie naszych stron internetowych, akceptujesz wykorzystywanie plików cookie zgodnie z niniejszą polityką.",
+          "Witryna logistiq.ro nie zapisuje żadnego pliku cookie, gdy ją odwiedzasz, dlatego nie wyświetla banera cookies. Zapisuje jeden tylko wtedy, gdy wybierzesz język z menu języków, aby zapamiętać ten wybór. Witryny logistiq.cloud i qrgo.ro zapisują pliki cookie, gdy się logujesz lub z nich korzystasz: każdy jest opisany poniżej, wraz z celem, okresem przechowywania i chwilą, w której jest zapisywany.",
       },
       whatAreCookies: {
         title: "2. Czym są pliki cookie?",
@@ -7751,59 +8306,222 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Pliki cookie, których używamy",
-        essential: {
-          title: "Niezbędne pliki cookie",
-          desc: "Wymagane do działania platformy. Nie można ich wyłączyć.",
-          cookies: [
+        intro: "Każdy plik cookie poniżej jest albo niezbędny (utrzymuje Twoje zalogowanie, prowadzi Cię z powrotem do Twojego check-inu albo chroni Twoje konto lub Twój check-in), albo zapisuje wybór, którego dokonałeś sam (język, magazyn lub filtr, widok, jasny lub ciemny motyw). Żaden nie służy reklamie ani analityce ani śledzeniu Cię między witrynami. Okresy przechowywania to te, o które proszą witryny; Twoja przeglądarka może przechowywać plik cookie krócej.",
+        kinds: { necessary: "Niezbędny", choice: "Zapisuje Twój wybór" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "Witryna prezentacyjna, dostępna także pod adresem logistiq.be. Podczas wizyty nie zapisuje żadnego pliku cookie; poniższy plik cookie zapisuje wyłącznie menu języków.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "Wybrany przez Ciebie język, aby adres witryny bez języka otwierał się w nim",
+                duration: "1 rok od wyboru",
+                setWhen: "Tylko gdy wybierzesz język z menu języków",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "To samo, na logistiq.be",
+                duration: "1 rok od wyboru",
+                setWhen: "Tylko gdy wybierzesz język z menu języków na logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Dashboard dla zalogowanych użytkowników oraz strony prezentacji udostępniane przez nas linkiem. Pliki cookie są zapisywane od strony logowania, w miarę jak się logujesz i pracujesz; strona logowania ładuje Google reCAPTCHA, gdy tylko się otworzy (sekcja 4). Trzy pliki cookie dostępu z urządzenia (lq_…) istnieją tylko tam, gdzie organizacja używa kodów dostępu dla swoich komputerów.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Twoja sesja po zalogowaniu (uwierzytelnianie Supabase: token dostępu i token odświeżania); gdy jest duży, dzielony na numerowane części (.0, .1)",
+                duration: "Do wylogowania; jeśli się nie wylogujesz, tak długo, jak przechowuje go przeglądarka (w obecnych przeglądarkach około 400 dni)",
+                setWhen: "Przy logowaniu; odnawiany, gdy korzystasz z dashboardu",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Podpisany znacznik, że ta sesja przeszła kod SMS logowania dwuetapowego",
+                duration: "Do zamknięcia przeglądarki; sam znacznik jest ważny 12 godzin",
+                setWhen: "Gdy wpiszesz poprawny kod SMS",
+              },
+              {
+                name: "lq_device",
+                purpose: "Dowód, że ta przeglądarka to komputer zapisany dla Twojej organizacji (dostęp z urządzenia)",
+                duration: "400 dni, liczone od nowa przy każdym zapisie",
+                setWhen: "Gdy przeglądarka zostanie zapisana kodem dostępu",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Podpisany znacznik, że w tej przeglądarce przed chwilą wpisano osobisty kod dostępu",
+                duration: "30 minut",
+                setWhen: "Gdy osobisty kod dostępu zostanie przyjęty",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Jednorazowa informacja, że Twój osobisty kod dostępu został zastąpiony",
+                duration: "2 minuty",
+                setWhen: "Przy logowaniu, jeśli w międzyczasie Twój kod dostępu został zastąpiony",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Tylko na impersonate.logistiq.cloud, w przeglądarce pracownika Logistiq: oznacza sesję wsparcia otwartą na koncie użytkownika (kto działa w czyim imieniu i do kiedy)",
+                duration: "8 godzin",
+                setWhen: "Gdy pracownik Logistiq otwiera sesję wsparcia",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Magazyn, którego panel otworzył w dashboardzie właściciel konta",
+                duration: "Do zamknięcia przeglądarki",
+                setWhen: "Gdy właściciel wybierze magazyn w przełączniku magazynów; usuwany, gdy go opuści",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Dział, według którego dyspozytor filtruje dashboard",
+                duration: "1 rok",
+                setWhen: "Gdy dyspozytor wybierze dział; usuwany, gdy filtr zostanie wyczyszczony",
+              },
+              {
+                name: "users_view",
+                purpose: "Widok, drzewo lub tabela, wybrany na stronie użytkowników; dashboard obecnie go nie odczytuje",
+                duration: "1 rok",
+                setWhen: "Gdy zmienisz widok na stronie użytkowników",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Wybrany przez Ciebie język; jest używany, dopóki nie jesteś zalogowany (język zalogowanego użytkownika jest zapisany w jego koncie)",
+                duration: "1 rok",
+                setWhen: "Gdy wybierzesz język z menu języków",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "Aplikacja internetowa do check-inu kierowców. Te same pliki cookie są zapisywane, gdy magazyn wyświetla check-in we własnej domenie.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Check-in wykonany w tej przeglądarce, aby kierowca wrócił na jego stronę statusu",
+                duration: "48 godzin",
+                setWhen: "Po wysłaniu check-inu; usuwany przez „Utwórz nowy check-in” lub po zakończeniu wizyty",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Dowód, że check-in wykonano w tej przeglądarce; udostępnia przyciski „Rozładunek zakończony” i „Załadunek zakończony”",
+                duration: "Usuwany po zakończeniu wizyty lub najpóźniej po 72 godzinach",
+                setWhen: "Po wysłaniu check-inu; usuwany przez „Utwórz nowy check-in” lub po zakończeniu wizyty",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Język wybrany przez kierowcę",
+                duration: "1 rok",
+                setWhen: "Po wybraniu języka lub po otwarciu linku, który wskazuje język (takie są linki z aplikacji QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Oznacza, że wybrano język, aby ekran wyboru języka nie pojawiał się ponownie",
+                duration: "1 rok",
+                setWhen: "Po wybraniu języka na pierwszym ekranie",
+              },
+              { name: "DARK_MODE", purpose: "Jasny lub ciemny motyw wybrany przez kierowcę", duration: "1 rok", setWhen: "Po zmianie motywu" },
+            ],
+          },
+        ],
+        storage: {
+          title: "Inne dane przechowywane w przeglądarce",
+          intro: "Podobne technologie. Pamięć lokalna i pamięć sesji to dane, które witryna przechowuje w Twojej przeglądarce; w przeciwieństwie do pliku cookie przeglądarka nigdy nie wysyła ich do witryny sama. Witryny logistiq.ro i logistiq.be nie przechowują żadnych. Witryny logistiq.cloud i qrgo.ro przechowują poniższe elementy: ustawienia wyświetlania, krótkotrwałe dane robocze oraz, jeśli korzystasz z selektora emoji, wybrane emoji.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "Do wylogowania",
-              purpose:
-                "Uwierzytelnianie Supabase - Twoja sesja zalogowana (token dostępu i odświeżania), dzielona na numerowane części (.0, .1), gdy jest duża",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Wybrany jasny lub ciemny tryb i motyw kolorystyczny",
+              kept: "Do usunięcia danych witryny",
+            },
+            { site: "logistiq.cloud", name: "logistiq-sidebar-collapsed", purpose: "Czy menu boczne zostało zwinięte", kept: "Do usunięcia danych witryny" },
+            {
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Filtr statusu użyty ostatnio na stronie check-inów",
+              kept: "Do usunięcia danych witryny",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 rok",
-              purpose: "Zapamiętywanie preferowanego języka",
-            },
-          ],
-        },
-        functional: {
-          title: "Funkcjonalne pliki cookie",
-          desc: "Poprawiają komfort korzystania z platformy.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 rok",
-              purpose: "Zapamiętywanie preferencji motywu ciemnego/jasnego",
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Ustawienia wyświetlania strony placu",
+              kept: "Do usunięcia danych witryny",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 dni",
-              purpose: "Stan menu bocznego w Dashboardzie",
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Język programowania wybrany dla przykładów w dokumentacji API",
+              kept: "Do usunięcia danych witryny",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "Język oraz jasny lub ciemny motyw wybrane na stronie prezentacji otwartej z linku wysłanego przez nas",
+              kept: "Do usunięcia danych witryny",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "Emoji wybrane w czacie i to, jak często, aby selektor emoji pokazywał najpierw najczęściej używane",
+              kept: "Do usunięcia danych witryny",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Że strona sandbox interfejsu dashboardu została odblokowana w tej karcie",
+              kept: "Do zamknięcia karty",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Liczba automatycznych przeładowań tablicy placu",
+              kept: "Do zamknięcia karty",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "Rezerwacja znaleziona przez kierowcę na stronie głównej qrgo.ro, przekazana do formularza check-inu magazynu; odczytywana raz, potem usuwana",
+              kept: "Do odczytania lub do zamknięcia karty",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "Emoji wybrane w czacie i to, jak często, aby selektor emoji pokazywał najpierw najczęściej używane",
+              kept: "Do usunięcia danych witryny",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Pliki cookie podmiotów trzecich",
+        title: "4. Usługi podmiotów trzecich",
         intro:
-          "Platforma Logistiq korzysta z następujących usług podmiotów trzecich, które mogą umieszczać pliki cookie:",
+          "Żadna strona trzech witryn nie ładuje usługi reklamowej ani analitycznej. Niektóre strony i funkcje uruchamiają w Twojej przeglądarce kod innej firmy lub pobierają od niej plik, gdy strona zostaje otwarta lub funkcja zostaje użyta. Ta firma otrzymuje wtedy Twój adres IP i może zapisywać lub odczytywać własne pliki cookie lub podobne dane:",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Uwierzytelnianie i baza danych",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Hosting",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Chroni przed botami formularze logistiq.cloud do logowania, resetowania hasła i rejestracji przewoźników",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile w qrgo.ro: gdy wyszukiwań rezerwacji jest bardzo dużo, potwierdza, że szuka człowiek",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "Mapa, na której rysuje się geofence magazynu, w ustawieniach magazynu w logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID w logistiq.ro: weryfikacja uruchamiana w Twojej przeglądarce, gdy wysyłasz formularz kontaktowy; jej skrypt jest serwowany przez samą witrynę logistiq.ro",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Dostarcza obrazki emoji z selektora emoji czatu w logistiq.cloud i qrgo.ro, gdy selektor zostanie otwarty",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -7812,7 +8530,7 @@ export const translations = {
       manageCookies: {
         title: "5. Jak zarządzać plikami cookie",
         intro:
-          "Możesz kontrolować i/lub usuwać pliki cookie zgodnie ze swoimi preferencjami. Oto jak to zrobić w głównych przeglądarkach:",
+          "Nasze witryny nie mają banera cookies ani panelu ustawień plików cookie. Plik cookie lub inne dane, które witryna przechowuje w przeglądarce, możesz usunąć w ustawieniach samej przeglądarki. Oto gdzie je znajdziesz w głównych przeglądarkach:",
         browsers: [
           {
             name: "Google Chrome",
@@ -7833,7 +8551,7 @@ export const translations = {
           },
         ],
         warning:
-          "Uwaga: wyłączenie niezbędnych plików cookie może wpłynąć na działanie platformy. Logowanie może okazać się niemożliwe lub możesz utracić dostęp do niektórych funkcji.",
+          "Bez plików cookie logistiq.ro nadal działa; jej adres bez języka otwiera się w domyślnym języku domeny. W logistiq.cloud zostaniesz wylogowany i nie zalogujesz się, dopóki pliki cookie są zablokowane. W qrgo.ro przeglądarka nie odnajdzie już wykonanego check-inu, a przyciski „Rozładunek zakończony” i „Załadunek zakończony” nie będą dostępne.",
       },
       changes: {
         title: "6. Zmiany polityki",
@@ -7860,6 +8578,11 @@ export const translations = {
         name: "Plik cookie",
         duration: "Okres przechowywania",
         purpose: "Cel",
+        kind: "Rodzaj",
+        setWhen: "Kiedy zapisywany",
+        site: "Witryna",
+        item: "Nazwa",
+        kept: "Przechowywanie",
       },
       meta: {
         privacy: "Polityka prywatności Logistiq – jak zbieramy, wykorzystujemy i chronimy Twoje dane osobowe zgodnie z RODO.",
@@ -9834,9 +10557,9 @@ export const translations = {
       intro: {
         title: "1. Bevezetés",
         p1:
-          "Ez a szabályzat ismerteti, hogyan használja a Logistiq platform (logistiq.ro, logistiq.cloud, qrgo.ro) a cookie-kat és a hasonló technológiákat annak érdekében, hogy Önnek biztonságos és személyre szabott élményt nyújtson.",
+          "Ez a szabályzat bemutatja, milyen cookie-kat és hasonló technológiákat használnak a Logistiq platform webhelyei: a logistiq.ro (és a logistiq.be), a bemutató webhely; a logistiq.cloud, az irányítópult; valamint a qrgo.ro, a sofőrök check-inje.",
         p2:
-          "Webhelyeink további böngészésével Ön elfogadja a cookie-k e szabályzatnak megfelelő használatát.",
+          "A logistiq.ro nem helyez el cookie-t, amikor Ön meglátogatja, ezért nem jelenít meg cookie-bannert. Csak akkor tárol egyet, ha Ön a nyelvi menüben nyelvet választ, hogy ezt a választást megjegyezze. A logistiq.cloud és a qrgo.ro akkor helyez el cookie-kat, amikor Ön bejelentkezik vagy használja őket: mindegyik szerepel alább, a céljával, az időtartamával és azzal, hogy mikor kerül elhelyezésre.",
       },
       whatAreCookies: {
         title: "2. Mik azok a cookie-k?",
@@ -9864,59 +10587,227 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Az általunk használt cookie-k",
-        essential: {
-          title: "Alapvető cookie-k",
-          desc: "A platform működéséhez szükségesek. Nem kapcsolhatók ki.",
-          cookies: [
+        intro: "Az alábbi cookie-k mindegyike vagy feltétlenül szükséges (bejelentkezve tartja Önt, visszaviszi a check-injéhez, vagy védi a fiókját vagy a check-injét), vagy egy Ön által meghozott választást tárol (egy nyelvet, egy raktárt vagy szűrőt, egy nézetet, a világos vagy sötét témát). Egyiket sem használjuk reklámra vagy elemzésre, sem arra, hogy Önt egyik webhelyről a másikra kövessük. Az időtartamok azok, amelyeket a webhelyek kérnek; a böngészője rövidebb ideig is megőrizhet egy cookie-t.",
+        kinds: { necessary: "Feltétlenül szükséges", choice: "Az Ön választását tárolja" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "A bemutató webhely, amely a logistiq.be címen is elérhető. Látogatáskor nem helyez el cookie-t; az alábbi cookie-t kizárólag a nyelvi menü írja.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "Az Ön által választott nyelv, hogy a webhely nyelv nélküli címe ezen a nyelven nyíljon meg",
+                duration: "a választástól számított 1 év",
+                setWhen: "Csak ha Ön a nyelvi menüben nyelvet választ",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "Ugyanez a logistiq.be-n",
+                duration: "a választástól számított 1 év",
+                setWhen: "Csak ha Ön a logistiq.be nyelvi menüjében nyelvet választ",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Az irányítópult a bejelentkezett felhasználóknak, valamint a linkkel megosztott bemutató oldalaink. A cookie-k a bejelentkezési oldaltól kezdve kerülnek elhelyezésre, ahogy Ön bejelentkezik és dolgozik; a bejelentkezési oldal megnyitásakor azonnal betölti a Google reCAPTCHA-t (4. szakasz). Az eszközalapú hozzáférés három cookie-ja (lq_…) csak ott létezik, ahol egy szervezet hozzáférési kódokat használ a számítógépeihez.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Az Ön bejelentkezett munkamenete (Supabase-hitelesítés: hozzáférési és frissítési token); ha nagy, számozott részekre (.0, .1) bontva",
+                duration: "Kijelentkezésig; ha nem jelentkezik ki, ameddig a böngészője megőrzi (a mai böngészőkben körülbelül 400 nap)",
+                setWhen: "Bejelentkezéskor; megújul, amíg az irányítópultot használja",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Aláírt jelölés arról, hogy ez a munkamenet teljesítette a kétlépéses bejelentkezés SMS-kódját",
+                duration: "A böngésző bezárásáig; maga a jelölés 12 óráig érvényes",
+                setWhen: "Amikor helyes SMS-kódot ad meg",
+              },
+              {
+                name: "lq_device",
+                purpose: "Igazolás, hogy ez a böngésző az Ön szervezetéhez felvett számítógép (eszközalapú hozzáférés)",
+                duration: "400 nap, minden íráskor újrakezdődik",
+                setWhen: "Amikor a böngészőt hozzáférési kóddal felveszik",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Aláírt jelölés arról, hogy ebben a böngészőben az imént személyes hozzáférési kódot adtak meg",
+                duration: "30 perc",
+                setWhen: "Amikor egy személyes hozzáférési kódot elfogadnak",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Egyszeri értesítés arról, hogy az Ön személyes hozzáférési kódját lecserélték",
+                duration: "2 perc",
+                setWhen: "Bejelentkezéskor, ha a hozzáférési kódját időközben lecserélték",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Csak az impersonate.logistiq.cloud oldalon, a Logistiq egy munkatársának böngészőjében: egy felhasználó fiókjában megnyitott támogatási munkamenetet jelöl (ki kinek a nevében jár el, és meddig)",
+                duration: "8 óra",
+                setWhen: "Amikor a Logistiq egy munkatársa támogatási munkamenetet nyit",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Az a raktár, amelynek felületét a fiók tulajdonosa megnyitotta az irányítópulton",
+                duration: "A böngésző bezárásáig",
+                setWhen: "Amikor a tulajdonos a raktárváltóban raktárt választ; törlődik, amikor kilép belőle",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Az a részleg, amely szerint egy diszpécser szűri az irányítópultot",
+                duration: "1 év",
+                setWhen: "Amikor egy diszpécser részleget választ; törlődik, amikor a szűrőt törlik",
+              },
+              {
+                name: "users_view",
+                purpose: "A felhasználók oldalán választott nézet, fa vagy táblázat; az irányítópult jelenleg nem olvassa vissza",
+                duration: "1 év",
+                setWhen: "Amikor a felhasználók oldalán nézetet vált",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Az Ön által választott nyelv; akkor használatos, amikor Ön nincs bejelentkezve (a bejelentkezett felhasználó nyelvét a fiókja őrzi)",
+                duration: "1 év",
+                setWhen: "Amikor a nyelvi menüben nyelvet választ",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "A sofőrök webes check-in alkalmazása. Ugyanezek a cookie-k kerülnek elhelyezésre, amikor egy raktár a saját domainjén jeleníti meg a check-int.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Az ebből a böngészőből végzett check-in, hogy a sofőr visszakerüljön az állapotoldalára",
+                duration: "48 óra",
+                setWhen: "Check-in beküldésekor; az „Új check-in létrehozása” vagy a látogatás vége törli",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Igazolás, hogy ez a böngésző végezte a check-int; ez teszi elérhetővé a „Kirakodás befejezve” és a „Berakodás befejezve” gombot",
+                duration: "A látogatás végén törlődik, de legkésőbb 72 óra elteltével",
+                setWhen: "Check-in beküldésekor; az „Új check-in létrehozása” vagy a látogatás vége törli",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "A sofőr által választott nyelv",
+                duration: "1 év",
+                setWhen: "Nyelv választásakor vagy egy nyelvet megadó link megnyitásakor (ilyenek a QRGo Driver alkalmazás linkjei)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Jelzi, hogy nyelvet választottak, hogy a nyelvválasztó képernyő ne jelenjen meg újra",
+                duration: "1 év",
+                setWhen: "Nyelv választásakor az első képernyőn",
+              },
+              { name: "DARK_MODE", purpose: "A sofőr által választott világos vagy sötét téma", duration: "1 év", setWhen: "A téma váltásakor" },
+            ],
+          },
+        ],
+        storage: {
+          title: "A böngészőben tárolt egyéb adatok",
+          intro: "Hasonló technológiák. A helyi tároló és a munkamenet-tároló olyan adatok, amelyeket egy webhely az Ön böngészőjében őriz; a cookie-val ellentétben a böngésző soha nem küldi el őket magától a webhelynek. A logistiq.ro és a logistiq.be semmit nem tárol. A logistiq.cloud és a qrgo.ro az alábbi elemeket tárolja: megjelenítési beállításokat, rövid életű munkaadatokat, valamint, ha használja az emojiválasztót, a kiválasztott emojikat.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "Kijelentkezésig",
-              purpose:
-                "Supabase-hitelesítés – a bejelentkezett munkamenet (hozzáférési és frissítési token), nagy méret esetén számozott részekre (.0, .1) bontva",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Az Ön által választott világos vagy sötét mód és színtéma",
+              kept: "Amíg nem törli a webhely adatait",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 év",
-              purpose: "A preferált nyelv megjegyzése",
-            },
-          ],
-        },
-        functional: {
-          title: "Funkcionális cookie-k",
-          desc: "Javítják a platform használati élményét.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 év",
-              purpose: "A sötét/világos témára vonatkozó beállítás megjegyzése",
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Hogy összecsukva hagyta-e az oldalsó menüt",
+              kept: "Amíg nem törli a webhely adatait",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 nap",
-              purpose: "Az oldalsó menü állapota az Irányítópulton",
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "A check-inek oldalán legutóbb használt állapotszűrő",
+              kept: "Amíg nem törli a webhely adatait",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Az udvar oldalának megjelenítési beállításai",
+              kept: "Amíg nem törli a webhely adatait",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Az API-dokumentáció példáihoz választott programozási nyelv",
+              kept: "Amíg nem törli a webhely adatait",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "A nyelv és a világos vagy sötét téma, amelyet egy általunk küldött linkről megnyitott bemutató oldalon választott",
+              kept: "Amíg nem törli a webhely adatait",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "A csevegésben választott emojik és hogy milyen gyakran, hogy az emojiválasztó elöl mutassa a leggyakrabban használtakat",
+              kept: "Amíg nem törli a webhely adatait",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Hogy az irányítópult felületi sandbox oldalát ezen a lapon feloldották",
+              kept: "A lap bezárásáig",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Egy udvartábla automatikus újratöltéseinek száma",
+              kept: "A lap bezárásáig",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "A sofőr által a qrgo.ro kezdőlapján talált foglalás, amely a raktár check-in űrlapjára kerül át; egyszer olvassák ki, utána törlődik",
+              kept: "Amíg ki nem olvassák, vagy a lap bezárásáig",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "A csevegésben választott emojik és hogy milyen gyakran, hogy az emojiválasztó elöl mutassa a leggyakrabban használtakat",
+              kept: "Amíg nem törli a webhely adatait",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Harmadik féltől származó cookie-k",
+        title: "4. Harmadik felek szolgáltatásai",
         intro:
-          "A Logistiq platform az alábbi, harmadik felek által nyújtott szolgáltatásokat használja, amelyek cookie-kat helyezhetnek el:",
+          "A három webhely egyetlen oldala sem tölt be reklám- vagy elemzőszolgáltatást. Egyes oldalak és funkciók egy másik cég kódját futtatják az Ön böngészőjében, vagy fájlt töltenek le tőle, amikor az oldal megnyílik vagy a funkciót használják. Ez a cég ekkor megkapja az Ön IP-címét, és tárolhatja vagy olvashatja saját cookie-jait vagy hasonló adatait:",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Hitelesítés és adatbázis",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Tárhelyszolgáltatás",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Megvédi a botoktól a logistiq.cloud bejelentkezési, jelszó-visszaállítási és fuvarozói regisztrációs űrlapjait",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile a qrgo.ro-n: ha nagyon sok a foglaláskeresés, megerősíti, hogy ember keres",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "A térkép, amelyen egy raktár geofence-ét megrajzolják, a logistiq.cloud raktárbeállításaiban",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID a logistiq.ro-n: ellenőrzés, amely az Ön böngészőjében fut, amikor elküldi a kapcsolatfelvételi űrlapot; a szkriptjét maga a logistiq.ro szolgálja ki",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "A csevegés emojiválasztójának emojiképeit szállítja a logistiq.cloud-on és a qrgo.ro-n, amikor a választót megnyitják",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -9925,7 +10816,7 @@ export const translations = {
       manageCookies: {
         title: "5. A cookie-k kezelése",
         intro:
-          "A cookie-kat igényei szerint szabályozhatja és/vagy törölheti. A legelterjedtebb böngészőkben ezt a következőképpen teheti meg:",
+          "Webhelyeinknek nincs cookie-bannere és cookie-beállítási panelje. Egy cookie-t vagy az egyéb adatokat, amelyeket egy webhely a böngészőjében őriz, magának a böngészőnek a beállításaiban törölheti. A legelterjedtebb böngészőkben itt találja őket:",
         browsers: [
           {
             name: "Google Chrome",
@@ -9945,7 +10836,7 @@ export const translations = {
           },
         ],
         warning:
-          "Figyelem: az alapvető cookie-k letiltása befolyásolhatja a platform működését. Előfordulhat, hogy nem tud bejelentkezni, vagy elveszíti a hozzáférést bizonyos funkciókhoz.",
+          "Cookie-k nélkül a logistiq.ro továbbra is működik; nyelv nélküli címe a domain alapértelmezett nyelvén nyílik meg. A logistiq.cloud-on Ön kijelentkezik, és nem tud bejelentkezni, amíg a cookie-k le vannak tiltva. A qrgo.ro-n a böngészője már nem találja az elvégzett check-int, és a „Kirakodás befejezve” és a „Berakodás befejezve” gomb nem jelenik meg.",
       },
       changes: {
         title: "6. A szabályzat módosításai",
@@ -9972,6 +10863,11 @@ export const translations = {
         name: "Cookie",
         duration: "Időtartam",
         purpose: "Cél",
+        kind: "Típus",
+        setWhen: "Mikor kerül elhelyezésre",
+        site: "Webhely",
+        item: "Név",
+        kept: "Megőrzés",
       },
       meta: {
         privacy: "A Logistiq adatvédelmi tájékoztatója – hogyan gyűjtjük, használjuk és védjük személyes adatait a GDPR szerint.",
@@ -11944,9 +12840,9 @@ export const translations = {
       intro: {
         title: "1. Въведение",
         p1:
-          "Тази политика обяснява как платформата Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) използва бисквитки и подобни технологии, за да ви осигури сигурно и персонализирано изживяване.",
+          "Тази политика посочва кои бисквитки и подобни технологии използват сайтовете на платформата Logistiq: logistiq.ro (и logistiq.be), сайтът за представяне; logistiq.cloud, таблото; и qrgo.ro, check-in на шофьорите.",
         p2:
-          "Като продължавате да разглеждате нашите уебсайтове, вие приемате използването на бисквитки в съответствие с тази политика.",
+          "logistiq.ro не поставя бисквитка, когато го посещавате, затова не показва банер за бисквитки. Запазва една-единствена само ако изберете език от менюто с езици, за да запомни този избор. logistiq.cloud и qrgo.ro поставят бисквитки, когато влизате в профила си или ги използвате: всяка е описана по-долу, с целта, срока и момента, в който се поставя.",
       },
       whatAreCookies: {
         title: "2. Какво представляват бисквитките?",
@@ -11974,59 +12870,227 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Бисквитките, които използваме",
-        essential: {
-          title: "Основни бисквитки",
-          desc: "Необходими са за функционирането на платформата. Не могат да бъдат деактивирани.",
-          cookies: [
+        intro: "Всяка бисквитка по-долу е или строго необходима (поддържа ви влезли в профила, връща ви към вашия check-in или защитава профила ви или вашия check-in), или запазва избор, който сте направили сами (език, склад или филтър, изглед, светла или тъмна тема). Никоя не се използва за реклама или анализ, нито за да ви проследява от един сайт към друг. Сроковете са тези, които сайтовете задават; браузърът ви може да пази бисквитка за по-кратко време.",
+        kinds: { necessary: "Строго необходима", choice: "Запазва вашия избор" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "Сайтът за представяне, достъпен и на адрес logistiq.be. При посещение не поставя бисквитка; бисквитката по-долу се записва само от менюто с езици.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "Езикът, който сте избрали, за да се отваря на него адресът на сайта без език",
+                duration: "1 година от избора",
+                setWhen: "Само когато изберете език от менюто с езици",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "Същото, на logistiq.be",
+                duration: "1 година от избора",
+                setWhen: "Само когато изберете език от менюто с езици на logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Таблото, за влезлите в профила си потребители, и страниците с презентации, които споделяме чрез линк. Бисквитките се поставят от страницата за вход нататък, докато влизате и работите; страницата за вход зарежда Google reCAPTCHA веднага щом се отвори (раздел 4). Трите бисквитки за достъп от устройство (lq_…) съществуват само там, където организация използва кодове за достъп за своите компютри.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Вашата сесия след вход (удостоверяване чрез Supabase: токен за достъп и токен за опресняване); разделена на номерирани части (.0, .1), когато е голяма",
+                duration: "До излизане от профила; ако не излезете, докато браузърът я пази (около 400 дни в съвременните браузъри)",
+                setWhen: "При вход; подновява се, докато използвате таблото",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Подписан маркер, че тази сесия е преминала SMS кода на двуетапния вход",
+                duration: "До затваряне на браузъра; самият маркер е валиден 12 часа",
+                setWhen: "Когато въведете верен SMS код",
+              },
+              {
+                name: "lq_device",
+                purpose: "Доказателство, че този браузър е компютър, вписан за вашата организация (достъп от устройство)",
+                duration: "400 дни, започващи отначало при всяко записване",
+                setWhen: "Когато браузърът бъде вписан с код за достъп",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Подписан маркер, че в този браузър току-що е въведен личен код за достъп",
+                duration: "30 минути",
+                setWhen: "Когато личен код за достъп бъде приет",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Еднократно известие, че личният ви код за достъп е заменен",
+                duration: "2 минути",
+                setWhen: "При вход, ако междувременно кодът ви за достъп е заменен",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Само на impersonate.logistiq.cloud, в браузъра на служител на Logistiq: отбелязва сесия за поддръжка, отворена в профила на потребител (кой действа от чие име и до кога)",
+                duration: "8 часа",
+                setWhen: "Когато служител на Logistiq отвори сесия за поддръжка",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Складът, чийто панел е отворил в таблото титулярят на профила",
+                duration: "До затваряне на браузъра",
+                setWhen: "Когато титулярят избере склад от превключвателя на складове; изтрива се, когато излезе от него",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Отделът, по който диспечер филтрира таблото",
+                duration: "1 година",
+                setWhen: "Когато диспечер избере отдел; изтрива се, когато филтърът бъде премахнат",
+              },
+              {
+                name: "users_view",
+                purpose: "Изгледът, дърво или таблица, избран на страницата с потребители; в момента таблото не го прочита",
+                duration: "1 година",
+                setWhen: "Когато смените изгледа на страницата с потребители",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Езикът, който сте избрали; използва се, докато не сте влезли в профила си (езикът на влязъл потребител се пази в профила му)",
+                duration: "1 година",
+                setWhen: "Когато изберете език от менюто с езици",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "Уеб приложението за check-in на шофьорите. Същите бисквитки се поставят и когато склад показва check-in на собствения си домейн.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Check-in, направен от този браузър, за да бъде шофьорът върнат към страницата му за статус",
+                duration: "48 часа",
+                setWhen: "При изпращане на check-in; изтрива се със „Създай нов check-in“ или в края на посещението",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Доказателство, че този браузър е направил check-in; той активира бутоните „Разтоварването приключи“ и „Товаренето приключи“",
+                duration: "Изтрива се в края на посещението или най-късно след 72 часа",
+                setWhen: "При изпращане на check-in; изтрива се със „Създай нов check-in“ или в края на посещението",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "Езикът, избран от шофьора",
+                duration: "1 година",
+                setWhen: "При избор на език или при отваряне на линк, който посочва език (такива са линковете от приложението QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Отбелязва, че е избран език, за да не се показва отново екранът за избор на език",
+                duration: "1 година",
+                setWhen: "При избор на език на първия екран",
+              },
+              { name: "DARK_MODE", purpose: "Светлата или тъмната тема, избрана от шофьора", duration: "1 година", setWhen: "При смяна на темата" },
+            ],
+          },
+        ],
+        storage: {
+          title: "Други данни, пазени в браузъра",
+          intro: "Подобни технологии. Локалното хранилище и хранилището за сесията са данни, които сайт пази във вашия браузър; за разлика от бисквитката браузърът никога не ги изпраща сам към сайта. logistiq.ro и logistiq.be не пазят такива. logistiq.cloud и qrgo.ro пазят елементите по-долу: избори за показване, краткотрайни работни данни и, ако използвате избора на емоджи, избраните емоджи.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "До излизане от профила",
-              purpose:
-                "Удостоверяване чрез Supabase - вашата сесия при вход (токени за достъп и опресняване), разделена на номерирани части (.0, .1), когато е голяма",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Избраните светъл или тъмен режим и цветова тема",
+              kept: "Докато не изтриете данните на сайта",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 година",
-              purpose: "Запомняне на предпочитания език",
-            },
-          ],
-        },
-        functional: {
-          title: "Функционални бисквитки",
-          desc: "Подобряват потребителското изживяване в платформата.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 година",
-              purpose: "Запомняне на предпочитанието за тъмна/светла тема",
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Дали сте оставили страничното меню свито",
+              kept: "Докато не изтриете данните на сайта",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 дни",
-              purpose: "Състояние на страничното меню в Таблото",
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Филтърът по статус, използван последно на страницата с check-in",
+              kept: "Докато не изтриете данните на сайта",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Настройки за показване на страницата на двора",
+              kept: "Докато не изтриете данните на сайта",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Езикът за програмиране, избран за примерите в документацията на API",
+              kept: "Докато не изтриете данните на сайта",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "Езикът и светлата или тъмната тема, избрани на страница с презентация, отворена от линк, изпратен от нас",
+              kept: "Докато не изтриете данните на сайта",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "Емоджито, избрани в чат, и колко често, за да показва изборът на емоджи първо най-използваните",
+              kept: "Докато не изтриете данните на сайта",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Че sandbox страницата на интерфейса на таблото е отключена в този раздел",
+              kept: "До затваряне на раздела",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Броят автоматични презареждания на табло на двора",
+              kept: "До затваряне на раздела",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "Резервацията, намерена от шофьора на началната страница на qrgo.ro, предадена към формуляра за check-in на склада; прочита се веднъж, след това се изтрива",
+              kept: "Докато не бъде прочетена или до затваряне на раздела",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "Емоджито, избрани в чат, и колко често, за да показва изборът на емоджи първо най-използваните",
+              kept: "Докато не изтриете данните на сайта",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Бисквитки на трети страни",
+        title: "4. Услуги на трети страни",
         intro:
-          "Платформата Logistiq използва следните услуги на трети страни, които могат да поставят бисквитки:",
+          "Никоя страница на трите сайта не зарежда рекламна услуга или услуга за анализ. Някои страници и функции изпълняват във вашия браузър код на друга компания или изтеглят файл от нея, когато страницата бъде отворена или функцията бъде използвана. Тази компания тогава получава вашия IP адрес и може да съхранява или чете собствени бисквитки или подобни данни:",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Удостоверяване и база данни",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Хостинг",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Защитава от ботове формулярите на logistiq.cloud за вход, възстановяване на паролата и регистрация на превозвачи",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile в qrgo.ro: когато търсенията на резервации са много, потвърждава, че търси човек",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "Картата, на която се чертае геозоната на склад, в настройките на склада в logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID в logistiq.ro: проверка, която се изпълнява във вашия браузър, когато изпращате формуляра за контакт; скриптът ѝ се предоставя от самия logistiq.ro",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Доставя изображенията на емоджи от избора на емоджи в чата в logistiq.cloud и qrgo.ro, когато изборът бъде отворен",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -12035,7 +13099,7 @@ export const translations = {
       manageCookies: {
         title: "5. Как да управлявате бисквитките",
         intro:
-          "Можете да контролирате и/или да изтривате бисквитките според предпочитанията си. Ето как можете да направите това в основните браузъри:",
+          "Нашите сайтове нямат банер за бисквитки, нито панел с настройки за бисквитки. Можете да изтриете бисквитка или другите данни, които сайт пази в браузъра ви, от настройките на самия браузър. Ето къде да ги намерите в основните браузъри:",
         browsers: [
           {
             name: "Google Chrome",
@@ -12056,7 +13120,7 @@ export const translations = {
           },
         ],
         warning:
-          "Внимание: Деактивирането на основните бисквитки може да засегне функционирането на платформата. Възможно е да не можете да влезете в акаунта си или да загубите достъп до определени функционалности.",
+          "Без бисквитки logistiq.ro продължава да работи; адресът му без език се отваря на езика по подразбиране на домейна. В logistiq.cloud излизате от профила си и не можете да влезете, докато бисквитките са блокирани. В qrgo.ro браузърът ви вече не намира направения check-in, а бутоните „Разтоварването приключи“ и „Товаренето приключи“ не се предлагат.",
       },
       changes: {
         title: "6. Промени в политиката",
@@ -12079,11 +13143,7 @@ export const translations = {
         type: "Вид данни",
         period: "Срок на съхранение",
       },
-      cookieHeaders: {
-        name: "Бисквитка",
-        duration: "Срок",
-        purpose: "Цел",
-      },
+      cookieHeaders: { name: "Бисквитка", duration: "Срок", purpose: "Цел", kind: "Вид", setWhen: "Кога се поставя", site: "Сайт", item: "Име", kept: "Срок на пазене" },
       meta: {
         privacy: "Политика за поверителност на Logistiq – как събираме, използваме и защитаваме личните Ви данни в съответствие с ОРЗД.",
         terms: "Общи условия на Logistiq – платформа за управление на складове и check-in на шофьори.",
@@ -14064,9 +15124,9 @@ export const translations = {
       intro: {
         title: "1. Introduction",
         p1:
-          "La présente politique explique la manière dont la plateforme Logistiq (logistiq.ro, logistiq.cloud, qrgo.ro) utilise des cookies et des technologies similaires afin de vous offrir une expérience sûre et personnalisée.",
+          "La présente politique indique quels cookies et technologies similaires utilisent les sites de la plateforme Logistiq : logistiq.ro (et logistiq.be), le site de présentation ; logistiq.cloud, le tableau de bord ; et qrgo.ro, le check-in des chauffeurs.",
         p2:
-          "En poursuivant votre navigation sur nos sites, vous acceptez l'utilisation des cookies conformément à la présente politique.",
+          "logistiq.ro ne dépose aucun cookie lorsque vous le visitez, c'est pourquoi il n'affiche pas de bandeau de cookies. Il n'en enregistre un que si vous choisissez une langue dans le menu des langues, pour retenir ce choix. logistiq.cloud et qrgo.ro déposent des cookies lorsque vous vous connectez ou que vous les utilisez : chacun est décrit ci-dessous, avec sa finalité, sa durée et le moment où il est déposé.",
       },
       whatAreCookies: {
         title: "2. Que sont les cookies ?",
@@ -14094,60 +15154,227 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Cookies que nous utilisons",
-        essential: {
-          title: "Cookies essentiels",
-          desc:
-            "Nécessaires au fonctionnement de la plateforme. Ils ne peuvent pas être désactivés.",
-          cookies: [
+        intro: "Chaque cookie ci-dessous est soit strictement nécessaire (il vous maintient connecté, vous ramène à votre check-in ou protège votre compte ou votre check-in), soit il enregistre un choix que vous avez fait vous-même (une langue, un entrepôt ou un filtre, un affichage, le thème clair ou sombre). Aucun n'est utilisé à des fins publicitaires ou d'analyse, ni pour vous suivre d'un site à l'autre. Les durées sont celles que les sites demandent ; votre navigateur peut conserver un cookie moins longtemps.",
+        kinds: { necessary: "Strictement nécessaire", choice: "Enregistre votre choix" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "Le site de présentation, également accessible à l'adresse logistiq.be. Il ne dépose aucun cookie lors d'une visite ; le cookie ci-dessous n'est écrit que par le menu des langues.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "La langue que vous avez choisie, pour que l'adresse du site sans langue s'ouvre dans cette langue",
+                duration: "1 an à compter du choix",
+                setWhen: "Uniquement lorsque vous choisissez une langue dans le menu des langues",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "La même chose, sur logistiq.be",
+                duration: "1 an à compter du choix",
+                setWhen: "Uniquement lorsque vous choisissez une langue dans le menu des langues de logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Le tableau de bord, pour les utilisateurs connectés, et les pages de présentation que nous partageons par lien. Les cookies sont déposés à partir de la page de connexion, à mesure que vous vous connectez et travaillez ; la page de connexion charge Google reCAPTCHA dès qu'elle s'ouvre (section 4). Les trois cookies d'accès par appareil (lq_…) n'existent que là où une organisation utilise des codes d'accès pour ses ordinateurs.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Votre session connectée (authentification Supabase : jetons d'accès et de rafraîchissement) ; divisée en parties numérotées (.0, .1) lorsqu'elle est volumineuse",
+                duration: "Jusqu'à votre déconnexion ; si vous ne vous déconnectez jamais, aussi longtemps que votre navigateur le conserve (environ 400 jours dans les navigateurs actuels)",
+                setWhen: "À la connexion ; renouvelé tant que vous utilisez le tableau de bord",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Marqueur signé indiquant que cette session a franchi le code SMS de la connexion en deux étapes",
+                duration: "Jusqu'à la fermeture du navigateur ; le marqueur lui-même est valable 12 heures",
+                setWhen: "Lorsque vous saisissez un code SMS correct",
+              },
+              {
+                name: "lq_device",
+                purpose: "Preuve que ce navigateur est un ordinateur enregistré pour votre organisation (accès par appareil)",
+                duration: "400 jours, recomptés à chaque écriture",
+                setWhen: "Lorsque le navigateur est enregistré avec un code d'accès",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Marqueur signé indiquant qu'un code d'accès personnel vient d'être saisi dans ce navigateur",
+                duration: "30 minutes",
+                setWhen: "Lorsqu'un code d'accès personnel est accepté",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Avis unique indiquant que votre code d'accès personnel a été remplacé",
+                duration: "2 minutes",
+                setWhen: "À la connexion, si votre code d'accès a été remplacé entre-temps",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Uniquement sur impersonate.logistiq.cloud, dans le navigateur d'un membre du personnel de Logistiq : signale une session d'assistance ouverte dans le compte d'un utilisateur (qui agit pour qui, et jusqu'à quand)",
+                duration: "8 heures",
+                setWhen: "Lorsqu'un membre du personnel de Logistiq ouvre une session d'assistance",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "L'entrepôt dont le titulaire du compte a ouvert le panneau dans le tableau de bord",
+                duration: "Jusqu'à la fermeture du navigateur",
+                setWhen: "Lorsque le titulaire choisit un entrepôt dans le sélecteur d'entrepôts ; supprimé lorsqu'il le quitte",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "Le département selon lequel un répartiteur filtre le tableau de bord",
+                duration: "1 an",
+                setWhen: "Lorsqu'un répartiteur choisit un département ; supprimé lorsque le filtre est effacé",
+              },
+              {
+                name: "users_view",
+                purpose: "L'affichage, arborescence ou tableau, choisi sur la page des utilisateurs ; le tableau de bord ne le relit pas aujourd'hui",
+                duration: "1 an",
+                setWhen: "Lorsque vous changez d'affichage sur la page des utilisateurs",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "La langue que vous avez choisie ; elle sert tant que vous n'êtes pas connecté (la langue d'un utilisateur connecté est conservée dans son compte)",
+                duration: "1 an",
+                setWhen: "Lorsque vous choisissez une langue dans le menu des langues",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "L'application web de check-in des chauffeurs. Les mêmes cookies sont déposés lorsqu'un entrepôt affiche le check-in sur son propre domaine.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "Le check-in effectué depuis ce navigateur, pour que le chauffeur soit ramené à sa page de statut",
+                duration: "48 heures",
+                setWhen: "À l'envoi d'un check-in ; supprimé par « Créer un nouveau check-in » ou à la fin de la visite",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Preuve que ce navigateur a effectué le check-in ; il active les boutons « Déchargement terminé » et « Chargement terminé »",
+                duration: "Supprimé à la fin de la visite ou, au plus tard, après 72 heures",
+                setWhen: "À l'envoi d'un check-in ; supprimé par « Créer un nouveau check-in » ou à la fin de la visite",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "La langue choisie par le chauffeur",
+                duration: "1 an",
+                setWhen: "Au choix d'une langue, ou à l'ouverture d'un lien qui indique une langue (comme les liens de l'application QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Indique qu'une langue a été choisie, pour que l'écran de choix de la langue ne réapparaisse pas",
+                duration: "1 an",
+                setWhen: "Au choix d'une langue sur le premier écran",
+              },
+              { name: "DARK_MODE", purpose: "Le thème clair ou sombre choisi par le chauffeur", duration: "1 an", setWhen: "Au changement de thème" },
+            ],
+          },
+        ],
+        storage: {
+          title: "Autres données conservées dans votre navigateur",
+          intro: "Technologies similaires. Le stockage local et le stockage de session sont des données qu'un site conserve dans votre navigateur ; contrairement à un cookie, le navigateur ne les envoie jamais de lui-même au site. logistiq.ro et logistiq.be n'en conservent aucune. logistiq.cloud et qrgo.ro conservent les éléments ci-dessous : des choix d'affichage, des données de travail de courte durée et, si vous utilisez le sélecteur d'emoji, les emoji choisis.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "Jusqu'à la déconnexion",
-              purpose:
-                "Authentification Supabase – votre session connectée (jetons d'accès et d'actualisation), découpée en parties numérotées (.0, .1) lorsqu'elle est longue",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "Le mode clair ou sombre et le thème de couleurs que vous avez choisis",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 an",
-              purpose: "Mémorisation de la langue préférée",
-            },
-          ],
-        },
-        functional: {
-          title: "Cookies fonctionnels",
-          desc: "Ils améliorent l'expérience d'utilisation de la plateforme.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 an",
-              purpose: "Mémorisation de la préférence pour le thème sombre/clair",
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Si vous avez laissé le menu latéral replié",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 jours",
-              purpose: "État du menu latéral dans le Dashboard",
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Le filtre de statut utilisé en dernier sur la page des check-ins",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Les réglages d'affichage de la page de la cour",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "Le langage de programmation choisi pour les exemples de la documentation de l'API",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "La langue et le thème clair ou sombre choisis sur une page de présentation ouverte depuis un lien que nous avons envoyé",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "Les emoji choisis dans un chat et leur fréquence, pour que le sélecteur d'emoji affiche d'abord les plus utilisés",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Le fait que la page sandbox de l'interface du tableau de bord a été déverrouillée dans cet onglet",
+              kept: "Jusqu'à la fermeture de l'onglet",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Le nombre de rechargements automatiques d'un tableau de la cour",
+              kept: "Jusqu'à la fermeture de l'onglet",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "La réservation trouvée par le chauffeur sur la page d'accueil de qrgo.ro, transmise au formulaire de check-in de l'entrepôt ; lue une seule fois, puis supprimée",
+              kept: "Jusqu'à sa lecture ou la fermeture de l'onglet",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "Les emoji choisis dans un chat et leur fréquence, pour que le sélecteur d'emoji affiche d'abord les plus utilisés",
+              kept: "Jusqu'à ce que vous effaciez les données du site",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Cookies tiers",
+        title: "4. Services tiers",
         intro:
-          "La plateforme Logistiq utilise les services tiers suivants, qui peuvent déposer des cookies :",
+          "Aucune page des trois sites ne charge de service publicitaire ou d'analyse. Certaines pages et fonctions exécutent dans votre navigateur le code d'une autre entreprise, ou téléchargent un fichier auprès d'elle, lorsque la page est ouverte ou que la fonction est utilisée. Cette entreprise reçoit alors votre adresse IP et peut enregistrer ou lire ses propres cookies ou données similaires :",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Authentification et base de données",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Hébergement",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Protège contre les robots les formulaires de logistiq.cloud pour la connexion, la réinitialisation du mot de passe et l'inscription des transporteurs",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile, sur qrgo.ro : lorsque les recherches de réservations sont très nombreuses, il confirme qu'une personne effectue la recherche",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "La carte sur laquelle on dessine la zone (geofence) d'un entrepôt, dans les paramètres de l'entrepôt sur logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID, sur logistiq.ro : une vérification qui s'exécute dans votre navigateur lorsque vous envoyez le formulaire de contact ; son script est servi par logistiq.ro lui-même",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Fournit les images du sélecteur d'emoji du chat, sur logistiq.cloud et qrgo.ro, à l'ouverture du sélecteur",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -14156,7 +15383,7 @@ export const translations = {
       manageCookies: {
         title: "5. Comment gérer les cookies",
         intro:
-          "Vous pouvez contrôler et/ou supprimer les cookies selon vos préférences. Voici comment procéder dans les principaux navigateurs :",
+          "Nos sites n'ont ni bandeau de cookies ni panneau de réglage des cookies. Vous pouvez supprimer un cookie, ou les autres données qu'un site conserve dans votre navigateur, depuis les réglages du navigateur lui-même. Voici où les trouver dans les principaux navigateurs :",
         browsers: [
           {
             name: "Google Chrome",
@@ -14176,7 +15403,7 @@ export const translations = {
           },
         ],
         warning:
-          "Attention : la désactivation des cookies essentiels peut affecter le fonctionnement de la plateforme. Il est possible que vous ne puissiez pas vous connecter ou que vous perdiez l'accès à certaines fonctionnalités.",
+          "Sans cookies, logistiq.ro continue de fonctionner ; son adresse sans langue s'ouvre dans la langue par défaut du domaine. Sur logistiq.cloud, vous êtes déconnecté et ne pouvez pas vous connecter tant que les cookies sont bloqués. Sur qrgo.ro, votre navigateur ne retrouve plus le check-in effectué, et les boutons « Déchargement terminé » et « Chargement terminé » ne sont plus proposés.",
       },
       changes: {
         title: "6. Modifications de la politique",
@@ -14199,11 +15426,7 @@ export const translations = {
         type: "Type de données",
         period: "Durée de conservation",
       },
-      cookieHeaders: {
-        name: "Cookie",
-        duration: "Durée",
-        purpose: "Finalité",
-      },
+      cookieHeaders: { name: "Cookie", duration: "Durée", purpose: "Finalité", kind: "Type", setWhen: "Déposé", site: "Site", item: "Nom", kept: "Conservé" },
       meta: {
         privacy: "Politique de confidentialité de Logistiq – comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD.",
         terms: "Conditions générales de Logistiq – plateforme de gestion d’entrepôt et de check-in des chauffeurs.",
@@ -16184,9 +17407,9 @@ export const translations = {
       intro: {
         title: "1. Inleiding",
         p1:
-          "Dit beleid legt uit hoe het Logistiq-platform (logistiq.ro, logistiq.cloud, qrgo.ro) cookies en vergelijkbare technologieën gebruikt om u een veilige en gepersonaliseerde ervaring te bieden.",
+          "Dit beleid vermeldt welke cookies en vergelijkbare technologieën de websites van het Logistiq-platform gebruiken: logistiq.ro (en logistiq.be), de presentatiewebsite; logistiq.cloud, het dashboard; en qrgo.ro, de check-in van chauffeurs.",
         p2:
-          "Door verder te surfen op onze websites, aanvaardt u het gebruik van cookies overeenkomstig dit beleid.",
+          "logistiq.ro plaatst geen cookie wanneer u de website bezoekt en toont daarom geen cookiebanner. De website bewaart er alleen een als u een taal kiest in het taalmenu, om die keuze te onthouden. logistiq.cloud en qrgo.ro plaatsen cookies wanneer u inlogt of de websites gebruikt: elk staat hieronder, met het doel, de bewaartermijn en het moment waarop het wordt geplaatst.",
       },
       whatAreCookies: {
         title: "2. Wat zijn cookies?",
@@ -16214,60 +17437,232 @@ export const translations = {
       },
       cookiesWeUse: {
         title: "3. Cookies die wij gebruiken",
-        essential: {
-          title: "Essentiële cookies",
-          desc:
-            "Noodzakelijk voor de werking van het platform. Ze kunnen niet worden uitgeschakeld.",
-          cookies: [
+        intro: "Elk cookie hieronder is ofwel strikt noodzakelijk (het houdt u ingelogd, brengt u terug naar uw check-in of beschermt uw account of uw check-in), ofwel bewaart het een keuze die u zelf hebt gemaakt (een taal, een magazijn of een filter, een weergave, het lichte of donkere thema). Geen enkel cookie wordt gebruikt voor advertenties of analyse, of om u van de ene website naar de andere te volgen. De bewaartermijnen zijn die welke de websites vragen; uw browser kan een cookie korter bewaren.",
+        kinds: { necessary: "Strikt noodzakelijk", choice: "Bewaart uw keuze" },
+        sites: [
+          {
+            site: "logistiq.ro",
+            desc: "De presentatiewebsite, ook te bereiken op logistiq.be. Bij een bezoek plaatst ze geen cookie; het cookie hieronder wordt alleen door het taalmenu geschreven.",
+            cookies: [
+              {
+                name: "LOGISTIQ_LANG",
+                purpose: "De taal die u hebt gekozen, zodat het adres van de website zonder taal in die taal opent",
+                duration: "1 jaar vanaf de keuze",
+                setWhen: "Alleen wanneer u een taal kiest in het taalmenu",
+              },
+              {
+                name: "LOGISTIQ_LANG_BE",
+                purpose: "Hetzelfde, op logistiq.be",
+                duration: "1 jaar vanaf de keuze",
+                setWhen: "Alleen wanneer u een taal kiest in het taalmenu op logistiq.be",
+              },
+            ],
+          },
+          {
+            site: "logistiq.cloud",
+            desc: "Het dashboard, voor ingelogde gebruikers, en de presentatiepagina's die wij via een link delen. Cookies worden vanaf de inlogpagina geplaatst, terwijl u inlogt en werkt; de inlogpagina laadt Google reCAPTCHA zodra ze opent (sectie 4). De drie cookies voor apparaattoegang (lq_…) bestaan alleen waar een organisatie toegangscodes voor haar computers gebruikt.",
+            cookies: [
+              {
+                name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
+                purpose: "Uw ingelogde sessie (Supabase-authenticatie: toegangs- en vernieuwingstoken); in genummerde delen (.0, .1) gesplitst wanneer ze groot is",
+                duration: "Tot u uitlogt; als u nooit uitlogt, zolang uw browser het bewaart (ongeveer 400 dagen in de huidige browsers)",
+                setWhen: "Bij het inloggen; vernieuwd zolang u het dashboard gebruikt",
+              },
+              {
+                name: "mfa_passed",
+                purpose: "Ondertekende markering dat deze sessie de sms-code van het inloggen in twee stappen heeft doorstaan",
+                duration: "Tot u de browser sluit; de markering zelf is 12 uur geldig",
+                setWhen: "Wanneer u een juiste sms-code invoert",
+              },
+              {
+                name: "lq_device",
+                purpose: "Bewijs dat deze browser een computer is die voor uw organisatie is vastgelegd (apparaattoegang)",
+                duration: "400 dagen, bij elke schrijfactie opnieuw beginnend",
+                setWhen: "Wanneer de browser met een toegangscode wordt vastgelegd",
+              },
+              {
+                name: "lq_personal",
+                purpose: "Ondertekende markering dat in deze browser zojuist een persoonlijke toegangscode is ingevoerd",
+                duration: "30 minuten",
+                setWhen: "Wanneer een persoonlijke toegangscode wordt aanvaard",
+              },
+              {
+                name: "lq_access_notice",
+                purpose: "Eenmalige melding dat uw persoonlijke toegangscode is vervangen",
+                duration: "2 minuten",
+                setWhen: "Bij het inloggen, als uw toegangscode intussen is vervangen",
+              },
+              {
+                name: "impersonation_context",
+                purpose: "Alleen op impersonate.logistiq.cloud, in de browser van een medewerker van Logistiq: markeert een ondersteuningssessie die in het account van een gebruiker is geopend (wie voor wie handelt, en tot wanneer)",
+                duration: "8 uur",
+                setWhen: "Wanneer een medewerker van Logistiq een ondersteuningssessie opent",
+              },
+              {
+                name: "warehouse_ctx",
+                purpose: "Het magazijn waarvan de accounthouder het paneel in het dashboard heeft geopend",
+                duration: "Tot u de browser sluit",
+                setWhen: "Wanneer de houder een magazijn kiest in de magazijnwisselaar; verwijderd wanneer hij het verlaat",
+              },
+              {
+                name: "dispatcher_dept_filter",
+                purpose: "De afdeling waarop een dispatcher het dashboard filtert",
+                duration: "1 jaar",
+                setWhen: "Wanneer een dispatcher een afdeling kiest; verwijderd wanneer het filter wordt gewist",
+              },
+              {
+                name: "users_view",
+                purpose: "De weergave, boom of tabel, die u op de gebruikerspagina hebt gekozen; het dashboard leest ze op dit moment niet terug",
+                duration: "1 jaar",
+                setWhen: "Wanneer u de weergave op de gebruikerspagina wijzigt",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "De taal die u hebt gekozen; ze wordt gebruikt zolang u niet bent ingelogd (de taal van een ingelogde gebruiker wordt in zijn account bewaard)",
+                duration: "1 jaar",
+                setWhen: "Wanneer u een taal kiest in het taalmenu",
+              },
+            ],
+          },
+          {
+            site: "qrgo.ro",
+            desc: "De webapp voor de check-in van chauffeurs. Dezelfde cookies worden geplaatst wanneer een magazijn de check-in op zijn eigen domein toont.",
+            cookies: [
+              {
+                name: "qrgo_checkin_id",
+                purpose: "De check-in die deze browser heeft gedaan, zodat de chauffeur wordt teruggebracht naar de statuspagina ervan",
+                duration: "48 uur",
+                setWhen: "Bij het versturen van een check-in; verwijderd door ‘Nieuwe incheck maken’ of aan het einde van het bezoek",
+              },
+              {
+                name: "qrgo_driver_secret",
+                purpose: "Bewijs dat deze browser de check-in heeft gedaan; het maakt de knoppen ‘Lossen klaar’ en ‘Laden klaar’ beschikbaar",
+                duration: "Verwijderd aan het einde van het bezoek of uiterlijk na 72 uur",
+                setWhen: "Bij het versturen van een check-in; verwijderd door ‘Nieuwe incheck maken’ of aan het einde van het bezoek",
+              },
+              {
+                name: "NEXT_LOCALE",
+                purpose: "De taal die de chauffeur heeft gekozen",
+                duration: "1 jaar",
+                setWhen: "Bij het kiezen van een taal, of bij het openen van een link die een taal aangeeft (zoals de links van de app QRGo Driver)",
+              },
+              {
+                name: "LANGUAGE_SELECTED",
+                purpose: "Geeft aan dat er een taal is gekozen, zodat het taalkeuzescherm niet opnieuw verschijnt",
+                duration: "1 jaar",
+                setWhen: "Bij het kiezen van een taal op het eerste scherm",
+              },
+              {
+                name: "DARK_MODE",
+                purpose: "Het lichte of donkere thema dat de chauffeur heeft gekozen",
+                duration: "1 jaar",
+                setWhen: "Bij het wisselen van thema",
+              },
+            ],
+          },
+        ],
+        storage: {
+          title: "Andere gegevens die in uw browser worden bewaard",
+          intro: "Vergelijkbare technologieën. Lokale opslag en sessieopslag zijn gegevens die een website in uw browser bewaart; anders dan een cookie stuurt de browser ze nooit uit zichzelf naar de website. logistiq.ro en logistiq.be bewaren er geen. logistiq.cloud en qrgo.ro bewaren de onderstaande items: weergavekeuzes, kortstondige werkgegevens en, als u de emojikiezer gebruikt, de gekozen emoji's.",
+          items: [
             {
-              name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
-              duration: "Tot het uitloggen",
-              purpose:
-                "Supabase-authenticatie - uw ingelogde sessie (toegangs- en vernieuwingstoken), opgesplitst in genummerde delen (.0, .1) als die groot is",
+              site: "logistiq.cloud",
+              name: "logistiq-theme-mode, logistiq-color-theme",
+              purpose: "De lichte of donkere modus en het kleurthema die u hebt gekozen",
+              kept: "Tot u de gegevens van de website wist",
             },
             {
-              name: "NEXT_LOCALE",
-              duration: "1 jaar",
-              purpose: "Onthouden van de voorkeurstaal",
-            },
-          ],
-        },
-        functional: {
-          title: "Functionele cookies",
-          desc: "Verbeteren de gebruikerservaring van het platform.",
-          cookies: [
-            {
-              name: "theme",
-              duration: "1 jaar",
-              purpose: "Onthouden van de voorkeur voor het donkere/lichte thema",
+              site: "logistiq.cloud",
+              name: "logistiq-sidebar-collapsed",
+              purpose: "Of u het zijmenu ingeklapt hebt gelaten",
+              kept: "Tot u de gegevens van de website wist",
             },
             {
-              name: "sidebar_collapsed",
-              duration: "30 dagen",
-              purpose: "Status van het zijmenu in het Dashboard",
+              site: "logistiq.cloud",
+              name: "checkins_status_filter",
+              purpose: "Het statusfilter dat u het laatst op de check-inpagina hebt gebruikt",
+              kept: "Tot u de gegevens van de website wist",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "yard-settings, yard-kpi-parking-expanded, yard-kpi-warehouse-expanded",
+              purpose: "Weergave-instellingen van de terreinpagina",
+              kept: "Tot u de gegevens van de website wist",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq.apiDocs.codeLang",
+              purpose: "De programmeertaal die u hebt gekozen voor de voorbeelden in de API-documentatie",
+              kept: "Tot u de gegevens van de website wist",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq-qrgo:lang, logistiq-qrgo:theme",
+              purpose: "De taal en het lichte of donkere thema die u hebt gekozen op een presentatiepagina die u opende via een link die wij stuurden",
+              kept: "Tot u de gegevens van de website wist",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "epr_suggested",
+              purpose: "De emoji's die u in een chat hebt gekozen en hoe vaak, zodat de emojikiezer de meest gebruikte eerst toont",
+              kept: "Tot u de gegevens van de website wist",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "sandbox_unlocked",
+              purpose: "Dat de sandboxpagina van de dashboardinterface in dit tabblad is ontgrendeld",
+              kept: "Tot het tabblad wordt gesloten",
+            },
+            {
+              site: "logistiq.cloud",
+              name: "logistiq:yard-board:reloads:…",
+              purpose: "Het aantal automatische herlaadbeurten van een terreinbord",
+              kept: "Tot het tabblad wordt gesloten",
+            },
+            {
+              site: "qrgo.ro",
+              name: "qrgo.bookingHandoff.v1",
+              purpose: "De boeking die een chauffeur op de startpagina van qrgo.ro heeft gevonden, doorgegeven aan het check-informulier van het magazijn; één keer gelezen en dan verwijderd",
+              kept: "Tot ze is gelezen of het tabblad wordt gesloten",
+            },
+            {
+              site: "qrgo.ro",
+              name: "epr_suggested",
+              purpose: "De emoji's die u in een chat hebt gekozen en hoe vaak, zodat de emojikiezer de meest gebruikte eerst toont",
+              kept: "Tot u de gegevens van de website wist",
             },
           ],
         },
       },
       thirdParty: {
-        title: "4. Cookies van derden",
+        title: "4. Diensten van derden",
         intro:
-          "Het Logistiq-platform maakt gebruik van de volgende diensten van derden die cookies kunnen plaatsen:",
+          "Geen enkele pagina van de drie websites laadt een advertentie- of analysedienst. Sommige pagina's en functies voeren in uw browser code van een ander bedrijf uit, of halen er een bestand op, wanneer de pagina wordt geopend of de functie wordt gebruikt. Dat bedrijf ontvangt dan uw IP-adres en kan eigen cookies of vergelijkbare gegevens opslaan of lezen:",
         services: [
-          {
-            name: "Supabase",
-            purpose: "Authenticatie en database",
-            url: "supabase.com/privacy",
-          },
-          {
-            name: "Vercel",
-            purpose: "Hosting",
-            url: "vercel.com/legal/privacy-policy",
-          },
           {
             name: "Google reCAPTCHA",
             purpose: "Beschermt de formulieren van logistiq.cloud voor inloggen, wachtwoordherstel en registratie van vervoerders tegen bots",
             url: "policies.google.com/privacy",
+          },
+          {
+            name: "Cloudflare",
+            purpose: "Cloudflare Turnstile op qrgo.ro: als er heel veel naar boekingen wordt gezocht, bevestigt het dat er een persoon zoekt",
+            url: "www.cloudflare.com/privacypolicy",
+          },
+          {
+            name: "Google Maps",
+            purpose: "De kaart waarop de geofence van een magazijn wordt getekend, in de magazijninstellingen van logistiq.cloud",
+            url: "policies.google.com/privacy",
+          },
+          {
+            name: "Vercel",
+            purpose: "Vercel BotID op logistiq.ro: een controle die in uw browser draait wanneer u het contactformulier verstuurt; het script ervan wordt door logistiq.ro zelf geleverd",
+            url: "vercel.com/legal/privacy-notice",
+          },
+          {
+            name: "jsDelivr",
+            purpose: "Levert de emojiafbeeldingen van de emojikiezer in de chat op logistiq.cloud en qrgo.ro, wanneer de kiezer wordt geopend",
+            url: "www.jsdelivr.com/terms/privacy-policy",
           },
         ],
         note:
@@ -16276,7 +17671,7 @@ export const translations = {
       manageCookies: {
         title: "5. Hoe u cookies kunt beheren",
         intro:
-          "U kunt cookies beheren en/of verwijderen volgens uw voorkeuren. Zo doet u dat in de belangrijkste browsers:",
+          "Onze websites hebben geen cookiebanner en geen paneel met cookie-instellingen. U kunt een cookie, of de andere gegevens die een website in uw browser bewaart, verwijderen via de instellingen van de browser zelf. Zo vindt u ze in de belangrijkste browsers:",
         browsers: [
           {
             name: "Google Chrome",
@@ -16296,7 +17691,7 @@ export const translations = {
           },
         ],
         warning:
-          "Let op: het uitschakelen van essentiële cookies kan de werking van het platform beïnvloeden. Mogelijk kunt u dan niet inloggen of verliest u de toegang tot bepaalde functionaliteiten.",
+          "Zonder cookies blijft logistiq.ro werken; het adres zonder taal opent in de standaardtaal van het domein. Op logistiq.cloud wordt u uitgelogd en kunt u niet inloggen zolang cookies geblokkeerd zijn. Op qrgo.ro vindt uw browser de gedane check-in niet meer terug, en de knoppen ‘Lossen klaar’ en ‘Laden klaar’ worden niet aangeboden.",
       },
       changes: {
         title: "6. Beleidswijzigingen",
@@ -16319,11 +17714,7 @@ export const translations = {
         type: "Soort gegevens",
         period: "Bewaartermijn",
       },
-      cookieHeaders: {
-        name: "Cookie",
-        duration: "Bewaartermijn",
-        purpose: "Doel",
-      },
+      cookieHeaders: { name: "Cookie", duration: "Bewaartermijn", purpose: "Doel", kind: "Soort", setWhen: "Geplaatst", site: "Website", item: "Naam", kept: "Bewaard" },
       meta: {
         privacy: "Privacybeleid van Logistiq – hoe wij uw persoonsgegevens verzamelen, gebruiken en beschermen in overeenstemming met de AVG.",
         terms: "Algemene voorwaarden van Logistiq – platform voor magazijnbeheer en check-in van chauffeurs.",

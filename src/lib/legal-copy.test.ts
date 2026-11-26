@@ -38,7 +38,7 @@ describe("legal pages", () => {
 describe("cookie policy", () => {
   it("lists no analytics cookie and no analytics service", () => {
     for (const [locale, copy] of Object.entries(translations)) {
-      expect(Object.keys(copy.cookies.cookiesWeUse).sort(), locale).toEqual(["essential", "functional", "title"]);
+      expect(Object.keys(copy.cookies.cookiesWeUse).sort(), locale).toEqual(["intro", "kinds", "sites", "storage", "title"]);
       const text = JSON.stringify(copy.cookies);
       expect(text.match(/Google Analytics|"_ga"|"_gid"/)?.[0], locale).toBeUndefined();
       const vercel = copy.cookies.thirdParty.services.find((s) => s.name === "Vercel");
@@ -146,18 +146,17 @@ describe("Google reCAPTCHA", () => {
   });
 });
 
-// The essential cookies the platform sets. logistiq.cloud's session is one Supabase cookie,
-// sb-<project-ref>-auth-token, split into .0, .1… when large and removed at sign-out
-// (@supabase/ssr 0.1.0, used without cookie options in Logistiq's packages/shared
-// lib/supabase/server.ts and apps/dashboard/middleware.ts; the project is
-// bhpiugfpkqwxcqbolisb). NEXT_LOCALE keeps the chosen language for a year (the dashboard's
-// LanguageSwitcher, the driver web's middleware). Until 2026-11-24 the policy named
-// sb-access-token (1 hour) and sb-refresh-token (7 days), which nothing sets.
-describe("cookie policy, essential cookies", () => {
-  it("names the session cookie the platform sets, and not the two it never set", () => {
+// logistiq.cloud's session is one Supabase cookie, sb-<project-ref>-auth-token, split into
+// .0, .1… when large and removed at sign-out (@supabase/ssr 0.1.0, used without cookie
+// options in Logistiq's packages/shared lib/supabase/server.ts and apps/dashboard/middleware.ts;
+// the project is bhpiugfpkqwxcqbolisb). Until 2026-11-24 the policy named sb-access-token
+// (1 hour) and sb-refresh-token (7 days), which nothing sets. The whole list, site by site,
+// is pinned in cookie-policy.test.tsx.
+describe("cookie policy, the session cookie", () => {
+  it("names the session cookie logistiq.cloud sets, and not the two it never set", () => {
     for (const [locale, copy] of Object.entries(translations)) {
-      const names = copy.cookies.cookiesWeUse.essential.cookies.map((c) => c.name);
-      expect(names, locale).toEqual(["sb-bhpiugfpkqwxcqbolisb-auth-token", "NEXT_LOCALE"]);
+      const cloud = copy.cookies.cookiesWeUse.sites.find((s) => s.site === "logistiq.cloud");
+      expect(cloud?.cookies[0].name, locale).toBe("sb-bhpiugfpkqwxcqbolisb-auth-token");
       expect(JSON.stringify(copy).match(/sb-access-token|sb-refresh-token/)?.[0], locale).toBeUndefined();
     }
   });

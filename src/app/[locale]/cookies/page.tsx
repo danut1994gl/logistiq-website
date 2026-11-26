@@ -4,6 +4,7 @@ import Link from "next/link";
 import { use } from "react";
 import { translations } from "@/lib/i18n/translations";
 import { isValidLocale } from "@/lib/i18n/config";
+import { cookieKind, type CookieKind } from "@/lib/cookie-kinds";
 import { company } from "@/lib/company";
 import { registeredOffice } from "@/lib/legal-identity";
 
@@ -55,72 +56,104 @@ function CookieTypeCard({
   );
 }
 
-type CookieHeaders = { name: string; duration: string; purpose: string };
+type CookieHeaders = {
+  name: string;
+  duration: string;
+  purpose: string;
+  kind: string;
+  setWhen: string;
+  site: string;
+  item: string;
+  kept: string;
+};
 
-function CookieTable({
-  cookies,
+type SiteCookies = {
+  site: string;
+  desc: string;
+  cookies: { name: string; purpose: string; duration: string; setWhen: string }[];
+};
+
+const th = "text-left py-2 pr-4 font-medium text-slate-900 dark:text-white align-bottom";
+const td = "py-2 pr-4 align-top";
+
+// One site's cookies: the domain as the card's heading, its description, then the table.
+// Long names and durations wrap (break-all on the name), so the table fits a phone inside
+// its scrolling wrapper instead of pushing the page sideways.
+function SiteCookiesCard({
+  site,
   headers,
+  kinds,
 }: {
-  cookies: { name: string; duration: string; purpose: string }[];
+  site: SiteCookies;
   headers: CookieHeaders;
+  kinds: Record<CookieKind, string>;
 }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-slate-200 dark:border-slate-700">
-            <th className="text-left py-2 pr-4 font-medium text-slate-900 dark:text-white">
-              {headers.name}
-            </th>
-            <th className="text-left py-2 pr-4 font-medium text-slate-900 dark:text-white">
-              {headers.duration}
-            </th>
-            <th className="text-left py-2 font-medium text-slate-900 dark:text-white">
-              {headers.purpose}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {cookies.map((cookie, i) => (
-            <tr
-              key={i}
-              className="border-b border-slate-100 dark:border-slate-800"
-            >
-              <td className="py-2 pr-4 font-mono text-sm text-blue-600 dark:text-blue-400">
-                {cookie.name}
-              </td>
-              <td className="py-2 pr-4 text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                {cookie.duration}
-              </td>
-              <td className="py-2 text-slate-600 dark:text-slate-300">
-                {cookie.purpose}
-              </td>
+    <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-5 mb-4">
+      <h3 className="font-semibold text-slate-900 dark:text-white mb-2 font-mono">{site.site}</h3>
+      <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{site.desc}</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className={th}>{headers.name}</th>
+              <th className={th}>{headers.kind}</th>
+              <th className={th}>{headers.purpose}</th>
+              <th className={th}>{headers.duration}</th>
+              <th className={`${th} pr-0`}>{headers.setWhen}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {site.cookies.map((cookie) => (
+              <tr key={cookie.name} className="border-b border-slate-100 dark:border-slate-800">
+                <td className={`${td} font-mono text-blue-600 dark:text-blue-400 break-all min-w-[8rem]`}>{cookie.name}</td>
+                <td className={`${td} text-slate-500 dark:text-slate-400 min-w-[6rem]`}>{kinds[cookieKind(cookie.name)]}</td>
+                <td className={`${td} text-slate-600 dark:text-slate-300 min-w-[12rem]`}>{cookie.purpose}</td>
+                <td className={`${td} text-slate-500 dark:text-slate-400 min-w-[7rem]`}>{cookie.duration}</td>
+                <td className={`${td} pr-0 text-slate-600 dark:text-slate-300 min-w-[9rem]`}>{cookie.setWhen}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-function CookieCategoryCard({
-  title,
-  desc,
-  cookies,
+// Local and session storage, which the policy lists apart as similar technologies.
+function StorageCard({
+  storage,
   headers,
 }: {
-  title: string;
-  desc: string;
-  cookies: { name: string; duration: string; purpose: string }[];
+  storage: { title: string; intro: string; items: { site: string; name: string; purpose: string; kept: string }[] };
   headers: CookieHeaders;
 }) {
   return (
     <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-5 mb-4">
-      <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-        {title}
-      </h3>
-      <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{desc}</p>
-      <CookieTable cookies={cookies} headers={headers} />
+      <h3 className="font-semibold text-slate-900 dark:text-white mb-2">{storage.title}</h3>
+      <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{storage.intro}</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className={th}>{headers.site}</th>
+              <th className={th}>{headers.item}</th>
+              <th className={th}>{headers.purpose}</th>
+              <th className={`${th} pr-0`}>{headers.kept}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {storage.items.map((item) => (
+              <tr key={`${item.site} ${item.name}`} className="border-b border-slate-100 dark:border-slate-800">
+                <td className={`${td} font-mono text-slate-500 dark:text-slate-400`}>{item.site}</td>
+                <td className={`${td} font-mono text-blue-600 dark:text-blue-400 break-all min-w-[8rem]`}>{item.name}</td>
+                <td className={`${td} text-slate-600 dark:text-slate-300 min-w-[12rem]`}>{item.purpose}</td>
+                <td className={`${td} pr-0 text-slate-500 dark:text-slate-400 min-w-[7rem]`}>{item.kept}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -248,18 +281,11 @@ export default function CookiesPage({
         {/* Section 3: Cookies We Use */}
         <Section delay={3}>
           <SectionTitle>{t.cookiesWeUse.title}</SectionTitle>
-          <CookieCategoryCard
-            title={t.cookiesWeUse.essential.title}
-            desc={t.cookiesWeUse.essential.desc}
-            cookies={t.cookiesWeUse.essential.cookies}
-            headers={legal.cookieHeaders}
-          />
-          <CookieCategoryCard
-            title={t.cookiesWeUse.functional.title}
-            desc={t.cookiesWeUse.functional.desc}
-            cookies={t.cookiesWeUse.functional.cookies}
-            headers={legal.cookieHeaders}
-          />
+          <Paragraph>{t.cookiesWeUse.intro}</Paragraph>
+          {t.cookiesWeUse.sites.map((site) => (
+            <SiteCookiesCard key={site.site} site={site} headers={legal.cookieHeaders} kinds={t.cookiesWeUse.kinds} />
+          ))}
+          <StorageCard storage={t.cookiesWeUse.storage} headers={legal.cookieHeaders} />
         </Section>
 
         {/* Section 4: Third Party */}
