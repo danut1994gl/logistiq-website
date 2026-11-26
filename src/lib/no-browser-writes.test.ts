@@ -45,4 +45,13 @@ describe("browser writes", () => {
     const local = files.filter((f) => /localStorage|sessionStorage/.test(readFileSync(f, "utf8")));
     expect(local.map(rel)).toEqual(["components/site/LegacyBrowserData.tsx"]);
   });
+
+  // The header read logistiq_authenticated until 2026-11-26 (SiteHeader.test.tsx). The only
+  // code that reads the browser's cookies is LegacyBrowserData, to find what to delete.
+  it("nothing reads logistiq_authenticated, and only LegacyBrowserData reads cookies", () => {
+    const files = sources(SRC);
+    expect(files.filter((f) => readFileSync(f, "utf8").includes("logistiq_authenticated")).map(rel)).toEqual([]);
+    const readers = files.filter((f) => /document\.cookie(?!\s*=)|\.cookie\.split/.test(readFileSync(f, "utf8")));
+    expect(readers.map(rel)).toEqual(["components/site/LegacyBrowserData.tsx"]);
+  });
 });

@@ -24,16 +24,11 @@ import {
 
 type Menu = null | "features" | "resources" | "lang";
 
-// The auth cookie is an external store — read it via useSyncExternalStore
-// (server snapshot: false; no live subscription needed, it only changes on
-// navigation to/from the dashboard).
+// The host is read through useSyncExternalStore (no live subscription: it never
+// changes while the page is open). Until 2026-11-26 the header also read the
+// dashboard's sign-in marker cookie to show "Dashboard"; nothing can set it for this domain
+// since the dashboard moved to logistiq.cloud, so the link always says Login.
 const noopSubscribe = () => () => {};
-const readAuthCookie = () =>
-  document.cookie.split(";").some((c) => {
-    const [key, value] = c.trim().split("=");
-    return key === "logistiq_authenticated" && value === "true";
-  });
-const authServerSnapshot = () => false;
 
 // The domain decides which languages the switcher offers (logistiq.be: nl/fr/en).
 // Read from the URL after hydration — the page is prerendered once for every
@@ -51,7 +46,6 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState<Menu>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileSub, setMobileSub] = useState<Menu>(null);
-  const isAuthenticated = useSyncExternalStore(noopSubscribe, readAuthCookie, authServerSnapshot);
   const site = siteForHost(useSyncExternalStore(noopSubscribe, readHost, hostServerSnapshot));
   const switcherLocales = site.locales;
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -284,12 +278,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               )}
             </div>
 
-            {/* Login/Dashboard Link */}
+            {/* Login Link */}
             <Link
-              href={isAuthenticated ? "https://logistiq.cloud/dashboard" : "https://logistiq.cloud"}
+              href="https://logistiq.cloud"
               className="hidden sm:block text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors font-medium"
             >
-              {isAuthenticated ? t.nav.dashboard : t.nav.login}
+              {t.nav.login}
             </Link>
 
             {/* CTA Button */}
