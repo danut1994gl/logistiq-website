@@ -1598,7 +1598,7 @@ export const translations = {
           { type: "Date tehnice (IP, loguri)", duration: "6 luni" },
           { type: "Atașamente (CMR, fotografii)", duration: "1 an după finalizarea operațiunii" },
         ],
-        note: "După expirarea perioadelor de retenție, datele sunt șterse sau anonimizate automat.",
+        note: "Perioadele de mai sus sunt cele mai lungi pentru care intenționăm să păstrăm fiecare categorie de date. În prezent, platforma șterge singură: check-in-urile mutate în coșul de gunoi, la 30 de zile de la ștergere; jurnalele de diagnosticare ale dispozitivelor, după 7 sau 30 de zile; și jurnalele cererilor API, după 30 de zile.",
       },
       rights: {
         title: "8. Drepturile Dumneavoastră",
@@ -3663,7 +3663,7 @@ export const translations = {
           { type: "Technical data (IP, logs)", duration: "6 months" },
           { type: "Attachments (CMR, photos)", duration: "1 year after operation completion" },
         ],
-        note: "After retention periods expire, data is automatically deleted or anonymized.",
+        note: "The periods above are the longest we intend to keep each kind of data. Today the platform deletes by itself: check-ins moved to the trash, 30 days after they were deleted; the diagnostic logs of devices, after 7 or 30 days; and the logs of API requests, after 30 days.",
       },
       rights: {
         title: "8. Your Rights",
@@ -5782,7 +5782,7 @@ export const translations = {
           },
         ],
         note:
-          "Nach Ablauf der Speicherfristen werden die Daten automatisch gelöscht oder anonymisiert.",
+          "Die oben genannten Fristen sind die längsten, für die wir die jeweilige Datenart aufbewahren wollen. Derzeit löscht die Plattform von selbst: in den Papierkorb verschobene Check-ins 30 Tage nach ihrer Löschung; die Diagnoseprotokolle von Geräten nach 7 oder 30 Tagen; und die Protokolle von API-Anfragen nach 30 Tagen.",
       },
       rights: {
         title: "8. Ihre Rechte",
@@ -8101,7 +8101,7 @@ export const translations = {
             duration: "1 rok po zakończeniu operacji",
           },
         ],
-        note: "Po upływie okresów przechowywania dane są automatycznie usuwane lub anonimizowane.",
+        note: "Powyższe okresy to najdłuższe okresy, przez które zamierzamy przechowywać poszczególne rodzaje danych. Obecnie platforma sama usuwa: check-iny przeniesione do kosza, 30 dni po ich usunięciu; dzienniki diagnostyczne urządzeń, po 7 lub 30 dniach; oraz dzienniki żądań API, po 30 dniach.",
       },
       rights: {
         title: "8. Twoje prawa",
@@ -10422,7 +10422,7 @@ export const translations = {
           },
         ],
         note:
-          "A megőrzési idők lejártát követően az adatokat automatikusan töröljük vagy anonimizáljuk.",
+          "A fenti időtartamok azok a leghosszabb idők, ameddig az egyes adatfajtákat meg kívánjuk őrizni. Jelenleg a platform magától törli: a kukába helyezett check-ineket a törlésük után 30 nappal; az eszközök diagnosztikai naplóit 7 vagy 30 nap után; valamint az API-kérések naplóit 30 nap után.",
       },
       rights: {
         title: "8. Az Ön jogai",
@@ -12740,7 +12740,7 @@ export const translations = {
           },
         ],
         note:
-          "След изтичането на сроковете за съхранение данните се изтриват или анонимизират автоматично.",
+          "Посочените по-горе срокове са най-дългите, за които възнамеряваме да пазим всеки вид данни. В момента платформата сама изтрива: check-in-ите, преместени в кошчето, 30 дни след изтриването им; диагностичните журнали на устройствата след 7 или 30 дни; и журналите на заявките към API след 30 дни.",
       },
       rights: {
         title: "8. Вашите права",
@@ -15056,7 +15056,7 @@ export const translations = {
           },
         ],
         note:
-          "À l'expiration des durées de conservation, les données sont automatiquement supprimées ou anonymisées.",
+          "Les durées ci-dessus sont les plus longues pendant lesquelles nous entendons conserver chaque catégorie de données. Aujourd'hui, la plateforme supprime d'elle-même : les check-ins placés dans la corbeille, 30 jours après leur suppression ; les journaux de diagnostic des appareils, après 7 ou 30 jours ; et les journaux des requêtes API, après 30 jours.",
       },
       rights: {
         title: "8. Vos droits",
@@ -17376,7 +17376,7 @@ export const translations = {
           },
         ],
         note:
-          "Na het verstrijken van de bewaartermijnen worden de gegevens automatisch verwijderd of geanonimiseerd.",
+          "De bovenstaande termijnen zijn de langste waarin wij elk soort gegevens willen bewaren. Op dit moment verwijdert het platform zelf: check-ins die naar de prullenbak zijn verplaatst, 30 dagen nadat ze zijn verwijderd; de diagnostische logboeken van apparaten, na 7 of 30 dagen; en de logboeken van API-verzoeken, na 30 dagen.",
       },
       rights: {
         title: "8. Uw rechten",
