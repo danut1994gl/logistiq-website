@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
-import { siteForHost, relocatePath, LOCALE_COOKIE_MAX_AGE } from "@/lib/i18n/sites";
+import { siteForHost, relocatePath } from "@/lib/i18n/sites";
 
 // Vercel BotID's challenge and proxy paths (see botid/next/config). Vercel routes
 // them itself; under `next start` the withBotId() rewrites in next.config.ts do.
@@ -18,26 +18,6 @@ function addSecurityHeaders(response: NextResponse) {
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=(self)"
   );
-}
-
-// A prefetch warms a page the visitor has not opened: the language menu's links
-// prefetch every language the moment the menu opens. Saving the language on
-// those requests made merely opening the menu overwrite the visitor's choice
-// (seen on logistiq.ro until 2026-11-08: a saved "de" turned into "ro").
-// Router prefetches are kept away by `config.matcher` (`missing`): Next strips its
-// router headers before the middleware runs, so only the matcher can see them.
-// This check is the second line, for the browser's own prefetch headers.
-function isPrefetch(request: NextRequest): boolean {
-  const { headers } = request;
-  return (
-    headers.has("next-router-prefetch") ||
-    headers.has("next-router-segment-prefetch") ||
-    /prefetch/i.test(headers.get("sec-purpose") ?? headers.get("purpose") ?? "")
-  );
-}
-
-function rememberLocale(response: NextResponse, cookie: string, locale: Locale) {
-  response.cookies.set(cookie, locale, { maxAge: LOCALE_COOKIE_MAX_AGE, path: "/" });
 }
 
 export function middleware(request: NextRequest) {
@@ -73,19 +53,18 @@ export function middleware(request: NextRequest) {
   }
 
   if (served(pathnameLocale)) {
-    // A page in a language the visitor opened (the language switcher, a link, a
-    // search result): that language becomes the saved one. Prefetches are not visits.
+    // Opening a page is not choosing a language: nothing is saved here. No page view
+    // sets a cookie (owner, 2026-11-26): the language menu's click is the only writer
+    // (SiteHeader, localeCookie). Until then every page in a language wrote it.
     const response = NextResponse.next();
-    if (!isPrefetch(request)) rememberLocale(response, site.cookie, pathnameLocale);
     addSecurityHeaders(response);
     return response;
   }
 
-  // No locale in the URL: the language the visitor saved, else the domain's
-  // first-visit language (Romanian on logistiq.ro and every host but logistiq.be,
-  // Dutch on logistiq.be). Geo/Accept-Language auto-routing is intentionally
-  // disabled. The default is not a choice, so this redirect never writes it into
-  // the cookie: a saved language is only renewed with its own value.
+  // No locale in the URL: the language the visitor chose in the language menu, else
+  // the domain's first-visit language (Romanian on logistiq.ro and every host but
+  // logistiq.be, Dutch on logistiq.be). Geo/Accept-Language auto-routing is
+  // intentionally disabled. The cookie is read, never written or renewed.
   const saved = request.cookies.get(site.cookie)?.value;
   const locale: Locale = saved && served(saved) ? saved : site.defaultLocale;
 
@@ -93,7 +72,6 @@ export function middleware(request: NextRequest) {
   url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
 
   const response = NextResponse.redirect(url);
-  if (locale === saved && !isPrefetch(request)) rememberLocale(response, site.cookie, locale);
   addSecurityHeaders(response);
 
   return response;
@@ -108,8 +86,9 @@ export const config = {
       // - Image optimization files
       // - Vercel BotID's paths (BOTID_PREFIX above)
       source: "/((?!api|_next/static|_next/image|favicon.ico|149e9513-01fa-4fb0-aad4-566afd725d1b/|.*\\..*).*)",
-      // ...and never for a prefetch (see isPrefetch): a prefetch must not save a
-      // language. The real visit to the page runs the middleware as usual.
+      // ...and never for a prefetch (router or browser): a prefetch is not a visit.
+      // Kept since the middleware stopped writing cookies (2026-11-26): it changes
+      // nothing a prefetch can see. The real visit runs the middleware as usual.
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },

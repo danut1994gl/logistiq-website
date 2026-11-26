@@ -36,11 +36,20 @@ describe("siteForHost", () => {
 });
 
 describe("localeCookie (the language switcher saves the pick itself)", () => {
-  it("writes the domain's cookie for a year, site-wide", () => {
+  it("writes the domain's cookie for a year, site-wide, over HTTPS only", () => {
     expect(localeCookie(siteForHost("logistiq.ro"), "pl")).toBe(
-      "NEXT_LOCALE=pl; Path=/; Max-Age=31536000; SameSite=Lax"
+      "LOGISTIQ_LANG=pl; Path=/; Max-Age=31536000; SameSite=Lax; Secure"
     );
-    expect(localeCookie(siteForHost("logistiq.be"), "fr")).toMatch(/^NEXT_LOCALE_BE=fr; /);
+    expect(localeCookie(siteForHost("logistiq.be"), "fr")).toMatch(/^LOGISTIQ_LANG_BE=fr; .*; Secure$/);
+  });
+
+  // Until 2026-11-26 every page view wrote NEXT_LOCALE (NEXT_LOCALE_BE on logistiq.be)
+  // with the language of the page opened. The chosen language has new names, so those
+  // cookies, which nobody chose, no longer steer anything.
+  it("uses neither of the names page views used to write", () => {
+    for (const host of ["logistiq.ro", "logistiq.be", "localhost"]) {
+      expect(["NEXT_LOCALE", "NEXT_LOCALE_BE"]).not.toContain(siteForHost(host).cookie);
+    }
   });
 });
 

@@ -13,8 +13,6 @@ function visit(url: string, cookies: Record<string, string> = {}, headers: Recor
   return middleware(new NextRequest(url, { headers: cookie ? { ...headers, cookie } : headers }));
 }
 
-const ONE_YEAR = 60 * 60 * 24 * 365;
-
 const redirectedTo = (res: Response) => {
   const location = res.headers.get("location");
   return location ? new URL(location).pathname + new URL(location).search : null;
@@ -36,21 +34,23 @@ describe("middleware on logistiq.be", () => {
     expect(redirectedTo(visit("https://logistiq.be/", { [BE_COOKIE]: "en" }))).toBe("/en");
   });
 
-  it("ignores the English that logistiq.be set for every visitor before it had a language set", () => {
+  it("ignores logistiq.ro's cookie and the old NEXT_LOCALE and NEXT_LOCALE_BE that page views wrote until 2026-11-26", () => {
     expect(redirectedTo(visit("https://logistiq.be/", { [RO_COOKIE]: "en" }))).toBe("/nl");
+    expect(redirectedTo(visit("https://logistiq.be/", { NEXT_LOCALE: "en" }))).toBe("/nl");
+    expect(redirectedTo(visit("https://logistiq.be/", { NEXT_LOCALE_BE: "fr" }))).toBe("/nl");
   });
 
   it("never lands on a language logistiq.be doesn't serve, whatever the cookie says", () => {
     expect(redirectedTo(visit("https://logistiq.be/", { [BE_COOKIE]: "de" }))).toBe("/nl");
   });
 
-  it("serves Dutch, French and English pages and remembers the choice", () => {
+  it("serves Dutch, French and English pages, and opening one saves nothing", () => {
     for (const path of ["/nl", "/fr/contact", "/en/blog"]) {
       const res = visit(`https://logistiq.be${path}`);
       expect(res.headers.get("location"), path).toBeNull();
       expect(res.headers.get("x-middleware-next"), path).toBe("1");
     }
-    expect(visit("https://logistiq.be/fr/contact").cookies.get(BE_COOKIE)?.value).toBe("fr");
+    expect(visit("https://logistiq.be/fr/contact").cookies.get(BE_COOKIE)).toBeUndefined();
   });
 
   it("moves the other languages' pages to Dutch, keeping the page where it can", () => {
@@ -88,10 +88,14 @@ describe("middleware on logistiq.ro", () => {
     expect(redirectedTo(visit("https://logistiq.ro/", { [RO_COOKIE]: "ro" }))).toBe("/ro");
   });
 
-  it("never overwrites a saved language with the default on a later bare visit", () => {
-    const cookie = visit("https://logistiq.ro/", { [RO_COOKIE]: "de" }).cookies.get(RO_COOKIE);
-    expect(cookie?.value).toBe("de");
-    expect(cookie?.maxAge).toBe(ONE_YEAR);
+  it("reads a saved language on a bare visit and never writes it again", () => {
+    const res = visit("https://logistiq.ro/", { [RO_COOKIE]: "de" });
+    expect(redirectedTo(res)).toBe("/de");
+    expect(res.cookies.get(RO_COOKIE)).toBeUndefined();
+  });
+
+  it("ignores the old NEXT_LOCALE, which page views wrote until 2026-11-26 for a language nobody picked", () => {
+    expect(redirectedTo(visit("https://logistiq.ro/", { NEXT_LOCALE: "de" }))).toBe("/ro");
   });
 
   it("ignores a cookie that holds no language", () => {
@@ -107,33 +111,29 @@ describe("middleware on logistiq.ro", () => {
     expect(redirectedTo(visit("https://logistiq.ro/contact?x=1", { [RO_COOKIE]: "fr" }))).toBe("/fr/contact?x=1");
   });
 
-  it("saves the language of a visited page for a year", () => {
+  it("a visited page saves nothing: opening a page is not choosing a language", () => {
     const res = visit("https://logistiq.ro/fr/contact");
     expect(res.headers.get("location")).toBeNull();
-    const cookie = res.cookies.get(RO_COOKIE);
-    expect(cookie?.value).toBe("fr");
-    expect(cookie?.maxAge).toBe(ONE_YEAR);
-    expect(cookie?.path).toBe("/");
+    expect(res.cookies.get(RO_COOKIE)).toBeUndefined();
   });
 
-  it("a visited page replaces the saved language (the language switcher)", () => {
-    expect(visit("https://logistiq.ro/pl", { [RO_COOKIE]: "de" }).cookies.get(RO_COOKIE)?.value).toBe("pl");
+  it("a visited page leaves the saved language as it was", () => {
+    expect(visit("https://logistiq.ro/pl", { [RO_COOKIE]: "de" }).cookies.get(RO_COOKIE)).toBeUndefined();
   });
 
-  it("a prefetch serves the page but saves nothing (opening the language menu is not a choice)", () => {
-    const prefetches: Record<string, string>[] = [
+  it("neither a prefetch nor a client-side navigation saves anything", () => {
+    const requests: Record<string, string>[] = [
       { "next-router-prefetch": "1", rsc: "1" },
       { "next-router-segment-prefetch": "/_tree", "next-router-prefetch": "1", rsc: "1" },
       { "sec-purpose": "prefetch" },
       { purpose: "prefetch" },
+      { rsc: "1" },
     ];
-    for (const headers of prefetches) {
+    for (const headers of requests) {
       const res = visit("https://logistiq.ro/nl", { [RO_COOKIE]: "de" }, headers);
       expect(res.headers.get("x-middleware-next"), JSON.stringify(headers)).toBe("1");
       expect(res.cookies.get(RO_COOKIE), JSON.stringify(headers)).toBeUndefined();
     }
-    // A real client-side navigation (RSC request, no prefetch header) is a choice.
-    expect(visit("https://logistiq.ro/nl", { [RO_COOKIE]: "de" }, { rsc: "1" }).cookies.get(RO_COOKIE)?.value).toBe("nl");
   });
 
   it("serves all eight languages", () => {
@@ -161,7 +161,7 @@ describe("middleware matcher", () => {
   // path the middleware must skip (BotID, files, API) can't silently be redirected.
   const pattern = new RegExp(`^${matcher.source}$`);
 
-  it("never runs for a router prefetch, so opening the language menu saves nothing", () => {
+  it("never runs for a router prefetch", () => {
     // Next strips its router headers before the middleware runs: only the matcher
     // can tell a prefetch from a visit (verified against `next start`, 2026-11-08).
     expect(matcher.missing).toContainEqual({ type: "header", key: "next-router-prefetch" });
@@ -183,6 +183,29 @@ describe("middleware matcher", () => {
       "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/tl",
     ]) {
       expect(pattern.test(path), path).toBe(false);
+    }
+  });
+});
+
+// No page view sets a cookie (owner, 2026-11-26, D2): logistiq.ro shows no cookie banner
+// because a visit stores nothing. The language menu's click is the only writer
+// (no-browser-writes.test.ts). Until then every page in a language answered with
+// Set-Cookie: NEXT_LOCALE (live: GET /ro).
+describe("no response of the middleware sets a cookie", () => {
+  const ORIGINS = ["https://logistiq.ro", "https://www.logistiq.ro", "https://logistiq.be", "https://www.logistiq.be", "http://localhost:3000"];
+  const PATHS = ["/", "/ro", "/en", "/de", "/nl/contact", "/fr/blog", "/en/privacy", "/ro/terms", "/en/cookies", "/de/funktionen/digitaler-check-in", "/contact", "/blog", "/xx"];
+  const SAVED: Record<string, string>[] = [{}, { LOGISTIQ_LANG: "de" }, { LOGISTIQ_LANG_BE: "fr" }, { NEXT_LOCALE: "de", NEXT_LOCALE_BE: "fr" }];
+
+  it("for any host, path or saved language", () => {
+    for (const origin of ORIGINS) {
+      for (const path of PATHS) {
+        for (const cookies of SAVED) {
+          const res = visit(`${origin}${path}`, cookies);
+          const where = `${origin}${path} ${JSON.stringify(cookies)}`;
+          expect(res.headers.getSetCookie(), where).toEqual([]);
+          expect(res.headers.get("set-cookie"), where).toBeNull();
+        }
+      }
     }
   });
 });

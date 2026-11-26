@@ -70,22 +70,21 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
 ## i18n & URLs (international SEO — critical)
 
 - **A first visit opens in Romanian on logistiq.ro** (and every host but logistiq.be):
-  `middleware.ts` sends a bare URL to the visitor's saved language (cookie
-  `NEXT_LOCALE`, 1 year), else the domain's `defaultLocale` in `lib/i18n/sites.ts`
-  (`ro`; `nl` on logistiq.be). Geo/Accept-Language auto-routing is disabled.
-- **The saved choice always wins.** The language switcher writes the cookie itself on
-  click (`localeCookie()`: a switch to a prefetched page opens from the router cache
-  and never reaches the server), and the middleware writes it whenever a page in a
-  language is served (a link, a search result, a reload; also the page a first visit
-  lands on, so it ends up saved as `ro`). The default redirect itself writes nothing,
-  and a prefetch never does: the language menu prefetches all 8 languages, and until
-  2026-11-08 merely opening it overwrote the visitor's choice. Next strips its router
-  headers before the middleware runs, so prefetches are kept out by
-  `config.matcher`'s `missing`, not by code. A bare visit only renews a saved cookie
-  with its own value. Visitors whose cookie the old default stamped `en` (every first
-  visit until 2026-11-08) keep English until they pick a language; renaming the cookie
-  (as logistiq.be did) would reset them, and is the way to go if the first-visit
-  language ever changes again.
+  `middleware.ts` sends a bare URL to the language the visitor picked (cookie
+  `LOGISTIQ_LANG`, `LOGISTIQ_LANG_BE` on logistiq.be, 1 year from the pick), else the
+  domain's `defaultLocale` in `lib/i18n/sites.ts` (`ro`; `nl` on logistiq.be).
+  Geo/Accept-Language auto-routing is disabled.
+- **No page view sets a cookie** (owner, 2026-11-26): that is why logistiq.ro has no
+  cookie banner, and the cookie policy says so. The language menu's click is the only
+  writer (`localeCookie()` in `SiteHeader`, `Secure`, never renewed); the middleware only
+  reads the cookie. Opening a page in a language (a link, a search result) saves
+  nothing. Until 2026-11-26 every page in a language wrote `NEXT_LOCALE`
+  (`NEXT_LOCALE_BE`), a language nobody picked: the cookie was renamed so those steer
+  nothing, and `LegacyBrowserData` deletes them. `middleware.test.ts` proves no answer
+  carries `Set-Cookie`, `no-browser-writes.test.ts` that the click is the only writer,
+  and `scripts/contact-smoke.mjs` the same of the production bundle. Prefetches are
+  still kept out by `config.matcher`'s `missing` (Next strips its router headers before
+  the middleware runs). Renaming the cookie again is the way to reset everyone's choice.
 - **`config.ts`'s `defaultLocale` = `en` is the international fallback, not the
   first-visit language:** hreflang **`x-default` → `/en`**, the sitemap's x-default,
   RSS, unknown-locale fallbacks. x-default serves searchers whose language we don't
@@ -94,7 +93,7 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
   change where a visit lands, change `sites.ts`, never `config.ts`.
 - **Per-domain language sets** live in `lib/i18n/sites.ts`: **logistiq.be** serves
   only `nl` (default), `fr`, `en` — `middleware.ts` moves every other locale's URL to
-  the same page in Dutch and remembers the choice in its own `NEXT_LOCALE_BE` cookie;
+  the same page in Dutch and keeps the visitor's pick in its own `LOGISTIQ_LANG_BE` cookie;
   `SiteHeader`'s switcher lists only the domain's set. Every other host serves all 8.
 - **hreflang is language-level** (`de`, `fr`, …), not country (`de-DE`). Only switch
   to language-region when content is actually differentiated per country.

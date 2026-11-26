@@ -14,29 +14,30 @@ import { featuresSegment } from "@/lib/i18n/segments";
 export type Site = {
   locales: readonly Locale[];
   defaultLocale: Locale;
-  // Cookie that remembers the visitor's language on this domain.
+  // Cookie that keeps the language the visitor picked in the language menu.
   cookie: string;
 };
 
 // Romanian since 2026-11-08 (owner's request: logistiq.ro opens in Romanian; a
 // language the visitor saved before still wins). Before, every host opened in English.
-const DEFAULT_SITE: Site = { locales, defaultLocale: "ro", cookie: "NEXT_LOCALE" };
+// The cookie is LOGISTIQ_LANG since 2026-11-26: until then page views wrote NEXT_LOCALE
+// with the language of the last page opened, a language nobody picked. The new name
+// keeps those from steering, and LegacyBrowserData deletes the old cookies.
+const DEFAULT_SITE: Site = { locales, defaultLocale: "ro", cookie: "LOGISTIQ_LANG" };
 
 const COUNTRY_SITES: Record<string, Site> = {
-  // Belgium: Dutch first, then French and English (2026-11-06). Its own cookie,
-  // because until then logistiq.be set NEXT_LOCALE=en for every visitor, and
-  // that would keep returning visitors on English instead of the new default.
-  "logistiq.be": { locales: ["nl", "fr", "en"], defaultLocale: "nl", cookie: "NEXT_LOCALE_BE" },
+  // Belgium: Dutch first, then French and English (2026-11-06). Its own cookie, so
+  // logistiq.ro's choice never steers it (NEXT_LOCALE_BE until 2026-11-26, see above).
+  "logistiq.be": { locales: ["nl", "fr", "en"], defaultLocale: "nl", cookie: "LOGISTIQ_LANG_BE" },
 };
 
-// The saved language lasts a year and is renewed on every visit.
+// The chosen language lasts a year from the click and is never renewed by a visit.
 export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-// The language switcher saves the visitor's pick in the browser, with the same
-// attributes middleware.ts uses: a switch to a prefetched page is served from the
-// router's cache and never reaches the middleware, so the click itself must save it.
+// The language menu's click is the only writer of the cookie (no page view sets one,
+// owner, 2026-11-26; the cookie policy says so). middleware.ts only reads it.
 export function localeCookie(site: Site, locale: Locale): string {
-  return `${site.cookie}=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
+  return `${site.cookie}=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax; Secure`;
 }
 
 export function siteForHost(host: string | null | undefined): Site {

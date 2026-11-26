@@ -15,6 +15,7 @@
 //   listen on them.
 // It checks that:
 // - every language's home and contact page answers 200 in its language, and / redirects to /ro;
+// - none of those answers, nor / nor the three legal pages, sets a cookie (no page view does, owner 2026-11-26);
 // - one person's message to /api/contact answers 200 and reaches the test server, signed in with SMTP_USER over TLS,
 //   for contact@logistiq.ro alone, composed exactly as route.mail.golden.json's "human" case (nodemailer 6.10.1);
 // - an address the parser could read a second recipient out of gets the form's own 400, and nothing more is sent;
@@ -140,12 +141,18 @@ async function main() {
 
     const root = await fetch(`${base}/`, { redirect: "manual" });
     check("/ redirects to the domain's language, /ro", root.status >= 300 && root.status < 400 && /\/ro$/.test(root.headers.get("location") ?? ""), `${root.status} ${root.headers.get("location")}`);
+    check("/ sets no cookie", root.headers.getSetCookie().length === 0, root.headers.getSetCookie().join("; "));
     for (const locale of LOCALES) {
       for (const path of [`/${locale}`, `/${locale}/contact`]) {
         const res = await fetch(`${base}${path}`, { redirect: "manual" });
         const html = res.status === 200 ? await res.text() : "";
         check(`${path} answers 200 in its language`, res.status === 200 && html.includes(`<html lang="${locale}"`), String(res.status));
+        check(`${path} sets no cookie`, res.headers.getSetCookie().length === 0, res.headers.getSetCookie().join("; "));
       }
+    }
+    for (const path of ["/en/privacy", "/en/terms", "/en/cookies"]) {
+      const res = await fetch(`${base}${path}`, { redirect: "manual" });
+      check(`${path} answers 200 and sets no cookie`, res.status === 200 && res.headers.getSetCookie().length === 0, `${res.status} ${res.headers.getSetCookie().join("; ")}`);
     }
 
     const answer = await fetch(`${base}/api/contact`, {
