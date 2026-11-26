@@ -12,7 +12,7 @@ import { localeToFlag } from "@/components/icons/flags";
 import { homeHref, featuresNavHref, pricingHref, contactHref, resourcesMenu, blogNavHref } from "@/lib/navigation";
 import { isSelfServeEnabled } from "@/lib/self-serve";
 import { blogIndexPath } from "@/lib/blog";
-import { anchorHref, swapLocale } from "@/lib/href";
+import { anchorHref, routeHref, swapLocale } from "@/lib/href";
 import {
   features,
   featureTitle,
@@ -249,7 +249,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               {open === "lang" && (
                 <div
                   role="menu"
-                  className="absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 rounded-xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 py-2 animate-fade-in-down"
+                  className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-2xl ring-1 ring-black/5 border border-slate-200 dark:border-slate-700 py-2 animate-fade-in-down"
                 >
                   {switcherLocales.map((loc) => {
                     const FlagComponent = localeToFlag[loc];
@@ -274,6 +274,16 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                       </Link>
                     );
                   })}
+                  {/* What the click does, at the control (2026-11-26): a pick is kept in a
+                      cookie for a year; the cookie policy describes it. */}
+                  <Link
+                    role="menuitem"
+                    href={routeHref(locale, "/cookies")}
+                    className="block mt-1 pt-2 px-4 pb-1 border-t border-slate-200 dark:border-slate-700 text-xs leading-snug text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 underline-offset-2 hover:underline"
+                    onClick={() => setOpen(null)}
+                  >
+                    {t.nav.languageCookieNote}
+                  </Link>
                 </div>
               )}
             </div>
