@@ -5,20 +5,20 @@ import { renderPage } from "@/lib/testing/render-page";
 import PrivacyPage from "@/app/[locale]/privacy/page";
 
 // The terms, the privacy policy and the cookie policy print legal.updatedOn under their
-// title. They changed on 26 November 2026 (round 8: the identity from company.ts, no cookie
+// title. They changed on 26 and 27 November 2026, pushed on the 27th (round 8: the identity from company.ts, no cookie
 // on a visit and no banner, the cookie policy site by site, the controller and processor
 // roles, no availability figure, accounts, retention and termination as the product does
 // them); before, on 24 November 2026, and until then they said "Last updated: 26 January
 // 2026". The date is written as each language writes it.
 const UPDATED_ON: Record<string, string> = {
-  ro: "26 noiembrie 2026",
-  en: "26 November 2026",
-  de: "26. November 2026",
-  pl: "26 listopada 2026",
-  hu: "2026. november 26.",
-  bg: "26 ноември 2026 г.",
-  fr: "26 novembre 2026",
-  nl: "26 november 2026",
+  ro: "27 noiembrie 2026",
+  en: "27 November 2026",
+  de: "27. November 2026",
+  pl: "27 listopada 2026",
+  hu: "2026. november 27.",
+  bg: "27 ноември 2026 г.",
+  fr: "27 novembre 2026",
+  nl: "27 november 2026",
 };
 
 describe("legal pages", () => {
@@ -26,7 +26,7 @@ describe("legal pages", () => {
     expect(Object.keys(UPDATED_ON).sort()).toEqual(Object.keys(translations).sort());
   });
 
-  it("say they were last updated on 26 November 2026", () => {
+  it("say they were last updated on 27 November 2026", () => {
     for (const [locale, copy] of Object.entries(translations)) {
       expect(copy.legal.updatedOn, locale).toBe(UPDATED_ON[locale]);
     }

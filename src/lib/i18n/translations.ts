@@ -2057,7 +2057,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 noiembrie 2026",
+      updatedOn: "27 noiembrie 2026",
       backHome: "Înapoi la pagina principală",
       identity: { taxId: "CUI:", regNo: "Nr. Reg. Com.:", country: "România" },
       retentionHeaders: {
@@ -4115,7 +4115,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 November 2026",
+      updatedOn: "27 November 2026",
       backHome: "Back to home",
       identity: { taxId: "Tax ID (CUI):", regNo: "Trade Register no.:", country: "Romania" },
       retentionHeaders: {
@@ -6441,7 +6441,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26. November 2026",
+      updatedOn: "27. November 2026",
       backHome: "Zurück zur Startseite",
       identity: { taxId: "Steuer-ID (CUI):", regNo: "Handelsregister-Nr.:", country: "Rumänien" },
       retentionHeaders: {
@@ -8753,7 +8753,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 listopada 2026",
+      updatedOn: "27 listopada 2026",
       backHome: "Powrót do strony głównej",
       identity: { taxId: "Identyfikator podatkowy (CUI):", regNo: "Nr w rejestrze handlowym:", country: "Rumunia" },
       retentionHeaders: {
@@ -11081,7 +11081,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "2026. november 26.",
+      updatedOn: "2026. november 27.",
       backHome: "Vissza a főoldalra",
       identity: { taxId: "Adószám (CUI):", regNo: "Cégjegyzékszám:", country: "Románia" },
       retentionHeaders: {
@@ -13405,7 +13405,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 ноември 2026 г.",
+      updatedOn: "27 ноември 2026 г.",
       backHome: "Обратно към началната страница",
       identity: { taxId: "Данъчен номер (CUI):", regNo: "№ в Търговския регистър:", country: "Румъния" },
       retentionHeaders: {
@@ -15731,7 +15731,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 novembre 2026",
+      updatedOn: "27 novembre 2026",
       backHome: "Retour à l’accueil",
       identity: { taxId: "Identifiant fiscal (CUI) :", regNo: "N° au registre du commerce :", country: "Roumanie" },
       retentionHeaders: {
@@ -18062,7 +18062,7 @@ export const translations = {
       },
     },
     legal: {
-      updatedOn: "26 november 2026",
+      updatedOn: "27 november 2026",
       backHome: "Terug naar de homepage",
       identity: { taxId: "Fiscaal nummer (CUI):", regNo: "Handelsregisternr.:", country: "Roemenië" },
       retentionHeaders: {
