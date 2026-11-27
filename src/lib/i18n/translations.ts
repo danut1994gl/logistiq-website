@@ -2026,6 +2026,11 @@ export const translations = {
             purpose: "Livrează imaginile emoji din selectorul de emoji al chatului, pe logistiq.cloud și qrgo.ro, la deschiderea selectorului",
             url: "www.jsdelivr.com/terms/privacy-policy",
           },
+          {
+            name: "Supabase",
+            purpose: "Pe logistiq.cloud și qrgo.ro, browserul dumneavoastră preia datele platformei, actualizările în timp real și fișierele direct de la Supabase, care găzduiește baza de date a platformei",
+            url: "supabase.com/privacy",
+          },
         ],
         note: "Vă recomandăm să consultați politicile de confidențialitate ale acestor servicii pentru detalii.",
       },
@@ -4078,6 +4083,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Delivers the emoji pictures of the chat's emoji picker, on logistiq.cloud and qrgo.ro, when the picker is opened",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "On logistiq.cloud and qrgo.ro, your browser fetches the platform's data, live updates and files directly from Supabase, which hosts the platform's database",
+            url: "supabase.com/privacy",
           },
         ],
         note: "We recommend consulting the privacy policies of these services for details.",
@@ -6381,6 +6391,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Liefert die Emoji-Bilder der Emoji-Auswahl im Chat auf logistiq.cloud und qrgo.ro, wenn die Auswahl geöffnet wird",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "Auf logistiq.cloud und qrgo.ro ruft Ihr Browser die Daten der Plattform, Live-Aktualisierungen und Dateien direkt von Supabase ab, das die Datenbank der Plattform hostet",
+            url: "supabase.com/privacy",
           },
         ],
         note:
@@ -8688,6 +8703,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Dostarcza obrazki emoji z selektora emoji czatu w logistiq.cloud i qrgo.ro, gdy selektor zostanie otwarty",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "W logistiq.cloud i qrgo.ro Twoja przeglądarka pobiera dane platformy, aktualizacje na żywo i pliki bezpośrednio z Supabase, który hostuje bazę danych platformy",
+            url: "supabase.com/privacy",
           },
         ],
         note:
@@ -11013,6 +11033,11 @@ export const translations = {
             purpose: "A csevegés emojiválasztójának emojiképeit szállítja a logistiq.cloud-on és a qrgo.ro-n, amikor a választót megnyitják",
             url: "www.jsdelivr.com/terms/privacy-policy",
           },
+          {
+            name: "Supabase",
+            purpose: "A logistiq.cloud-on és a qrgo.ro-n a böngészője közvetlenül a Supabase-től tölti le a platform adatait, élő frissítéseit és fájljait; a Supabase üzemelteti a platform adatbázisát",
+            url: "supabase.com/privacy",
+          },
         ],
         note:
           "A részletekért javasoljuk, hogy tekintse át ezen szolgáltatások adatvédelmi szabályzatait.",
@@ -13330,6 +13355,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Доставя изображенията на емоджи от избора на емоджи в чата в logistiq.cloud и qrgo.ro, когато изборът бъде отворен",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "В logistiq.cloud и qrgo.ro браузърът ви изтегля данните на платформата, актуализациите в реално време и файловете директно от Supabase, който хоства базата данни на платформата",
+            url: "supabase.com/privacy",
           },
         ],
         note:
@@ -15652,6 +15682,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Fournit les images du sélecteur d'emoji du chat, sur logistiq.cloud et qrgo.ro, à l'ouverture du sélecteur",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "Sur logistiq.cloud et qrgo.ro, votre navigateur récupère les données de la plateforme, les mises à jour en direct et les fichiers directement auprès de Supabase, qui héberge la base de données de la plateforme",
+            url: "supabase.com/privacy",
           },
         ],
         note:
@@ -17978,6 +18013,11 @@ export const translations = {
             name: "jsDelivr",
             purpose: "Levert de emojiafbeeldingen van de emojikiezer in de chat op logistiq.cloud en qrgo.ro, wanneer de kiezer wordt geopend",
             url: "www.jsdelivr.com/terms/privacy-policy",
+          },
+          {
+            name: "Supabase",
+            purpose: "Op logistiq.cloud en qrgo.ro haalt uw browser de gegevens van het platform, live-updates en bestanden rechtstreeks op bij Supabase, dat de database van het platform host",
+            url: "supabase.com/privacy",
           },
         ],
         note:

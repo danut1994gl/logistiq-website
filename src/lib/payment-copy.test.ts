@@ -112,8 +112,9 @@ describe("payment copy: a contract and a bank transfer, no card", () => {
       // logistiq.cloud or qrgo.ro loads it (legal-copy.test.ts).
       // Google reCAPTCHA joined it on 2026-11-24 (legal-copy.test.ts). Since 2026-11-26 the
       // list names the companies whose code or files the sites load (cookie-policy.test.tsx);
-      // Supabase's session cookie is the dashboard's own, listed under logistiq.cloud.
-      expect(services, locale).toEqual(["Google reCAPTCHA", "Cloudflare", "Google Maps", "Vercel", "jsDelivr"]);
+      // Supabase's session cookie is the dashboard's own, listed under logistiq.cloud, and
+      // since 2026-11-27 Supabase is listed as the servers the browsers fetch data from.
+      expect(services, locale).toEqual(["Google reCAPTCHA", "Cloudflare", "Google Maps", "Vercel", "jsDelivr", "Supabase"]);
     }
   });
 

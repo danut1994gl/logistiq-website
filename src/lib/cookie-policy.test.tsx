@@ -64,6 +64,10 @@ const SERVICES: [string, string][] = [
   ["Google Maps", "policies.google.com/privacy"],
   ["Vercel", "vercel.com/legal/privacy-notice"],
   ["jsDelivr", "www.jsdelivr.com/terms/privacy-policy"],
+  // The browsers of logistiq.cloud and qrgo.ro fetch data, Realtime updates and Storage files
+  // straight from the Supabase project (final review N2, 2026-11-27; apps/dashboard and
+  // apps/driver's browser clients, e.g. apps/driver/components/StatusView.tsx).
+  ["Supabase", "supabase.com/privacy"],
 ];
 
 // The sentence that took browsing for consent, as each language said it until 2026-11-26.
