@@ -144,4 +144,31 @@ describe("cookie policy, the cookies site by site", () => {
     for (const [, name] of STORAGE) expect(html, name).toContain(name);
     expect(html).not.toContain("<button");
   });
+
+  // qrgo.ro removes its two check-in cookies when a new check-in is started in the browser,
+  // or when a status page open in the browser sees that the visit has ended
+  // (apps/driver/components/StatusView.tsx, lib/actions/driver-report.ts clearDriverSecret);
+  // a driver who closes the tab keeps them for their 48 and 72 hours. The policy says so, and
+  // quotes no button label: qrgo.ro's labels are being reworded (final review M1, 2026-11-27).
+  it("says when qrgo.ro's check-in cookies go, as the code removes them, quoting no button", () => {
+    const q = (l: (typeof locales)[number]) => translations[l].cookies.cookiesWeUse.sites[2].cookies;
+    expect(q("en")[0].setWhen).toBe(
+      "When a check-in is submitted; removed when you start a new check-in in this browser, or when a status page open in this browser shows that the visit has ended",
+    );
+    expect(q("en")[1].duration).toBe(
+      "At most 72 hours; removed earlier when the status page open in this browser shows that the visit has ended",
+    );
+    expect(q("ro")[0].setWhen).toBe(
+      "La trimiterea unui check-in; șters când începeți un check-in nou din acest browser sau când pagina de status deschisă în acest browser arată că vizita s-a încheiat",
+    );
+    expect(q("ro")[1].duration).toBe(
+      "Cel mult 72 de ore; șters mai devreme atunci când pagina de status deschisă în acest browser arată că vizita s-a încheiat",
+    );
+    const NEW_CHECKIN_BUTTON = /Fă un Check-in Nou|Create New Check-in|Neuen Check-in erstellen|Utwórz nowy check-in|Új check-in létrehozása|Създай нов check-in|Créer un nouveau check-in|Nieuwe incheck maken/;
+    for (const locale of locales) {
+      const [checkin, secret] = q(locale);
+      expect(checkin.setWhen, locale).toBe(secret.setWhen);
+      expect(JSON.stringify(translations[locale].cookies).match(NEW_CHECKIN_BUTTON)?.[0], locale).toBeUndefined();
+    }
+  });
 });
