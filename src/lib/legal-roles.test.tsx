@@ -38,7 +38,9 @@ describe("privacy policy and terms, the two roles", () => {
     const processor = privacy.intro.roles.processor.desc;
     expect(processor).toMatch(CONTROLLER[locale]);
     expect(processor).toMatch(PROCESSOR[locale]);
-    for (const name of ["qrgo.ro", "QRGo Driver", "QRGo Self"]) expect(processor).toContain(name);
+    // Drivers' data also arrives from the warehouse's own systems, through the Integration API
+    // (bookings; final review N5, 2026-11-27).
+    for (const name of ["qrgo.ro", "QRGo Driver", "QRGo Self", "API"]) expect(processor).toContain(name);
     for (const text of [privacy.contact.operator, terms.article10.items[3]]) {
       expect(text).toMatch(CONTROLLER[locale]);
       expect(text).toMatch(PROCESSOR[locale]);

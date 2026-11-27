@@ -1479,7 +1479,7 @@ export const translations = {
           },
           processor: {
             title: "Unde suntem persoană împuternicită",
-            desc: "Pentru datele șoferilor care fac check-in la un depozit (pe qrgo.ro, în aplicația QRGo Driver, pe o tabletă QRGo Self sau introduse de personalul depozitului), operatorul de date este depozitul la care se face check-in-ul, clientul nostru. Noi prelucrăm aceste date în numele depozitului, în calitate de persoană împuternicită de operator. Pentru a vă exercita drepturile privind aceste date, contactați depozitul la care ați făcut check-in-ul sau scrieți-ne.",
+            desc: "Pentru datele șoferilor care fac check-in la un depozit (pe qrgo.ro, în aplicația QRGo Driver, pe o tabletă QRGo Self, introduse de personalul depozitului ori trimise de sistemele lui prin API), operatorul de date este depozitul la care se face check-in-ul, clientul nostru. Noi prelucrăm aceste date în numele depozitului, în calitate de persoană împuternicită de operator. Pentru a vă exercita drepturile privind aceste date, contactați depozitul la care ați făcut check-in-ul sau scrieți-ne.",
           },
         },
       },
@@ -3552,7 +3552,7 @@ export const translations = {
           },
           processor: {
             title: "Where we are a processor",
-            desc: "For the data of drivers who check in at a warehouse (on qrgo.ro, in the QRGo Driver app, on a QRGo Self tablet, or entered by the warehouse's staff), the data controller is the warehouse where the check-in is made, which is our client. We process this data on the warehouse's behalf, as a data processor. To exercise your rights over this data, contact the warehouse where you checked in, or write to us.",
+            desc: "For the data of drivers who check in at a warehouse (on qrgo.ro, in the QRGo Driver app, on a QRGo Self tablet, entered by the warehouse's staff, or sent by its own systems through the API), the data controller is the warehouse where the check-in is made, which is our client. We process this data on the warehouse's behalf, as a data processor. To exercise your rights over this data, contact the warehouse where you checked in, or write to us.",
           },
         },
       },
@@ -5612,7 +5612,7 @@ export const translations = {
           },
           processor: {
             title: "Wo wir Auftragsverarbeiter sind",
-            desc: "Für die Daten von Fahrern, die bei einem Lager einchecken (auf qrgo.ro, in der App QRGo Driver, auf einem QRGo Self-Tablet oder vom Personal des Lagers eingegeben), ist der Verantwortliche das Lager, bei dem der Check-in erfolgt, also unser Kunde. Wir verarbeiten diese Daten im Auftrag des Lagers, als Auftragsverarbeiter. Um Ihre Rechte an diesen Daten auszuüben, wenden Sie sich an das Lager, bei dem Sie eingecheckt haben, oder schreiben Sie uns.",
+            desc: "Für die Daten von Fahrern, die bei einem Lager einchecken (auf qrgo.ro, in der App QRGo Driver, auf einem QRGo Self-Tablet, vom Personal des Lagers eingegeben oder von seinen eigenen Systemen über die API gesendet), ist der Verantwortliche das Lager, bei dem der Check-in erfolgt, also unser Kunde. Wir verarbeiten diese Daten im Auftrag des Lagers, als Auftragsverarbeiter. Um Ihre Rechte an diesen Daten auszuüben, wenden Sie sich an das Lager, bei dem Sie eingecheckt haben, oder schreiben Sie uns.",
           },
         },
       },
@@ -7938,7 +7938,7 @@ export const translations = {
           },
           processor: {
             title: "Gdzie jesteśmy podmiotem przetwarzającym",
-            desc: "W przypadku danych kierowców, którzy dokonują check-inu w magazynie (w qrgo.ro, w aplikacji QRGo Driver, na tablecie QRGo Self lub wprowadzonych przez personel magazynu), administratorem danych jest magazyn, w którym dokonuje się check-inu, czyli nasz klient. Przetwarzamy te dane w imieniu magazynu, jako podmiot przetwarzający. Aby skorzystać ze swoich praw dotyczących tych danych, skontaktuj się z magazynem, w którym dokonałeś check-inu, lub napisz do nas.",
+            desc: "W przypadku danych kierowców, którzy dokonują check-inu w magazynie (w qrgo.ro, w aplikacji QRGo Driver, na tablecie QRGo Self, wprowadzonych przez personel magazynu lub przesłanych przez jego własne systemy przez API), administratorem danych jest magazyn, w którym dokonuje się check-inu, czyli nasz klient. Przetwarzamy te dane w imieniu magazynu, jako podmiot przetwarzający. Aby skorzystać ze swoich praw dotyczących tych danych, skontaktuj się z magazynem, w którym dokonałeś check-inu, lub napisz do nas.",
           },
         },
       },
@@ -10259,7 +10259,7 @@ export const translations = {
           },
           processor: {
             title: "Ahol mi vagyunk az adatfeldolgozó",
-            desc: "A raktárban check-int végző sofőrök adatai esetében (a qrgo.ro-n, a QRGo Driver alkalmazásban, egy QRGo Self táblagépen, vagy a raktár személyzete által rögzítve) az adatkezelő az a raktár, ahol a check-in történik, vagyis az ügyfelünk. Ezeket az adatokat a raktár nevében kezeljük, adatfeldolgozóként. Az ezen adatokkal kapcsolatos jogai gyakorlásához forduljon ahhoz a raktárhoz, ahol check-int végzett, vagy írjon nekünk.",
+            desc: "A raktárban check-int végző sofőrök adatai esetében (a qrgo.ro-n, a QRGo Driver alkalmazásban, egy QRGo Self táblagépen, a raktár személyzete által rögzítve, vagy a raktár saját rendszerei által az API-n keresztül küldve) az adatkezelő az a raktár, ahol a check-in történik, vagyis az ügyfelünk. Ezeket az adatokat a raktár nevében kezeljük, adatfeldolgozóként. Az ezen adatokkal kapcsolatos jogai gyakorlásához forduljon ahhoz a raktárhoz, ahol check-int végzett, vagy írjon nekünk.",
           },
         },
       },
@@ -12587,7 +12587,7 @@ export const translations = {
           },
           processor: {
             title: "Когато сме обработващ лични данни",
-            desc: "За данните на шофьорите, които правят check-in в склад (в qrgo.ro, в приложението QRGo Driver, на таблет QRGo Self или въведени от персонала на склада), администратор на лични данни е складът, в който се прави check-in, т.е. нашият клиент. Ние обработваме тези данни от името на склада, като обработващ лични данни. За да упражните правата си по отношение на тези данни, свържете се със склада, в който сте направили check-in, или ни пишете.",
+            desc: "За данните на шофьорите, които правят check-in в склад (в qrgo.ro, в приложението QRGo Driver, на таблет QRGo Self, въведени от персонала на склада или изпратени от собствените му системи чрез API), администратор на лични данни е складът, в който се прави check-in, т.е. нашият клиент. Ние обработваме тези данни от името на склада, като обработващ лични данни. За да упражните правата си по отношение на тези данни, свържете се със склада, в който сте направили check-in, или ни пишете.",
           },
         },
       },
@@ -14902,7 +14902,7 @@ export const translations = {
           },
           processor: {
             title: "Lorsque nous sommes sous-traitant",
-            desc: "Pour les données des chauffeurs qui effectuent un check-in dans un entrepôt (sur qrgo.ro, dans l'application QRGo Driver, sur une tablette QRGo Self ou saisies par le personnel de l'entrepôt), le responsable du traitement est l'entrepôt où le check-in est effectué, qui est notre client. Nous traitons ces données pour le compte de l'entrepôt, en tant que sous-traitant. Pour exercer vos droits sur ces données, contactez l'entrepôt où vous avez effectué le check-in, ou écrivez-nous.",
+            desc: "Pour les données des chauffeurs qui effectuent un check-in dans un entrepôt (sur qrgo.ro, dans l'application QRGo Driver, sur une tablette QRGo Self, saisies par le personnel de l'entrepôt ou envoyées par ses propres systèmes via l'API), le responsable du traitement est l'entrepôt où le check-in est effectué, qui est notre client. Nous traitons ces données pour le compte de l'entrepôt, en tant que sous-traitant. Pour exercer vos droits sur ces données, contactez l'entrepôt où vous avez effectué le check-in, ou écrivez-nous.",
           },
         },
       },
@@ -17228,7 +17228,7 @@ export const translations = {
           },
           processor: {
             title: "Waar wij verwerker zijn",
-            desc: "Voor de gegevens van chauffeurs die bij een magazijn inchecken (op qrgo.ro, in de app QRGo Driver, op een QRGo Self-tablet of ingevoerd door het personeel van het magazijn) is de verwerkingsverantwoordelijke het magazijn waar de check-in plaatsvindt, onze klant. Wij verwerken deze gegevens namens het magazijn, als verwerker. Om uw rechten op deze gegevens uit te oefenen, neemt u contact op met het magazijn waar u hebt ingecheckt, of schrijft u ons.",
+            desc: "Voor de gegevens van chauffeurs die bij een magazijn inchecken (op qrgo.ro, in de app QRGo Driver, op een QRGo Self-tablet, ingevoerd door het personeel van het magazijn of via de API verstuurd door zijn eigen systemen) is de verwerkingsverantwoordelijke het magazijn waar de check-in plaatsvindt, onze klant. Wij verwerken deze gegevens namens het magazijn, als verwerker. Om uw rechten op deze gegevens uit te oefenen, neemt u contact op met het magazijn waar u hebt ingecheckt, of schrijft u ons.",
           },
         },
       },
