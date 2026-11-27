@@ -171,4 +171,19 @@ describe("cookie policy, the cookies site by site", () => {
       expect(JSON.stringify(translations[locale].cookies).match(NEW_CHECKIN_BUTTON)?.[0], locale).toBeUndefined();
     }
   });
+
+  // Measured on 2026-11-27 (final review S1, a read-only page view of logistiq.cloud in
+  // headless Chrome): the sign-in page loads reCAPTCHA on open (LoginCard.tsx), Google sets
+  // _GRECAPTCHA on www.google.com for 180 days and keeps rc::a / rc::c in its own frame, and
+  // logistiq.cloud's own origin gets nothing. The policy states it as a fact about Google's
+  // cookie, which is not one of ours, so it is not a row of the table.
+  it.each(locales)("%s names Google's reCAPTCHA cookie in logistiq.cloud's description, not in the table", (locale) => {
+    const cloud = translations[locale].cookies.cookiesWeUse.sites[1];
+    expect(cloud.desc).toContain("_GRECAPTCHA");
+    expect(cloud.desc).toContain("google.com");
+    expect(cloud.desc).toMatch(/\b6\b/);
+    for (const site of translations[locale].cookies.cookiesWeUse.sites) {
+      expect(site.cookies.map((c) => c.name)).not.toContain("_GRECAPTCHA");
+    }
+  });
 });

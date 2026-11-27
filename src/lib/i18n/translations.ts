@@ -1828,7 +1828,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Dashboardul, pentru utilizatorii autentificați, și paginile de prezentare trimise prin link. Cookie-urile sunt plasate începând cu pagina de autentificare, pe măsură ce vă autentificați și lucrați; pagina de autentificare încarcă Google reCAPTCHA de îndată ce se deschide (secțiunea 4). Cele trei cookie-uri de acces pe dispozitiv (lq_…) există numai acolo unde organizația folosește coduri de acces pentru calculatoarele sale.",
+            desc: "Dashboardul, pentru utilizatorii autentificați, și paginile de prezentare trimise prin link. Cookie-urile sunt plasate începând cu pagina de autentificare, pe măsură ce vă autentificați și lucrați; pagina de autentificare încarcă Google reCAPTCHA de îndată ce se deschide, iar Google plasează atunci propriul cookie (_GRECAPTCHA, pe google.com, circa 6 luni) și păstrează date în propriul cadru (secțiunea 4). Cele trei cookie-uri de acces pe dispozitiv (lq_…) există numai acolo unde organizația folosește coduri de acces pentru calculatoarele sale.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -3881,7 +3881,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "The dashboard, for signed-in users, and the presentation pages we share by link. Cookies are set from the sign-in page on, as you sign in and work; the sign-in page loads Google reCAPTCHA as soon as it opens (section 4). The three device-access cookies (lq_…) exist only where an organisation uses access codes for its computers.",
+            desc: "The dashboard, for signed-in users, and the presentation pages we share by link. Cookies are set from the sign-in page on, as you sign in and work; the sign-in page loads Google reCAPTCHA as soon as it opens, and Google then sets its own cookie (_GRECAPTCHA, on google.com, about 6 months) and keeps data in its own frame (section 4). The three device-access cookies (lq_…) exist only where an organisation uses access codes for its computers.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -6178,7 +6178,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Das Dashboard, für angemeldete Nutzer, und die Präsentationsseiten, die wir per Link teilen. Cookies werden ab der Anmeldeseite gesetzt, während Sie sich anmelden und arbeiten; die Anmeldeseite lädt Google reCAPTCHA, sobald sie sich öffnet (Abschnitt 4). Die drei Cookies des Gerätezugangs (lq_…) gibt es nur dort, wo eine Organisation Zugangscodes für ihre Computer verwendet.",
+            desc: "Das Dashboard, für angemeldete Nutzer, und die Präsentationsseiten, die wir per Link teilen. Cookies werden ab der Anmeldeseite gesetzt, während Sie sich anmelden und arbeiten; die Anmeldeseite lädt Google reCAPTCHA, sobald sie sich öffnet, und Google setzt dann ein eigenes Cookie (_GRECAPTCHA, auf google.com, etwa 6 Monate) und speichert Daten in seinem eigenen Frame (Abschnitt 4). Die drei Cookies des Gerätezugangs (lq_…) gibt es nur dort, wo eine Organisation Zugangscodes für ihre Computer verwendet.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -8495,7 +8495,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Dashboard dla zalogowanych użytkowników oraz strony prezentacji udostępniane przez nas linkiem. Pliki cookie są zapisywane od strony logowania, w miarę jak się logujesz i pracujesz; strona logowania ładuje Google reCAPTCHA, gdy tylko się otworzy (sekcja 4). Trzy pliki cookie dostępu z urządzenia (lq_…) istnieją tylko tam, gdzie organizacja używa kodów dostępu dla swoich komputerów.",
+            desc: "Dashboard dla zalogowanych użytkowników oraz strony prezentacji udostępniane przez nas linkiem. Pliki cookie są zapisywane od strony logowania, w miarę jak się logujesz i pracujesz; strona logowania ładuje Google reCAPTCHA, gdy tylko się otworzy, a Google zapisuje wtedy własny plik cookie (_GRECAPTCHA, w google.com, około 6 miesięcy) i przechowuje dane we własnej ramce (sekcja 4). Trzy pliki cookie dostępu z urządzenia (lq_…) istnieją tylko tam, gdzie organizacja używa kodów dostępu dla swoich komputerów.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -10814,7 +10814,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Az irányítópult a bejelentkezett felhasználóknak, valamint a linkkel megosztott bemutató oldalaink. A cookie-k a bejelentkezési oldaltól kezdve kerülnek elhelyezésre, ahogy Ön bejelentkezik és dolgozik; a bejelentkezési oldal megnyitásakor azonnal betölti a Google reCAPTCHA-t (4. szakasz). Az eszközalapú hozzáférés három cookie-ja (lq_…) csak ott létezik, ahol egy szervezet hozzáférési kódokat használ a számítógépeihez.",
+            desc: "Az irányítópult a bejelentkezett felhasználóknak, valamint a linkkel megosztott bemutató oldalaink. A cookie-k a bejelentkezési oldaltól kezdve kerülnek elhelyezésre, ahogy Ön bejelentkezik és dolgozik; a bejelentkezési oldal megnyitásakor azonnal betölti a Google reCAPTCHA-t, a Google pedig ekkor saját cookie-t helyez el (_GRECAPTCHA, a google.com-on, körülbelül 6 hónapig), és adatokat tárol a saját keretében (4. szakasz). Az eszközalapú hozzáférés három cookie-ja (lq_…) csak ott létezik, ahol egy szervezet hozzáférési kódokat használ a számítógépeihez.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -13132,7 +13132,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Таблото, за влезлите в профила си потребители, и страниците с презентации, които споделяме чрез линк. Бисквитките се поставят от страницата за вход нататък, докато влизате и работите; страницата за вход зарежда Google reCAPTCHA веднага щом се отвори (раздел 4). Трите бисквитки за достъп от устройство (lq_…) съществуват само там, където организация използва кодове за достъп за своите компютри.",
+            desc: "Таблото, за влезлите в профила си потребители, и страниците с презентации, които споделяме чрез линк. Бисквитките се поставят от страницата за вход нататък, докато влизате и работите; страницата за вход зарежда Google reCAPTCHA веднага щом се отвори, а Google тогава поставя собствена бисквитка (_GRECAPTCHA, на google.com, около 6 месеца) и пази данни в собствената си рамка (раздел 4). Трите бисквитки за достъп от устройство (lq_…) съществуват само там, където организация използва кодове за достъп за своите компютри.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -15454,7 +15454,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Le tableau de bord, pour les utilisateurs connectés, et les pages de présentation que nous partageons par lien. Les cookies sont déposés à partir de la page de connexion, à mesure que vous vous connectez et travaillez ; la page de connexion charge Google reCAPTCHA dès qu'elle s'ouvre (section 4). Les trois cookies d'accès par appareil (lq_…) n'existent que là où une organisation utilise des codes d'accès pour ses ordinateurs.",
+            desc: "Le tableau de bord, pour les utilisateurs connectés, et les pages de présentation que nous partageons par lien. Les cookies sont déposés à partir de la page de connexion, à mesure que vous vous connectez et travaillez ; la page de connexion charge Google reCAPTCHA dès qu'elle s'ouvre, et Google dépose alors son propre cookie (_GRECAPTCHA, sur google.com, environ 6 mois) et conserve des données dans son propre cadre (section 4). Les trois cookies d'accès par appareil (lq_…) n'existent que là où une organisation utilise des codes d'accès pour ses ordinateurs.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
@@ -17775,7 +17775,7 @@ export const translations = {
           },
           {
             site: "logistiq.cloud",
-            desc: "Het dashboard, voor ingelogde gebruikers, en de presentatiepagina's die wij via een link delen. Cookies worden vanaf de inlogpagina geplaatst, terwijl u inlogt en werkt; de inlogpagina laadt Google reCAPTCHA zodra ze opent (sectie 4). De drie cookies voor apparaattoegang (lq_…) bestaan alleen waar een organisatie toegangscodes voor haar computers gebruikt.",
+            desc: "Het dashboard, voor ingelogde gebruikers, en de presentatiepagina's die wij via een link delen. Cookies worden vanaf de inlogpagina geplaatst, terwijl u inlogt en werkt; de inlogpagina laadt Google reCAPTCHA zodra ze opent, en Google plaatst dan een eigen cookie (_GRECAPTCHA, op google.com, ongeveer 6 maanden) en bewaart gegevens in zijn eigen frame (sectie 4). De drie cookies voor apparaattoegang (lq_…) bestaan alleen waar een organisatie toegangscodes voor haar computers gebruikt.",
             cookies: [
               {
                 name: "sb-bhpiugfpkqwxcqbolisb-auth-token",
