@@ -295,7 +295,7 @@ scripts/contact-smoke.mjs    # the production bundle's contact form against the 
 
   ```bash
   P="git -C /root/logistiq"; R=origin/main
-  $P grep -nE "cookies\.set\(|Cookies\.set\(|document\.cookie\s*=|jar\.set\(|cookieStore\.set\(" $R -- apps/dashboard apps/driver packages/shared ':!graphify-out' | grep -v '\.test\.\|__tests__'
+  $P grep -nE "\.set\(\s*[A-Z_]*COOKIE\b|cookies\(\)\)?\.set\(|cookies\.set\(|Cookies\.set\(|document\.cookie\s*=|jar\.set\(|cookieStore\.set\(" $R -- apps/dashboard apps/driver packages/shared ':!graphify-out' | grep -v '\.test\.\|__tests__'
   $P grep -nE "(localStorage|sessionStorage)\.setItem\(|window\.(local|session)Storage" $R -- apps/dashboard apps/driver packages/shared resources/presentation/src ':!graphify-out' | grep -v '\.test\.\|__tests__'
   $P grep -nE "createElement\('script'\)|next/script|react-google-recaptcha|@react-google-maps/api|emoji-picker-react|challenges\.cloudflare\.com" $R -- apps/dashboard apps/driver resources/presentation/src ':!graphify-out' | grep -v '\.test\.\|__tests__\|package.json'
   ```
