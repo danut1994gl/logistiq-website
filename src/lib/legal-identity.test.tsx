@@ -39,6 +39,10 @@ describe("legal identity", () => {
     expect(registeredOffice(translations.en)).toBe("Str. Vidin 37, 805300 Tecuci, Galați, Romania");
     expect(registeredOffice(translations.ro)).toBe("Str. Vidin 37, 805300 Tecuci, Galați, România");
     expect(withCompany("{company} {cui}", translations.en)).toBe(`${company.legalName} ${company.cui}`);
+    // Romanian introduces the address with „la adresa” (final review N4, 2026-11-27): „cu sediul
+    // în Str. Vidin 37” read as if the seat were inside the street.
+    expect(translations.ro.privacy.intro.p1).toContain("cu sediul la adresa {office}");
+    expect(translations.ro.terms.article1.definitions[0].def).toContain("cu sediul la adresa {office}");
   });
 
   it.each(locales)("%s: only the two identity strings hold the placeholders, once each", (locale) => {

@@ -1469,7 +1469,7 @@ export const translations = {
       lastUpdated: "Ultima actualizare",
       intro: {
         title: "1. Introducere",
-        p1: "{company}, cu sediul în {office}, CUI {cui} („noi”), furnizează platforma Logistiq și respectă confidențialitatea datelor dumneavoastră personale.",
+        p1: "{company}, cu sediul la adresa {office}, CUI {cui} („noi”), furnizează platforma Logistiq și respectă confidențialitatea datelor dumneavoastră personale.",
         p2: "Această politică descrie modul în care colectăm, utilizăm și protejăm datele personale în conformitate cu Regulamentul General privind Protecția Datelor (GDPR - Regulamentul UE 2016/679).",
         roles: {
           title: "Rolul nostru",
@@ -1654,7 +1654,7 @@ export const translations = {
         title: "Articolul 1 - Definiții",
         content: "În sensul prezentului contract, termenii de mai jos au următoarele semnificații:",
         definitions: [
-          { term: "Prestator", def: "{company}, cu sediul în {office}, CUI {cui}" },
+          { term: "Prestator", def: "{company}, cu sediul la adresa {office}, CUI {cui}" },
           { term: "Platforma", def: "Ansamblul serviciilor disponibile prin intermediul site-urilor logistiq.ro, logistiq.cloud și qrgo.ro" },
           { term: "Client", def: "Persoana juridică sau fizică autorizată care achiziționează un abonament pentru utilizarea Platformei" },
           { term: "Utilizator", def: "Orice persoană care accesează sau utilizează Platforma, inclusiv Clientul și persoanele desemnate de acesta" },
