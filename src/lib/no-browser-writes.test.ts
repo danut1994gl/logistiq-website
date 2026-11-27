@@ -31,6 +31,7 @@ describe("browser writes", () => {
     );
     expect(writes).toEqual([
       "components/site/LegacyBrowserData.tsx: if (present.has(name)) jar.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;",
+      "components/site/LegacyBrowserData.tsx: jar.cookie = `${LEGACY_DOMAIN_COOKIE}=; Domain=.logistiq.ro; Path=/; Max-Age=0; SameSite=Lax`;",
       "components/site/SiteHeader.tsx: document.cookie = localeCookie(site, loc);",
     ]);
   });
@@ -46,11 +47,14 @@ describe("browser writes", () => {
     expect(local.map(rel)).toEqual(["components/site/LegacyBrowserData.tsx"]);
   });
 
-  // The header read logistiq_authenticated until 2026-11-26 (SiteHeader.test.tsx). The only
-  // code that reads the browser's cookies is LegacyBrowserData, to find what to delete.
-  it("nothing reads logistiq_authenticated, and only LegacyBrowserData reads cookies", () => {
+  // The header read logistiq_authenticated until 2026-11-26 (SiteHeader.test.tsx); since
+  // 2026-11-27 LegacyBrowserData names it, to delete it. The only code that reads the
+  // browser's cookies is LegacyBrowserData, to find what to delete.
+  it("only LegacyBrowserData names logistiq_authenticated or reads cookies", () => {
     const files = sources(SRC);
-    expect(files.filter((f) => readFileSync(f, "utf8").includes("logistiq_authenticated")).map(rel)).toEqual([]);
+    expect(files.filter((f) => readFileSync(f, "utf8").includes("logistiq_authenticated")).map(rel)).toEqual([
+      "components/site/LegacyBrowserData.tsx",
+    ]);
     const readers = files.filter((f) => /document\.cookie(?!\s*=)|\.cookie\.split/.test(readFileSync(f, "utf8")));
     expect(readers.map(rel)).toEqual(["components/site/LegacyBrowserData.tsx"]);
   });

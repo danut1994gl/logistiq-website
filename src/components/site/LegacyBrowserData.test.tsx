@@ -41,6 +41,24 @@ describe("LegacyBrowserData", () => {
     ]);
   });
 
+  // The dashboard's old sign-in marker was written for Domain=.logistiq.ro: it is deleted with
+  // that Domain, and only on a logistiq.ro host (another host may not write that Domain).
+  it("deletes logistiq_authenticated with its Domain, on logistiq.ro hosts only", () => {
+    for (const host of ["logistiq.ro", "www.logistiq.ro"]) {
+      const j = jar("logistiq_authenticated=true; LOGISTIQ_LANG=de");
+      clearLegacyBrowserData(j, store({}), host);
+      expect(j.writes, host).toEqual(["logistiq_authenticated=; Domain=.logistiq.ro; Path=/; Max-Age=0; SameSite=Lax"]);
+    }
+    for (const host of ["logistiq.be", "localhost", "notlogistiq.ro", ""]) {
+      const j = jar("logistiq_authenticated=true");
+      clearLegacyBrowserData(j, store({}), host);
+      expect(j.writes, host).toEqual([]);
+    }
+    const none = jar("LOGISTIQ_LANG=de");
+    clearLegacyBrowserData(none, store({}), "logistiq.ro");
+    expect(none.writes).toEqual([]);
+  });
+
   it("writes nothing when there is nothing old", () => {
     const j = jar("LOGISTIQ_LANG=de");
     const s = store({});
