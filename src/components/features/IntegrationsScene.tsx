@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { Translations } from "@/lib/i18n/translations";
 import { LogistiqCloud } from "./LogistiqCloud";
+import { IntegrationsInfoTip, type TipSide } from "./IntegrationsInfoTip";
 
 // Systems Integrations & API (feature 16): one clean interconnection map, drawn as a
 // wheel. logistiq.cloud is the hub and eight cards sit around it, each on a spoke aimed
@@ -15,7 +16,11 @@ import { LogistiqCloud } from "./LogistiqCloud";
 // it on a valid scan is in progress (until 2026-11-24 this node was labelled "Integration
 // API" and its barrier was lifted). Until 2026-11-28 the map was two columns of cards, the
 // surfaces on the left and the systems on the right, without QRGo Self or the carrier portal.
-// Pure CSS (ix16-*), no client JS. Presentational Server Component. aria-hidden.
+// Each card carries an info button on its inner top corner (IntegrationsInfoTip, the one
+// client leaf) that says what that part does; the buttons sit in an HTML layer over the SVG,
+// in a box of the drawing's own proportions, so a percentage of the box is a point of the
+// drawing and the notes stay legible however small the drawing is shown. The drawing itself
+// is pure CSS (ix16-*), aria-hidden, a Server Component.
 
 const W = 1200;
 const H = 760;
@@ -240,12 +245,34 @@ function Label({ at, text }: { at: Spot; text: string }) {
   );
 }
 
+// Where each card's info button sits (its inner top corner) and where its note opens:
+// towards the hub, so it stays inside the frame.
+function infoSpot(at: Spot): { x: number; y: number; side: TipSide } {
+  const c = POS[at];
+  const right = c.x > HUB.x;
+  const x = right ? c.x - CARD_HW + 3 : c.x + CARD_HW - 3;
+  const y = c.y - CARD_HH + 3;
+  const side: TipSide = at === "n" ? "below" : at === "s" ? "above" : right ? "left" : "right";
+  return { x, y, side };
+}
+
 export function IntegrationsScene({ t }: { t: Translations }) {
   const f = t.f16Page;
   const api = spoke("e");
+  const infos: { at: Spot; name: string; text: string }[] = [
+    { at: "n", name: f.uiSelf, text: f.tipSelf },
+    { at: "nw", name: f.uiGateScanner, text: f.tipAccess },
+    { at: "w", name: f.uiCarrier, text: f.tipPortal },
+    { at: "sw", name: f.uiRealtime, text: f.tipDriver },
+    { at: "s", name: f.uiCarrierPortal, text: f.tipCarrier },
+    { at: "ne", name: f.uiTms, text: f.tipTms },
+    { at: "e", name: f.uiWms, text: f.tipWms },
+    { at: "se", name: f.uiErp, text: f.tipErp },
+  ];
   return (
-    <div className="@container absolute inset-0 p-[2cqw] select-none" aria-hidden="true">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    <div className="absolute inset-0 p-[2cqw] select-none [container-type:size] flex items-center justify-center">
+      <div className="relative" style={{ aspectRatio: `${W} / ${H}`, width: `min(100cqw, ${W / H} * 100cqh)` }}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
           <radialGradient id="ix16-glow">
             <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.30" />
@@ -296,6 +323,19 @@ export function IntegrationsScene({ t }: { t: Translations }) {
         <SystemNode x={POS.e.x} y={POS.e.y} label={f.uiWms} />
         <SystemNode x={POS.se.x} y={POS.se.y} label={f.uiErp} />
       </svg>
+
+      {/* ===== what each card does: an info button on its inner top corner ===== */}
+      {infos.map(({ at, name, text }) => {
+        const { x, y, side } = infoSpot(at);
+        // no transform here: it would trap the open note's z-index under the later buttons
+        return (
+          <div key={at} className="absolute select-text"
+            style={{ left: `${(x / W) * 100}%`, top: `${(y / H) * 100}%` }}>
+            <IntegrationsInfoTip name={name} text={text} what={f.tipAria} side={side} />
+          </div>
+        );
+      })}
+      </div>
     </div>
   );
 }

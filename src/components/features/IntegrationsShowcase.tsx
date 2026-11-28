@@ -3,14 +3,16 @@ import type { Locale } from "@/lib/i18n/config";
 import { ShowcaseStage } from "./ShowcaseStage";
 import { IntegrationsScene } from "./IntegrationsScene";
 import { FeatureSpecSection } from "./sections";
+import { ApiDeveloperSection, ApiUseCasesSection } from "./IntegrationsDeveloper";
 
-// Systems Integrations & API (feature 16): kept lean. The interconnection map does the
-// explaining, and a single concise spec grounds it in the Integration API (/api/v1):
-// its address, its keys, what it covers and its events. No problem/schema/roadmap
-// detail — the page is about the API + interconnection, nothing more.
-// The `locale` prop is retained for the page contract even though no per-section
-// JSON-LD is emitted here.
-export function IntegrationsShowcase({ t, locale: _locale }: { t: Translations; locale: Locale }) {
+// Systems Integrations & API (feature 16). The interconnection map does the explaining
+// (an info button on each card says what it does); six use cases show what a warehouse
+// builds with the Integration API (/api/v1), each opening its calls in the public
+// documentation; a concise spec grounds it (address, keys, coverage, events); and the
+// developer panel carries the Logistiq API lockup, the quick start and the documentation's
+// pages (owner, 2026-11-28). No problem/schema/roadmap detail. `locale` picks the
+// documentation's language (Romanian for ro, English otherwise).
+export function IntegrationsShowcase({ t, locale }: { t: Translations; locale: Locale }) {
   const f = t.f16Page;
   return (
     <>
@@ -27,6 +29,8 @@ export function IntegrationsShowcase({ t, locale: _locale }: { t: Translations; 
         <IntegrationsScene t={t} />
       </ShowcaseStage>
 
+      <ApiUseCasesSection t={t} locale={locale} />
+
       <FeatureSpecSection
         idPrefix="in16"
         title={f.specTitle}
@@ -39,6 +43,8 @@ export function IntegrationsShowcase({ t, locale: _locale }: { t: Translations; 
         ]}
         tinted
       />
+
+      <ApiDeveloperSection t={t} locale={locale} />
     </>
   );
 }
