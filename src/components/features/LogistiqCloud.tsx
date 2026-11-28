@@ -7,9 +7,10 @@ import type { ReactNode } from "react";
 //
 // The cloud is a union of CIRCLES rather than one path so the outline stays round
 // and continuous on every side (including the bottom). The official banner rides a
-// white plate — but the plate now FADES to transparent on its left/right edges
-// (id-namespaced gradient) so it melts into the blue cloud instead of reading as a
-// hard white rectangle. The centre stays opaque, so the dark wordmark is legible.
+// white plate with round corners whose every edge FADES into the blue cloud (an
+// id-namespaced blur), so it reads as part of the cloud, not as a white rectangle.
+// Until 2026-11-28 only its left and right ends faded. The centre stays opaque, so the
+// dark wordmark is legible.
 
 export const CLOUD_LOBES = [
   { cx: -108, cy: 8, r: 50 },
@@ -50,13 +51,10 @@ export function LogistiqCloud({
           <stop offset="0%" stopColor="#3b82f6" />
           <stop offset="100%" stopColor="#1d4ed8" />
         </linearGradient>
-        {/* opaque in the middle, transparent at the two ends → soft side edges */}
-        <linearGradient id={`${id}-plate`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#fff" stopOpacity="0" />
-          <stop offset="16%" stopColor="#fff" stopOpacity="0.96" />
-          <stop offset="84%" stopColor="#fff" stopOpacity="0.96" />
-          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
+        {/* blurs the plate's every edge, so it melts into the cloud all round */}
+        <filter id={`${id}-plate`} x="-20%" y="-60%" width="140%" height="220%">
+          <feGaussianBlur stdDeviation="6" />
+        </filter>
       </defs>
 
       {/* outline: the same lobes, slightly larger, behind the fill */}
@@ -73,7 +71,7 @@ export function LogistiqCloud({
 
       {banner && (
         <>
-          <rect x={-bw / 2 - 13} y={-bh / 2 - 11} width={bw + 26} height={bh + 22} rx={12} fill={`url(#${id}-plate)`} />
+          <rect x={-bw / 2 - 18} y={-bh / 2 - 14} width={bw + 36} height={bh + 28} rx={24} fill="#fff" fillOpacity={0.96} filter={`url(#${id}-plate)`} />
           <image
             href="/logistiq-banner-dark.svg"
             x={-bw / 2}
