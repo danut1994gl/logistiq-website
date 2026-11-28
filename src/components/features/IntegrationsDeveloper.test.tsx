@@ -16,6 +16,9 @@ import { apiDocsUrl } from "@/lib/api-docs";
 const escape = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
 
+const html = (locale: (typeof locales)[number]) =>
+  renderToString(<IntegrationsShowcase t={translations[locale]} locale={locale} />);
+
 describe("integrations page, developer side", () => {
   it("links the documentation in Romanian for ro and in English for every other language", () => {
     expect(apiDocsUrl("ro", "reference")).toBe("https://api.logistiq.cloud/docs/ro/reference");
@@ -58,9 +61,10 @@ describe("integrations page, developer side", () => {
   // Opening the barrier on a valid scan is in progress (qrgobox-copy.test.ts): the gate's use
   // case and QRGo Access's note speak of scans and their outcome, never of trucks let through.
   it("says nothing of a gate letting a truck through", () => {
-    for (const [locale, copy] of Object.entries(translations)) {
-      const f = copy.f16Page;
+    for (const locale of locales) {
+      const f = translations[locale].f16Page;
       expect(f.uc4d, locale).toContain("QRGo Access");
+      expect(html(locale), locale).toContain(escape(f.uc4Badge));
       expect(`${f.uc4t} ${f.uc4d}`, locale).not.toMatch(/let through|lăsat să treacă|durchgelassen|przepuszcz|átenged|пропусн|laissé passer|doorgelaten/i);
     }
   });

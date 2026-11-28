@@ -8,8 +8,8 @@ import { ApiIcon, ArrowRightIcon, ClockIcon, GateIcon, MapPinIcon, QrCodeIcon, U
 // and the API's links and logo on the page):
 //   - what you can build: the six use cases of the public documentation's home page, each
 //     card opening the calls it uses. The gate one says what is true today: every scan
-//     QRGo Access makes, with its outcome (opening the barrier is in progress, so no card
-//     says a gate lets a truck through);
+//     QRGo Access makes, with its outcome; its badge says opening the barrier is being
+//     tested (owner, 2026-11-28), so no card says a gate lets a truck through;
 //   - start building: the "Logistiq API </>" lockup of api.logistiq.cloud/docs
 //     (public/logistiq-api.svg, generated from that page's pinned brand pieces), the quick
 //     start in one sentence, and the documentation's pages.
@@ -50,11 +50,11 @@ const KeyIcon = () => (
 
 export function ApiUseCasesSection({ t, locale }: { t: Translations; locale: Locale }) {
   const f = t.f16Page;
-  const cases: { title: string; desc: string; page: string; icon: ReactNode }[] = [
+  const cases: { title: string; desc: string; page: string; icon: ReactNode; badge?: string }[] = [
     { title: f.uc1t, desc: f.uc1d, page: "reference#group-checkins", icon: <QrCodeIcon /> },
     { title: f.uc2t, desc: f.uc2d, page: "reference#group-bookings", icon: <ClockIcon /> },
     { title: f.uc3t, desc: f.uc3d, page: "reference#group-yard", icon: <MapPinIcon /> },
-    { title: f.uc4t, desc: f.uc4d, page: "reference#group-gates", icon: <GateIcon /> },
+    { title: f.uc4t, desc: f.uc4d, page: "reference#group-gates", icon: <GateIcon />, badge: f.uc4Badge },
     { title: f.uc5t, desc: f.uc5d, page: "reference#group-users", icon: <UsersIcon /> },
     { title: f.uc6t, desc: f.uc6d, page: "guides/receive-webhooks", icon: <ApiIcon /> },
   ];
@@ -77,6 +77,12 @@ export function ApiUseCasesSection({ t, locale }: { t: Translations; locale: Loc
                   {c.icon}
                 </span>
                 <h3 className="font-bold text-slate-900 dark:text-white mb-2">{c.title}</h3>
+                {c.badge ? (
+                  <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-xs font-semibold text-amber-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" aria-hidden="true" />
+                    {c.badge}
+                  </span>
+                ) : null}
                 <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed flex-1">{c.desc}</p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--link)]">
                   {f.ucLink}

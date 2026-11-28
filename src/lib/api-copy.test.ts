@@ -19,7 +19,7 @@ const F16_RENDERED = [
   // the map's info notes (2026-11-28)
   "tipAria", "tipSelf", "tipAccess", "tipPortal", "tipDriver", "tipCarrier", "tipTms", "tipWms", "tipErp",
   // what you can build, and the developer panel (2026-11-28)
-  "ucTitle", "ucSub", "uc1t", "uc1d", "uc2t", "uc2d", "uc3t", "uc3d", "uc4t", "uc4d", "uc5t", "uc5d", "uc6t", "uc6d", "ucLink",
+  "ucTitle", "ucSub", "uc1t", "uc1d", "uc2t", "uc2d", "uc3t", "uc3d", "uc4t", "uc4d", "uc4Badge", "uc5t", "uc5d", "uc6t", "uc6d", "ucLink",
   "devTitle", "devSub", "devDocs", "devKey", "devReference", "devWebhooks", "devOpenapi", "devChangelog", "devNote",
 ];
 
