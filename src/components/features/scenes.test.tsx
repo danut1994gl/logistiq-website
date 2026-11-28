@@ -29,6 +29,18 @@ describe("integrations scene (f16)", () => {
     expect(html).not.toMatch(/rotate\(/);
     expect(html).toContain(">API</text>");
   });
+
+  // Until 2026-11-28 the left column held the gate scanner, the warehouse portal and the
+  // QRGo Driver apps only; QRGo Self (top) and the carrier portal (bottom) talk to the cloud too.
+  it.each(locales)("hangs QRGo Self first and the carrier portal last on the left in %s", (locale) => {
+    const f = translations[locale].f16Page;
+    const html = renderToString(<IntegrationsScene t={translations[locale]} />);
+    const order = [f.uiSelf, f.uiGateScanner, f.uiCarrier, f.uiRealtime, f.uiCarrierPortal].map((l) =>
+      html.indexOf(`>${escape(l)}</text>`),
+    );
+    expect(order.every((at) => at >= 0), locale).toBe(true);
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
+  });
 });
 
 describe("QRGoBox scene (f15)", () => {
