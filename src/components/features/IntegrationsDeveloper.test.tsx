@@ -51,11 +51,11 @@ describe("integrations page, developer side", () => {
     const html = renderToString(<IntegrationsScene t={translations[locale]} />);
     const tips = [f.tipSelf, f.tipAccess, f.tipPortal, f.tipDriver, f.tipCarrier, f.tipTms, f.tipWms, f.tipErp];
     for (const tip of tips) expect(html, locale).toContain(escape(tip));
-    expect(html.match(/role="tooltip"/g)).toHaveLength(8);
-    expect(html.match(/<button type="button" aria-label="[^"]+"/g)).toHaveLength(8);
+    expect(html.match(/role="tooltip"/g)).toHaveLength(16); // 8 per geometry, one shown
+    expect(html.match(/<button type="button" aria-label="[^"]+"/g)).toHaveLength(16);
     expect(html).toContain(`aria-label="${escape(`${f.uiSelf}: ${f.tipAria}`)}"`);
     // closed until opened, so the server's HTML and the first paint agree
-    expect(html.match(/role="tooltip" hidden=""/g)).toHaveLength(8);
+    expect(html.match(/role="tooltip" hidden=""/g)).toHaveLength(16);
   });
 
   // Opening the barrier on a valid scan is in progress (qrgobox-copy.test.ts): the gate's use

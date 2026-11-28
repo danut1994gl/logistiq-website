@@ -21,44 +21,65 @@ import { IntegrationsInfoTip, type TipSide } from "./IntegrationsInfoTip";
 // in a box of the drawing's own proportions, so a percentage of the box is a point of the
 // drawing and the notes stay legible however small the drawing is shown. The drawing itself
 // is pure CSS (ix16-*), aria-hidden, a Server Component.
+// Two geometries of the same wheel: WIDE (1200 x 760) from 640 px up, and TALL (800 x 1000)
+// on a phone, whose cards stand in three rows each side and whose names are half as big
+// again, so the map stays readable at a third of its size (until 2026-11-28 a phone showed
+// the wide drawing at about a quarter, its names some 4 px tall). Only one is displayed.
 
-const W = 1200;
-const H = 760;
-const HUB = { x: 600, y: 380 };
 const S = 0.85; // every card's scale
 const CARD_HW = 100 * S; // a card's half-width and half-height, as drawn
 const CARD_HH = 52 * S;
-// Where a spoke ends under the cloud: an ellipse inside its outline, so each spoke
-// and its packets disappear beneath the cloud's edge.
-const HUB_RX = 160;
-const HUB_RY = 100;
 
-// The eight card centres, mirrored about the hub on both axes.
-const POS = {
-  n: { x: 600, y: 100 },
-  nw: { x: 300, y: 175 },
-  w: { x: 175, y: 380 },
-  sw: { x: 300, y: 585 },
-  s: { x: 600, y: 660 },
-  ne: { x: 900, y: 175 },
-  e: { x: 1025, y: 380 },
-  se: { x: 900, y: 585 },
-} as const;
-type Spot = keyof typeof POS;
+type Spot = "n" | "nw" | "w" | "sw" | "s" | "ne" | "e" | "se";
 const SPOKES: Spot[] = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
 
+type Layout = {
+  id: string; // namespaces the SVG's gradients and filters
+  w: number;
+  h: number;
+  hub: { x: number; y: number };
+  cloud: number; // the cloud's scale
+  glow: number;
+  tag: number; // the API tag's scale
+  label: number; // a surface name's font size
+  above: Spot[]; // the surfaces named above their card: their spoke leaves downwards
+  // the eight card centres, mirrored about the hub on both axes
+  pos: Record<Spot, { x: number; y: number }>;
+};
+
+const WIDE: Layout = {
+  id: "ix16", w: 1200, h: 760, hub: { x: 600, y: 380 }, cloud: 1.16, glow: 300, tag: 1, label: 16, above: ["n"],
+  pos: {
+    n: { x: 600, y: 100 }, nw: { x: 300, y: 175 }, w: { x: 175, y: 380 }, sw: { x: 300, y: 585 },
+    s: { x: 600, y: 660 }, ne: { x: 900, y: 175 }, e: { x: 1025, y: 380 }, se: { x: 900, y: 585 },
+  },
+};
+const TALL: Layout = {
+  id: "ix16t", w: 800, h: 1000, hub: { x: 400, y: 500 }, cloud: 0.75, glow: 260, tag: 0.8, label: 24, above: ["n", "nw"],
+  pos: {
+    n: { x: 400, y: 105 }, nw: { x: 140, y: 290 }, w: { x: 140, y: 500 }, sw: { x: 140, y: 710 },
+    s: { x: 400, y: 890 }, ne: { x: 660, y: 290 }, e: { x: 660, y: 500 }, se: { x: 660, y: 710 },
+  },
+};
+
+// The cloud's half-width at scale 1 (LogistiqCloud's CLOUD_HW), and the ellipse inside its
+// outline where a spoke ends, so each spoke and its packets disappear beneath its edge.
+const CLOUD_HALF_W = 158;
+const hubEllipse = (L: Layout) => ({ rx: (160 / 1.16) * L.cloud, ry: (100 / 1.16) * L.cloud });
+
 // A spoke from a card to the hub: where it leaves the card and where it goes under the cloud.
-function spoke(at: Spot) {
-  const c = POS[at];
-  const vx = HUB.x - c.x, vy = HUB.y - c.y;
+function spoke(L: Layout, at: Spot) {
+  const c = L.pos[at];
+  const vx = L.hub.x - c.x, vy = L.hub.y - c.y;
   const len = Math.hypot(vx, vy);
   const ux = vx / len, uy = vy / len;
   const out = Math.min(ux ? CARD_HW / Math.abs(ux) : Infinity, uy ? CARD_HH / Math.abs(uy) : Infinity);
-  const under = 1 / Math.hypot(ux / HUB_RX, uy / HUB_RY);
+  const { rx, ry } = hubEllipse(L);
+  const under = 1 / Math.hypot(ux / rx, uy / ry);
   const r = (n: number) => Math.round(n * 10) / 10;
   return {
     x1: r(c.x + ux * out), y1: r(c.y + uy * out),
-    x2: r(HUB.x - ux * under), y2: r(HUB.y - uy * under),
+    x2: r(L.hub.x - ux * under), y2: r(L.hub.y - uy * under),
   };
 }
 
@@ -234,12 +255,16 @@ function SystemNode({ x, y, label }: { x: number; y: number; label: string }) {
   );
 }
 
-// A surface's name: under its card, but above the top one, whose spoke leaves downwards.
-function Label({ at, text }: { at: Spot; text: string }) {
-  const c = POS[at];
-  const y = at === "n" ? c.y - CARD_HH - 12 : c.y + CARD_HH + 22;
+// A surface's name: under its card, or above it when its spoke leaves downwards.
+function Label({ L, at, text }: { L: Layout; at: Spot; text: string }) {
+  const c = L.pos[at];
+  const above = L.above.includes(at);
+  // a side card's name above it starts at its left edge and stands higher, clear of the info
+  // button on its corner (on a phone the button is large next to the drawing)
+  const start = above && at !== "n";
+  const y = above ? c.y - CARD_HH - (start ? 28 : 12) : c.y + CARD_HH + 6 + L.label;
   return (
-    <text x={c.x} y={y} textAnchor="middle" fill="#cbd5e1" style={{ fontSize: 16, fontWeight: 600 }}>
+    <text x={start ? c.x - CARD_HW : c.x} y={y} textAnchor={start ? "start" : "middle"} fill="#cbd5e1" style={{ fontSize: L.label, fontWeight: 600 }}>
       {text}
     </text>
   );
@@ -247,18 +272,19 @@ function Label({ at, text }: { at: Spot; text: string }) {
 
 // Where each card's info button sits (its inner top corner) and where its note opens:
 // towards the hub, so it stays inside the frame.
-function infoSpot(at: Spot): { x: number; y: number; side: TipSide } {
-  const c = POS[at];
-  const right = c.x > HUB.x;
+function infoSpot(L: Layout, at: Spot): { x: number; y: number; side: TipSide } {
+  const c = L.pos[at];
+  const right = c.x > L.hub.x;
   const x = right ? c.x - CARD_HW + 3 : c.x + CARD_HW - 3;
   const y = c.y - CARD_HH + 3;
   const side: TipSide = at === "n" ? "below" : at === "s" ? "above" : right ? "left" : "right";
   return { x, y, side };
 }
 
-export function IntegrationsScene({ t }: { t: Translations }) {
-  const f = t.f16Page;
-  const api = spoke("e");
+// One geometry of the wheel: the drawing, and the info buttons over it.
+function Wheel({ L, f, className }: { L: Layout; f: Translations["f16Page"]; className: string }) {
+  const api = spoke(L, "e");
+  const cloudRight = L.hub.x + CLOUD_HALF_W * L.cloud;
   const infos: { at: Spot; name: string; text: string }[] = [
     { at: "n", name: f.uiSelf, text: f.tipSelf },
     { at: "nw", name: f.uiGateScanner, text: f.tipAccess },
@@ -269,22 +295,23 @@ export function IntegrationsScene({ t }: { t: Translations }) {
     { at: "e", name: f.uiWms, text: f.tipWms },
     { at: "se", name: f.uiErp, text: f.tipErp },
   ];
+  const P = L.pos;
   return (
-    <div className="absolute inset-0 p-[2cqw] select-none [container-type:size] flex items-center justify-center">
-      <div className="relative" style={{ aspectRatio: `${W} / ${H}`, width: `min(100cqw, ${W / H} * 100cqh)` }}>
-      <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <div className={`absolute inset-0 p-[2cqw] select-none [container-type:size] items-center justify-center ${className}`}>
+      <div className="relative" style={{ aspectRatio: `${L.w} / ${L.h}`, width: `min(100cqw, ${L.w / L.h} * 100cqh)` }}>
+      <svg viewBox={`0 0 ${L.w} ${L.h}`} data-layout={L.id} className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
-          <radialGradient id="ix16-glow">
+          <radialGradient id={`${L.id}-glow`}>
             <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.30" />
             <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
           </radialGradient>
         </defs>
 
-        <circle className="ix16-breathe" cx={HUB.x} cy={HUB.y} r={300} fill="url(#ix16-glow)" />
+        <circle className="ix16-breathe" cx={L.hub.x} cy={L.hub.y} r={L.glow} fill={`url(#${L.id}-glow)`} />
 
         {/* ===== the spokes: every card talks to the cloud, packets both ways ===== */}
         {SPOKES.map((at, i) => {
-          const { x1, y1, x2, y2 } = spoke(at);
+          const { x1, y1, x2, y2 } = spoke(L, at);
           const dx = x2 - x1, dy = y2 - y1;
           return (
             <g key={at}>
@@ -297,45 +324,55 @@ export function IntegrationsScene({ t }: { t: Translations }) {
         })}
 
         {/* ===== the hub: the shared logistiq.cloud mark ===== */}
-        <g transform={`translate(${HUB.x} ${HUB.y}) scale(1.16)`}>
-          <LogistiqCloud id="ix16" />
+        <g transform={`translate(${L.hub.x} ${L.hub.y}) scale(${L.cloud})`}>
+          <LogistiqCloud id={L.id} />
         </g>
         {/* the API tag on the connection to your systems, between the cloud's edge and WMS */}
-        <g transform={`translate(${Math.round((HUB.x + 183 + api.x1) / 2)} ${HUB.y})`}>
+        <g transform={`translate(${Math.round((cloudRight + api.x1) / 2)} ${L.hub.y}) scale(${L.tag})`}>
           <rect x={-30} y={-15} width={60} height={30} rx={15} fill="#0f1720" stroke="#3b82f6" strokeOpacity="0.5" strokeWidth="1.5" />
           <text x={0} y={5} textAnchor="middle" fill="#7dd3fc" style={{ fontSize: 15, fontWeight: 700 }}>API</text>
         </g>
 
         {/* ===== the logistiq surfaces: above, left and below ===== */}
-        <SelfNode x={POS.n.x} y={POS.n.y} />
-        <DeviceNode x={POS.nw.x} y={POS.nw.y} />
-        <PortalNode x={POS.w.x} y={POS.w.y} />
-        <DriversNode x={POS.sw.x} y={POS.sw.y} />
-        <CarrierPortalNode x={POS.s.x} y={POS.s.y} />
-        <Label at="n" text={f.uiSelf} />
-        <Label at="nw" text={f.uiGateScanner} />
-        <Label at="w" text={f.uiCarrier} />
-        <Label at="sw" text={f.uiRealtime} />
-        <Label at="s" text={f.uiCarrierPortal} />
+        <SelfNode x={P.n.x} y={P.n.y} />
+        <DeviceNode x={P.nw.x} y={P.nw.y} />
+        <PortalNode x={P.w.x} y={P.w.y} />
+        <DriversNode x={P.sw.x} y={P.sw.y} />
+        <CarrierPortalNode x={P.s.x} y={P.s.y} />
+        <Label L={L} at="n" text={f.uiSelf} />
+        <Label L={L} at="nw" text={f.uiGateScanner} />
+        <Label L={L} at="w" text={f.uiCarrier} />
+        <Label L={L} at="sw" text={f.uiRealtime} />
+        <Label L={L} at="s" text={f.uiCarrierPortal} />
 
         {/* ===== your systems (right), connected over the API ===== */}
-        <SystemNode x={POS.ne.x} y={POS.ne.y} label={f.uiTms} />
-        <SystemNode x={POS.e.x} y={POS.e.y} label={f.uiWms} />
-        <SystemNode x={POS.se.x} y={POS.se.y} label={f.uiErp} />
+        <SystemNode x={P.ne.x} y={P.ne.y} label={f.uiTms} />
+        <SystemNode x={P.e.x} y={P.e.y} label={f.uiWms} />
+        <SystemNode x={P.se.x} y={P.se.y} label={f.uiErp} />
       </svg>
 
       {/* ===== what each card does: an info button on its inner top corner ===== */}
       {infos.map(({ at, name, text }) => {
-        const { x, y, side } = infoSpot(at);
+        const { x, y, side } = infoSpot(L, at);
         // no transform here: it would trap the open note's z-index under the later buttons
         return (
           <div key={at} className="absolute select-text"
-            style={{ left: `${(x / W) * 100}%`, top: `${(y / H) * 100}%` }}>
+            style={{ left: `${(x / L.w) * 100}%`, top: `${(y / L.h) * 100}%` }}>
             <IntegrationsInfoTip name={name} text={text} what={f.tipAria} side={side} />
           </div>
         );
       })}
       </div>
     </div>
+  );
+}
+
+export function IntegrationsScene({ t }: { t: Translations }) {
+  const f = t.f16Page;
+  return (
+    <>
+      <Wheel L={WIDE} f={f} className="hidden sm:flex" />
+      <Wheel L={TALL} f={f} className="flex sm:hidden" />
+    </>
   );
 }
