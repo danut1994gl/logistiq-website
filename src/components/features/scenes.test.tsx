@@ -30,16 +30,33 @@ describe("integrations scene (f16)", () => {
     expect(html).toContain(">API</text>");
   });
 
-  // Until 2026-11-28 the left column held the gate scanner, the warehouse portal and the
-  // QRGo Driver apps only; QRGo Self (top) and the carrier portal (bottom) talk to the cloud too.
-  it.each(locales)("hangs QRGo Self first and the carrier portal last on the left in %s", (locale) => {
+  // Until 2026-11-28 the map was two columns: the gate scanner, the warehouse portal and the
+  // QRGo Driver apps on the left, TMS, WMS and ERP on the right. It is now a wheel of eight
+  // spokes: QRGo Self above the cloud, the carrier portal below it, the rest mirrored.
+  it.each(locales)("draws a wheel with QRGo Self above the cloud and the carrier portal below in %s", (locale) => {
     const f = translations[locale].f16Page;
     const html = renderToString(<IntegrationsScene t={translations[locale]} />);
-    const order = [f.uiSelf, f.uiGateScanner, f.uiCarrier, f.uiRealtime, f.uiCarrierPortal].map((l) =>
-      html.indexOf(`>${escape(l)}</text>`),
-    );
-    expect(order.every((at) => at >= 0), locale).toBe(true);
-    expect([...order].sort((a, b) => a - b)).toEqual(order);
+    const labelY = (l: string) => {
+      const m = new RegExp(`<text x="([\\d.]+)" y="([\\d.]+)"[^>]*>${escape(l).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</text>`).exec(html);
+      expect(m, `${locale}: ${l}`).not.toBeNull();
+      return { x: Number(m![1]), y: Number(m![2]) };
+    };
+    const self = labelY(f.uiSelf), carriers = labelY(f.uiCarrierPortal);
+    const access = labelY(f.uiGateScanner), portal = labelY(f.uiCarrier), driver = labelY(f.uiRealtime);
+    expect(self.x).toBe(600);
+    expect(carriers.x).toBe(600);
+    expect(self.y).toBeLessThan(380);
+    expect(carriers.y).toBeGreaterThan(380);
+    for (const left of [access, portal, driver]) expect(left.x).toBeLessThan(600);
+    expect(access.y).toBeLessThan(portal.y);
+    expect(portal.y).toBeLessThan(driver.y);
+    // every spoke, extended, passes through the hub's centre (600, 380)
+    const lines = [...html.matchAll(/<line x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/g)].map((m) => m.slice(1).map(Number));
+    expect(lines).toHaveLength(8);
+    for (const [x1, y1, x2, y2] of lines) {
+      const cross = (x2 - x1) * (380 - y1) - (y2 - y1) * (600 - x1);
+      expect(Math.abs(cross) / Math.hypot(x2 - x1, y2 - y1)).toBeLessThan(0.5);
+    }
   });
 });
 
